@@ -1,0 +1,14 @@
+var EFFECT_GRAYSCALE = 0;
+var EFFECT_SKETCH    = 1;
+var EFFECT_BLUR      = 2;
+var EFFECT_HUE       = 3;
+
+var MODE_SCROLL   = 0;
+var MODE_ORIGINAL = 1;
+var MODE_EFFECTED = 2;
+
+var SCALE_PERCENT_50  = 0;
+var SCALE_PERCENT_75  = 1;
+var SCALE_PERCENT_100 = 2;
+var SCALE_PERCENT_150 = 3;
+var SCALE_PERCENT_200 = 4;
