@@ -68,7 +68,7 @@ Page {
 
             attachedObjects: [
                 ComponentDefinition {
-                    id: helpPageDefinition
+                    id:     helpPageDefinition
                     source: "HelpPage.qml"
                 }
             ]
