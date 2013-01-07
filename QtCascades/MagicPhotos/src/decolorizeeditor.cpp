@@ -110,7 +110,7 @@ void DecolorizeEditor::changeImageAt(bool save_undo, int center_x, int center_y,
 			SaveUndoImage();
 		}
 
-	    int radius = isnan(zoom_level) ? BRUSH_SIZE : BRUSH_SIZE / zoom_level;
+	    int radius = BRUSH_SIZE / zoom_level;
 
 	    for (int x = center_x - radius; x <= center_x + radius; x++) {
 	        for (int y = center_y - radius; y <= center_y + radius; y++) {
@@ -126,7 +126,8 @@ void DecolorizeEditor::changeImageAt(bool save_undo, int center_x, int center_y,
 
 	    IsChanged = true;
 
-	    Repaint(false, QRect(center_x - radius, center_y - radius, radius * 2, radius * 2));
+	    RepaintImage(false, QRect(center_x - radius, center_y - radius, radius * 2, radius * 2));
+	    RepaintHelper(center_x, center_y, zoom_level);
 	}
 }
 
@@ -141,7 +142,7 @@ void DecolorizeEditor::undo()
 
         IsChanged = true;
 
-        Repaint(true);
+        RepaintImage(true);
     }
 }
 
@@ -157,7 +158,7 @@ void DecolorizeEditor::effectedImageReady(const QImage &effected_image)
 
     IsChanged = true;
 
-    Repaint(true);
+    RepaintImage(true);
 
     emit undoAvailabilityChanged(false);
     emit imageOpened();
@@ -176,12 +177,12 @@ void DecolorizeEditor::SaveUndoImage()
     emit undoAvailabilityChanged(true);
 }
 
-void DecolorizeEditor::Repaint(bool full, QRect rect)
+void DecolorizeEditor::RepaintImage(bool full, QRect rect)
 {
 	if (CurrentImage.isNull()) {
 		CurrentImageData = bb::ImageData();
 
-		emit needRepaint(bb::cascades::Image());
+		emit needImageRepaint(bb::cascades::Image());
 	} else if (full) {
 		CurrentImageData = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, CurrentImage.width(), CurrentImage.height());
 
@@ -202,7 +203,7 @@ void DecolorizeEditor::Repaint(bool full, QRect rect)
 			dst_line += CurrentImageData.bytesPerLine();
 		}
 
-		emit needRepaint(bb::cascades::Image(CurrentImageData));
+		emit needImageRepaint(bb::cascades::Image(CurrentImageData));
 	} else {
 		unsigned char *dst_line = CurrentImageData.pixels();
 
@@ -225,7 +226,37 @@ void DecolorizeEditor::Repaint(bool full, QRect rect)
 			dst_line += CurrentImageData.bytesPerLine();
 		}
 
-		emit needRepaint(bb::cascades::Image(CurrentImageData));
+		emit needImageRepaint(bb::cascades::Image(CurrentImageData));
+	}
+}
+
+void DecolorizeEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
+{
+	if (CurrentImage.isNull()) {
+		emit needHelperRepaint(bb::cascades::Image());
+	} else {
+		QImage        helper_image      = CurrentImage.copy(center_x - HELPER_SIZE / (zoom_level * 2),
+				                                            center_y - HELPER_SIZE / (zoom_level * 2), HELPER_SIZE / zoom_level, HELPER_SIZE / zoom_level).scaledToWidth(HELPER_SIZE);
+		bb::ImageData helper_image_data = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, helper_image.width(), helper_image.height());
+
+		unsigned char *dst_line = helper_image_data.pixels();
+
+		for (int y = 0; y < helper_image_data.height(); y++) {
+			unsigned char *dst = dst_line;
+
+			for (int x = 0; x < helper_image_data.width(); x++) {
+				QRgb pixel = helper_image.pixel(x, y);
+
+				*dst++ = qRed(pixel);
+				*dst++ = qGreen(pixel);
+				*dst++ = qBlue(pixel);
+				*dst++ = qAlpha(pixel);
+			}
+
+			dst_line += helper_image_data.bytesPerLine();
+		}
+
+		emit needHelperRepaint(bb::cascades::Image(helper_image_data));
 	}
 }
 

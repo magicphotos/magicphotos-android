@@ -24,35 +24,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="169"/>
-        <location filename="../assets/DecolorizePage.qml" line="177"/>
+        <location filename="../assets/DecolorizePage.qml" line="214"/>
+        <location filename="../assets/DecolorizePage.qml" line="222"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="169"/>
+        <location filename="../assets/DecolorizePage.qml" line="214"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="173"/>
+        <location filename="../assets/DecolorizePage.qml" line="218"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="177"/>
+        <location filename="../assets/DecolorizePage.qml" line="222"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="169"/>
-        <location filename="../assets/DecolorizePage.qml" line="173"/>
-        <location filename="../assets/DecolorizePage.qml" line="177"/>
+        <location filename="../assets/DecolorizePage.qml" line="214"/>
+        <location filename="../assets/DecolorizePage.qml" line="218"/>
+        <location filename="../assets/DecolorizePage.qml" line="222"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="173"/>
+        <location filename="../assets/DecolorizePage.qml" line="218"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
@@ -73,8 +73,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="113"/>
-        <location filename="../assets/main.qml" line="127"/>
+        <location filename="../assets/main.qml" line="115"/>
+        <location filename="../assets/main.qml" line="129"/>
         <source>Open Image</source>
         <translation type="unfinished"></translation>
     </message>

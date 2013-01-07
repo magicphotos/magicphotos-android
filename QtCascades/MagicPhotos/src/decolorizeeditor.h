@@ -53,14 +53,18 @@ signals:
 
     void undoAvailabilityChanged(bool available);
 
-    void needRepaint(const bb::cascades::Image &image);
+    void needImageRepaint(const bb::cascades::Image &image);
+    void needHelperRepaint(const bb::cascades::Image &image);
 
 private:
     void SaveUndoImage();
-    void Repaint(bool full, QRect rect = QRect());
 
-    static const int UNDO_DEPTH = 4,
-                     BRUSH_SIZE = 32;
+    void RepaintImage(bool full, QRect rect = QRect());
+    void RepaintHelper(int center_x, int center_y, double zoom_level);
+
+    static const int UNDO_DEPTH  = 4,
+                     BRUSH_SIZE  = 32,
+                     HELPER_SIZE = 192;
 
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 

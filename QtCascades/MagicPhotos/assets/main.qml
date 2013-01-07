@@ -102,6 +102,8 @@ NavigationPane {
                                 id:                  modeImageView
                                 preferredWidth:      itemRoot.ListItem.view.actualWidth
                                 preferredHeight:     itemRoot.ListItem.view.actualHeight - modeLabelLayoutUpdateHandler.layoutFrame.height - modeButtonLayoutUpdateHandler.layoutFrame.height
+                                maxWidth:            preferredWidth
+                                maxHeight:           preferredHeight
                                 horizontalAlignment: HorizontalAlignment.Center
                                 imageSource:         ListItemData.image
                                 scalingMethod:       ScalingMethod.AspectFit
