@@ -5,6 +5,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QThread>
 #include <QtGui/QImageReader>
+#include <QtGui/QPainter>
 
 #include "decolorizeeditor.h"
 
@@ -207,14 +208,27 @@ void DecolorizeEditor::RepaintImage(bool full, QRect rect)
 	} else {
 		unsigned char *dst_line = CurrentImageData.pixels();
 
+		if (rect.x() < 0) {
+			rect.setX(0);
+		}
+		if (rect.y() < 0) {
+			rect.setY(0);
+		}
+		if (rect.x() + rect.width() > CurrentImageData.width()) {
+			rect.setWidth(CurrentImageData.width() - rect.x());
+		}
+		if (rect.y() + rect.height() > CurrentImageData.height()) {
+			rect.setHeight(CurrentImageData.height() - rect.y());
+		}
+
 		dst_line += rect.y() * CurrentImageData.bytesPerLine();
 
-		for (int y = rect.y(); y < rect.y() + rect.height() && y < CurrentImageData.height(); y++) {
+		for (int y = rect.y(); y < rect.y() + rect.height(); y++) {
 			unsigned char *dst = dst_line;
 
 			dst += rect.x() * 4;
 
-			for (int x = rect.x(); x < rect.x() + rect.width() && x < CurrentImageData.width(); x++) {
+			for (int x = rect.x(); x < rect.x() + rect.width(); x++) {
 				QRgb pixel = CurrentImage.pixel(x, y);
 
 				*dst++ = qRed(pixel);
@@ -235,8 +249,13 @@ void DecolorizeEditor::RepaintHelper(int center_x, int center_y, double zoom_lev
 	if (CurrentImage.isNull()) {
 		emit needHelperRepaint(bb::cascades::Image());
 	} else {
-		QImage        helper_image      = CurrentImage.copy(center_x - HELPER_SIZE / (zoom_level * 2),
-				                                            center_y - HELPER_SIZE / (zoom_level * 2), HELPER_SIZE / zoom_level, HELPER_SIZE / zoom_level).scaledToWidth(HELPER_SIZE);
+		QImage   helper_image = CurrentImage.copy(center_x - HELPER_SIZE / (zoom_level * 2),
+				                                  center_y - HELPER_SIZE / (zoom_level * 2), HELPER_SIZE / zoom_level, HELPER_SIZE / zoom_level).scaledToWidth(HELPER_SIZE);
+		QPainter painter(&helper_image);
+
+		painter.setPen(QPen(Qt::white, 4, Qt::SolidLine));
+		painter.drawPoint(helper_image.rect().center());
+
 		bb::ImageData helper_image_data = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, helper_image.width(), helper_image.height());
 
 		unsigned char *dst_line = helper_image_data.pixels();
