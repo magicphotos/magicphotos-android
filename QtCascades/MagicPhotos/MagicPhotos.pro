@@ -7,6 +7,6 @@ DEPENDPATH += ../src ${QNX_TARGET}/usr/include/bb/cascades/pickers
 LIBS += -lbbcascadespickers -lbb -lbbsystem
 
 # Uncomment this to enable debugging output to console
-DEFINES += DEBUG
+DEFINES += DEBUG_CONSOLE
 
 include(config.pri)

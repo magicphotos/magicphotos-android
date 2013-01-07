@@ -29,7 +29,7 @@ void consoleMessageOutput(QtMsgType type, const char *msg)
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
-#ifdef DEBUG
+#ifdef DEBUG_CONSOLE
 	qInstallMsgHandler(consoleMessageOutput);
 #endif
 
