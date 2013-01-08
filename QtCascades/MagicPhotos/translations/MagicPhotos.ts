@@ -4,55 +4,55 @@
 <context>
     <name>DecolorizePage</name>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="23"/>
+        <location filename="../assets/DecolorizePage.qml" line="26"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="34"/>
+        <location filename="../assets/DecolorizePage.qml" line="37"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="49"/>
+        <location filename="../assets/DecolorizePage.qml" line="52"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="59"/>
+        <location filename="../assets/DecolorizePage.qml" line="62"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="214"/>
-        <location filename="../assets/DecolorizePage.qml" line="222"/>
+        <location filename="../assets/DecolorizePage.qml" line="223"/>
+        <location filename="../assets/DecolorizePage.qml" line="231"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="214"/>
+        <location filename="../assets/DecolorizePage.qml" line="223"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="218"/>
+        <location filename="../assets/DecolorizePage.qml" line="227"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="222"/>
+        <location filename="../assets/DecolorizePage.qml" line="231"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="214"/>
-        <location filename="../assets/DecolorizePage.qml" line="218"/>
-        <location filename="../assets/DecolorizePage.qml" line="222"/>
+        <location filename="../assets/DecolorizePage.qml" line="223"/>
+        <location filename="../assets/DecolorizePage.qml" line="227"/>
+        <location filename="../assets/DecolorizePage.qml" line="231"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="218"/>
+        <location filename="../assets/DecolorizePage.qml" line="227"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>

@@ -6,6 +6,9 @@ Page {
     id: decolorizePage
 
     function openImage(imageFile) {
+        activityIndicator.visible = true;
+        activityIndicator.start();
+
         decolorizeEditor.openImage(imageFile);
     }
 
@@ -137,20 +140,20 @@ Page {
 
             function showHelper(touch_x, touch_y) {
                 if (modeSegmentedControl.selectedValue !== DecolorizeEditor.ModeScroll) {
-                    helperImageContainer.visible = true;
+                    helperImageView.visible = true;
 
                     var local_x = imageScrollViewLayoutUpdateHandler.layoutFrame.x + touch_x * imageScrollView.contentScale - imageScrollView.viewableArea.x;
                     var local_y = imageScrollViewLayoutUpdateHandler.layoutFrame.y + touch_y * imageScrollView.contentScale - imageScrollView.viewableArea.y;
     
-                    if (local_y < helperImageContainerLayoutUpdateHandler.layoutFrame.height * 2) {
-                        if (local_x < helperImageContainerLayoutUpdateHandler.layoutFrame.width * 2) {
-                            helperImageContainer.horizontalAlignment = HorizontalAlignment.Right;
-                        } else if (local_x > imageContainerLayoutUpdateHandler.layoutFrame.width - helperImageContainerLayoutUpdateHandler.layoutFrame.width * 2) {
-                            helperImageContainer.horizontalAlignment = HorizontalAlignment.Left;
+                    if (local_y < helperImageViewLayoutUpdateHandler.layoutFrame.height * 2) {
+                        if (local_x < helperImageViewLayoutUpdateHandler.layoutFrame.width * 2) {
+                            helperImageView.horizontalAlignment = HorizontalAlignment.Right;
+                        } else if (local_x > imageContainerLayoutUpdateHandler.layoutFrame.width - helperImageViewLayoutUpdateHandler.layoutFrame.width * 2) {
+                            helperImageView.horizontalAlignment = HorizontalAlignment.Left;
                         }
                     }
                 } else {
-                    helperImageContainer.visible = false;
+                    helperImageView.visible = false;
                 }
             }
 
@@ -181,7 +184,7 @@ Page {
 
                             decolorizeEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
                         } else {
-                            helperImageContainer.visible = false;
+                            helperImageView.visible = false;
                         }
                     }
 
@@ -191,6 +194,9 @@ Page {
                             mode: DecolorizeEditor.ModeScroll 
                             
                             onImageOpened: {
+                                activityIndicator.stop();
+                                activityIndicator.visible = false;
+                                
                                 saveActionItem.enabled = true;
                                 
                                 modeSegmentedControl.selectedOption = scrollModeOption;
@@ -202,6 +208,9 @@ Page {
                             }
                             
                             onImageOpenFailed: {
+                                activityIndicator.stop();
+                                activityIndicator.visible = false;
+                                
                                 saveActionItem.enabled = false;
                                 
                                 modeSegmentedControl.selectedOption = scrollModeOption;
@@ -248,22 +257,26 @@ Page {
                 ]
             }
             
-            Container {
-                id:                  helperImageContainer
-                background:          Color.Transparent
+            ImageView {
+                id:                  helperImageView
                 horizontalAlignment: HorizontalAlignment.Left
                 verticalAlignment:   VerticalAlignment.Top
                 visible:             false
                 
-                ImageView {
-                    id: helperImageView
-                } 
-
                 attachedObjects: [
                     LayoutUpdateHandler {
-                        id: helperImageContainerLayoutUpdateHandler
+                        id: helperImageViewLayoutUpdateHandler
                     }
                 ]
+            } 
+
+            ActivityIndicator {
+                id:                  activityIndicator
+                preferredWidth:      256
+                preferredHeight:     256
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment:   VerticalAlignment.Center
+                visible:             false
             }
 
             attachedObjects: [
