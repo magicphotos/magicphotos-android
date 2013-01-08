@@ -4,15 +4,15 @@ import ImageEditor 1.0
 Page {
     id: sketchPreviewPage
 
-    property string imageFileName: ""
+    property string imageFile: ""
 
-    function openImage(imageFile) {
-        imageFileName = imageFile;
+    function openImage(image_file) {
+        imageFile = image_file;
 
         activityIndicator.visible = true;
         activityIndicator.start();
 
-        sketchPreviewGenerator.openImage(imageFile);
+        sketchPreviewGenerator.openImage(image_file);
     }
 
     paneProperties: NavigationPaneProperties {
@@ -139,7 +139,19 @@ Page {
             }
             
             onClicked: {
+                var page = sketchPageDefinition.createObject();
+
+                navigationPane.push(page);
+
+                page.openImage(imageFile, gaussianRadiusSlider.value);
             }
+
+            attachedObjects: [
+                ComponentDefinition {
+                    id:     sketchPageDefinition
+                    source: "SketchPage.qml"
+                }
+            ]
         }
     }
 }

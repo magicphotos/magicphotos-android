@@ -3,13 +3,14 @@ import FilePicker 1.0
 import ImageEditor 1.0
 
 Page {
-    id: decolorizePage
+    id: sketchPage
 
-    function openImage(image_file) {
+    function openImage(image_file, gaussian_radius) {
         activityIndicator.visible = true;
         activityIndicator.start();
 
-        decolorizeEditor.openImage(image_file);
+        sketchEditor.radius = gaussian_radius;
+        sketchEditor.openImage(image_file);
     }
 
     paneProperties: NavigationPaneProperties {
@@ -29,7 +30,7 @@ Page {
             enabled:             false
 
             onTriggered: {
-                decolorizeEditor.undo();
+                sketchEditor.undo();
             }
         },
         ActionItem {
@@ -52,7 +53,7 @@ Page {
                     title:          qsTr("Save Image")
                     
                     onFileSelected: {
-                        decolorizeEditor.saveImage(selectedFiles[0]);
+                        sketchEditor.saveImage(selectedFiles[0]);
                     } 
                 }
             ]
@@ -79,7 +80,7 @@ Page {
     ]
     
     Container {
-        id:         decolorizePageContainer
+        id:         sketchPageContainer
         background: Color.Black
 
         layout: StackLayout {
@@ -94,31 +95,31 @@ Page {
             }
 
             onSelectedValueChanged: {
-                if (selectedValue === DecolorizeEditor.ModeScroll) {
+                if (selectedValue === SketchEditor.ModeScroll) {
                     imageScrollView.touchPropagationMode = TouchPropagationMode.Full;
                 } else {
                     imageScrollView.touchPropagationMode = TouchPropagationMode.PassThrough;
                 }
                 
-                decolorizeEditor.mode = selectedValue;
+                sketchEditor.mode = selectedValue;
             }
 
             Option {
                 id:          scrollModeOption
-                value:       DecolorizeEditor.ModeScroll
+                value:       SketchEditor.ModeScroll
                 imageSource: "images/mode_scroll.png"
             }
 
             Option {
                 id:          originalModeOption
-                value:       DecolorizeEditor.ModeOriginal
+                value:       SketchEditor.ModeOriginal
                 imageSource: "images/mode_original.png"
                 enabled:     false
             }
 
             Option {
                 id:          effectedModeOption
-                value:       DecolorizeEditor.ModeEffected
+                value:       SketchEditor.ModeEffected
                 imageSource: "images/mode_effected.png"
                 enabled:     false
             }
@@ -126,7 +127,7 @@ Page {
 
         Container {
             id:                  imageContainer
-            preferredWidth:      decolorizePageContainerLayoutUpdateHandler.layoutFrame.width
+            preferredWidth:      sketchPageContainerLayoutUpdateHandler.layoutFrame.width
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
 
@@ -138,7 +139,7 @@ Page {
             }
 
             function showHelper(touch_x, touch_y) {
-                if (modeSegmentedControl.selectedValue !== DecolorizeEditor.ModeScroll) {
+                if (modeSegmentedControl.selectedValue !== SketchEditor.ModeScroll) {
                     helperImageView.visible = true;
 
                     var local_x = imageScrollViewLayoutUpdateHandler.layoutFrame.x + touch_x * imageScrollView.contentScale - imageScrollView.viewableArea.x;
@@ -177,20 +178,20 @@ Page {
                         if (event.touchType === TouchType.Down) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            decolorizeEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                            sketchEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
                         } else if (event.touchType === TouchType.Move) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            decolorizeEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                            sketchEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
                         } else {
                             helperImageView.visible = false;
                         }
                     }
 
                     attachedObjects: [
-                        DecolorizeEditor {
-                            id:   decolorizeEditor
-                            mode: DecolorizeEditor.ModeScroll 
+                        SketchEditor {
+                            id:   sketchEditor
+                            mode: SketchEditor.ModeScroll 
                             
                             onImageOpened: {
                                 activityIndicator.stop();
@@ -287,7 +288,7 @@ Page {
 
         attachedObjects: [
             LayoutUpdateHandler {
-                id: decolorizePageContainerLayoutUpdateHandler
+                id: sketchPageContainerLayoutUpdateHandler
             }
         ]
     }

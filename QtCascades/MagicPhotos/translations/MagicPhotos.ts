@@ -66,6 +66,62 @@
     </message>
 </context>
 <context>
+    <name>SketchPage</name>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="27"/>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="38"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="53"/>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="63"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="223"/>
+        <location filename="../assets/SketchPage.qml" line="231"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="223"/>
+        <source>Could not open image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="223"/>
+        <location filename="../assets/SketchPage.qml" line="227"/>
+        <location filename="../assets/SketchPage.qml" line="231"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="227"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="227"/>
+        <source>Image saved successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="231"/>
+        <source>Could not save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SketchPreviewPage</name>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="29"/>

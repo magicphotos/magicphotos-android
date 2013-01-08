@@ -50,7 +50,7 @@ NavigationPane {
                 property int actualWidth:  0
                 property int actualHeight: 0
 
-                function navigateToEditPage(mode, imageFile) {
+                function navigateToEditPage(mode, image_file) {
                     if (mode === "DECOLORIZE") {
                         editPageDefinition.source = "DecolorizePage.qml";
 
@@ -58,7 +58,7 @@ NavigationPane {
 
                         navigationPane.push(page);
 
-                        page.openImage(imageFile);
+                        page.openImage(image_file);
                     } else if (mode === "SKETCH") {
                         editPageDefinition.source = "SketchPreviewPage.qml";
 
@@ -66,7 +66,7 @@ NavigationPane {
 
                         navigationPane.push(page);
 
-                        page.openImage(imageFile);
+                        page.openImage(image_file);
                     }
                 }
 
