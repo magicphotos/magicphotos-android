@@ -362,6 +362,8 @@ void SketchPreviewGenerator::openImage(const QString &image_file)
             	generator->setInput(LoadedImage);
 
             	thread->start();
+
+            	emit imageOpened();
             } else {
                 emit imageOpenFailed();
             }

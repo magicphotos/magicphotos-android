@@ -4,7 +4,11 @@ import ImageEditor 1.0
 Page {
     id: sketchPreviewPage
 
+    property string imageFileName: ""
+
     function openImage(imageFile) {
+        imageFileName = imageFile;
+
         activityIndicator.visible = true;
         activityIndicator.start();
 
@@ -47,25 +51,6 @@ Page {
         layout: StackLayout {
         }
 
-        Slider {
-            id:                  gaussianRadiusSlider
-            horizontalAlignment: HorizontalAlignment.Center 
-            fromValue:           4
-            toValue:             18
-            value:               11
-
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-            
-            onValueChanged: {
-                activityIndicator.visible = true;
-                activityIndicator.start();
-                
-                sketchPreviewGenerator.radius = value;
-            }
-        }
-
         Container {
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
@@ -87,9 +72,17 @@ Page {
                     SketchPreviewGenerator {
                         id: sketchPreviewGenerator
                         
+                        onImageOpened: {
+                            gaussianRadiusSlider.enabled = true;
+                            applyButton.enabled          = true;
+                        }
+                        
                         onImageOpenFailed: {
                             activityIndicator.stop();
                             activityIndicator.visible = false;
+
+                            gaussianRadiusSlider.enabled = false;
+                            applyButton.enabled          = false;
 
                             MessageBox.showMessage(qsTr("Error"), qsTr("Could not open image"), qsTr("OK"));
                         }
@@ -114,11 +107,32 @@ Page {
             }
         }
 
+        Slider {
+            id:                  gaussianRadiusSlider
+            horizontalAlignment: HorizontalAlignment.Center 
+            fromValue:           4
+            toValue:             18
+            value:               11
+            enabled:             false
+
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
+            }
+            
+            onValueChanged: {
+                activityIndicator.visible = true;
+                activityIndicator.start();
+                
+                sketchPreviewGenerator.radius = value;
+            }
+        }
+
         Button {
             id:                  applyButton
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment:   VerticalAlignment.Bottom
             text:                qsTr("Apply")
+            enabled:             false
             
             layoutProperties: StackLayoutProperties {
                 spaceQuota: -1

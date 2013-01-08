@@ -97,6 +97,7 @@ public slots:
 	void sketchImageReady(const QImage &sketch_image);
 
 signals:
+	void imageOpened();
 	void imageOpenFailed();
 
 	void needRepaint(const bb::cascades::Image &image);
