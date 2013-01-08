@@ -1,6 +1,3 @@
-#include <float.h>
-
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QThread>
