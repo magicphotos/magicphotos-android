@@ -14,6 +14,7 @@
 #include "messagebox.h"
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
+#include "recoloreditor.h"
 
 using namespace bb::cascades;
 
@@ -28,8 +29,11 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>("FilePicker", 1, 0, "FilePickerViewMode", "");
 
 	qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
+
 	qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
 	qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
+
+	qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 

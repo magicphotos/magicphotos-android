@@ -11,17 +11,16 @@ Page {
         }
     }
 
-    Container {
-        background: Color.Black
-        
-        layout: StackLayout {
-        }
+    ScrollView {
+        scrollViewProperties {
+            scrollMode:         ScrollMode.Both
+            pinchToZoomEnabled: true
+            minContentScale:    1.0
+            maxContentScale:    4.0
+        }            
 
-        ScrollView {
-            WebView {
-                id:  helpWebView
-                url: qsTr("doc/help.html")
-            }
+        WebView {
+            url: qsTr("doc/help.html")
         }
     }
 }

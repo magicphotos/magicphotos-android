@@ -67,6 +67,14 @@ NavigationPane {
                         navigationPane.push(page);
 
                         page.openImage(image_file);
+                    } else if (mode === "RECOLOR") {
+                        editPageDefinition.source = "RecolorPage.qml";
+
+                        var page = editPageDefinition.createObject();
+
+                        navigationPane.push(page);
+
+                        page.openImage(image_file);
                     }
                 }
 
