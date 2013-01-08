@@ -59,6 +59,14 @@ NavigationPane {
                         navigationPane.push(page);
 
                         page.openImage(imageFile);
+                    } else if (mode === "SKETCH") {
+                        editPageDefinition.source = "SketchPreviewPage.qml";
+
+                        var page = editPageDefinition.createObject();
+
+                        navigationPane.push(page);
+
+                        page.openImage(imageFile);
                     }
                 }
 
@@ -91,22 +99,21 @@ NavigationPane {
                                 textStyle.fontSizeValue: 250
                                 textStyle.color:         Color.White
 
-                                attachedObjects: [
-                                    LayoutUpdateHandler {
-                                        id: modeLabelLayoutUpdateHandler
-                                    }
-                                ]
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
                             }
 
                             ImageView {
                                 id:                  modeImageView
                                 preferredWidth:      itemRoot.ListItem.view.actualWidth
-                                preferredHeight:     itemRoot.ListItem.view.actualHeight - modeLabelLayoutUpdateHandler.layoutFrame.height - modeButtonLayoutUpdateHandler.layoutFrame.height
-                                maxWidth:            preferredWidth
-                                maxHeight:           preferredHeight
                                 horizontalAlignment: HorizontalAlignment.Center
                                 imageSource:         ListItemData.image
                                 scalingMethod:       ScalingMethod.AspectFit
+
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
                             }
                             
                             Button {
@@ -114,14 +121,15 @@ NavigationPane {
                                 horizontalAlignment: HorizontalAlignment.Center
                                 text:                qsTr("Open Image")
                                 
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
+
                                 onClicked: {
                                     openFilePicker.open();
                                 }
                                 
                                 attachedObjects: [
-                                    LayoutUpdateHandler {
-                                        id: modeButtonLayoutUpdateHandler
-                                    },
                                     FilePicker {
                                         id:    openFilePicker
                                         type:  FileType.Picture

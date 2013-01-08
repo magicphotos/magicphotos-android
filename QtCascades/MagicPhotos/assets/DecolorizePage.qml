@@ -89,6 +89,10 @@ Page {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
             
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
+            }
+
             onSelectedValueChanged: {
                 if (selectedValue === DecolorizeEditor.ModeScroll) {
                     imageScrollView.touchPropagationMode = TouchPropagationMode.Full;
@@ -118,23 +122,18 @@ Page {
                 imageSource: "images/mode_effected.png"
                 enabled:     false
             }
-
-            attachedObjects: [
-                LayoutUpdateHandler {
-                    id: modeSegmentedControlLayoutUpdateHandler
-                }
-            ]
         }
 
         Container {
             id:                  imageContainer
             preferredWidth:      decolorizePageContainerLayoutUpdateHandler.layoutFrame.width
-            preferredHeight:     decolorizePageContainerLayoutUpdateHandler.layoutFrame.height - modeSegmentedControlLayoutUpdateHandler.layoutFrame.height
-            maxWidth:            preferredWidth
-            maxHeight:           preferredHeight
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
-            
+
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: 1
+            }
+
             layout: DockLayout {
             }
 

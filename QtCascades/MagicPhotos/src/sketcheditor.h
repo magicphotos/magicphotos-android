@@ -1,5 +1,5 @@
-#ifndef DECOLORIZEEDITOR_H
-#define DECOLORIZEEDITOR_H
+#ifndef SKETCHEDITOR_H
+#define SKETCHEDITOR_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -9,21 +9,25 @@
 #include <bb/cascades/Image>
 #include <bb/cascades/CustomControl>
 
-class DecolorizeEditor : public bb::cascades::CustomControl
+class SketchEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
     Q_PROPERTY(int  mode    READ mode   WRITE setMode)
+    Q_PROPERTY(int  radius  READ radius WRITE setRadius)
     Q_PROPERTY(bool changed READ changed)
 
     Q_ENUMS(Mode)
 
 public:
-    explicit DecolorizeEditor();
-    virtual ~DecolorizeEditor();
+    explicit SketchEditor();
+    virtual ~SketchEditor();
 
     int  mode() const;
     void setMode(const int &mode);
+
+    int  radius() const;
+    void setRadius(const int &radius);
 
     bool changed() const;
 
@@ -68,20 +72,53 @@ private:
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged;
-    int            CurrentMode;
+    int            CurrentMode, GaussianRadius;
     QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
     QStack<QImage> UndoStack;
     bb::ImageData  CurrentImageData;
 };
 
-class GrayscaleImageGenerator : public QObject
+class SketchPreviewGenerator : public bb::cascades::CustomControl
+{
+    Q_OBJECT
+
+    Q_PROPERTY(int radius READ radius WRITE setRadius)
+
+public:
+    explicit SketchPreviewGenerator();
+    virtual ~SketchPreviewGenerator();
+
+    int  radius() const;
+    void setRadius(const int &radius);
+
+    Q_INVOKABLE void openImage(const QString &image_file);
+
+public slots:
+	void sketchImageReady(const QImage &sketch_image);
+
+signals:
+	void imageOpenFailed();
+
+	void needRepaint(const bb::cascades::Image &image);
+
+private:
+    void Repaint();
+
+    static const qreal IMAGE_MPIX_LIMIT = 0.5;
+
+    int    GaussianRadius;
+    QImage LoadedImage, SketchImage;
+};
+
+class SketchImageGenerator : public QObject
 {
 	Q_OBJECT
 
 public:
-    explicit GrayscaleImageGenerator(QObject *parent = 0);
-    virtual ~GrayscaleImageGenerator();
+    explicit SketchImageGenerator(QObject *parent = 0);
+    virtual ~SketchImageGenerator();
 
+    void setGaussianRadius(const int &radius);
 	void setInput(const QImage &input_image);
 
 public slots:
@@ -92,7 +129,8 @@ signals:
 	void finished();
 
 private:
+	int    GaussianRadius;
 	QImage InputImage;
 };
 
-#endif // DECOLORIZEEDITOR_H
+#endif // SKETCHEDITOR_H
