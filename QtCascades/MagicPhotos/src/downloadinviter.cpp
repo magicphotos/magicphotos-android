@@ -1,3 +1,4 @@
+#include <QtCore/QString>
 #include <QtCore/QUuid>
 #include <bb/platform/bbm/MessageService>
 
@@ -21,7 +22,7 @@ void DownloadInviter::sendDownloadInvitation()
 	RegistrationState = RegStateStarted;
 
 	if (BBMContext == NULL) {
-		BBMContext = new bb::platform::bbm::Context(QUuid::createUuid(), this);
+		BBMContext = new bb::platform::bbm::Context(QUuid(QString("c0e86694-0ce4-4eea-b343-4ba005c7a4fa")), this);
 
     	QObject::connect(BBMContext, SIGNAL(registrationStateUpdated(bb::platform::bbm::RegistrationState::Type)), this, SLOT(contextRegistrationStateUpdated(bb::platform::bbm::RegistrationState::Type)));
 	}
