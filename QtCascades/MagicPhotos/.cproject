@@ -31,7 +31,7 @@
 								<inputType id="com.qnx.qcc.inputType.compiler.250962844" superClass="com.qnx.qcc.inputType.compiler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.assembler.852777585" name="QCC Assembler" superClass="com.qnx.qcc.tool.assembler">
-								<option id="com.qnx.qcc.option.assembler.defines.71412944" name="Defines (-D)" superClass="com.qnx.qcc.option.assembler.defines" valueType="definedSymbols"/>
+								<option id="com.qnx.qcc.option.assembler.defines.71412944" name="Defines (-D)" superClass="com.qnx.qcc.option.assembler.defines"/>
 								<inputType id="com.qnx.qcc.inputType.assembler.1323132047" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.628964180" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
