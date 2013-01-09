@@ -6,8 +6,8 @@
 
 DownloadInviter::DownloadInviter() : bb::cascades::CustomControl()
 {
-    RegistrationState = RegStateNotStarted;
-    BBMContext        = NULL;
+    State      = InviterStateNotStarted;
+    BBMContext = NULL;
 }
 
 DownloadInviter::~DownloadInviter()
@@ -19,7 +19,7 @@ DownloadInviter::~DownloadInviter()
 
 void DownloadInviter::sendDownloadInvitation()
 {
-    RegistrationState = RegStateStarted;
+    State = InviterStateStarted;
 
     if (BBMContext == NULL) {
         BBMContext = new bb::platform::bbm::Context(QUuid(QString("c0e86694-0ce4-4eea-b343-4ba005c7a4fa")), this);
@@ -32,33 +32,41 @@ void DownloadInviter::sendDownloadInvitation()
 
 void DownloadInviter::contextRegistrationStateUpdated(bb::platform::bbm::RegistrationState::Type state)
 {
-    if (BBMContext->isAccessAllowed()) {
-        RegistrationState = RegStateRegistered;
+    if (State == InviterStateStarted) {
+        if (BBMContext->isAccessAllowed()) {
+            State = InviterStateNotStarted;
 
-        bb::platform::bbm::MessageService message_service(BBMContext);
+            bb::platform::bbm::MessageService message_service(BBMContext);
 
-        if (message_service.sendDownloadInvitation()) {
-            emit invitationSent();
-        } else {
-            emit invitationSendFailed();
-        }
-    } else {
-        if (RegistrationState == RegStateStarted) {
-            if (state != bb::platform::bbm::RegistrationState::Unknown) {
-                if (BBMContext->requestRegisterApplication()) {
-                    RegistrationState = RegStatePending;
-                } else {
-                    RegistrationState = RegStateError;
-
-                    emit invitationSendFailed();
-                }
+            if (message_service.sendDownloadInvitation()) {
+                emit invitationSent();
+            } else {
+                emit invitationSendFailed();
             }
-        } else if (RegistrationState == RegStatePending) {
-            if (state != bb::platform::bbm::RegistrationState::Pending) {
-                RegistrationState = RegStateError;
+        } else if (state != bb::platform::bbm::RegistrationState::Unknown) {
+            if (BBMContext->requestRegisterApplication()) {
+                State = InviterStateRegPending;
+            } else {
+                State = InviterStateNotStarted;
 
                 emit invitationSendFailed();
             }
+        }
+    } else if (State == InviterStateRegPending) {
+        if (BBMContext->isAccessAllowed()) {
+            State = InviterStateNotStarted;
+
+            bb::platform::bbm::MessageService message_service(BBMContext);
+
+            if (message_service.sendDownloadInvitation()) {
+                emit invitationSent();
+            } else {
+                emit invitationSendFailed();
+            }
+        } else if (state != bb::platform::bbm::RegistrationState::Pending) {
+            State = InviterStateNotStarted;
+
+            emit invitationSendFailed();
         }
     }
 }

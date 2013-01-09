@@ -23,15 +23,13 @@ signals:
     void invitationSendFailed();
 
 private:
-    enum RegState {
-        RegStateNotStarted,
-        RegStateStarted,
-        RegStatePending,
-        RegStateRegistered,
-        RegStateError
+    enum InviterState {
+        InviterStateNotStarted,
+        InviterStateStarted,
+        InviterStateRegPending,
     };
 
-    int                        RegistrationState;
+    int                        State;
     bb::platform::bbm::Context *BBMContext;
 };
 
