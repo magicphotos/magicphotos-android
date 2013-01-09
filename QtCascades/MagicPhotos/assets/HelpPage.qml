@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import DownloadInviter 1.0
 
 Page {
     id: helpPage
@@ -10,6 +11,28 @@ Page {
             }
         }
     }
+
+    actions: [
+        ActionItem {
+            title:               qsTr("Recommend App")
+            imageSource:         "images/share.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+
+            onTriggered: {
+                downloadInviter.sendDownloadInvitation();
+            }
+            
+            attachedObjects: [
+                DownloadInviter {
+                    id: downloadInviter
+
+                    onInvitationSendFailed: {
+                        MessageBox.showMessage(qsTr("Error"), qsTr("Could not send download invitation"), qsTr("OK"));
+                    }
+                }
+            ]
+        }
+    ]
 
     ScrollView {
         scrollViewProperties {

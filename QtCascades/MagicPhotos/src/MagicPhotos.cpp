@@ -12,6 +12,7 @@
 #include <bb/cascades/AbstractPane>
 
 #include "messagebox.h"
+#include "downloadinviter.h"
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
 #include "recoloreditor.h"
@@ -27,6 +28,8 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortOrder>("FilePicker", 1, 0, "FilePickerSortOrder", "");
 	qmlRegisterUncreatableType<bb::cascades::pickers::FileType>("FilePicker", 1, 0, "FileType", "");
 	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>("FilePicker", 1, 0, "FilePickerViewMode", "");
+
+	qmlRegisterType<DownloadInviter>("DownloadInviter", 1, 0, "DownloadInviter");
 
 	qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 
