@@ -18,13 +18,13 @@ public:
     Q_INVOKABLE int showQuestion(const QString &title, const QString &body, const QString &confirmButtonLabel, const QString &cancelButtonLabel);
 
     enum DialogResult {
-    	DialogResultNone,
-    	DialogResultButtonSelection,
-    	DialogResultConfirmButtonSelection,
-    	DialogResultCancelButtonSelection,
-    	DialogResultTimeOut,
-    	DialogResultError,
-    	DialogResultCustomButtonSelection
+        DialogResultNone,
+        DialogResultButtonSelection,
+        DialogResultConfirmButtonSelection,
+        DialogResultCancelButtonSelection,
+        DialogResultTimeOut,
+        DialogResultError,
+        DialogResultCustomButtonSelection
     };
 };
 

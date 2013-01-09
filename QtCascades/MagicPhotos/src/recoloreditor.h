@@ -40,10 +40,10 @@ public:
     Q_INVOKABLE void undo();
 
     enum Mode {
-    	ModeScroll,
-    	ModeOriginal,
-    	ModeEffected,
-    	ModeHueSelection
+        ModeScroll,
+        ModeOriginal,
+        ModeEffected,
+        ModeHueSelection
     };
 
 signals:

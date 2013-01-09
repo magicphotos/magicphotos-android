@@ -1,7 +1,7 @@
 <model>
-  <header title="Edit Modes">
-    <item mode="DECOLORIZE" name="Decolorize" image="images/edit_mode_decolorize.png" />
-    <item mode="SKETCH"     name="Sketch"     image="images/edit_mode_sketch.png" />
-    <item mode="RECOLOR"    name="Recolor"    image="images/edit_mode_recolor.png" />
-  </header>
+    <header title="Edit Modes">
+        <item mode="DECOLORIZE" name="Decolorize" image="images/edit_mode_decolorize.png" />
+        <item mode="SKETCH"     name="Sketch"     image="images/edit_mode_sketch.png" />
+        <item mode="RECOLOR"    name="Recolor"    image="images/edit_mode_recolor.png" />
+    </header>
 </model>

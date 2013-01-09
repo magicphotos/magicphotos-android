@@ -161,9 +161,9 @@ NavigationPane {
                             modeSelectionListView.actualHeight = layoutFrame.height;
                         }
                     },
-	                ComponentDefinition {
-	                    id: editPageDefinition
-	                }
+                    ComponentDefinition {
+                        id: editPageDefinition
+                    }
                 ]
             }
         }

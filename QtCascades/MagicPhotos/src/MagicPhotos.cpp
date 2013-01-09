@@ -21,22 +21,22 @@ using namespace bb::cascades;
 
 MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 {
-	qmlRegisterType<bb::cascades::pickers::FilePicker>("FilePicker", 1, 0, "FilePicker");
+    qmlRegisterType<bb::cascades::pickers::FilePicker>("FilePicker", 1, 0, "FilePicker");
 
-	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerMode>("FilePicker", 1, 0, "FilePickerMode", "");
-	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortFlag>("FilePicker", 1, 0, "FilePickerSortFlag", "");
-	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortOrder>("FilePicker", 1, 0, "FilePickerSortOrder", "");
-	qmlRegisterUncreatableType<bb::cascades::pickers::FileType>("FilePicker", 1, 0, "FileType", "");
-	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>("FilePicker", 1, 0, "FilePickerViewMode", "");
+    qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerMode>("FilePicker", 1, 0, "FilePickerMode", "");
+    qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortFlag>("FilePicker", 1, 0, "FilePickerSortFlag", "");
+    qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortOrder>("FilePicker", 1, 0, "FilePickerSortOrder", "");
+    qmlRegisterUncreatableType<bb::cascades::pickers::FileType>("FilePicker", 1, 0, "FileType", "");
+    qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>("FilePicker", 1, 0, "FilePickerViewMode", "");
 
-	qmlRegisterType<DownloadInviter>("DownloadInviter", 1, 0, "DownloadInviter");
+    qmlRegisterType<DownloadInviter>("DownloadInviter", 1, 0, "DownloadInviter");
 
-	qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
+    qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 
-	qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
-	qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
+    qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
+    qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
 
-	qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
+    qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 

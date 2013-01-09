@@ -39,13 +39,13 @@ public:
     Q_INVOKABLE void undo();
 
     enum Mode {
-    	ModeScroll,
-    	ModeOriginal,
-    	ModeEffected
+        ModeScroll,
+        ModeOriginal,
+        ModeEffected
     };
 
 public slots:
-	void effectedImageReady(const QImage &effected_image);
+    void effectedImageReady(const QImage &effected_image);
 
 signals:
     void imageOpened();
@@ -94,13 +94,13 @@ public:
     Q_INVOKABLE void openImage(const QString &image_file);
 
 public slots:
-	void sketchImageReady(const QImage &sketch_image);
+    void sketchImageReady(const QImage &sketch_image);
 
 signals:
-	void imageOpened();
-	void imageOpenFailed();
+    void imageOpened();
+    void imageOpenFailed();
 
-	void needRepaint(const bb::cascades::Image &image);
+    void needRepaint(const bb::cascades::Image &image);
 
 private:
     void Repaint();
@@ -113,25 +113,25 @@ private:
 
 class SketchImageGenerator : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit SketchImageGenerator(QObject *parent = 0);
     virtual ~SketchImageGenerator();
 
     void setGaussianRadius(const int &radius);
-	void setInput(const QImage &input_image);
+    void setInput(const QImage &input_image);
 
 public slots:
-	void start();
+    void start();
 
 signals:
-	void imageReady(const QImage &output_image);
-	void finished();
+    void imageReady(const QImage &output_image);
+    void finished();
 
 private:
-	int    GaussianRadius;
-	QImage InputImage;
+    int    GaussianRadius;
+    QImage InputImage;
 };
 
 #endif // SKETCHEDITOR_H

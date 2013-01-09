@@ -35,13 +35,13 @@ public:
     Q_INVOKABLE void undo();
 
     enum Mode {
-    	ModeScroll,
-    	ModeOriginal,
-    	ModeEffected
+        ModeScroll,
+        ModeOriginal,
+        ModeEffected
     };
 
 public slots:
-	void effectedImageReady(const QImage &effected_image);
+    void effectedImageReady(const QImage &effected_image);
 
 signals:
     void imageOpened();
@@ -76,23 +76,23 @@ private:
 
 class GrayscaleImageGenerator : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit GrayscaleImageGenerator(QObject *parent = 0);
     virtual ~GrayscaleImageGenerator();
 
-	void setInput(const QImage &input_image);
+    void setInput(const QImage &input_image);
 
 public slots:
-	void start();
+    void start();
 
 signals:
-	void imageReady(const QImage &output_image);
-	void finished();
+    void imageReady(const QImage &output_image);
+    void finished();
 
 private:
-	QImage InputImage;
+    QImage InputImage;
 };
 
 #endif // DECOLORIZEEDITOR_H

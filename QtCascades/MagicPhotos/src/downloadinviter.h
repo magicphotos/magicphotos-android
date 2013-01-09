@@ -16,23 +16,23 @@ public:
     Q_INVOKABLE void sendDownloadInvitation();
 
 public slots:
-	void contextRegistrationStateUpdated(bb::platform::bbm::RegistrationState::Type state);
+    void contextRegistrationStateUpdated(bb::platform::bbm::RegistrationState::Type state);
 
 signals:
-	void invitationSent();
-	void invitationSendFailed();
+    void invitationSent();
+    void invitationSendFailed();
 
 private:
-	enum RegState {
-		RegStateNotStarted,
-		RegStateStarted,
-		RegStatePending,
-		RegStateRegistered,
-		RegStateError
-	};
+    enum RegState {
+        RegStateNotStarted,
+        RegStateStarted,
+        RegStatePending,
+        RegStateRegistered,
+        RegStateError
+    };
 
-	int                        RegistrationState;
-	bb::platform::bbm::Context *BBMContext;
+    int                        RegistrationState;
+    bb::platform::bbm::Context *BBMContext;
 };
 
 #endif // DOWNLOADINVITER_H
