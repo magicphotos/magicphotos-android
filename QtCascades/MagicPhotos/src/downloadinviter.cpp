@@ -1,5 +1,6 @@
 #include <QtCore/QString>
 #include <QtCore/QUuid>
+
 #include <bb/platform/bbm/MessageService>
 
 #include "downloadinviter.h"

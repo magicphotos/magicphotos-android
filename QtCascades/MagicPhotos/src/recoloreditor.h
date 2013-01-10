@@ -6,6 +6,7 @@
 #include <QtCore/QStack>
 #include <QtCore/QHash>
 #include <QtGui/QImage>
+
 #include <bb/ImageData>
 #include <bb/cascades/Image>
 #include <bb/cascades/CustomControl>

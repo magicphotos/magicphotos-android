@@ -2,6 +2,7 @@
 #define DOWNLOADINVITER_H
 
 #include <QtCore/QObject>
+
 #include <bb/platform/bbm/Context>
 #include <bb/cascades/CustomControl>
 

@@ -1,5 +1,3 @@
-#include "MagicPhotos.hpp"
-
 #include <bb/cascades/pickers/FilePicker>
 #include <bb/cascades/pickers/FilePickerMode>
 #include <bb/cascades/pickers/FilePickerSortFlag>
@@ -16,6 +14,8 @@
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
 #include "recoloreditor.h"
+
+#include "MagicPhotos.hpp"
 
 using namespace bb::cascades;
 

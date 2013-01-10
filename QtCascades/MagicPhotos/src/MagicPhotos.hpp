@@ -1,7 +1,7 @@
 #ifndef MAGICPHOTOS_HPP
 #define MAGICPHOTOS_HPP
 
-#include <QObject>
+#include <QtCore/QObject>
 
 namespace bb { namespace cascades { class Application; }}
 
