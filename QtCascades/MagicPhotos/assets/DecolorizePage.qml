@@ -126,7 +126,7 @@ Page {
 
         Container {
             id:                  imageContainer
-            preferredWidth:      decolorizePageContainerLayoutUpdateHandler.layoutFrame.width
+            preferredWidth:      65535
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
 
@@ -284,11 +284,5 @@ Page {
                 }
             ]
         }
-
-        attachedObjects: [
-            LayoutUpdateHandler {
-                id: decolorizePageContainerLayoutUpdateHandler
-            }
-        ]
     }
 }
