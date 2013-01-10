@@ -1,3 +1,4 @@
+#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QThread>
@@ -217,6 +218,12 @@ void SketchEditor::RepaintImage(bool full, QRect rect)
     } else {
         unsigned char *dst_line = CurrentImageData.pixels();
 
+        if (rect.x() >= CurrentImageData.width()) {
+            rect.setX(CurrentImageData.width() - 1);
+        }
+        if (rect.y() >= CurrentImageData.height()) {
+            rect.setY(CurrentImageData.height() - 1);
+        }
         if (rect.x() < 0) {
             rect.setX(0);
         }
@@ -322,6 +329,8 @@ void SketchPreviewGenerator::setRadius(const int &radius)
         generator->setInput(LoadedImage);
 
         thread->start();
+
+        emit generationStarted();
     }
 }
 
@@ -364,6 +373,7 @@ void SketchPreviewGenerator::openImage(const QString &image_file)
                 thread->start();
 
                 emit imageOpened();
+                emit generationStarted();
             } else {
                 emit imageOpenFailed();
             }
@@ -380,6 +390,8 @@ void SketchPreviewGenerator::sketchImageReady(const QImage &sketch_image)
     SketchImage = sketch_image;
 
     Repaint();
+
+    emit generationFinished();
 }
 
 void SketchPreviewGenerator::Repaint()

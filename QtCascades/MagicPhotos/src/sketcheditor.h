@@ -100,6 +100,9 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
+    void generationStarted();
+    void generationFinished();
+
     void needRepaint(const bb::cascades::Image &image);
 
 private:

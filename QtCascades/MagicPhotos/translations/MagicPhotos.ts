@@ -200,27 +200,27 @@
 <context>
     <name>SketchPreviewPage</name>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="29"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="26"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="87"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="83"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="87"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="83"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="87"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="83"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="134"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="144"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>

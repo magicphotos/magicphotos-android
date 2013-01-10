@@ -1,3 +1,4 @@
+#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QThread>
@@ -205,6 +206,12 @@ void DecolorizeEditor::RepaintImage(bool full, QRect rect)
     } else {
         unsigned char *dst_line = CurrentImageData.pixels();
 
+        if (rect.x() >= CurrentImageData.width()) {
+            rect.setX(CurrentImageData.width() - 1);
+        }
+        if (rect.y() >= CurrentImageData.height()) {
+            rect.setY(CurrentImageData.height() - 1);
+        }
         if (rect.x() < 0) {
             rect.setX(0);
         }

@@ -9,9 +9,6 @@ Page {
     function openImage(image_file) {
         imageFile = image_file;
 
-        activityIndicator.visible = true;
-        activityIndicator.start();
-
         sketchPreviewGenerator.openImage(image_file);
     }
 
@@ -72,25 +69,41 @@ Page {
                     SketchPreviewGenerator {
                         id: sketchPreviewGenerator
                         
+                        property int activityIndicatorUsageCounter: 0
+                        
                         onImageOpened: {
                             gaussianRadiusSlider.enabled = true;
                             applyButton.enabled          = true;
                         }
-                        
-                        onImageOpenFailed: {
-                            activityIndicator.stop();
-                            activityIndicator.visible = false;
 
+                        onImageOpenFailed: {
                             gaussianRadiusSlider.enabled = false;
                             applyButton.enabled          = false;
 
                             MessageBox.showMessage(qsTr("Error"), qsTr("Could not open image"), qsTr("OK"));
                         }
                         
-                        onNeedRepaint: {
-                            activityIndicator.stop();
-                            activityIndicator.visible = false;
+                        onGenerationStarted: {
+                            activityIndicatorUsageCounter = activityIndicatorUsageCounter + 1;
+                            
+                            if (activityIndicatorUsageCounter === 1) {
+                                activityIndicator.visible = true;
+                                activityIndicator.start();
+                            }
+                        }
 
+                        onGenerationFinished: {
+                            if (activityIndicatorUsageCounter === 1) {
+                                activityIndicator.stop();
+                                activityIndicator.visible = false;
+                            }
+                            
+                            if (activityIndicatorUsageCounter > 0) {
+                                activityIndicatorUsageCounter = activityIndicatorUsageCounter - 1;
+                            }
+                        }
+
+                        onNeedRepaint: {
                             previewImageView.image = image;                            
                         }
                     }
@@ -120,9 +133,6 @@ Page {
             }
             
             onValueChanged: {
-                activityIndicator.visible = true;
-                activityIndicator.start();
-                
                 sketchPreviewGenerator.radius = value;
             }
         }

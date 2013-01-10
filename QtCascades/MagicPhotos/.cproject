@@ -26,6 +26,7 @@
 							<tool id="com.qnx.qcc.tool.compiler.1839991048" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler">
 								<option id="com.qnx.qcc.option.compiler.optlevel.654339411" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
 								<option id="com.qnx.qcc.option.compiler.includePath.2070924748" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb/cascades/pickers"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.compiler.250962844" superClass="com.qnx.qcc.inputType.compiler"/>
@@ -37,6 +38,7 @@
 							<tool id="com.qnx.qcc.tool.linker.628964180" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
 								<option id="com.qnx.qcc.option.linker.libraries.1435338865" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbcascadespickers"/>
+									<listOptionValue builtIn="false" value="bb"/>
 								</option>
 							</tool>
 							<tool id="com.qnx.qcc.tool.archiver.302634181" name="QCC Archiver" superClass="com.qnx.qcc.tool.archiver"/>
@@ -71,7 +73,8 @@
 							<builder autoBuildTarget="Device-Release" enableAutoBuild="true" id="com.qnx.qcc.toolChain.1749730763.766372369" incrementalBuildTarget="Device-Release" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="com.qnx.qcc.tool.compiler.418524252" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler">
 								<option id="com.qnx.qcc.option.compiler.optlevel.43450147" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
-								<option id="com.qnx.qcc.option.compiler.includePath.1034309490" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+								<option id="com.qnx.qcc.option.compiler.includePath.1034309490" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb/cascades/pickers"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.compiler.77371417" superClass="com.qnx.qcc.inputType.compiler"/>
@@ -80,8 +83,9 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.1434254598" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.1850844549" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.1769189123" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.1769189123" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbcascadespickers"/>
+									<listOptionValue builtIn="false" value="bb"/>
 								</option>
 							</tool>
 							<tool id="com.qnx.qcc.tool.archiver.354774050" name="QCC Archiver" superClass="com.qnx.qcc.tool.archiver"/>
@@ -116,7 +120,8 @@
 							<builder autoBuildTarget="Device-Profile" enableAutoBuild="true" id="com.qnx.qcc.toolChain.1854831697.326497177" incrementalBuildTarget="Device-Profile" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="com.qnx.qcc.tool.compiler.1819552774" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler">
 								<option id="com.qnx.qcc.option.compiler.optlevel.1621743014" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
-								<option id="com.qnx.qcc.option.compiler.includePath.573556732" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+								<option id="com.qnx.qcc.option.compiler.includePath.573556732" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb/cascades/pickers"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.compiler.488513289" superClass="com.qnx.qcc.inputType.compiler"/>
@@ -125,8 +130,9 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.865822638" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.994513969" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.1016246658" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.1016246658" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbcascadespickers"/>
+									<listOptionValue builtIn="false" value="bb"/>
 								</option>
 							</tool>
 							<tool id="com.qnx.qcc.tool.archiver.945821683" name="QCC Archiver" superClass="com.qnx.qcc.tool.archiver"/>
@@ -161,7 +167,8 @@
 							<builder autoBuildTarget="Simulator-Debug" enableAutoBuild="true" id="com.qnx.qcc.toolChain.1662656897.2126585305" incrementalBuildTarget="Simulator-Debug" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="com.qnx.qcc.tool.compiler.712748418" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler">
 								<option id="com.qnx.qcc.option.compiler.optlevel.272535278" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
-								<option id="com.qnx.qcc.option.compiler.includePath.469054177" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+								<option id="com.qnx.qcc.option.compiler.includePath.469054177" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/bb/cascades/pickers"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.compiler.1639503300" superClass="com.qnx.qcc.inputType.compiler"/>
@@ -170,8 +177,9 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.155346494" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.718737485" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.217345345" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.217345345" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbcascadespickers"/>
+									<listOptionValue builtIn="false" value="bb"/>
 								</option>
 							</tool>
 							<tool id="com.qnx.qcc.tool.archiver.197959650" name="QCC Archiver" superClass="com.qnx.qcc.tool.archiver"/>
