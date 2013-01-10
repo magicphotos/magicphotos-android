@@ -1,3 +1,5 @@
+#include <QtDeclarative/QDeclarativeEngine>
+
 #include <bb/cascades/pickers/FilePicker>
 #include <bb/cascades/pickers/FilePickerMode>
 #include <bb/cascades/pickers/FilePickerSortFlag>
