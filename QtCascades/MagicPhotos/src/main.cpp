@@ -1,3 +1,4 @@
+#include <QtCore/QtGlobal>
 #include <QtCore/QMetaType>
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
