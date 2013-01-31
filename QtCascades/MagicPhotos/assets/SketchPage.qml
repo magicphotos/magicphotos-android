@@ -220,15 +220,15 @@ Page {
                                 
                                 imageScrollView.resetViewableArea(ScrollAnimation.Default);
                                 
-                                MessageBox.showMessage(qsTr("Error"), qsTr("Could not open image"), qsTr("OK"));
+                                MessageBox.showToast(qsTr("Could not open image"));
                             }
                             
                             onImageSaved: {
-                                MessageBox.showMessage(qsTr("Info"), qsTr("Image saved successfully"), qsTr("OK"));
+                                MessageBox.showToast(qsTr("Image saved successfully"));
                             }
                             
                             onImageSaveFailed: {
-                                MessageBox.showMessage(qsTr("Error"), qsTr("Could not save image"), qsTr("OK"));
+                                MessageBox.showToast(qsTr("Could not save image"));
                             }
                             
                             onUndoAvailabilityChanged: {

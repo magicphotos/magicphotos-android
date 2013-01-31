@@ -27,7 +27,7 @@ Page {
                     id: downloadInviter
 
                     onInvitationSendFailed: {
-                        MessageBox.showMessage(qsTr("Error"), qsTr("Could not send download invitation"), qsTr("OK"));
+                        MessageBox.showToast(qsTr("Could not send download invitation"));
                     }
                 }
             ]

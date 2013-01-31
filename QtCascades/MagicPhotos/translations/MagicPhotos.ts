@@ -25,12 +25,6 @@
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="222"/>
-        <location filename="../assets/DecolorizePage.qml" line="230"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/DecolorizePage.qml" line="222"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -44,31 +38,9 @@
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../assets/DecolorizePage.qml" line="222"/>
-        <location filename="../assets/DecolorizePage.qml" line="226"/>
-        <location filename="../assets/DecolorizePage.qml" line="230"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/DecolorizePage.qml" line="226"/>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>HelpPage</name>
-    <message>
-        <location filename="../assets/HelpPage.qml" line="30"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/HelpPage.qml" line="30"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="17"/>
         <source>Recommend App</source>
@@ -109,25 +81,7 @@
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="237"/>
-        <location filename="../assets/RecolorPage.qml" line="245"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/RecolorPage.qml" line="237"/>
         <source>Could not open image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/RecolorPage.qml" line="237"/>
-        <location filename="../assets/RecolorPage.qml" line="241"/>
-        <location filename="../assets/RecolorPage.qml" line="245"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/RecolorPage.qml" line="241"/>
-        <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -165,25 +119,7 @@
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="223"/>
-        <location filename="../assets/SketchPage.qml" line="231"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPage.qml" line="223"/>
         <source>Could not open image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPage.qml" line="223"/>
-        <location filename="../assets/SketchPage.qml" line="227"/>
-        <location filename="../assets/SketchPage.qml" line="231"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPage.qml" line="227"/>
-        <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -206,17 +142,7 @@
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="83"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="83"/>
         <source>Could not open image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="83"/>
-        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

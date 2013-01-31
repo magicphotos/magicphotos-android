@@ -4,6 +4,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+#include <bb/system/SystemToast>
+
 class MessageBox : public QObject
 {
     Q_OBJECT
@@ -14,18 +16,10 @@ public:
     explicit MessageBox(QObject *parent = 0);
     virtual ~MessageBox();
 
-    Q_INVOKABLE int showMessage(const QString &title, const QString &body, const QString &confirmButtonLabel);
-    Q_INVOKABLE int showQuestion(const QString &title, const QString &body, const QString &confirmButtonLabel, const QString &cancelButtonLabel);
+    Q_INVOKABLE void showToast(const QString &body);
 
-    enum DialogResult {
-        DialogResultNone,
-        DialogResultButtonSelection,
-        DialogResultConfirmButtonSelection,
-        DialogResultCancelButtonSelection,
-        DialogResultTimeOut,
-        DialogResultError,
-        DialogResultCustomButtonSelection
-    };
+private:
+    bb::system::SystemToast Toast;
 };
 
 #endif // MESSAGEBOX_H

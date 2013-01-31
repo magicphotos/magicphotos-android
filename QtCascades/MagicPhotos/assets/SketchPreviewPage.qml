@@ -80,7 +80,7 @@ Page {
                             gaussianRadiusSlider.enabled = false;
                             applyButton.enabled          = false;
 
-                            MessageBox.showMessage(qsTr("Error"), qsTr("Could not open image"), qsTr("OK"));
+                            MessageBox.showToast(qsTr("Could not open image"));
                         }
                         
                         onGenerationStarted: {
