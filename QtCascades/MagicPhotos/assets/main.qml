@@ -75,6 +75,14 @@ NavigationPane {
                         navigationPane.push(page);
 
                         page.openImage(image_file);
+                    } else if (mode === "RETOUCH") {
+                        editPageDefinition.source = "RetouchPage.qml";
+
+                        var page = editPageDefinition.createObject();
+
+                        navigationPane.push(page);
+
+                        page.openImage(image_file);
                     }
                 }
 

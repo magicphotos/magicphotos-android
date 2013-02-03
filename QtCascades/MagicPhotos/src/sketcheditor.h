@@ -14,8 +14,8 @@ class SketchEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode    READ mode   WRITE setMode)
-    Q_PROPERTY(int  radius  READ radius WRITE setRadius)
+    Q_PROPERTY(int  mode    READ mode    WRITE setMode)
+    Q_PROPERTY(int  radius  READ radius  WRITE setRadius)
     Q_PROPERTY(bool changed READ changed)
 
     Q_ENUMS(Mode)

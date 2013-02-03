@@ -16,6 +16,7 @@
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
 #include "recoloreditor.h"
+#include "retoucheditor.h"
 
 #include "MagicPhotos.hpp"
 
@@ -39,6 +40,8 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
     qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
 
     qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
+
+    qmlRegisterType<RetouchEditor>("ImageEditor", 1, 0, "RetouchEditor");
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 

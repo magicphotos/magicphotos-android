@@ -96,6 +96,44 @@
     </message>
 </context>
 <context>
+    <name>RetouchPage</name>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="26"/>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="37"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="52"/>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="62"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="294"/>
+        <source>Could not open image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="298"/>
+        <source>Image saved successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="302"/>
+        <source>Could not save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SketchPage</name>
     <message>
         <location filename="../assets/SketchPage.qml" line="27"/>
@@ -159,8 +197,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="130"/>
-        <location filename="../assets/main.qml" line="145"/>
+        <location filename="../assets/main.qml" line="138"/>
+        <location filename="../assets/main.qml" line="153"/>
         <source>Open Image</source>
         <translation type="unfinished"></translation>
     </message>
