@@ -320,6 +320,7 @@ Page {
                     maxHeight:            preferredHeight
                     imageSource:          "images/hue_slider.png"
                     touchPropagationMode: TouchPropagationMode.PassThrough
+                    overlapTouchPolicy:   OverlapTouchPolicy.Allow
 
                     layoutProperties: AbsoluteLayoutProperties {
                         positionX: 0

@@ -331,6 +331,7 @@ Page {
                         maxHeight:            preferredHeight
                         imageSource:          "images/sampling_point.png"
                         touchPropagationMode: TouchPropagationMode.PassThrough
+                        overlapTouchPolicy:   OverlapTouchPolicy.Allow
                         visible:              false
                         
                         layoutProperties: AbsoluteLayoutProperties {
