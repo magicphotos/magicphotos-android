@@ -4,6 +4,9 @@ CONFIG += qt warn_on cascades10
 
 LIBS += -lbbcascadespickers -lbbplatformbbm -lbb -lbbsystem
 
+TRANSLATIONS = $${TARGET}_ru.ts \
+               $${TARGET}.ts
+
 # Uncomment this to enable debugging output to console
 DEFINES += DEBUG_CONSOLE
 

@@ -63,8 +63,6 @@ Page {
             imageSource:         "images/help.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             
-            property Page helpPage: null
-            
             onTriggered: {
                 navigationPane.push(helpPageDefinition.createObject());
             }
@@ -89,10 +87,6 @@ Page {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
             
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-
             onSelectedValueChanged: {
                 if (selectedValue === DecolorizeEditor.ModeScroll) {
                     imageScrollView.touchPropagationMode = TouchPropagationMode.Full;
@@ -101,6 +95,10 @@ Page {
                 }
                 
                 decolorizeEditor.mode = selectedValue;
+            }
+
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
             }
 
             Option {

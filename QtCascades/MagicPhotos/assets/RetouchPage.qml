@@ -63,8 +63,6 @@ Page {
             imageSource:         "images/help.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             
-            property Page helpPage: null
-            
             onTriggered: {
                 navigationPane.push(helpPageDefinition.createObject());
             }
@@ -89,10 +87,6 @@ Page {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
             
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-
             onSelectedValueChanged: {
                 if (selectedValue === RetouchEditor.ModeScroll) {
                     imageScrollView.touchPropagationMode = TouchPropagationMode.Full;
@@ -101,6 +95,10 @@ Page {
                 }
 
                 retouchEditor.mode = selectedValue;
+            }
+
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
             }
 
             Option {
@@ -169,13 +167,6 @@ Page {
                 verticalAlignment:    VerticalAlignment.Center
                 touchPropagationMode: TouchPropagationMode.Full
                 
-                scrollViewProperties {
-                    scrollMode:         ScrollMode.Both
-                    pinchToZoomEnabled: true
-                    minContentScale:    1.0
-                    maxContentScale:    4.0
-                }            
-                
                 onContentScaleChanged: {
                     if (retouchEditor.samplingPointValid) {
                         var sampling_point_x = Math.max(samplingPointImageView.preferredWidth  / 2, Math.min(retouchEditor.imageWidth  - samplingPointImageView.preferredWidth  / 2, retouchEditor.samplingPointX));
@@ -189,6 +180,13 @@ Page {
                     }
                 }
                 
+                scrollViewProperties {
+                    scrollMode:         ScrollMode.Both
+                    pinchToZoomEnabled: true
+                    minContentScale:    1.0
+                    maxContentScale:    4.0
+                }            
+                
                 Container {
                     id: imageViewContainer
                     
@@ -198,11 +196,6 @@ Page {
                     ImageView {
                         id:            imageView
                         scalingMethod: ScalingMethod.AspectFit 
-
-                        layoutProperties: AbsoluteLayoutProperties {
-                            positionX: 0
-                            positionY: 0
-                        }
 
                         property int initial_sampling_point_x: 0
                         property int initial_sampling_point_y: 0
@@ -270,6 +263,11 @@ Page {
                                     helperImageView.visible = false;
                                 }
                             }
+                        }
+
+                        layoutProperties: AbsoluteLayoutProperties {
+                            positionX: 0
+                            positionY: 0
                         }
 
                         attachedObjects: [

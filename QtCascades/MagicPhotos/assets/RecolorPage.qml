@@ -63,8 +63,6 @@ Page {
             imageSource:         "images/help.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             
-            property Page helpPage: null
-            
             onTriggered: {
                 navigationPane.push(helpPageDefinition.createObject());
             }
@@ -89,10 +87,6 @@ Page {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
             
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-
             onSelectedValueChanged: {
                 if (selectedValue === RecolorEditor.ModeScroll) {
                     imageScrollView.touchPropagationMode = TouchPropagationMode.Full;
@@ -106,6 +100,10 @@ Page {
                 }
 
                 recolorEditor.mode = selectedValue;
+            }
+
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
             }
 
             Option {
@@ -277,15 +275,15 @@ Page {
                 verticalAlignment:   VerticalAlignment.Center
                 visible:             false
                 
-                layout: AbsoluteLayout {
-                }
-
                 onVisibleChanged: {
                     if (visible) {
                         hueSliderImageView.layoutProperties.positionY = Math.max(0, Math.min(hueBarImageView.preferredHeight - hueSliderImageView.preferredHeight, recolorEditor.hue));
                     }
                 }
                 
+                layout: AbsoluteLayout {
+                }
+
                 ImageView {
                     id:              hueBarImageView
                     preferredWidth:  128
@@ -296,11 +294,6 @@ Page {
                     maxHeight:       preferredHeight
                     imageSource:     "images/hue_bar.png"
                     
-                    layoutProperties: AbsoluteLayoutProperties {
-                        positionX: 0
-                        positionY: 0
-                    }
-                    
                     onTouch: {
                         if (event.touchType === TouchType.Down || event.touchType === TouchType.Move) {
                             hueSliderImageView.layoutProperties.positionY = Math.max(0, Math.min(hueBarImageView.preferredHeight - hueSliderImageView.preferredHeight, event.localY));
@@ -308,6 +301,11 @@ Page {
                             recolorEditor.hue = Math.max(0, Math.min(360, event.localY));
                         }
                     }  
+
+                    layoutProperties: AbsoluteLayoutProperties {
+                        positionX: 0
+                        positionY: 0
+                    }
                 }
                 
                 ImageView {

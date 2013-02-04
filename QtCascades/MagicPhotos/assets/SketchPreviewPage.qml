@@ -27,8 +27,6 @@ Page {
             imageSource:         "images/help.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             
-            property Page helpPage: null
-            
             onTriggered: {
                 navigationPane.push(helpPageDefinition.createObject());
             }
@@ -128,12 +126,12 @@ Page {
             value:               11
             enabled:             false
 
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-            
             onValueChanged: {
                 sketchPreviewGenerator.radius = value;
+            }
+
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
             }
         }
 
@@ -144,10 +142,6 @@ Page {
             text:                qsTr("Apply")
             enabled:             false
             
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-            
             onClicked: {
                 var page = sketchPageDefinition.createObject();
 
@@ -156,6 +150,10 @@ Page {
                 page.openImage(imageFile, gaussianRadiusSlider.value);
             }
 
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: -1
+            }
+            
             attachedObjects: [
                 ComponentDefinition {
                     id:     sketchPageDefinition

@@ -104,13 +104,26 @@ NavigationPane {
                             preferredHeight: ListItem.view.actualHeight
                             background:      Color.Transparent
 
+                            property string itemMode: ListItemData.mode
+
+                            onItemModeChanged: {
+                                if (ListItemData.mode === "DECOLORIZE") {
+                                    modeLabel.text = qsTr("Decolorize");
+                                } else if (ListItemData.mode === "SKETCH") {
+                                    modeLabel.text = qsTr("Sketch");
+                                } else if (ListItemData.mode === "RECOLOR") {
+                                    modeLabel.text = qsTr("Recolor");
+                                } else if (ListItemData.mode === "RETOUCH") {
+                                    modeLabel.text = qsTr("Retouch");
+                                }
+                            }
+
                             layout: StackLayout {
                             }
 
                             Label {
                                 id:                      modeLabel
                                 horizontalAlignment:     HorizontalAlignment.Left
-                                text:                    qsTr(ListItemData.name)
                                 textStyle.fontSize:      FontSize.PercentageValue
                                 textStyle.fontSizeValue: 250
                                 textStyle.color:         Color.White
@@ -137,14 +150,14 @@ NavigationPane {
                                 horizontalAlignment: HorizontalAlignment.Center
                                 text:                qsTr("Open Image")
                                 
-                                layoutProperties: StackLayoutProperties {
-                                    spaceQuota: -1
-                                }
-
                                 onClicked: {
                                     openFilePicker.open();
                                 }
                                 
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
+
                                 attachedObjects: [
                                     FilePicker {
                                         id:    openFilePicker
