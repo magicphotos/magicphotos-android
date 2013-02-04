@@ -57,7 +57,8 @@ public:
     enum Mode {
         ModeScroll,
         ModeSamplingPoint,
-        ModeClone
+        ModeClone,
+        ModeBlur
     };
 
 signals:
@@ -78,9 +79,10 @@ private:
     void RepaintImage(bool full, QRect rect = QRect());
     void RepaintHelper(int center_x, int center_y, double zoom_level);
 
-    static const int UNDO_DEPTH  = 4,
-                     BRUSH_SIZE  = 32,
-                     HELPER_SIZE = 192;
+    static const int UNDO_DEPTH      = 4,
+                     BRUSH_SIZE      = 32,
+                     GAUSSIAN_RADIUS = 4,
+                     HELPER_SIZE     = 192;
 
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 

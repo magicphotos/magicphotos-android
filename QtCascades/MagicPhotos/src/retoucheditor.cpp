@@ -142,20 +142,128 @@ void RetouchEditor::saveImage(const QString &image_file)
 
 void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level)
 {
-    if (CurrentMode == ModeClone) {
+    if (CurrentMode == ModeClone || CurrentMode == ModeBlur) {
         if (save_undo) {
             SaveUndoImage();
         }
 
         int radius = BRUSH_SIZE / zoom_level;
 
-        for (int from_x = SamplingPoint.x() - radius, to_x = center_x - radius; from_x <= SamplingPoint.x() + radius && to_x <= center_x + radius; from_x++, to_x++) {
-            for (int from_y = SamplingPoint.y() - radius, to_y = center_y - radius; from_y <= SamplingPoint.y() + radius && to_y <= center_y + radius; from_y++, to_y++) {
-                if (from_x >= 0 && from_x < CurrentImage.width() && from_y >= 0 && from_y < CurrentImage.height() && qSqrt(qPow(from_x - SamplingPoint.x(), 2) + qPow(from_y - SamplingPoint.y(), 2)) <= radius &&
-                    to_x   >= 0 && to_x   < CurrentImage.width() && to_y   >= 0 && to_y   < CurrentImage.height() && qSqrt(qPow(to_x   - center_x,          2) + qPow(to_y   - center_y,          2)) <= radius) {
-                    CurrentImage.setPixel(to_x, to_y, CurrentImage.pixel(from_x, from_y));
+        if (CurrentMode == ModeClone) {
+            for (int from_x = SamplingPoint.x() - radius, to_x = center_x - radius; from_x <= SamplingPoint.x() + radius && to_x <= center_x + radius; from_x++, to_x++) {
+                for (int from_y = SamplingPoint.y() - radius, to_y = center_y - radius; from_y <= SamplingPoint.y() + radius && to_y <= center_y + radius; from_y++, to_y++) {
+                    if (from_x >= 0 && from_x < CurrentImage.width() && from_y >= 0 && from_y < CurrentImage.height() && qSqrt(qPow(from_x - SamplingPoint.x(), 2) + qPow(from_y - SamplingPoint.y(), 2)) <= radius &&
+                        to_x   >= 0 && to_x   < CurrentImage.width() && to_y   >= 0 && to_y   < CurrentImage.height() && qSqrt(qPow(to_x   - center_x,          2) + qPow(to_y   - center_y,          2)) <= radius) {
+                        CurrentImage.setPixel(to_x, to_y, CurrentImage.pixel(from_x, from_y));
+                    }
                 }
             }
+        } else if (CurrentMode == ModeBlur) {
+            QRect blur_rect(center_x - radius, center_y - radius, radius * 2, radius * 2);
+
+            if (blur_rect.x() >= CurrentImage.width()) {
+                blur_rect.setX(CurrentImage.width() - 1);
+            }
+            if (blur_rect.y() >= CurrentImage.height()) {
+                blur_rect.setY(CurrentImage.height() - 1);
+            }
+            if (blur_rect.x() < 0) {
+                blur_rect.setX(0);
+            }
+            if (blur_rect.y() < 0) {
+                blur_rect.setY(0);
+            }
+            if (blur_rect.x() + blur_rect.width() > CurrentImage.width()) {
+                blur_rect.setWidth(CurrentImage.width() - blur_rect.x());
+            }
+            if (blur_rect.y() + blur_rect.height() > CurrentImage.height()) {
+                blur_rect.setHeight(CurrentImage.height() - blur_rect.y());
+            }
+
+            QImage blur_image = CurrentImage.copy(blur_rect).convertToFormat(QImage::Format_ARGB32_Premultiplied);
+
+            int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
+            int alpha = (GAUSSIAN_RADIUS < 1) ? 16 : (GAUSSIAN_RADIUS > 17) ? 1 : tab[GAUSSIAN_RADIUS - 1];
+
+            int r1 = blur_image.rect().top();
+            int r2 = blur_image.rect().bottom();
+            int c1 = blur_image.rect().left();
+            int c2 = blur_image.rect().right();
+
+            int bpl = blur_image.bytesPerLine();
+
+            int           rgba[4];
+            unsigned char *p;
+
+            for (int col = c1; col <= c2; col++) {
+                p = blur_image.scanLine(r1) + col * 4;
+
+                for (int i = 0; i < 4; i++) {
+                    rgba[i] = p[i] << 4;
+                }
+
+                p += bpl;
+
+                for (int j = r1; j < r2; j++, p += bpl) {
+                    for (int i = 0; i < 4; i++) {
+                        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+                    }
+                }
+            }
+
+            for (int row = r1; row <= r2; row++) {
+                p = blur_image.scanLine(row) + c1 * 4;
+
+                for (int i = 0; i < 4; i++) {
+                    rgba[i] = p[i] << 4;
+                }
+
+                p += 4;
+
+                for (int j = c1; j < c2; j++, p += 4) {
+                    for (int i = 0; i < 4; i++) {
+                        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+                    }
+                }
+            }
+
+            for (int col = c1; col <= c2; col++) {
+                p = blur_image.scanLine(r2) + col * 4;
+
+                for (int i = 0; i < 4; i++) {
+                    rgba[i] = p[i] << 4;
+                }
+
+                p -= bpl;
+
+                for (int j = r1; j < r2; j++, p -= bpl) {
+                    for (int i = 0; i < 4; i++) {
+                        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+                    }
+                }
+            }
+
+            for (int row = r1; row <= r2; row++) {
+                p = blur_image.scanLine(row) + c2 * 4;
+
+                for (int i = 0; i < 4; i++) {
+                    rgba[i] = p[i] << 4;
+                }
+
+                p -= 4;
+
+                for (int j = c1; j < c2; j++, p -= 4) {
+                    for (int i = 0; i < 4; i++) {
+                        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+                    }
+                }
+            }
+
+            QPainter painter(&CurrentImage);
+
+            painter.setClipRegion(QRegion(blur_rect, QRegion::Ellipse));
+
+            painter.drawImage(blur_rect, blur_image);
         }
 
         IsChanged = true;

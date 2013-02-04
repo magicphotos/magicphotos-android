@@ -122,6 +122,13 @@ Page {
                 imageSource: "images/mode_clone.png"
                 enabled:     false
             }
+
+            Option {
+                id:          blurModeOption
+                value:       RetouchEditor.ModeBlur
+                imageSource: "images/mode_blur.png"
+                enabled:     false
+            }
         }
 
         Container {
@@ -250,6 +257,18 @@ Page {
                                         helperImageView.visible = false;
                                     }
                                 }
+                            } else if (modeSegmentedControl.selectedValue === RetouchEditor.ModeBlur) {
+                                if (event.touchType === TouchType.Down) {
+                                    imageContainer.showHelper(event.localX, event.localY);
+                                    
+                                    retouchEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                                } else if (event.touchType === TouchType.Move) {
+                                    imageContainer.showHelper(event.localX, event.localY);
+
+                                    retouchEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                                } else {
+                                    helperImageView.visible = false;
+                                }
                             }
                         }
 
@@ -268,6 +287,7 @@ Page {
                                     
                                     samplingPointModeOption.enabled = true;
                                     cloneModeOption.enabled         = true;
+                                    blurModeOption.enabled          = true;
 
                                     samplingPointValid             = false;
                                     samplingPointImageView.visible = false;
@@ -285,6 +305,7 @@ Page {
                                     
                                     samplingPointModeOption.enabled = false;
                                     cloneModeOption.enabled         = false;
+                                    blurModeOption.enabled          = false;
 
                                     samplingPointValid             = false;
                                     samplingPointImageView.visible = false;

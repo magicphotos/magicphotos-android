@@ -118,17 +118,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="294"/>
+        <location filename="../assets/RetouchPage.qml" line="315"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="298"/>
+        <location filename="../assets/RetouchPage.qml" line="319"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="302"/>
+        <location filename="../assets/RetouchPage.qml" line="323"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
