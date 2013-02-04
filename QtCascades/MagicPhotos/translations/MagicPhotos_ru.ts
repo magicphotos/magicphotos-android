@@ -49,7 +49,7 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="30"/>
         <source>Could not send download invitation</source>
-        <translation>Невозможно отослать приглашение на скачивание</translation>
+        <translation>Невозможно отослать предложение загрузки</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="46"/>
