@@ -6,7 +6,7 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="26"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="37"/>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="17"/>
         <source>Recommend App</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfehlen</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="30"/>
@@ -62,7 +62,7 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="26"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="37"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="26"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="37"/>
@@ -138,7 +138,7 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="27"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="38"/>
