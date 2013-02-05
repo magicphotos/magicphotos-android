@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.0" language="de_DE">
 <context>
     <name>DecolorizePage</name>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="26"/>
         <source>Undo</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="37"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="52"/>
         <source>Save Image</source>
-        <translation>Сохранить Фото</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="62"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="220"/>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="224"/>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="228"/>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -44,17 +44,17 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="17"/>
         <source>Recommend App</source>
-        <translation>Рекомендовать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="30"/>
         <source>Could not send download invitation</source>
-        <translation>Невозможно отослать приглашение на загрузку приложения</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="46"/>
         <source>doc/help.html</source>
-        <translation>doc/help_ru.html</translation>
+        <translation>doc/help_de.html</translation>
     </message>
 </context>
 <context>
@@ -62,37 +62,37 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="26"/>
         <source>Undo</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="37"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="52"/>
         <source>Save Image</source>
-        <translation>Сохранить Фото</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="62"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="235"/>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="239"/>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="243"/>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -100,37 +100,37 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="26"/>
         <source>Undo</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="37"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="52"/>
         <source>Save Image</source>
-        <translation>Сохранить Фото</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="62"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="313"/>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="317"/>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="321"/>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -138,37 +138,37 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="27"/>
         <source>Undo</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="38"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="53"/>
         <source>Save Image</source>
-        <translation>Сохранить Фото</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="63"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="221"/>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="225"/>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="229"/>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -176,17 +176,17 @@
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="26"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="81"/>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="142"/>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation>Anwenden</translation>
     </message>
 </context>
 <context>
@@ -194,33 +194,33 @@
     <message>
         <location filename="../assets/main.qml" line="21"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="111"/>
         <source>Decolorize</source>
-        <translation>Обесцветить</translation>
+        <translation>Entfärben</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="113"/>
         <source>Sketch</source>
-        <translation>В эскиз</translation>
+        <translation>Zur Skizze</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="115"/>
         <source>Recolor</source>
-        <translation>Перекрасить</translation>
+        <translation>Umfärben</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="117"/>
         <source>Retouch</source>
-        <translation>Ретушировать</translation>
+        <translation>Retuschieren</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="151"/>
         <location filename="../assets/main.qml" line="166"/>
         <source>Open Image</source>
-        <translation>Открыть Фото</translation>
+        <translation>Öffnen ein Foto</translation>
     </message>
 </context>
 </TS>
