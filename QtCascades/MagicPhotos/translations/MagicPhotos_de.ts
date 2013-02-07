@@ -49,7 +49,7 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="30"/>
         <source>Could not send download invitation</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist unmöglich, die Aufforderung zum Applikationsdownload abzusenden</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="46"/>
