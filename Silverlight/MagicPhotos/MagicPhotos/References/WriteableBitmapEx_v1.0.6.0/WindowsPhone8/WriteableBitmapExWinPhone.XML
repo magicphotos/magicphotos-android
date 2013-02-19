@@ -473,6 +473,18 @@
             <param name="interpolation">The interpolation method that should be used.</param>
             <returns>A new bitmap that is a resized version of the input.</returns>
         </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Int32[],System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
+            <summary>
+            Creates a new resized bitmap.
+            </summary>
+            <param name="pixels">The source pixels.</param>
+            <param name="widthSource">The width of the source pixels.</param>
+            <param name="heightSource">The height of the source pixels.</param>
+            <param name="width">The new desired width.</param>
+            <param name="height">The new desired height.</param>
+            <param name="interpolation">The interpolation method that should be used.</param>
+            <returns>A new bitmap that is a resized version of the input.</returns>
+        </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Rotate(System.Windows.Media.Imaging.WriteableBitmap,System.Int32)">
             <summary>
             Rotates the bitmap in 90° steps clockwise and returns a new rotated WriteableBitmap.
@@ -772,27 +784,27 @@
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromResource(System.Windows.Media.Imaging.WriteableBitmap,System.String)">
             <summary>
-            Loads an image from the applications resource file and fills this WriteableBitmap with it.
+            Loads an image from the applications resource file and returns a new WriteableBitmap. The passed WriteableBitmap is not used.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <param name="relativePath">Only the relative path to the resource file. The assembly name is retrieved automatically.</param>
-            <returns>The WriteableBitmap that was passed as parameter.</returns>
+            <returns>A new WriteableBitmap containing the pixel data.</returns>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromContent(System.Windows.Media.Imaging.WriteableBitmap,System.String)">
             <summary>
-            Loads an image from the applications content and fills this WriteableBitmap with it.
+            Loads an image from the applications content and returns a new WriteableBitmap. The passed WriteableBitmap is not used.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <param name="relativePath">Only the relative path to the content file.</param>
-            <returns>The WriteableBitmap that was passed as parameter.</returns>
+            <returns>A new WriteableBitmap containing the pixel data.</returns>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromStream(System.Windows.Media.Imaging.WriteableBitmap,System.IO.Stream)">
             <summary>
-            Loads the data from an image stream and fills this WriteableBitmap with it.
+            Loads the data from an image stream and returns a new WriteableBitmap. The passed WriteableBitmap is not used.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <param name="stream">The stream with the image data.</param>
-            <returns>The WriteableBitmap that was passed as parameter.</returns>
+            <returns>A new WriteableBitmap containing the pixel data.</returns>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineBresenham(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>

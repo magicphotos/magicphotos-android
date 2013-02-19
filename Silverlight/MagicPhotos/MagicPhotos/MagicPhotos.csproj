@@ -70,7 +70,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
     <Reference Include="WriteableBitmapExWinPhone">
-      <HintPath>References\WriteableBitmapEx_v1.0.5.0\WindowsPhone\WriteableBitmapExWinPhone.dll</HintPath>
+      <HintPath>References\WriteableBitmapEx_v1.0.6.0\WindowsPhone\WriteableBitmapExWinPhone.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
