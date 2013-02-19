@@ -30,11 +30,10 @@ namespace MagicPhotos
                           MODE_EFFECTED = 3,
                           MODE_COLOR    = 4;
 
-        private const int MAX_IMAGE_WIDTH  = 1400,
-                          MAX_IMAGE_HEIGHT = 1400;
+        private const int MAX_IMAGE_WIDTH  = 2800,
+                          MAX_IMAGE_HEIGHT = 2800;
 
-        private const int HELPER_POINT_WIDTH  = 6,
-                          HELPER_POINT_HEIGHT = 6;
+        private const int HELPER_POINT_RADIUS = 3;
 
         private const int BRUSH_RADIUS = 24,
                           UNDO_DEPTH   = 4;
@@ -257,21 +256,14 @@ namespace MagicPhotos
                 int width  = (int)(this.HelperImage.Width  / this.currentScale) < this.editedBitmap.PixelWidth  ? (int)(this.HelperImage.Width  / this.currentScale) : this.editedBitmap.PixelWidth;
                 int height = (int)(this.HelperImage.Height / this.currentScale) < this.editedBitmap.PixelHeight ? (int)(this.HelperImage.Height / this.currentScale) : this.editedBitmap.PixelHeight;
 
-                int x = (x = (int)(touch_point.X / this.currentScale) - width  / 2 < 0 ? 0 : (int)(touch_point.X / this.currentScale) - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : x;
-                int y = (y = (int)(touch_point.Y / this.currentScale) - height / 2 < 0 ? 0 : (int)(touch_point.Y / this.currentScale) - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : y;
+                int x = (x = (int)(touch_point.X - width  / 2 < 0 ? 0 : touch_point.X - width  / 2)) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : x;
+                int y = (y = (int)(touch_point.Y - height / 2 < 0 ? 0 : touch_point.Y - height / 2)) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : y;
 
                 this.helperBitmap = this.editedBitmap.Crop(x, y, width, height);
 
-                int touch_x1 = (int)(touch_point.X / this.currentScale) - x - HELPER_POINT_WIDTH  / 2;
-                int touch_y1 = (int)(touch_point.Y / this.currentScale) - y - HELPER_POINT_HEIGHT / 2;
-                int touch_x2 = (int)(touch_point.X / this.currentScale) - x + HELPER_POINT_WIDTH  / 2;
-                int touch_y2 = (int)(touch_point.Y / this.currentScale) - y + HELPER_POINT_HEIGHT / 2;
+                int helper_point_radius = (int)(HELPER_POINT_RADIUS / this.currentScale) < 1 ? 1 : (int)(HELPER_POINT_RADIUS / this.currentScale);
 
-                if (touch_x1 > 0 && touch_x1 < this.helperBitmap.PixelWidth && touch_y1 > 0 && touch_y1 < this.helperBitmap.PixelHeight &&
-                    touch_x2 > 0 && touch_x2 < this.helperBitmap.PixelWidth && touch_y2 > 0 && touch_y2 < this.helperBitmap.PixelHeight)
-                {
-                    this.helperBitmap.DrawRectangle(touch_x1, touch_y1, touch_x2, touch_y2, 0x00FFFFFF);
-                }
+                this.helperBitmap.FillEllipseCentered(width / 2, height / 2, helper_point_radius, helper_point_radius, 0x00FFFFFF);
 
                 this.HelperImage.Source = this.helperBitmap;
 
@@ -316,17 +308,23 @@ namespace MagicPhotos
 
                 if (this.editedBitmap.PixelWidth > this.editedBitmap.PixelHeight)
                 {
-                    this.currentScale = this.EditorScrollViewer.ViewportWidth / this.editedBitmap.PixelWidth;
+                    this.currentScale = this.EditorGrid.ActualWidth / this.editedBitmap.PixelWidth;
                 }
                 else
                 {
-                    this.currentScale = this.EditorScrollViewer.ViewportHeight / this.editedBitmap.PixelHeight;
+                    this.currentScale = this.EditorGrid.ActualHeight / this.editedBitmap.PixelHeight;
                 }
 
                 this.EditorImage.Visibility = System.Windows.Visibility.Visible;
                 this.EditorImage.Source     = this.editedBitmap;
-                this.EditorImage.Width      = this.editedBitmap.PixelWidth  * this.currentScale;
-                this.EditorImage.Height     = this.editedBitmap.PixelHeight * this.currentScale;
+
+                this.EditorImageGrid.Width  = MAX_IMAGE_WIDTH;
+                this.EditorImageGrid.Height = MAX_IMAGE_HEIGHT;
+
+                this.EditorImageTransform.TranslateX = 0.0;
+                this.EditorImageTransform.TranslateY = 0.0;
+                this.EditorImageTransform.ScaleX     = this.currentScale;
+                this.EditorImageTransform.ScaleY     = this.currentScale;
 
                 int brush_width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
                 int brush_height = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
@@ -359,8 +357,7 @@ namespace MagicPhotos
 
         private void ChangeBitmap(Point touch_point)
         {
-            int   radius  = (int)(BRUSH_RADIUS / this.currentScale);
-            Point t_point = new Point(touch_point.X / this.currentScale, touch_point.Y / this.currentScale);
+            int radius = (int)(BRUSH_RADIUS / this.currentScale);
 
             if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
             {
@@ -369,8 +366,8 @@ namespace MagicPhotos
 
                 Rect rect = new Rect();
 
-                rect.X      = (rect.X = t_point.X - width  / 2 < 0 ? 0 : t_point.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : rect.X;
-                rect.Y      = (rect.Y = t_point.Y - height / 2 < 0 ? 0 : t_point.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : rect.Y;
+                rect.X      = (rect.X = touch_point.X - width  / 2 < 0 ? 0 : touch_point.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : rect.X;
+                rect.Y      = (rect.Y = touch_point.Y - height / 2 < 0 ? 0 : touch_point.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : rect.Y;
                 rect.Width  = width;
                 rect.Height = height;
 
@@ -472,6 +469,33 @@ namespace MagicPhotos
 
                 this.loadImageOnLayoutUpdate = false;
             }
+        }
+
+        private void RecolorPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+            double x = this.EditorImageTransform.TranslateX;
+            double y = this.EditorImageTransform.TranslateY;
+
+            if (x < this.EditorGrid.ActualWidth - this.EditorImage.ActualWidth * this.currentScale)
+            {
+                x = this.EditorGrid.ActualWidth - this.EditorImage.ActualWidth * this.currentScale;
+            }
+            if (x > 0.0)
+            {
+                x = 0.0;
+            }
+
+            if (y < this.EditorGrid.ActualHeight - this.EditorImage.ActualHeight * this.currentScale)
+            {
+                y = this.EditorGrid.ActualHeight - this.EditorImage.ActualHeight * this.currentScale;
+            }
+            if (y > 0.0)
+            {
+                y = 0.0;
+            }
+
+            this.EditorImageTransform.TranslateX = x;
+            this.EditorImageTransform.TranslateY = y;
         }
 
         private void RecolorPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
@@ -711,6 +735,38 @@ namespace MagicPhotos
             }
         }
 
+        private void EditorImage_DragDelta(object sender, DragDeltaGestureEventArgs e)
+        {
+            if (this.selectedMode == MODE_SCROLL)
+            {
+                e.Handled = true;
+
+                double x = this.EditorImageTransform.TranslateX + e.HorizontalChange;
+                double y = this.EditorImageTransform.TranslateY + e.VerticalChange;
+
+                if (x < this.EditorGrid.ActualWidth - this.EditorImage.ActualWidth * this.currentScale)
+                {
+                    x = this.EditorGrid.ActualWidth - this.EditorImage.ActualWidth * this.currentScale;
+                }
+                if (x > 0.0)
+                {
+                    x = 0.0;
+                }
+
+                if (y < this.EditorGrid.ActualHeight - this.EditorImage.ActualHeight * this.currentScale)
+                {
+                    y = this.EditorGrid.ActualHeight - this.EditorImage.ActualHeight * this.currentScale;
+                }
+                if (y > 0.0)
+                {
+                    y = 0.0;
+                }
+
+                this.EditorImageTransform.TranslateX = x;
+                this.EditorImageTransform.TranslateY = y;
+            }
+        }
+
         private void EditorImage_PinchStarted(object sender, PinchStartedGestureEventArgs e)
         {
             if (this.selectedMode == MODE_SCROLL)
@@ -731,44 +787,42 @@ namespace MagicPhotos
                 double width  = this.editedBitmap.PixelWidth  * scale;
                 double height = this.editedBitmap.PixelHeight * scale;
 
-                if ((width >= this.EditorScrollViewer.ViewportWidth || height >= this.EditorScrollViewer.ViewportHeight) &&
-                    (width <= MAX_IMAGE_WIDTH                       && height <= MAX_IMAGE_HEIGHT))
+                if ((width >= this.EditorGrid.ActualWidth || height >= this.EditorGrid.ActualHeight) &&
+                    (width <= MAX_IMAGE_WIDTH             && height <= MAX_IMAGE_HEIGHT))
                 {
-                    this.currentScale       = scale;
-                    this.EditorImage.Width  = width;
-                    this.EditorImage.Height = height;
+                    this.currentScale = scale;
+
+                    double x = this.EditorImageTransform.TranslateX;
+                    double y = this.EditorImageTransform.TranslateY;
+
+                    if (x < this.EditorGrid.ActualWidth - this.EditorImage.ActualWidth * this.currentScale)
+                    {
+                        x = this.EditorGrid.ActualWidth - this.EditorImage.ActualWidth * this.currentScale;
+                    }
+                    if (x > 0.0)
+                    {
+                        x = 0.0;
+                    }
+
+                    if (y < this.EditorGrid.ActualHeight - this.EditorImage.ActualHeight * this.currentScale)
+                    {
+                        y = this.EditorGrid.ActualHeight - this.EditorImage.ActualHeight * this.currentScale;
+                    }
+                    if (y > 0.0)
+                    {
+                        y = 0.0;
+                    }
+
+                    this.EditorImageTransform.TranslateX = x;
+                    this.EditorImageTransform.TranslateY = y;
+                    this.EditorImageTransform.ScaleX     = this.currentScale;
+                    this.EditorImageTransform.ScaleY     = this.currentScale;
 
                     int brush_width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
                     int brush_height = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
 
                     this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
                 }
-            }
-        }
-
-        private void EditorScrollViewer_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
-        {
-            if (this.selectedMode != MODE_SCROLL)
-            {
-                e.Handled = true;
-                e.Complete();
-            }
-        }
-
-        private void EditorScrollViewer_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
-        {
-            if (this.selectedMode != MODE_SCROLL)
-            {
-                e.Handled = true;
-                e.Complete();
-            }
-        }
-
-        private void EditorScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
-        {
-            if (this.selectedMode != MODE_SCROLL)
-            {
-                e.Handled = true;
             }
         }
     }

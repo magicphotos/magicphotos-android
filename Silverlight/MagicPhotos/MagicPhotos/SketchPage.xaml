@@ -13,6 +13,7 @@
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True" d:DesignHeight="696" d:DesignWidth="480"
     LayoutUpdated="SketchPage_LayoutUpdated"
+    OrientationChanged="SketchPage_OrientationChanged"
     BackKeyPress="SketchPage_BackKeyPress">
 
     <shell:SystemTray.ProgressIndicator>
@@ -49,15 +50,16 @@
                 <Border Name="HelperBorder" Width="140" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.ZIndex="1" Visibility="Collapsed" IsHitTestVisible="False" BorderBrush="White" BorderThickness="2">
                     <Image Name="HelperImage" Stretch="Uniform" Width="140" Height="140" IsHitTestVisible="False" />
                 </Border>
-                <ScrollViewer Name="EditorScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ManipulationStarted="EditorScrollViewer_ManipulationStarted" ManipulationDelta="EditorScrollViewer_ManipulationDelta" ManipulationCompleted="EditorScrollViewer_ManipulationCompleted">
-                    <Grid>
-                        <Image Name="EditorImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" MouseLeftButtonDown="EditorImage_MouseLeftButtonDown" MouseMove="EditorImage_MouseMove" MouseLeftButtonUp="EditorImage_MouseLeftButtonUp" MouseLeave="EditorImage_MouseLeave">
-                            <toolkit:GestureService.GestureListener>
-                                <toolkit:GestureListener PinchStarted="EditorImage_PinchStarted" PinchDelta="EditorImage_PinchDelta" />
-                            </toolkit:GestureService.GestureListener>
-                        </Image>
-                    </Grid>
-                </ScrollViewer>
+                <Grid x:Name="EditorImageGrid" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Name="EditorImage" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" MouseLeftButtonDown="EditorImage_MouseLeftButtonDown" MouseMove="EditorImage_MouseMove" MouseLeftButtonUp="EditorImage_MouseLeftButtonUp" MouseLeave="EditorImage_MouseLeave">
+                        <Image.RenderTransform>
+                            <CompositeTransform x:Name="EditorImageTransform" />
+                        </Image.RenderTransform>
+                        <toolkit:GestureService.GestureListener>
+                            <toolkit:GestureListener DragDelta="EditorImage_DragDelta" PinchStarted="EditorImage_PinchStarted" PinchDelta="EditorImage_PinchDelta" />
+                        </toolkit:GestureService.GestureListener>
+                    </Image>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
