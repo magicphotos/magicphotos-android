@@ -48,6 +48,7 @@ namespace MagicPhotos
         }
 
         private bool                  loadImageOnLayoutUpdate,
+                                      pageNavigationComplete,
                                       needImageReduction,
                                       editedImageChanged;
         private int                   selectedMode,
@@ -70,6 +71,7 @@ namespace MagicPhotos
             InitializeComponent();
 
             this.loadImageOnLayoutUpdate = true;
+            this.pageNavigationComplete  = false;
             this.editedImageChanged      = false;
             this.selectedMode            = MODE_NONE;
             this.gaussianRadius          = 0;
@@ -157,6 +159,8 @@ namespace MagicPhotos
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            this.pageNavigationComplete = true;
 
             IDictionary<string, string> query_strings = this.NavigationContext.QueryString;
 
@@ -338,7 +342,7 @@ namespace MagicPhotos
 
         private void SketchPage_LayoutUpdated(object sender, EventArgs e)
         {
-            if (this.loadImageOnLayoutUpdate)
+            if (this.loadImageOnLayoutUpdate && this.pageNavigationComplete)
             {
                 try
                 {

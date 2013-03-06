@@ -42,6 +42,7 @@ namespace MagicPhotos
 
         private bool                  loadImageOnLayoutUpdate,
                                       loadImageCancelled,
+                                      pageNavigationComplete,
                                       needImageReduction,
                                       editedImageChanged;
         private int                   selectedMode,
@@ -63,6 +64,7 @@ namespace MagicPhotos
 
             this.loadImageOnLayoutUpdate = true;
             this.loadImageCancelled      = false;
+            this.pageNavigationComplete  = false;
             this.editedImageChanged      = false;
             this.selectedMode            = MODE_NONE;
             this.selectedHue             = 0;
@@ -148,6 +150,8 @@ namespace MagicPhotos
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            this.pageNavigationComplete = true;
 
             if (this.loadImageCancelled)
             {
@@ -437,7 +441,7 @@ namespace MagicPhotos
 
         private void RecolorPage_LayoutUpdated(object sender, EventArgs e)
         {
-            if (this.loadImageOnLayoutUpdate)
+            if (this.loadImageOnLayoutUpdate && this.pageNavigationComplete)
             {
                 try
                 {

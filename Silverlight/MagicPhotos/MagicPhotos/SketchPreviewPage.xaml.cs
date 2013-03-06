@@ -36,6 +36,7 @@ namespace MagicPhotos
 
         private bool             loadImageOnLayoutUpdate,
                                  loadImageCancelled,
+                                 pageNavigationComplete,
                                  needImageReduction,
                                  restartSketchGenerator;
         private int              gaussianRadius;
@@ -51,6 +52,7 @@ namespace MagicPhotos
 
             this.loadImageOnLayoutUpdate = true;
             this.loadImageCancelled      = false;
+            this.pageNavigationComplete  = false;
             this.restartSketchGenerator  = false;
             this.gaussianRadius          = (int)this.GaussianRadiusSlider.Value;
             this.loadedBitmap            = null;
@@ -95,6 +97,8 @@ namespace MagicPhotos
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            this.pageNavigationComplete = true;
 
             if (this.loadImageCancelled)
             {
@@ -162,7 +166,7 @@ namespace MagicPhotos
 
         private void SketchPreviewPage_LayoutUpdated(object sender, EventArgs e)
         {
-            if (this.loadImageOnLayoutUpdate)
+            if (this.loadImageOnLayoutUpdate && this.pageNavigationComplete)
             {
                 try
                 {
