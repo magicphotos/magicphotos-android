@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -193,7 +194,13 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    ThreadPool.QueueUserWorkItem((stateInfo) =>
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(delegate()
+                        {
+                            MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        });
+                    });
                 }
 
                 this.loadImageOnLayoutUpdate = false;
