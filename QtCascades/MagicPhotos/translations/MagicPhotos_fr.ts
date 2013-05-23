@@ -197,28 +197,28 @@
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="111"/>
+        <location filename="../assets/main.qml" line="112"/>
         <source>Decolorize</source>
         <translation>Décolorer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="113"/>
+        <location filename="../assets/main.qml" line="114"/>
         <source>Sketch</source>
         <translation>En croquis</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="115"/>
+        <location filename="../assets/main.qml" line="116"/>
         <source>Recolor</source>
         <translation>Repeindre</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="117"/>
+        <location filename="../assets/main.qml" line="118"/>
         <source>Retouch</source>
         <translation>Retoucher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="151"/>
-        <location filename="../assets/main.qml" line="166"/>
+        <location filename="../assets/main.qml" line="152"/>
+        <location filename="../assets/main.qml" line="167"/>
         <source>Open Image</source>
         <translation>Ouvrir une Photo</translation>
     </message>

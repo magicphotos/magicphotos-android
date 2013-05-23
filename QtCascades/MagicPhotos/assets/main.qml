@@ -104,16 +104,17 @@ NavigationPane {
                             preferredHeight: ListItem.view.actualHeight
                             background:      Color.Transparent
 
-                            property string itemMode: ListItemData.mode
+                            property string itemMode:  ListItemData.mode
+                            property string itemImage: ListItemData.image 
 
                             onItemModeChanged: {
-                                if (ListItemData.mode === "DECOLORIZE") {
+                                if (itemMode === "DECOLORIZE") {
                                     modeLabel.text = qsTr("Decolorize");
-                                } else if (ListItemData.mode === "SKETCH") {
+                                } else if (itemMode === "SKETCH") {
                                     modeLabel.text = qsTr("Sketch");
-                                } else if (ListItemData.mode === "RECOLOR") {
+                                } else if (itemMode === "RECOLOR") {
                                     modeLabel.text = qsTr("Recolor");
-                                } else if (ListItemData.mode === "RETOUCH") {
+                                } else if (itemMode === "RETOUCH") {
                                     modeLabel.text = qsTr("Retouch");
                                 }
                             }
@@ -137,7 +138,7 @@ NavigationPane {
                                 id:                  modeImageView
                                 preferredWidth:      itemRoot.ListItem.view.actualWidth
                                 horizontalAlignment: HorizontalAlignment.Center
-                                imageSource:         ListItemData.image
+                                imageSource:         itemImage
                                 scalingMethod:       ScalingMethod.AspectFit
 
                                 layoutProperties: StackLayoutProperties {
@@ -166,7 +167,7 @@ NavigationPane {
                                         title: qsTr("Open Image")
 
                                         onFileSelected: {
-                                            itemRoot.ListItem.view.navigateToEditPage(ListItemData.mode, selectedFiles[0]);
+                                            itemRoot.ListItem.view.navigateToEditPage(itemMode, selectedFiles[0]);
                                         } 
                                     }
                                 ]
