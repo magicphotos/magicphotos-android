@@ -131,6 +131,48 @@ namespace MagicPhotos
             }
         }
 
+        private void CartoonOpenImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.startupImageToken != "")
+            {
+                try
+                {
+                    createTemporaryImage(this.startupImageToken);
+
+                    NavigationService.Navigate(new Uri("/CartoonPreviewPage.xaml", UriKind.Relative));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                }
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("/CartoonPreviewPage.xaml", UriKind.Relative));
+            }
+        }
+
+        private void BlurOpenImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.startupImageToken != "")
+            {
+                try
+                {
+                    createTemporaryImage(this.startupImageToken);
+
+                    NavigationService.Navigate(new Uri("/BlurPreviewPage.xaml", UriKind.Relative));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                }
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("/BlurPreviewPage.xaml", UriKind.Relative));
+            }
+        }
+
         private void RecolorOpenImageButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.startupImageToken != "")

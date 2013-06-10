@@ -39,6 +39,26 @@
                         <Button x:Name="SketchOpenImageButton" Grid.Row="1" Content="{Binding Path=AppResources.MainPageButtonOpenImageContent, Source={StaticResource XAMLAppResources}}" Click="SketchOpenImageButton_Click" />
                     </Grid>
                 </controls:PivotItem>
+                <controls:PivotItem Header="{Binding Path=AppResources.MainPagePivotItemCartoonHeader, Source={StaticResource XAMLAppResources}}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Stretch="Uniform" Source="/Images/edit_mode_cartoon.png" />
+                        <Button x:Name="CartoonOpenImageButton" Grid.Row="1" Content="{Binding Path=AppResources.MainPageButtonOpenImageContent, Source={StaticResource XAMLAppResources}}" Click="CartoonOpenImageButton_Click" />
+                    </Grid>
+                </controls:PivotItem>
+                <controls:PivotItem Header="{Binding Path=AppResources.MainPagePivotItemBlurHeader, Source={StaticResource XAMLAppResources}}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Stretch="Uniform" Source="/Images/edit_mode_blur.png" />
+                        <Button x:Name="BlurOpenImageButton" Grid.Row="1" Content="{Binding Path=AppResources.MainPageButtonOpenImageContent, Source={StaticResource XAMLAppResources}}" Click="BlurOpenImageButton_Click" />
+                    </Grid>
+                </controls:PivotItem>
                 <controls:PivotItem Header="{Binding Path=AppResources.MainPagePivotItemRecolorHeader, Source={StaticResource XAMLAppResources}}">
                     <Grid>
                         <Grid.RowDefinitions>
