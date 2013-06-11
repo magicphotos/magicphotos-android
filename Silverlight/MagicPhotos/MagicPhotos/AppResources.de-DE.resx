@@ -177,4 +177,38 @@
   <data name="SketchPreviewPageTextBlockSliderCommentText" xml:space="preserve">
     <value>Sättigung:</value>
   </data>
+  <data name="BlurPreviewPageButtonApplyContent" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="BlurPreviewPageTextBlockPageCommentText" xml:space="preserve">
+    <value>BLUR PARAMETERS</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="BlurPreviewPageTextBlockSliderCommentText" xml:space="preserve">
+    <value>Blur:</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="CartoonPreviewPageButtonApplyContent" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="CartoonPreviewPageTextBlockGaussianRadiusSliderCommentText" xml:space="preserve">
+    <value>Smoothing:</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="CartoonPreviewPageTextBlockPageCommentText" xml:space="preserve">
+    <value>CARTOON PARAMETERS</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="CartoonPreviewPageTextBlockThresholdSliderCommentText" xml:space="preserve">
+    <value>Sharpness:</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="MainPagePivotItemBlurHeader" xml:space="preserve">
+    <value>Blur</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="MainPagePivotItemCartoonHeader" xml:space="preserve">
+    <value>Cartoon</value>
+    <comment>!!!</comment>
+  </data>
 </root>

@@ -35,7 +35,7 @@
             <TextBlock x:Name="PageCommentTextBlock" Grid.Row="0" Text="{Binding Path=AppResources.CartoonPreviewPageTextBlockPageCommentText, Source={StaticResource XAMLAppResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
             <Image x:Name="PreviewImage" Grid.Row="1" Stretch="Uniform" />
             <TextBlock x:Name="GaussianRadiusSliderCommentTextBlock" Grid.Row="2" Text="{Binding Path=AppResources.CartoonPreviewPageTextBlockGaussianRadiusSliderCommentText, Source={StaticResource XAMLAppResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
-            <Slider x:Name="GaussianRadiusSlider" Grid.Row="3" Value="6" Minimum="3" Maximum="9" ValueChanged="GaussianRadiusSlider_ValueChanged" />
+            <Slider x:Name="GaussianRadiusSlider" Grid.Row="3" Value="5" Minimum="0" Maximum="10" ValueChanged="GaussianRadiusSlider_ValueChanged" />
             <TextBlock x:Name="ThresholdSliderCommentTextBlock" Grid.Row="4" Text="{Binding Path=AppResources.CartoonPreviewPageTextBlockThresholdSliderCommentText, Source={StaticResource XAMLAppResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
             <Slider x:Name="ThresholdSlider" Grid.Row="5" Value="80" Minimum="32" Maximum="128" LargeChange="8" ValueChanged="ThresholdSlider_ValueChanged" />
             <Button x:Name="ApplyButton" Grid.Row="6" Content="{Binding Path=AppResources.CartoonPreviewPageButtonApplyContent, Source={StaticResource XAMLAppResources}}" Click="ApplyButton_Click" />

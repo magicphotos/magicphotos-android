@@ -555,113 +555,116 @@ namespace MagicPhotos
             int   width     = (e.Argument as CartoonGenTaskData).width;
             int   height    = (e.Argument as CartoonGenTaskData).height;
             int[] pixels    = (e.Argument as CartoonGenTaskData).pixels;
-            
-            // Make Gaussian blur of original image
+
+            // Make Gaussian blur of original image, if applicable
 
             int[] blur_pixels = pixels.Clone() as int[];
 
-            int[] tab   = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-            int   alpha = (radius < 1) ? 16 : (radius > 17) ? 1 : tab[radius - 1];
-
-            int   r1   = 0;
-            int   r2   = height - 1;
-            int   c1   = 0;
-            int   c2   = width - 1;
-            int[] rgba = new int[4];
-
-            for (int col = c1; col <= c2; col++)
+            if (radius != 0)
             {
-                int s = r1 * width + col;
+                int[] tab   = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
+                int   alpha = (radius < 1) ? 16 : (radius > 17) ? 1 : tab[radius - 1];
 
-                for (int i = 0; i < 4; i++)
+                int   r1   = 0;
+                int   r2   = height - 1;
+                int   c1   = 0;
+                int   c2   = width - 1;
+                int[] rgba = new int[4];
+
+                for (int col = c1; col <= c2; col++)
                 {
-                    rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
-                }
-
-                s += width;
-
-                for (int j = r1; j < r2; j++, s += width)
-                {
-                    int p = 0;
+                    int s = r1 * width + col;
 
                     for (int i = 0; i < 4; i++)
                     {
-                        p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
                     }
 
-                    blur_pixels[s] = p;
+                    s += width;
+
+                    for (int j = r1; j < r2; j++, s += width)
+                    {
+                        int p = 0;
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        }
+
+                        blur_pixels[s] = p;
+                    }
                 }
-            }
 
-            for (int row = r1; row <= r2; row++)
-            {
-                int s = row * width + c1;
-
-                for (int i = 0; i < 4; i++)
+                for (int row = r1; row <= r2; row++)
                 {
-                    rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
-                }
-
-                s++;
-
-                for (int j = c1; j < c2; j++, s++)
-                {
-                    int p = 0;
+                    int s = row * width + c1;
 
                     for (int i = 0; i < 4; i++)
                     {
-                        p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
                     }
 
-                    blur_pixels[s] = p;
+                    s++;
+
+                    for (int j = c1; j < c2; j++, s++)
+                    {
+                        int p = 0;
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        }
+
+                        blur_pixels[s] = p;
+                    }
                 }
-            }
 
-            for (int col = c1; col <= c2; col++)
-            {
-                int s = r2 * width + col;
-
-                for (int i = 0; i < 4; i++)
+                for (int col = c1; col <= c2; col++)
                 {
-                    rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
-                }
-
-                s -= width;
-
-                for (int j = r1; j < r2; j++, s -= width)
-                {
-                    int p = 0;
+                    int s = r2 * width + col;
 
                     for (int i = 0; i < 4; i++)
                     {
-                        p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
                     }
 
-                    blur_pixels[s] = p;
+                    s -= width;
+
+                    for (int j = r1; j < r2; j++, s -= width)
+                    {
+                        int p = 0;
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        }
+
+                        blur_pixels[s] = p;
+                    }
                 }
-            }
 
-            for (int row = r1; row <= r2; row++)
-            {
-                int s = row * width + c2;
-
-                for (int i = 0; i < 4; i++)
+                for (int row = r1; row <= r2; row++)
                 {
-                    rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
-                }
-
-                s--;
-
-                for (int j = c1; j < c2; j++, s--)
-                {
-                    int p = 0;
+                    int s = row * width + c2;
 
                     for (int i = 0; i < 4; i++)
                     {
-                        p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        rgba[i] = ((blur_pixels[s] >> (i * 8)) & 0xFF) << 4;
                     }
 
-                    blur_pixels[s] = p;
+                    s--;
+
+                    for (int j = c1; j < c2; j++, s--)
+                    {
+                        int p = 0;
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            p = p | ((((rgba[i] += ((((blur_pixels[s] >> (i * 8)) & 0xFF) << 4) - rgba[i]) * alpha / 16) >> 4) & 0xFF) << (i * 8));
+                        }
+
+                        blur_pixels[s] = p;
+                    }
                 }
             }
 

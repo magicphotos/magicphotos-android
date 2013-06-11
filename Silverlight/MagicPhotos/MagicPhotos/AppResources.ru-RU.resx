@@ -177,4 +177,31 @@
   <data name="SketchPreviewPageTextBlockSliderCommentText" xml:space="preserve">
     <value>Насыщенность:</value>
   </data>
+  <data name="BlurPreviewPageButtonApplyContent" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="BlurPreviewPageTextBlockPageCommentText" xml:space="preserve">
+    <value>ПАРАМЕТРЫ РАЗМЫТИЯ</value>
+  </data>
+  <data name="BlurPreviewPageTextBlockSliderCommentText" xml:space="preserve">
+    <value>Размытие:</value>
+  </data>
+  <data name="CartoonPreviewPageButtonApplyContent" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="CartoonPreviewPageTextBlockGaussianRadiusSliderCommentText" xml:space="preserve">
+    <value>Сглаживание:</value>
+  </data>
+  <data name="CartoonPreviewPageTextBlockPageCommentText" xml:space="preserve">
+    <value>ПАРАМЕТРЫ КОМИКСА</value>
+  </data>
+  <data name="CartoonPreviewPageTextBlockThresholdSliderCommentText" xml:space="preserve">
+    <value>Резкость:</value>
+  </data>
+  <data name="MainPagePivotItemBlurHeader" xml:space="preserve">
+    <value>Размыть</value>
+  </data>
+  <data name="MainPagePivotItemCartoonHeader" xml:space="preserve">
+    <value>В комикс</value>
+  </data>
 </root>
