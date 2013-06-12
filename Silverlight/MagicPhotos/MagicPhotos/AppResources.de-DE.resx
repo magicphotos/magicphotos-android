@@ -181,34 +181,27 @@
     <value>Anwenden</value>
   </data>
   <data name="BlurPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>BLUR PARAMETERS</value>
-    <comment>!!!</comment>
+    <value>WEICHZEICHNENSPARAMETER</value>
   </data>
   <data name="BlurPreviewPageTextBlockSliderCommentText" xml:space="preserve">
-    <value>Blur:</value>
-    <comment>!!!</comment>
+    <value>Weichzeichnen:</value>
   </data>
   <data name="CartoonPreviewPageButtonApplyContent" xml:space="preserve">
     <value>Anwenden</value>
   </data>
   <data name="CartoonPreviewPageTextBlockGaussianRadiusSliderCommentText" xml:space="preserve">
-    <value>Smoothing:</value>
-    <comment>!!!</comment>
+    <value>Glättung:</value>
   </data>
   <data name="CartoonPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>CARTOON PARAMETERS</value>
-    <comment>!!!</comment>
+    <value>COMICPARAMETER</value>
   </data>
   <data name="CartoonPreviewPageTextBlockThresholdSliderCommentText" xml:space="preserve">
-    <value>Sharpness:</value>
-    <comment>!!!</comment>
+    <value>Schärfe:</value>
   </data>
   <data name="MainPagePivotItemBlurHeader" xml:space="preserve">
-    <value>Blur</value>
-    <comment>!!!</comment>
+    <value>Weichzeichnen</value>
   </data>
   <data name="MainPagePivotItemCartoonHeader" xml:space="preserve">
-    <value>Cartoon</value>
-    <comment>!!!</comment>
+    <value>In den Comic</value>
   </data>
 </root>

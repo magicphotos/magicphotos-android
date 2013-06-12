@@ -181,34 +181,27 @@
     <value>Appliquer</value>
   </data>
   <data name="BlurPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>BLUR PARAMETERS</value>
-    <comment>!!!</comment>
+    <value>PARAMÈTRES DU FLOU</value>
   </data>
   <data name="BlurPreviewPageTextBlockSliderCommentText" xml:space="preserve">
-    <value>Blur:</value>
-    <comment>!!!</comment>
+    <value>Flou:</value>
   </data>
   <data name="CartoonPreviewPageButtonApplyContent" xml:space="preserve">
     <value>Appliquer</value>
   </data>
   <data name="CartoonPreviewPageTextBlockGaussianRadiusSliderCommentText" xml:space="preserve">
-    <value>Smoothing:</value>
-    <comment>!!!</comment>
+    <value>Lissage:</value>
   </data>
   <data name="CartoonPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>CARTOON PARAMETERS</value>
-    <comment>!!!</comment>
+    <value>PARAMÈTRES DE LA BANDE DESSINÉE</value>
   </data>
   <data name="CartoonPreviewPageTextBlockThresholdSliderCommentText" xml:space="preserve">
-    <value>Sharpness:</value>
-    <comment>!!!</comment>
+    <value>Netteté:</value>
   </data>
   <data name="MainPagePivotItemBlurHeader" xml:space="preserve">
-    <value>Blur</value>
-    <comment>!!!</comment>
+    <value>Flou</value>
   </data>
   <data name="MainPagePivotItemCartoonHeader" xml:space="preserve">
-    <value>Cartoon</value>
-    <comment>!!!</comment>
+    <value>En bande dessinée</value>
   </data>
 </root>
