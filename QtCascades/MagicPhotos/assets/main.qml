@@ -146,7 +146,7 @@ NavigationPane {
                                 id:                      modeLabel
                                 horizontalAlignment:     HorizontalAlignment.Left
                                 textStyle.fontSize:      FontSize.PercentageValue
-                                textStyle.fontSizeValue: 250
+                                textStyle.fontSizeValue: 200
                                 textStyle.color:         Color.White
 
                                 layoutProperties: StackLayoutProperties {

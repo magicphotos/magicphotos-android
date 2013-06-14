@@ -6,37 +6,37 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="27"/>
         <source>Undo</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="38"/>
         <source>Save</source>
-        <translation type="unfinished">Sauvegarder</translation>
+        <translation>Sauvegarder</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="53"/>
         <source>Save Image</source>
-        <translation type="unfinished">Sauvegarder une Photo</translation>
+        <translation>Sauvegarder une Photo</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="63"/>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="221"/>
         <source>Could not open image</source>
-        <translation type="unfinished">L’image ne peut pas être ouverte</translation>
+        <translation>L’image ne peut pas être ouverte</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="225"/>
         <source>Image saved successfully</source>
-        <translation type="unfinished">L’image était sauvegardée avec succès</translation>
+        <translation>L’image était sauvegardée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="229"/>
         <source>Could not save image</source>
-        <translation type="unfinished">L’image ne peut pas être sauvegardée</translation>
+        <translation>L’image ne peut pas être sauvegardée</translation>
     </message>
 </context>
 <context>
@@ -44,17 +44,17 @@
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="26"/>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="81"/>
         <source>Could not open image</source>
-        <translation type="unfinished">L’image ne peut pas être ouverte</translation>
+        <translation>L’image ne peut pas être ouverte</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="142"/>
         <source>Apply</source>
-        <translation type="unfinished">Appliquer</translation>
+        <translation>Appliquer</translation>
     </message>
 </context>
 <context>
@@ -62,37 +62,37 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="28"/>
         <source>Undo</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="39"/>
         <source>Save</source>
-        <translation type="unfinished">Sauvegarder</translation>
+        <translation>Sauvegarder</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="54"/>
         <source>Save Image</source>
-        <translation type="unfinished">Sauvegarder une Photo</translation>
+        <translation>Sauvegarder une Photo</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="64"/>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="222"/>
         <source>Could not open image</source>
-        <translation type="unfinished">L’image ne peut pas être ouverte</translation>
+        <translation>L’image ne peut pas être ouverte</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="226"/>
         <source>Image saved successfully</source>
-        <translation type="unfinished">L’image était sauvegardée avec succès</translation>
+        <translation>L’image était sauvegardée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="230"/>
         <source>Could not save image</source>
-        <translation type="unfinished">L’image ne peut pas être sauvegardée</translation>
+        <translation>L’image ne peut pas être sauvegardée</translation>
     </message>
 </context>
 <context>
@@ -100,17 +100,17 @@
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="26"/>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="83"/>
         <source>Could not open image</source>
-        <translation type="unfinished">L’image ne peut pas être ouverte</translation>
+        <translation>L’image ne peut pas être ouverte</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="161"/>
         <source>Apply</source>
-        <translation type="unfinished">Appliquer</translation>
+        <translation>Appliquer</translation>
     </message>
 </context>
 <context>
@@ -321,12 +321,12 @@
     <message>
         <location filename="../assets/main.qml" line="132"/>
         <source>Cartoon</source>
-        <translation type="unfinished"></translation>
+        <translation>En bande dessinée</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="134"/>
         <source>Blur</source>
-        <translation type="unfinished"></translation>
+        <translation>Flou</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="136"/>

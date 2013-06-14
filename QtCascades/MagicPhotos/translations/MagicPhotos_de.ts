@@ -6,37 +6,37 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="27"/>
         <source>Undo</source>
-        <translation type="unfinished">Annullieren</translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="38"/>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="53"/>
         <source>Save Image</source>
-        <translation type="unfinished">Speichern ein Foto</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="63"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="221"/>
         <source>Could not open image</source>
-        <translation type="unfinished">Das Bild kann nicht geöffnet werden</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="225"/>
         <source>Image saved successfully</source>
-        <translation type="unfinished">Das Bild wurde erfolgreich gespeichert</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="229"/>
         <source>Could not save image</source>
-        <translation type="unfinished">Das Bild kann nicht gespeichert werden</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -44,17 +44,17 @@
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="26"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="81"/>
         <source>Could not open image</source>
-        <translation type="unfinished">Das Bild kann nicht geöffnet werden</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="142"/>
         <source>Apply</source>
-        <translation type="unfinished">Anwenden</translation>
+        <translation>Anwenden</translation>
     </message>
 </context>
 <context>
@@ -62,37 +62,37 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="28"/>
         <source>Undo</source>
-        <translation type="unfinished">Annullieren</translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="39"/>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="54"/>
         <source>Save Image</source>
-        <translation type="unfinished">Speichern ein Foto</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="64"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="222"/>
         <source>Could not open image</source>
-        <translation type="unfinished">Das Bild kann nicht geöffnet werden</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="226"/>
         <source>Image saved successfully</source>
-        <translation type="unfinished">Das Bild wurde erfolgreich gespeichert</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="230"/>
         <source>Could not save image</source>
-        <translation type="unfinished">Das Bild kann nicht gespeichert werden</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -100,17 +100,17 @@
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="26"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="83"/>
         <source>Could not open image</source>
-        <translation type="unfinished">Das Bild kann nicht geöffnet werden</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="161"/>
         <source>Apply</source>
-        <translation type="unfinished">Anwenden</translation>
+        <translation>Anwenden</translation>
     </message>
 </context>
 <context>
@@ -321,12 +321,12 @@
     <message>
         <location filename="../assets/main.qml" line="132"/>
         <source>Cartoon</source>
-        <translation type="unfinished"></translation>
+        <translation>In den Comic</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="134"/>
         <source>Blur</source>
-        <translation type="unfinished"></translation>
+        <translation>Weichzeichnen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="136"/>
