@@ -15,6 +15,8 @@
 #include "downloadinviter.h"
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
+#include "cartooneditor.h"
+#include "blureditor.h"
 #include "recoloreditor.h"
 #include "retoucheditor.h"
 
@@ -38,6 +40,12 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 
     qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
     qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
+
+    qmlRegisterType<CartoonEditor>("ImageEditor", 1, 0, "CartoonEditor");
+    qmlRegisterType<CartoonPreviewGenerator>("ImageEditor", 1, 0, "CartoonPreviewGenerator");
+
+    qmlRegisterType<BlurEditor>("ImageEditor", 1, 0, "BlurEditor");
+    qmlRegisterType<BlurPreviewGenerator>("ImageEditor", 1, 0, "BlurPreviewGenerator");
 
     qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
 

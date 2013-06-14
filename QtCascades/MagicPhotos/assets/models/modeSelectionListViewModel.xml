@@ -2,6 +2,8 @@
     <header title="Edit Modes">
         <item mode="DECOLORIZE" image="images/edit_mode_decolorize.png" />
         <item mode="SKETCH"     image="images/edit_mode_sketch.png" />
+        <item mode="CARTOON"    image="images/edit_mode_cartoon.png" />
+        <item mode="BLUR"       image="images/edit_mode_blur.png" />
         <item mode="RECOLOR"    image="images/edit_mode_recolor.png" />
         <item mode="RETOUCH"    image="images/edit_mode_retouch.png" />
     </header>

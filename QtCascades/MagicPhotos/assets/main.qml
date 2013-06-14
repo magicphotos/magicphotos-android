@@ -67,6 +67,22 @@ NavigationPane {
                         navigationPane.push(page);
 
                         page.openImage(image_file);
+                    } else if (mode === "CARTOON") {
+                        editPageDefinition.source = "CartoonPreviewPage.qml";
+
+                        var page = editPageDefinition.createObject();
+
+                        navigationPane.push(page);
+
+                        page.openImage(image_file);
+                    } else if (mode === "BLUR") {
+                        editPageDefinition.source = "BlurPreviewPage.qml";
+
+                        var page = editPageDefinition.createObject();
+
+                        navigationPane.push(page);
+
+                        page.openImage(image_file);
                     } else if (mode === "RECOLOR") {
                         editPageDefinition.source = "RecolorPage.qml";
 
@@ -112,6 +128,10 @@ NavigationPane {
                                     modeLabel.text = qsTr("Decolorize");
                                 } else if (itemMode === "SKETCH") {
                                     modeLabel.text = qsTr("Sketch");
+                                } else if (itemMode === "CARTOON") {
+                                    modeLabel.text = qsTr("Cartoon");
+                                } else if (itemMode === "BLUR") {
+                                    modeLabel.text = qsTr("Blur");
                                 } else if (itemMode === "RECOLOR") {
                                     modeLabel.text = qsTr("Recolor");
                                 } else if (itemMode === "RETOUCH") {
