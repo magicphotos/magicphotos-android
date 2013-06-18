@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.system 1.0
 import FilePicker 1.0
 import ImageEditor 1.0
 
@@ -309,16 +310,16 @@ Page {
                                     samplingPointImageView.visible = false;
 
                                     imageScrollView.resetViewableArea(ScrollAnimation.Default);
-                                    
-                                    MessageBox.showToast(qsTr("Could not open image"));
+
+                                    imageOpenFailedToast.show();
                                 }
                                 
                                 onImageSaved: {
-                                    MessageBox.showToast(qsTr("Image saved successfully"));
+                                    imageSavedToast.show();
                                 }
                                 
                                 onImageSaveFailed: {
-                                    MessageBox.showToast(qsTr("Could not save image"));
+                                    imageSaveFailedToast.show();
                                 }
                                 
                                 onUndoAvailabilityChanged: {
@@ -336,6 +337,18 @@ Page {
                                 onNeedHelperRepaint: {
                                     helperImageView.image = image;
                                 }
+                            },
+                            SystemToast {
+                                id:   imageOpenFailedToast
+                                body: qsTr("Could not open image")
+                            },
+                            SystemToast {
+                                id:   imageSavedToast
+                                body: qsTr("Image saved successfully")
+                            },
+                            SystemToast {
+                                id:   imageSaveFailedToast
+                                body: qsTr("Could not save image")
                             }
                         ]
                     }

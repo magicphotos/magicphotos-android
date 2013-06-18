@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.system 1.0
 import DownloadInviter 1.0
 
 Page {
@@ -27,8 +28,12 @@ Page {
                     id: downloadInviter
 
                     onInvitationSendFailed: {
-                        MessageBox.showToast(qsTr("Could not send download invitation"));
+                        invitationSendFailedToast.show();
                     }
+                },
+                SystemToast {
+                    id:   invitationSendFailedToast
+                    body: qsTr("Could not send download invitation")
                 }
             ]
         }

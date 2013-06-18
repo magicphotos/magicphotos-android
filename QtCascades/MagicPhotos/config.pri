@@ -18,20 +18,20 @@ device {
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
-                 $$quote($$BASEDIR/src/messagebox.cpp) \
                  $$quote($$BASEDIR/src/recoloreditor.cpp) \
                  $$quote($$BASEDIR/src/retoucheditor.cpp) \
-                 $$quote($$BASEDIR/src/sketcheditor.cpp)
+                 $$quote($$BASEDIR/src/sketcheditor.cpp) \
+                 $$quote($$BASEDIR/src/trialmanager.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/MagicPhotos.hpp) \
                  $$quote($$BASEDIR/src/blureditor.h) \
                  $$quote($$BASEDIR/src/cartooneditor.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
-                 $$quote($$BASEDIR/src/messagebox.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
                  $$quote($$BASEDIR/src/retoucheditor.h) \
-                 $$quote($$BASEDIR/src/sketcheditor.h)
+                 $$quote($$BASEDIR/src/sketcheditor.h) \
+                 $$quote($$BASEDIR/src/trialmanager.h)
     }
 
     CONFIG(release, debug|release) {
@@ -50,20 +50,20 @@ device {
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
-                 $$quote($$BASEDIR/src/messagebox.cpp) \
                  $$quote($$BASEDIR/src/recoloreditor.cpp) \
                  $$quote($$BASEDIR/src/retoucheditor.cpp) \
-                 $$quote($$BASEDIR/src/sketcheditor.cpp)
+                 $$quote($$BASEDIR/src/sketcheditor.cpp) \
+                 $$quote($$BASEDIR/src/trialmanager.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/MagicPhotos.hpp) \
                  $$quote($$BASEDIR/src/blureditor.h) \
                  $$quote($$BASEDIR/src/cartooneditor.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
-                 $$quote($$BASEDIR/src/messagebox.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
                  $$quote($$BASEDIR/src/retoucheditor.h) \
-                 $$quote($$BASEDIR/src/sketcheditor.h)
+                 $$quote($$BASEDIR/src/sketcheditor.h) \
+                 $$quote($$BASEDIR/src/trialmanager.h)
     }
 }
 
@@ -84,20 +84,20 @@ simulator {
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
-                 $$quote($$BASEDIR/src/messagebox.cpp) \
                  $$quote($$BASEDIR/src/recoloreditor.cpp) \
                  $$quote($$BASEDIR/src/retoucheditor.cpp) \
-                 $$quote($$BASEDIR/src/sketcheditor.cpp)
+                 $$quote($$BASEDIR/src/sketcheditor.cpp) \
+                 $$quote($$BASEDIR/src/trialmanager.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/MagicPhotos.hpp) \
                  $$quote($$BASEDIR/src/blureditor.h) \
                  $$quote($$BASEDIR/src/cartooneditor.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
-                 $$quote($$BASEDIR/src/messagebox.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
                  $$quote($$BASEDIR/src/retoucheditor.h) \
-                 $$quote($$BASEDIR/src/sketcheditor.h)
+                 $$quote($$BASEDIR/src/sketcheditor.h) \
+                 $$quote($$BASEDIR/src/trialmanager.h)
     }
 }
 

@@ -4,37 +4,37 @@
 <context>
     <name>BlurPage</name>
     <message>
-        <location filename="../assets/BlurPage.qml" line="27"/>
+        <location filename="../assets/BlurPage.qml" line="28"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="38"/>
+        <location filename="../assets/BlurPage.qml" line="39"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="53"/>
+        <location filename="../assets/BlurPage.qml" line="54"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="63"/>
+        <location filename="../assets/BlurPage.qml" line="64"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="221"/>
+        <location filename="../assets/BlurPage.qml" line="251"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="225"/>
+        <location filename="../assets/BlurPage.qml" line="255"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="229"/>
+        <location filename="../assets/BlurPage.qml" line="259"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -42,17 +42,17 @@
 <context>
     <name>BlurPreviewPage</name>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="26"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="27"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="81"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="111"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="142"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="147"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
@@ -60,37 +60,37 @@
 <context>
     <name>CartoonPage</name>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="28"/>
+        <location filename="../assets/CartoonPage.qml" line="29"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="39"/>
+        <location filename="../assets/CartoonPage.qml" line="40"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="54"/>
+        <location filename="../assets/CartoonPage.qml" line="55"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="64"/>
+        <location filename="../assets/CartoonPage.qml" line="65"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="222"/>
+        <location filename="../assets/CartoonPage.qml" line="252"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="226"/>
+        <location filename="../assets/CartoonPage.qml" line="256"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="230"/>
+        <location filename="../assets/CartoonPage.qml" line="260"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,17 +98,17 @@
 <context>
     <name>CartoonPreviewPage</name>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="26"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="27"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="83"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="113"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="161"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="166"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,37 +116,37 @@
 <context>
     <name>DecolorizePage</name>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="26"/>
+        <location filename="../assets/DecolorizePage.qml" line="27"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="37"/>
+        <location filename="../assets/DecolorizePage.qml" line="38"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="52"/>
+        <location filename="../assets/DecolorizePage.qml" line="53"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="62"/>
+        <location filename="../assets/DecolorizePage.qml" line="63"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="220"/>
+        <location filename="../assets/DecolorizePage.qml" line="250"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="224"/>
+        <location filename="../assets/DecolorizePage.qml" line="254"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="228"/>
+        <location filename="../assets/DecolorizePage.qml" line="258"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,17 +154,17 @@
 <context>
     <name>HelpPage</name>
     <message>
-        <location filename="../assets/HelpPage.qml" line="17"/>
+        <location filename="../assets/HelpPage.qml" line="18"/>
         <source>Recommend App</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="30"/>
+        <location filename="../assets/HelpPage.qml" line="36"/>
         <source>Could not send download invitation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="46"/>
+        <location filename="../assets/HelpPage.qml" line="51"/>
         <source>doc/help.html</source>
         <translation type="unfinished"></translation>
     </message>
@@ -172,37 +172,37 @@
 <context>
     <name>RecolorPage</name>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="26"/>
+        <location filename="../assets/RecolorPage.qml" line="27"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="37"/>
+        <location filename="../assets/RecolorPage.qml" line="38"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="52"/>
+        <location filename="../assets/RecolorPage.qml" line="53"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="62"/>
+        <location filename="../assets/RecolorPage.qml" line="63"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="235"/>
+        <location filename="../assets/RecolorPage.qml" line="265"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="239"/>
+        <location filename="../assets/RecolorPage.qml" line="269"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="243"/>
+        <location filename="../assets/RecolorPage.qml" line="273"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -210,37 +210,37 @@
 <context>
     <name>RetouchPage</name>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="26"/>
+        <location filename="../assets/RetouchPage.qml" line="27"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="37"/>
+        <location filename="../assets/RetouchPage.qml" line="38"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="52"/>
+        <location filename="../assets/RetouchPage.qml" line="53"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="62"/>
+        <location filename="../assets/RetouchPage.qml" line="63"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="313"/>
+        <location filename="../assets/RetouchPage.qml" line="343"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="317"/>
+        <location filename="../assets/RetouchPage.qml" line="347"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="321"/>
+        <location filename="../assets/RetouchPage.qml" line="351"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -248,37 +248,37 @@
 <context>
     <name>SketchPage</name>
     <message>
-        <location filename="../assets/SketchPage.qml" line="27"/>
+        <location filename="../assets/SketchPage.qml" line="28"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="38"/>
+        <location filename="../assets/SketchPage.qml" line="39"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="53"/>
+        <location filename="../assets/SketchPage.qml" line="54"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="63"/>
+        <location filename="../assets/SketchPage.qml" line="64"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="221"/>
+        <location filename="../assets/SketchPage.qml" line="251"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="225"/>
+        <location filename="../assets/SketchPage.qml" line="255"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="229"/>
+        <location filename="../assets/SketchPage.qml" line="259"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -286,17 +286,17 @@
 <context>
     <name>SketchPreviewPage</name>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="26"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="27"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="81"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="111"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="142"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="147"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.system 1.0
 import ImageEditor 1.0
 
 Page {
@@ -78,7 +79,7 @@ Page {
                             gaussianRadiusSlider.enabled = false;
                             applyButton.enabled          = false;
 
-                            MessageBox.showToast(qsTr("Could not open image"));
+                            imageOpenFailedToast.show();
                         }
                         
                         onGenerationStarted: {
@@ -104,6 +105,10 @@ Page {
                         onNeedRepaint: {
                             previewImageView.image = image;                            
                         }
+                    },
+                    SystemToast {
+                        id:   imageOpenFailedToast
+                        body: qsTr("Could not open image")
                     }
                 ]
             }

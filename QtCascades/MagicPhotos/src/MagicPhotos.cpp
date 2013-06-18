@@ -11,7 +11,7 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 
-#include "messagebox.h"
+#include "trialmanager.h"
 #include "downloadinviter.h"
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
@@ -53,7 +53,7 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
-    qml->setContextProperty("MessageBox", new MessageBox());
+    qml->setContextProperty("TrialManager", new TrialManager());
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
