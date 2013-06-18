@@ -14,27 +14,37 @@
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="54"/>
+        <location filename="../assets/BlurPage.qml" line="58"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="64"/>
+        <location filename="../assets/BlurPage.qml" line="66"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BlurPage.qml" line="67"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BlurPage.qml" line="87"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="251"/>
+        <location filename="../assets/BlurPage.qml" line="274"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="255"/>
+        <location filename="../assets/BlurPage.qml" line="278"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="259"/>
+        <location filename="../assets/BlurPage.qml" line="282"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -70,27 +80,37 @@
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="55"/>
+        <location filename="../assets/CartoonPage.qml" line="59"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="65"/>
+        <location filename="../assets/CartoonPage.qml" line="67"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CartoonPage.qml" line="68"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CartoonPage.qml" line="88"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="252"/>
+        <location filename="../assets/CartoonPage.qml" line="275"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="256"/>
+        <location filename="../assets/CartoonPage.qml" line="279"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="260"/>
+        <location filename="../assets/CartoonPage.qml" line="283"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -126,27 +146,37 @@
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="53"/>
+        <location filename="../assets/DecolorizePage.qml" line="57"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="63"/>
+        <location filename="../assets/DecolorizePage.qml" line="65"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/DecolorizePage.qml" line="66"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/DecolorizePage.qml" line="86"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="250"/>
+        <location filename="../assets/DecolorizePage.qml" line="273"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="254"/>
+        <location filename="../assets/DecolorizePage.qml" line="277"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="258"/>
+        <location filename="../assets/DecolorizePage.qml" line="281"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -182,27 +212,37 @@
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="53"/>
+        <location filename="../assets/RecolorPage.qml" line="57"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="63"/>
+        <location filename="../assets/RecolorPage.qml" line="65"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RecolorPage.qml" line="66"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RecolorPage.qml" line="86"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="265"/>
+        <location filename="../assets/RecolorPage.qml" line="288"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="269"/>
+        <location filename="../assets/RecolorPage.qml" line="292"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="273"/>
+        <location filename="../assets/RecolorPage.qml" line="296"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -220,27 +260,37 @@
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="53"/>
+        <location filename="../assets/RetouchPage.qml" line="57"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="63"/>
+        <location filename="../assets/RetouchPage.qml" line="65"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="66"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="86"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="343"/>
+        <location filename="../assets/RetouchPage.qml" line="366"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="347"/>
+        <location filename="../assets/RetouchPage.qml" line="370"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="351"/>
+        <location filename="../assets/RetouchPage.qml" line="374"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -258,27 +308,37 @@
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="54"/>
+        <location filename="../assets/SketchPage.qml" line="58"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="64"/>
+        <location filename="../assets/SketchPage.qml" line="66"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="67"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="87"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="251"/>
+        <location filename="../assets/SketchPage.qml" line="274"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="255"/>
+        <location filename="../assets/SketchPage.qml" line="278"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="259"/>
+        <location filename="../assets/SketchPage.qml" line="282"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>

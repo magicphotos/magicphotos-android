@@ -41,7 +41,11 @@ Page {
             enabled:             false
 
             onTriggered: {
-                saveFilePicker.open();
+                if (TrialManager.trialMode) {
+                    trialModeDialog.show();
+                } else {
+                    saveFilePicker.open();
+                }
             }
             
             attachedObjects: [
@@ -55,6 +59,25 @@ Page {
                     onFileSelected: {
                         decolorizeEditor.saveImage(selectedFiles[0]);
                     } 
+                },
+                SystemDialog {
+                    id:    trialModeDialog
+                    title: qsTr("Info")
+                    body:  qsTr("The save function is available in the full version only. Do you want to purchase full version now?")
+                    
+                    onFinished: {
+                        if (result === SystemUiResult.ConfirmButtonSelection) {
+                            appWorldInvocation.trigger("bb.action.OPEN");
+                        }
+                    }
+                },
+                Invocation {
+                    id: appWorldInvocation
+
+                    query: InvokeQuery {
+                        mimeType: "application/x-bb-appworld"
+                        uri:      "appworld://content/20356189"
+                    }
                 }
             ]
         },
