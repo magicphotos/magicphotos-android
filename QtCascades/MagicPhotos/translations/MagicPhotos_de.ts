@@ -21,12 +21,12 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="66"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="67"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="87"/>
@@ -87,12 +87,12 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="67"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="68"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="88"/>
@@ -153,12 +153,12 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="65"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="66"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="86"/>
@@ -219,12 +219,12 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="65"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="66"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="86"/>
@@ -267,12 +267,12 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="65"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="66"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="86"/>
@@ -315,12 +315,12 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="66"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="67"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="87"/>
