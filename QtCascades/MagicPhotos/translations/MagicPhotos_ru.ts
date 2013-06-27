@@ -259,7 +259,7 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="41"/>
         <source>Review App</source>
-        <translation>Обзор</translation>
+        <translation>Отзыв</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="83"/>
