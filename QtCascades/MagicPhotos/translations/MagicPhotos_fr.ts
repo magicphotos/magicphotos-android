@@ -257,7 +257,12 @@
         <translation>Impossible d’envoyer une invitation pour le chargement de l’application</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="51"/>
+        <location filename="../assets/HelpPage.qml" line="41"/>
+        <source>Review App</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HelpPage.qml" line="83"/>
         <source>doc/help.html</source>
         <translation>doc/help_fr.html</translation>
     </message>

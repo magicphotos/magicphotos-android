@@ -36,6 +36,38 @@ Page {
                     body: qsTr("Could not send download invitation")
                 }
             ]
+        },
+        ActionItem {
+            title:               qsTr("Review App")
+            imageSource:         "images/review.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+
+            onTriggered: {
+                if (TrialManager.trialMode) {
+                    appWorldTrialInvocation.trigger("bb.action.OPEN");
+                } else {
+                    appWorldFullInvocation.trigger("bb.action.OPEN");
+                }
+            }
+
+            attachedObjects: [
+                Invocation {
+                    id: appWorldTrialInvocation
+
+                    query: InvokeQuery {
+                        mimeType: "application/x-bb-appworld"
+                        uri:      "appworld://content/30425892"
+                    }
+                },
+                Invocation {
+                    id: appWorldFullInvocation
+
+                    query: InvokeQuery {
+                        mimeType: "application/x-bb-appworld"
+                        uri:      "appworld://content/20356189"
+                    }
+                }
+            ]
         }
     ]
 

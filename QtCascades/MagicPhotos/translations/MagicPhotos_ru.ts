@@ -257,7 +257,12 @@
         <translation>Невозможно отослать приглашение на загрузку приложения</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="51"/>
+        <location filename="../assets/HelpPage.qml" line="41"/>
+        <source>Review App</source>
+        <translation>Обзор</translation>
+    </message>
+    <message>
+        <location filename="../assets/HelpPage.qml" line="83"/>
         <source>doc/help.html</source>
         <translation>doc/help_ru.html</translation>
     </message>

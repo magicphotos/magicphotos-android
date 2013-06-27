@@ -257,7 +257,12 @@
         <translation>Es ist unmöglich, die Aufforderung zum Applikationsdownload abzusenden</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="51"/>
+        <location filename="../assets/HelpPage.qml" line="41"/>
+        <source>Review App</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HelpPage.qml" line="83"/>
         <source>doc/help.html</source>
         <translation>doc/help_de.html</translation>
     </message>
