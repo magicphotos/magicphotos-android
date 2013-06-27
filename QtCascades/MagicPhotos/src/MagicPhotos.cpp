@@ -11,7 +11,9 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 
+#include "appsettings.h"
 #include "trialmanager.h"
+#include "customtimer.h"
 #include "downloadinviter.h"
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
@@ -34,6 +36,8 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
     qmlRegisterUncreatableType<bb::cascades::pickers::FileType>("FilePicker", 1, 0, "FileType", "");
     qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>("FilePicker", 1, 0, "FilePickerViewMode", "");
 
+    qmlRegisterType<CustomTimer>("CustomTimer", 1, 0, "CustomTimer");
+
     qmlRegisterType<DownloadInviter>("DownloadInviter", 1, 0, "DownloadInviter");
 
     qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
@@ -53,6 +57,7 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
+    qml->setContextProperty("AppSettings", new AppSettings());
     qml->setContextProperty("TrialManager", new TrialManager());
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();

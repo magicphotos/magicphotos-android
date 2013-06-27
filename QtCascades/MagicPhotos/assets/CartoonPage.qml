@@ -1,6 +1,7 @@
 import bb.cascades 1.0
 import bb.system 1.0
 import FilePicker 1.0
+import CustomTimer 1.0
 import ImageEditor 1.0
 
 Page {
@@ -70,6 +71,36 @@ Page {
                     onFinished: {
                         if (result === SystemUiResult.ConfirmButtonSelection) {
                             appWorldInvocation.trigger("bb.action.OPEN");
+                        }
+                    }
+                },
+                SystemDialog {
+                    id:                  requestFeedbackDialog
+                    title:               qsTr("Info")
+                    body:                qsTr("If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?")
+                    confirmButton.label: qsTr("Yes")
+                    cancelButton.label:  qsTr("Later")
+                    customButton.label:  qsTr("Never")
+
+                    onFinished: {
+                        if (result === SystemUiResult.ConfirmButtonSelection) {
+                            appWorldInvocation.trigger("bb.action.OPEN");
+
+                            AppSettings.requestFeedback = false;
+                        } else if (result === SystemUiResult.CancelButtonSelection) {
+                            AppSettings.lastRequestLaunchNumber = AppSettings.launchNumber;
+                        } else if (result === SystemUiResult.CustomButtonSelection) {
+                            AppSettings.requestFeedback = false;
+                        }
+                    }
+                },
+                CustomTimer {
+                    id:       requestFeedbackTimer
+                    interval: 1000
+
+                    onTimeout: {
+                        if (AppSettings.requestFeedback && AppSettings.launchNumber > 1 && AppSettings.lastRequestLaunchNumber !== AppSettings.launchNumber) {
+                            requestFeedbackDialog.show();
                         }
                     }
                 },
@@ -248,6 +279,8 @@ Page {
                             
                             onImageSaved: {
                                 imageSavedToast.show();
+
+                                requestFeedbackTimer.start();
                             }
                             
                             onImageSaveFailed: {

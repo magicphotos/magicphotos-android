@@ -7,6 +7,8 @@ NavigationPane {
 
     onCreationCompleted: {
         OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
+
+        AppSettings.launchNumber = AppSettings.launchNumber + 1;
     }
 
     onPopTransitionEnded: {

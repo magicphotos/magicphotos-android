@@ -13,8 +13,10 @@ device {
                 -lbb
 
         SOURCES +=  $$quote($$BASEDIR/src/MagicPhotos.cpp) \
+                 $$quote($$BASEDIR/src/appsettings.cpp) \
                  $$quote($$BASEDIR/src/blureditor.cpp) \
                  $$quote($$BASEDIR/src/cartooneditor.cpp) \
+                 $$quote($$BASEDIR/src/customtimer.cpp) \
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
@@ -24,8 +26,10 @@ device {
                  $$quote($$BASEDIR/src/trialmanager.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/MagicPhotos.hpp) \
+                 $$quote($$BASEDIR/src/appsettings.h) \
                  $$quote($$BASEDIR/src/blureditor.h) \
                  $$quote($$BASEDIR/src/cartooneditor.h) \
+                 $$quote($$BASEDIR/src/customtimer.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
@@ -45,8 +49,10 @@ device {
                 -lbb
 
         SOURCES +=  $$quote($$BASEDIR/src/MagicPhotos.cpp) \
+                 $$quote($$BASEDIR/src/appsettings.cpp) \
                  $$quote($$BASEDIR/src/blureditor.cpp) \
                  $$quote($$BASEDIR/src/cartooneditor.cpp) \
+                 $$quote($$BASEDIR/src/customtimer.cpp) \
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
@@ -56,8 +62,10 @@ device {
                  $$quote($$BASEDIR/src/trialmanager.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/MagicPhotos.hpp) \
+                 $$quote($$BASEDIR/src/appsettings.h) \
                  $$quote($$BASEDIR/src/blureditor.h) \
                  $$quote($$BASEDIR/src/cartooneditor.h) \
+                 $$quote($$BASEDIR/src/customtimer.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
@@ -79,8 +87,10 @@ simulator {
                 -lbb
 
         SOURCES +=  $$quote($$BASEDIR/src/MagicPhotos.cpp) \
+                 $$quote($$BASEDIR/src/appsettings.cpp) \
                  $$quote($$BASEDIR/src/blureditor.cpp) \
                  $$quote($$BASEDIR/src/cartooneditor.cpp) \
+                 $$quote($$BASEDIR/src/customtimer.cpp) \
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
@@ -90,8 +100,10 @@ simulator {
                  $$quote($$BASEDIR/src/trialmanager.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/MagicPhotos.hpp) \
+                 $$quote($$BASEDIR/src/appsettings.h) \
                  $$quote($$BASEDIR/src/blureditor.h) \
                  $$quote($$BASEDIR/src/cartooneditor.h) \
+                 $$quote($$BASEDIR/src/customtimer.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
