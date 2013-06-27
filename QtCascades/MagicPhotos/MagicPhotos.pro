@@ -2,7 +2,7 @@ APP_NAME = MagicPhotos
 
 CONFIG += qt warn_on cascades10
 
-LIBS += -lbbcascadespickers -lbbplatformbbm -lbb -lbbsystem
+LIBS += -lbbcascadespickers -lbbplatformbbm -lbb -lbbsystem -lexif
 
 TRANSLATIONS = $${TARGET}_ru.ts \
                $${TARGET}_de.ts \

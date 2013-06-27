@@ -2,8 +2,13 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtGui/QColor>
+#include <QtGui/QTransform>
 #include <QtGui/QImageReader>
 #include <QtGui/QPainter>
+
+#include <libexif/exif-loader.h>
+#include <libexif/exif-data.h>
+#include <libexif/exif-entry.h>
 
 #include "recoloreditor.h"
 
@@ -64,6 +69,32 @@ bool RecolorEditor::changed() const
 
 void RecolorEditor::openImage(const QString &image_file)
 {
+    int         img_orientation = 0;
+    ExifLoader *exif_loader     = exif_loader_new();
+
+    if (exif_loader != NULL) {
+        ExifData *exif_data;
+
+        exif_loader_write_file(exif_loader, image_file.toUtf8().data());
+
+        exif_data = exif_loader_get_data(exif_loader);
+
+        if (exif_data != NULL) {
+            ExifByteOrder exif_bo    = exif_data_get_byte_order(exif_data);
+            ExifEntry    *exif_entry = exif_content_get_entry(exif_data->ifd[EXIF_IFD_0], EXIF_TAG_ORIENTATION);
+
+            if (exif_entry != NULL) {
+                img_orientation = exif_get_short(exif_entry->data, exif_bo);
+
+                exif_entry_unref(exif_entry);
+            }
+
+            exif_data_unref(exif_data);
+        }
+
+        exif_loader_unref(exif_loader);
+    }
+
     QImageReader reader(image_file);
 
     if (reader.canRead()) {
@@ -81,6 +112,26 @@ void RecolorEditor::openImage(const QString &image_file)
         LoadedImage = reader.read();
 
         if (!LoadedImage.isNull()) {
+            if (img_orientation == 3) {
+                QTransform transform;
+
+                transform.rotate(180);
+
+                LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
+            } else if (img_orientation == 6) {
+                QTransform transform;
+
+                transform.rotate(90);
+
+                LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+            } else if (img_orientation == 8) {
+                QTransform transform;
+
+                transform.rotate(270);
+
+                LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+            }
+
             LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
             if (!LoadedImage.isNull()) {
