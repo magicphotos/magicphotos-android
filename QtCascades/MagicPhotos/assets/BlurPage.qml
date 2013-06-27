@@ -69,7 +69,7 @@ Page {
                     
                     onFinished: {
                         if (result === SystemUiResult.ConfirmButtonSelection) {
-                            appWorldInvocation.trigger("bb.action.OPEN");
+                            appWorldFullInvocation.trigger("bb.action.OPEN");
                         }
                     }
                 },
@@ -83,7 +83,7 @@ Page {
 
                     onFinished: {
                         if (result === SystemUiResult.ConfirmButtonSelection) {
-                            appWorldInvocation.trigger("bb.action.OPEN");
+                            appWorldFullInvocation.trigger("bb.action.OPEN");
 
                             AppSettings.requestFeedback = false;
                         } else if (result === SystemUiResult.CancelButtonSelection) {
@@ -104,7 +104,7 @@ Page {
                     }
                 },
                 Invocation {
-                    id: appWorldInvocation
+                    id: appWorldFullInvocation
 
                     query: InvokeQuery {
                         mimeType: "application/x-bb-appworld"
