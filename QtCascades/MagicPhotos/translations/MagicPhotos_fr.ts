@@ -32,22 +32,22 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="79"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="80"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="81"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus tard</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="82"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="118"/>
@@ -119,22 +119,22 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="80"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="81"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="82"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus tard</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="83"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="119"/>
@@ -206,22 +206,22 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="78"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="80"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus tard</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="81"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="117"/>
@@ -259,7 +259,7 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="41"/>
         <source>Review App</source>
-        <translation type="unfinished"></translation>
+        <translation>Avis</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="83"/>
@@ -298,22 +298,22 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="78"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="80"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus tard</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="81"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="117"/>
@@ -367,22 +367,22 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="78"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="80"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus tard</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="81"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="117"/>
@@ -436,22 +436,22 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="79"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="80"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="81"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus tard</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="82"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="118"/>
