@@ -16,6 +16,20 @@ bool CustomTimer::active() const
     return Timer.isActive();
 }
 
+bool CustomTimer::singleShot() const
+{
+    return Timer.isSingleShot();
+}
+
+void CustomTimer::setSingleShot(const bool &single_shot)
+{
+    if (Timer.isSingleShot() != single_shot) {
+        Timer.setSingleShot(single_shot);
+
+        emit singleShotChanged();
+    }
+}
+
 int CustomTimer::interval() const
 {
     return Timer.interval();

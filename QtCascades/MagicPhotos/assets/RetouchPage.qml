@@ -75,18 +75,19 @@ Page {
 
                             AppSettings.requestFeedback = false;
                         } else if (result === SystemUiResult.CancelButtonSelection) {
-                            AppSettings.lastRequestLaunchNumber = AppSettings.launchNumber;
+                            AppSettings.lastFeedbackRequestLaunchNumber = AppSettings.launchNumber;
                         } else if (result === SystemUiResult.CustomButtonSelection) {
                             AppSettings.requestFeedback = false;
                         }
                     }
                 },
                 CustomTimer {
-                    id:       requestFeedbackTimer
-                    interval: 1000
+                    id:         requestFeedbackTimer
+                    singleShot: true
+                    interval:   1000
 
                     onTimeout: {
-                        if (AppSettings.requestFeedback && AppSettings.launchNumber > 1 && AppSettings.lastRequestLaunchNumber !== AppSettings.launchNumber) {
+                        if (AppSettings.requestFeedback && AppSettings.launchNumber > 1 && AppSettings.lastFeedbackRequestLaunchNumber !== AppSettings.launchNumber) {
                             requestFeedbackDialog.show();
                         }
                     }

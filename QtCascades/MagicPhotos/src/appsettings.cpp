@@ -24,18 +24,18 @@ void AppSettings::setLaunchNumber(const int &number)
     Settings->setValue("LaunchNumber", number);
 }
 
-int AppSettings::lastRequestLaunchNumber() const
+int AppSettings::lastFeedbackRequestLaunchNumber() const
 {
-    if (Settings->contains("LastRequestLaunchNumber")) {
-        return Settings->value("LastRequestLaunchNumber").toInt();
+    if (Settings->contains("LastFeedbackRequestLaunchNumber")) {
+        return Settings->value("LastFeedbackRequestLaunchNumber").toInt();
     } else {
         return 0;
     }
 }
 
-void AppSettings::setLastRequestLaunchNumber(const int &number)
+void AppSettings::setLastFeedbackRequestLaunchNumber(const int &number)
 {
-    Settings->setValue("LastRequestLaunchNumber", number);
+    Settings->setValue("LastFeedbackRequestLaunchNumber", number);
 }
 
 bool AppSettings::requestFeedback() const
@@ -50,4 +50,18 @@ bool AppSettings::requestFeedback() const
 void AppSettings::setRequestFeedback(const bool &request)
 {
     Settings->setValue("RequestFeedback", request);
+}
+
+bool AppSettings::showModeChangeSuggestion() const
+{
+    if (Settings->contains("ShowModeChangeSuggestion")) {
+        return Settings->value("ShowModeChangeSuggestion").toBool();
+    } else {
+        return true;
+    }
+}
+
+void AppSettings::setShowModeChangeSuggestion(const bool &show)
+{
+    Settings->setValue("ShowModeChangeSuggestion", show);
 }

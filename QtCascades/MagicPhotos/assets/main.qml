@@ -1,5 +1,7 @@
 import bb.cascades 1.0
+import bb.system 1.0
 import FilePicker 1.0
+import CustomTimer 1.0
 
 NavigationPane {
     id:          navigationPane
@@ -17,6 +19,10 @@ NavigationPane {
 
     Page {
         id: modeSelectionPage
+        
+        onCreationCompleted: {
+            modeChangeSuggestionTimer.start();
+        }
         
         actions: [
             ActionItem {
@@ -210,6 +216,32 @@ NavigationPane {
                     }
                 ]
             }
+            
+            attachedObjects: [
+                SystemToast {
+                    id:   modeChangeSuggestionToast
+                    body: qsTr("Slide your finger over the mode selection screen to switch between modes")
+                    
+                    onFinished: {
+                        modeSelectionListView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
+                    }
+                },
+                CustomTimer {
+                    id:         modeChangeSuggestionTimer
+                    singleShot: true
+                    interval:   1000
+                    
+                    onTimeout: {
+                        if (AppSettings.showModeChangeSuggestion) {
+                            modeChangeSuggestionToast.show();
+
+                            modeSelectionListView.scrollToPosition(ScrollPosition.End, ScrollAnimation.Smooth);
+
+                            AppSettings.showModeChangeSuggestion = false;
+                        }
+                    }
+                }
+            ]
         }
     }
 }

@@ -4,7 +4,7 @@
 <context>
     <name>BlurPage</name>
     <message>
-        <location filename="../assets/BlurPage.qml" line="107"/>
+        <location filename="../assets/BlurPage.qml" line="108"/>
         <source>Undo</source>
         <translation>Annullieren</translation>
     </message>
@@ -50,22 +50,22 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="118"/>
+        <location filename="../assets/BlurPage.qml" line="119"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="307"/>
+        <location filename="../assets/BlurPage.qml" line="308"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="311"/>
+        <location filename="../assets/BlurPage.qml" line="312"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="315"/>
+        <location filename="../assets/BlurPage.qml" line="316"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
@@ -91,7 +91,7 @@
 <context>
     <name>CartoonPage</name>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="108"/>
+        <location filename="../assets/CartoonPage.qml" line="109"/>
         <source>Undo</source>
         <translation>Annullieren</translation>
     </message>
@@ -137,22 +137,22 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="119"/>
+        <location filename="../assets/CartoonPage.qml" line="120"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="308"/>
+        <location filename="../assets/CartoonPage.qml" line="309"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="312"/>
+        <location filename="../assets/CartoonPage.qml" line="313"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="316"/>
+        <location filename="../assets/CartoonPage.qml" line="317"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
@@ -178,7 +178,7 @@
 <context>
     <name>DecolorizePage</name>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="106"/>
+        <location filename="../assets/DecolorizePage.qml" line="107"/>
         <source>Undo</source>
         <translation>Annullieren</translation>
     </message>
@@ -224,22 +224,22 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="117"/>
+        <location filename="../assets/DecolorizePage.qml" line="118"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="306"/>
+        <location filename="../assets/DecolorizePage.qml" line="307"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="310"/>
+        <location filename="../assets/DecolorizePage.qml" line="311"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="314"/>
+        <location filename="../assets/DecolorizePage.qml" line="315"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
@@ -270,7 +270,7 @@
 <context>
     <name>RecolorPage</name>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="106"/>
+        <location filename="../assets/RecolorPage.qml" line="107"/>
         <source>Undo</source>
         <translation>Annullieren</translation>
     </message>
@@ -316,22 +316,22 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="117"/>
+        <location filename="../assets/RecolorPage.qml" line="118"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="321"/>
+        <location filename="../assets/RecolorPage.qml" line="322"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="325"/>
+        <location filename="../assets/RecolorPage.qml" line="326"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="329"/>
+        <location filename="../assets/RecolorPage.qml" line="330"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
@@ -339,7 +339,7 @@
 <context>
     <name>RetouchPage</name>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="106"/>
+        <location filename="../assets/RetouchPage.qml" line="107"/>
         <source>Undo</source>
         <translation>Annullieren</translation>
     </message>
@@ -385,22 +385,22 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="117"/>
+        <location filename="../assets/RetouchPage.qml" line="118"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="399"/>
+        <location filename="../assets/RetouchPage.qml" line="400"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="403"/>
+        <location filename="../assets/RetouchPage.qml" line="404"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="407"/>
+        <location filename="../assets/RetouchPage.qml" line="408"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
@@ -408,7 +408,7 @@
 <context>
     <name>SketchPage</name>
     <message>
-        <location filename="../assets/SketchPage.qml" line="107"/>
+        <location filename="../assets/SketchPage.qml" line="108"/>
         <source>Undo</source>
         <translation>Annullieren</translation>
     </message>
@@ -454,22 +454,22 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="118"/>
+        <location filename="../assets/SketchPage.qml" line="119"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="307"/>
+        <location filename="../assets/SketchPage.qml" line="308"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="311"/>
+        <location filename="../assets/SketchPage.qml" line="312"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="315"/>
+        <location filename="../assets/SketchPage.qml" line="316"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
@@ -495,45 +495,50 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="23"/>
+        <location filename="../assets/main.qml" line="29"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="130"/>
+        <location filename="../assets/main.qml" line="136"/>
         <source>Decolorize</source>
         <translation>Entfärben</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="132"/>
+        <location filename="../assets/main.qml" line="138"/>
         <source>Sketch</source>
         <translation>Zur Skizze</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="134"/>
+        <location filename="../assets/main.qml" line="140"/>
         <source>Cartoon</source>
         <translation>In den Comic</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="136"/>
+        <location filename="../assets/main.qml" line="142"/>
         <source>Blur</source>
         <translation>Weichzeichnen</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="138"/>
+        <location filename="../assets/main.qml" line="144"/>
         <source>Recolor</source>
         <translation>Umfärben</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="140"/>
+        <location filename="../assets/main.qml" line="146"/>
         <source>Retouch</source>
         <translation>Retuschieren</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="174"/>
-        <location filename="../assets/main.qml" line="189"/>
+        <location filename="../assets/main.qml" line="180"/>
+        <location filename="../assets/main.qml" line="195"/>
         <source>Open Image</source>
         <translation>Öffnen ein Foto</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="223"/>
+        <source>Slide your finger over the mode selection screen to switch between modes</source>
+        <translation>Mit dem Finger können Sie die Liste für die Umstellung von Modi durchblättern</translation>
     </message>
 </context>
 </TS>
