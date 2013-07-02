@@ -4,48 +4,48 @@
 <context>
     <name>BlurPage</name>
     <message>
-        <location filename="../assets/BlurPage.qml" line="29"/>
+        <location filename="../assets/BlurPage.qml" line="107"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="40"/>
+        <location filename="../assets/BlurPage.qml" line="29"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="59"/>
+        <location filename="../assets/BlurPage.qml" line="48"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/BlurPage.qml" line="56"/>
         <location filename="../assets/BlurPage.qml" line="67"/>
-        <location filename="../assets/BlurPage.qml" line="78"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="68"/>
+        <location filename="../assets/BlurPage.qml" line="57"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="79"/>
+        <location filename="../assets/BlurPage.qml" line="68"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="80"/>
+        <location filename="../assets/BlurPage.qml" line="69"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="81"/>
+        <location filename="../assets/BlurPage.qml" line="70"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="82"/>
+        <location filename="../assets/BlurPage.qml" line="71"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
@@ -91,48 +91,48 @@
 <context>
     <name>CartoonPage</name>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="30"/>
+        <location filename="../assets/CartoonPage.qml" line="108"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="41"/>
+        <location filename="../assets/CartoonPage.qml" line="30"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="60"/>
+        <location filename="../assets/CartoonPage.qml" line="49"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/CartoonPage.qml" line="57"/>
         <location filename="../assets/CartoonPage.qml" line="68"/>
-        <location filename="../assets/CartoonPage.qml" line="79"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="69"/>
+        <location filename="../assets/CartoonPage.qml" line="58"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="80"/>
+        <location filename="../assets/CartoonPage.qml" line="69"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="81"/>
+        <location filename="../assets/CartoonPage.qml" line="70"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="82"/>
+        <location filename="../assets/CartoonPage.qml" line="71"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="83"/>
+        <location filename="../assets/CartoonPage.qml" line="72"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,48 +178,48 @@
 <context>
     <name>DecolorizePage</name>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="28"/>
+        <location filename="../assets/DecolorizePage.qml" line="106"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="39"/>
+        <location filename="../assets/DecolorizePage.qml" line="28"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="58"/>
+        <location filename="../assets/DecolorizePage.qml" line="47"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/DecolorizePage.qml" line="55"/>
         <location filename="../assets/DecolorizePage.qml" line="66"/>
-        <location filename="../assets/DecolorizePage.qml" line="77"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="67"/>
+        <location filename="../assets/DecolorizePage.qml" line="56"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="78"/>
+        <location filename="../assets/DecolorizePage.qml" line="67"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="79"/>
+        <location filename="../assets/DecolorizePage.qml" line="68"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="80"/>
+        <location filename="../assets/DecolorizePage.qml" line="69"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="81"/>
+        <location filename="../assets/DecolorizePage.qml" line="70"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,48 +270,48 @@
 <context>
     <name>RecolorPage</name>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="28"/>
+        <location filename="../assets/RecolorPage.qml" line="106"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="39"/>
+        <location filename="../assets/RecolorPage.qml" line="28"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="58"/>
+        <location filename="../assets/RecolorPage.qml" line="47"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/RecolorPage.qml" line="55"/>
         <location filename="../assets/RecolorPage.qml" line="66"/>
-        <location filename="../assets/RecolorPage.qml" line="77"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="67"/>
+        <location filename="../assets/RecolorPage.qml" line="56"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="78"/>
+        <location filename="../assets/RecolorPage.qml" line="67"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="79"/>
+        <location filename="../assets/RecolorPage.qml" line="68"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="80"/>
+        <location filename="../assets/RecolorPage.qml" line="69"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="81"/>
+        <location filename="../assets/RecolorPage.qml" line="70"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
@@ -339,48 +339,48 @@
 <context>
     <name>RetouchPage</name>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="28"/>
+        <location filename="../assets/RetouchPage.qml" line="106"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="39"/>
+        <location filename="../assets/RetouchPage.qml" line="28"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="58"/>
+        <location filename="../assets/RetouchPage.qml" line="47"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/RetouchPage.qml" line="55"/>
         <location filename="../assets/RetouchPage.qml" line="66"/>
-        <location filename="../assets/RetouchPage.qml" line="77"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="67"/>
+        <location filename="../assets/RetouchPage.qml" line="56"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="78"/>
+        <location filename="../assets/RetouchPage.qml" line="67"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="79"/>
+        <location filename="../assets/RetouchPage.qml" line="68"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="80"/>
+        <location filename="../assets/RetouchPage.qml" line="69"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="81"/>
+        <location filename="../assets/RetouchPage.qml" line="70"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
@@ -408,48 +408,48 @@
 <context>
     <name>SketchPage</name>
     <message>
-        <location filename="../assets/SketchPage.qml" line="29"/>
+        <location filename="../assets/SketchPage.qml" line="107"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="40"/>
+        <location filename="../assets/SketchPage.qml" line="29"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="59"/>
+        <location filename="../assets/SketchPage.qml" line="48"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/SketchPage.qml" line="56"/>
         <location filename="../assets/SketchPage.qml" line="67"/>
-        <location filename="../assets/SketchPage.qml" line="78"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="68"/>
+        <location filename="../assets/SketchPage.qml" line="57"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="79"/>
+        <location filename="../assets/SketchPage.qml" line="68"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="80"/>
+        <location filename="../assets/SketchPage.qml" line="69"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="81"/>
+        <location filename="../assets/SketchPage.qml" line="70"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="82"/>
+        <location filename="../assets/SketchPage.qml" line="71"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>

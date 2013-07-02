@@ -25,17 +25,6 @@ Page {
 
     actions: [
         ActionItem {
-            id:                  undoActionItem
-            title:               qsTr("Undo")
-            imageSource:         "images/undo.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
-            enabled:             false
-
-            onTriggered: {
-                sketchEditor.undo();
-            }
-        },
-        ActionItem {
             id:                  saveActionItem
             title:               qsTr("Save")
             imageSource:         "images/save.png"
@@ -112,6 +101,17 @@ Page {
                     }
                 }
             ]
+        },
+        ActionItem {
+            id:                  undoActionItem
+            title:               qsTr("Undo")
+            imageSource:         "images/undo.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            enabled:             false
+
+            onTriggered: {
+                sketchEditor.undo();
+            }
         },
         ActionItem {
             id:                  helpActionItem
