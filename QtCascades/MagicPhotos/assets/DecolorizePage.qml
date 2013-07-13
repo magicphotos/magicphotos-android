@@ -220,7 +220,7 @@ Page {
                     scrollMode:         ScrollMode.Both
                     pinchToZoomEnabled: true
                     minContentScale:    1.0
-                    maxContentScale:    4.0
+                    maxContentScale:    8.0
                 }            
                 
                 ImageView {

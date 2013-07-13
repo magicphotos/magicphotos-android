@@ -15,6 +15,7 @@ RetouchEditor::RetouchEditor() : bb::cascades::CustomControl()
 {
     IsChanged            = false;
     IsSamplingPointValid = false;
+    IsLastBlurPointValid = false;
     CurrentMode          = ModeScroll;
 }
 
@@ -42,6 +43,16 @@ void RetouchEditor::setSamplingPointValid(const bool &valid)
     IsSamplingPointValid = valid;
 }
 
+bool RetouchEditor::lastBlurPointValid() const
+{
+    return IsLastBlurPointValid;
+}
+
+void RetouchEditor::setLastBlurPointValid(const bool &valid)
+{
+    IsLastBlurPointValid = valid;
+}
+
 int RetouchEditor::samplingPointX() const
 {
     return SamplingPoint.x();
@@ -60,6 +71,26 @@ int RetouchEditor::samplingPointY() const
 void RetouchEditor::setSamplingPointY(const int &y)
 {
     SamplingPoint.setY(y);
+}
+
+int RetouchEditor::lastBlurPointX() const
+{
+    return LastBlurPoint.x();
+}
+
+void RetouchEditor::setLastBlurPointX(const int &x)
+{
+    LastBlurPoint.setX(x);
+}
+
+int RetouchEditor::lastBlurPointY() const
+{
+    return LastBlurPoint.y();
+}
+
+void RetouchEditor::setLastBlurPointY(const int &y)
+{
+    LastBlurPoint.setY(y);
 }
 
 bool RetouchEditor::changed() const
@@ -210,6 +241,32 @@ void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, do
                 }
             }
         } else if (CurrentMode == ModeBlur) {
+            QRect  last_blur_rect(LastBlurPoint.x() - radius, LastBlurPoint.y() - radius, radius * 2, radius * 2);
+            QImage last_blur_image;
+
+            if (IsLastBlurPointValid) {
+                if (last_blur_rect.x() >= CurrentImage.width()) {
+                    last_blur_rect.setX(CurrentImage.width() - 1);
+                }
+                if (last_blur_rect.y() >= CurrentImage.height()) {
+                    last_blur_rect.setY(CurrentImage.height() - 1);
+                }
+                if (last_blur_rect.x() < 0) {
+                    last_blur_rect.setX(0);
+                }
+                if (last_blur_rect.y() < 0) {
+                    last_blur_rect.setY(0);
+                }
+                if (last_blur_rect.x() + last_blur_rect.width() > CurrentImage.width()) {
+                    last_blur_rect.setWidth(CurrentImage.width() - last_blur_rect.x());
+                }
+                if (last_blur_rect.y() + last_blur_rect.height() > CurrentImage.height()) {
+                    last_blur_rect.setHeight(CurrentImage.height() - last_blur_rect.y());
+                }
+
+                last_blur_image = CurrentImage.copy(last_blur_rect);
+            }
+
             QRect blur_rect(center_x - radius, center_y - radius, radius * 2, radius * 2);
 
             if (blur_rect.x() >= CurrentImage.width()) {
@@ -315,6 +372,12 @@ void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, do
             painter.setClipRegion(QRegion(blur_rect, QRegion::Ellipse));
 
             painter.drawImage(blur_rect, blur_image);
+
+            if (IsLastBlurPointValid) {
+                painter.setClipRegion(QRegion(last_blur_rect, QRegion::Ellipse));
+
+                painter.drawImage(last_blur_rect, last_blur_image);
+            }
         }
 
         IsChanged = true;

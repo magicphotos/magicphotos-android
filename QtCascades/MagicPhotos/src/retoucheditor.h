@@ -18,8 +18,11 @@ class RetouchEditor : public bb::cascades::CustomControl
 
     Q_PROPERTY(int  mode               READ mode               WRITE setMode)
     Q_PROPERTY(bool samplingPointValid READ samplingPointValid WRITE setSamplingPointValid)
+    Q_PROPERTY(bool lastBlurPointValid READ lastBlurPointValid WRITE setLastBlurPointValid)
     Q_PROPERTY(int  samplingPointX     READ samplingPointX     WRITE setSamplingPointX)
     Q_PROPERTY(int  samplingPointY     READ samplingPointY     WRITE setSamplingPointY)
+    Q_PROPERTY(int  lastBlurPointX     READ lastBlurPointX     WRITE setLastBlurPointX)
+    Q_PROPERTY(int  lastBlurPointY     READ lastBlurPointY     WRITE setLastBlurPointY)
     Q_PROPERTY(bool changed            READ changed)
     Q_PROPERTY(int  imageWidth         READ imageWidth)
     Q_PROPERTY(int  imageHeight        READ imageHeight)
@@ -36,11 +39,20 @@ public:
     bool samplingPointValid() const;
     void setSamplingPointValid(const bool &valid);
 
+    bool lastBlurPointValid() const;
+    void setLastBlurPointValid(const bool &valid);
+
     int  samplingPointX() const;
     void setSamplingPointX(const int &x);
 
     int  samplingPointY() const;
     void setSamplingPointY(const int &y);
+
+    int  lastBlurPointX() const;
+    void setLastBlurPointX(const int &x);
+
+    int  lastBlurPointY() const;
+    void setLastBlurPointY(const int &y);
 
     bool changed() const;
     int  imageWidth() const;
@@ -86,9 +98,9 @@ private:
 
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
-    bool           IsChanged, IsSamplingPointValid;
+    bool           IsChanged, IsSamplingPointValid, IsLastBlurPointValid;
     int            CurrentMode;
-    QPoint         SamplingPoint;
+    QPoint         SamplingPoint, LastBlurPoint;
     QImage         LoadedImage, CurrentImage;
     QStack<QImage> UndoStack;
     bb::ImageData  CurrentImageData;

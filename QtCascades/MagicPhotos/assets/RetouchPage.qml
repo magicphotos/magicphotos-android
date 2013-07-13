@@ -240,7 +240,7 @@ Page {
                     scrollMode:         ScrollMode.Both
                     pinchToZoomEnabled: true
                     minContentScale:    1.0
-                    maxContentScale:    4.0
+                    maxContentScale:    8.0
                 }            
                 
                 Container {
@@ -311,12 +311,20 @@ Page {
                                     imageContainer.showHelper(event.localX, event.localY);
                                     
                                     retouchEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                                    
+                                    retouchEditor.lastBlurPointValid = true;
+                                    retouchEditor.lastBlurPointX     = event.localX;
+                                    retouchEditor.lastBlurPointY     = event.localY;
                                 } else if (event.touchType === TouchType.Move) {
                                     imageContainer.showHelper(event.localX, event.localY);
 
                                     retouchEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+
+                                    retouchEditor.lastBlurPointX = event.localX;
+                                    retouchEditor.lastBlurPointY = event.localY;
                                 } else {
-                                    helperImageView.visible = false;
+                                    helperImageView.visible          = false;
+                                    retouchEditor.lastBlurPointValid = false;
                                 }
                             }
                         }

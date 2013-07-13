@@ -390,17 +390,17 @@
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="400"/>
+        <location filename="../assets/RetouchPage.qml" line="408"/>
         <source>Could not open image</source>
         <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="404"/>
+        <location filename="../assets/RetouchPage.qml" line="412"/>
         <source>Image saved successfully</source>
         <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="408"/>
+        <location filename="../assets/RetouchPage.qml" line="416"/>
         <source>Could not save image</source>
         <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
