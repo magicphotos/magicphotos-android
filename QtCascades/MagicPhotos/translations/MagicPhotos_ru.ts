@@ -609,7 +609,7 @@
     <message>
         <location filename="../assets/main.qml" line="152"/>
         <source>Pixelate</source>
-        <translation>Пикселизация</translation>
+        <translation>Пикселизировать</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="154"/>
