@@ -263,7 +263,7 @@
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="83"/>
-        <source>doc/help.html</source>
+        <source>local:///assets/doc/help.html</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

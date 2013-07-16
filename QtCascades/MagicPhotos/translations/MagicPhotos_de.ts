@@ -263,8 +263,8 @@
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="83"/>
-        <source>doc/help.html</source>
-        <translation>doc/help_de.html</translation>
+        <source>local:///assets/doc/help.html</source>
+        <translation>local:///assets/doc/help_de.html</translation>
     </message>
 </context>
 <context>

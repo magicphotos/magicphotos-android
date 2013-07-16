@@ -80,7 +80,7 @@ Page {
         }            
 
         WebView {
-            url: qsTr("doc/help.html")
+            url: qsTr("local:///assets/doc/help.html")
         }
     }
 }
