@@ -272,68 +272,68 @@
     <message>
         <location filename="../assets/PixelatePage.qml" line="29"/>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="48"/>
         <source>Save Image</source>
-        <translation type="unfinished">Speichern ein Foto</translation>
+        <translation>Speichern ein Foto</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="56"/>
         <location filename="../assets/PixelatePage.qml" line="67"/>
         <source>Info</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="57"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished">Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
+        <translation>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="68"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation type="unfinished">Falls die Applikation Ihnen gefallen hat, erübrigen Sie ein bisschen Zeit, um eine Bewertung zu schreiben. Möchten Sie eine Bewertung schreiben?</translation>
+        <translation>Falls die Applikation Ihnen gefallen hat, erübrigen Sie ein bisschen Zeit, um eine Bewertung zu schreiben. Möchten Sie eine Bewertung schreiben?</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="69"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="70"/>
         <source>Later</source>
-        <translation type="unfinished">Später</translation>
+        <translation>Später</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="71"/>
         <source>Never</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="108"/>
         <source>Undo</source>
-        <translation type="unfinished">Annullieren</translation>
+        <translation>Annullieren</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="119"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="308"/>
         <source>Could not open image</source>
-        <translation type="unfinished">Das Bild kann nicht geöffnet werden</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="312"/>
         <source>Image saved successfully</source>
-        <translation type="unfinished">Das Bild wurde erfolgreich gespeichert</translation>
+        <translation>Das Bild wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="316"/>
         <source>Could not save image</source>
-        <translation type="unfinished">Das Bild kann nicht gespeichert werden</translation>
+        <translation>Das Bild kann nicht gespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -341,17 +341,17 @@
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="27"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="111"/>
         <source>Could not open image</source>
-        <translation type="unfinished">Das Bild kann nicht geöffnet werden</translation>
+        <translation>Das Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="147"/>
         <source>Apply</source>
-        <translation type="unfinished">Anwenden</translation>
+        <translation>Anwenden</translation>
     </message>
 </context>
 <context>
@@ -609,7 +609,7 @@
     <message>
         <location filename="../assets/main.qml" line="152"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpixelung</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="154"/>
