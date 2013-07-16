@@ -91,6 +91,14 @@ NavigationPane {
                         navigationPane.push(page);
 
                         page.openImage(image_file);
+                    } else if (mode === "PIXELATE") {
+                        editPageDefinition.source = "PixelatePreviewPage.qml";
+
+                        var page = editPageDefinition.createObject();
+
+                        navigationPane.push(page);
+
+                        page.openImage(image_file);
                     } else if (mode === "RECOLOR") {
                         editPageDefinition.source = "RecolorPage.qml";
 
@@ -140,6 +148,8 @@ NavigationPane {
                                     modeLabel.text = qsTr("Cartoon");
                                 } else if (itemMode === "BLUR") {
                                     modeLabel.text = qsTr("Blur");
+                                } else if (itemMode === "PIXELATE") {
+                                    modeLabel.text = qsTr("Pixelate");
                                 } else if (itemMode === "RECOLOR") {
                                     modeLabel.text = qsTr("Recolor");
                                 } else if (itemMode === "RETOUCH") {

@@ -20,6 +20,7 @@ device {
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
+                 $$quote($$BASEDIR/src/pixelateeditor.cpp) \
                  $$quote($$BASEDIR/src/recoloreditor.cpp) \
                  $$quote($$BASEDIR/src/retoucheditor.cpp) \
                  $$quote($$BASEDIR/src/sketcheditor.cpp) \
@@ -32,6 +33,7 @@ device {
                  $$quote($$BASEDIR/src/customtimer.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
+                 $$quote($$BASEDIR/src/pixelateeditor.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
                  $$quote($$BASEDIR/src/retoucheditor.h) \
                  $$quote($$BASEDIR/src/sketcheditor.h) \
@@ -56,6 +58,7 @@ device {
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
+                 $$quote($$BASEDIR/src/pixelateeditor.cpp) \
                  $$quote($$BASEDIR/src/recoloreditor.cpp) \
                  $$quote($$BASEDIR/src/retoucheditor.cpp) \
                  $$quote($$BASEDIR/src/sketcheditor.cpp) \
@@ -68,6 +71,7 @@ device {
                  $$quote($$BASEDIR/src/customtimer.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
+                 $$quote($$BASEDIR/src/pixelateeditor.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
                  $$quote($$BASEDIR/src/retoucheditor.h) \
                  $$quote($$BASEDIR/src/sketcheditor.h) \
@@ -94,6 +98,7 @@ simulator {
                  $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
                  $$quote($$BASEDIR/src/downloadinviter.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
+                 $$quote($$BASEDIR/src/pixelateeditor.cpp) \
                  $$quote($$BASEDIR/src/recoloreditor.cpp) \
                  $$quote($$BASEDIR/src/retoucheditor.cpp) \
                  $$quote($$BASEDIR/src/sketcheditor.cpp) \
@@ -106,6 +111,7 @@ simulator {
                  $$quote($$BASEDIR/src/customtimer.h) \
                  $$quote($$BASEDIR/src/decolorizeeditor.h) \
                  $$quote($$BASEDIR/src/downloadinviter.h) \
+                 $$quote($$BASEDIR/src/pixelateeditor.h) \
                  $$quote($$BASEDIR/src/recoloreditor.h) \
                  $$quote($$BASEDIR/src/retoucheditor.h) \
                  $$quote($$BASEDIR/src/sketcheditor.h) \

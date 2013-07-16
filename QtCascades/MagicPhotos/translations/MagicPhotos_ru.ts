@@ -268,6 +268,93 @@
     </message>
 </context>
 <context>
+    <name>PixelatePage</name>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="29"/>
+        <source>Save</source>
+        <translation type="unfinished">Сохранить</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="48"/>
+        <source>Save Image</source>
+        <translation type="unfinished">Сохранить Фото</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="56"/>
+        <location filename="../assets/PixelatePage.qml" line="67"/>
+        <source>Info</source>
+        <translation type="unfinished">Информация</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="57"/>
+        <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
+        <translation type="unfinished">Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="68"/>
+        <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
+        <translation type="unfinished">Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="69"/>
+        <source>Yes</source>
+        <translation type="unfinished">Да</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="70"/>
+        <source>Later</source>
+        <translation type="unfinished">Позже</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="71"/>
+        <source>Never</source>
+        <translation type="unfinished">Никогда</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="108"/>
+        <source>Undo</source>
+        <translation type="unfinished">Отменить</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="119"/>
+        <source>Help</source>
+        <translation type="unfinished">Справка</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="308"/>
+        <source>Could not open image</source>
+        <translation type="unfinished">Невозможно открыть изображение</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="312"/>
+        <source>Image saved successfully</source>
+        <translation type="unfinished">Изображение успешно сохранено</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="316"/>
+        <source>Could not save image</source>
+        <translation type="unfinished">Невозможно сохранить изображение</translation>
+    </message>
+</context>
+<context>
+    <name>PixelatePreviewPage</name>
+    <message>
+        <location filename="../assets/PixelatePreviewPage.qml" line="27"/>
+        <source>Help</source>
+        <translation type="unfinished">Справка</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePreviewPage.qml" line="111"/>
+        <source>Could not open image</source>
+        <translation type="unfinished">Невозможно открыть изображение</translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePreviewPage.qml" line="147"/>
+        <source>Apply</source>
+        <translation type="unfinished">Применить</translation>
+    </message>
+</context>
+<context>
     <name>RecolorPage</name>
     <message>
         <location filename="../assets/RecolorPage.qml" line="107"/>
@@ -500,43 +587,48 @@
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="136"/>
+        <location filename="../assets/main.qml" line="144"/>
         <source>Decolorize</source>
         <translation>Обесцветить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="138"/>
+        <location filename="../assets/main.qml" line="146"/>
         <source>Sketch</source>
         <translation>В эскиз</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="140"/>
+        <location filename="../assets/main.qml" line="148"/>
         <source>Cartoon</source>
         <translation>В комикс</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="142"/>
+        <location filename="../assets/main.qml" line="150"/>
         <source>Blur</source>
         <translation>Размыть</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="144"/>
+        <location filename="../assets/main.qml" line="152"/>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="154"/>
         <source>Recolor</source>
         <translation>Перекрасить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="146"/>
+        <location filename="../assets/main.qml" line="156"/>
         <source>Retouch</source>
         <translation>Ретушировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="180"/>
-        <location filename="../assets/main.qml" line="195"/>
+        <location filename="../assets/main.qml" line="190"/>
+        <location filename="../assets/main.qml" line="205"/>
         <source>Open Image</source>
         <translation>Открыть Фото</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="223"/>
+        <location filename="../assets/main.qml" line="233"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation>Пролистните список пальцем для переключения между режимами</translation>
     </message>
