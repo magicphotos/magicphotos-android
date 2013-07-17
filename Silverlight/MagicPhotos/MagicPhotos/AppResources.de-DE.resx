@@ -205,19 +205,15 @@
     <value>In den Comic</value>
   </data>
   <data name="MainPagePivotItemPixelateHeader" xml:space="preserve">
-    <value>Pixelate</value>
-    <comment>!!!</comment>
+    <value>Verpixelung</value>
   </data>
   <data name="PixelatePreviewPageButtonApplyContent" xml:space="preserve">
-    <value>Apply</value>
-    <comment>!!!</comment>
+    <value>Anwenden</value>
   </data>
   <data name="PixelatePreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>PIXELATE PARAMETERS</value>
-    <comment>!!!</comment>
+    <value>VERPIXELUNG PARAMETER</value>
   </data>
   <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
-    <value>Pixel size:</value>
-    <comment>!!!</comment>
+    <value>Pixelgröße:</value>
   </data>
 </root>
