@@ -307,8 +307,6 @@ namespace MagicPhotos
 
         private void ChangeBitmap(Point touch_point)
         {
-            int radius = (int)(BRUSH_RADIUS / this.currentScale);
-
             if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED)
             {
                 int width  = this.brushBitmap.PixelWidth;

@@ -204,4 +204,20 @@
   <data name="CartoonPreviewPageTextBlockThresholdSliderCommentText" xml:space="preserve">
     <value>Sharpness:</value>
   </data>
+  <data name="MainPagePivotItemPixelateHeader" xml:space="preserve">
+    <value>Pixelate</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="PixelatePreviewPageButtonApplyContent" xml:space="preserve">
+    <value>Apply</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="PixelatePreviewPageTextBlockPageCommentText" xml:space="preserve">
+    <value>PIXELATE PARAMETERS</value>
+    <comment>!!!</comment>
+  </data>
+  <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
+    <value>Pixel size:</value>
+    <comment>!!!</comment>
+  </data>
 </root>

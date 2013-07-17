@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.IO;
@@ -23,13 +24,12 @@ using Microsoft.Xna.Framework.Media;
 
 namespace MagicPhotos
 {
-    public partial class RecolorPage : PhoneApplicationPage
+    public partial class PixelatePage : PhoneApplicationPage
     {
         private const int MODE_NONE     = 0,
                           MODE_SCROLL   = 1,
                           MODE_ORIGINAL = 2,
-                          MODE_EFFECTED = 3,
-                          MODE_COLOR    = 4;
+                          MODE_EFFECTED = 3;
 
         private const int MAX_IMAGE_WIDTH  = 2800,
                           MAX_IMAGE_HEIGHT = 2800;
@@ -41,39 +41,48 @@ namespace MagicPhotos
 
         private const double REDUCTION_MPIX_LIMIT = 1.0;
 
+        class PixelateGenTaskData
+        {
+            public int   pix_denom;
+            public int   width, height;
+            public int[] pixels;
+        }
+
         private bool                  loadImageOnLayoutUpdate,
-                                      loadImageCancelled,
                                       pageNavigationComplete,
                                       needImageReduction,
                                       editedImageChanged;
         private int                   selectedMode,
-                                      selectedHue;
+                                      pixDenom;
         private double                currentScale,
                                       initialScale;
         private List<int[]>           undoStack;
-        private WriteableBitmap       editedBitmap,
+        private WriteableBitmap       loadedBitmap,
+                                      editedBitmap,
                                       originalBitmap,
+                                      effectedBitmap,
                                       helperBitmap,
                                       brushTemplateBitmap,
                                       brushBitmap;
-        private PhotoChooserTask      photoChooserTask;
+        private BackgroundWorker      pixelateGeneratorWorker;
         private MarketplaceDetailTask marketplaceDetailTask;
 
-        public RecolorPage()
+        public PixelatePage()
         {
             InitializeComponent();
 
             this.loadImageOnLayoutUpdate = true;
-            this.loadImageCancelled      = false;
             this.pageNavigationComplete  = false;
             this.editedImageChanged      = false;
             this.selectedMode            = MODE_NONE;
-            this.selectedHue             = 0;
+            this.pixDenom                = 0;
             this.currentScale            = 1.0;
             this.initialScale            = 1.0;
             this.undoStack               = new List<int[]>();
+            this.loadedBitmap            = null;
             this.editedBitmap            = null;
             this.originalBitmap          = null;
+            this.effectedBitmap          = null;
             this.helperBitmap            = null;
             this.brushBitmap             = null;
 
@@ -112,9 +121,9 @@ namespace MagicPhotos
                 }
             }
 
-            this.photoChooserTask            = new PhotoChooserTask();
-            this.photoChooserTask.ShowCamera = true;
-            this.photoChooserTask.Completed += new EventHandler<PhotoResult>(photoChooserTask_Completed);
+            this.pixelateGeneratorWorker                     = new BackgroundWorker();
+            this.pixelateGeneratorWorker.DoWork             += new DoWorkEventHandler(pixelateGeneratorWorker_DoWork);
+            this.pixelateGeneratorWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(pixelateGeneratorWorker_RunWorkerCompleted);
 
             this.marketplaceDetailTask                   = new MarketplaceDetailTask();
 #if DEBUG_TRIAL
@@ -154,39 +163,19 @@ namespace MagicPhotos
 
             this.pageNavigationComplete = true;
 
-            if (this.loadImageCancelled)
+            IDictionary<string, string> query_strings = this.NavigationContext.QueryString;
+
+            if (query_strings.ContainsKey("pix_denom"))
             {
-                if (NavigationService.CanGoBack)
+                try
                 {
-                    NavigationService.GoBack();
+                    this.pixDenom = Convert.ToInt32(query_strings["pix_denom"]);
                 }
-
-                this.loadImageCancelled = false;
+                catch (Exception)
+                {
+                    // Ignore
+                }
             }
-        }
-
-        private double Normalize(double d)
-        {
-            if (d < 0) d += 1;
-            if (d > 1) d -= 1;
-            return d;
-        }
-
-        private double GetComponent(double tc, double p, double q)
-        {
-            if (tc < (1.0 / 6.0))
-            {
-                return p + ((q - p) * 6 * tc);
-            }
-            if (tc < .5)
-            {
-                return q;
-            }
-            if (tc < (2.0 / 3.0))
-            {
-                return p + ((q - p) * 6 * ((2.0 / 3.0) - tc));
-            }
-            return p;
         }
 
         private void UpdateModeButtons()
@@ -227,15 +216,6 @@ namespace MagicPhotos
             else
             {
                 this.EffectedModeButton.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(img_dir + "/mode_effected.png", UriKind.Relative)) };
-            }
-
-            if (this.selectedMode == MODE_COLOR)
-            {
-                this.ColorModeButton.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(img_dir + "/mode_color_selected.png", UriKind.Relative)) };
-            }
-            else
-            {
-                this.ColorModeButton.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(img_dir + "/mode_color.png", UriKind.Relative)) };
             }
         }
 
@@ -280,18 +260,6 @@ namespace MagicPhotos
             }
         }
 
-        private void UpdateColorBorder()
-        {
-            if (this.selectedMode == MODE_COLOR)
-            {
-                this.ColorBorder.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                this.ColorBorder.Visibility = System.Windows.Visibility.Collapsed;
-            }
-        }
-
         private void LoadImage(WriteableBitmap bitmap)
         {
             if (this.needImageReduction && bitmap.PixelWidth * bitmap.PixelHeight > REDUCTION_MPIX_LIMIT * 1000000.0)
@@ -303,40 +271,18 @@ namespace MagicPhotos
 
             if (bitmap.PixelWidth != 0 && bitmap.PixelHeight != 0)
             {
-                this.editedImageChanged = true;
-                this.selectedMode       = MODE_SCROLL;
+                this.loadedBitmap = bitmap;
 
-                this.undoStack.Clear();
+                PixelateGenTaskData task_data = new PixelateGenTaskData();
 
-                this.originalBitmap = bitmap.Clone();
-                this.editedBitmap   = bitmap.Clone();
+                task_data.pix_denom = this.pixDenom;
+                task_data.width     = bitmap.PixelWidth;
+                task_data.height    = bitmap.PixelHeight;
+                task_data.pixels    = bitmap.Pixels;
 
-                if (this.editedBitmap.PixelWidth > this.editedBitmap.PixelHeight)
-                {
-                    this.currentScale = this.EditorGrid.ActualWidth / this.editedBitmap.PixelWidth;
-                }
-                else
-                {
-                    this.currentScale = this.EditorGrid.ActualHeight / this.editedBitmap.PixelHeight;
-                }
+                this.pixelateGeneratorWorker.RunWorkerAsync(task_data);
 
-                this.EditorImage.Visibility = System.Windows.Visibility.Visible;
-                this.EditorImage.Source     = this.editedBitmap;
-
-                this.EditorImageGrid.Width  = MAX_IMAGE_WIDTH;
-                this.EditorImageGrid.Height = MAX_IMAGE_HEIGHT;
-
-                this.EditorImageTransform.TranslateX = 0.0;
-                this.EditorImageTransform.TranslateY = 0.0;
-                this.EditorImageTransform.ScaleX     = this.currentScale;
-                this.EditorImageTransform.ScaleY     = this.currentScale;
-
-                int brush_width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                int brush_height = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
-
-                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
-
-                UpdateModeButtons();
+                this.GenerationProgressIndicator.IsVisible = true;
             }
         }
 
@@ -362,7 +308,7 @@ namespace MagicPhotos
 
         private void ChangeBitmap(Point touch_point)
         {
-            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
+            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED)
             {
                 int width  = this.brushBitmap.PixelWidth;
                 int height = this.brushBitmap.PixelHeight;
@@ -378,58 +324,13 @@ namespace MagicPhotos
 
                 WriteableBitmap brush_bitmap = this.brushBitmap.Clone();
 
-                brush_bitmap.Blit(brh, this.originalBitmap, rect, WriteableBitmapExtensions.BlendMode.Multiply);
-
-                if (this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
+                if (this.selectedMode == MODE_ORIGINAL)
                 {
-                    brush_bitmap.ForEach((x, y, color) => {
-                        double r = (double)color.R / 255.0;
-                        double g = (double)color.G / 255.0;
-                        double b = (double)color.B / 255.0;
-
-                        double max = Math.Max(b, Math.Max(r, g));
-                        double min = Math.Min(b, Math.Min(r, g));
-
-                        double s = 0;
-                        double l = 0.5 * (max + min);
-
-                        if (max == min)
-                        {
-                            s = 0;
-                        }
-                        else if (l <= 0.5)
-                        {
-                            s = (max - min) / (2 * l);
-                        }
-                        else if (l > 0.5)
-                        {
-                            s = (max - min) / (2 - 2 * l);
-                        }
-
-                        double q = 0;
-
-                        if (l < 0.5)
-                        {
-                            q = l * (1 + s);
-                        }
-                        else
-                        {
-                            q = l + s - (l * s);
-                        }
-
-                        double p  = (2 * l) - q;
-                        double hk = (double)this.selectedHue / 360.0;
-
-                        r = GetComponent(Normalize(hk + (1.0 / 3.0)), p, q) * 255.0 + 0.5;
-                        g = GetComponent(Normalize(hk),               p, q) * 255.0 + 0.5;
-                        b = GetComponent(Normalize(hk - (1.0 / 3.0)), p, q) * 255.0 + 0.5;
-
-                        byte rgb_r = (byte)((r > 255 ? 255 : r) < 0 ? 0 : r);
-                        byte rgb_g = (byte)((g > 255 ? 255 : g) < 0 ? 0 : g);
-                        byte rgb_b = (byte)((b > 255 ? 255 : b) < 0 ? 0 : b);
-
-                        return Color.FromArgb(color.A, rgb_r, rgb_g, rgb_b);
-                    });
+                    brush_bitmap.Blit(brh, this.originalBitmap, rect, WriteableBitmapExtensions.BlendMode.Multiply);
+                }
+                else
+                {
+                    brush_bitmap.Blit(brh, this.effectedBitmap, rect, WriteableBitmapExtensions.BlendMode.Multiply);
                 }
 
                 this.editedBitmap.Blit(rect, brush_bitmap, brh, WriteableBitmapExtensions.BlendMode.Alpha);
@@ -438,7 +339,7 @@ namespace MagicPhotos
             }
         }
 
-        private void RecolorPage_LayoutUpdated(object sender, EventArgs e)
+        private void PixelatePage_LayoutUpdated(object sender, EventArgs e)
         {
             if (this.loadImageOnLayoutUpdate && this.pageNavigationComplete)
             {
@@ -459,10 +360,6 @@ namespace MagicPhotos
 
                             store.DeleteFile(file_name);
                         }
-                        else
-                        {
-                            this.photoChooserTask.Show();
-                        }
                     }
                 }
                 catch (Exception ex)
@@ -480,7 +377,7 @@ namespace MagicPhotos
             }
         }
 
-        private void RecolorPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        private void PixelatePage_OrientationChanged(object sender, OrientationChangedEventArgs e)
         {
             double x = this.EditorImageTransform.TranslateX;
             double y = this.EditorImageTransform.TranslateY;
@@ -507,7 +404,7 @@ namespace MagicPhotos
             this.EditorImageTransform.TranslateY = y;
         }
 
-        private void RecolorPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        private void PixelatePage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.editedImageChanged)
             {
@@ -546,7 +443,6 @@ namespace MagicPhotos
                 this.selectedMode = MODE_SCROLL;
 
                 UpdateModeButtons();
-                UpdateColorBorder();
             }
         }
 
@@ -557,7 +453,6 @@ namespace MagicPhotos
                 this.selectedMode = MODE_ORIGINAL;
 
                 UpdateModeButtons();
-                UpdateColorBorder();
             }
         }
 
@@ -568,18 +463,6 @@ namespace MagicPhotos
                 this.selectedMode = MODE_EFFECTED;
 
                 UpdateModeButtons();
-                UpdateColorBorder();
-            }
-        }
-
-        private void ColorModeButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.selectedMode != MODE_NONE)
-            {
-                this.selectedMode = MODE_COLOR;
-
-                UpdateModeButtons();
-                UpdateColorBorder();
             }
         }
 
@@ -649,19 +532,118 @@ namespace MagicPhotos
             NavigationService.Navigate(new Uri("/HelpPage.xaml", UriKind.Relative));
         }
 
-        private void photoChooserTask_Completed(object sender, PhotoResult e)
+        private void pixelateGeneratorWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e != null && e.TaskResult == TaskResult.OK && e.ChosenPhoto != null)
+            int   pix_denom = (e.Argument as PixelateGenTaskData).pix_denom;
+            int   width     = (e.Argument as PixelateGenTaskData).width;
+            int   height    = (e.Argument as PixelateGenTaskData).height;
+            int[] pixels    = (e.Argument as PixelateGenTaskData).pixels;
+
+            int[] pixelated_pixels = pixels.Clone() as int[];
+            int   pix_size         = width > height ? width / pix_denom : height / pix_denom;
+
+            if (pix_size != 0)
             {
-                WriteableBitmap bitmap = new WriteableBitmap(0, 0);
+                for (int i = 0; i < width / pix_size + 1; i++)
+                {
+                    for (int j = 0; j < height / pix_size + 1; j++)
+                    {
+                        int avg_r  = 0;
+                        int avg_g  = 0;
+                        int avg_b  = 0;
+                        int pixcnt = 0;
 
-                bitmap.SetSource(e.ChosenPhoto);
+                        for (int x = i * pix_size; x < (i + 1) * pix_size && x < width; x++)
+                        {
+                            for (int y = j * pix_size; y < (j + 1) * pix_size && y < height; y++)
+                            {
+                                byte[] color = BitConverter.GetBytes(pixelated_pixels[y * width + x]);
 
-                LoadImage(bitmap);
+                                avg_r += color[0];
+                                avg_g += color[1];
+                                avg_b += color[2];
+
+                                pixcnt++;
+                            }
+                        }
+
+                        if (pixcnt != 0)
+                        {
+                            avg_r = avg_r / pixcnt;
+                            avg_g = avg_g / pixcnt;
+                            avg_b = avg_b / pixcnt;
+
+                            for (int x = i * pix_size; x < (i + 1) * pix_size && x < width; x++)
+                            {
+                                for (int y = j * pix_size; y < (j + 1) * pix_size && y < height; y++)
+                                {
+                                    byte[] color = BitConverter.GetBytes(pixelated_pixels[y * width + x]);
+
+                                    pixelated_pixels[y * width + x] = (color[3] << 24) | (avg_b << 16) | (avg_g << 8) | avg_r;
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            else
+
+            PixelateGenTaskData task_data = new PixelateGenTaskData();
+
+            task_data.pix_denom = pix_denom;
+            task_data.width     = width;
+            task_data.height    = height;
+            task_data.pixels    = pixelated_pixels;
+
+            e.Result = task_data;
+        }
+
+        private void pixelateGeneratorWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.GenerationProgressIndicator.IsVisible = false;
+
+            if (!e.Cancelled && e.Error == null)
             {
-                this.loadImageCancelled = true;
+                WriteableBitmap bitmap = new WriteableBitmap((e.Result as PixelateGenTaskData).width, (e.Result as PixelateGenTaskData).height);
+
+                (e.Result as PixelateGenTaskData).pixels.CopyTo(bitmap.Pixels, 0);
+
+                this.editedImageChanged = true;
+                this.selectedMode       = MODE_SCROLL;
+
+                this.undoStack.Clear();
+
+                this.originalBitmap = this.loadedBitmap.Clone();
+                this.effectedBitmap = bitmap.Clone();
+                this.editedBitmap   = bitmap.Clone();
+
+                this.loadedBitmap = null;
+
+                if (this.editedBitmap.PixelWidth > this.editedBitmap.PixelHeight)
+                {
+                    this.currentScale = this.EditorGrid.ActualWidth / this.editedBitmap.PixelWidth;
+                }
+                else
+                {
+                    this.currentScale = this.EditorGrid.ActualHeight / this.editedBitmap.PixelHeight;
+                }
+
+                this.EditorImage.Visibility = System.Windows.Visibility.Visible;
+                this.EditorImage.Source     = this.editedBitmap;
+
+                this.EditorImageGrid.Width  = MAX_IMAGE_WIDTH;
+                this.EditorImageGrid.Height = MAX_IMAGE_HEIGHT;
+
+                this.EditorImageTransform.TranslateX = 0.0;
+                this.EditorImageTransform.TranslateY = 0.0;
+                this.EditorImageTransform.ScaleX     = this.currentScale;
+                this.EditorImageTransform.ScaleY     = this.currentScale;
+
+                int brush_width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
+                int brush_height = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+
+                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+
+                UpdateModeButtons();
             }
         }
 
@@ -680,31 +662,11 @@ namespace MagicPhotos
             MoveHelper(e.GetPosition(this.EditorGrid));
         }
 
-        private void ColorRectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            double top    = Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight - this.ColorSliderRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y));
-            double bottom = this.ColorRectangle.ActualHeight - this.ColorSliderRectangle.ActualHeight - top;
-
-            this.ColorSliderRectangle.Margin = new Thickness(0, top, 0, bottom);
-
-            this.selectedHue = (int)(Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y)) * (360 / this.ColorRectangle.ActualHeight));
-        }
-
-        private void ColorRectangle_MouseMove(object sender, MouseEventArgs e)
-        {
-            double top    = Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight - this.ColorSliderRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y));
-            double bottom = this.ColorRectangle.ActualHeight - this.ColorSliderRectangle.ActualHeight - top;
-
-            this.ColorSliderRectangle.Margin = new Thickness(0, top, 0, bottom);
-
-            this.selectedHue = (int)(Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y)) * (360 / this.ColorRectangle.ActualHeight));
-        }
-
         private void EditorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.EditorImage.CaptureMouse();
 
-            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
+            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED)
             {
                 this.editedImageChanged = true;
 
@@ -718,7 +680,7 @@ namespace MagicPhotos
 
         private void EditorImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
+            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED)
             {
                 ChangeBitmap(e.GetPosition(this.EditorImage));
 
@@ -730,7 +692,7 @@ namespace MagicPhotos
         {
             this.EditorImage.ReleaseMouseCapture();
 
-            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
+            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED)
             {
                 UpdateHelper(false, e.GetPosition(this.EditorImage));
             }
@@ -738,7 +700,7 @@ namespace MagicPhotos
 
         private void EditorImage_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED || this.selectedMode == MODE_COLOR)
+            if (this.selectedMode == MODE_ORIGINAL || this.selectedMode == MODE_EFFECTED)
             {
                 UpdateHelper(false, e.GetPosition(this.EditorImage));
             }

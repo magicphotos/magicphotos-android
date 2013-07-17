@@ -204,4 +204,16 @@
   <data name="MainPagePivotItemCartoonHeader" xml:space="preserve">
     <value>В комикс</value>
   </data>
+  <data name="MainPagePivotItemPixelateHeader" xml:space="preserve">
+    <value>Пикселизировать</value>
+  </data>
+  <data name="PixelatePreviewPageButtonApplyContent" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="PixelatePreviewPageTextBlockPageCommentText" xml:space="preserve">
+    <value>ПАРАМЕТРЫ ПИКСЕЛИЗАЦИИ</value>
+  </data>
+  <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
+    <value>Размер пикселя:</value>
+  </data>
 </root>

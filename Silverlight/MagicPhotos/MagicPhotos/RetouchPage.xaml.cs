@@ -356,8 +356,6 @@ namespace MagicPhotos
 
         private void ChangeBitmap()
         {
-            int radius = (int)(BRUSH_RADIUS / this.currentScale);
-
             if (this.selectedMode == MODE_CLONE)
             {
                 if (this.samplingPointValid)
@@ -391,8 +389,8 @@ namespace MagicPhotos
             }
             else if (this.selectedMode == MODE_BLUR)
             {
-                int width  = radius * 2 <= this.editedBitmap.PixelWidth  ? radius * 2 : this.editedBitmap.PixelWidth;
-                int height = radius * 2 <= this.editedBitmap.PixelHeight ? radius * 2 : this.editedBitmap.PixelHeight;
+                int width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 <= this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
+                int height = (int)(BRUSH_RADIUS / this.currentScale) * 2 <= this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
 
                 Rect blr = new Rect(0, 0, width, height);
 

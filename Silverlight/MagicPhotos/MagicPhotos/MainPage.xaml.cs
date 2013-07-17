@@ -173,6 +173,27 @@ namespace MagicPhotos
             }
         }
 
+        private void PixelateOpenImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.startupImageToken != "")
+            {
+                try
+                {
+                    createTemporaryImage(this.startupImageToken);
+
+                    NavigationService.Navigate(new Uri("/PixelatePreviewPage.xaml", UriKind.Relative));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                }
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("/PixelatePreviewPage.xaml", UriKind.Relative));
+            }
+        }
+
         private void RecolorOpenImageButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.startupImageToken != "")
