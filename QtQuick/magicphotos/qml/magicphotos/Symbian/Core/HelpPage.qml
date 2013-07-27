@@ -1,16 +1,10 @@
-import QtQuick 1.0
+import QtQuick 1.1
 import QtWebKit 1.0
-import com.nokia.symbian 1.0
+import com.nokia.symbian 1.1
 
 Page {
     id:           helpPage
     anchors.fill: parent
-
-    onStatusChanged: {
-        if (status === PageStatus.Active) {
-            helpWebView.url = "qrc:/resources/doc/help.html";
-        }
-    }
 
     Flickable {
         id:             helpWebViewFlickable
@@ -25,6 +19,7 @@ Page {
             id:              helpWebView
             preferredWidth:  helpWebViewFlickable.width
             preferredHeight: helpWebViewFlickable.height
+            url:             "../../doc/help.html"
         }
     }
 
@@ -35,12 +30,10 @@ Page {
 
         tools: ToolBarLayout {
             ToolButton {
-                id:         helpOkToolButton
-                iconSource: "qrc:/resources/images/ok.png"
-                flat:       true
+                iconSource: "../../images/back.png"
 
                 onClicked: {
-                    mainPageStack.replace(paintPage);
+                    mainPageStack.pop();
                 }
             }
         }

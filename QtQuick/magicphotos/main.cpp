@@ -1,7 +1,7 @@
 #include <QApplication>
 
 #include "qmlapplicationviewer.h"
-#include "paintitem.h"
+#include "decolorizeeditor.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 #endif
     QmlApplicationViewer viewer;
 
-    qmlRegisterType<PaintItem>("PaintItem", 1, 0, "PaintItem");
+    qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 
 #ifndef MEEGO_TARGET
     splash.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);

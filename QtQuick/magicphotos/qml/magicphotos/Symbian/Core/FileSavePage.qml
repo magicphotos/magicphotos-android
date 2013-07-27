@@ -1,38 +1,43 @@
-import QtQuick 1.0
+import QtQuick 1.1
 import QtMobility.gallery 1.1
-import com.nokia.symbian 1.0
+import com.nokia.symbian 1.1
 
 Page {
     id:           fileSavePage
     anchors.fill: parent
 
-    property int fileNameRectangleHeight: 48
-    property string fileUrlPath:          ""
+    property int     fileNameRectangleHeight: 48
+    property string  fileUrl:                 ""
+    property string  fileUrlPath:             ""
+    property variant caller:                  null
 
-    signal fileSelected(string fileUrl)
-    signal saveCancelled()
+    signal fileSelected(string file_url)
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
             imageGridView.visible = false;
             waitRectangle.visible = true;
         } else if (status === PageStatus.Active) {
+            fileSelected.connect(caller.fileSelected);
+
             imageGridView.currentIndex = -1;
 
             documentGalleryModel.reload();
         }
     }
 
-    function setFileUrl(file_url) {
-        var urlPathNameRegexp = /^(.+)\/([^/]+)$/;
-        var urlPathNameArr;
+    onFileUrlChanged: {
+        if (fileUrl !== "") {
+            var urlPathNameRegexp = /^(.+)\/([^/]+)$/;
+            var urlPathNameArr;
 
-        if ((urlPathNameArr = urlPathNameRegexp.exec(file_url)) !== null) {
-            fileUrlPath            = urlPathNameArr[1];
-            fileNameTextField.text = urlPathNameArr[2];
-        } else {
-            fileUrlPath            = "";
-            fileNameTextField.text = "";
+            if ((urlPathNameArr = urlPathNameRegexp.exec(fileUrl)) !== null) {
+                fileUrlPath            = urlPathNameArr[1];
+                fileNameTextField.text = urlPathNameArr[2];
+            } else {
+                fileUrlPath            = "";
+                fileNameTextField.text = "";
+            }
         }
     }
 
@@ -47,7 +52,6 @@ Page {
     }
 
     Rectangle {
-        id:             gridViewBackground
         anchors.top:    parent.top
         anchors.bottom: fileNameRectangle.top
         anchors.left:   parent.left
@@ -65,7 +69,7 @@ Page {
 
             onCurrentIndexChanged: {
                 if (currentIndex !== -1) {
-                    fileSavePage.setFileUrl(fileSavePage.normalizeFileUrl(documentGalleryModel.property(imageGridView.currentIndex, "url")));
+                    fileSavePage.fileUrl = fileSavePage.normalizeFileUrl(documentGalleryModel.property(imageGridView.currentIndex, "url"));
                 }
             }
 
@@ -96,7 +100,6 @@ Page {
                     border.width: 2
 
                     MouseArea {
-                        id:           galleryItemMouseArea
                         anchors.fill: parent
 
                         onClicked: {
@@ -104,7 +107,6 @@ Page {
                         }
 
                         Image {
-                            id:               galleryItemImage
                             anchors.centerIn: parent
                             width:            parent.width  - galleryItemRectangle.border.width
                             height:           parent.height - galleryItemRectangle.border.width
@@ -125,14 +127,11 @@ Page {
             color:        "transparent"
 
             MouseArea {
-                id:           waitRectangleMouseArea
                 anchors.fill: parent
 
                 Image {
-                    id:                       waitBusyIndicatorImage
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter:   parent.verticalCenter
-                    source:                   "qrc:/resources/images/busy_indicator.png"
+                    anchors.centerIn: parent
+                    source:           "../../images/busy_indicator.png"
 
                     NumberAnimation on rotation {
                         running: waitRectangle.visible
@@ -166,30 +165,21 @@ Page {
         z:              1
 
         tools: ToolBarLayout {
-            ButtonRow {
-                id:        bottomToolBarButtonRow
-                exclusive: false
+            ToolButton {
+                iconSource: "../../images/back.png"
 
-                ToolButton {
-                    id:         saveToolButton
-                    iconSource: "qrc:/resources/images/save.png"
-                    flat:       true
-                    enabled:    fileSavePage.fileUrlPath !== "" && fileNameTextField.text !== ""
-
-                    onClicked: {
-                        if (fileSavePage.fileUrlPath !== "" && fileNameTextField.text !== "") {
-                            fileSavePage.fileSelected(fileSavePage.fileUrlPath + "/" + fileNameTextField.text);
-                        }
-                    }
+                onClicked: {
+                    mainPageStack.pop();
                 }
+            }
 
-                ToolButton {
-                    id:         saveCancelToolButton
-                    iconSource: "qrc:/resources/images/cancel.png"
-                    flat:       true
+            ToolButton {
+                iconSource: "../../images/ok.png"
+                enabled:    fileSavePage.fileUrlPath !== "" && fileNameTextField.text !== ""
 
-                    onClicked: {
-                        fileSavePage.saveCancelled();
+                onClicked: {
+                    if (fileSavePage.fileUrlPath !== "" && fileNameTextField.text !== "") {
+                        fileSavePage.fileSelected(fileSavePage.fileUrlPath + "/" + fileNameTextField.text);
                     }
                 }
             }

@@ -1,19 +1,22 @@
-import QtQuick 1.0
+import QtQuick 1.1
 import QtMobility.gallery 1.1
-import com.nokia.symbian 1.0
+import com.nokia.symbian 1.1
 
 Page {
     id:           fileOpenPage
     anchors.fill: parent
 
-    signal fileSelected(string fileUrl)
-    signal openCancelled()
+    property variant caller: null
+
+    signal fileSelected(string file_url)
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
             imageGridView.visible = false;
             waitRectangle.visible = true;
         } else if (status === PageStatus.Active) {
+            fileSelected.connect(caller.fileSelected);
+
             imageGridView.currentIndex = -1;
 
             documentGalleryModel.reload();
@@ -31,7 +34,6 @@ Page {
     }
 
     Rectangle {
-        id:             gridViewBackground
         anchors.top:    parent.top
         anchors.bottom: bottomToolBar.top
         anchors.left:   parent.left
@@ -74,7 +76,6 @@ Page {
                     border.width: 2
 
                     MouseArea {
-                        id:           galleryItemMouseArea
                         anchors.fill: parent
 
                         onClicked: {
@@ -82,7 +83,6 @@ Page {
                         }
 
                         Image {
-                            id:               galleryItemImage
                             anchors.centerIn: parent
                             width:            parent.width  - galleryItemRectangle.border.width
                             height:           parent.height - galleryItemRectangle.border.width
@@ -103,14 +103,11 @@ Page {
             color:        "transparent"
 
             MouseArea {
-                id:           waitRectangleMouseArea
                 anchors.fill: parent
 
                 Image {
-                    id:                       waitBusyIndicatorImage
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter:   parent.verticalCenter
-                    source:                   "qrc:/resources/images/busy_indicator.png"
+                    anchors.centerIn: parent
+                    source:           "../../images/busy_indicator.png"
 
                     NumberAnimation on rotation {
                         running: waitRectangle.visible
@@ -129,30 +126,21 @@ Page {
         z:              1
 
         tools: ToolBarLayout {
-            ButtonRow {
-                id:        bottomToolBarButtonRow
-                exclusive: false
+            ToolButton {
+                iconSource: "../../images/back.png"
 
-                ToolButton {
-                    id:         openToolButton
-                    iconSource: "qrc:/resources/images/open.png"
-                    flat:       true
-                    enabled:    imageGridView.currentIndex !== -1
-
-                    onClicked: {
-                        if (imageGridView.currentIndex !== -1) {
-                            fileOpenPage.fileSelected(fileOpenPage.normalizeFileUrl(documentGalleryModel.property(imageGridView.currentIndex, "url")));
-                        }
-                    }
+                onClicked: {
+                    mainPageStack.pop();
                 }
+            }
 
-                ToolButton {
-                    id:         openCancelToolButton
-                    iconSource: "qrc:/resources/images/cancel.png"
-                    flat:       true
+            ToolButton {
+                iconSource: "../../images/ok.png"
+                enabled:    imageGridView.currentIndex !== -1
 
-                    onClicked: {
-                        fileOpenPage.openCancelled();
+                onClicked: {
+                    if (imageGridView.currentIndex !== -1) {
+                        fileOpenPage.fileSelected(fileOpenPage.normalizeFileUrl(documentGalleryModel.property(imageGridView.currentIndex, "url")));
                     }
                 }
             }
