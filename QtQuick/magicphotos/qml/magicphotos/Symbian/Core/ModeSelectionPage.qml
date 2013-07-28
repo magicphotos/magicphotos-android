@@ -78,7 +78,7 @@ Page {
                     mainPageStack.pop();
 
                     if (mode === "DECOLORIZE") {
-                        mainPageStack.push(Qt.resolvedUrl("DecolorizePage.qml"), {fileUrl: file_url});
+                        mainPageStack.push(Qt.resolvedUrl("DecolorizePage.qml"), {openFileUrl: file_url});
                     }
                 }
 

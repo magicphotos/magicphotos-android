@@ -2,28 +2,23 @@ import QtQuick 1.1
 import com.nokia.symbian 1.1
 import ImageEditor 1.0
 
+import "Util"
+
 Page {
     id:           decolorizePage
     anchors.fill: parent
 
-    property string fileUrl: ""
-
-    signal fileSelected(string file_url)
+    property string openFileUrl: ""
+    property string saveFileUrl: ""
 
     Component.onCompleted: {
         decolorizeEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
-    onFileUrlChanged: {
-        if (fileUrl !== "") {
-            decolorizeEditor.openImage(fileUrl);
+    onOpenFileUrlChanged: {
+        if (openFileUrl !== "") {
+            decolorizeEditor.openImage(openFileUrl);
         }
-    }
-
-    onFileSelected: {
-        mainPageStack.pop();
-
-        decolorizeEditor.saveImage(file_url);
     }
 
     Rectangle {
@@ -275,7 +270,11 @@ Page {
                 enabled:    false
 
                 onClicked: {
-                    mainPageStack.push(Qt.resolvedUrl("FileSavePage.qml"), {fileUrl: decolorizePage.fileUrl, caller: decolorizePage});
+                    if (saveFileUrl !== "") {
+                        saveDialog.show(saveFileUrl);
+                    } else {
+                        saveDialog.show(openFileUrl);
+                    }
                 }
             }
 
@@ -325,6 +324,16 @@ Page {
 
         onAccepted: {
             mainPageStack.pop();
+        }
+    }
+
+    SaveDialog {
+        id: saveDialog
+
+        onDone: {
+            decolorizePage.saveFileUrl = file_url_path + "/" + file_name;
+
+            decolorizeEditor.saveImage(decolorizePage.saveFileUrl);
         }
     }
 }
