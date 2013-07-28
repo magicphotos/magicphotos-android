@@ -116,7 +116,7 @@ Page {
                     var scale = 1.0 + pinch.scale - pinch.previousScale;
 
                     if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
-                        editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 2.0) {
+                        editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
                         editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
                     }
                 }
