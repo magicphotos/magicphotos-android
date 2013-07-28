@@ -5,19 +5,31 @@ import ImageEditor 1.0
 import "Util"
 
 Page {
-    id:           decolorizePage
+    id:           sketchPage
     anchors.fill: parent
 
-    property string openFileUrl: ""
-    property string saveFileUrl: ""
+    property int    gaussianRadius: -1
+
+    property string openFileUrl:    ""
+    property string saveFileUrl:    ""
 
     Component.onCompleted: {
-        decolorizeEditor.helperImageReady.connect(helper.helperImageReady);
+        sketchEditor.helperImageReady.connect(helper.helperImageReady);
+    }
+
+    onGaussianRadiusChanged: {
+        if (gaussianRadius !== -1 && openFileUrl !== "") {
+            sketchEditor.radius = gaussianRadius;
+
+            sketchEditor.openImage(openFileUrl);
+        }
     }
 
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
-            decolorizeEditor.openImage(openFileUrl);
+        if (gaussianRadius !== -1 && openFileUrl !== "") {
+            sketchEditor.radius = gaussianRadius;
+
+            sketchEditor.openImage(openFileUrl);
         }
     }
 
@@ -44,7 +56,7 @@ Page {
 
                 onCheckedChanged: {
                     if (checked) {
-                        decolorizeEditor.mode       = DecolorizeEditor.ModeScroll;
+                        sketchEditor.mode           = SketchEditor.ModeScroll;
                         editorFlickable.interactive = true;
                         editorPinchArea.enabled     = true;
                     }
@@ -58,7 +70,7 @@ Page {
 
                 onCheckedChanged: {
                     if (checked) {
-                        decolorizeEditor.mode       = DecolorizeEditor.ModeOriginal;
+                        sketchEditor.mode           = SketchEditor.ModeOriginal;
                         editorFlickable.interactive = false;
                         editorPinchArea.enabled     = false;
                     }
@@ -72,7 +84,7 @@ Page {
 
                 onCheckedChanged: {
                     if (checked) {
-                        decolorizeEditor.mode       = DecolorizeEditor.ModeEffected;
+                        sketchEditor.mode           = SketchEditor.ModeEffected;
                         editorFlickable.interactive = false;
                         editorPinchArea.enabled     = false;
                     }
@@ -99,8 +111,8 @@ Page {
 
             onContentWidthChanged: {
                 if (contentWidth > 0.0 && initialContentWidth > 0.0) {
-                    decolorizeEditor.width  = contentWidth;
-                    decolorizeEditor.height = contentHeight;
+                    sketchEditor.width  = contentWidth;
+                    sketchEditor.height = contentHeight;
                 }
             }
 
@@ -125,8 +137,8 @@ Page {
                     editorFlickable.returnToBounds();
                 }
 
-                DecolorizeEditor {
-                    id:         decolorizeEditor
+                SketchEditor {
+                    id:         sketchEditor
                     helperSize: helper.width
 
                     onImageOpened: {
@@ -171,7 +183,7 @@ Page {
                     onMouseEvent: {
                         var rect = mapToItem(editorRectangle, x, y);
 
-                        if (event_type === DecolorizeEditor.MousePressed) {
+                        if (event_type === SketchEditor.MousePressed) {
                             helperRectangle.visible = true;
 
                             if (rect.y < editorRectangle.height / 2) {
@@ -183,7 +195,7 @@ Page {
                                     helperRectangle.anchors.left  = editorRectangle.left;
                                 }
                             }
-                        } else if (event_type === DecolorizeEditor.MouseMoved) {
+                        } else if (event_type === SketchEditor.MouseMoved) {
                             helperRectangle.visible = true;
 
                             if (rect.y < editorRectangle.height / 2) {
@@ -195,7 +207,7 @@ Page {
                                     helperRectangle.anchors.left  = editorRectangle.left;
                                 }
                             }
-                        } else if (event_type === DecolorizeEditor.MouseReleased) {
+                        } else if (event_type === SketchEditor.MouseReleased) {
                             helperRectangle.visible = false;
                         }
                     }
@@ -249,7 +261,7 @@ Page {
                 iconSource: "../../images/back.png"
 
                 onClicked: {
-                    if (decolorizeEditor.changed) {
+                    if (sketchEditor.changed) {
                         backQueryDialog.open();
                     } else {
                         mainPageStack.pop();
@@ -277,7 +289,7 @@ Page {
                 enabled:    false
 
                 onClicked: {
-                    decolorizeEditor.undo();
+                    sketchEditor.undo();
                 }
             }
 
@@ -324,9 +336,9 @@ Page {
         id: saveDialog
 
         onDone: {
-            decolorizePage.saveFileUrl = file_url_path + "/" + file_name;
+            sketchPage.saveFileUrl = file_url_path + "/" + file_name;
 
-            decolorizeEditor.saveImage(decolorizePage.saveFileUrl);
+            sketchEditor.saveImage(sketchPage.saveFileUrl);
         }
     }
 }

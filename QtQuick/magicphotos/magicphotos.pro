@@ -8,10 +8,12 @@ MOBILITY += gallery
 
 SOURCES += main.cpp \
     helper.cpp \
-    decolorizeeditor.cpp
+    decolorizeeditor.cpp \
+    sketcheditor.cpp
 HEADERS += \
     helper.h \
-    decolorizeeditor.h
+    decolorizeeditor.h \
+    sketcheditor.h
 OTHER_FILES += \
     icon.png \
     icon.svg

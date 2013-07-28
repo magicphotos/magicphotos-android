@@ -4,20 +4,20 @@
 
 Helper::Helper(QDeclarativeItem *parent) : QDeclarativeItem(parent)
 {
-    setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, true);
-    setFlag(QGraphicsItem::ItemHasNoContents,           false);
+    setFlag(QGraphicsItem::ItemHasNoContents, false);
 }
 
 Helper::~Helper()
 {
 }
 
-void Helper::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget*)
+void Helper::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
     qreal scale = 1.0;
 
-    if (HelperImage.width() != 0) {
-        scale = width() / HelperImage.width();
+    if (HelperImage.width() != 0 && HelperImage.height() != 0) {
+        scale = width() / HelperImage.width() < height() / HelperImage.height() ?
+                width() / HelperImage.width() : height() / HelperImage.height();
     }
 
     bool antialiasing = painter->testRenderHint(QPainter::Antialiasing);
@@ -26,12 +26,15 @@ void Helper::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         painter->setRenderHint(QPainter::Antialiasing, true);
     }
 
-    QRectF source_rect(option->exposedRect.left()   / scale,
-                       option->exposedRect.top()    / scale,
-                       option->exposedRect.width()  / scale,
-                       option->exposedRect.height() / scale);
+    QRectF src_rect(0, 0,
+                    HelperImage.width(),
+                    HelperImage.height());
+    QRectF dst_rect((width()  - HelperImage.width()  * scale) / 2,
+                    (height() - HelperImage.height() * scale) / 2,
+                    HelperImage.width()  * scale,
+                    HelperImage.height() * scale);
 
-    painter->drawImage(option->exposedRect, HelperImage.copy(source_rect.toRect()));
+    painter->drawImage(dst_rect, HelperImage, src_rect);
 
     painter->setRenderHint(QPainter::Antialiasing, antialiasing);
 }

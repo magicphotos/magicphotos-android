@@ -2,6 +2,7 @@
 
 #include "helper.h"
 #include "decolorizeeditor.h"
+#include "sketcheditor.h"
 
 #include "qmlapplicationviewer.h"
 
@@ -16,6 +17,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
 
     qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
+
+    qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
+    qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
 
 #ifndef MEEGO_TARGET
     splash.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);

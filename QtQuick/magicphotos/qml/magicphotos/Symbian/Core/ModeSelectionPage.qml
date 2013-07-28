@@ -79,6 +79,8 @@ Page {
 
                     if (mode === "DECOLORIZE") {
                         mainPageStack.push(Qt.resolvedUrl("DecolorizePage.qml"), {openFileUrl: file_url});
+                    } else if (mode === "SKETCH") {
+                        mainPageStack.push(Qt.resolvedUrl("SketchPreviewPage.qml"), {openFileUrl: file_url});
                     }
                 }
 
@@ -117,9 +119,7 @@ Page {
                         text:             "Open Image"
 
                         onClicked: {
-                            if (mode === "DECOLORIZE") {
-                                mainPageStack.push(Qt.resolvedUrl("FileOpenPage.qml"), {caller: modeSelectionItemDelegate});
-                            }
+                            mainPageStack.push(Qt.resolvedUrl("FileOpenPage.qml"), {caller: modeSelectionItemDelegate});
                         }
                     }
                 }

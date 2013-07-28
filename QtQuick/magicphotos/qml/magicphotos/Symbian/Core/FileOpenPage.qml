@@ -109,13 +109,6 @@ Page {
                 Image {
                     anchors.centerIn: parent
                     source:           "../../images/busy_indicator.png"
-
-                    NumberAnimation on rotation {
-                        running: waitRectangle.visible
-                        from:    0
-                        to:      360
-                        loops:   Animation.Infinite
-                    }
                 }
             }
         }

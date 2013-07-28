@@ -1,6 +1,5 @@
 #include <qmath.h>
 #include <QFileInfo>
-#include <QDir>
 #include <QThread>
 #include <QImageReader>
 #include <QPainter>
@@ -86,7 +85,7 @@ void DecolorizeEditor::openImage(const QString &image_url)
 
                     generator->setInput(LoadedImage);
 
-                    thread->start();
+                    thread->start(QThread::LowPriority);
                 } else {
                     emit imageOpenFailed();
                 }
@@ -147,8 +146,9 @@ void DecolorizeEditor::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 {
     qreal scale = 1.0;
 
-    if (CurrentImage.width() != 0) {
-        scale = width() / CurrentImage.width();
+    if (CurrentImage.width() != 0 && CurrentImage.height() != 0) {
+        scale = width() / CurrentImage.width() < height() / CurrentImage.height() ?
+                width() / CurrentImage.width() : height() / CurrentImage.height();
     }
 
     bool antialiasing = painter->testRenderHint(QPainter::Antialiasing);
@@ -157,12 +157,12 @@ void DecolorizeEditor::paint(QPainter *painter, const QStyleOptionGraphicsItem *
         painter->setRenderHint(QPainter::Antialiasing, true);
     }
 
-    QRectF source_rect(option->exposedRect.left()   / scale,
-                       option->exposedRect.top()    / scale,
-                       option->exposedRect.width()  / scale,
-                       option->exposedRect.height() / scale);
+    QRectF src_rect(option->exposedRect.left()   / scale,
+                    option->exposedRect.top()    / scale,
+                    option->exposedRect.width()  / scale,
+                    option->exposedRect.height() / scale);
 
-    painter->drawImage(option->exposedRect, CurrentImage.copy(source_rect.toRect()));
+    painter->drawImage(option->exposedRect, CurrentImage.copy(src_rect.toRect()));
 
     painter->setRenderHint(QPainter::Antialiasing, antialiasing);
 }
@@ -235,8 +235,9 @@ void DecolorizeEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         qreal scale = 1.0;
 
-        if (CurrentImage.width() != 0) {
-            scale = width() / CurrentImage.width();
+        if (CurrentImage.width() != 0 && CurrentImage.height() != 0) {
+            scale = width() / CurrentImage.width() < height() / CurrentImage.height() ?
+                    width() / CurrentImage.width() : height() / CurrentImage.height();
         }
 
         int img_center_x = center_x   / scale;

@@ -2,7 +2,6 @@
 #define HELPER_H
 
 #include <QImage>
-#include <QStyleOptionGraphicsItem>
 #include <QDeclarativeItem>
 
 class Helper : public QDeclarativeItem
@@ -13,7 +12,7 @@ public:
     explicit Helper(QDeclarativeItem *parent = 0);
     virtual ~Helper();
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget*);
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 public slots:
     void helperImageReady(const QImage &helper_image);
