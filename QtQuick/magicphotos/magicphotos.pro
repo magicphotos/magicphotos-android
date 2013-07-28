@@ -7,8 +7,10 @@ CONFIG += qt-components mobility
 MOBILITY += gallery
 
 SOURCES += main.cpp \
+    helper.cpp \
     decolorizeeditor.cpp
 HEADERS += \
+    helper.h \
     decolorizeeditor.h
 OTHER_FILES += \
     icon.png \

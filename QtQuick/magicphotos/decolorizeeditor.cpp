@@ -11,6 +11,7 @@ DecolorizeEditor::DecolorizeEditor(QDeclarativeItem *parent) : QDeclarativeItem(
 {
     IsChanged   = false;
     CurrentMode = ModeScroll;
+    HelperSize  = 0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
@@ -30,6 +31,16 @@ int DecolorizeEditor::mode() const
 void DecolorizeEditor::setMode(const int &mode)
 {
     CurrentMode = mode;
+}
+
+int DecolorizeEditor::helperSize() const
+{
+    return HelperSize;
+}
+
+void DecolorizeEditor::setHelperSize(const int &size)
+{
+    HelperSize = size;
 }
 
 bool DecolorizeEditor::changed() const
@@ -134,8 +145,13 @@ void DecolorizeEditor::undo()
 
 void DecolorizeEditor::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget*)
 {
-    qreal scale        = width() / CurrentImage.width();
-    bool  antialiasing = painter->testRenderHint(QPainter::Antialiasing);
+    qreal scale = 1.0;
+
+    if (CurrentImage.width() != 0) {
+        scale = width() / CurrentImage.width();
+    }
+
+    bool antialiasing = painter->testRenderHint(QPainter::Antialiasing);
 
     if (smooth()) {
         painter->setRenderHint(QPainter::Antialiasing, true);
@@ -176,6 +192,8 @@ void DecolorizeEditor::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
         ChangeImageAt(true, event->pos().x(), event->pos().y());
+
+        emit mouseEvent(MousePressed, event->pos().x(), event->pos().y());
     }
 }
 
@@ -183,6 +201,15 @@ void DecolorizeEditor::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
         ChangeImageAt(false, event->pos().x(), event->pos().y());
+
+        emit mouseEvent(MouseMoved, event->pos().x(), event->pos().y());
+    }
+}
+
+void DecolorizeEditor::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+        emit mouseEvent(MouseReleased, event->pos().x(), event->pos().y());
     }
 }
 
@@ -206,10 +233,15 @@ void DecolorizeEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        qreal scale        = width() / CurrentImage.width();
-        int   img_center_x = center_x / scale;
-        int   img_center_y = center_y / scale;
-        int   radius       = BRUSH_SIZE / scale;
+        qreal scale = 1.0;
+
+        if (CurrentImage.width() != 0) {
+            scale = width() / CurrentImage.width();
+        }
+
+        int img_center_x = center_x   / scale;
+        int img_center_y = center_y   / scale;
+        int radius       = BRUSH_SIZE / scale;
 
         for (int x = img_center_x - radius; x <= img_center_x + radius; x++) {
             for (int y = img_center_y - radius; y <= img_center_y + radius; y++) {
@@ -226,6 +258,13 @@ void DecolorizeEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
         IsChanged = true;
 
         update(center_x - BRUSH_SIZE, center_y - BRUSH_SIZE, BRUSH_SIZE * 2, BRUSH_SIZE * 2);
+
+        QImage helper_image = CurrentImage.copy(img_center_x - (HelperSize / scale) / 2,
+                                                img_center_y - (HelperSize / scale) / 2,
+                                                HelperSize / scale,
+                                                HelperSize / scale).scaledToWidth(HelperSize);
+
+        emit helperImageReady(helper_image);
     }
 }
 

@@ -10,6 +10,10 @@ Page {
 
     signal fileSelected(string file_url)
 
+    Component.onCompleted: {
+        decolorizeEditor.helperImageReady.connect(helper.helperImageReady);
+    }
+
     onFileUrlChanged: {
         if (fileUrl !== "") {
             decolorizeEditor.openImage(fileUrl);
@@ -82,112 +86,166 @@ Page {
         }
     }
 
-    Flickable {
-        id:             editorFlickable
+    Rectangle {
+        id:             editorRectangle
         anchors.top:    topButtonGroupRectangle.bottom
         anchors.bottom: bottomToolBar.top
         anchors.left:   parent.left
         anchors.right:  parent.right
-        boundsBehavior: Flickable.StopAtBounds
+        color:          "transparent"
 
-        property real initialContentWidth:  0.0
-        property real initialContentHeight: 0.0
-
-        onContentWidthChanged: {
-            if (contentWidth > 0.0 && initialContentWidth > 0.0) {
-                decolorizeEditor.width  = contentWidth;
-                decolorizeEditor.height = contentHeight;
-            }
-        }
-
-        PinchArea {
-            id:             editorPinchArea
+        Flickable {
+            id:             editorFlickable
             anchors.fill:   parent
-            pinch.dragAxis: Pinch.NoDrag
+            boundsBehavior: Flickable.StopAtBounds
 
-            onPinchUpdated: {
-                editorFlickable.contentX += pinch.previousCenter.x - pinch.center.x;
-                editorFlickable.contentY += pinch.previousCenter.y - pinch.center.y;
+            property real initialContentWidth:  0.0
+            property real initialContentHeight: 0.0
 
-                var scale = 1.0 + pinch.scale - pinch.previousScale;
-
-                if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.25 &&
-                    editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 8.0) {
-                    editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
+            onContentWidthChanged: {
+                if (contentWidth > 0.0 && initialContentWidth > 0.0) {
+                    decolorizeEditor.width  = contentWidth;
+                    decolorizeEditor.height = contentHeight;
                 }
             }
 
-            onPinchFinished: {
-                editorFlickable.returnToBounds();
-            }
+            PinchArea {
+                id:             editorPinchArea
+                anchors.fill:   parent
+                pinch.dragAxis: Pinch.NoDrag
 
-            DecolorizeEditor {
-                id: decolorizeEditor
+                onPinchUpdated: {
+                    editorFlickable.contentX += pinch.previousCenter.x - pinch.center.x;
+                    editorFlickable.contentY += pinch.previousCenter.y - pinch.center.y;
 
-                onImageOpened: {
-                    waitRectangle.visible = false;
+                    var scale = 1.0 + pinch.scale - pinch.previousScale;
 
-                    saveToolButton.enabled = true;
-
-                    scrollModeButton.enabled   = true;
-                    originalModeButton.enabled = true;
-                    effectedModeButton.enabled = true;
-
-                    editorFlickable.contentWidth         = width;
-                    editorFlickable.contentHeight        = height;
-                    editorFlickable.initialContentWidth  = width;
-                    editorFlickable.initialContentHeight = height;
+                    if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
+                        editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 2.0) {
+                        editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
+                    }
                 }
 
-                onImageOpenFailed: {
-                    waitRectangle.visible = false;
-
-                    saveToolButton.enabled = false;
-
-                    scrollModeButton.enabled   = false;
-                    originalModeButton.enabled = false;
-                    effectedModeButton.enabled = false;
-
-                    imageOpenFailedQueryDialog.open();
+                onPinchFinished: {
+                    editorFlickable.returnToBounds();
                 }
 
-                onImageSaveFailed: {
-                    imageSaveFailedQueryDialog.open();
-                }
+                DecolorizeEditor {
+                    id:         decolorizeEditor
+                    helperSize: helper.width
 
-                onUndoAvailabilityChanged: {
-                    if (available) {
-                        undoToolButton.enabled = true;
-                    } else {
-                        undoToolButton.enabled = false;
+                    onImageOpened: {
+                        waitRectangle.visible = false;
+
+                        saveToolButton.enabled = true;
+
+                        scrollModeButton.enabled   = true;
+                        originalModeButton.enabled = true;
+                        effectedModeButton.enabled = true;
+
+                        editorFlickable.contentWidth         = width;
+                        editorFlickable.contentHeight        = height;
+                        editorFlickable.initialContentWidth  = width;
+                        editorFlickable.initialContentHeight = height;
+                    }
+
+                    onImageOpenFailed: {
+                        waitRectangle.visible = false;
+
+                        saveToolButton.enabled = false;
+
+                        scrollModeButton.enabled   = false;
+                        originalModeButton.enabled = false;
+                        effectedModeButton.enabled = false;
+
+                        imageOpenFailedQueryDialog.open();
+                    }
+
+                    onImageSaveFailed: {
+                        imageSaveFailedQueryDialog.open();
+                    }
+
+                    onUndoAvailabilityChanged: {
+                        if (available) {
+                            undoToolButton.enabled = true;
+                        } else {
+                            undoToolButton.enabled = false;
+                        }
+                    }
+
+                    onMouseEvent: {
+                        var rect = mapToItem(editorRectangle, x, y);
+
+                        if (event_type === DecolorizeEditor.MousePressed) {
+                            helperRectangle.visible = true;
+
+                            if (rect.y < editorRectangle.height / 2) {
+                                if (rect.x < editorRectangle.width / 2) {
+                                    helperRectangle.anchors.left  = undefined;
+                                    helperRectangle.anchors.right = editorRectangle.right;
+                                } else {
+                                    helperRectangle.anchors.right = undefined;
+                                    helperRectangle.anchors.left  = editorRectangle.left;
+                                }
+                            }
+                        } else if (event_type === DecolorizeEditor.MouseMoved) {
+                            helperRectangle.visible = true;
+
+                            if (rect.y < editorRectangle.height / 2) {
+                                if (rect.x < editorRectangle.width / 2) {
+                                    helperRectangle.anchors.left  = undefined;
+                                    helperRectangle.anchors.right = editorRectangle.right;
+                                } else {
+                                    helperRectangle.anchors.right = undefined;
+                                    helperRectangle.anchors.left  = editorRectangle.left;
+                                }
+                            }
+                        } else if (event_type === DecolorizeEditor.MouseReleased) {
+                            helperRectangle.visible = false;
+                        }
                     }
                 }
             }
         }
-    }
 
-    Rectangle {
-        id:             waitRectangle
-        anchors.top:    topButtonGroupRectangle.bottom
-        anchors.bottom: bottomToolBar.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        z:              10
-        color:          "black"
-        opacity:        0.75
+        Rectangle {
+            id:           helperRectangle
+            anchors.top:  parent.top
+            anchors.left: parent.left
+            width:        128
+            height:       128
+            z:            5
+            visible:      false
+            color:        "black"
+            border.color: "white"
+            border.width: 2
 
-        MouseArea {
+            Helper {
+                id:           helper
+                anchors.fill: parent
+            }
+        }
+
+        Rectangle {
+            id:           waitRectangle
             anchors.fill: parent
+            z:            10
+            color:        "black"
+            opacity:      0.75
 
-            Image {
-                anchors.centerIn: parent
-                source:           "../../images/busy_indicator.png"
+            MouseArea {
+                anchors.fill: parent
 
-                NumberAnimation on rotation {
-                    running: waitRectangle.visible
-                    from:    0
-                    to:      360
-                    loops:   Animation.Infinite
+                Image {
+                    anchors.centerIn: parent
+                    source:           "../../images/busy_indicator.png"
+
+                    NumberAnimation on rotation {
+                        running: waitRectangle.visible
+                        from:    0
+                        to:      360
+                        loops:   Animation.Infinite
+                    }
                 }
             }
         }

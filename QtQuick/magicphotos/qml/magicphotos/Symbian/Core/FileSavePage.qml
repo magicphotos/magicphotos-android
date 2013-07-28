@@ -112,6 +112,7 @@ Page {
                             height:           parent.height - galleryItemRectangle.border.width
                             source:           url
                             sourceSize.width: width
+                            cache:            false
                             asynchronous:     true
                             fillMode:         Image.PreserveAspectFit
                             smooth:           false

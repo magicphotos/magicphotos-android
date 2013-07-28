@@ -1,7 +1,9 @@
 #include <QApplication>
 
-#include "qmlapplicationviewer.h"
+#include "helper.h"
 #include "decolorizeeditor.h"
+
+#include "qmlapplicationviewer.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +12,8 @@ int main(int argc, char *argv[])
     QmlApplicationViewer splash;
 #endif
     QmlApplicationViewer viewer;
+
+    qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
 
     qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 
