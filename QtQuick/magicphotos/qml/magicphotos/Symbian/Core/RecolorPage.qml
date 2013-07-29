@@ -299,13 +299,13 @@ Page {
             onPositionChanged: {
                 hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, mouse.y));
 
-                recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * 1.5;
+                recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
             }
 
             onPressed: {
                 hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, mouse.y));
 
-                recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * 1.5;
+                recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
             }
         }
     }
