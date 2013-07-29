@@ -81,6 +81,12 @@ Page {
                         mainPageStack.push(Qt.resolvedUrl("DecolorizePage.qml"), {openFileUrl: file_url});
                     } else if (mode === "SKETCH") {
                         mainPageStack.push(Qt.resolvedUrl("SketchPreviewPage.qml"), {openFileUrl: file_url});
+                    } else if (mode === "CARTOON") {
+                        mainPageStack.push(Qt.resolvedUrl("CartoonPreviewPage.qml"), {openFileUrl: file_url});
+                    } else if (mode === "BLUR") {
+                        mainPageStack.push(Qt.resolvedUrl("BlurPreviewPage.qml"), {openFileUrl: file_url});
+                    } else if (mode === "PIXELATE") {
+                        mainPageStack.push(Qt.resolvedUrl("PixelatePreviewPage.qml"), {openFileUrl: file_url});
                     }
                 }
 

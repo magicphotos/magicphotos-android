@@ -9,11 +9,17 @@ MOBILITY += gallery
 SOURCES += main.cpp \
     helper.cpp \
     decolorizeeditor.cpp \
-    sketcheditor.cpp
+    sketcheditor.cpp \
+    cartooneditor.cpp \
+    blureditor.cpp \
+    pixelateeditor.cpp
 HEADERS += \
     helper.h \
     decolorizeeditor.h \
-    sketcheditor.h
+    sketcheditor.h \
+    cartooneditor.h \
+    blureditor.h \
+    pixelateeditor.h
 OTHER_FILES += \
     icon.png \
     icon.svg
