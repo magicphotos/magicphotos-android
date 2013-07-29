@@ -12,14 +12,16 @@ SOURCES += main.cpp \
     sketcheditor.cpp \
     cartooneditor.cpp \
     blureditor.cpp \
-    pixelateeditor.cpp
+    pixelateeditor.cpp \
+    recoloreditor.cpp
 HEADERS += \
     helper.h \
     decolorizeeditor.h \
     sketcheditor.h \
     cartooneditor.h \
     blureditor.h \
-    pixelateeditor.h
+    pixelateeditor.h \
+    recoloreditor.h
 OTHER_FILES += \
     icon.png \
     icon.svg

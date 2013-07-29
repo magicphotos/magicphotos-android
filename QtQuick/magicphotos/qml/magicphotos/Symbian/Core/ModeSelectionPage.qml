@@ -87,6 +87,8 @@ Page {
                         mainPageStack.push(Qt.resolvedUrl("BlurPreviewPage.qml"), {openFileUrl: file_url});
                     } else if (mode === "PIXELATE") {
                         mainPageStack.push(Qt.resolvedUrl("PixelatePreviewPage.qml"), {openFileUrl: file_url});
+                    } else if (mode === "RECOLOR") {
+                        mainPageStack.push(Qt.resolvedUrl("RecolorPage.qml"), {openFileUrl: file_url});
                     }
                 }
 
