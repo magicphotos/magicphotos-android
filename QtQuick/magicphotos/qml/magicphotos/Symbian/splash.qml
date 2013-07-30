@@ -11,7 +11,7 @@ Window {
         Image {
             id:               logoImage
             anchors.centerIn: parent
-            source:           "../images/splash.png"
+            source:           "images/splash.png"
             opacity:          0.5
         }
 

@@ -75,22 +75,22 @@ Page {
                 signal fileSelected(string file_url)
 
                 onFileSelected: {
-                    mainPageStack.pop();
-
                     if (mode === "DECOLORIZE") {
-                        mainPageStack.push(Qt.resolvedUrl("DecolorizePage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("DecolorizePage.qml"), {openFileUrl: file_url});
                     } else if (mode === "SKETCH") {
-                        mainPageStack.push(Qt.resolvedUrl("SketchPreviewPage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("SketchPreviewPage.qml"), {openFileUrl: file_url});
                     } else if (mode === "CARTOON") {
-                        mainPageStack.push(Qt.resolvedUrl("CartoonPreviewPage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("CartoonPreviewPage.qml"), {openFileUrl: file_url});
                     } else if (mode === "BLUR") {
-                        mainPageStack.push(Qt.resolvedUrl("BlurPreviewPage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("BlurPreviewPage.qml"), {openFileUrl: file_url});
                     } else if (mode === "PIXELATE") {
-                        mainPageStack.push(Qt.resolvedUrl("PixelatePreviewPage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("PixelatePreviewPage.qml"), {openFileUrl: file_url});
                     } else if (mode === "RECOLOR") {
-                        mainPageStack.push(Qt.resolvedUrl("RecolorPage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("RecolorPage.qml"), {openFileUrl: file_url});
                     } else if (mode === "RETOUCH") {
-                        mainPageStack.push(Qt.resolvedUrl("RetouchPage.qml"), {openFileUrl: file_url});
+                        mainPageStack.replace(Qt.resolvedUrl("RetouchPage.qml"), {openFileUrl: file_url});
+                    } else {
+                        mainPageStack.pop();
                     }
                 }
 
@@ -144,7 +144,8 @@ Page {
 
         tools: ToolBarLayout {
             ToolButton {
-                iconSource: "../../images/close.png"
+                iconSource: "../images/close.png"
+                flat:       true
 
                 onClicked: {
                     Qt.quit();
@@ -152,7 +153,8 @@ Page {
             }
 
             ToolButton {
-                iconSource: "../../images/help.png"
+                iconSource: "../images/help.png"
+                flat:       true
 
                 onClicked: {
                     mainPageStack.push(Qt.resolvedUrl("HelpPage.qml"));

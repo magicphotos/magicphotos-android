@@ -30,7 +30,8 @@ Page {
 
         tools: ToolBarLayout {
             ToolButton {
-                iconSource: "../../images/back.png"
+                iconSource: "../images/back.png"
+                flat:       true
 
                 onClicked: {
                     mainPageStack.pop();

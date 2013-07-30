@@ -133,7 +133,8 @@ Page {
 
         tools: ToolBarLayout {
             ToolButton {
-                iconSource: "../../images/back.png"
+                iconSource: "../images/back.png"
+                flat:       true
 
                 onClicked: {
                     mainPageStack.pop();
@@ -141,7 +142,8 @@ Page {
             }
 
             ToolButton {
-                iconSource: "../../images/help.png"
+                iconSource: "../images/help.png"
+                flat:       true
 
                 onClicked: {
                     mainPageStack.push(Qt.resolvedUrl("HelpPage.qml"));

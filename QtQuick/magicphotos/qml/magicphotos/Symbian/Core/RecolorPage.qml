@@ -33,13 +33,13 @@ Page {
         ButtonRow {
             id:               modeButtonRow
             anchors.centerIn: parent
-            width:            scrollModeButton.width + originalModeButton.width + effectedModeButton.width + hueSelectionModeButton.width
+            width:            64 * 4
             exclusive:        true
             checkedButton:    scrollModeButton
 
             Button {
                 id:         scrollModeButton
-                iconSource: "../../images/mode_scroll.png"
+                iconSource: "../images/mode_scroll.png"
                 enabled:    false
 
                 onCheckedChanged: {
@@ -53,7 +53,7 @@ Page {
 
             Button {
                 id:         originalModeButton
-                iconSource: "../../images/mode_original.png"
+                iconSource: "../images/mode_original.png"
                 enabled:    false
 
                 onCheckedChanged: {
@@ -67,7 +67,7 @@ Page {
 
             Button {
                 id:         effectedModeButton
-                iconSource: "../../images/mode_effected.png"
+                iconSource: "../images/mode_effected.png"
                 enabled:    false
 
                 onCheckedChanged: {
@@ -81,7 +81,7 @@ Page {
 
             Button {
                 id:         hueSelectionModeButton
-                iconSource: "../../images/mode_hue_selection.png"
+                iconSource: "../images/mode_hue_selection.png"
                 enabled:    false
 
                 onCheckedChanged: {
@@ -324,7 +324,8 @@ Page {
 
         tools: ToolBarLayout {
             ToolButton {
-                iconSource: "../../images/back.png"
+                iconSource: "../images/back.png"
+                flat:       true
 
                 onClicked: {
                     if (recolorEditor.changed) {
@@ -337,7 +338,8 @@ Page {
 
             ToolButton {
                 id:         saveToolButton
-                iconSource: "../../images/save.png"
+                iconSource: "../images/save.png"
+                flat:       true
                 enabled:    false
 
                 onClicked: {
@@ -351,7 +353,8 @@ Page {
 
             ToolButton {
                 id:         undoToolButton
-                iconSource: "../../images/undo.png"
+                iconSource: "../images/undo.png"
+                flat:       true
                 enabled:    false
 
                 onClicked: {
@@ -360,7 +363,8 @@ Page {
             }
 
             ToolButton {
-                iconSource: "../../images/help.png"
+                iconSource: "../images/help.png"
+                flat:       true
 
                 onClicked: {
                     mainPageStack.push(Qt.resolvedUrl("HelpPage.qml"));
