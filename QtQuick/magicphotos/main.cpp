@@ -7,6 +7,7 @@
 #include "blureditor.h"
 #include "pixelateeditor.h"
 #include "recoloreditor.h"
+#include "retoucheditor.h"
 
 #include "qmlapplicationviewer.h"
 
@@ -35,6 +36,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<PixelatePreviewGenerator>("ImageEditor", 1, 0, "PixelatePreviewGenerator");
 
     qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
+
+    qmlRegisterType<RetouchEditor>("ImageEditor", 1, 0, "RetouchEditor");
 
 #ifndef MEEGO_TARGET
     splash.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);

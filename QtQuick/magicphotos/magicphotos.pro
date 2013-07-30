@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     cartooneditor.cpp \
     blureditor.cpp \
     pixelateeditor.cpp \
-    recoloreditor.cpp
+    recoloreditor.cpp \
+    retoucheditor.cpp
 HEADERS += \
     helper.h \
     decolorizeeditor.h \
@@ -21,7 +22,8 @@ HEADERS += \
     cartooneditor.h \
     blureditor.h \
     pixelateeditor.h \
-    recoloreditor.h
+    recoloreditor.h \
+    retoucheditor.h
 OTHER_FILES += \
     icon.png \
     icon.svg

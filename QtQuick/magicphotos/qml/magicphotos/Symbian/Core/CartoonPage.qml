@@ -122,8 +122,13 @@ Page {
             property real initialContentHeight: 0.0
 
             onContentWidthChanged: {
-                if (contentWidth > 0.0 && initialContentWidth > 0.0) {
-                    cartoonEditor.width  = contentWidth;
+                if (contentWidth >= 0.0) {
+                    cartoonEditor.width = contentWidth;
+                }
+            }
+
+            onContentHeightChanged: {
+                if (contentHeight >= 0.0) {
                     cartoonEditor.height = contentHeight;
                 }
             }
@@ -134,14 +139,16 @@ Page {
                 pinch.dragAxis: Pinch.NoDrag
 
                 onPinchUpdated: {
-                    editorFlickable.contentX += pinch.previousCenter.x - pinch.center.x;
-                    editorFlickable.contentY += pinch.previousCenter.y - pinch.center.y;
+                    if (editorFlickable.initialContentWidth > 0.0) {
+                        editorFlickable.contentX += pinch.previousCenter.x - pinch.center.x;
+                        editorFlickable.contentY += pinch.previousCenter.y - pinch.center.y;
 
-                    var scale = 1.0 + pinch.scale - pinch.previousScale;
+                        var scale = 1.0 + pinch.scale - pinch.previousScale;
 
-                    if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
-                        editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
-                        editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
+                        if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
+                            editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
+                            editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
+                        }
                     }
                 }
 

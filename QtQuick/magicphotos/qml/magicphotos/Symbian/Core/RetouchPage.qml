@@ -5,19 +5,19 @@ import ImageEditor 1.0
 import "Util"
 
 Page {
-    id:           recolorPage
+    id:           retouchPage
     anchors.fill: parent
 
     property string openFileUrl: ""
     property string saveFileUrl: ""
 
     Component.onCompleted: {
-        recolorEditor.helperImageReady.connect(helper.helperImageReady);
+        retouchEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
     onOpenFileUrlChanged: {
         if (openFileUrl !== "") {
-            recolorEditor.openImage(openFileUrl);
+            retouchEditor.openImage(openFileUrl);
         }
     }
 
@@ -33,7 +33,7 @@ Page {
         ButtonRow {
             id:               modeButtonRow
             anchors.centerIn: parent
-            width:            scrollModeButton.width + originalModeButton.width + effectedModeButton.width + hueSelectionModeButton.width
+            width:            scrollModeButton.width + samplingPointModeButton.width + cloneModeButton.width + blurModeButton.width
             exclusive:        true
             checkedButton:    scrollModeButton
 
@@ -44,7 +44,7 @@ Page {
 
                 onCheckedChanged: {
                     if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeScroll;
+                        retouchEditor.mode          = RetouchEditor.ModeScroll;
                         editorFlickable.interactive = true;
                         editorPinchArea.enabled     = true;
                     }
@@ -52,13 +52,13 @@ Page {
             }
 
             Button {
-                id:         originalModeButton
-                iconSource: "../../images/mode_original.png"
+                id:         samplingPointModeButton
+                iconSource: "../../images/mode_sampling_point.png"
                 enabled:    false
 
                 onCheckedChanged: {
                     if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeOriginal;
+                        retouchEditor.mode          = RetouchEditor.ModeSamplingPoint;
                         editorFlickable.interactive = false;
                         editorPinchArea.enabled     = false;
                     }
@@ -66,13 +66,13 @@ Page {
             }
 
             Button {
-                id:         effectedModeButton
-                iconSource: "../../images/mode_effected.png"
+                id:         cloneModeButton
+                iconSource: "../../images/mode_clone.png"
                 enabled:    false
 
                 onCheckedChanged: {
                     if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeEffected;
+                        retouchEditor.mode          = RetouchEditor.ModeClone;
                         editorFlickable.interactive = false;
                         editorPinchArea.enabled     = false;
                     }
@@ -80,18 +80,15 @@ Page {
             }
 
             Button {
-                id:         hueSelectionModeButton
-                iconSource: "../../images/mode_hue_selection.png"
+                id:         blurModeButton
+                iconSource: "../../images/mode_blur.png"
                 enabled:    false
 
                 onCheckedChanged: {
                     if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeEffected;
+                        retouchEditor.mode          = RetouchEditor.ModeBlur;
                         editorFlickable.interactive = false;
                         editorPinchArea.enabled     = false;
-                        hueZoneRectangle.visible    = true;
-                    } else {
-                        hueZoneRectangle.visible    = false;
                     }
                 }
             }
@@ -116,13 +113,17 @@ Page {
 
             onContentWidthChanged: {
                 if (contentWidth >= 0.0) {
-                    recolorEditor.width = contentWidth;
+                    retouchEditor.width = contentWidth;
+
+                    samplingPointImage.updatePosition();
                 }
             }
 
             onContentHeightChanged: {
                 if (contentHeight >= 0.0) {
-                    recolorEditor.height = contentHeight;
+                    retouchEditor.height = contentHeight;
+
+                    samplingPointImage.updatePosition();
                 }
             }
 
@@ -149,81 +150,123 @@ Page {
                     editorFlickable.returnToBounds();
                 }
 
-                RecolorEditor {
-                    id:         recolorEditor
-                    helperSize: helper.width
-                    hue:        180
+                Rectangle {
+                    width:  retouchEditor.width
+                    height: retouchEditor.height
+                    clip:   true
+                    color:  "transparent"
 
-                    onImageOpened: {
-                        waitRectangle.visible = false;
+                    RetouchEditor {
+                        id:         retouchEditor
+                        helperSize: helper.width
 
-                        saveToolButton.enabled = true;
+                        onImageOpened: {
+                            waitRectangle.visible = false;
 
-                        scrollModeButton.enabled       = true;
-                        originalModeButton.enabled     = true;
-                        effectedModeButton.enabled     = true;
-                        hueSelectionModeButton.enabled = true;
+                            saveToolButton.enabled = true;
 
-                        editorFlickable.contentWidth         = width;
-                        editorFlickable.contentHeight        = height;
-                        editorFlickable.initialContentWidth  = width;
-                        editorFlickable.initialContentHeight = height;
-                    }
+                            scrollModeButton.enabled        = true;
+                            samplingPointModeButton.enabled = true;
+                            cloneModeButton.enabled         = true;
+                            blurModeButton.enabled          = true;
 
-                    onImageOpenFailed: {
-                        waitRectangle.visible = false;
+                            editorFlickable.contentWidth         = width;
+                            editorFlickable.contentHeight        = height;
+                            editorFlickable.initialContentWidth  = width;
+                            editorFlickable.initialContentHeight = height;
+                        }
 
-                        saveToolButton.enabled = false;
+                        onImageOpenFailed: {
+                            waitRectangle.visible = false;
 
-                        scrollModeButton.enabled       = false;
-                        originalModeButton.enabled     = false;
-                        effectedModeButton.enabled     = false;
-                        hueSelectionModeButton.enabled = false;
+                            saveToolButton.enabled = false;
 
-                        imageOpenFailedQueryDialog.open();
-                    }
+                            scrollModeButton.enabled        = false;
+                            samplingPointModeButton.enabled = false;
+                            cloneModeButton.enabled         = false;
+                            blurModeButton.enabled          = false;
 
-                    onImageSaveFailed: {
-                        imageSaveFailedQueryDialog.open();
-                    }
+                            imageOpenFailedQueryDialog.open();
+                        }
 
-                    onUndoAvailabilityChanged: {
-                        if (available) {
-                            undoToolButton.enabled = true;
-                        } else {
-                            undoToolButton.enabled = false;
+                        onImageSaveFailed: {
+                            imageSaveFailedQueryDialog.open();
+                        }
+
+                        onUndoAvailabilityChanged: {
+                            if (available) {
+                                undoToolButton.enabled = true;
+                            } else {
+                                undoToolButton.enabled = false;
+                            }
+                        }
+
+                        onMouseEvent: {
+                            var rect = mapToItem(editorRectangle, x, y);
+
+                            if (event_type === RetouchEditor.MousePressed) {
+                                helperRectangle.visible = true;
+
+                                if (rect.y < editorRectangle.height / 2) {
+                                    if (rect.x < editorRectangle.width / 2) {
+                                        helperRectangle.anchors.left  = undefined;
+                                        helperRectangle.anchors.right = editorRectangle.right;
+                                    } else {
+                                        helperRectangle.anchors.right = undefined;
+                                        helperRectangle.anchors.left  = editorRectangle.left;
+                                    }
+                                }
+                            } else if (event_type === RetouchEditor.MouseMoved) {
+                                helperRectangle.visible = true;
+
+                                if (rect.y < editorRectangle.height / 2) {
+                                    if (rect.x < editorRectangle.width / 2) {
+                                        helperRectangle.anchors.left  = undefined;
+                                        helperRectangle.anchors.right = editorRectangle.right;
+                                    } else {
+                                        helperRectangle.anchors.right = undefined;
+                                        helperRectangle.anchors.left  = editorRectangle.left;
+                                    }
+                                }
+                            } else if (event_type === RetouchEditor.MouseReleased) {
+                                helperRectangle.visible = false;
+                            }
                         }
                     }
 
-                    onMouseEvent: {
-                        var rect = mapToItem(editorRectangle, x, y);
+                    Image {
+                        id:      samplingPointImage
+                        width:   48
+                        height:  48
+                        source:  "../../images/sampling_point.png"
+                        visible: retouchEditor.samplingPointValid
 
-                        if (event_type === RecolorEditor.MousePressed) {
-                            helperRectangle.visible = true;
+                        property int samplingPointX: retouchEditor.samplingPoint.x
+                        property int samplingPointY: retouchEditor.samplingPoint.y
 
-                            if (rect.y < editorRectangle.height / 2) {
-                                if (rect.x < editorRectangle.width / 2) {
-                                    helperRectangle.anchors.left  = undefined;
-                                    helperRectangle.anchors.right = editorRectangle.right;
-                                } else {
-                                    helperRectangle.anchors.right = undefined;
-                                    helperRectangle.anchors.left  = editorRectangle.left;
-                                }
+                        onSamplingPointXChanged: {
+                            if (editorFlickable.initialContentWidth > 0.0) {
+                                var scale = editorFlickable.contentWidth / editorFlickable.initialContentWidth;
+
+                                x = samplingPointX * scale - width / 2;
                             }
-                        } else if (event_type === RecolorEditor.MouseMoved) {
-                            helperRectangle.visible = true;
+                        }
 
-                            if (rect.y < editorRectangle.height / 2) {
-                                if (rect.x < editorRectangle.width / 2) {
-                                    helperRectangle.anchors.left  = undefined;
-                                    helperRectangle.anchors.right = editorRectangle.right;
-                                } else {
-                                    helperRectangle.anchors.right = undefined;
-                                    helperRectangle.anchors.left  = editorRectangle.left;
-                                }
+                        onSamplingPointYChanged: {
+                            if (editorFlickable.initialContentWidth > 0.0) {
+                                var scale = editorFlickable.contentWidth / editorFlickable.initialContentWidth;
+
+                                y = samplingPointY * scale - height / 2;
                             }
-                        } else if (event_type === RecolorEditor.MouseReleased) {
-                            helperRectangle.visible = false;
+                        }
+
+                        function updatePosition() {
+                            if (editorFlickable.initialContentWidth > 0.0) {
+                                var scale = editorFlickable.contentWidth / editorFlickable.initialContentWidth;
+
+                                x = samplingPointX * scale - width  / 2;
+                                y = samplingPointY * scale - height / 2;
+                            }
                         }
                     }
                 }
@@ -266,57 +309,6 @@ Page {
         }
     }
 
-    Rectangle {
-        id:                     hueZoneRectangle
-        anchors.right:          parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        width:                  48
-        height:                 240
-        z:                      1
-        color:                  "transparent"
-        border.color:           "black"
-        border.width:           1
-        visible:                false
-
-        gradient: Gradient {
-            GradientStop { position: 1.0;  color: "#FF0000" }
-            GradientStop { position: 0.85; color: "#FFFF00" }
-            GradientStop { position: 0.76; color: "#00FF00" }
-            GradientStop { position: 0.5;  color: "#00FFFF" }
-            GradientStop { position: 0.33; color: "#0000FF" }
-            GradientStop { position: 0.16; color: "#FF00FF" }
-            GradientStop { position: 0.0;  color: "#FF0000" }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-
-            Rectangle {
-                id:            hueSliderRectangle
-                anchors.left:  parent.left
-                anchors.right: parent.right
-                height:        6
-                y:             (parent.height - height) * 0.5
-                z:             2
-                color:         "transparent"
-                border.color:  "black"
-                border.width:  2
-            }
-
-            onPositionChanged: {
-                hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, mouse.y));
-
-                recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
-            }
-
-            onPressed: {
-                hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, mouse.y));
-
-                recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
-            }
-        }
-    }
-
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
@@ -327,7 +319,7 @@ Page {
                 iconSource: "../../images/back.png"
 
                 onClicked: {
-                    if (recolorEditor.changed) {
+                    if (retouchEditor.changed) {
                         backQueryDialog.open();
                     } else {
                         mainPageStack.pop();
@@ -355,7 +347,7 @@ Page {
                 enabled:    false
 
                 onClicked: {
-                    recolorEditor.undo();
+                    retouchEditor.undo();
                 }
             }
 
@@ -402,9 +394,9 @@ Page {
         id: saveDialog
 
         onDone: {
-            recolorPage.saveFileUrl = file_url_path + "/" + file_name;
+            retouchPage.saveFileUrl = file_url_path + "/" + file_name;
 
-            recolorEditor.saveImage(recolorPage.saveFileUrl);
+            retouchEditor.saveImage(retouchPage.saveFileUrl);
         }
     }
 }
