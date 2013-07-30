@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import com.nokia.symbian 1.1
+import com.nokia.meego 1.0
 
 Dialog {
     id: saveDialog
@@ -31,6 +31,7 @@ Dialog {
             anchors.verticalCenter: parent.verticalCenter
             x:                      10
             color:                  "steelblue"
+            font.pointSize:         18
             text:                   "File Name"
         },
         Image {
