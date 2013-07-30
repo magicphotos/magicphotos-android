@@ -9,7 +9,7 @@ Page {
 
     Component.onCompleted: {
         if (SettingsScript.getSetting("ShowModeChangeSuggestion", "TRUE") === "TRUE") {
-            modeChangeSuggestionQueryDialog.open();
+            modeChangeSuggestionPropertyAnimation.start();
 
             SettingsScript.setSetting("ShowModeChangeSuggestion", "FALSE");
         }
@@ -173,43 +173,25 @@ Page {
         }
     }
 
-    QueryDialog {
-        id:        modeChangeSuggestionQueryDialog
-        titleText: "Info"
-        icon:      "../../images/dialog_info.png"
-        message:   "Slide your finger over the mode selection screen to switch between modes"
+    SequentialAnimation {
+        id: modeChangeSuggestionPropertyAnimation
 
-        onStatusChanged: {
-            if (status === DialogStatus.Open) {
-                modeChangeSuggestionPropertyAnimation.start();
-                modeChangeSuggestionTimer.start();
-            }
+        PropertyAnimation {
+            target:      modeSelectionListView
+            property:    "contentX"
+            from:        0
+            to:          modeSelectionListView.width * (modeSelectionListView.count - 1)
+            easing.type: Easing.InOutExpo
+            duration:    2000
         }
 
-        onRejected: {
-            modeChangeSuggestionPropertyAnimation.stop();
-
-            modeSelectionListView.contentX = 0;
-        }
-    }
-
-    PropertyAnimation {
-        id:          modeChangeSuggestionPropertyAnimation
-        target:      modeSelectionListView
-        property:    "contentX"
-        from:        0
-        to:          modeSelectionListView.width / 2
-        easing.type: Easing.InOutExpo
-        duration:    1000
-        loops:       Animation.Infinite
-    }
-
-    Timer {
-        id:       modeChangeSuggestionTimer
-        interval: 5000
-
-        onTriggered: {
-            modeChangeSuggestionQueryDialog.reject();
+        PropertyAnimation {
+            target:      modeSelectionListView
+            property:    "contentX"
+            from:        modeSelectionListView.width * (modeSelectionListView.count - 1)
+            to:          0
+            easing.type: Easing.InOutExpo
+            duration:    2000
         }
     }
 }

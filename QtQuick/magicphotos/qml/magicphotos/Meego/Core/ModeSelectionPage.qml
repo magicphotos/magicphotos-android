@@ -1,9 +1,19 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
+import "../Settings.js" as SettingsScript
+
 Page {
     id:           modeSelectionPage
     anchors.fill: parent
+
+    Component.onCompleted: {
+        if (SettingsScript.getSetting("ShowModeChangeSuggestion", "TRUE") === "TRUE") {
+            modeChangeSuggestionPropertyAnimation.start();
+
+            SettingsScript.setSetting("ShowModeChangeSuggestion", "FALSE");
+        }
+    }
 
     ListView {
         id:                 modeSelectionListView
@@ -160,6 +170,28 @@ Page {
                     mainPageStack.push(Qt.resolvedUrl("HelpPage.qml"));
                 }
             }
+        }
+    }
+
+    SequentialAnimation {
+        id: modeChangeSuggestionPropertyAnimation
+
+        PropertyAnimation {
+            target:      modeSelectionListView
+            property:    "contentX"
+            from:        0
+            to:          modeSelectionListView.width * (modeSelectionListView.count - 1)
+            easing.type: Easing.InOutExpo
+            duration:    2000
+        }
+
+        PropertyAnimation {
+            target:      modeSelectionListView
+            property:    "contentX"
+            from:        modeSelectionListView.width * (modeSelectionListView.count - 1)
+            to:          0
+            easing.type: Easing.InOutExpo
+            duration:    2000
         }
     }
 }
