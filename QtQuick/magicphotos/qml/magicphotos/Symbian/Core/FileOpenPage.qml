@@ -1,6 +1,6 @@
 import QtQuick 1.1
 import QtMobility.gallery 1.1
-import com.nokia.symbian 1.1
+import com.nokia.symbian 1.0
 
 Page {
     id:           fileOpenPage

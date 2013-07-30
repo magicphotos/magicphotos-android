@@ -1,9 +1,19 @@
 import QtQuick 1.1
-import com.nokia.symbian 1.1
+import com.nokia.symbian 1.0
+
+import "../Settings.js" as SettingsScript
 
 Page {
     id:           modeSelectionPage
     anchors.fill: parent
+
+    Component.onCompleted: {
+        if (SettingsScript.getSetting("ShowModeChangeSuggestion", "TRUE") === "TRUE") {
+            modeChangeSuggestionQueryDialog.open();
+
+            SettingsScript.setSetting("ShowModeChangeSuggestion", "FALSE");
+        }
+    }
 
     ListView {
         id:                 modeSelectionListView
@@ -160,6 +170,46 @@ Page {
                     mainPageStack.push(Qt.resolvedUrl("HelpPage.qml"));
                 }
             }
+        }
+    }
+
+    QueryDialog {
+        id:        modeChangeSuggestionQueryDialog
+        titleText: "Info"
+        icon:      "../../images/dialog_info.png"
+        message:   "Slide your finger over the mode selection screen to switch between modes"
+
+        onStatusChanged: {
+            if (status === DialogStatus.Open) {
+                modeChangeSuggestionPropertyAnimation.start();
+                modeChangeSuggestionTimer.start();
+            }
+        }
+
+        onRejected: {
+            modeChangeSuggestionPropertyAnimation.stop();
+
+            modeSelectionListView.contentX = 0;
+        }
+    }
+
+    PropertyAnimation {
+        id:          modeChangeSuggestionPropertyAnimation
+        target:      modeSelectionListView
+        property:    "contentX"
+        from:        0
+        to:          modeSelectionListView.width / 2
+        easing.type: Easing.InOutExpo
+        duration:    1000
+        loops:       Animation.Infinite
+    }
+
+    Timer {
+        id:       modeChangeSuggestionTimer
+        interval: 5000
+
+        onTriggered: {
+            modeChangeSuggestionQueryDialog.reject();
         }
     }
 }
