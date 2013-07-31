@@ -8,17 +8,21 @@ Page {
     id:           blurPage
     anchors.fill: parent
 
-    property int    gaussianRadius: -1
+    property bool   openFileOnActivation: true
 
-    property string openFileUrl:    ""
-    property string saveFileUrl:    ""
+    property int    gaussianRadius:       -1
+
+    property string openFileUrl:          ""
+    property string saveFileUrl:          ""
 
     Component.onCompleted: {
         blurEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             blurEditor.radius = gaussianRadius;
 
             blurEditor.openImage(openFileUrl);
@@ -26,7 +30,9 @@ Page {
     }
 
     onGaussianRadiusChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             blurEditor.radius = gaussianRadius;
 
             blurEditor.openImage(openFileUrl);
@@ -34,7 +40,9 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             blurEditor.radius = gaussianRadius;
 
             blurEditor.openImage(openFileUrl);

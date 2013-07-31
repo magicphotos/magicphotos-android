@@ -12,11 +12,15 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            fileSelected.connect(caller.fileSelected);
-
             imageGridView.currentIndex = -1;
 
             documentGalleryModel.reload();
+        }
+    }
+
+    onCallerChanged: {
+        if (caller !== null) {
+            fileSelected.connect(caller.fileSelected);
         }
     }
 
@@ -54,7 +58,10 @@ Page {
                 sortProperties: ["-lastModified"]
 
                 onStatusChanged: {
-                    if (status == DocumentGalleryModel.Finished || status === DocumentGalleryModel.Idle) {
+                    if (status === DocumentGalleryModel.Active || status === DocumentGalleryModel.Canceling) {
+                        waitRectangle.visible = true;
+                        imageGridView.visible = false;
+                    } else {
                         waitRectangle.visible = false;
                         imageGridView.visible = true;
                     }

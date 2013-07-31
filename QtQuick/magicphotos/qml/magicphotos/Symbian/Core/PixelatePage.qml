@@ -8,17 +8,21 @@ Page {
     id:           pixelatePage
     anchors.fill: parent
 
-    property int    pixelDenom:  -1
+    property bool   openFileOnActivation: true
 
-    property string openFileUrl: ""
-    property string saveFileUrl: ""
+    property int    pixelDenom:           -1
+
+    property string openFileUrl:          ""
+    property string saveFileUrl:          ""
 
     Component.onCompleted: {
         pixelateEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active && pixelDenom !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && pixelDenom !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             pixelateEditor.pixDenom = pixelDenom;
 
             pixelateEditor.openImage(openFileUrl);
@@ -26,7 +30,9 @@ Page {
     }
 
     onPixelDenomChanged: {
-        if (status === PageStatus.Active && pixelDenom !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && pixelDenom !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             pixelateEditor.pixDenom = pixelDenom;
 
             pixelateEditor.openImage(openFileUrl);
@@ -34,7 +40,9 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (status === PageStatus.Active && pixelDenom !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && pixelDenom !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             pixelateEditor.pixDenom = pixelDenom;
 
             pixelateEditor.openImage(openFileUrl);

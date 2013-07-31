@@ -8,21 +8,27 @@ Page {
     id:           recolorPage
     anchors.fill: parent
 
-    property string openFileUrl: ""
-    property string saveFileUrl: ""
+    property bool   openFileOnActivation: true
+
+    property string openFileUrl:          ""
+    property string saveFileUrl:          ""
 
     Component.onCompleted: {
         recolorEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             recolorEditor.openImage(openFileUrl);
         }
     }
 
     onOpenFileUrlChanged: {
-        if (status === PageStatus.Active && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             recolorEditor.openImage(openFileUrl);
         }
     }
