@@ -17,8 +17,16 @@ Page {
         pixelateEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && pixelDenom !== -1 && openFileUrl !== "") {
+            pixelateEditor.pixDenom = pixelDenom;
+
+            pixelateEditor.openImage(openFileUrl);
+        }
+    }
+
     onPixelDenomChanged: {
-        if (pixelDenom !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && pixelDenom !== -1 && openFileUrl !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
             pixelateEditor.openImage(openFileUrl);
@@ -26,7 +34,7 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (pixelDenom !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && pixelDenom !== -1 && openFileUrl !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
             pixelateEditor.openImage(openFileUrl);

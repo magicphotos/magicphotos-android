@@ -11,10 +11,7 @@ Page {
     signal fileSelected(string file_url)
 
     onStatusChanged: {
-        if (status === PageStatus.Activating) {
-            imageGridView.visible = false;
-            waitRectangle.visible = true;
-        } else if (status === PageStatus.Active) {
+        if (status === PageStatus.Active) {
             fileSelected.connect(caller.fileSelected);
 
             imageGridView.currentIndex = -1;

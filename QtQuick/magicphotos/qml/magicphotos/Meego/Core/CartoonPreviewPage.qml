@@ -8,8 +8,17 @@ Page {
 
     property string openFileUrl: ""
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && openFileUrl !== "") {
+            cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
+            cartoonPreviewGenerator.threshold = thresholdSlider.value;
+
+            cartoonPreviewGenerator.openImage(openFileUrl);
+        }
+    }
+
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileUrl !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 

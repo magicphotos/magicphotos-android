@@ -7,11 +7,13 @@ Page {
     id:           modeSelectionPage
     anchors.fill: parent
 
-    Component.onCompleted: {
-        if (SettingsScript.getSetting("ShowModeChangeSuggestion", "TRUE") === "TRUE") {
-            modeChangeSuggestionPropertyAnimation.start();
+    onStatusChanged: {
+        if (status === PageStatus.Active) {
+            if (SettingsScript.getSetting("ShowModeChangeSuggestion", "TRUE") === "TRUE") {
+                modeChangeSuggestionPropertyAnimation.start();
 
-            SettingsScript.setSetting("ShowModeChangeSuggestion", "FALSE");
+                SettingsScript.setSetting("ShowModeChangeSuggestion", "FALSE");
+            }
         }
     }
 

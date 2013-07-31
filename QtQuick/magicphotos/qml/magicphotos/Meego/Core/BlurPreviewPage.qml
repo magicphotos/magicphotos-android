@@ -8,8 +8,16 @@ Page {
 
     property string openFileUrl: ""
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && openFileUrl !== "") {
+            blurPreviewGenerator.radius = gaussianRadiusSlider.value;
+
+            blurPreviewGenerator.openImage(openFileUrl);
+        }
+    }
+
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileUrl !== "") {
             blurPreviewGenerator.radius = gaussianRadiusSlider.value;
 
             blurPreviewGenerator.openImage(openFileUrl);

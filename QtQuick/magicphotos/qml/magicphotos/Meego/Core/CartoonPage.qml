@@ -18,8 +18,17 @@ Page {
         cartoonEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+            cartoonEditor.radius    = gaussianRadius;
+            cartoonEditor.threshold = cartoonThreshold;
+
+            cartoonEditor.openImage(openFileUrl);
+        }
+    }
+
     onGaussianRadiusChanged: {
-        if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
@@ -28,7 +37,7 @@ Page {
     }
 
     onCartoonThresholdChanged: {
-        if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
@@ -37,7 +46,7 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
