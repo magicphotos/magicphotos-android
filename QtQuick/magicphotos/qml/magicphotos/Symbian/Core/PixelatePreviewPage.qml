@@ -8,8 +8,16 @@ Page {
 
     property string openFileUrl: ""
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && openFileUrl !== "") {
+            pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
+
+            pixelatePreviewGenerator.openImage(openFileUrl);
+        }
+    }
+
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileUrl !== "") {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
             pixelatePreviewGenerator.openImage(openFileUrl);

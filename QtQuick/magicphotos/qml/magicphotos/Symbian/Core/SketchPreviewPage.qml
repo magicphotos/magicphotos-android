@@ -8,8 +8,16 @@ Page {
 
     property string openFileUrl: ""
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && openFileUrl !== "") {
+            sketchPreviewGenerator.radius = gaussianRadiusSlider.value;
+
+            sketchPreviewGenerator.openImage(openFileUrl);
+        }
+    }
+
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileUrl !== "") {
             sketchPreviewGenerator.radius = gaussianRadiusSlider.value;
 
             sketchPreviewGenerator.openImage(openFileUrl);

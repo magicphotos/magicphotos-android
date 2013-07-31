@@ -15,8 +15,14 @@ Page {
         decolorizeEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && openFileUrl !== "") {
+            decolorizeEditor.openImage(openFileUrl);
+        }
+    }
+
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileUrl !== "") {
             decolorizeEditor.openImage(openFileUrl);
         }
     }

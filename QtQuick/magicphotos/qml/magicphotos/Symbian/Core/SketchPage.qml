@@ -17,8 +17,16 @@ Page {
         sketchEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && openFileUrl !== "") {
+            sketchEditor.radius = gaussianRadius;
+
+            sketchEditor.openImage(openFileUrl);
+        }
+    }
+
     onGaussianRadiusChanged: {
-        if (gaussianRadius !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && openFileUrl !== "") {
             sketchEditor.radius = gaussianRadius;
 
             sketchEditor.openImage(openFileUrl);
@@ -26,7 +34,7 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (gaussianRadius !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && gaussianRadius !== -1 && openFileUrl !== "") {
             sketchEditor.radius = gaussianRadius;
 
             sketchEditor.openImage(openFileUrl);

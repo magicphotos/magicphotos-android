@@ -15,8 +15,14 @@ Page {
         retouchEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && openFileUrl !== "") {
+            retouchEditor.openImage(openFileUrl);
+        }
+    }
+
     onOpenFileUrlChanged: {
-        if (openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileUrl !== "") {
             retouchEditor.openImage(openFileUrl);
         }
     }
