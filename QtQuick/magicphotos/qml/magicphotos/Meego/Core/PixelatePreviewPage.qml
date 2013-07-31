@@ -6,10 +6,14 @@ Page {
     id:           pixelatePreviewPage
     anchors.fill: parent
 
-    property string openFileUrl: ""
+    property bool   openFileOnActivation: true
+
+    property string openFileUrl:          ""
 
     onStatusChanged: {
-        if (status === PageStatus.Active && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
             pixelatePreviewGenerator.openImage(openFileUrl);
@@ -17,7 +21,9 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (status === PageStatus.Active && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
             pixelatePreviewGenerator.openImage(openFileUrl);

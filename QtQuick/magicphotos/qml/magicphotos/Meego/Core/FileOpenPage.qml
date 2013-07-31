@@ -6,7 +6,7 @@ Page {
     id:           fileOpenPage
     anchors.fill: parent
 
-    property variant caller: null
+    property variant caller: undefined
 
     signal fileSelected(string file_url)
 
@@ -19,7 +19,7 @@ Page {
     }
 
     onCallerChanged: {
-        if (caller !== null) {
+        if (caller !== undefined) {
             fileSelected.connect(caller.fileSelected);
         }
     }

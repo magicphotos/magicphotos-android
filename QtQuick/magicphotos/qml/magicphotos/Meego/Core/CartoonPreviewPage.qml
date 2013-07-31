@@ -6,10 +6,14 @@ Page {
     id:           cartoonPreviewPage
     anchors.fill: parent
 
-    property string openFileUrl: ""
+    property bool   openFileOnActivation: true
+
+    property string openFileUrl:          ""
 
     onStatusChanged: {
-        if (status === PageStatus.Active && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
@@ -18,7 +22,9 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (status === PageStatus.Active && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 

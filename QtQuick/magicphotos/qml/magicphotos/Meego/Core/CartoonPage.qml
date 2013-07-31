@@ -8,18 +8,22 @@ Page {
     id:           cartoonPage
     anchors.fill: parent
 
-    property int    gaussianRadius:   -1
-    property int    cartoonThreshold: -1
+    property bool   openFileOnActivation: true
 
-    property string openFileUrl:      ""
-    property string saveFileUrl:      ""
+    property int    gaussianRadius:       -1
+    property int    cartoonThreshold:     -1
+
+    property string openFileUrl:          ""
+    property string saveFileUrl:          ""
 
     Component.onCompleted: {
         cartoonEditor.helperImageReady.connect(helper.helperImageReady);
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
@@ -28,7 +32,9 @@ Page {
     }
 
     onGaussianRadiusChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
@@ -37,7 +43,9 @@ Page {
     }
 
     onCartoonThresholdChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
@@ -46,7 +54,9 @@ Page {
     }
 
     onOpenFileUrlChanged: {
-        if (status === PageStatus.Active && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+        if (status === PageStatus.Active && openFileOnActivation && gaussianRadius !== -1 && cartoonThreshold !== -1 && openFileUrl !== "") {
+            openFileOnActivation = false;
+
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
