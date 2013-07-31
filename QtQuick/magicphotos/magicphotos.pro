@@ -29,15 +29,15 @@ OTHER_FILES += \
     icon.svg
 
 symbian: {
-    TARGET.UID3 = 0xE29BCA98
-    #TARGET.UID3 = 0x2004771D
+    #TARGET.UID3 = 0xE29BCA98
+    TARGET.UID3 = 0x2004771D
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x020000 0x8000000
 
     ICON = icon.svg
 
     # SIS header: name, uid, version
-    packageheader = "$${LITERAL_HASH}{\"MagicPhotos\"}, (0xE29BCA98), 2, 0, 0, TYPE=SA"
+    packageheader = "$${LITERAL_HASH}{\"MagicPhotos\"}, (0x2004771D), 2, 0, 0, TYPE=SA"
     # Vendor info: localised and non-localised vendor names
     vendorinfo = "%{\"Oleg Derevenetz\"}" ":\"Oleg Derevenetz\""
 
