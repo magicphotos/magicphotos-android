@@ -687,7 +687,7 @@ namespace MagicPhotos
 
             this.ColorSliderRectangle.Margin = new Thickness(0, top, 0, bottom);
 
-            this.selectedHue = (int)(Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y)) * (360 / this.ColorRectangle.ActualHeight));
+            this.selectedHue = (int)(Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y)) * (359 / this.ColorRectangle.ActualHeight));
         }
 
         private void ColorRectangle_MouseMove(object sender, MouseEventArgs e)
@@ -697,7 +697,7 @@ namespace MagicPhotos
 
             this.ColorSliderRectangle.Margin = new Thickness(0, top, 0, bottom);
 
-            this.selectedHue = (int)(Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y)) * (360 / this.ColorRectangle.ActualHeight));
+            this.selectedHue = (int)(Math.Max(0, Math.Min(this.ColorRectangle.ActualHeight, e.GetPosition(this.ColorRectangle).Y)) * (359 / this.ColorRectangle.ActualHeight));
         }
 
         private void EditorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
