@@ -368,7 +368,7 @@ Page {
                         if (event.touchType === TouchType.Down || event.touchType === TouchType.Move) {
                             hueSliderImageView.layoutProperties.positionY = Math.max(0, Math.min(hueBarImageView.preferredHeight - hueSliderImageView.preferredHeight, event.localY));
 
-                            recolorEditor.hue = Math.max(0, Math.min(360, event.localY));
+                            recolorEditor.hue = Math.max(0, Math.min(359, event.localY));
                         }
                     }  
 
