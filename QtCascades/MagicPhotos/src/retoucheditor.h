@@ -5,7 +5,6 @@
 #include <QtCore/QPoint>
 #include <QtCore/QString>
 #include <QtCore/QStack>
-#include <QtCore/QHash>
 #include <QtGui/QImage>
 
 #include <bb/ImageData>

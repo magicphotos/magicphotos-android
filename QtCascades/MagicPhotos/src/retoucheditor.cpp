@@ -182,7 +182,7 @@ void RetouchEditor::openImage(const QString &image_file)
 
                 UndoStack.clear();
 
-                IsChanged = true;
+                IsChanged = false;
 
                 RepaintImage(true);
 
