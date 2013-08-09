@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{89417600-7704-4326-adfd-db0ab91d0d54}" Title="MagicPhotos" RuntimeType="Silverlight" Version="1.7.0.0" Genre="apps.normal"  Author="Oleg Derevenetz" Description="MagicPhotos lets you quickly and easily give photos a dramatic look by applying different effects while keeping your chosen details untouched." Publisher="MagicPhotos">
+  <App xmlns="" ProductID="{89417600-7704-4326-adfd-db0ab91d0d54}" Title="MagicPhotos" RuntimeType="Silverlight" Version="1.8.0.0" Genre="apps.normal"  Author="Oleg Derevenetz" Description="MagicPhotos lets you quickly and easily give photos a dramatic look by applying different effects while keeping your chosen details untouched." Publisher="MagicPhotos">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES"/>

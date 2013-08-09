@@ -303,7 +303,7 @@ namespace MagicPhotos
 
             if (bitmap.PixelWidth != 0 && bitmap.PixelHeight != 0)
             {
-                this.editedImageChanged = true;
+                this.editedImageChanged = false;
                 this.selectedMode       = MODE_SCROLL;
 
                 this.undoStack.Clear();
