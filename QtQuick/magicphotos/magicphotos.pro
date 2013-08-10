@@ -1,5 +1,5 @@
 TARGET = MagicPhotos
-VERSION = 2.0.0
+VERSION = 2.0.1
 
 TEMPLATE = app
 QT += core gui declarative
@@ -37,7 +37,7 @@ symbian: {
     ICON = icon.svg
 
     # SIS header: name, uid, version
-    packageheader = "$${LITERAL_HASH}{\"MagicPhotos\"}, (0x2004771D), 2, 0, 0, TYPE=SA"
+    packageheader = "$${LITERAL_HASH}{\"MagicPhotos\"}, (0x2004771D), 2, 0, 1, TYPE=SA"
     # Vendor info: localised and non-localised vendor names
     vendorinfo = "%{\"Oleg Derevenetz\"}" ":\"Oleg Derevenetz\""
 

@@ -10,14 +10,6 @@ Page {
 
     signal fileSelected(string file_url)
 
-    onStatusChanged: {
-        if (status === PageStatus.Active) {
-            imageGridView.currentIndex = -1;
-
-            documentGalleryModel.reload();
-        }
-    }
-
     onCallerChanged: {
         if (caller !== undefined) {
             fileSelected.connect(caller.fileSelected);
