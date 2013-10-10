@@ -163,7 +163,7 @@
     <value>Impossible d'ouvrir le Marketplace:</value>
   </data>
   <data name="MessageBoxMessageTrialVersionQuestion" xml:space="preserve">
-    <value>la fonction d’enregistrement  n'est disponible que dans la version complète. Voulez-vous acheter la version complète?</value>
+    <value>La fonction d’enregistrement n'est disponible que dans la version complète. Voulez-vous acheter la version complète?</value>
   </data>
   <data name="MessageBoxMessageUnsavedImageQuestion" xml:space="preserve">
     <value>Êtes-vous sûr? Toutes les modifications non enregistrées seront perdues.</value>
