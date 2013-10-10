@@ -11,28 +11,28 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="29"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="48"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="56"/>
         <location filename="../assets/BlurPage.qml" line="67"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="57"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="68"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="69"/>
@@ -57,17 +57,17 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="308"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="312"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="316"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -80,7 +80,7 @@
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="111"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="147"/>
@@ -98,28 +98,28 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="30"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="49"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="57"/>
         <location filename="../assets/CartoonPage.qml" line="68"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="58"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="69"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="70"/>
@@ -144,17 +144,17 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="309"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="313"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="317"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -167,7 +167,7 @@
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="113"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="166"/>
@@ -185,28 +185,28 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="28"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="47"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="55"/>
         <location filename="../assets/DecolorizePage.qml" line="66"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="56"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="67"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="68"/>
@@ -231,17 +231,17 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="307"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="311"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="315"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -254,12 +254,12 @@
     <message>
         <location filename="../assets/HelpPage.qml" line="36"/>
         <source>Could not send download invitation</source>
-        <translation>Impossible d’envoyer une invitation pour le chargement de l’application</translation>
+        <translation>Impossible d&apos;envoyer une invitation à télécharger l&apos;application</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="41"/>
         <source>Review App</source>
-        <translation>Avis</translation>
+        <translation>Laisser un avis</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="83"/>
@@ -272,28 +272,28 @@
     <message>
         <location filename="../assets/PixelatePage.qml" line="29"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="48"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="56"/>
         <location filename="../assets/PixelatePage.qml" line="67"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="57"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="68"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="69"/>
@@ -323,17 +323,17 @@
     <message>
         <location filename="../assets/PixelatePage.qml" line="308"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="312"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="316"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="111"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="147"/>
@@ -364,28 +364,28 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="28"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="47"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="55"/>
         <location filename="../assets/RecolorPage.qml" line="66"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="56"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="67"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="68"/>
@@ -410,17 +410,17 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="322"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="326"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="330"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -433,28 +433,28 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="28"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="47"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="55"/>
         <location filename="../assets/RetouchPage.qml" line="66"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="56"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="67"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="68"/>
@@ -479,17 +479,17 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="408"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="412"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="416"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -502,28 +502,28 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="29"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="48"/>
         <source>Save Image</source>
-        <translation>Sauvegarder une Photo</translation>
+        <translation>Enregistrer la Photo</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="56"/>
         <location filename="../assets/SketchPage.qml" line="67"/>
         <source>Info</source>
-        <translation>Information</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="57"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</translation>
+        <translation>La fonction d’enregistrement n&apos;est disponible que dans la version complète. Voulez-vous acheter la version complète?</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="68"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
-        <translation>Si l’application vous plaît, trouvez du temps pour écrire un avis. Voulez-vous écrire un avis ?</translation>
+        <translation>Si vous aimez l&apos;application, prenez une minute pour laisser votre avis. Voulez-vous laisser votre avis?</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="69"/>
@@ -548,17 +548,17 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="308"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="312"/>
         <source>Image saved successfully</source>
-        <translation>L’image était sauvegardée avec succès</translation>
+        <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="316"/>
         <source>Could not save image</source>
-        <translation>L’image ne peut pas être sauvegardée</translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -571,7 +571,7 @@
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="111"/>
         <source>Could not open image</source>
-        <translation>L’image ne peut pas être ouverte</translation>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="147"/>
@@ -594,27 +594,27 @@
     <message>
         <location filename="../assets/main.qml" line="146"/>
         <source>Sketch</source>
-        <translation>En croquis</translation>
+        <translation>Dans l&apos;esquisse</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="148"/>
         <source>Cartoon</source>
-        <translation>En bande dessinée</translation>
+        <translation>Dans la bande dessinée</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="150"/>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Faire flou</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="152"/>
         <source>Pixelate</source>
-        <translation>Pixélisation</translation>
+        <translation>Pixéliser</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="154"/>
         <source>Recolor</source>
-        <translation>Repeindre</translation>
+        <translation>Recolorier</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="156"/>
@@ -625,12 +625,12 @@
         <location filename="../assets/main.qml" line="190"/>
         <location filename="../assets/main.qml" line="205"/>
         <source>Open Image</source>
-        <translation>Ouvrir une Photo</translation>
+        <translation>Ouvrir la Photo</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="233"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
-        <translation>Passez le doigt sur la liste pour le changement entre les modes</translation>
+        <translation>Faites glisser la liste avec un doigt pour passer entre les modes</translation>
     </message>
 </context>
 </TS>
