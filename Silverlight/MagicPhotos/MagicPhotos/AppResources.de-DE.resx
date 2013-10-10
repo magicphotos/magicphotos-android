@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationBarButtonHelpText" xml:space="preserve">
-    <value>Hilfe</value>
+    <value>Auskunft</value>
   </data>
   <data name="ApplicationBarButtonSaveText" xml:space="preserve">
     <value>Speichern</value>
   </data>
   <data name="MainPageButtonOpenImageContent" xml:space="preserve">
-    <value>Öffnen ein Foto</value>
+    <value>Foto öffnen</value>
   </data>
   <data name="MainPagePivotItemDecolorizeHeader" xml:space="preserve">
     <value>Entfärben</value>
@@ -136,10 +136,10 @@
     <value>Retuschieren</value>
   </data>
   <data name="MainPagePivotItemSketchHeader" xml:space="preserve">
-    <value>Zur Skizze</value>
+    <value>In die Skizze</value>
   </data>
   <data name="MainPagePivotTitle" xml:space="preserve">
-    <value>WÄHLEN DAS MODUS</value>
+    <value>MODUS AUSWÄHLEN</value>
   </data>
   <data name="MessageBoxHeaderError" xml:space="preserve">
     <value>Fehler</value>
@@ -151,40 +151,40 @@
     <value>Achtung</value>
   </data>
   <data name="MessageBoxMessageImageOpenError" xml:space="preserve">
-    <value>Das Bild kann nicht geöffnet werden:</value>
+    <value>Bild kann nicht geöffnet werden:</value>
   </data>
   <data name="MessageBoxMessageImageSavedInfo" xml:space="preserve">
-    <value>Das Bild wurde erfolgreich gespeichert.</value>
+    <value>Abbildung wurde erfolgreich gespeichert.</value>
   </data>
   <data name="MessageBoxMessageImageSaveError" xml:space="preserve">
-    <value>Das Bild kann nicht gespeichert werden:</value>
+    <value>Abbildung kann nicht gespeichert werden:</value>
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
     <value>Marketplace kann nicht geöffnet werden:</value>
   </data>
   <data name="MessageBoxMessageTrialVersionQuestion" xml:space="preserve">
-    <value>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</value>
+    <value>Speicherfunktion ist nur in der Vollversion verfügbar. Möchten Sie die Vollversion kaufen?</value>
   </data>
   <data name="MessageBoxMessageUnsavedImageQuestion" xml:space="preserve">
-    <value>Sind Sie sicher?  Alle nicht gespeicherten Änderungen gehen verloren.</value>
+    <value>Sind Sie sicher? Alle nicht gespeicherten Änderungen gehen verloren.</value>
   </data>
   <data name="SketchPreviewPageButtonApplyContent" xml:space="preserve">
     <value>Anwenden</value>
   </data>
   <data name="SketchPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>SKIZZEPARAMETER</value>
+    <value>SKIZZENPARAMETER</value>
   </data>
   <data name="SketchPreviewPageTextBlockSliderCommentText" xml:space="preserve">
-    <value>Sättigung:</value>
+    <value>Sättigungsgrad:</value>
   </data>
   <data name="BlurPreviewPageButtonApplyContent" xml:space="preserve">
     <value>Anwenden</value>
   </data>
   <data name="BlurPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>WEICHZEICHNENSPARAMETER</value>
+    <value>VERWISCHUNGSPARAMETER</value>
   </data>
   <data name="BlurPreviewPageTextBlockSliderCommentText" xml:space="preserve">
-    <value>Weichzeichnen:</value>
+    <value>Verwischung:</value>
   </data>
   <data name="CartoonPreviewPageButtonApplyContent" xml:space="preserve">
     <value>Anwenden</value>
@@ -193,25 +193,25 @@
     <value>Glättung:</value>
   </data>
   <data name="CartoonPreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>COMICPARAMETER</value>
+    <value>COMIC-STRIP-PARAMETER</value>
   </data>
   <data name="CartoonPreviewPageTextBlockThresholdSliderCommentText" xml:space="preserve">
     <value>Schärfe:</value>
   </data>
   <data name="MainPagePivotItemBlurHeader" xml:space="preserve">
-    <value>Weichzeichnen</value>
+    <value>Verwischen</value>
   </data>
   <data name="MainPagePivotItemCartoonHeader" xml:space="preserve">
-    <value>In den Comic</value>
+    <value>In den Comic Strip</value>
   </data>
   <data name="MainPagePivotItemPixelateHeader" xml:space="preserve">
-    <value>Verpixelung</value>
+    <value>Pixeln</value>
   </data>
   <data name="PixelatePreviewPageButtonApplyContent" xml:space="preserve">
     <value>Anwenden</value>
   </data>
   <data name="PixelatePreviewPageTextBlockPageCommentText" xml:space="preserve">
-    <value>VERPIXELUNG PARAMETER</value>
+    <value>PIXELUNGSPARAMETER</value>
   </data>
   <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
     <value>Pixelgröße:</value>
