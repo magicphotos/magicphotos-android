@@ -21,26 +21,6 @@ Page {
         }
     }
 
-    actions: [
-        ActionItem {
-            id:                  helpActionItem
-            title:               qsTr("Help")
-            imageSource:         "images/help.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
-            
-            onTriggered: {
-                navigationPane.push(helpPageDefinition.createObject());
-            }
-
-            attachedObjects: [
-                ComponentDefinition {
-                    id:     helpPageDefinition
-                    source: "HelpPage.qml"
-                }
-            ]
-        }
-    ]
-    
     Container {
         background: Color.Black
 

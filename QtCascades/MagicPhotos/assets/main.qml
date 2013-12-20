@@ -17,31 +17,27 @@ NavigationPane {
         page.destroy();
     }
 
+    Menu.definition: MenuDefinition {
+        helpAction: HelpActionItem {
+            onTriggered: {
+                navigationPane.push(helpPageDefinition.createObject());
+            }
+
+            attachedObjects: [
+                ComponentDefinition {
+                    id:     helpPageDefinition
+                    source: "HelpPage.qml"
+                }
+            ]
+        }
+    }
+
     Page {
         id: modeSelectionPage
         
         onCreationCompleted: {
             modeChangeSuggestionTimer.start();
         }
-        
-        actions: [
-            ActionItem {
-                title:               qsTr("Help")
-                imageSource:         "images/help.png"
-                ActionBar.placement: ActionBarPlacement.OnBar
-                
-                onTriggered: {
-                    navigationPane.push(helpPageDefinition.createObject());
-                }
-                
-                attachedObjects: [
-                    ComponentDefinition {
-                        id:     helpPageDefinition
-                        source: "HelpPage.qml"
-                    }
-                ]
-            }
-        ]
         
         Container {
             background: Color.Black
@@ -182,31 +178,25 @@ NavigationPane {
                                 layoutProperties: StackLayoutProperties {
                                     spaceQuota: 1
                                 }
-                            }
-                            
-                            Button {
-                                id:                  modeButton
-                                horizontalAlignment: HorizontalAlignment.Center
-                                text:                qsTr("Open Image")
                                 
-                                onClicked: {
-                                    openFilePicker.open();
-                                }
-                                
-                                layoutProperties: StackLayoutProperties {
-                                    spaceQuota: -1
-                                }
+                                gestureHandlers: [
+                                    TapHandler {
+                                        onTapped: {
+                                            openFilePicker.open();
+                                        }
 
-                                attachedObjects: [
-                                    FilePicker {
-                                        id:    openFilePicker
-                                        type:  FileType.Picture
-                                        mode:  FilePickerMode.Picker
-                                        title: qsTr("Open Image")
+                                        attachedObjects: [
+                                            FilePicker {
+                                                id:    openFilePicker
+                                                type:  FileType.Picture
+                                                mode:  FilePickerMode.Picker
+                                                title: qsTr("Open Image")
 
-                                        onFileSelected: {
-                                            itemRoot.ListItem.view.navigateToEditPage(itemMode, selectedFiles[0]);
-                                        } 
+                                                onFileSelected: {
+                                                    itemRoot.ListItem.view.navigateToEditPage(itemMode, selectedFiles[0]);
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }

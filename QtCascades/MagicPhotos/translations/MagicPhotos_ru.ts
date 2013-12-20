@@ -50,22 +50,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="119"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/BlurPage.qml" line="308"/>
+        <location filename="../assets/BlurPage.qml" line="291"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="312"/>
+        <location filename="../assets/BlurPage.qml" line="295"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="316"/>
+        <location filename="../assets/BlurPage.qml" line="299"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -73,17 +68,12 @@
 <context>
     <name>BlurPreviewPage</name>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="27"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="111"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="91"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="147"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="127"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
@@ -137,22 +127,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="120"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/CartoonPage.qml" line="309"/>
+        <location filename="../assets/CartoonPage.qml" line="292"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="313"/>
+        <location filename="../assets/CartoonPage.qml" line="296"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="317"/>
+        <location filename="../assets/CartoonPage.qml" line="300"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -160,17 +145,12 @@
 <context>
     <name>CartoonPreviewPage</name>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="27"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="113"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="93"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="166"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="146"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
@@ -224,22 +204,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="118"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/DecolorizePage.qml" line="307"/>
+        <location filename="../assets/DecolorizePage.qml" line="290"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="311"/>
+        <location filename="../assets/DecolorizePage.qml" line="294"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="315"/>
+        <location filename="../assets/DecolorizePage.qml" line="298"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -316,22 +291,17 @@
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="119"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/PixelatePage.qml" line="308"/>
+        <location filename="../assets/PixelatePage.qml" line="291"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="312"/>
+        <location filename="../assets/PixelatePage.qml" line="295"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="316"/>
+        <location filename="../assets/PixelatePage.qml" line="299"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -339,17 +309,12 @@
 <context>
     <name>PixelatePreviewPage</name>
     <message>
-        <location filename="../assets/PixelatePreviewPage.qml" line="27"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/PixelatePreviewPage.qml" line="111"/>
+        <location filename="../assets/PixelatePreviewPage.qml" line="91"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePreviewPage.qml" line="147"/>
+        <location filename="../assets/PixelatePreviewPage.qml" line="127"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
@@ -403,22 +368,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="118"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/RecolorPage.qml" line="322"/>
+        <location filename="../assets/RecolorPage.qml" line="305"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="326"/>
+        <location filename="../assets/RecolorPage.qml" line="309"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="330"/>
+        <location filename="../assets/RecolorPage.qml" line="313"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -472,22 +432,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="118"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/RetouchPage.qml" line="408"/>
+        <location filename="../assets/RetouchPage.qml" line="391"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="412"/>
+        <location filename="../assets/RetouchPage.qml" line="395"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="416"/>
+        <location filename="../assets/RetouchPage.qml" line="399"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -541,22 +496,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="119"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPage.qml" line="308"/>
+        <location filename="../assets/SketchPage.qml" line="291"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="312"/>
+        <location filename="../assets/SketchPage.qml" line="295"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="316"/>
+        <location filename="../assets/SketchPage.qml" line="299"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -564,17 +514,12 @@
 <context>
     <name>SketchPreviewPage</name>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="27"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="111"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="91"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="147"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="127"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
@@ -582,53 +527,47 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="29"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="144"/>
+        <location filename="../assets/main.qml" line="140"/>
         <source>Decolorize</source>
         <translation>Обесцветить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="146"/>
+        <location filename="../assets/main.qml" line="142"/>
         <source>Sketch</source>
         <translation>В эскиз</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="148"/>
+        <location filename="../assets/main.qml" line="144"/>
         <source>Cartoon</source>
         <translation>В комикс</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="150"/>
+        <location filename="../assets/main.qml" line="146"/>
         <source>Blur</source>
         <translation>Размыть</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="152"/>
+        <location filename="../assets/main.qml" line="148"/>
         <source>Pixelate</source>
         <translation>Пикселизировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="154"/>
+        <location filename="../assets/main.qml" line="150"/>
         <source>Recolor</source>
         <translation>Перекрасить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="156"/>
+        <location filename="../assets/main.qml" line="152"/>
         <source>Retouch</source>
         <translation>Ретушировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="190"/>
-        <location filename="../assets/main.qml" line="205"/>
+        <location filename="../assets/main.qml" line="193"/>
         <source>Open Image</source>
         <translation>Открыть Фото</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="233"/>
+        <location filename="../assets/main.qml" line="223"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation>Пролистните список пальцем для переключения между режимами</translation>
     </message>
