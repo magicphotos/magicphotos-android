@@ -562,12 +562,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="193"/>
+        <location filename="../assets/main.qml" line="194"/>
+        <location filename="../assets/main.qml" line="210"/>
         <source>Open Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="223"/>
+        <location filename="../assets/main.qml" line="237"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation type="unfinished"></translation>
     </message>

@@ -562,12 +562,13 @@
         <translation>Ретушировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="193"/>
+        <location filename="../assets/main.qml" line="194"/>
+        <location filename="../assets/main.qml" line="210"/>
         <source>Open Image</source>
         <translation>Открыть Фото</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="223"/>
+        <location filename="../assets/main.qml" line="237"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation>Пролистните список пальцем для переключения между режимами</translation>
     </message>

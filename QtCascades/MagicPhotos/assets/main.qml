@@ -172,7 +172,7 @@ NavigationPane {
                                 id:                  modeImageView
                                 preferredWidth:      itemRoot.ListItem.view.actualWidth
                                 horizontalAlignment: HorizontalAlignment.Center
-                                imageSource:         itemImage
+                                imageSource:         itemRoot.itemImage
                                 scalingMethod:       ScalingMethod.AspectFit
 
                                 layoutProperties: StackLayoutProperties {
@@ -184,22 +184,36 @@ NavigationPane {
                                         onTapped: {
                                             openFilePicker.open();
                                         }
-
-                                        attachedObjects: [
-                                            FilePicker {
-                                                id:    openFilePicker
-                                                type:  FileType.Picture
-                                                mode:  FilePickerMode.Picker
-                                                title: qsTr("Open Image")
-
-                                                onFileSelected: {
-                                                    itemRoot.ListItem.view.navigateToEditPage(itemMode, selectedFiles[0]);
-                                                }
-                                            }
-                                        ]
                                     }
                                 ]
                             }
+                            
+                            Button {
+                                id:                  modeButton
+                                horizontalAlignment: HorizontalAlignment.Center
+                                text:                qsTr("Open Image")
+
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
+                                
+                                onClicked: {
+                                    openFilePicker.open();
+                                }
+                            }
+
+                            attachedObjects: [
+                                FilePicker {
+                                    id:    openFilePicker
+                                    type:  FileType.Picture
+                                    mode:  FilePickerMode.Picker
+                                    title: qsTr("Open Image")
+
+                                    onFileSelected: {
+                                        itemRoot.ListItem.view.navigateToEditPage(itemRoot.itemMode, selectedFiles[0]);
+                                    }
+                                }
+                            ]
                         } 
                     }
                 ]
