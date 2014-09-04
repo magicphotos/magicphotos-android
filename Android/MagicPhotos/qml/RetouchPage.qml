@@ -139,6 +139,18 @@ Item {
             property real initialContentWidth:  0.0
             property real initialContentHeight: 0.0
 
+            onContentWidthChanged: {
+                if (contentWidth >= 0.0) {
+                    samplingPointImage.updatePosition();
+                }
+            }
+
+            onContentHeightChanged: {
+                if (contentHeight >= 0.0) {
+                    samplingPointImage.updatePosition();
+                }
+            }
+
             PinchArea {
                 id:             editorPinchArea
                 anchors.fill:   parent
@@ -159,8 +171,7 @@ Item {
                 }
 
                 onPinchStarted: {
-                    editorFlickable.interactive      = false;
-                    retouchEditor.samplingPointValid = false;
+                    editorFlickable.interactive = false;
                 }
 
                 onPinchFinished: {

@@ -16,8 +16,8 @@ class RetouchEditor : public QQuickPaintedItem
     Q_PROPERTY(int    mode               READ mode               WRITE  setMode)
     Q_PROPERTY(int    helperSize         READ helperSize         WRITE  setHelperSize)
     Q_PROPERTY(bool   changed            READ changed)
-    Q_PROPERTY(bool   samplingPointValid READ samplingPointValid WRITE setSamplingPointValid NOTIFY samplingPointValidChanged)
-    Q_PROPERTY(QPoint samplingPoint      READ samplingPoint                                  NOTIFY samplingPointChanged)
+    Q_PROPERTY(bool   samplingPointValid READ samplingPointValid NOTIFY samplingPointValidChanged)
+    Q_PROPERTY(QPoint samplingPoint      READ samplingPoint      NOTIFY samplingPointChanged)
 
     Q_ENUMS(Mode)
     Q_ENUMS(MouseState)
@@ -32,11 +32,8 @@ public:
     int  helperSize() const;
     void setHelperSize(const int &size);
 
-    bool changed() const;
-
-    bool samplingPointValid() const;
-    void setSamplingPointValid(const bool &valid);
-
+    bool   changed() const;
+    bool   samplingPointValid() const;
     QPoint samplingPoint() const;
 
     Q_INVOKABLE void openImage(const QString &image_file);

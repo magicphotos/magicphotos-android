@@ -52,8 +52,6 @@ Item {
 
     onOpenImageFileChanged: {
         if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
-            openFileOnActivation = false;
-
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 

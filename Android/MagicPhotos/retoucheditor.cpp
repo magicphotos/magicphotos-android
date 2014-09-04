@@ -54,15 +54,6 @@ bool RetouchEditor::samplingPointValid() const
     return IsSamplingPointValid;
 }
 
-void RetouchEditor::setSamplingPointValid(const bool &valid)
-{
-    if (IsSamplingPointValid != valid) {
-        IsSamplingPointValid = valid;
-
-        emit samplingPointValidChanged();
-    }
-}
-
 QPoint RetouchEditor::samplingPoint() const
 {
     return SamplingPoint;
