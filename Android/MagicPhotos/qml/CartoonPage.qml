@@ -347,7 +347,7 @@ Item {
         }
     }
 
-    MessageDialog  {
+    MessageDialog {
         id:              imageOpenFailedQueryDialog
         title:           qsTr("Error")
         icon:            StandardIcon.Critical

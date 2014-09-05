@@ -13,7 +13,7 @@ ApplicationWindow {
         anchors.fill: parent
         color:        "black"
 
-        StackView  {
+        StackView {
             id:           mainStackView
             anchors.fill: parent
 
