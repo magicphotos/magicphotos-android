@@ -3,6 +3,7 @@ TEMPLATE = app
 QT += gui widgets qml quick androidextras
 
 SOURCES += main.cpp \
+    appsettings.cpp \
     decolorizeeditor.cpp \
     helper.cpp \
     sketcheditor.cpp \
@@ -14,6 +15,7 @@ SOURCES += main.cpp \
     androidgw.cpp
 
 HEADERS += \
+    appsettings.h \
     decolorizeeditor.h \
     helper.h \
     sketcheditor.h \

@@ -29,6 +29,10 @@ ApplicationWindow {
                 if (depth > 0) {
                     get(depth - 1).focus = true;
                 }
+
+                if (depth === 1) {
+                    modeSelectionPage.playModeChangeSuggestionAnimation();
+                }
             }
         }
 

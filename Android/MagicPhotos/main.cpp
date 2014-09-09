@@ -2,6 +2,7 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
 
+#include "appsettings.h"
 #include "androidgw.h"
 #include "decolorizeeditor.h"
 #include "helper.h"
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    engine.rootContext()->setContextProperty(QStringLiteral("AppSettings"), new AppSettings(&app));
     engine.rootContext()->setContextProperty(QStringLiteral("AndroidGW"), new AndroidGW(&app));
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

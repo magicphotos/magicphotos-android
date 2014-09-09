@@ -4,6 +4,14 @@ import QtQuick.Controls 1.2
 Item {
     id: modeSelectionPage
 
+    function playModeChangeSuggestionAnimation() {
+        if (AppSettings.showModeChangeSuggestion) {
+            modeChangeSuggestionAnimationTimer.start();
+
+            AppSettings.showModeChangeSuggestion = false;
+        }
+    }
+
     ListView {
         id:                 modeSelectionListView
         anchors.top:        parent.top
@@ -236,6 +244,15 @@ Item {
             to:          0
             easing.type: Easing.InOutExpo
             duration:    2000
+        }
+    }
+
+    Timer {
+        id:       modeChangeSuggestionAnimationTimer
+        interval: 500
+
+        onTriggered: {
+            modeChangeSuggestionPropertyAnimation.start();
         }
     }
 }
