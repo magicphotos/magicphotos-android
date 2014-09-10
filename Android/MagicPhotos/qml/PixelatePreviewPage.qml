@@ -3,7 +3,6 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.1
-import QtQuick.Window 2.1
 import ImageEditor 1.0
 
 import "Util.js" as UtilScript
@@ -98,7 +97,7 @@ Item {
         anchors.bottom: applyButtonRectangle.top
         anchors.left:   parent.left
         anchors.right:  parent.right
-        height:         pixDenomSlider.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
+        height:         pixDenomSlider.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
         color:          "transparent"
 
         Slider {
@@ -125,7 +124,7 @@ Item {
         anchors.bottom: bottomToolBar.top
         anchors.left:   parent.left
         anchors.right:  parent.right
-        height:         applyButton.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
+        height:         applyButton.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
         color:          "transparent"
 
         Button {
@@ -149,7 +148,7 @@ Item {
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
-        height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+        height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
         z:              1
 
         RowLayout {
@@ -157,8 +156,8 @@ Item {
 
             ToolButton {
                 anchors.left: parent.left
-                width:        UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:       UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:        UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
                 style: ButtonStyle {
                     background: Rectangle {
@@ -168,7 +167,7 @@ Item {
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/back.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -182,8 +181,8 @@ Item {
 
             ToolButton {
                 anchors.centerIn: parent
-                width:            UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:           UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
                 style: ButtonStyle {
                     background: Rectangle {
@@ -193,7 +192,7 @@ Item {
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/help.png"
                             fillMode:        Image.PreserveAspectFit
                         }

@@ -15,7 +15,7 @@ class RetouchEditor : public QQuickPaintedItem
 
     Q_PROPERTY(int    mode               READ mode               WRITE  setMode)
     Q_PROPERTY(int    helperSize         READ helperSize         WRITE  setHelperSize)
-    Q_PROPERTY(int    screenPixelDensity READ screenPixelDensity WRITE  setScreenPixelDensity)
+    Q_PROPERTY(int    screenDPI          READ screenDPI          WRITE  setScreenDPI)
     Q_PROPERTY(bool   changed            READ changed)
     Q_PROPERTY(bool   samplingPointValid READ samplingPointValid NOTIFY samplingPointValidChanged)
     Q_PROPERTY(QPoint samplingPoint      READ samplingPoint      NOTIFY samplingPointChanged)
@@ -33,8 +33,8 @@ public:
     int  helperSize() const;
     void setHelperSize(const int &size);
 
-    int  screenPixelDensity() const;
-    void setScreenPixelDensity(const int &density);
+    int  screenDPI() const;
+    void setScreenDPI(const int &dpi);
 
     bool   changed() const;
     bool   samplingPointValid() const;
@@ -93,7 +93,7 @@ private:
     constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged, IsSamplingPointValid, IsLastBlurPointValid;
-    int            CurrentMode, HelperSize, ScreenPixelDensity;
+    int            CurrentMode, HelperSize, ScreenDPI;
     QPoint         SamplingPoint, InitialSamplingPoint, LastBlurPoint, InitialTouchPoint;
     QImage         LoadedImage, CurrentImage;
     QStack<QImage> UndoStack;

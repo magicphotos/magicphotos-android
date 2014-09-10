@@ -12,12 +12,12 @@ class CartoonEditor : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode               READ mode               WRITE setMode)
-    Q_PROPERTY(int  helperSize         READ helperSize         WRITE setHelperSize)
-    Q_PROPERTY(int  screenPixelDensity READ screenPixelDensity WRITE setScreenPixelDensity)
-    Q_PROPERTY(int  radius             READ radius             WRITE setRadius)
-    Q_PROPERTY(int  threshold          READ threshold          WRITE setThreshold)
-    Q_PROPERTY(bool changed            READ changed)
+    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
+    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
+    Q_PROPERTY(int  screenDPI  READ screenDPI  WRITE setScreenDPI)
+    Q_PROPERTY(int  radius     READ radius     WRITE setRadius)
+    Q_PROPERTY(int  threshold  READ threshold  WRITE setThreshold)
+    Q_PROPERTY(bool changed    READ changed)
 
     Q_ENUMS(Mode)
     Q_ENUMS(MouseState)
@@ -32,8 +32,8 @@ public:
     int  helperSize() const;
     void setHelperSize(const int &size);
 
-    int  screenPixelDensity() const;
-    void setScreenPixelDensity(const int &density);
+    int  screenDPI() const;
+    void setScreenDPI(const int &dpi);
 
     int  radius() const;
     void setRadius(const int &radius);
@@ -94,7 +94,7 @@ private:
     constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged;
-    int            CurrentMode, HelperSize, ScreenPixelDensity, GaussianRadius, CartoonThreshold;
+    int            CurrentMode, HelperSize, ScreenDPI, GaussianRadius, CartoonThreshold;
     QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
     QStack<QImage> UndoStack;
 };

@@ -7,6 +7,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 
 import org.qtproject.qt5.android.bindings.QtApplication;
 import org.qtproject.qt5.android.bindings.QtActivity;
@@ -35,6 +36,13 @@ public class MagicActivity extends QtActivity
     public void onDestroy()
     {
         super.onDestroy();
+    }
+
+    public static int getScreenDPI()
+    {
+        DisplayMetrics metrics = instance.getResources().getDisplayMetrics();
+
+        return metrics.densityDpi;
     }
 
     public static void showGallery()

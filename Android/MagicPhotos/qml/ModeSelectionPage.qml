@@ -1,7 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
-import QtQuick.Window 2.1
 
 import "Util.js" as UtilScript
 
@@ -194,7 +193,7 @@ Item {
                     anchors.bottom: parent.bottom
                     anchors.left:   parent.left
                     anchors.right:  parent.right
-                    height:         modeButton.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
+                    height:         modeButton.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
                     color:          "transparent"
 
                     Button {
@@ -217,13 +216,13 @@ Item {
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
-        height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+        height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
         z:              1
 
         ToolButton {
             anchors.centerIn: parent
-            width:            UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-            height:           UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+            width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+            height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
             style: ButtonStyle {
                 background: Rectangle {
@@ -233,7 +232,7 @@ Item {
 
                     Image {
                         anchors.fill:    parent
-                        anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                        anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                         source:          "images/help.png"
                         fillMode:        Image.PreserveAspectFit
                     }

@@ -8,11 +8,11 @@
 
 PixelateEditor::PixelateEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    IsChanged          = false;
-    CurrentMode        = ModeScroll;
-    HelperSize         = 0;
-    ScreenPixelDensity = 0;
-    PixelDenom         = 0;
+    IsChanged   = false;
+    CurrentMode = ModeScroll;
+    HelperSize  = 0;
+    ScreenDPI   = 0;
+    PixelDenom  = 0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
@@ -45,14 +45,14 @@ void PixelateEditor::setHelperSize(const int &size)
     HelperSize = size;
 }
 
-int PixelateEditor::screenPixelDensity() const
+int PixelateEditor::screenDPI() const
 {
-    return ScreenPixelDensity;
+    return ScreenDPI;
 }
 
-void PixelateEditor::setScreenPixelDensity(const int &density)
+void PixelateEditor::setScreenDPI(const int &dpi)
 {
-    ScreenPixelDensity = density;
+    ScreenDPI = dpi;
 }
 
 int PixelateEditor::pixDenom() const
@@ -227,15 +227,13 @@ void PixelateEditor::mouseReleaseEvent(QMouseEvent *event)
 
 int PixelateEditor::MapSizeToDevice(int size)
 {
-    int device_dpi = ScreenPixelDensity * 25.4;
-
-    if (device_dpi > (640 - 32)) {
+    if (ScreenDPI >= 640) {
         return size * 4;
-    } else if (device_dpi > (480 - 32)) {
+    } else if (ScreenDPI >= 480) {
         return size * 3;
-    } else if (device_dpi > (320 - 16)) {
+    } else if (ScreenDPI >= 320) {
         return size * 2;
-    } else if (device_dpi > (240 - 16)) {
+    } else if (ScreenDPI >= 240) {
         return size * 1.5;
     } else {
         return size;

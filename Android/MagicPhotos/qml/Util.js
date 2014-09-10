@@ -1,13 +1,11 @@
-function mapSizeToDevice(pixel_density, size) {
-    var device_dpi = pixel_density * 25.4;
-
-    if (device_dpi > (640 - 32)) {
+function mapSizeToDevice(screen_dpi, size) {
+    if (screen_dpi >= 640) {
         return Math.floor(size * 4);
-    } else if (device_dpi > (480 - 32)) {
+    } else if (screen_dpi >= 480) {
         return Math.floor(size * 3);
-    } else if (device_dpi > (320 - 16)) {
+    } else if (screen_dpi >= 320) {
         return Math.floor(size * 2);
-    } else if (device_dpi > (240 - 16)) {
+    } else if (screen_dpi >= 240) {
         return Math.floor(size * 1.5);
     } else {
         return Math.floor(size);

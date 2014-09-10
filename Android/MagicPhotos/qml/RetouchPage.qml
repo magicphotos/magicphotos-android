@@ -3,7 +3,6 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.1
-import QtQuick.Window 2.1
 import ImageEditor 1.0
 
 import "Util"
@@ -58,8 +57,8 @@ Item {
 
             Button {
                 id:             scrollModeButton
-                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 checked:        true
@@ -70,11 +69,11 @@ Item {
                         implicitWidth:  control.width
                         implicitHeight: control.height
                         color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/mode_scroll.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -92,8 +91,8 @@ Item {
 
             Button {
                 id:             samplingPointModeButton
-                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 enabled:        false
@@ -103,11 +102,11 @@ Item {
                         implicitWidth:  control.width
                         implicitHeight: control.height
                         color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/mode_sampling_point.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -125,8 +124,8 @@ Item {
 
             Button {
                 id:             cloneModeButton
-                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 enabled:        false
@@ -136,11 +135,11 @@ Item {
                         implicitWidth:  control.width
                         implicitHeight: control.height
                         color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/mode_clone.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -158,8 +157,8 @@ Item {
 
             Button {
                 id:             blurModeButton
-                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 enabled:        false
@@ -169,11 +168,11 @@ Item {
                         implicitWidth:  control.width
                         implicitHeight: control.height
                         color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/mode_blur.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -255,13 +254,13 @@ Item {
                     color:  "transparent"
 
                     RetouchEditor {
-                        id:                 retouchEditor
-                        scale:              editorFlickable.contentWidth        > 0.0 &&
-                                            editorFlickable.initialContentWidth > 0.0 ?
-                                            editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
-                        transformOrigin:    Item.TopLeft
-                        helperSize:         helper.width
-                        screenPixelDensity: Screen.pixelDensity
+                        id:              retouchEditor
+                        scale:           editorFlickable.contentWidth        > 0.0 &&
+                                         editorFlickable.initialContentWidth > 0.0 ?
+                                         editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
+                        transformOrigin: Item.TopLeft
+                        helperSize:      helper.width
+                        screenDPI:       AndroidGW.getScreenDPI()
 
                         onImageOpened: {
                             waitRectangle.visible = false;
@@ -339,8 +338,8 @@ Item {
 
                     Image {
                         id:      samplingPointImage
-                        width:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                        height:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                        width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                        height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                         source:  "images/sampling_point.png"
                         visible: retouchEditor.samplingPointValid
 
@@ -380,13 +379,13 @@ Item {
             id:           helperRectangle
             anchors.top:  parent.top
             anchors.left: parent.left
-            width:        UtilScript.mapSizeToDevice(Screen.pixelDensity, 128)
-            height:       UtilScript.mapSizeToDevice(Screen.pixelDensity, 128)
+            width:        UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 128)
+            height:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 128)
             z:            5
             visible:      false
             color:        "black"
             border.color: "white"
-            border.width: UtilScript.mapSizeToDevice(Screen.pixelDensity, 2)
+            border.width: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 2)
 
             Helper {
                 id:           helper
@@ -415,15 +414,15 @@ Item {
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
-        height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+        height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
         z:              1
 
         RowLayout {
             anchors.fill: parent
 
             ToolButton {
-                width:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height: UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
                 style: ButtonStyle {
                     background: Rectangle {
@@ -433,7 +432,7 @@ Item {
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/back.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -451,8 +450,8 @@ Item {
 
             ToolButton {
                 id:      saveToolButton
-                width:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled: false
 
                 style: ButtonStyle {
@@ -463,7 +462,7 @@ Item {
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/save.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -481,8 +480,8 @@ Item {
 
             ToolButton {
                 id:      undoToolButton
-                width:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled: false
 
                 style: ButtonStyle {
@@ -493,7 +492,7 @@ Item {
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/undo.png"
                             fillMode:        Image.PreserveAspectFit
                         }
@@ -506,8 +505,8 @@ Item {
             }
 
             ToolButton {
-                width:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
-                height: UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
                 style: ButtonStyle {
                     background: Rectangle {
@@ -517,7 +516,7 @@ Item {
 
                         Image {
                             anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
                             source:          "images/help.png"
                             fillMode:        Image.PreserveAspectFit
                         }

@@ -12,6 +12,12 @@ AndroidGW *AndroidGW::instance()
     return Instance;
 }
 
+int AndroidGW::getScreenDPI()
+{
+    return QAndroidJniObject::callStaticMethod<jint>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                                     "getScreenDPI");
+}
+
 void AndroidGW::showGallery()
 {
     QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",

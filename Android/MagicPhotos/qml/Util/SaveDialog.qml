@@ -1,7 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
-import QtQuick.Window 2.1
 
 import "../Util.js" as UtilScript
 
@@ -62,13 +61,13 @@ Rectangle {
         opacity:          1.0
         color:            "lightgray"
         width:            parent.width * 3 / 4
-        height:           labelText.height + fileNameTextField.height + Math.max(okButton.height, cancelButton.height) + UtilScript.mapSizeToDevice(Screen.pixelDensity, 32)
+        height:           labelText.height + fileNameTextField.height + Math.max(okButton.height, cancelButton.height) + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 32)
 
         Text {
             id:                 labelText
             anchors.top:        parent.top
             anchors.left:       parent.left
-            anchors.leftMargin: UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            anchors.leftMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
             color:              "black"
             font.pointSize:     18
             text:               qsTr("File Name")
@@ -79,8 +78,8 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
             anchors.right:          parent.right
-            anchors.leftMargin:     UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
-            anchors.rightMargin:    UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            anchors.leftMargin:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
+            anchors.rightMargin:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
             inputMethodHints:       Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
         }
 
@@ -88,9 +87,9 @@ Rectangle {
             id:                   okButton
             anchors.bottom:       parent.bottom
             anchors.left:         parent.left
-            anchors.leftMargin:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
-            anchors.bottomMargin: UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
-            width:                parent.width / 2 - UtilScript.mapSizeToDevice(Screen.pixelDensity, 10)
+            anchors.leftMargin:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
+            anchors.bottomMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
+            width:                parent.width / 2 - UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 10)
             text:                 qsTr("OK")
 
             onClicked: {
@@ -105,9 +104,9 @@ Rectangle {
             id:                   cancelButton
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
-            anchors.rightMargin:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
-            anchors.bottomMargin: UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
-            width:                parent.width / 2 - UtilScript.mapSizeToDevice(Screen.pixelDensity, 10)
+            anchors.rightMargin:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
+            anchors.bottomMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 5)
+            width:                parent.width / 2 - UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 10)
             text:                 qsTr("Cancel")
 
             onClicked: {

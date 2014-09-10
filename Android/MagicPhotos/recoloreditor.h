@@ -13,11 +13,11 @@ class RecolorEditor : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode               READ mode               WRITE setMode)
-    Q_PROPERTY(int  helperSize         READ helperSize         WRITE setHelperSize)
-    Q_PROPERTY(int  screenPixelDensity READ screenPixelDensity WRITE setScreenPixelDensity)
-    Q_PROPERTY(int  hue                READ hue                WRITE setHue)
-    Q_PROPERTY(bool changed            READ changed)
+    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
+    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
+    Q_PROPERTY(int  screenDPI  READ screenDPI  WRITE setScreenDPI)
+    Q_PROPERTY(int  hue        READ hue        WRITE setHue)
+    Q_PROPERTY(bool changed    READ changed)
 
     Q_ENUMS(Mode)
     Q_ENUMS(MouseState)
@@ -32,8 +32,8 @@ public:
     int  helperSize() const;
     void setHelperSize(const int &size);
 
-    int  screenPixelDensity() const;
-    void setScreenPixelDensity(const int &density);
+    int  screenDPI() const;
+    void setScreenDPI(const int &dpi);
 
     int  hue() const;
     void setHue(const int &hue);
@@ -107,7 +107,7 @@ private:
     constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool                    IsChanged;
-    int                     CurrentMode, HelperSize, ScreenPixelDensity, CurrentHue;
+    int                     CurrentMode, HelperSize, ScreenDPI, CurrentHue;
     QImage                  LoadedImage, OriginalImage, CurrentImage;
     QStack<QImage>          UndoStack;
     QHash<quint16, quint32> RGB16ToHSVMap;
