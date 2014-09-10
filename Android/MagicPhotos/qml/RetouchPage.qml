@@ -13,8 +13,10 @@ Item {
     id:    retouchPage
     focus: true
 
-    property string openImageFile: ""
-    property string saveImageFile: ""
+    property int    imageOrientation: -1
+
+    property string openImageFile:    ""
+    property string saveImageFile:    ""
 
     Component.onCompleted: {
         retouchEditor.helperImageReady.connect(helper.helperImageReady);
@@ -32,9 +34,15 @@ Item {
         }
     }
 
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && openImageFile !== "") {
+            retouchEditor.openImage(openImageFile, imageOrientation);
+        }
+    }
+
     onOpenImageFileChanged: {
-        if (openImageFile !== "") {
-            retouchEditor.openImage(openImageFile);
+        if (imageOrientation !== -1 && openImageFile !== "") {
+            retouchEditor.openImage(openImageFile, imageOrientation);
         }
     }
 

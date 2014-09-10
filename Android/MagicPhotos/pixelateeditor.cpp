@@ -1,6 +1,7 @@
 #include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QThread>
+#include <QtGui/QTransform>
 #include <QtGui/QImageReader>
 #include <QtGui/QPainter>
 
@@ -70,7 +71,7 @@ bool PixelateEditor::changed() const
     return IsChanged;
 }
 
-void PixelateEditor::openImage(const QString &image_file)
+void PixelateEditor::openImage(const QString &image_file, const int &image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -90,6 +91,26 @@ void PixelateEditor::openImage(const QString &image_file)
             LoadedImage = reader.read();
 
             if (!LoadedImage.isNull()) {
+                if (image_orientation == 3) {
+                    QTransform transform;
+
+                    transform.rotate(180);
+
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
+                } else if (image_orientation == 6) {
+                    QTransform transform;
+
+                    transform.rotate(90);
+
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                } else if (image_orientation == 8) {
+                    QTransform transform;
+
+                    transform.rotate(270);
+
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                }
+
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {
@@ -320,7 +341,7 @@ void PixelatePreviewGenerator::setPixDenom(const int &pix_denom)
     }
 }
 
-void PixelatePreviewGenerator::openImage(const QString &image_file)
+void PixelatePreviewGenerator::openImage(const QString &image_file, const int &image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -340,6 +361,26 @@ void PixelatePreviewGenerator::openImage(const QString &image_file)
             LoadedImage = reader.read();
 
             if (!LoadedImage.isNull()) {
+                if (image_orientation == 3) {
+                    QTransform transform;
+
+                    transform.rotate(180);
+
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
+                } else if (image_orientation == 6) {
+                    QTransform transform;
+
+                    transform.rotate(90);
+
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                } else if (image_orientation == 8) {
+                    QTransform transform;
+
+                    transform.rotate(270);
+
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                }
+
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {

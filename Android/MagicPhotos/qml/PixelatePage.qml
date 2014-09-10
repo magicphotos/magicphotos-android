@@ -13,10 +13,11 @@ Item {
     id:    pixelatePage
     focus: true
 
-    property int    pixelDenom:    -1
+    property int    imageOrientation: -1
+    property int    pixelDenom:       -1
 
-    property string openImageFile: ""
-    property string saveImageFile: ""
+    property string openImageFile:    ""
+    property string saveImageFile:    ""
 
     Component.onCompleted: {
         pixelateEditor.helperImageReady.connect(helper.helperImageReady);
@@ -34,19 +35,27 @@ Item {
         }
     }
 
-    onPixelDenomChanged: {
-        if (pixelDenom !== -1 && openImageFile !== "") {
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && openImageFile !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(openImageFile);
+            pixelateEditor.openImage(openImageFile, imageOrientation);
+        }
+    }
+
+    onPixelDenomChanged: {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && openImageFile !== "") {
+            pixelateEditor.pixDenom = pixelDenom;
+
+            pixelateEditor.openImage(openImageFile, imageOrientation);
         }
     }
 
     onOpenImageFileChanged: {
-        if (pixelDenom !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && openImageFile !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(openImageFile);
+            pixelateEditor.openImage(openImageFile, imageOrientation);
         }
     }
 

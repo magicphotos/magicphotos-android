@@ -12,8 +12,10 @@ import "Util.js" as UtilScript
 Item {
     id: recolorPage
 
-    property string openImageFile: ""
-    property string saveImageFile: ""
+    property int    imageOrientation: -1
+
+    property string openImageFile:    ""
+    property string saveImageFile:    ""
 
     Component.onCompleted: {
         recolorEditor.helperImageReady.connect(helper.helperImageReady);
@@ -31,9 +33,15 @@ Item {
         }
     }
 
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && openImageFile !== "") {
+            recolorEditor.openImage(openImageFile, imageOrientation);
+        }
+    }
+
     onOpenImageFileChanged: {
-        if (openImageFile !== "") {
-            recolorEditor.openImage(openImageFile);
+        if (imageOrientation !== -1 && openImageFile !== "") {
+            recolorEditor.openImage(openImageFile, imageOrientation);
         }
     }
 

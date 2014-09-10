@@ -13,6 +13,7 @@ Item {
     id:    cartoonPage
     focus: true
 
+    property int    imageOrientation: -1
     property int    gaussianRadius:   -1
     property int    cartoonThreshold: -1
 
@@ -35,30 +36,39 @@ Item {
         }
     }
 
-    onGaussianRadiusChanged: {
-        if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile);
+            cartoonEditor.openImage(openImageFile, imageOrientation);
+        }
+    }
+
+    onGaussianRadiusChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+            cartoonEditor.radius    = gaussianRadius;
+            cartoonEditor.threshold = cartoonThreshold;
+
+            cartoonEditor.openImage(openImageFile, imageOrientation);
         }
     }
 
     onCartoonThresholdChanged: {
-        if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile);
+            cartoonEditor.openImage(openImageFile, imageOrientation);
         }
     }
 
     onOpenImageFileChanged: {
-        if (gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile);
+            cartoonEditor.openImage(openImageFile, imageOrientation);
         }
     }
 

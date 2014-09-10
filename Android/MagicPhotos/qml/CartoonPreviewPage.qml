@@ -11,7 +11,9 @@ Item {
     id:    cartoonPreviewPage
     focus: true
 
-    property string openImageFile: ""
+    property int    imageOrientation: -1
+
+    property string openImageFile:    ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -21,12 +23,21 @@ Item {
         }
     }
 
-    onOpenImageFileChanged: {
-        if (openImageFile !== "") {
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && openImageFile !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
-            cartoonPreviewGenerator.openImage(openImageFile);
+            cartoonPreviewGenerator.openImage(openImageFile, imageOrientation);
+        }
+    }
+
+    onOpenImageFileChanged: {
+        if (imageOrientation !== -1 && openImageFile !== "") {
+            cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
+            cartoonPreviewGenerator.threshold = thresholdSlider.value;
+
+            cartoonPreviewGenerator.openImage(openImageFile, imageOrientation);
         }
     }
 
@@ -167,7 +178,7 @@ Item {
                 var component = Qt.createComponent("CartoonPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {gaussianRadius: gaussianRadiusSlider.value, cartoonThreshold: thresholdSlider.value, openImageFile: openImageFile}});
+                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, cartoonThreshold: thresholdSlider.value, openImageFile: openImageFile}});
                 } else {
                     console.log(component.errorString());
                 }

@@ -32,14 +32,14 @@ void AndroidGW::refreshGallery(const QString &image_file)
                                               "refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
-static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file)
+static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
 {
     const char* str        = jni_env->GetStringUTFChars(j_image_file, NULL);
     QString     image_file = str;
 
     jni_env->ReleaseStringUTFChars(j_image_file, str);
 
-    emit AndroidGW::instance()->imageSelected(image_file);
+    emit AndroidGW::instance()->imageSelected(image_file, image_orientation);
 }
 
 static void imageSelectionCancelled(JNIEnv *)
@@ -48,8 +48,8 @@ static void imageSelectionCancelled(JNIEnv *)
 }
 
 static JNINativeMethod methods[] = {
-    { "imageSelected",           "(Ljava/lang/String;)V", (void *)imageSelected },
-    { "imageSelectionCancelled", "()V",                   (void *)imageSelectionCancelled }
+    { "imageSelected",           "(Ljava/lang/String;I)V", (void *)imageSelected },
+    { "imageSelectionCancelled", "()V",                    (void *)imageSelectionCancelled }
 };
 
 jint JNICALL JNI_OnLoad(JavaVM *vm, void *)

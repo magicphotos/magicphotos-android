@@ -13,10 +13,11 @@ Item {
     id:    sketchPage
     focus: true
 
-    property int    gaussianRadius: -1
+    property int    imageOrientation: -1
+    property int    gaussianRadius:   -1
 
-    property string openImageFile:  ""
-    property string saveImageFile:  ""
+    property string openImageFile:    ""
+    property string saveImageFile:    ""
 
     Component.onCompleted: {
         sketchEditor.helperImageReady.connect(helper.helperImageReady);
@@ -34,19 +35,27 @@ Item {
         }
     }
 
-    onGaussianRadiusChanged: {
-        if (gaussianRadius !== -1 && openImageFile !== "") {
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && openImageFile !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(openImageFile);
+            sketchEditor.openImage(openImageFile, imageOrientation);
+        }
+    }
+
+    onGaussianRadiusChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && openImageFile !== "") {
+            sketchEditor.radius = gaussianRadius;
+
+            sketchEditor.openImage(openImageFile, imageOrientation);
         }
     }
 
     onOpenImageFileChanged: {
-        if (gaussianRadius !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && openImageFile !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(openImageFile);
+            sketchEditor.openImage(openImageFile, imageOrientation);
         }
     }
 

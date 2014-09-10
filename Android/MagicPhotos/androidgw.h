@@ -18,7 +18,7 @@ public:
     Q_INVOKABLE void refreshGallery(const QString &image_file);
 
 signals:
-    void imageSelected(const QString &image_file);
+    void imageSelected(const QString &image_file, const int &image_orientation);
     void imageSelectionCancelled();
 
 private:

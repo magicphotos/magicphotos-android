@@ -11,7 +11,9 @@ Item {
     id:    sketchPreviewPage
     focus: true
 
-    property string openImageFile: ""
+    property int    imageOrientation: -1
+
+    property string openImageFile:    ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -21,11 +23,19 @@ Item {
         }
     }
 
-    onOpenImageFileChanged: {
-        if (openImageFile !== "") {
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && openImageFile !== "") {
             sketchPreviewGenerator.radius = gaussianRadiusSlider.value;
 
-            sketchPreviewGenerator.openImage(openImageFile);
+            sketchPreviewGenerator.openImage(openImageFile, imageOrientation);
+        }
+    }
+
+    onOpenImageFileChanged: {
+        if (imageOrientation !== -1 && openImageFile !== "") {
+            sketchPreviewGenerator.radius = gaussianRadiusSlider.value;
+
+            sketchPreviewGenerator.openImage(openImageFile, imageOrientation);
         }
     }
 
@@ -137,7 +147,7 @@ Item {
                 var component = Qt.createComponent("SketchPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {gaussianRadius: gaussianRadiusSlider.value, openImageFile: openImageFile}});
+                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, openImageFile: openImageFile}});
                 } else {
                     console.log(component.errorString());
                 }

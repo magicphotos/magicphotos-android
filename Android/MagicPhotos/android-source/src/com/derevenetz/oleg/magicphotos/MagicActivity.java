@@ -3,6 +3,7 @@ package com.derevenetz.oleg.magicphotos;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class MagicActivity extends QtActivity
 
     private static MagicActivity instance = null;
 
-    private static native void imageSelected(String image_file);
+    private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
 
     public MagicActivity()
@@ -73,7 +74,21 @@ public class MagicActivity extends QtActivity
 
                cursor.close();
 
-               imageSelected(image_file);
+               int image_orientation = ExifInterface.ORIENTATION_UNDEFINED;
+
+               try {
+                   ExifInterface exif_interface = new ExifInterface(image_file);
+
+                   image_orientation = exif_interface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+                   if (image_orientation < 0) {
+                       image_orientation = ExifInterface.ORIENTATION_UNDEFINED;
+                   }
+               } catch (Exception ex) {
+                   image_orientation = ExifInterface.ORIENTATION_UNDEFINED;
+               }
+
+               imageSelected(image_file, image_orientation);
            } else {
                imageSelectionCancelled();
            }

@@ -35,7 +35,7 @@ public:
 
     bool changed() const;
 
-    Q_INVOKABLE void openImage(const QString &image_file);
+    Q_INVOKABLE void openImage(const QString &image_file, const int &image_orientation);
     Q_INVOKABLE void saveImage(const QString &image_file);
 
     Q_INVOKABLE void undo();
