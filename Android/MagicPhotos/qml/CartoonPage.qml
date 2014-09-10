@@ -468,7 +468,7 @@ Item {
                 }
 
                 onClicked: {
-                    Qt.openUrlExternally(qsTr("http://m.youtube.com/"));
+                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
                 }
             }
         }
