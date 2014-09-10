@@ -1,8 +1,12 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.1
+import QtQuick.Window 2.1
 import ImageEditor 1.0
+
+import "Util.js" as UtilScript
 
 Item {
     id:    cartoonPreviewPage
@@ -51,7 +55,7 @@ Item {
                 thresholdSlider.enabled      = false;
                 applyButton.enabled          = false;
 
-                imageOpenFailedQueryDialog.open();
+                imageOpenFailedMessageDialog.open();
             }
 
             onGenerationStarted: {
@@ -97,7 +101,7 @@ Item {
         anchors.bottom: thresholdSliderRectangle.top
         anchors.left:   parent.left
         anchors.right:  parent.right
-        height:         gaussianRadiusSlider.height + 16
+        height:         gaussianRadiusSlider.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
         color:          "transparent"
 
         Slider {
@@ -124,7 +128,7 @@ Item {
         anchors.bottom: applyButtonRectangle.top
         anchors.left:   parent.left
         anchors.right:  parent.right
-        height:         thresholdSlider.height + 16
+        height:         thresholdSlider.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
         color:          "transparent"
 
         Slider {
@@ -151,7 +155,7 @@ Item {
         anchors.bottom: bottomToolBar.top
         anchors.left:   parent.left
         anchors.right:  parent.right
-        height:         applyButton.height + 16
+        height:         applyButton.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
         color:          "transparent"
 
         Button {
@@ -175,13 +179,31 @@ Item {
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
+        height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
         z:              1
 
         RowLayout {
             anchors.fill: parent
 
             ToolButton {
-                iconSource: "images/back.png"
+                anchors.left: parent.left
+                width:        UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:       UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/back.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onClicked: {
                     mainStackView.pop();
@@ -189,7 +211,24 @@ Item {
             }
 
             ToolButton {
-                iconSource: "images/help.png"
+                anchors.centerIn: parent
+                width:            UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:           UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/help.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onClicked: {
                     Qt.openUrlExternally(qsTr("http://m.youtube.com/"));
@@ -199,7 +238,7 @@ Item {
     }
 
     MessageDialog {
-        id:              imageOpenFailedQueryDialog
+        id:              imageOpenFailedMessageDialog
         title:           qsTr("Error")
         icon:            StandardIcon.Critical
         text:            qsTr("Could not open image")

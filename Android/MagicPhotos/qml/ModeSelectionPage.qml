@@ -1,5 +1,9 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.2
+import QtQuick.Window 2.1
+
+import "Util.js" as UtilScript
 
 Item {
     id: modeSelectionPage
@@ -190,7 +194,7 @@ Item {
                     anchors.bottom: parent.bottom
                     anchors.left:   parent.left
                     anchors.right:  parent.right
-                    height:         modeButton.height + 16
+                    height:         modeButton.height + UtilScript.mapSizeToDevice(Screen.pixelDensity, 16)
                     color:          "transparent"
 
                     Button {
@@ -213,11 +217,28 @@ Item {
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
+        height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
         z:              1
 
         ToolButton {
             anchors.centerIn: parent
-            iconSource:       "images/help.png"
+            width:            UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+            height:           UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+
+            style: ButtonStyle {
+                background: Rectangle {
+                    implicitWidth:  control.width
+                    implicitHeight: control.height
+                    color:          "transparent"
+
+                    Image {
+                        anchors.fill:    parent
+                        anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                        source:          "images/help.png"
+                        fillMode:        Image.PreserveAspectFit
+                    }
+                }
+            }
 
             onClicked: {
                 Qt.openUrlExternally(qsTr("http://m.youtube.com/"));

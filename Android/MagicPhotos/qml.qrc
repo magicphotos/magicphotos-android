@@ -36,5 +36,6 @@
         <file alias="PixelatePreviewPage.qml">qml/PixelatePreviewPage.qml</file>
         <file alias="RecolorPage.qml">qml/RecolorPage.qml</file>
         <file alias="RetouchPage.qml">qml/RetouchPage.qml</file>
+        <file alias="Util.js">qml/Util.js</file>
     </qresource>
 </RCC>

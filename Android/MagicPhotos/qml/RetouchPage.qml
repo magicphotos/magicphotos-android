@@ -1,10 +1,14 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.1
+import QtQuick.Window 2.1
 import ImageEditor 1.0
 
 import "Util"
+
+import "Util.js" as UtilScript
 
 Item {
     id:    retouchPage
@@ -20,7 +24,7 @@ Item {
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
             if (retouchEditor.changed) {
-                backQueryDialog.open();
+                backMessageDialog.open();
             } else {
                 mainStackView.pop();
             }
@@ -54,12 +58,28 @@ Item {
 
             Button {
                 id:             scrollModeButton
-                iconSource:     "images/mode_scroll.png"
-                width:          80
+                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 checked:        true
                 enabled:        false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          control.checked ? "gray" : "lightgray"
+                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/mode_scroll.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onCheckedChanged: {
                     if (checked) {
@@ -72,11 +92,27 @@ Item {
 
             Button {
                 id:             samplingPointModeButton
-                iconSource:     "images/mode_sampling_point.png"
-                width:          80
+                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 enabled:        false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          control.checked ? "gray" : "lightgray"
+                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/mode_sampling_point.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onCheckedChanged: {
                     if (checked) {
@@ -89,11 +125,27 @@ Item {
 
             Button {
                 id:             cloneModeButton
-                iconSource:     "images/mode_clone.png"
-                width:          80
+                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 enabled:        false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          control.checked ? "gray" : "lightgray"
+                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/mode_clone.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onCheckedChanged: {
                     if (checked) {
@@ -106,11 +158,27 @@ Item {
 
             Button {
                 id:             blurModeButton
-                iconSource:     "images/mode_blur.png"
-                width:          80
+                width:          UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
                 exclusiveGroup: buttonExclusiveGroup
                 checkable:      true
                 enabled:        false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          control.checked ? "gray" : "lightgray"
+                        radius:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/mode_blur.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onCheckedChanged: {
                     if (checked) {
@@ -187,12 +255,13 @@ Item {
                     color:  "transparent"
 
                     RetouchEditor {
-                        id:              retouchEditor
-                        scale:           editorFlickable.contentWidth        > 0.0 &&
-                                         editorFlickable.initialContentWidth > 0.0 ?
-                                         editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
-                        transformOrigin: Item.TopLeft
-                        helperSize:      helper.width
+                        id:                 retouchEditor
+                        scale:              editorFlickable.contentWidth        > 0.0 &&
+                                            editorFlickable.initialContentWidth > 0.0 ?
+                                            editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
+                        transformOrigin:    Item.TopLeft
+                        helperSize:         helper.width
+                        screenPixelDensity: Screen.pixelDensity
 
                         onImageOpened: {
                             waitRectangle.visible = false;
@@ -220,11 +289,11 @@ Item {
                             cloneModeButton.enabled         = false;
                             blurModeButton.enabled          = false;
 
-                            imageOpenFailedQueryDialog.open();
+                            imageOpenFailedMessageDialog.open();
                         }
 
                         onImageSaveFailed: {
-                            imageSaveFailedQueryDialog.open();
+                            imageSaveFailedMessageDialog.open();
                         }
 
                         onUndoAvailabilityChanged: {
@@ -270,8 +339,8 @@ Item {
 
                     Image {
                         id:      samplingPointImage
-                        width:   48
-                        height:  48
+                        width:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                        height:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
                         source:  "images/sampling_point.png"
                         visible: retouchEditor.samplingPointValid
 
@@ -311,13 +380,13 @@ Item {
             id:           helperRectangle
             anchors.top:  parent.top
             anchors.left: parent.left
-            width:        128
-            height:       128
+            width:        UtilScript.mapSizeToDevice(Screen.pixelDensity, 128)
+            height:       UtilScript.mapSizeToDevice(Screen.pixelDensity, 128)
             z:            5
             visible:      false
             color:        "black"
             border.color: "white"
-            border.width: 2
+            border.width: UtilScript.mapSizeToDevice(Screen.pixelDensity, 2)
 
             Helper {
                 id:           helper
@@ -346,17 +415,34 @@ Item {
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
+        height:         UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
         z:              1
 
         RowLayout {
             anchors.fill: parent
 
             ToolButton {
-                iconSource: "images/back.png"
+                width:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height: UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/back.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onClicked: {
                     if (retouchEditor.changed) {
-                        backQueryDialog.open();
+                        backMessageDialog.open();
                     } else {
                         mainStackView.pop();
                     }
@@ -364,9 +450,25 @@ Item {
             }
 
             ToolButton {
-                id:         saveToolButton
-                iconSource: "images/save.png"
-                enabled:    false
+                id:      saveToolButton
+                width:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                enabled: false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/save.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onClicked: {
                     if (saveImageFile !== "") {
@@ -378,9 +480,25 @@ Item {
             }
 
             ToolButton {
-                id:         undoToolButton
-                iconSource: "images/undo.png"
-                enabled:    false
+                id:      undoToolButton
+                width:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                enabled: false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/undo.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onClicked: {
                     retouchEditor.undo();
@@ -388,7 +506,23 @@ Item {
             }
 
             ToolButton {
-                iconSource: "images/help.png"
+                width:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+                height: UtilScript.mapSizeToDevice(Screen.pixelDensity, 48)
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(Screen.pixelDensity, 4)
+                            source:          "images/help.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
 
                 onClicked: {
                     Qt.openUrlExternally(qsTr("http://m.youtube.com/"));
@@ -398,7 +532,7 @@ Item {
     }
 
     MessageDialog {
-        id:              imageOpenFailedQueryDialog
+        id:              imageOpenFailedMessageDialog
         title:           qsTr("Error")
         icon:            StandardIcon.Critical
         text:            qsTr("Could not open image")
@@ -406,7 +540,7 @@ Item {
     }
 
     MessageDialog {
-        id:              imageSaveFailedQueryDialog
+        id:              imageSaveFailedMessageDialog
         title:           qsTr("Error")
         icon:            StandardIcon.Critical
         text:            qsTr("Could not save image")
@@ -414,7 +548,7 @@ Item {
     }
 
     MessageDialog {
-        id:              backQueryDialog
+        id:              backMessageDialog
         title:           qsTr("Warning")
         icon:            StandardIcon.Warning
         text:            qsTr("Are you sure? Current image is not saved and will be lost.")

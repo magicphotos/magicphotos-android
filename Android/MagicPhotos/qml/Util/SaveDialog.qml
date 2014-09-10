@@ -1,6 +1,9 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.1
+import QtQuick.Window 2.1
+
+import "../Util.js" as UtilScript
 
 Rectangle {
     id:           saveDialog
@@ -58,15 +61,17 @@ Rectangle {
         anchors.centerIn: parent
         opacity:          1.0
         color:            "lightgray"
-        width:            360
-        height:           180
+        width:            parent.width * 3 / 4
+        height:           labelText.height + fileNameTextField.height + Math.max(okButton.height, cancelButton.height) + UtilScript.mapSizeToDevice(Screen.pixelDensity, 32)
 
         Text {
-            anchors.top:    parent.top
-            anchors.left:   parent.left
-            color:          "black"
-            font.pointSize: 18
-            text:           qsTr("File Name")
+            id:                 labelText
+            anchors.top:        parent.top
+            anchors.left:       parent.left
+            anchors.leftMargin: UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            color:              "black"
+            font.pointSize:     18
+            text:               qsTr("File Name")
         }
 
         TextField {
@@ -74,15 +79,18 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
             anchors.right:          parent.right
+            anchors.leftMargin:     UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            anchors.rightMargin:    UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
             inputMethodHints:       Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
         }
 
         Button {
+            id:                   okButton
             anchors.bottom:       parent.bottom
             anchors.left:         parent.left
-            anchors.leftMargin:   5
-            anchors.bottomMargin: 5
-            width:                parent.width / 2 - 10
+            anchors.leftMargin:   UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            anchors.bottomMargin: UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            width:                parent.width / 2 - UtilScript.mapSizeToDevice(Screen.pixelDensity, 10)
             text:                 qsTr("OK")
 
             onClicked: {
@@ -94,11 +102,12 @@ Rectangle {
         }
 
         Button {
+            id:                   cancelButton
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
-            anchors.rightMargin:  5
-            anchors.bottomMargin: 5
-            width:                parent.width / 2 - 10
+            anchors.rightMargin:  UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            anchors.bottomMargin: UtilScript.mapSizeToDevice(Screen.pixelDensity, 5)
+            width:                parent.width / 2 - UtilScript.mapSizeToDevice(Screen.pixelDensity, 10)
             text:                 qsTr("Cancel")
 
             onClicked: {

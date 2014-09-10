@@ -8,10 +8,11 @@
 
 RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    IsChanged   = false;
-    CurrentMode = ModeScroll;
-    HelperSize  = 0;
-    CurrentHue  = 0;
+    IsChanged          = false;
+    CurrentMode        = ModeScroll;
+    HelperSize         = 0;
+    ScreenPixelDensity = 0;
+    CurrentHue         = 0;
 
     RGB16  rgb16;
     HSV    hsv;
@@ -61,6 +62,16 @@ int RecolorEditor::helperSize() const
 void RecolorEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
+}
+
+int RecolorEditor::screenPixelDensity() const
+{
+    return ScreenPixelDensity;
+}
+
+void RecolorEditor::setScreenPixelDensity(const int &density)
+{
+    ScreenPixelDensity = density;
 }
 
 int RecolorEditor::hue() const
@@ -227,6 +238,23 @@ QRgb RecolorEditor::AdjustHue(QRgb rgb)
     return QColor::fromHsv(CurrentHue, hsv.s, hsv.v, qAlpha(rgb)).rgba();
 }
 
+int RecolorEditor::MapSizeToDevice(int size)
+{
+    int device_dpi = ScreenPixelDensity * 25.4;
+
+    if (device_dpi > (640 - 32)) {
+        return size * 4;
+    } else if (device_dpi > (480 - 32)) {
+        return size * 3;
+    } else if (device_dpi > (320 - 16)) {
+        return size * 2;
+    } else if (device_dpi > (240 - 16)) {
+        return size * 1.5;
+    } else {
+        return size;
+    }
+}
+
 void RecolorEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
@@ -247,7 +275,7 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = BRUSH_SIZE / scale();
+        int radius = MapSizeToDevice(BRUSH_SIZE) / scale();
 
         for (int x = center_x - radius; x <= center_x + radius; x++) {
             for (int y = center_y - radius; y <= center_y + radius; y++) {
