@@ -18,6 +18,18 @@ int AndroidGW::getScreenDPI()
                                                      "getScreenDPI");
 }
 
+bool AndroidGW::getFullVersion()
+{
+    return QAndroidJniObject::callStaticMethod<jboolean>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                                         "getFullVersion");
+}
+
+bool AndroidGW::buyFullVersion()
+{
+    return QAndroidJniObject::callStaticMethod<jboolean>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                                         "buyFullVersion");
+}
+
 void AndroidGW::showGallery()
 {
     QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",

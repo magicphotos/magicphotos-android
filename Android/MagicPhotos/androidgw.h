@@ -14,6 +14,8 @@ public:
     static AndroidGW *instance();
 
     Q_INVOKABLE int  getScreenDPI();
+    Q_INVOKABLE bool getFullVersion();
+    Q_INVOKABLE bool buyFullVersion();
     Q_INVOKABLE void showGallery();
     Q_INVOKABLE void refreshGallery(const QString &image_file);
 

@@ -401,10 +401,14 @@ Item {
                 }
 
                 onClicked: {
-                    if (saveImageFile !== "") {
-                        saveDialog.show(saveImageFile);
+                    if (AndroidGW.getFullVersion()) {
+                        if (saveImageFile !== "") {
+                            saveDialog.show(saveImageFile);
+                        } else {
+                            saveDialog.show(openImageFile);
+                        }
                     } else {
-                        saveDialog.show(openImageFile);
+                        purchaseMessageDialog.open();
                     }
                 }
             }
@@ -487,6 +491,28 @@ Item {
         onYes: {
             mainStackView.pop();
         }
+    }
+
+    MessageDialog {
+        id:              purchaseMessageDialog
+        title:           qsTr("Warning")
+        icon:            StandardIcon.Warning
+        text:            qsTr("The save function is available in the full version only. Do you want to purchase full version now?")
+        standardButtons: StandardButton.Yes | StandardButton.No
+
+        onYes: {
+            if (!AndroidGW.buyFullVersion()) {
+                purchaseFailedMessageDialog.open();
+            }
+        }
+    }
+
+    MessageDialog {
+        id:              purchaseFailedMessageDialog
+        title:           qsTr("Error")
+        icon:            StandardIcon.Critical
+        text:            qsTr("Purchase attempt failed, in-app billing may be not supported on this device")
+        standardButtons: StandardButton.Ok
     }
 
     SaveDialog {
