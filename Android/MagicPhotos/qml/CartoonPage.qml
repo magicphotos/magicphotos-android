@@ -425,24 +425,28 @@ Item {
                 }
 
                 onClicked: {
-                    var date  = new Date();
-                    var year  = date.getFullYear();
-                    var month = date.getMonth() + 1;
-                    var day   = date.getDate();
-                    var hour  = date.getHours();
-                    var min   = date.getMinutes();
-                    var sec   = date.getSeconds();
+                    if (AndroidGW.getFullVersion()) {
+                        var date  = new Date();
+                        var year  = date.getFullYear();
+                        var month = date.getMonth() + 1;
+                        var day   = date.getDate();
+                        var hour  = date.getHours();
+                        var min   = date.getMinutes();
+                        var sec   = date.getSeconds();
 
-                    var file_name = "IMG_" + year                              + "-" +
-                                             (month > 9 ? month : "0" + month) + "-" +
-                                             (day   > 9 ? day   : "0" + day)   + "_" +
-                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                             (min   > 9 ? min   : "0" + min)   + "-" +
-                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+                        var file_name = "IMG_" + year                              + "-" +
+                                                 (month > 9 ? month : "0" + month) + "-" +
+                                                 (day   > 9 ? day   : "0" + day)   + "_" +
+                                                 (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                                 (min   > 9 ? min   : "0" + min)   + "-" +
+                                                 (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
 
-                    cartoonPage.shareActionActive = false;
+                        cartoonPage.shareActionActive = false;
 
-                    cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                        cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    } else {
+                        purchaseMessageDialog.open();
+                    }
                 }
             }
 
@@ -468,24 +472,28 @@ Item {
                 }
 
                 onClicked: {
-                    var date  = new Date();
-                    var year  = date.getFullYear();
-                    var month = date.getMonth() + 1;
-                    var day   = date.getDate();
-                    var hour  = date.getHours();
-                    var min   = date.getMinutes();
-                    var sec   = date.getSeconds();
+                    if (AndroidGW.getFullVersion()) {
+                        var date  = new Date();
+                        var year  = date.getFullYear();
+                        var month = date.getMonth() + 1;
+                        var day   = date.getDate();
+                        var hour  = date.getHours();
+                        var min   = date.getMinutes();
+                        var sec   = date.getSeconds();
 
-                    var file_name = "IMG_" + year                              + "-" +
-                                             (month > 9 ? month : "0" + month) + "-" +
-                                             (day   > 9 ? day   : "0" + day)   + "_" +
-                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                             (min   > 9 ? min   : "0" + min)   + "-" +
-                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+                        var file_name = "IMG_" + year                              + "-" +
+                                                 (month > 9 ? month : "0" + month) + "-" +
+                                                 (day   > 9 ? day   : "0" + day)   + "_" +
+                                                 (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                                 (min   > 9 ? min   : "0" + min)   + "-" +
+                                                 (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
 
-                    cartoonPage.shareActionActive = true;
+                        cartoonPage.shareActionActive = true;
 
-                    cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                        cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    } else {
+                        purchaseMessageDialog.open();
+                    }
                 }
             }
 
@@ -575,5 +583,27 @@ Item {
         onYes: {
             mainStackView.pop();
         }
+    }
+
+    MessageDialog {
+        id:              purchaseMessageDialog
+        title:           qsTr("Warning")
+        icon:            StandardIcon.Warning
+        text:            qsTr("This function is available in the full version only. Do you want to purchase full version now?")
+        standardButtons: StandardButton.Yes | StandardButton.No
+
+        onYes: {
+            if (!AndroidGW.buyFullVersion()) {
+                purchaseFailedMessageDialog.open();
+            }
+        }
+    }
+
+    MessageDialog {
+        id:              purchaseFailedMessageDialog
+        title:           qsTr("Error")
+        icon:            StandardIcon.Critical
+        text:            qsTr("Purchase attempt failed, in-app billing may be not supported on this device")
+        standardButtons: StandardButton.Ok
     }
 }
