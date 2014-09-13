@@ -15,7 +15,7 @@ Item {
     property int    gaussianRadius:   -1
     property int    cartoonThreshold: -1
 
-    property string openImageFile:    ""
+    property string imageFile:        ""
 
     Component.onCompleted: {
         cartoonEditor.helperImageReady.connect(helper.helperImageReady);
@@ -34,38 +34,38 @@ Item {
     }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile, imageOrientation);
+            cartoonEditor.openImage(imageFile, imageOrientation);
         }
     }
 
     onGaussianRadiusChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile, imageOrientation);
+            cartoonEditor.openImage(imageFile, imageOrientation);
         }
     }
 
     onCartoonThresholdChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile, imageOrientation);
+            cartoonEditor.openImage(imageFile, imageOrientation);
         }
     }
 
-    onOpenImageFileChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && openImageFile !== "") {
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(openImageFile, imageOrientation);
+            cartoonEditor.openImage(imageFile, imageOrientation);
         }
     }
 

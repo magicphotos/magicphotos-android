@@ -14,7 +14,7 @@ Item {
     property int    imageOrientation: -1
     property int    gaussianRadius:   -1
 
-    property string openImageFile:    ""
+    property string imageFile:        ""
 
     Component.onCompleted: {
         sketchEditor.helperImageReady.connect(helper.helperImageReady);
@@ -33,26 +33,26 @@ Item {
     }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(openImageFile, imageOrientation);
+            sketchEditor.openImage(imageFile, imageOrientation);
         }
     }
 
     onGaussianRadiusChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(openImageFile, imageOrientation);
+            sketchEditor.openImage(imageFile, imageOrientation);
         }
     }
 
-    onOpenImageFileChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && openImageFile !== "") {
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(openImageFile, imageOrientation);
+            sketchEditor.openImage(imageFile, imageOrientation);
         }
     }
 

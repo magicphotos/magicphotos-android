@@ -13,7 +13,7 @@ Item {
 
     property int    imageOrientation: -1
 
-    property string openImageFile:    ""
+    property string imageFile:        ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -24,18 +24,18 @@ Item {
     }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && imageFile !== "") {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
-            pixelatePreviewGenerator.openImage(openImageFile, imageOrientation);
+            pixelatePreviewGenerator.openImage(imageFile, imageOrientation);
         }
     }
 
-    onOpenImageFileChanged: {
-        if (imageOrientation !== -1 && openImageFile !== "") {
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && imageFile !== "") {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
-            pixelatePreviewGenerator.openImage(openImageFile, imageOrientation);
+            pixelatePreviewGenerator.openImage(imageFile, imageOrientation);
         }
     }
 
@@ -147,7 +147,7 @@ Item {
                 var component = Qt.createComponent("PixelatePage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, pixelDenom: pixDenomSlider.value, openImageFile: openImageFile}});
+                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, pixelDenom: pixDenomSlider.value, imageFile: pixelatePreviewPage.imageFile}});
                 } else {
                     console.log(component.errorString());
                 }

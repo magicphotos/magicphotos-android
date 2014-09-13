@@ -14,7 +14,7 @@ Item {
     property int    imageOrientation: -1
     property int    pixelDenom:       -1
 
-    property string openImageFile:    ""
+    property string imageFile:        ""
 
     Component.onCompleted: {
         pixelateEditor.helperImageReady.connect(helper.helperImageReady);
@@ -33,26 +33,26 @@ Item {
     }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && pixelDenom !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(openImageFile, imageOrientation);
+            pixelateEditor.openImage(imageFile, imageOrientation);
         }
     }
 
     onPixelDenomChanged: {
-        if (imageOrientation !== -1 && pixelDenom !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(openImageFile, imageOrientation);
+            pixelateEditor.openImage(imageFile, imageOrientation);
         }
     }
 
-    onOpenImageFileChanged: {
-        if (imageOrientation !== -1 && pixelDenom !== -1 && openImageFile !== "") {
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(openImageFile, imageOrientation);
+            pixelateEditor.openImage(imageFile, imageOrientation);
         }
     }
 

@@ -13,7 +13,7 @@ Item {
 
     property int    imageOrientation: -1
 
-    property string openImageFile:    ""
+    property string imageFile:        ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -24,20 +24,20 @@ Item {
     }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && openImageFile !== "") {
+        if (imageOrientation !== -1 && imageFile !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
-            cartoonPreviewGenerator.openImage(openImageFile, imageOrientation);
+            cartoonPreviewGenerator.openImage(imageFile, imageOrientation);
         }
     }
 
-    onOpenImageFileChanged: {
-        if (imageOrientation !== -1 && openImageFile !== "") {
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && imageFile !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
-            cartoonPreviewGenerator.openImage(openImageFile, imageOrientation);
+            cartoonPreviewGenerator.openImage(imageFile, imageOrientation);
         }
     }
 
@@ -178,7 +178,7 @@ Item {
                 var component = Qt.createComponent("CartoonPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, cartoonThreshold: thresholdSlider.value, openImageFile: openImageFile}});
+                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, cartoonThreshold: thresholdSlider.value, imageFile: cartoonPreviewPage.imageFile}});
                 } else {
                     console.log(component.errorString());
                 }

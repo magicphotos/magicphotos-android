@@ -12,7 +12,7 @@ Item {
 
     property int    imageOrientation: -1
 
-    property string openImageFile:    ""
+    property string imageFile:        ""
 
     Component.onCompleted: {
         recolorEditor.helperImageReady.connect(helper.helperImageReady);
@@ -31,14 +31,14 @@ Item {
     }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && openImageFile !== "") {
-            recolorEditor.openImage(openImageFile, imageOrientation);
+        if (imageOrientation !== -1 && imageFile !== "") {
+            recolorEditor.openImage(imageFile, imageOrientation);
         }
     }
 
-    onOpenImageFileChanged: {
-        if (imageOrientation !== -1 && openImageFile !== "") {
-            recolorEditor.openImage(openImageFile, imageOrientation);
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && imageFile !== "") {
+            recolorEditor.openImage(imageFile, imageOrientation);
         }
     }
 
