@@ -11,9 +11,11 @@ Item {
     id:    retouchPage
     focus: true
 
-    property int    imageOrientation: -1
+    property bool   shareActionActive: false
 
-    property string imageFile:        ""
+    property int    imageOrientation:  -1
+
+    property string imageFile:         ""
 
     Component.onCompleted: {
         retouchEditor.helperImageReady.connect(helper.helperImageReady);
@@ -270,7 +272,8 @@ Item {
                         onImageOpened: {
                             waitRectangle.visible = false;
 
-                            saveToolButton.enabled = true;
+                            saveToolButton.enabled  = true;
+                            shareToolButton.enabled = true;
 
                             scrollModeButton.enabled        = true;
                             samplingPointModeButton.enabled = true;
@@ -286,7 +289,8 @@ Item {
                         onImageOpenFailed: {
                             waitRectangle.visible = false;
 
-                            saveToolButton.enabled = false;
+                            saveToolButton.enabled  = false;
+                            shareToolButton.enabled = false;
 
                             scrollModeButton.enabled        = false;
                             samplingPointModeButton.enabled = false;
@@ -299,7 +303,11 @@ Item {
                         onImageSaved: {
                             AndroidGW.refreshGallery(image_file);
 
-                            imageSavedMessageDialog.open();
+                            if (retouchPage.shareActionActive) {
+                                AndroidGW.shareImage(image_file);
+                            } else {
+                                imageSavedMessageDialog.open();
+                            }
                         }
 
                         onImageSaveFailed: {
@@ -495,6 +503,51 @@ Item {
                                              (hour  > 9 ? hour  : "0" + hour)  + "-" +
                                              (min   > 9 ? min   : "0" + min)   + "-" +
                                              (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+
+                    retouchPage.shareActionActive = false;
+
+                    retouchEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                }
+            }
+
+            ToolButton {
+                id:      shareToolButton
+                width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled: false
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+                            source:          "images/share.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
+
+                onClicked: {
+                    var date  = new Date();
+                    var year  = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var day   = date.getDate();
+                    var hour  = date.getHours();
+                    var min   = date.getMinutes();
+                    var sec   = date.getSeconds();
+
+                    var file_name = "IMG_" + year                              + "-" +
+                                             (month > 9 ? month : "0" + month) + "-" +
+                                             (day   > 9 ? day   : "0" + day)   + "_" +
+                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                             (min   > 9 ? min   : "0" + min)   + "-" +
+                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+
+                    retouchPage.shareActionActive = true;
 
                     retouchEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
                 }

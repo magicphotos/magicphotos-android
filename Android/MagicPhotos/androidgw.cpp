@@ -52,6 +52,14 @@ void AndroidGW::refreshGallery(const QString &image_file)
                                               "refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
+void AndroidGW::shareImage(const QString &image_file)
+{
+    QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
+
+    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                              "shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
+}
+
 static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
 {
     const char* str        = jni_env->GetStringUTFChars(j_image_file, NULL);

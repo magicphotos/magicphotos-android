@@ -189,12 +189,30 @@ public class MagicActivity extends QtActivity
 
     public static void showGallery()
     {
-        instance.startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI), REQUEST_CODE_LOAD_IMAGE);
+        try {
+            instance.startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI), REQUEST_CODE_LOAD_IMAGE);
+        } catch (Exception ex) {
+            imageSelectionCancelled();
+        }
     }
 
     public static void refreshGallery(String image_file)
     {
         MediaScannerConnection.scanFile(instance, new String[] { image_file }, null, null);
+    }
+
+    public static void shareImage(String image_file)
+    {
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(image_file)));
+
+            instance.startActivity(Intent.createChooser(intent, instance.getString(R.string.activity_header_share_image)));
+        } catch (Exception ex) {
+            // Ignore
+        }
     }
 
     @Override
