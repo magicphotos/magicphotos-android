@@ -5,8 +5,6 @@ import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.1
 import ImageEditor 1.0
 
-import "Util"
-
 import "Util.js" as UtilScript
 
 Item {
@@ -18,7 +16,6 @@ Item {
     property int    cartoonThreshold: -1
 
     property string openImageFile:    ""
-    property string saveImageFile:    ""
 
     Component.onCompleted: {
         cartoonEditor.helperImageReady.connect(helper.helperImageReady);
@@ -272,6 +269,12 @@ Item {
                         imageOpenFailedMessageDialog.open();
                     }
 
+                    onImageSaved: {
+                        AndroidGW.refreshGallery(image_file);
+
+                        imageSavedMessageDialog.open();
+                    }
+
                     onImageSaveFailed: {
                         imageSaveFailedMessageDialog.open();
                     }
@@ -414,11 +417,22 @@ Item {
                 }
 
                 onClicked: {
-                    if (saveImageFile !== "") {
-                        saveDialog.show(saveImageFile);
-                    } else {
-                        saveDialog.show(openImageFile);
-                    }
+                    var date  = new Date();
+                    var year  = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var day   = date.getDate();
+                    var hour  = date.getHours();
+                    var min   = date.getMinutes();
+                    var sec   = date.getSeconds();
+
+                    var file_name = "IMG_" + year                              + "-" +
+                                             (month > 9 ? month : "0" + month) + "-" +
+                                             (day   > 9 ? day   : "0" + day)   + "_" +
+                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                             (min   > 9 ? min   : "0" + min)   + "-" +
+                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+
+                    cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -483,6 +497,14 @@ Item {
     }
 
     MessageDialog {
+        id:              imageSavedMessageDialog
+        title:           qsTr("Info")
+        icon:            StandardIcon.Information
+        text:            qsTr("Image saved successfully")
+        standardButtons: StandardButton.Ok
+    }
+
+    MessageDialog {
         id:              imageSaveFailedMessageDialog
         title:           qsTr("Error")
         icon:            StandardIcon.Critical
@@ -499,23 +521,6 @@ Item {
 
         onYes: {
             mainStackView.pop();
-        }
-    }
-
-    SaveDialog {
-        id: saveDialog
-
-        onOkPressed: {
-            cartoonPage.focus         = true;
-            cartoonPage.saveImageFile = file_path + "/" + file_name;
-
-            cartoonEditor.saveImage(cartoonPage.saveImageFile);
-
-            AndroidGW.refreshGallery(cartoonPage.saveImageFile);
-        }
-
-        onCancelPressed: {
-            cartoonPage.focus = true;
         }
     }
 }

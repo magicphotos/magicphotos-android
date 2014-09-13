@@ -2,6 +2,7 @@
 #define ANDROIDGW_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtAndroidExtras/QAndroidJniObject>
 
 class AndroidGW : public QObject
@@ -13,11 +14,12 @@ public:
 
     static AndroidGW *instance();
 
-    Q_INVOKABLE int  getScreenDPI();
-    Q_INVOKABLE bool getFullVersion();
-    Q_INVOKABLE bool buyFullVersion();
-    Q_INVOKABLE void showGallery();
-    Q_INVOKABLE void refreshGallery(const QString &image_file);
+    Q_INVOKABLE QString getSaveDirectory();
+    Q_INVOKABLE int     getScreenDPI();
+    Q_INVOKABLE bool    getFullVersion();
+    Q_INVOKABLE bool    buyFullVersion();
+    Q_INVOKABLE void    showGallery();
+    Q_INVOKABLE void    refreshGallery(const QString &image_file);
 
 signals:
     void imageSelected(const QString &image_file, const int &image_orientation);

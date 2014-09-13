@@ -63,7 +63,7 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved();
+    void imageSaved(const QString &image_file);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);

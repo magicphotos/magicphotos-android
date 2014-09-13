@@ -12,6 +12,14 @@ AndroidGW *AndroidGW::instance()
     return Instance;
 }
 
+QString AndroidGW::getSaveDirectory()
+{
+    QAndroidJniObject str_object = QAndroidJniObject::callStaticObjectMethod<jstring>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                                                                      "getSaveDirectory");
+
+    return str_object.toString();
+}
+
 int AndroidGW::getScreenDPI()
 {
     return QAndroidJniObject::callStaticMethod<jint>("com/derevenetz/oleg/magicphotos/MagicActivity",

@@ -1,5 +1,6 @@
 package com.derevenetz.oleg.magicphotos;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
@@ -127,6 +129,17 @@ public class MagicActivity extends QtActivity
 
         if (androidIAPService != null) {
             unbindService(androidIAPServiceConnection);
+        }
+    }
+
+    public static String getSaveDirectory()
+    {
+        File save_dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/MagicPhotos");
+
+        if (save_dir.mkdirs() || save_dir.isDirectory()) {
+            return save_dir.getAbsolutePath();
+        } else {
+            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
         }
     }
 

@@ -25,7 +25,6 @@
         <file alias="main.qml">qml/main.qml</file>
         <file alias="ModeSelectionPage.qml">qml/ModeSelectionPage.qml</file>
         <file alias="DecolorizePage.qml">qml/DecolorizePage.qml</file>
-        <file alias="Util/SaveDialog.qml">qml/Util/SaveDialog.qml</file>
         <file alias="SketchPreviewPage.qml">qml/SketchPreviewPage.qml</file>
         <file alias="SketchPage.qml">qml/SketchPage.qml</file>
         <file alias="CartoonPage.qml">qml/CartoonPage.qml</file>

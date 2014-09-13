@@ -146,7 +146,7 @@ void DecolorizeEditor::saveImage(const QString &image_file)
             if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_name)) {
                 IsChanged = false;
 
-                emit imageSaved();
+                emit imageSaved(file_name);
             } else {
                 emit imageSaveFailed();
             }
