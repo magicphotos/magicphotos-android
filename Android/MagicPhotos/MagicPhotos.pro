@@ -31,7 +31,7 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/MagicPhotos_ru_RU.ts
+    translations/MagicPhotos_ru.ts
 
 OTHER_FILES += \
     android-source/AndroidManifest.xml \
