@@ -1,3 +1,5 @@
+#include <QtCore/QLocale>
+#include <QtCore/QTranslator>
 #include <QtWidgets/QApplication>
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
@@ -15,7 +17,12 @@
 
 int main(int argc, char *argv[])
 {
+    QTranslator  translator;
     QApplication app(argc, argv);
+
+    if (translator.load(QString(":/tr/MagicPhotos_%1").arg(QLocale::system().name()))) {
+        app.installTranslator(&translator);
+    }
 
     qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/tr">
+        <file alias="MagicPhotos_ru_RU.qm">translations/MagicPhotos_ru_RU.qm</file>
+    </qresource>
+</RCC>

@@ -26,11 +26,17 @@ HEADERS += \
     retoucheditor.h \
     androidgw.h
 
-RESOURCES += qml.qrc
+RESOURCES += \
+    qml.qrc \
+    translations.qrc
+
+TRANSLATIONS += \
+    translations/MagicPhotos_ru_RU.ts
 
 OTHER_FILES += \
     android-source/AndroidManifest.xml \
     android-source/res/values/strings.xml \
+    android-source/res/values-ru/strings.xml \
     android-source/res/drawable-hdpi/ic_launcher.png \
     android-source/res/drawable-mdpi/ic_launcher.png \
     android-source/res/drawable-xhdpi/ic_launcher.png \
