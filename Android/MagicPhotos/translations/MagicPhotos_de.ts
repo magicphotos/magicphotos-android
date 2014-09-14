@@ -1,404 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.1" language="de_DE">
 <context>
     <name>BlurPage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
     <message>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
+        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>BlurPreviewPage</name>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
 </context>
 <context>
     <name>CartoonPage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
     <message>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
+        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CartoonPreviewPage</name>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
 </context>
 <context>
     <name>DecolorizePage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
 </context>
 <context>
     <name>ModeSelectionPage</name>
     <message>
         <source>DECOLORIZE</source>
-        <translation>ОБЕСЦВЕТИТЬ</translation>
+        <translation>ENTFÄRBEN</translation>
     </message>
     <message>
         <source>SKETCH</source>
-        <translation>В ЭСКИЗ</translation>
+        <translation>IN DIE SKIZZE</translation>
     </message>
     <message>
         <source>CARTOON</source>
-        <translation>В КОМИКС</translation>
+        <translation>IN DEN COMIC STRIP</translation>
     </message>
     <message>
         <source>BLUR</source>
-        <translation>РАЗМЫТЬ</translation>
+        <translation>VERWISCHEN</translation>
     </message>
     <message>
         <source>PIXELATE</source>
-        <translation>ПИКСЕЛИЗИРОВАТЬ</translation>
+        <translation>PIXELN</translation>
     </message>
     <message>
         <source>RECOLOR</source>
-        <translation>ПЕРЕКРАСИТЬ</translation>
+        <translation>UMFÄRBEN</translation>
     </message>
     <message>
         <source>RETOUCH</source>
-        <translation>РЕТУШИРОВАТЬ</translation>
+        <translation>RETUSCHIEREN</translation>
     </message>
     <message>
         <source>Open Image</source>
-        <translation>Открыть Фото</translation>
+        <translation>Foto Öffnen</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
 </context>
 <context>
     <name>PixelatePage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
     <message>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
+        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PixelatePreviewPage</name>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
 </context>
 <context>
     <name>RecolorPage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
     <message>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
+        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RetouchPage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
     <message>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
+        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SketchPage</name>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Image saved successfully</source>
-        <translation>Изображение успешно сохранено</translation>
+        <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
         <source>Could not save image</source>
-        <translation>Невозможно сохранить изображение</translation>
+        <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
+        <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
 </context>
 <context>
     <name>SketchPreviewPage</name>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not open image</source>
-        <translation>Невозможно открыть изображение</translation>
+        <translation>Bild kann nicht geöffnet werden</translation>
     </message>
 </context>
 </TS>

@@ -31,12 +31,16 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/MagicPhotos_ru.ts
+    translations/MagicPhotos_ru.ts \
+    translations/MagicPhotos_de.ts \
+    translations/MagicPhotos_fr.ts
 
 OTHER_FILES += \
     android-source/AndroidManifest.xml \
     android-source/res/values/strings.xml \
     android-source/res/values-ru/strings.xml \
+    android-source/res/values-de/strings.xml \
+    android-source/res/values-fr/strings.xml \
     android-source/res/drawable-hdpi/ic_launcher.png \
     android-source/res/drawable-mdpi/ic_launcher.png \
     android-source/res/drawable-xhdpi/ic_launcher.png \
