@@ -84,7 +84,7 @@ private:
     void SaveUndoImage();
     void ChangeImageAt(bool save_undo, int center_x, int center_y);
 
-    static const int UNDO_DEPTH = 4,
+    static const int UNDO_DEPTH = 8,
                      BRUSH_SIZE = 16;
 
     constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;

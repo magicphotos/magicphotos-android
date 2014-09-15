@@ -37,7 +37,7 @@ public class MagicActivity extends QtActivity
                                  REQUEST_CODE_LOAD_IMAGE              = 1001,
                                  REQUEST_CODE_BUY_FULL_VERSION        = 1002;
 
-    private static final String  GOOGLE_IAP_FULL_VERSION_PRODUCT_ID   = "android.test.purchased",
+    private static final String  GOOGLE_IAP_FULL_VERSION_PRODUCT_ID   = "magicphotos.version.full",
                                  GOOGLE_IAP_DEVELOPER_PAYLOAD         = "PXV0HzqSbr1ZT";
 
     private static boolean       isFullVersion                        = false;

@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>
@@ -301,7 +301,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>
@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>

@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -301,7 +301,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>

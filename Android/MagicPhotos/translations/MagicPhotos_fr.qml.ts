@@ -54,7 +54,7 @@
     <message>
         <location filename="../qml/BlurPage.qml" line="593"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -133,7 +133,7 @@
     <message>
         <location filename="../qml/CartoonPage.qml" line="606"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -304,7 +304,7 @@
     <message>
         <location filename="../qml/PixelatePage.qml" line="593"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -383,7 +383,7 @@
     <message>
         <location filename="../qml/RecolorPage.qml" line="674"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
@@ -439,7 +439,7 @@
     <message>
         <location filename="../qml/RetouchPage.qml" line="670"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
 </context>
 <context>
