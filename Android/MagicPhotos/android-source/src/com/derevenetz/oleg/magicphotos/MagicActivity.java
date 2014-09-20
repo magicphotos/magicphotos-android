@@ -30,7 +30,8 @@ import org.qtproject.qt5.android.bindings.QtActivity;
 public class MagicActivity extends QtActivity
 {
     private static final boolean DEBUG_GOOGLE_IAP_AUTO_CONSUME        = false,
-                                 DEBUG_GOOGLE_IAP_ALWAYS_TRIAL        = false;
+                                 DEBUG_GOOGLE_IAP_ALWAYS_TRIAL        = false,
+                                 DEBUG_GOOGLE_IAP_ALWAYS_FULL         = false;
 
     private static final int     GOOGLE_IAP_RESULT_OK                 = 0,
                                  GOOGLE_IAP_RESULT_ITEM_ALREADY_OWNED = 7,
@@ -77,6 +78,8 @@ public class MagicActivity extends QtActivity
 
                             if (DEBUG_GOOGLE_IAP_ALWAYS_TRIAL) {
                                 isFullVersion = false;
+                            } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
+                                isFullVersion = true;
                             } else {
                                 isFullVersion = is_full_version;
                             }
@@ -115,6 +118,8 @@ public class MagicActivity extends QtActivity
 
         if (DEBUG_GOOGLE_IAP_ALWAYS_TRIAL) {
             isFullVersion = false;
+        } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
+            isFullVersion = true;
         } else {
             isFullVersion = getPreferences(MODE_PRIVATE).getBoolean("FullVersion", false);
         }
