@@ -101,7 +101,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else
@@ -122,7 +129,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else
@@ -143,7 +157,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else
@@ -164,7 +185,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else
@@ -185,7 +213,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else
@@ -206,7 +241,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else
@@ -227,7 +269,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
             else

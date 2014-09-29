@@ -201,7 +201,14 @@ namespace MagicPhotos
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(delegate()
                         {
-                            MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                            try
+                            {
+                                MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                            }
+                            catch (Exception)
+                            {
+                                // Ignore
+                            }
                         });
                     });
                 }
@@ -235,7 +242,14 @@ namespace MagicPhotos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    try
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore
+                    }
                 }
             }
         }

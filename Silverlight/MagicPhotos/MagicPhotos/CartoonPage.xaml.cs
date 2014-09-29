@@ -382,7 +382,14 @@ namespace MagicPhotos
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(delegate()
                         {
-                            MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                            try
+                            {
+                                MessageBox.Show(AppResources.MessageBoxMessageImageOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                            }
+                            catch (Exception)
+                            {
+                                // Ignore
+                            }
                         });
                     });
                 }
@@ -422,7 +429,16 @@ namespace MagicPhotos
         {
             if (this.editedImageChanged)
             {
-                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageUnsavedImageQuestion, AppResources.MessageBoxHeaderWarning, MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBoxResult.None;
+
+                try
+                {
+                    result = MessageBox.Show(AppResources.MessageBoxMessageUnsavedImageQuestion, AppResources.MessageBoxHeaderWarning, MessageBoxButton.OKCancel);
+                }
+                catch (Exception)
+                {
+                    result = MessageBoxResult.None;
+                }
 
                 if (result == MessageBoxResult.Cancel)
                 {
@@ -486,7 +502,16 @@ namespace MagicPhotos
             {
                 if ((Application.Current as App).TrialMode)
                 {
-                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+                    MessageBoxResult result = MessageBoxResult.None;
+
+                    try
+                    {
+                        result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+                    }
+                    catch (Exception)
+                    {
+                        result = MessageBoxResult.None;
+                    }
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -496,7 +521,14 @@ namespace MagicPhotos
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                            try
+                            {
+                                MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                            }
+                            catch (Exception)
+                            {
+                                // Ignore
+                            }
                         }
                     }
                 }
@@ -531,11 +563,25 @@ namespace MagicPhotos
 
                         this.editedImageChanged = false;
 
-                        MessageBox.Show(AppResources.MessageBoxMessageImageSavedInfo, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OK);
+                        try
+                        {
+                            MessageBox.Show(AppResources.MessageBoxMessageImageSavedInfo, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OK);
+                        }
+                        catch (Exception)
+                        {
+                            // Ignore
+                        }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(AppResources.MessageBoxMessageImageSaveError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        try
+                        {
+                            MessageBox.Show(AppResources.MessageBoxMessageImageSaveError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        }
+                        catch (Exception)
+                        {
+                            // Ignore
+                        }
                     }
                 }
             }
