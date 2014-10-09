@@ -28,11 +28,7 @@ void InvocationHelper::setImageFile(const QString &image_file)
 
 void InvocationHelper::invoked(const bb::system::InvokeRequest &request)
 {
-    QString image_file = request.uri().toLocalFile();
+    ImageFile = request.uri().toLocalFile();
 
-    if (ImageFile != image_file) {
-        ImageFile = image_file;
-
-        emit imageFileChanged();
-    }
+    emit imageFileChanged();
 }
