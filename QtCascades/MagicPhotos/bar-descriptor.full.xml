@@ -40,7 +40,7 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
-    <versionNumber>1.17.0</versionNumber>
+    <versionNumber>1.18.0</versionNumber>
     <packageLocale>ru,de,fr</packageLocale>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
@@ -72,13 +72,12 @@
     <initialWindow>
         <autoOrients>true</autoOrients>
         <systemChrome>none</systemChrome>
-        <transparent>false</transparent>
     </initialWindow>
     
     <!--  The category where the application appears. Either core.games or core.media. -->
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="arm/o.le-v7/MagicPhotos.so" entry="true" type="Qnx/Elf">MagicPhotos.so</asset>
+       <asset path="arm/o.le-v7-g/MagicPhotos" entry="true" type="Qnx/Elf">MagicPhotos</asset>
     </configuration>
     <configuration name="Device-Release">
        <entryPointType>Qnx/Cascades</entryPointType>
@@ -121,5 +120,16 @@
     <permission>access_shared</permission>
     <permission>bbm_connect</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
+
+    <!-- Handle invocations -->
+    <invoke-target id="com.derevenetz.oleg.MagicPhotos.image.open">
+        <invoke-target-type>application</invoke-target-type>
+        <filter>
+            <action>bb.action.OPEN</action>
+            <mime-type>*</mime-type>
+            <property var="uris" value="file://"/>
+            <property var="exts" value="png,jpg,bmp"/>
+        </filter>
+    </invoke-target>
 
 </qnx>

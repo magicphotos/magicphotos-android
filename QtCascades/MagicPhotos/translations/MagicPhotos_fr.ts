@@ -527,48 +527,48 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="140"/>
+        <location filename="../assets/main.qml" line="142"/>
         <source>Decolorize</source>
         <translation>Décolorer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="142"/>
+        <location filename="../assets/main.qml" line="144"/>
         <source>Sketch</source>
         <translation>Dans l&apos;esquisse</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="144"/>
+        <location filename="../assets/main.qml" line="146"/>
         <source>Cartoon</source>
         <translation>Dans la bande dessinée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="146"/>
+        <location filename="../assets/main.qml" line="148"/>
         <source>Blur</source>
         <translation>Faire flou</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="148"/>
+        <location filename="../assets/main.qml" line="150"/>
         <source>Pixelate</source>
         <translation>Pixéliser</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="150"/>
+        <location filename="../assets/main.qml" line="152"/>
         <source>Recolor</source>
         <translation>Recolorier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="152"/>
+        <location filename="../assets/main.qml" line="154"/>
         <source>Retouch</source>
         <translation>Retoucher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="194"/>
-        <location filename="../assets/main.qml" line="210"/>
+        <location filename="../assets/main.qml" line="204"/>
+        <location filename="../assets/main.qml" line="228"/>
         <source>Open Image</source>
         <translation>Ouvrir la Photo</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="237"/>
+        <location filename="../assets/main.qml" line="255"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation>Faites glisser la liste avec un doigt pour passer entre les modes</translation>
     </message>

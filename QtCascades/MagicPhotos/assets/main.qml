@@ -54,6 +54,8 @@ NavigationPane {
                 property int actualWidth:  0
                 property int actualHeight: 0
 
+                property variant invocationHelper: InvocationHelper
+
                 function navigateToEditPage(mode, image_file) {
                     if (mode === "DECOLORIZE") {
                         editPageDefinition.source = "DecolorizePage.qml";
@@ -182,7 +184,15 @@ NavigationPane {
                                 gestureHandlers: [
                                     TapHandler {
                                         onTapped: {
-                                            openFilePicker.open();
+                                            if (itemRoot.ListItem.view.invocationHelper.imageFile !== "") {
+                                                var image_file = itemRoot.ListItem.view.invocationHelper.imageFile;
+
+                                                itemRoot.ListItem.view.invocationHelper.imageFile = "";
+
+                                                itemRoot.ListItem.view.navigateToEditPage(itemRoot.itemMode, image_file);
+                                            } else {
+                                                openFilePicker.open();
+                                            }
                                         }
                                     }
                                 ]
@@ -198,7 +208,15 @@ NavigationPane {
                                 }
                                 
                                 onClicked: {
-                                    openFilePicker.open();
+                                    if (itemRoot.ListItem.view.invocationHelper.imageFile !== "") {
+                                        var image_file = itemRoot.ListItem.view.invocationHelper.imageFile;
+                                        
+                                        itemRoot.ListItem.view.invocationHelper.imageFile = "";
+                                        
+                                        itemRoot.ListItem.view.navigateToEditPage(itemRoot.itemMode, image_file);
+                                    } else {
+                                        openFilePicker.open();
+                                    }
                                 }
                             }
 

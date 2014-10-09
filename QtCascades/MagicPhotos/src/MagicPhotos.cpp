@@ -13,6 +13,7 @@
 
 #include "appsettings.h"
 #include "trialmanager.h"
+#include "invocationhelper.h"
 #include "customtimer.h"
 #include "downloadinviter.h"
 #include "decolorizeeditor.h"
@@ -63,6 +64,7 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
 
     qml->setContextProperty("AppSettings", new AppSettings());
     qml->setContextProperty("TrialManager", new TrialManager());
+    qml->setContextProperty("InvocationHelper", new InvocationHelper());
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
