@@ -1,5 +1,3 @@
-#include <QtCore/QUrl>
-
 #include "invocationhelper.h"
 
 InvocationHelper::InvocationHelper(QObject *parent) : QObject(parent)
