@@ -19,8 +19,26 @@ Page {
     paneProperties: NavigationPaneProperties {
         backButton: ActionItem {
             onTriggered: {
-                navigationPane.pop();
+                if (cartoonEditor.changed) {
+                    backDialog.show();
+                } else {
+                    navigationPane.pop();
+                }
             }
+            
+            attachedObjects: [
+                SystemDialog {
+                    id:    backDialog
+                    title: qsTr("Warning")
+                    body:  qsTr("Are you sure? Current image is not saved and will be lost.")
+                    
+                    onFinished: {
+                        if (result === SystemUiResult.ConfirmButtonSelection) {
+                            navigationPane.pop();
+                        }
+                    }
+                }
+            ]
         }
     }
 
