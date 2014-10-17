@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,7 +34,7 @@ public class MagicActivity extends QtActivity
 
     private static final int     GOOGLE_IAP_RESULT_OK                 = 0,
                                  GOOGLE_IAP_RESULT_ITEM_ALREADY_OWNED = 7,
-                                 REQUEST_CODE_LOAD_IMAGE              = 1001,
+                                 REQUEST_CODE_SHOW_GALLERY            = 1001,
                                  REQUEST_CODE_BUY_FULL_VERSION        = 1002;
 
     private static final String  GOOGLE_IAP_FULL_VERSION_PRODUCT_ID   = "magicphotos.version.full",
@@ -195,7 +194,11 @@ public class MagicActivity extends QtActivity
     public static void showGallery()
     {
         try {
-            instance.startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI), REQUEST_CODE_LOAD_IMAGE);
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+
+            intent.setType("image/*");
+
+            instance.startActivityForResult(intent, REQUEST_CODE_SHOW_GALLERY);
         } catch (Exception ex) {
             imageSelectionCancelled();
         }
@@ -224,35 +227,42 @@ public class MagicActivity extends QtActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_LOAD_IMAGE) {
+        if (requestCode == REQUEST_CODE_SHOW_GALLERY) {
             if (resultCode == RESULT_OK && data != null) {
-                Uri      selected_image   = data.getData();
-                String[] file_path_column = { MediaStore.Images.Media.DATA };
+                Uri image_uri = data.getData();
 
-                Cursor cursor = getContentResolver().query(selected_image, file_path_column, null, null, null);
+                if (image_uri != null) {
+                    String[] query_columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media.ORIENTATION };
 
-                cursor.moveToFirst();
+                    Cursor cursor = getContentResolver().query(image_uri, query_columns, null, null, null);
 
-                int    index      = cursor.getColumnIndex(file_path_column[0]);
-                String image_file = cursor.getString(index);
+                    if (cursor != null) {
+                        if (cursor.moveToFirst()) {
+                            String image_file        = cursor.getString(cursor.getColumnIndex(query_columns[0]));
+                            String image_orientation = cursor.getString(cursor.getColumnIndex(query_columns[1]));
 
-                cursor.close();
+                            if (image_orientation.equals("0")) {
+                                imageSelected(image_file, 0);
+                            } else if (image_orientation.equals("90")) {
+                                imageSelected(image_file, 90);
+                            } else if (image_orientation.equals("180")) {
+                                imageSelected(image_file, 180);
+                            } else if (image_orientation.equals("270")) {
+                                imageSelected(image_file, 270);
+                            } else {
+                                imageSelected(image_file, 0);
+                            }
+                        } else {
+                            imageSelectionCancelled();
+                        }
 
-                int image_orientation = ExifInterface.ORIENTATION_UNDEFINED;
-
-                try {
-                    ExifInterface exif_interface = new ExifInterface(image_file);
-
-                    image_orientation = exif_interface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-
-                    if (image_orientation < 0) {
-                        image_orientation = ExifInterface.ORIENTATION_UNDEFINED;
+                        cursor.close();
+                    } else {
+                        imageSelectionCancelled();
                     }
-                } catch (Exception ex) {
-                    image_orientation = ExifInterface.ORIENTATION_UNDEFINED;
+                } else {
+                    imageSelectionCancelled();
                 }
-
-                imageSelected(image_file, image_orientation);
             } else {
                 imageSelectionCancelled();
             }
