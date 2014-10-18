@@ -112,6 +112,7 @@ public class MagicActivity extends QtActivity
 
     private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
+    private static native void imageSelectionFailed();
 
     public MagicActivity()
     {
@@ -208,7 +209,7 @@ public class MagicActivity extends QtActivity
 
             instance.startActivityForResult(intent, REQUEST_CODE_SHOW_GALLERY);
         } catch (Exception ex) {
-            imageSelectionCancelled();
+            imageSelectionFailed();
         }
     }
 
@@ -321,7 +322,7 @@ public class MagicActivity extends QtActivity
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        imageSelectionCancelled();
+                                        imageSelectionFailed();
                                     }
                                 });
                             } finally {
@@ -350,7 +351,7 @@ public class MagicActivity extends QtActivity
                         }
                     })).start();
                 } else {
-                    imageSelectionCancelled();
+                    imageSelectionFailed();
                 }
             } else {
                 imageSelectionCancelled();

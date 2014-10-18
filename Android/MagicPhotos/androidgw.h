@@ -25,6 +25,7 @@ public:
 signals:
     void imageSelected(const QString &image_file, const int &image_orientation);
     void imageSelectionCancelled();
+    void imageSelectionFailed();
 
 private:
     static AndroidGW *Instance;

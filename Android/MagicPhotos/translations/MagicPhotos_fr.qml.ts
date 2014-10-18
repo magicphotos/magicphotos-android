@@ -206,49 +206,59 @@
 <context>
     <name>ModeSelectionPage</name>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="85"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="87"/>
         <source>DECOLORIZE</source>
         <translation>DÉCOLORER</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="87"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="89"/>
         <source>SKETCH</source>
         <translation>DANS L’ESQUISSE</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="89"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="91"/>
         <source>CARTOON</source>
         <translation>DANS LA BANDE DESSINÉE</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="91"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="93"/>
         <source>BLUR</source>
         <translation>FAIRE FLOU</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="93"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="95"/>
         <source>PIXELATE</source>
         <translation>PIXÉLISER</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="95"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="97"/>
         <source>RECOLOR</source>
         <translation>RECOLORIER</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="97"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="99"/>
         <source>RETOUCH</source>
         <translation>RETOUCHER</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="202"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="220"/>
         <source>Open Image</source>
         <translation>Ouvrir la Photo</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="243"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="264"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
+        <location filename="../qml/ModeSelectionPage.qml" line="320"/>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <location filename="../qml/ModeSelectionPage.qml" line="322"/>
+        <source>Could not open image</source>
+        <translation type="unfinished">Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
 </context>
 <context>

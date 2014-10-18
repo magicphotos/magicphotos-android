@@ -198,6 +198,14 @@
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Could not open image</source>
+        <translation>Невозможно открыть изображение</translation>
+    </message>
 </context>
 <context>
     <name>PixelatePage</name>

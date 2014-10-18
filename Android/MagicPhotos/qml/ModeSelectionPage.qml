@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
+import QtQuick.Dialogs 1.1
 
 import "Util.js" as UtilScript
 
@@ -79,6 +80,7 @@ Item {
 
                 signal fileSelected(string image_file, int image_orientation)
                 signal fileSelectionCancelled()
+                signal fileSelectionFailed()
 
                 onItemModeChanged: {
                     if (itemMode === "DECOLORIZE") {
@@ -99,6 +101,12 @@ Item {
                 }
 
                 onFileSelected: {
+                    waitRectangle.visible = false;
+
+                    AndroidGW.imageSelected.disconnect(modeSelectionItemDelegate.fileSelected);
+                    AndroidGW.imageSelectionCancelled.disconnect(modeSelectionItemDelegate.fileSelectionCancelled);
+                    AndroidGW.imageSelectionFailed.disconnect(modeSelectionItemDelegate.fileSelectionFailed);
+
                     var component;
 
                     if (mode === "DECOLORIZE"){
@@ -158,11 +166,6 @@ Item {
                             console.log(component.errorString());
                         }
                     }
-
-                    waitRectangle.visible = false;
-
-                    AndroidGW.imageSelected.disconnect(modeSelectionItemDelegate.fileSelected);
-                    AndroidGW.imageSelectionCancelled.disconnect(modeSelectionItemDelegate.fileSelectionCancelled);
                 }
 
                 onFileSelectionCancelled: {
@@ -170,6 +173,17 @@ Item {
 
                     AndroidGW.imageSelected.disconnect(modeSelectionItemDelegate.fileSelected);
                     AndroidGW.imageSelectionCancelled.disconnect(modeSelectionItemDelegate.fileSelectionCancelled);
+                    AndroidGW.imageSelectionFailed.disconnect(modeSelectionItemDelegate.fileSelectionFailed);
+                }
+
+                onFileSelectionFailed: {
+                    waitRectangle.visible = false;
+
+                    AndroidGW.imageSelected.disconnect(modeSelectionItemDelegate.fileSelected);
+                    AndroidGW.imageSelectionCancelled.disconnect(modeSelectionItemDelegate.fileSelectionCancelled);
+                    AndroidGW.imageSelectionFailed.disconnect(modeSelectionItemDelegate.fileSelectionFailed);
+
+                    imageSelectionFailedMessageDialog.open();
                 }
 
                 Text {
@@ -210,6 +224,7 @@ Item {
 
                             AndroidGW.imageSelected.connect(modeSelectionItemDelegate.fileSelected);
                             AndroidGW.imageSelectionCancelled.connect(modeSelectionItemDelegate.fileSelectionCancelled);
+                            AndroidGW.imageSelectionFailed.connect(modeSelectionItemDelegate.fileSelectionFailed);
 
                             AndroidGW.showGallery();
                         }
@@ -298,5 +313,13 @@ Item {
         onTriggered: {
             modeChangeSuggestionPropertyAnimation.start();
         }
+    }
+
+    MessageDialog {
+        id:              imageSelectionFailedMessageDialog
+        title:           qsTr("Error")
+        icon:            StandardIcon.Critical
+        text:            qsTr("Could not open image")
+        standardButtons: StandardButton.Ok
     }
 }

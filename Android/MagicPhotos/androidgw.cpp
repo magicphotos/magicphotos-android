@@ -75,9 +75,15 @@ static void imageSelectionCancelled(JNIEnv *)
     emit AndroidGW::instance()->imageSelectionCancelled();
 }
 
+static void imageSelectionFailed(JNIEnv *)
+{
+    emit AndroidGW::instance()->imageSelectionFailed();
+}
+
 static JNINativeMethod methods[] = {
     { "imageSelected",           "(Ljava/lang/String;I)V", (void *)imageSelected },
-    { "imageSelectionCancelled", "()V",                    (void *)imageSelectionCancelled }
+    { "imageSelectionCancelled", "()V",                    (void *)imageSelectionCancelled },
+    { "imageSelectionFailed",    "()V",                    (void *)imageSelectionFailed }
 };
 
 jint JNICALL JNI_OnLoad(JavaVM *vm, void *)
