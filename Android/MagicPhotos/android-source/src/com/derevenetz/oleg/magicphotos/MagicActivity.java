@@ -21,9 +21,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 
@@ -270,7 +272,13 @@ public class MagicActivity extends QtActivity
                                         Cursor   cursor            = null;
 
                                         try {
-                                            cursor = getContentResolver().query(image_uri, query_columns, null, null, null);
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(getApplicationContext(), image_uri)) {
+                                                String id = DocumentsContract.getDocumentId(image_uri).split(":")[1];
+
+                                                cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, query_columns, MediaStore.Images.Media._ID + " = ?", new String[]{id}, null);
+                                            } else {
+                                                cursor = getContentResolver().query(image_uri, query_columns, null, null, null);
+                                            }
 
                                             if (cursor != null && cursor.moveToFirst()) {
                                                 image_orientation = cursor.getString(cursor.getColumnIndex(query_columns[0]));
