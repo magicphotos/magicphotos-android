@@ -159,11 +159,15 @@ Item {
                         }
                     }
 
+                    waitRectangle.visible = false;
+
                     AndroidGW.imageSelected.disconnect(modeSelectionItemDelegate.fileSelected);
                     AndroidGW.imageSelectionCancelled.disconnect(modeSelectionItemDelegate.fileSelectionCancelled);
                 }
 
                 onFileSelectionCancelled: {
+                    waitRectangle.visible = false;
+
                     AndroidGW.imageSelected.disconnect(modeSelectionItemDelegate.fileSelected);
                     AndroidGW.imageSelectionCancelled.disconnect(modeSelectionItemDelegate.fileSelectionCancelled);
                 }
@@ -202,6 +206,8 @@ Item {
                         text:             qsTr("Open Image")
 
                         onClicked: {
+                            waitRectangle.visible = true;
+
                             AndroidGW.imageSelected.connect(modeSelectionItemDelegate.fileSelected);
                             AndroidGW.imageSelectionCancelled.connect(modeSelectionItemDelegate.fileSelectionCancelled);
 
@@ -241,6 +247,24 @@ Item {
 
             onClicked: {
                 Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
+            }
+        }
+    }
+
+    Rectangle {
+        id:           waitRectangle
+        anchors.fill: parent
+        z:            10
+        color:        "black"
+        opacity:      0.75
+        visible:      false
+
+        MouseArea {
+            anchors.fill: parent
+
+            Image {
+                anchors.centerIn: parent
+                source:           "images/busy_indicator.png"
             }
         }
     }

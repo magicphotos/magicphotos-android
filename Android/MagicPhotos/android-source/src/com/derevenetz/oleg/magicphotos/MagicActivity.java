@@ -1,6 +1,10 @@
 package com.derevenetz.oleg.magicphotos;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
@@ -13,6 +17,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -229,37 +235,112 @@ public class MagicActivity extends QtActivity
 
         if (requestCode == REQUEST_CODE_SHOW_GALLERY) {
             if (resultCode == RESULT_OK && data != null) {
-                Uri image_uri = data.getData();
+                final Uri image_uri = data.getData();
 
                 if (image_uri != null) {
-                    String[] query_columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media.ORIENTATION };
+                    (new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            InputStream      input_stream       = null;
+                            FileOutputStream file_output_stream = null;
+                            OutputStream     output_stream      = null;
 
-                    Cursor cursor = getContentResolver().query(image_uri, query_columns, null, null, null);
+                            try {
+                                input_stream = getContentResolver().openInputStream(image_uri);
 
-                    if (cursor != null) {
-                        if (cursor.moveToFirst()) {
-                            String image_file        = cursor.getString(cursor.getColumnIndex(query_columns[0]));
-                            String image_orientation = cursor.getString(cursor.getColumnIndex(query_columns[1]));
+                                Bitmap bitmap = BitmapFactory.decodeStream(input_stream);
 
-                            if (image_orientation.equals("0")) {
-                                imageSelected(image_file, 0);
-                            } else if (image_orientation.equals("90")) {
-                                imageSelected(image_file, 90);
-                            } else if (image_orientation.equals("180")) {
-                                imageSelected(image_file, 180);
-                            } else if (image_orientation.equals("270")) {
-                                imageSelected(image_file, 270);
-                            } else {
-                                imageSelected(image_file, 0);
+                                if (bitmap != null) {
+                                    final File cache_file = new File(getApplicationContext().getCacheDir().getAbsolutePath() + "/cache.jpg");
+
+                                    if (cache_file.getParentFile().mkdirs() || cache_file.getParentFile().isDirectory()) {
+                                        file_output_stream = new FileOutputStream(cache_file);
+                                        output_stream      = new BufferedOutputStream(file_output_stream);
+
+                                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output_stream);
+
+                                        output_stream.flush();
+                                        output_stream.close();
+
+                                        file_output_stream.flush();
+                                        file_output_stream.close();
+
+                                        String[] query_columns     = { MediaStore.Images.Media.ORIENTATION };
+                                        String   image_orientation = null;
+                                        Cursor   cursor            = null;
+
+                                        try {
+                                            cursor = getContentResolver().query(image_uri, query_columns, null, null, null);
+
+                                            if (cursor != null && cursor.moveToFirst()) {
+                                                image_orientation = cursor.getString(cursor.getColumnIndex(query_columns[0]));
+                                            }
+                                        } catch (Exception ex) {
+                                            // Ignore
+                                        } finally {
+                                            if (cursor != null) {
+                                                cursor.close();
+                                            }
+                                        }
+
+                                        final String final_image_orientation = image_orientation;
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                if (final_image_orientation == null) {
+                                                    imageSelected(cache_file.getAbsolutePath(), 0);
+                                                } else if (final_image_orientation.equals("0")) {
+                                                    imageSelected(cache_file.getAbsolutePath(), 0);
+                                                } else if (final_image_orientation.equals("90")) {
+                                                    imageSelected(cache_file.getAbsolutePath(), 90);
+                                                } else if (final_image_orientation.equals("180")) {
+                                                    imageSelected(cache_file.getAbsolutePath(), 180);
+                                                } else if (final_image_orientation.equals("270")) {
+                                                    imageSelected(cache_file.getAbsolutePath(), 270);
+                                                } else {
+                                                    imageSelected(cache_file.getAbsolutePath(), 0);
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        throw(new Exception("CACHE_DIR_ACCESS_FAILED"));
+                                    }
+                                } else {
+                                    throw(new Exception("BITMAP_DECODE_FAILED"));
+                                }
+                            } catch (Exception ex) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        imageSelectionCancelled();
+                                    }
+                                });
+                            } finally {
+                                if (input_stream != null) {
+                                    try {
+                                        input_stream.close();
+                                    } catch (Exception ex) {
+                                        // Ignore
+                                    }
+                                }
+                                if (output_stream != null) {
+                                    try {
+                                        output_stream.close();
+                                    } catch (Exception ex) {
+                                        // Ignore
+                                    }
+                                }
+                                if (file_output_stream != null) {
+                                    try {
+                                        file_output_stream.close();
+                                    } catch (Exception ex) {
+                                        // Ignore
+                                    }
+                                }
                             }
-                        } else {
-                            imageSelectionCancelled();
                         }
-
-                        cursor.close();
-                    } else {
-                        imageSelectionCancelled();
-                    }
+                    })).start();
                 } else {
                     imageSelectionCancelled();
                 }

@@ -85,13 +85,13 @@ void DecolorizeEditor::openImage(const QString &image_file, const int &image_ori
 
                     transform.rotate(90);
 
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
                 } else if (image_orientation == 180) {
                     QTransform transform;
 
                     transform.rotate(180);
 
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
                 } else if (image_orientation == 270) {
                     QTransform transform;
 
