@@ -334,7 +334,10 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
+                    width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                    height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                     source:           "images/busy_indicator.png"
+                    fillMode:         Image.PreserveAspectFit
                 }
             }
         }
