@@ -244,8 +244,10 @@ Page {
 
                     attachedObjects: [
                         DecolorizeEditor {
-                            id:   decolorizeEditor
-                            mode: DecolorizeEditor.ModeScroll 
+                            id:         decolorizeEditor
+                            mode:       DecolorizeEditor.ModeScroll
+                            brushSize:  32
+                            helperSize: 192 
                             
                             onImageOpened: {
                                 activityIndicator.stop();

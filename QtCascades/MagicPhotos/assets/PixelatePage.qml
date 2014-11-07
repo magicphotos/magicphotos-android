@@ -245,8 +245,10 @@ Page {
 
                     attachedObjects: [
                         PixelateEditor {
-                            id:   pixelateEditor
-                            mode: PixelateEditor.ModeScroll 
+                            id:         pixelateEditor
+                            mode:       PixelateEditor.ModeScroll 
+                            brushSize:  32
+                            helperSize: 192 
                             
                             onImageOpened: {
                                 activityIndicator.stop();

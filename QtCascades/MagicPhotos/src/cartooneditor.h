@@ -14,10 +14,12 @@ class CartoonEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode      READ mode      WRITE setMode)
-    Q_PROPERTY(int  radius    READ radius    WRITE setRadius)
-    Q_PROPERTY(int  threshold READ threshold WRITE setThreshold)
-    Q_PROPERTY(bool changed   READ changed)
+    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
+    Q_PROPERTY(int  brushSize  READ brushSize  WRITE setBrushSize)
+    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
+    Q_PROPERTY(int  radius     READ radius     WRITE setRadius)
+    Q_PROPERTY(int  threshold  READ threshold  WRITE setThreshold)
+    Q_PROPERTY(bool changed    READ changed)
 
     Q_ENUMS(Mode)
 
@@ -27,6 +29,12 @@ public:
 
     int  mode() const;
     void setMode(const int &mode);
+
+    int  brushSize() const;
+    void setBrushSize(const int &size);
+
+    int  helperSize() const;
+    void setHelperSize(const int &size);
 
     int  radius() const;
     void setRadius(const int &radius);
@@ -70,14 +78,12 @@ private:
     void RepaintImage(bool full, QRect rect = QRect());
     void RepaintHelper(int center_x, int center_y, double zoom_level);
 
-    static const int UNDO_DEPTH  = 4,
-                     BRUSH_SIZE  = 32,
-                     HELPER_SIZE = 192;
+    static const int UNDO_DEPTH = 4;
 
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged;
-    int            CurrentMode, GaussianRadius, CartoonThreshold;
+    int            CurrentMode, BrushSize, HelperSize, GaussianRadius, CartoonThreshold;
     QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
     QStack<QImage> UndoStack;
     bb::ImageData  CurrentImageData;

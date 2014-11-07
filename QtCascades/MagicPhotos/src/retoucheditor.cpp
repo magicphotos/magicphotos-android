@@ -17,6 +17,8 @@ RetouchEditor::RetouchEditor() : bb::cascades::CustomControl()
     IsSamplingPointValid = false;
     IsLastBlurPointValid = false;
     CurrentMode          = ModeScroll;
+    BrushSize            = 0;
+    HelperSize           = 0;
 }
 
 RetouchEditor::~RetouchEditor()
@@ -31,6 +33,26 @@ int RetouchEditor::mode() const
 void RetouchEditor::setMode(const int &mode)
 {
     CurrentMode = mode;
+}
+
+int RetouchEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void RetouchEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
+int RetouchEditor::helperSize() const
+{
+    return HelperSize;
+}
+
+void RetouchEditor::setHelperSize(const int &size)
+{
+    HelperSize = size;
 }
 
 bool RetouchEditor::samplingPointValid() const
@@ -229,7 +251,7 @@ void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, do
             SaveUndoImage();
         }
 
-        int radius = BRUSH_SIZE / zoom_level;
+        int radius = BrushSize / zoom_level;
 
         if (CurrentMode == ModeClone) {
             for (int from_x = SamplingPoint.x() - radius, to_x = center_x - radius; from_x <= SamplingPoint.x() + radius && to_x <= center_x + radius; from_x++, to_x++) {
@@ -499,8 +521,8 @@ void RetouchEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());
     } else {
-        QImage   helper_image = CurrentImage.copy(center_x - HELPER_SIZE / (zoom_level * 2),
-                                                  center_y - HELPER_SIZE / (zoom_level * 2), HELPER_SIZE / zoom_level, HELPER_SIZE / zoom_level).scaledToWidth(HELPER_SIZE);
+        QImage   helper_image = CurrentImage.copy(center_x - HelperSize / (zoom_level * 2),
+                                                  center_y - HelperSize / (zoom_level * 2), HelperSize / zoom_level, HelperSize / zoom_level).scaledToWidth(HelperSize);
         QPainter painter(&helper_image);
 
         painter.setPen(QPen(Qt::white, 4, Qt::SolidLine));

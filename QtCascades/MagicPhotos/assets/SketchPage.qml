@@ -245,8 +245,10 @@ Page {
 
                     attachedObjects: [
                         SketchEditor {
-                            id:   sketchEditor
-                            mode: SketchEditor.ModeScroll 
+                            id:         sketchEditor
+                            mode:       SketchEditor.ModeScroll 
+                            brushSize:  32
+                            helperSize: 192 
                             
                             onImageOpened: {
                                 activityIndicator.stop();

@@ -337,8 +337,10 @@ Page {
 
                         attachedObjects: [
                             RetouchEditor {
-                                id:   retouchEditor
-                                mode: RetouchEditor.ModeScroll
+                                id:         retouchEditor
+                                mode:       RetouchEditor.ModeScroll
+                                brushSize:  32
+                                helperSize: 192 
                                 
                                 onImageOpened: {
                                     activityIndicator.stop();

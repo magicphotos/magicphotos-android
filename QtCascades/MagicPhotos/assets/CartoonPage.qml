@@ -246,8 +246,10 @@ Page {
 
                     attachedObjects: [
                         CartoonEditor {
-                            id:   cartoonEditor
-                            mode: CartoonEditor.ModeScroll 
+                            id:         cartoonEditor
+                            mode:       CartoonEditor.ModeScroll 
+                            brushSize:  32
+                            helperSize: 192 
                             
                             onImageOpened: {
                                 activityIndicator.stop();

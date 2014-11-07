@@ -14,8 +14,10 @@ class DecolorizeEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode    READ mode    WRITE setMode)
-    Q_PROPERTY(bool changed READ changed)
+    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
+    Q_PROPERTY(int  brushSize  READ brushSize  WRITE setBrushSize)
+    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
+    Q_PROPERTY(bool changed    READ changed)
 
     Q_ENUMS(Mode)
 
@@ -25,6 +27,12 @@ public:
 
     int  mode() const;
     void setMode(const int &mode);
+
+    int  brushSize() const;
+    void setBrushSize(const int &size);
+
+    int  helperSize() const;
+    void setHelperSize(const int &size);
 
     bool changed() const;
 
@@ -62,14 +70,12 @@ private:
     void RepaintImage(bool full, QRect rect = QRect());
     void RepaintHelper(int center_x, int center_y, double zoom_level);
 
-    static const int UNDO_DEPTH  = 4,
-                     BRUSH_SIZE  = 32,
-                     HELPER_SIZE = 192;
+    static const int UNDO_DEPTH = 4;
 
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged;
-    int            CurrentMode;
+    int            CurrentMode, BrushSize, HelperSize;
     QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
     QStack<QImage> UndoStack;
     bb::ImageData  CurrentImageData;

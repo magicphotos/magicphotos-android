@@ -16,6 +16,8 @@ class RetouchEditor : public bb::cascades::CustomControl
     Q_OBJECT
 
     Q_PROPERTY(int  mode               READ mode               WRITE setMode)
+    Q_PROPERTY(int  brushSize          READ brushSize          WRITE setBrushSize)
+    Q_PROPERTY(int  helperSize         READ helperSize         WRITE setHelperSize)
     Q_PROPERTY(bool samplingPointValid READ samplingPointValid WRITE setSamplingPointValid)
     Q_PROPERTY(bool lastBlurPointValid READ lastBlurPointValid WRITE setLastBlurPointValid)
     Q_PROPERTY(int  samplingPointX     READ samplingPointX     WRITE setSamplingPointX)
@@ -34,6 +36,12 @@ public:
 
     int  mode() const;
     void setMode(const int &mode);
+
+    int  brushSize() const;
+    void setBrushSize(const int &size);
+
+    int  helperSize() const;
+    void setHelperSize(const int &size);
 
     bool samplingPointValid() const;
     void setSamplingPointValid(const bool &valid);
@@ -91,14 +99,12 @@ private:
     void RepaintHelper(int center_x, int center_y, double zoom_level);
 
     static const int UNDO_DEPTH      = 4,
-                     BRUSH_SIZE      = 32,
-                     GAUSSIAN_RADIUS = 4,
-                     HELPER_SIZE     = 192;
+                     GAUSSIAN_RADIUS = 4;
 
     static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged, IsSamplingPointValid, IsLastBlurPointValid;
-    int            CurrentMode;
+    int            CurrentMode, BrushSize, HelperSize;
     QPoint         SamplingPoint, LastBlurPoint;
     QImage         LoadedImage, CurrentImage;
     QStack<QImage> UndoStack;

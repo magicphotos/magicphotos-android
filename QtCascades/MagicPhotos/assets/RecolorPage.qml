@@ -256,9 +256,11 @@ Page {
 
                     attachedObjects: [
                         RecolorEditor {
-                            id:   recolorEditor
-                            mode: RecolorEditor.ModeScroll
-                            hue:  180 
+                            id:         recolorEditor
+                            mode:       RecolorEditor.ModeScroll
+                            brushSize:  32
+                            helperSize: 192 
+                            hue:        180 
 
                             onImageOpened: {
                                 activityIndicator.stop();

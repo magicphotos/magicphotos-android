@@ -17,6 +17,8 @@ CartoonEditor::CartoonEditor() : bb::cascades::CustomControl()
 {
     IsChanged        = false;
     CurrentMode      = ModeScroll;
+    BrushSize        = 0;
+    HelperSize       = 0;
     GaussianRadius   = 0;
     CartoonThreshold = 0;
 }
@@ -33,6 +35,26 @@ int CartoonEditor::mode() const
 void CartoonEditor::setMode(const int &mode)
 {
     CurrentMode = mode;
+}
+
+int CartoonEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void CartoonEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
+int CartoonEditor::helperSize() const
+{
+    return HelperSize;
+}
+
+void CartoonEditor::setHelperSize(const int &size)
+{
+    HelperSize = size;
 }
 
 int CartoonEditor::radius() const
@@ -185,7 +207,7 @@ void CartoonEditor::changeImageAt(bool save_undo, int center_x, int center_y, do
             SaveUndoImage();
         }
 
-        int radius = BRUSH_SIZE / zoom_level;
+        int radius = BrushSize / zoom_level;
 
         for (int x = center_x - radius; x <= center_x + radius; x++) {
             for (int y = center_y - radius; y <= center_y + radius; y++) {
@@ -329,8 +351,8 @@ void CartoonEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());
     } else {
-        QImage   helper_image = CurrentImage.copy(center_x - HELPER_SIZE / (zoom_level * 2),
-                                                  center_y - HELPER_SIZE / (zoom_level * 2), HELPER_SIZE / zoom_level, HELPER_SIZE / zoom_level).scaledToWidth(HELPER_SIZE);
+        QImage   helper_image = CurrentImage.copy(center_x - HelperSize / (zoom_level * 2),
+                                                  center_y - HelperSize / (zoom_level * 2), HelperSize / zoom_level, HelperSize / zoom_level).scaledToWidth(HelperSize);
         QPainter painter(&helper_image);
 
         painter.setPen(QPen(Qt::white, 4, Qt::SolidLine));

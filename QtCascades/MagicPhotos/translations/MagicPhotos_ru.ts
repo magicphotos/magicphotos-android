@@ -60,17 +60,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="309"/>
+        <location filename="../assets/BlurPage.qml" line="311"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="313"/>
+        <location filename="../assets/BlurPage.qml" line="315"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="317"/>
+        <location filename="../assets/BlurPage.qml" line="319"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -147,17 +147,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="310"/>
+        <location filename="../assets/CartoonPage.qml" line="312"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="314"/>
+        <location filename="../assets/CartoonPage.qml" line="316"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="318"/>
+        <location filename="../assets/CartoonPage.qml" line="320"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -234,17 +234,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="308"/>
+        <location filename="../assets/DecolorizePage.qml" line="310"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="312"/>
+        <location filename="../assets/DecolorizePage.qml" line="314"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="316"/>
+        <location filename="../assets/DecolorizePage.qml" line="318"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -331,17 +331,17 @@
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="309"/>
+        <location filename="../assets/PixelatePage.qml" line="311"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="313"/>
+        <location filename="../assets/PixelatePage.qml" line="315"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="317"/>
+        <location filename="../assets/PixelatePage.qml" line="319"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -418,17 +418,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="323"/>
+        <location filename="../assets/RecolorPage.qml" line="325"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="327"/>
+        <location filename="../assets/RecolorPage.qml" line="329"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="331"/>
+        <location filename="../assets/RecolorPage.qml" line="333"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -492,17 +492,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="409"/>
+        <location filename="../assets/RetouchPage.qml" line="411"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="413"/>
+        <location filename="../assets/RetouchPage.qml" line="415"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="417"/>
+        <location filename="../assets/RetouchPage.qml" line="419"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
@@ -566,17 +566,17 @@
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="309"/>
+        <location filename="../assets/SketchPage.qml" line="311"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="313"/>
+        <location filename="../assets/SketchPage.qml" line="315"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="317"/>
+        <location filename="../assets/SketchPage.qml" line="319"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>

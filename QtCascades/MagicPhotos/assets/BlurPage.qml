@@ -245,9 +245,11 @@ Page {
 
                     attachedObjects: [
                         BlurEditor {
-                            id:   blurEditor
-                            mode: BlurEditor.ModeScroll 
-                            
+                            id:         blurEditor
+                            mode:       BlurEditor.ModeScroll
+                            brushSize:  32
+                            helperSize: 192
+
                             onImageOpened: {
                                 activityIndicator.stop();
                                 activityIndicator.visible = false;
