@@ -12,8 +12,8 @@ RetouchEditor::RetouchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     IsSamplingPointValid = false;
     IsLastBlurPointValid = false;
     CurrentMode          = ModeScroll;
+    BrushSize            = 0;
     HelperSize           = 0;
-    ScreenDPI            = 0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
@@ -36,6 +36,16 @@ void RetouchEditor::setMode(const int &mode)
     CurrentMode = mode;
 }
 
+int RetouchEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void RetouchEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
 int RetouchEditor::helperSize() const
 {
     return HelperSize;
@@ -44,16 +54,6 @@ int RetouchEditor::helperSize() const
 void RetouchEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
-}
-
-int RetouchEditor::screenDPI() const
-{
-    return ScreenDPI;
-}
-
-void RetouchEditor::setScreenDPI(const int &dpi)
-{
-    ScreenDPI = dpi;
 }
 
 bool RetouchEditor::changed() const
@@ -326,21 +326,6 @@ void RetouchEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-int RetouchEditor::MapSizeToDevice(int size)
-{
-    if (ScreenDPI >= 640) {
-        return size * 4;
-    } else if (ScreenDPI >= 480) {
-        return size * 3;
-    } else if (ScreenDPI >= 320) {
-        return size * 2;
-    } else if (ScreenDPI >= 240) {
-        return size * 1.5;
-    } else {
-        return size;
-    }
-}
-
 void RetouchEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
@@ -361,7 +346,7 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = MapSizeToDevice(BRUSH_SIZE) / scale();
+        int radius = BrushSize / scale();
 
         if (CurrentMode == ModeClone) {
             for (int from_x = SamplingPoint.x() - radius, to_x = center_x - radius; from_x <= SamplingPoint.x() + radius && to_x <= center_x + radius; from_x++, to_x++) {

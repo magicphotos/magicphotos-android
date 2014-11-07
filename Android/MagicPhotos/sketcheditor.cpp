@@ -11,8 +11,8 @@ SketchEditor::SketchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
     IsChanged      = false;
     CurrentMode    = ModeScroll;
+    BrushSize      = 0;
     HelperSize     = 0;
-    ScreenDPI      = 0;
     GaussianRadius = 0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
@@ -36,6 +36,16 @@ void SketchEditor::setMode(const int &mode)
     CurrentMode = mode;
 }
 
+int SketchEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void SketchEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
 int SketchEditor::helperSize() const
 {
     return HelperSize;
@@ -44,16 +54,6 @@ int SketchEditor::helperSize() const
 void SketchEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
-}
-
-int SketchEditor::screenDPI() const
-{
-    return ScreenDPI;
-}
-
-void SketchEditor::setScreenDPI(const int &dpi)
-{
-    ScreenDPI = dpi;
 }
 
 int SketchEditor::radius() const
@@ -246,21 +246,6 @@ void SketchEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-int SketchEditor::MapSizeToDevice(int size)
-{
-    if (ScreenDPI >= 640) {
-        return size * 4;
-    } else if (ScreenDPI >= 480) {
-        return size * 3;
-    } else if (ScreenDPI >= 320) {
-        return size * 2;
-    } else if (ScreenDPI >= 240) {
-        return size * 1.5;
-    } else {
-        return size;
-    }
-}
-
 void SketchEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
@@ -281,7 +266,7 @@ void SketchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = MapSizeToDevice(BRUSH_SIZE) / scale();
+        int radius = BrushSize / scale();
 
         for (int x = center_x - radius; x <= center_x + radius; x++) {
             for (int y = center_y - radius; y <= center_y + radius; y++) {

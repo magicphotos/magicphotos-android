@@ -11,8 +11,8 @@ CartoonEditor::CartoonEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
     IsChanged        = false;
     CurrentMode      = ModeScroll;
+    BrushSize        = 0;
     HelperSize       = 0;
-    ScreenDPI        = 0;
     GaussianRadius   = 0;
     CartoonThreshold = 0;
 
@@ -37,6 +37,16 @@ void CartoonEditor::setMode(const int &mode)
     CurrentMode = mode;
 }
 
+int CartoonEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void CartoonEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
 int CartoonEditor::helperSize() const
 {
     return HelperSize;
@@ -45,16 +55,6 @@ int CartoonEditor::helperSize() const
 void CartoonEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
-}
-
-int CartoonEditor::screenDPI() const
-{
-    return ScreenDPI;
-}
-
-void CartoonEditor::setScreenDPI(const int &dpi)
-{
-    ScreenDPI = dpi;
 }
 
 int CartoonEditor::radius() const
@@ -258,21 +258,6 @@ void CartoonEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-int CartoonEditor::MapSizeToDevice(int size)
-{
-    if (ScreenDPI >= 640) {
-        return size * 4;
-    } else if (ScreenDPI >= 480) {
-        return size * 3;
-    } else if (ScreenDPI >= 320) {
-        return size * 2;
-    } else if (ScreenDPI >= 240) {
-        return size * 1.5;
-    } else {
-        return size;
-    }
-}
-
 void CartoonEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
@@ -293,7 +278,7 @@ void CartoonEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = MapSizeToDevice(BRUSH_SIZE) / scale();
+        int radius = BrushSize / scale();
 
         for (int x = center_x - radius; x <= center_x + radius; x++) {
             for (int y = center_y - radius; y <= center_y + radius; y++) {

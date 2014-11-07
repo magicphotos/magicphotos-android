@@ -11,8 +11,8 @@ BlurEditor::BlurEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
     IsChanged      = false;
     CurrentMode    = ModeScroll;
+    BrushSize      = 0;
     HelperSize     = 0;
-    ScreenDPI      = 0;
     GaussianRadius = 0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
@@ -36,6 +36,16 @@ void BlurEditor::setMode(const int &mode)
     CurrentMode = mode;
 }
 
+int BlurEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void BlurEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
 int BlurEditor::helperSize() const
 {
     return HelperSize;
@@ -44,16 +54,6 @@ int BlurEditor::helperSize() const
 void BlurEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
-}
-
-int BlurEditor::screenDPI() const
-{
-    return ScreenDPI;
-}
-
-void BlurEditor::setScreenDPI(const int &dpi)
-{
-    ScreenDPI = dpi;
 }
 
 int BlurEditor::radius() const
@@ -246,21 +246,6 @@ void BlurEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-int BlurEditor::MapSizeToDevice(int size)
-{
-    if (ScreenDPI >= 640) {
-        return size * 4;
-    } else if (ScreenDPI >= 480) {
-        return size * 3;
-    } else if (ScreenDPI >= 320) {
-        return size * 2;
-    } else if (ScreenDPI >= 240) {
-        return size * 1.5;
-    } else {
-        return size;
-    }
-}
-
 void BlurEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
@@ -281,7 +266,7 @@ void BlurEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = MapSizeToDevice(BRUSH_SIZE) / scale();
+        int radius = BrushSize / scale();
 
         for (int x = center_x - radius; x <= center_x + radius; x++) {
             for (int y = center_y - radius; y <= center_y + radius; y++) {

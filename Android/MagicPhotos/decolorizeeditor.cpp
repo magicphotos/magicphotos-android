@@ -11,8 +11,8 @@ DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) : QQuickPaintedItem(paren
 {
     IsChanged   = false;
     CurrentMode = ModeScroll;
+    BrushSize   = 0;
     HelperSize  = 0;
-    ScreenDPI   = 0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
@@ -35,6 +35,16 @@ void DecolorizeEditor::setMode(const int &mode)
     CurrentMode = mode;
 }
 
+int DecolorizeEditor::brushSize() const
+{
+    return BrushSize;
+}
+
+void DecolorizeEditor::setBrushSize(const int &size)
+{
+    BrushSize = size;
+}
+
 int DecolorizeEditor::helperSize() const
 {
     return HelperSize;
@@ -43,16 +53,6 @@ int DecolorizeEditor::helperSize() const
 void DecolorizeEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
-}
-
-int DecolorizeEditor::screenDPI() const
-{
-    return ScreenDPI;
-}
-
-void DecolorizeEditor::setScreenDPI(const int &dpi)
-{
-    ScreenDPI = dpi;
 }
 
 bool DecolorizeEditor::changed() const
@@ -234,21 +234,6 @@ void DecolorizeEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-int DecolorizeEditor::MapSizeToDevice(int size)
-{
-    if (ScreenDPI >= 640) {
-        return size * 4;
-    } else if (ScreenDPI >= 480) {
-        return size * 3;
-    } else if (ScreenDPI >= 320) {
-        return size * 2;
-    } else if (ScreenDPI >= 240) {
-        return size * 1.5;
-    } else {
-        return size;
-    }
-}
-
 void DecolorizeEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
@@ -269,7 +254,7 @@ void DecolorizeEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = MapSizeToDevice(BRUSH_SIZE) / scale();
+        int radius = BrushSize / scale();
 
         for (int x = center_x - radius; x <= center_x + radius; x++) {
             for (int y = center_y - radius; y <= center_y + radius; y++) {

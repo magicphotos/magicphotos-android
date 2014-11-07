@@ -241,8 +241,8 @@ Item {
                                      editorFlickable.initialContentWidth > 0.0 ?
                                      editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
                     transformOrigin: Item.TopLeft
+                    brushSize:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
                     helperSize:      helper.width
-                    screenDPI:       AndroidGW.getScreenDPI()
 
                     onImageOpened: {
                         waitRectangle.visible = false;

@@ -13,8 +13,8 @@ class BlurEditor : public QQuickPaintedItem
     Q_OBJECT
 
     Q_PROPERTY(int  mode       READ mode       WRITE setMode)
+    Q_PROPERTY(int  brushSize  READ brushSize  WRITE setBrushSize)
     Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
-    Q_PROPERTY(int  screenDPI  READ screenDPI  WRITE setScreenDPI)
     Q_PROPERTY(int  radius     READ radius     WRITE setRadius)
     Q_PROPERTY(bool changed    READ changed)
 
@@ -28,11 +28,11 @@ public:
     int  mode() const;
     void setMode(const int &mode);
 
+    int  brushSize() const;
+    void setBrushSize(const int &size);
+
     int  helperSize() const;
     void setHelperSize(const int &size);
-
-    int  screenDPI() const;
-    void setScreenDPI(const int &dpi);
 
     int  radius() const;
     void setRadius(const int &radius);
@@ -80,17 +80,15 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent *event);
 
 private:
-    int  MapSizeToDevice(int size);
     void SaveUndoImage();
     void ChangeImageAt(bool save_undo, int center_x, int center_y);
 
-    static const int UNDO_DEPTH = 8,
-                     BRUSH_SIZE = 16;
+    static const int UNDO_DEPTH = 8;
 
     constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     bool           IsChanged;
-    int            CurrentMode, HelperSize, ScreenDPI, GaussianRadius;
+    int            CurrentMode, BrushSize, HelperSize, GaussianRadius;
     QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
     QStack<QImage> UndoStack;
 };
