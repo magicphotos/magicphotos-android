@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QThread>
@@ -175,7 +174,7 @@ void DecolorizeEditor::saveImage(const QString &image_file)
     }
 }
 
-void DecolorizeEditor::changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level)
+void DecolorizeEditor::changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentMode != ModeScroll) {
         if (save_undo) {
@@ -321,7 +320,7 @@ void DecolorizeEditor::RepaintImage(bool full, QRect rect)
     }
 }
 
-void DecolorizeEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
+void DecolorizeEditor::RepaintHelper(int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());

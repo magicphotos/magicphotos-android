@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QVector>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
@@ -200,7 +199,7 @@ void CartoonEditor::saveImage(const QString &image_file)
     }
 }
 
-void CartoonEditor::changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level)
+void CartoonEditor::changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentMode != ModeScroll) {
         if (save_undo) {
@@ -346,7 +345,7 @@ void CartoonEditor::RepaintImage(bool full, QRect rect)
     }
 }
 
-void CartoonEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
+void CartoonEditor::RepaintHelper(int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());

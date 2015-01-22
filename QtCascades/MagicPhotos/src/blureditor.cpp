@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QThread>
@@ -187,7 +186,7 @@ void BlurEditor::saveImage(const QString &image_file)
     }
 }
 
-void BlurEditor::changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level)
+void BlurEditor::changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentMode != ModeScroll) {
         if (save_undo) {
@@ -333,7 +332,7 @@ void BlurEditor::RepaintImage(bool full, QRect rect)
     }
 }
 
-void BlurEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
+void BlurEditor::RepaintHelper(int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());

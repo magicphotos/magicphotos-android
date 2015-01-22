@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtGui/QTransform>
@@ -244,7 +243,7 @@ void RetouchEditor::saveImage(const QString &image_file)
     }
 }
 
-void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level)
+void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentMode == ModeClone || CurrentMode == ModeBlur) {
         if (save_undo) {
@@ -409,7 +408,7 @@ void RetouchEditor::changeImageAt(bool save_undo, int center_x, int center_y, do
     }
 }
 
-void RetouchEditor::updateHelperAt(int center_x, int center_y, double zoom_level)
+void RetouchEditor::updateHelperAt(int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentMode != ModeScroll) {
         RepaintHelper(center_x, center_y, zoom_level);
@@ -516,7 +515,7 @@ void RetouchEditor::RepaintImage(bool full, QRect rect)
     }
 }
 
-void RetouchEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
+void RetouchEditor::RepaintHelper(int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());

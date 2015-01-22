@@ -1,6 +1,7 @@
 #ifndef CARTOONEDITOR_H
 #define CARTOONEDITOR_H
 
+#include <QtCore/qmath.h>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStack>
@@ -47,7 +48,7 @@ public:
     Q_INVOKABLE void openImage(const QString &image_file);
     Q_INVOKABLE void saveImage(const QString &image_file);
 
-    Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level);
+    Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level);
 
     Q_INVOKABLE void undo();
 
@@ -76,7 +77,7 @@ private:
     void SaveUndoImage();
 
     void RepaintImage(bool full, QRect rect = QRect());
-    void RepaintHelper(int center_x, int center_y, double zoom_level);
+    void RepaintHelper(int center_x, int center_y, qreal zoom_level);
 
     static const int UNDO_DEPTH = 4;
 

@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtGui/QColor>
@@ -204,7 +203,7 @@ void RecolorEditor::saveImage(const QString &image_file)
     }
 }
 
-void RecolorEditor::changeImageAt(bool save_undo, int center_x, int center_y, double zoom_level)
+void RecolorEditor::changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentMode != ModeScroll) {
         if (save_undo) {
@@ -346,7 +345,7 @@ void RecolorEditor::RepaintImage(bool full, QRect rect)
     }
 }
 
-void RecolorEditor::RepaintHelper(int center_x, int center_y, double zoom_level)
+void RecolorEditor::RepaintHelper(int center_x, int center_y, qreal zoom_level)
 {
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());
