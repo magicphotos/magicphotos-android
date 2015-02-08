@@ -60,17 +60,17 @@
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="311"/>
+        <location filename="../assets/BlurPage.qml" line="312"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="315"/>
+        <location filename="../assets/BlurPage.qml" line="316"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="319"/>
+        <location filename="../assets/BlurPage.qml" line="320"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
@@ -147,17 +147,17 @@
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="312"/>
+        <location filename="../assets/CartoonPage.qml" line="313"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="316"/>
+        <location filename="../assets/CartoonPage.qml" line="317"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="320"/>
+        <location filename="../assets/CartoonPage.qml" line="321"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
@@ -331,17 +331,17 @@
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="311"/>
+        <location filename="../assets/PixelatePage.qml" line="312"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="315"/>
+        <location filename="../assets/PixelatePage.qml" line="316"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="319"/>
+        <location filename="../assets/PixelatePage.qml" line="320"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
@@ -418,17 +418,17 @@
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="325"/>
+        <location filename="../assets/RecolorPage.qml" line="326"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="329"/>
+        <location filename="../assets/RecolorPage.qml" line="330"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="333"/>
+        <location filename="../assets/RecolorPage.qml" line="334"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
@@ -492,17 +492,17 @@
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="411"/>
+        <location filename="../assets/RetouchPage.qml" line="412"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="415"/>
+        <location filename="../assets/RetouchPage.qml" line="416"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="419"/>
+        <location filename="../assets/RetouchPage.qml" line="420"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
@@ -566,17 +566,17 @@
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="311"/>
+        <location filename="../assets/SketchPage.qml" line="312"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="315"/>
+        <location filename="../assets/SketchPage.qml" line="316"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="319"/>
+        <location filename="../assets/SketchPage.qml" line="320"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
