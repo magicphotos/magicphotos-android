@@ -137,6 +137,7 @@ Page {
     Container {
         id:         sketchPageContainer
         background: Color.Black
+        topPadding: 20
 
         layout: StackLayout {
         }

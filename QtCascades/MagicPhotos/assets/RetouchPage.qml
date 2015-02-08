@@ -136,6 +136,7 @@ Page {
     Container {
         id:         retouchPageContainer
         background: Color.Black
+        topPadding: 20
 
         layout: StackLayout {
         }

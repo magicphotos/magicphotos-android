@@ -137,6 +137,7 @@ Page {
     Container {
         id:         pixelatePageContainer
         background: Color.Black
+        topPadding: 20
 
         layout: StackLayout {
         }

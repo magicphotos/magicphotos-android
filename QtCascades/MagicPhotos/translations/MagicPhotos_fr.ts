@@ -234,17 +234,17 @@
         <translation>Jamais</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="310"/>
+        <location filename="../assets/DecolorizePage.qml" line="311"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="314"/>
+        <location filename="../assets/DecolorizePage.qml" line="315"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="318"/>
+        <location filename="../assets/DecolorizePage.qml" line="319"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>

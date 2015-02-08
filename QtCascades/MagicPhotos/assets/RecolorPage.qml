@@ -136,6 +136,7 @@ Page {
     Container {
         id:         recolorPageContainer
         background: Color.Black
+        topPadding: 20
 
         layout: StackLayout {
         }

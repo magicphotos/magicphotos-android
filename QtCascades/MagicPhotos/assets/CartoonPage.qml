@@ -138,6 +138,7 @@ Page {
     Container {
         id:         cartoonPageContainer
         background: Color.Black
+        topPadding: 20
 
         layout: StackLayout {
         }

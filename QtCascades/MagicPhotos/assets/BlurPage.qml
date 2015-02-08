@@ -137,6 +137,7 @@ Page {
     Container {
         id:         blurPageContainer
         background: Color.Black
+        topPadding: 20
 
         layout: StackLayout {
         }
