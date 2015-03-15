@@ -1,5 +1,5 @@
-import bb.cascades 1.0
-import bb.system 1.0
+import bb.cascades 1.3
+import bb.system 1.2
 import ImageEditor 1.0
 
 Page {
@@ -21,8 +21,34 @@ Page {
         }
     }
 
+    actions: [
+        ActionItem {
+            id:                  applyActionItem
+            title:               qsTr("Apply")
+            imageSource:         "images/apply.png"
+            ActionBar.placement: ActionBarPlacement.Signature
+            enabled:             false
+            
+            onTriggered: {
+                var page = pixelatePageDefinition.createObject();
+                
+                navigationPane.push(page);
+                
+                page.openImage(imageFile, pixDenomSlider.value);
+            }
+
+            attachedObjects: [
+                ComponentDefinition {
+                    id:     pixelatePageDefinition
+                    source: "PixelatePage.qml"
+                }
+            ]
+        }
+    ]
+
     Container {
-        background: Color.Black
+        background:    Color.Black
+        bottomPadding: ui.sdu(8)
 
         layout: StackLayout {
         }
@@ -43,6 +69,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center 
                 verticalAlignment:   VerticalAlignment.Center
                 scalingMethod:       ScalingMethod.AspectFit
+                accessibility.name:  qsTr("Resulting image preview")
 
                 attachedObjects: [
                     PixelatePreviewGenerator {
@@ -51,13 +78,13 @@ Page {
                         property int activityIndicatorUsageCounter: 0
                         
                         onImageOpened: {
-                            pixDenomSlider.enabled = true;
-                            applyButton.enabled    = true;
+                            pixDenomSlider.enabled  = true;
+                            applyActionItem.enabled = true;
                         }
 
                         onImageOpenFailed: {
-                            pixDenomSlider.enabled = false;
-                            applyButton.enabled    = false;
+                            pixDenomSlider.enabled  = false;
+                            applyActionItem.enabled = false;
 
                             imageOpenFailedToast.show();
                         }
@@ -95,11 +122,12 @@ Page {
 
             ActivityIndicator {
                 id:                  activityIndicator
-                preferredWidth:      256
-                preferredHeight:     256
+                preferredWidth:      ui.sdu(24)
+                preferredHeight:     ui.sdu(24)
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment:   VerticalAlignment.Center
                 visible:             false
+                accessibility.name:  qsTr("Activity indicator")
             }
         }
 
@@ -110,6 +138,7 @@ Page {
             toValue:             192
             value:               112
             enabled:             false
+            accessibility.name:  qsTr("Pixelate denominator slider")
 
             onValueChanged: {
                 pixelatePreviewGenerator.pixDenom = value;
@@ -118,33 +147,6 @@ Page {
             layoutProperties: StackLayoutProperties {
                 spaceQuota: -1
             }
-        }
-
-        Button {
-            id:                  applyButton
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment:   VerticalAlignment.Bottom
-            text:                qsTr("Apply")
-            enabled:             false
-            
-            onClicked: {
-                var page = pixelatePageDefinition.createObject();
-
-                navigationPane.push(page);
-
-                page.openImage(imageFile, pixDenomSlider.value);
-            }
-
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-            
-            attachedObjects: [
-                ComponentDefinition {
-                    id:     pixelatePageDefinition
-                    source: "PixelatePage.qml"
-                }
-            ]
         }
     }
 }

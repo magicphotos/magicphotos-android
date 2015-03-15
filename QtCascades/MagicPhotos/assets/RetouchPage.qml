@@ -1,5 +1,5 @@
-import bb.cascades 1.0
-import bb.system 1.0
+import bb.cascades 1.3
+import bb.system 1.2
 import FilePicker 1.0
 import CustomTimer 1.0
 import ImageEditor 1.0
@@ -45,7 +45,7 @@ Page {
             id:                  saveActionItem
             title:               qsTr("Save")
             imageSource:         "images/save.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: ActionBarPlacement.Signature
             enabled:             false
 
             onTriggered: {
@@ -136,7 +136,7 @@ Page {
     Container {
         id:         retouchPageContainer
         background: Color.Black
-        topPadding: 20
+        topPadding: ui.sdu(2)
 
         layout: StackLayout {
         }
@@ -144,6 +144,7 @@ Page {
         SegmentedControl {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
+            accessibility.name:  qsTr("Editor modes")
             
             onSelectedValueChanged: {
                 if (selectedValue === RetouchEditor.ModeScroll) {
@@ -189,7 +190,7 @@ Page {
 
         Container {
             id:                  imageContainer
-            preferredWidth:      65535
+            preferredWidth:      ui.px(65535)
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
 
@@ -204,9 +205,9 @@ Page {
                 if (modeSegmentedControl.selectedValue !== RetouchEditor.ModeScroll) {
                     helperImageView.visible = true;
 
-                    var local_x = imageScrollViewLayoutUpdateHandler.layoutFrame.x + (imageViewContainerLayoutUpdateHandler.layoutFrame.x + touch_x) * imageScrollView.contentScale - imageScrollView.viewableArea.x;
-                    var local_y = imageScrollViewLayoutUpdateHandler.layoutFrame.y + (imageViewContainerLayoutUpdateHandler.layoutFrame.y + touch_y) * imageScrollView.contentScale - imageScrollView.viewableArea.y;
-    
+                    var local_x = imageScrollViewLayoutUpdateHandler.layoutFrame.x + (imageViewLayoutUpdateHandler.layoutFrame.x + touch_x) * imageScrollView.contentScale - imageScrollView.viewableArea.x;
+                    var local_y = imageScrollViewLayoutUpdateHandler.layoutFrame.y + (imageViewLayoutUpdateHandler.layoutFrame.y + touch_y) * imageScrollView.contentScale - imageScrollView.viewableArea.y;
+
                     if (local_y < helperImageViewLayoutUpdateHandler.layoutFrame.height * 2) {
                         if (local_x < helperImageViewLayoutUpdateHandler.layoutFrame.width * 2) {
                             helperImageView.horizontalAlignment = HorizontalAlignment.Right;
@@ -224,6 +225,7 @@ Page {
                 horizontalAlignment:  HorizontalAlignment.Center
                 verticalAlignment:    VerticalAlignment.Center
                 touchPropagationMode: TouchPropagationMode.Full
+                accessibility.name:   qsTr("Image editor")
                 
                 onContentScaleChanged: {
                     if (retouchEditor.samplingPointValid) {
@@ -246,14 +248,13 @@ Page {
                 }            
                 
                 Container {
-                    id: imageViewContainer
-                    
                     layout: AbsoluteLayout {
                     }
 
                     ImageView {
-                        id:            imageView
-                        scalingMethod: ScalingMethod.AspectFit 
+                        id:                 imageView
+                        scalingMethod:      ScalingMethod.AspectFit
+                        accessibility.name: qsTr("Image editor")
 
                         property int initial_sampling_point_x: 0
                         property int initial_sampling_point_y: 0
@@ -340,8 +341,8 @@ Page {
                             RetouchEditor {
                                 id:         retouchEditor
                                 mode:       RetouchEditor.ModeScroll
-                                brushSize:  32
-                                helperSize: 192 
+                                brushSize:  ui.sdu(3)
+                                helperSize: ui.sdu(20)
                                 
                                 onImageOpened: {
                                     activityIndicator.stop();
@@ -418,14 +419,17 @@ Page {
                             SystemToast {
                                 id:   imageSaveFailedToast
                                 body: qsTr("Could not save image")
+                            },
+                            LayoutUpdateHandler {
+                                id: imageViewLayoutUpdateHandler
                             }
                         ]
                     }
-                    
+
                     ImageView {
                         id:                   samplingPointImageView
-                        preferredWidth:       64 / imageScrollView.contentScale
-                        preferredHeight:      64 / imageScrollView.contentScale
+                        preferredWidth:       ui.sdu(6) / imageScrollView.contentScale
+                        preferredHeight:      ui.sdu(6) / imageScrollView.contentScale
                         minWidth:             preferredWidth
                         minHeight:            preferredHeight
                         maxWidth:             preferredWidth
@@ -434,18 +438,13 @@ Page {
                         touchPropagationMode: TouchPropagationMode.PassThrough
                         overlapTouchPolicy:   OverlapTouchPolicy.Allow
                         visible:              false
-                        
+                        accessibility.name:   qsTr("Sampling point")
+
                         layoutProperties: AbsoluteLayoutProperties {
                             positionX: 0
                             positionY: 0
                         }
                     }
-
-                    attachedObjects: [
-                        LayoutUpdateHandler {
-                            id: imageViewContainerLayoutUpdateHandler
-                        }
-                    ]
                 }
                 
                 attachedObjects: [
@@ -460,6 +459,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Left
                 verticalAlignment:   VerticalAlignment.Top
                 visible:             false
+                accessibility.name:  qsTr("Helper image")
                 
                 attachedObjects: [
                     LayoutUpdateHandler {
@@ -470,11 +470,12 @@ Page {
 
             ActivityIndicator {
                 id:                  activityIndicator
-                preferredWidth:      256
-                preferredHeight:     256
+                preferredWidth:      ui.sdu(24)
+                preferredHeight:     ui.sdu(24)
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment:   VerticalAlignment.Center
                 visible:             false
+                accessibility.name:  qsTr("Activity indicator")
             }
 
             attachedObjects: [

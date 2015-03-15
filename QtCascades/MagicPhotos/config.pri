@@ -101,6 +101,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/doc/recommend_app_button.png) \
         $$quote($$BASEDIR/assets/doc/review_app_button.png) \
         $$quote($$BASEDIR/assets/doc/sampling_point_selected.png) \
+        $$quote($$BASEDIR/assets/images/apply.png) \
         $$quote($$BASEDIR/assets/images/edit_mode_blur.png) \
         $$quote($$BASEDIR/assets/images/edit_mode_cartoon.png) \
         $$quote($$BASEDIR/assets/images/edit_mode_decolorize.png) \
@@ -117,6 +118,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/mode_original.png) \
         $$quote($$BASEDIR/assets/images/mode_sampling_point.png) \
         $$quote($$BASEDIR/assets/images/mode_scroll.png) \
+        $$quote($$BASEDIR/assets/images/open.png) \
         $$quote($$BASEDIR/assets/images/review.png) \
         $$quote($$BASEDIR/assets/images/sampling_point.png) \
         $$quote($$BASEDIR/assets/images/save.png) \

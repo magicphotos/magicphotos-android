@@ -1,5 +1,5 @@
-import bb.cascades 1.0
-import bb.system 1.0
+import bb.cascades 1.3
+import bb.system 1.2
 import FilePicker 1.0
 import CustomTimer 1.0
 import ImageEditor 1.0
@@ -46,7 +46,7 @@ Page {
             id:                  saveActionItem
             title:               qsTr("Save")
             imageSource:         "images/save.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: ActionBarPlacement.Signature
             enabled:             false
 
             onTriggered: {
@@ -137,7 +137,7 @@ Page {
     Container {
         id:         blurPageContainer
         background: Color.Black
-        topPadding: 20
+        topPadding: ui.sdu(2)
 
         layout: StackLayout {
         }
@@ -145,6 +145,7 @@ Page {
         SegmentedControl {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
+            accessibility.name:  qsTr("Editor modes")
             
             onSelectedValueChanged: {
                 if (selectedValue === BlurEditor.ModeScroll) {
@@ -183,7 +184,7 @@ Page {
 
         Container {
             id:                  imageContainer
-            preferredWidth:      65535
+            preferredWidth:      ui.px(65535)
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
 
@@ -218,6 +219,7 @@ Page {
                 horizontalAlignment:  HorizontalAlignment.Center
                 verticalAlignment:    VerticalAlignment.Center
                 touchPropagationMode: TouchPropagationMode.Full
+                accessibility.name:   qsTr("Image editor")
                 
                 scrollViewProperties {
                     scrollMode:         ScrollMode.Both
@@ -227,8 +229,9 @@ Page {
                 }            
                 
                 ImageView {
-                    id:            imageView
-                    scalingMethod: ScalingMethod.AspectFit 
+                    id:                 imageView
+                    scalingMethod:      ScalingMethod.AspectFit
+                    accessibility.name: qsTr("Image editor")
                     
                     onTouch: {
                         if (event.touchType === TouchType.Down) {
@@ -248,8 +251,8 @@ Page {
                         BlurEditor {
                             id:         blurEditor
                             mode:       BlurEditor.ModeScroll
-                            brushSize:  32
-                            helperSize: 192
+                            brushSize:  ui.sdu(3)
+                            helperSize: ui.sdu(20)
 
                             onImageOpened: {
                                 activityIndicator.stop();
@@ -334,6 +337,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Left
                 verticalAlignment:   VerticalAlignment.Top
                 visible:             false
+                accessibility.name:  qsTr("Helper image")
                 
                 attachedObjects: [
                     LayoutUpdateHandler {
@@ -344,11 +348,12 @@ Page {
 
             ActivityIndicator {
                 id:                  activityIndicator
-                preferredWidth:      256
-                preferredHeight:     256
+                preferredWidth:      ui.sdu(24)
+                preferredHeight:     ui.sdu(24)
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment:   VerticalAlignment.Center
                 visible:             false
+                accessibility.name:  qsTr("Activity indicator")
             }
 
             attachedObjects: [

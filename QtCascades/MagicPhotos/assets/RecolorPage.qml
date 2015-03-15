@@ -1,5 +1,5 @@
-import bb.cascades 1.0
-import bb.system 1.0
+import bb.cascades 1.3
+import bb.system 1.2
 import FilePicker 1.0
 import CustomTimer 1.0
 import ImageEditor 1.0
@@ -45,7 +45,7 @@ Page {
             id:                  saveActionItem
             title:               qsTr("Save")
             imageSource:         "images/save.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: ActionBarPlacement.Signature
             enabled:             false
 
             onTriggered: {
@@ -136,7 +136,7 @@ Page {
     Container {
         id:         recolorPageContainer
         background: Color.Black
-        topPadding: 20
+        topPadding: ui.sdu(2)
 
         layout: StackLayout {
         }
@@ -144,6 +144,7 @@ Page {
         SegmentedControl {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
+            accessibility.name:  qsTr("Editor modes")
             
             onSelectedValueChanged: {
                 if (selectedValue === RecolorEditor.ModeScroll) {
@@ -194,7 +195,7 @@ Page {
 
         Container {
             id:                  imageContainer
-            preferredWidth:      65535
+            preferredWidth:      ui.px(65535)
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
 
@@ -211,7 +212,7 @@ Page {
 
                     var local_x = imageScrollViewLayoutUpdateHandler.layoutFrame.x + touch_x * imageScrollView.contentScale - imageScrollView.viewableArea.x;
                     var local_y = imageScrollViewLayoutUpdateHandler.layoutFrame.y + touch_y * imageScrollView.contentScale - imageScrollView.viewableArea.y;
-    
+
                     if (local_y < helperImageViewLayoutUpdateHandler.layoutFrame.height * 2) {
                         if (local_x < helperImageViewLayoutUpdateHandler.layoutFrame.width * 2) {
                             helperImageView.horizontalAlignment = HorizontalAlignment.Right;
@@ -229,6 +230,7 @@ Page {
                 horizontalAlignment:  HorizontalAlignment.Center
                 verticalAlignment:    VerticalAlignment.Center
                 touchPropagationMode: TouchPropagationMode.Full
+                accessibility.name:   qsTr("Image editor")
                 
                 scrollViewProperties {
                     scrollMode:         ScrollMode.Both
@@ -238,8 +240,9 @@ Page {
                 }            
                 
                 ImageView {
-                    id:            imageView
-                    scalingMethod: ScalingMethod.AspectFit 
+                    id:                 imageView
+                    scalingMethod:      ScalingMethod.AspectFit
+                    accessibility.name: qsTr("Image editor")
                     
                     onTouch: {
                         if (event.touchType === TouchType.Down) {
@@ -259,9 +262,9 @@ Page {
                         RecolorEditor {
                             id:         recolorEditor
                             mode:       RecolorEditor.ModeScroll
-                            brushSize:  32
-                            helperSize: 192 
-                            hue:        180 
+                            brushSize:  ui.sdu(3)
+                            helperSize: ui.sdu(20)
+                            hue:        180
 
                             onImageOpened: {
                                 activityIndicator.stop();
@@ -351,7 +354,7 @@ Page {
                 
                 onVisibleChanged: {
                     if (visible) {
-                        hueSliderImageView.layoutProperties.positionY = Math.max(0, Math.min(hueBarImageView.preferredHeight - hueSliderImageView.preferredHeight, recolorEditor.hue));
+                        hueSliderImageView.layoutProperties.positionY = Math.max(0, Math.min(hueBarImageView.preferredHeight - hueSliderImageView.preferredHeight, recolorEditor.hue / (359 / hueBarImageView.preferredHeight)));
                     }
                 }
                 
@@ -359,20 +362,21 @@ Page {
                 }
 
                 ImageView {
-                    id:              hueBarImageView
-                    preferredWidth:  128
-                    preferredHeight: 360
-                    minWidth:        preferredWidth
-                    minHeight:       preferredHeight
-                    maxWidth:        preferredWidth
-                    maxHeight:       preferredHeight
-                    imageSource:     "images/hue_bar.png"
-                    
+                    id:                 hueBarImageView
+                    preferredWidth:     ui.sdu(12)
+                    preferredHeight:    ui.sdu(36)
+                    minWidth:           preferredWidth
+                    minHeight:          preferredHeight
+                    maxWidth:           preferredWidth
+                    maxHeight:          preferredHeight
+                    imageSource:        "images/hue_bar.png"
+                    accessibility.name: qsTr("Hue bar")
+
                     onTouch: {
                         if (event.touchType === TouchType.Down || event.touchType === TouchType.Move) {
                             hueSliderImageView.layoutProperties.positionY = Math.max(0, Math.min(hueBarImageView.preferredHeight - hueSliderImageView.preferredHeight, event.localY));
 
-                            recolorEditor.hue = Math.max(0, Math.min(359, event.localY));
+                            recolorEditor.hue = Math.max(0, Math.min(hueBarImageView.preferredHeight, event.localY)) * (359 / hueBarImageView.preferredHeight);
                         }
                     }  
 
@@ -384,8 +388,8 @@ Page {
                 
                 ImageView {
                     id:                   hueSliderImageView
-                    preferredWidth:       128
-                    preferredHeight:      24
+                    preferredWidth:       ui.sdu(12)
+                    preferredHeight:      ui.sdu(2)
                     minWidth:             preferredWidth
                     minHeight:            preferredHeight
                     maxWidth:             preferredWidth
@@ -393,6 +397,7 @@ Page {
                     imageSource:          "images/hue_slider.png"
                     touchPropagationMode: TouchPropagationMode.PassThrough
                     overlapTouchPolicy:   OverlapTouchPolicy.Allow
+                    accessibility.name:   qsTr("Hue slider")
 
                     layoutProperties: AbsoluteLayoutProperties {
                         positionX: 0
@@ -406,6 +411,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Left
                 verticalAlignment:   VerticalAlignment.Top
                 visible:             false
+                accessibility.name:  qsTr("Helper image")
                 
                 attachedObjects: [
                     LayoutUpdateHandler {
@@ -416,11 +422,12 @@ Page {
 
             ActivityIndicator {
                 id:                  activityIndicator
-                preferredWidth:      256
-                preferredHeight:     256
+                preferredWidth:      ui.sdu(24)
+                preferredHeight:     ui.sdu(24)
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment:   VerticalAlignment.Center
                 visible:             false
+                accessibility.name:  qsTr("Activity indicator")
             }
 
             attachedObjects: [

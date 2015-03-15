@@ -1,5 +1,5 @@
-import bb.cascades 1.0
-import bb.system 1.0
+import bb.cascades 1.3
+import bb.system 1.2
 import DownloadInviter 1.0
 
 Page {
@@ -15,32 +15,9 @@ Page {
 
     actions: [
         ActionItem {
-            title:               qsTr("Recommend App")
-            imageSource:         "images/share.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
-
-            onTriggered: {
-                downloadInviter.sendDownloadInvitation();
-            }
-            
-            attachedObjects: [
-                DownloadInviter {
-                    id: downloadInviter
-
-                    onInvitationSendFailed: {
-                        invitationSendFailedToast.show();
-                    }
-                },
-                SystemToast {
-                    id:   invitationSendFailedToast
-                    body: qsTr("Could not send download invitation")
-                }
-            ]
-        },
-        ActionItem {
             title:               qsTr("Review App")
             imageSource:         "images/review.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: ActionBarPlacement.Signature
 
             onTriggered: {
                 if (TrialManager.trialMode) {
@@ -68,10 +45,35 @@ Page {
                     }
                 }
             ]
+        },
+        ActionItem {
+            title:               qsTr("Recommend App")
+            imageSource:         "images/share.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            
+            onTriggered: {
+                downloadInviter.sendDownloadInvitation();
+            }
+            
+            attachedObjects: [
+                DownloadInviter {
+                    id: downloadInviter
+                    
+                    onInvitationSendFailed: {
+                        invitationSendFailedToast.show();
+                    }
+                },
+                SystemToast {
+                    id:   invitationSendFailedToast
+                    body: qsTr("Could not send download invitation")
+                }
+            ]
         }
     ]
 
     ScrollView {
+        accessibility.name: qsTr("Help browser")
+
         scrollViewProperties {
             scrollMode:         ScrollMode.Both
             pinchToZoomEnabled: true
@@ -80,7 +82,8 @@ Page {
         }            
 
         WebView {
-            url: qsTr("local:///assets/doc/help.html")
+            url:                qsTr("local:///assets/doc/help.html")
+            accessibility.name: qsTr("Help browser")
         }
     }
 }

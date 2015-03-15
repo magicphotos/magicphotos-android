@@ -1,5 +1,5 @@
 1
-52
+54
 BlurPage.qml
 BlurPreviewPage.qml
 CartoonPage.qml
@@ -23,6 +23,7 @@ doc/recommend_app_button.png
 doc/review_app_button.png
 doc/sampling_point_selected.png
 HelpPage.qml
+images/apply.png
 images/edit_mode_blur.png
 images/edit_mode_cartoon.png
 images/edit_mode_decolorize.png
@@ -39,6 +40,7 @@ images/mode_hue_selection.png
 images/mode_original.png
 images/mode_sampling_point.png
 images/mode_scroll.png
+images/open.png
 images/review.png
 images/sampling_point.png
 images/save.png

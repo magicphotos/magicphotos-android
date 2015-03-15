@@ -1,5 +1,5 @@
-import bb.cascades 1.0
-import bb.system 1.0
+import bb.cascades 1.3
+import bb.system 1.2
 import ImageEditor 1.0
 
 Page {
@@ -21,8 +21,34 @@ Page {
         }
     }
 
+    actions: [
+        ActionItem {
+            id:                  applyActionItem
+            title:               qsTr("Apply")
+            imageSource:         "images/apply.png"
+            ActionBar.placement: ActionBarPlacement.Signature
+            enabled:             false
+            
+            onTriggered: {
+                var page = cartoonPageDefinition.createObject();
+                
+                navigationPane.push(page);
+                
+                page.openImage(imageFile, gaussianRadiusSlider.value, thresholdSlider.value);
+            }
+
+            attachedObjects: [
+                ComponentDefinition {
+                    id:     cartoonPageDefinition
+                    source: "CartoonPage.qml"
+                }
+            ]
+        }
+    ]
+
     Container {
-        background: Color.Black
+        background:    Color.Black
+        bottomPadding: ui.sdu(8)
 
         layout: StackLayout {
         }
@@ -43,6 +69,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center 
                 verticalAlignment:   VerticalAlignment.Center
                 scalingMethod:       ScalingMethod.AspectFit
+                accessibility.name:  qsTr("Resulting image preview")
 
                 attachedObjects: [
                     CartoonPreviewGenerator {
@@ -53,13 +80,13 @@ Page {
                         onImageOpened: {
                             gaussianRadiusSlider.enabled = true;
                             thresholdSlider.enabled      = true;
-                            applyButton.enabled          = true;
+                            applyActionItem.enabled      = true;
                         }
 
                         onImageOpenFailed: {
                             gaussianRadiusSlider.enabled = false;
                             thresholdSlider.enabled      = false;
-                            applyButton.enabled          = false;
+                            applyActionItem.enabled      = false;
 
                             imageOpenFailedToast.show();
                         }
@@ -97,11 +124,12 @@ Page {
 
             ActivityIndicator {
                 id:                  activityIndicator
-                preferredWidth:      256
-                preferredHeight:     256
+                preferredWidth:      ui.sdu(24)
+                preferredHeight:     ui.sdu(24)
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment:   VerticalAlignment.Center
                 visible:             false
+                accessibility.name:  qsTr("Activity indicator")
             }
         }
 
@@ -112,6 +140,7 @@ Page {
             toValue:             10
             value:               5
             enabled:             false
+            accessibility.name:  qsTr("Gaussian radius slider")
 
             onValueChanged: {
                 cartoonPreviewGenerator.radius = value;
@@ -129,6 +158,7 @@ Page {
             toValue:             128
             value:               80
             enabled:             false
+            accessibility.name:  qsTr("Threshold slider")
 
             onValueChanged: {
                 cartoonPreviewGenerator.threshold = value;
@@ -137,33 +167,6 @@ Page {
             layoutProperties: StackLayoutProperties {
                 spaceQuota: -1
             }
-        }
-
-        Button {
-            id:                  applyButton
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment:   VerticalAlignment.Bottom
-            text:                qsTr("Apply")
-            enabled:             false
-            
-            onClicked: {
-                var page = cartoonPageDefinition.createObject();
-
-                navigationPane.push(page);
-
-                page.openImage(imageFile, gaussianRadiusSlider.value, thresholdSlider.value);
-            }
-
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: -1
-            }
-            
-            attachedObjects: [
-                ComponentDefinition {
-                    id:     cartoonPageDefinition
-                    source: "CartoonPage.qml"
-                }
-            ]
         }
     }
 }
