@@ -669,37 +669,37 @@
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="228"/>
-        <location filename="../assets/RetouchPage.qml" line="259"/>
+        <location filename="../assets/RetouchPage.qml" line="257"/>
         <source>Image editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="418"/>
+        <location filename="../assets/RetouchPage.qml" line="413"/>
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="422"/>
+        <location filename="../assets/RetouchPage.qml" line="417"/>
         <source>Image saved successfully</source>
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="426"/>
+        <location filename="../assets/RetouchPage.qml" line="421"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="443"/>
+        <location filename="../assets/RetouchPage.qml" line="441"/>
         <source>Sampling point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="464"/>
+        <location filename="../assets/RetouchPage.qml" line="462"/>
         <source>Helper image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="480"/>
+        <location filename="../assets/RetouchPage.qml" line="478"/>
         <source>Activity indicator</source>
         <translation type="unfinished"></translation>
     </message>
