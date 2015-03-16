@@ -62,13 +62,13 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="148"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="222"/>
         <location filename="../assets/BlurPage.qml" line="234"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="315"/>
@@ -88,12 +88,12 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="340"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="356"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -101,7 +101,7 @@
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="72"/>
         <source>Resulting image preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisbild Vorschau</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="118"/>
@@ -111,12 +111,12 @@
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="130"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="141"/>
         <source>Gaussian radius slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauß-Filter Radius Schieber</translation>
     </message>
     <message>
         <location filename="../assets/BlurPreviewPage.qml" line="27"/>
@@ -185,13 +185,13 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="149"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="223"/>
         <location filename="../assets/CartoonPage.qml" line="235"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="316"/>
@@ -211,12 +211,12 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="341"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="357"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -224,7 +224,7 @@
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="72"/>
         <source>Resulting image preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisbild Vorschau</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="120"/>
@@ -234,17 +234,17 @@
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="132"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="143"/>
         <source>Gaussian radius slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauß-Filter Radius Schieber</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="161"/>
         <source>Threshold slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Threshold Filterschieber</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPreviewPage.qml" line="27"/>
@@ -313,13 +313,13 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="147"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="221"/>
         <location filename="../assets/DecolorizePage.qml" line="233"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="314"/>
@@ -339,12 +339,12 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="339"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="355"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -368,7 +368,7 @@
         <location filename="../assets/HelpPage.qml" line="75"/>
         <location filename="../assets/HelpPage.qml" line="86"/>
         <source>Help browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe Browser</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="85"/>
@@ -437,13 +437,13 @@
     <message>
         <location filename="../assets/PixelatePage.qml" line="148"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="222"/>
         <location filename="../assets/PixelatePage.qml" line="234"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="315"/>
@@ -463,12 +463,12 @@
     <message>
         <location filename="../assets/PixelatePage.qml" line="340"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="356"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -476,7 +476,7 @@
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="72"/>
         <source>Resulting image preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisbild Vorschau</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="118"/>
@@ -486,12 +486,12 @@
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="130"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="141"/>
         <source>Pixelate denominator slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixelate Filter Nenner Schieber</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePreviewPage.qml" line="27"/>
@@ -560,13 +560,13 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="147"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="233"/>
         <location filename="../assets/RecolorPage.qml" line="245"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="329"/>
@@ -586,22 +586,22 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="373"/>
         <source>Hue bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbton bar</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="400"/>
         <source>Hue slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbtonregler</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="414"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="430"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -665,13 +665,13 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="147"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="228"/>
         <location filename="../assets/RetouchPage.qml" line="257"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="413"/>
@@ -691,17 +691,17 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="441"/>
         <source>Sampling point</source>
-        <translation type="unfinished"></translation>
+        <translation>Entnahmestelle</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="462"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="478"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -765,13 +765,13 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="148"/>
         <source>Editor modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modi des Editors</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="222"/>
         <location filename="../assets/SketchPage.qml" line="234"/>
         <source>Image editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildeditor</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="315"/>
@@ -791,12 +791,12 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="340"/>
         <source>Helper image</source>
-        <translation type="unfinished"></translation>
+        <translation>Helper Bild</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="356"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
 </context>
 <context>
@@ -804,7 +804,7 @@
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="72"/>
         <source>Resulting image preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisbild Vorschau</translation>
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="118"/>
@@ -814,12 +814,12 @@
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="130"/>
         <source>Activity indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitätsanzeige</translation>
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="141"/>
         <source>Gaussian radius slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauß-Filter Radius Schieber</translation>
     </message>
     <message>
         <location filename="../assets/SketchPreviewPage.qml" line="27"/>
@@ -832,12 +832,12 @@
     <message>
         <location filename="../assets/main.qml" line="44"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="65"/>
         <source>List of modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste der Modi</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="165"/>
@@ -877,7 +877,7 @@
     <message>
         <location filename="../assets/main.qml" line="216"/>
         <source>Example image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildbeispiel</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="254"/>
