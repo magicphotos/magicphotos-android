@@ -27,7 +27,7 @@ ApplicationWindow {
                 }
 
                 if (depth > 0) {
-                    get(depth - 1).focus = true;
+                    get(depth - 1).forceActiveFocus();
                 }
 
                 if (depth === 1) {

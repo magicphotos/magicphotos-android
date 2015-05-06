@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    pixelatePage
-    focus: true
+    id: pixelatePage
 
     property bool   shareActionActive: false
 

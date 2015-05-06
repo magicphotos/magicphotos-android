@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    retouchPage
-    focus: true
+    id: retouchPage
 
     property bool   shareActionActive: false
 

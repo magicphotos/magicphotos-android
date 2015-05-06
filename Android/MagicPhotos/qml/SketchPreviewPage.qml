@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    sketchPreviewPage
-    focus: true
+    id: sketchPreviewPage
 
     property int    imageOrientation: -1
 

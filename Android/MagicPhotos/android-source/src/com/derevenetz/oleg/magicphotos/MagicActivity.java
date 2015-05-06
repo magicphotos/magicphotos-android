@@ -132,7 +132,11 @@ public class MagicActivity extends QtActivity
             isFullVersion = getPreferences(MODE_PRIVATE).getBoolean("FullVersion", false);
         }
 
-        bindService(new Intent("com.android.vending.billing.InAppBillingService.BIND"), androidIAPServiceConnection, Context.BIND_AUTO_CREATE);
+        Intent intent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+
+        intent.setPackage("com.android.vending");
+
+        bindService(intent, androidIAPServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override

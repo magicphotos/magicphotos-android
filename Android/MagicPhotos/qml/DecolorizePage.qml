@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    decolorizePage
-    focus: true
+    id: decolorizePage
 
     property bool   shareActionActive: false
 

@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    recolorPage
-    focus: true
+    id: recolorPage
 
     property bool   shareActionActive: false
 

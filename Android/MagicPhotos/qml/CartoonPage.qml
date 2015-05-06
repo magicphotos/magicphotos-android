@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    cartoonPage
-    focus: true
+    id: cartoonPage
 
     property bool   shareActionActive: false
 

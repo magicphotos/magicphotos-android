@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    blurPage
-    focus: true
+    id: blurPage
 
     property bool   shareActionActive: false
 

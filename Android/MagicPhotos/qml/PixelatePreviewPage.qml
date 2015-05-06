@@ -8,8 +8,7 @@ import ImageEditor 1.0
 import "Util.js" as UtilScript
 
 Item {
-    id:    pixelatePreviewPage
-    focus: true
+    id: pixelatePreviewPage
 
     property int    imageOrientation: -1
 
