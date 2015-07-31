@@ -216,4 +216,13 @@
   <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
     <value>Taille de pixel:</value>
   </data>
+  <data name="TextBlockBrushOpacityText" xml:space="preserve">
+    <value>Dureté de la brosse:</value>
+  </data>
+  <data name="TextBlockBrushRadiusText" xml:space="preserve">
+    <value>Taille de la brosse:</value>
+  </data>
+  <data name="ApplicationBarButtonSettingsText" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
 </root>

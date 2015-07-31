@@ -23,6 +23,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="64" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid HorizontalAlignment="Left">
@@ -59,6 +60,25 @@
                         </toolkit:GestureService.GestureListener>
                     </Image>
                 </Grid>
+            </Grid>
+            <Grid x:Name="BrushSettingsGrid" Grid.Row="2" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Name="BrushRadiusTextBlock" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="{Binding Path=AppResources.TextBlockBrushRadiusText, Source={StaticResource XAMLAppResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
+                <Slider x:Name="BrushRadiusSlider" Grid.Row="0" Grid.Column="1" Value="24" Maximum="32" Minimum="16" LargeChange="4" ValueChanged="BrushRadiusSlider_ValueChanged" ManipulationCompleted="BrushRadiusSlider_ManipulationCompleted" />
+
+                <TextBlock Name="BrushOpacityTextBlock" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="{Binding Path=AppResources.TextBlockBrushOpacityText, Source={StaticResource XAMLAppResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
+                <Slider x:Name="BrushOpacitySlider" Grid.Row="1" Grid.Column="1" Value="0.75" Maximum="1.0" Minimum="0.0" LargeChange="0.1" ValueChanged="BrushOpacitySlider_ValueChanged" ManipulationCompleted="BrushOpacitySlider_ManipulationCompleted" />
+
+                <Image Name="BrushPreviewImage" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" />
             </Grid>
         </Grid>
     </Grid>

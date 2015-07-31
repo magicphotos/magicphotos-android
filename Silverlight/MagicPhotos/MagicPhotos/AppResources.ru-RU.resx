@@ -216,4 +216,13 @@
   <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
     <value>Размер пикселя:</value>
   </data>
+  <data name="TextBlockBrushOpacityText" xml:space="preserve">
+    <value>Жесткость кисти:</value>
+  </data>
+  <data name="TextBlockBrushRadiusText" xml:space="preserve">
+    <value>Размер кисти:</value>
+  </data>
+  <data name="ApplicationBarButtonSettingsText" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
 </root>

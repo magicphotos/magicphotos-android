@@ -216,4 +216,13 @@
   <data name="PixelatePreviewPageTextBlockSliderCommentText" xml:space="preserve">
     <value>Pixelgröße:</value>
   </data>
+  <data name="TextBlockBrushOpacityText" xml:space="preserve">
+    <value>Pinsel Härte:</value>
+  </data>
+  <data name="TextBlockBrushRadiusText" xml:space="preserve">
+    <value>Pinselgröße:</value>
+  </data>
+  <data name="ApplicationBarButtonSettingsText" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
 </root>

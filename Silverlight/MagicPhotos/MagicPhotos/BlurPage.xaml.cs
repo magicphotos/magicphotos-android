@@ -36,10 +36,11 @@ namespace MagicPhotos
 
         private const int HELPER_POINT_RADIUS = 3;
 
-        private const int BRUSH_RADIUS = 24,
-                          UNDO_DEPTH   = 4;
+        private const int DEFAULT_BRUSH_RADIUS = 24,
+                          UNDO_DEPTH           = 4;
 
-        private const double REDUCTION_MPIX_LIMIT = 1.0;
+        private const double REDUCTION_MPIX_LIMIT  = 1.0,
+                             DEFAULT_BRUSH_OPACITY = 0.75;
 
         class BlurGenTaskData
         {
@@ -53,9 +54,11 @@ namespace MagicPhotos
                                       needImageReduction,
                                       editedImageChanged;
         private int                   selectedMode,
+                                      brushRadius,
                                       gaussianRadius;
         private double                currentScale,
-                                      initialScale;
+                                      initialScale,
+                                      brushOpacity;
         private List<int[]>           undoStack;
         private WriteableBitmap       loadedBitmap,
                                       editedBitmap,
@@ -63,7 +66,8 @@ namespace MagicPhotos
                                       effectedBitmap,
                                       helperBitmap,
                                       brushTemplateBitmap,
-                                      brushBitmap;
+                                      brushBitmap,
+                                      brushPreviewBitmap;
         private BackgroundWorker      blurGeneratorWorker;
         private MarketplaceDetailTask marketplaceDetailTask;
 
@@ -104,15 +108,36 @@ namespace MagicPhotos
                 this.needImageReduction = false;
             }
 
-            this.brushTemplateBitmap = new WriteableBitmap(BRUSH_RADIUS * 2, BRUSH_RADIUS * 2);
+            if (!IsolatedStorageSettings.ApplicationSettings.TryGetValue<int>("BrushRadius", out this.brushRadius))
+            {
+                this.brushRadius = DEFAULT_BRUSH_RADIUS;
+            }
+            if (!IsolatedStorageSettings.ApplicationSettings.TryGetValue<double>("BrushOpacity", out this.brushOpacity))
+            {
+                this.brushOpacity = DEFAULT_BRUSH_OPACITY;
+            }
+
+            this.BrushRadiusSlider.Value  = this.brushRadius;
+            this.BrushOpacitySlider.Value = this.brushOpacity;
+
+            this.brushTemplateBitmap = new WriteableBitmap(this.brushRadius * 2, this.brushRadius * 2);
 
             for (int x = 0; x < this.brushTemplateBitmap.PixelWidth; x++)
             {
                 for (int y = 0; y < this.brushTemplateBitmap.PixelHeight; y++)
                 {
-                    if (Math.Sqrt(Math.Pow(x - BRUSH_RADIUS, 2) + Math.Pow(y - BRUSH_RADIUS, 2)) <= BRUSH_RADIUS)
+                    double r = Math.Sqrt(Math.Pow(x - this.brushRadius, 2) + Math.Pow(y - this.brushRadius, 2));
+
+                    if (r <= this.brushRadius)
                     {
-                        this.brushTemplateBitmap.SetPixel(x, y, (0xFF << 24) | 0xFFFFFF);
+                        if (r <= this.brushRadius * this.brushOpacity)
+                        {
+                            this.brushTemplateBitmap.SetPixel(x, y, (0xFF << 24) | 0xFFFFFF);
+                        }
+                        else
+                        {
+                            this.brushTemplateBitmap.SetPixel(x, y, ((byte)(0xFF * (this.brushRadius - r) / (this.brushRadius * (1.0 - this.brushOpacity))) << 24) | 0xFFFFFF);
+                        }
                     }
                     else
                     {
@@ -120,6 +145,22 @@ namespace MagicPhotos
                     }
                 }
             }
+
+            Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+            Rect pre_rect = new Rect(((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelWidth)  / 2,
+                                     ((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelHeight) / 2,
+                                     this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+
+            WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+
+            brush_preview.Clear(Colors.Red);
+            brush_preview.Blit(brt_rect, this.brushTemplateBitmap, brt_rect, WriteableBitmapExtensions.BlendMode.Mask);
+
+            this.brushPreviewBitmap = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
+            this.brushPreviewBitmap.Clear(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
+            this.brushPreviewBitmap.Blit(pre_rect, brush_preview, brt_rect, WriteableBitmapExtensions.BlendMode.None);
+
+            this.BrushPreviewImage.Source = this.brushPreviewBitmap;
 
             this.blurGeneratorWorker                     = new BackgroundWorker();
             this.blurGeneratorWorker.DoWork             += new DoWorkEventHandler(blurGeneratorWorker_DoWork);
@@ -136,6 +177,12 @@ namespace MagicPhotos
             button        = new ApplicationBarIconButton(new Uri("/Images/save.png", UriKind.Relative));
             button.Text   = AppResources.ApplicationBarButtonSaveText;
             button.Click += new EventHandler(SaveButton_Click);
+
+            this.ApplicationBar.Buttons.Add(button);
+
+            button        = new ApplicationBarIconButton(new Uri("/Images/settings.png", UriKind.Relative));
+            button.Text   = AppResources.ApplicationBarButtonSettingsText;
+            button.Click += new EventHandler(SettingsButton_Click);
 
             this.ApplicationBar.Buttons.Add(button);
 
@@ -313,27 +360,28 @@ namespace MagicPhotos
                 int width  = this.brushBitmap.PixelWidth;
                 int height = this.brushBitmap.PixelHeight;
 
-                Rect rect = new Rect();
+                Rect img_rect = new Rect();
 
-                rect.X      = (rect.X = touch_point.X - width  / 2 < 0 ? 0 : touch_point.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : rect.X;
-                rect.Y      = (rect.Y = touch_point.Y - height / 2 < 0 ? 0 : touch_point.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : rect.Y;
-                rect.Width  = width;
-                rect.Height = height;
+                img_rect.X      = (img_rect.X = touch_point.X - width  / 2 < 0 ? 0 : touch_point.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : img_rect.X;
+                img_rect.Y      = (img_rect.Y = touch_point.Y - height / 2 < 0 ? 0 : touch_point.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : img_rect.Y;
+                img_rect.Width  = width;
+                img_rect.Height = height;
 
-                Rect brh = new Rect(0, 0, width, height);
+                Rect brh_rect = new Rect(0, 0, width, height);
 
-                WriteableBitmap brush_bitmap = this.brushBitmap.Clone();
+                WriteableBitmap brush_bitmap = new WriteableBitmap(width, height);
 
                 if (this.selectedMode == MODE_ORIGINAL)
                 {
-                    brush_bitmap.Blit(brh, this.originalBitmap, rect, WriteableBitmapExtensions.BlendMode.Multiply);
+                    brush_bitmap.Blit(brh_rect, this.originalBitmap, img_rect, WriteableBitmapExtensions.BlendMode.None);
                 }
                 else
                 {
-                    brush_bitmap.Blit(brh, this.effectedBitmap, rect, WriteableBitmapExtensions.BlendMode.Multiply);
+                    brush_bitmap.Blit(brh_rect, this.effectedBitmap, img_rect, WriteableBitmapExtensions.BlendMode.None);
                 }
 
-                this.editedBitmap.Blit(rect, brush_bitmap, brh, WriteableBitmapExtensions.BlendMode.Alpha);
+                brush_bitmap.Blit     (brh_rect, this.brushBitmap, brh_rect, WriteableBitmapExtensions.BlendMode.Mask);
+                this.editedBitmap.Blit(img_rect, brush_bitmap,     brh_rect, WriteableBitmapExtensions.BlendMode.Alpha);
 
                 this.EditorImage.Source = this.editedBitmap;
             }
@@ -413,7 +461,13 @@ namespace MagicPhotos
 
         private void BlurPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.editedImageChanged)
+            if (this.BrushSettingsGrid.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.BrushSettingsGrid.Visibility = System.Windows.Visibility.Collapsed;
+
+                e.Cancel = true;
+            }
+            else if (this.editedImageChanged)
             {
                 MessageBoxResult result = MessageBoxResult.None;
 
@@ -570,6 +624,18 @@ namespace MagicPhotos
                         }
                     }
                 }
+            }
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            if (this.BrushSettingsGrid.Visibility == System.Windows.Visibility.Collapsed)
+            {
+                this.BrushSettingsGrid.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                this.BrushSettingsGrid.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -743,8 +809,8 @@ namespace MagicPhotos
                 this.EditorImageTransform.ScaleX     = this.currentScale;
                 this.EditorImageTransform.ScaleY     = this.currentScale;
 
-                int brush_width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                int brush_height = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+                int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
+                int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
 
                 this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
 
@@ -894,12 +960,140 @@ namespace MagicPhotos
                     this.EditorImageTransform.ScaleX     = this.currentScale;
                     this.EditorImageTransform.ScaleY     = this.currentScale;
 
-                    int brush_width  = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                    int brush_height = (int)(BRUSH_RADIUS / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(BRUSH_RADIUS / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+                    int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
+                    int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
 
                     this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
                 }
             }
+        }
+
+        private void BrushRadiusSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.brushRadius = (int)e.NewValue;
+
+            this.brushTemplateBitmap = new WriteableBitmap(this.brushRadius * 2, this.brushRadius * 2);
+
+            for (int x = 0; x < this.brushTemplateBitmap.PixelWidth; x++)
+            {
+                for (int y = 0; y < this.brushTemplateBitmap.PixelHeight; y++)
+                {
+                    double r = Math.Sqrt(Math.Pow(x - this.brushRadius, 2) + Math.Pow(y - this.brushRadius, 2));
+
+                    if (r <= this.brushRadius)
+                    {
+                        if (r <= this.brushRadius * this.brushOpacity)
+                        {
+                            this.brushTemplateBitmap.SetPixel(x, y, (0xFF << 24) | 0xFFFFFF);
+                        }
+                        else
+                        {
+                            this.brushTemplateBitmap.SetPixel(x, y, ((byte)(0xFF * (this.brushRadius - r) / (this.brushRadius * (1.0 - this.brushOpacity))) << 24) | 0xFFFFFF);
+                        }
+                    }
+                    else
+                    {
+                        this.brushTemplateBitmap.SetPixel(x, y, (0x00 << 24) | 0xFFFFFF);
+                    }
+                }
+            }
+
+            if (this.editedBitmap != null)
+            {
+                int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
+                int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+
+                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+            }
+
+            if (this.BrushRadiusSlider != null && this.BrushPreviewImage != null)
+            {
+                Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                Rect pre_rect = new Rect(((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelWidth)  / 2,
+                                         ((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelHeight) / 2,
+                                         this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+
+                WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+
+                brush_preview.Clear(Colors.Red);
+                brush_preview.Blit(brt_rect, this.brushTemplateBitmap, brt_rect, WriteableBitmapExtensions.BlendMode.Mask);
+
+                this.brushPreviewBitmap = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
+                this.brushPreviewBitmap.Clear(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
+                this.brushPreviewBitmap.Blit(pre_rect, brush_preview, brt_rect, WriteableBitmapExtensions.BlendMode.None);
+
+                this.BrushPreviewImage.Source = this.brushPreviewBitmap;
+            }
+        }
+
+        private void BrushRadiusSlider_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            IsolatedStorageSettings.ApplicationSettings["BrushRadius"] = this.brushRadius;
+            IsolatedStorageSettings.ApplicationSettings.Save();
+        }
+
+        private void BrushOpacitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.brushOpacity = e.NewValue;
+
+            this.brushTemplateBitmap = new WriteableBitmap(this.brushRadius * 2, this.brushRadius * 2);
+
+            for (int x = 0; x < this.brushTemplateBitmap.PixelWidth; x++)
+            {
+                for (int y = 0; y < this.brushTemplateBitmap.PixelHeight; y++)
+                {
+                    double r = Math.Sqrt(Math.Pow(x - this.brushRadius, 2) + Math.Pow(y - this.brushRadius, 2));
+
+                    if (r <= this.brushRadius)
+                    {
+                        if (r <= this.brushRadius * this.brushOpacity)
+                        {
+                            this.brushTemplateBitmap.SetPixel(x, y, (0xFF << 24) | 0xFFFFFF);
+                        }
+                        else
+                        {
+                            this.brushTemplateBitmap.SetPixel(x, y, ((byte)(0xFF * (this.brushRadius - r) / (this.brushRadius * (1.0 - this.brushOpacity))) << 24) | 0xFFFFFF);
+                        }
+                    }
+                    else
+                    {
+                        this.brushTemplateBitmap.SetPixel(x, y, (0x00 << 24) | 0xFFFFFF);
+                    }
+                }
+            }
+
+            if (this.editedBitmap != null)
+            {
+                int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
+                int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+
+                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+            }
+
+            if (this.BrushRadiusSlider != null && this.BrushPreviewImage != null)
+            {
+                Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                Rect pre_rect = new Rect(((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelWidth)  / 2,
+                                         ((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelHeight) / 2,
+                                         this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+
+                WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+
+                brush_preview.Clear(Colors.Red);
+                brush_preview.Blit(brt_rect, this.brushTemplateBitmap, brt_rect, WriteableBitmapExtensions.BlendMode.Mask);
+
+                this.brushPreviewBitmap = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
+                this.brushPreviewBitmap.Clear(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
+                this.brushPreviewBitmap.Blit(pre_rect, brush_preview, brt_rect, WriteableBitmapExtensions.BlendMode.None);
+
+                this.BrushPreviewImage.Source = this.brushPreviewBitmap;
+            }
+        }
+
+        private void BrushOpacitySlider_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            IsolatedStorageSettings.ApplicationSettings["BrushOpacity"] = this.brushOpacity;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
     }
 }
