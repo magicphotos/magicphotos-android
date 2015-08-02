@@ -751,7 +751,7 @@ namespace MagicPhotos
                 this.EditorImageTransform.ScaleX     = this.currentScale;
                 this.EditorImageTransform.ScaleY     = this.currentScale;
 
-                int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
+                int brush_width = Math.Max(1, Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight));
 
                 this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
 
@@ -901,7 +901,7 @@ namespace MagicPhotos
                     this.EditorImageTransform.ScaleX     = this.currentScale;
                     this.EditorImageTransform.ScaleY     = this.currentScale;
 
-                    int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
+                    int brush_width = Math.Max(1, Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight));
 
                     this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
                 }
@@ -940,7 +940,7 @@ namespace MagicPhotos
 
             if (this.editedBitmap != null)
             {
-                int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
+                int brush_width = Math.Max(1, Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight));
 
                 this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
             }
@@ -1004,7 +1004,7 @@ namespace MagicPhotos
 
             if (this.editedBitmap != null)
             {
-                int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
+                int brush_width = Math.Max(1, Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight));
 
                 this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
             }
