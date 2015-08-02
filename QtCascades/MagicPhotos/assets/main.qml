@@ -83,51 +83,68 @@ NavigationPane {
                                     rightPadding: ui.sdu(1)
                                     
                                     layout: StackLayout {
-                                    }
-                                    
-                                    Divider {
-                                        accessibility.name: qsTr("Divider")
-                                    }
-                                    
-                                    Label {
-                                        multiline:       true
-                                        textStyle.color: Color.White
-                                        text:            qsTr("Brush Size")
-                                    }
-                                    
-                                    Slider {
-                                        id:                  brushSizeSlider
-                                        horizontalAlignment: HorizontalAlignment.Fill
-                                        fromValue:           ui.sdu(2)
-                                        toValue:             ui.sdu(4)
-                                        value:               ui.sdu(3)
-                                        accessibility.name:  qsTr("Brush size slider")
+                                        orientation: LayoutOrientation.LeftToRight
                                     }
 
-                                    Label {
-                                        multiline:       true
-                                        textStyle.color: Color.White
-                                        text:            qsTr("Brush Opacity")
-                                    }
-                                    
-                                    Slider {
-                                        id:                  brushOpacitySlider
-                                        horizontalAlignment: HorizontalAlignment.Fill
-                                        fromValue:           0.0
-                                        toValue:             1.0
-                                        value:               0.75
-                                        accessibility.name:  qsTr("Brush opacity slider")
+                                    Container {
+                                        background: Color.Transparent
+                                        
+                                        layout: StackLayout {
+                                        }
+                                        
+                                        layoutProperties: StackLayoutProperties {
+                                            spaceQuota: 3
+                                        }
+                                        
+                                        Divider {
+                                            accessibility.name: qsTr("Divider")
+                                        }
+                                        
+                                        Label {
+                                            multiline:       true
+                                            textStyle.color: Color.White
+                                            text:            qsTr("Brush Size")
+                                        }
+                                        
+                                        Slider {
+                                            id:                  brushSizeSlider
+                                            horizontalAlignment: HorizontalAlignment.Fill
+                                            fromValue:           ui.sdu(2)
+                                            toValue:             ui.sdu(4)
+                                            value:               ui.sdu(3)
+                                            accessibility.name:  qsTr("Brush size slider")
+                                        }
+                                        
+                                        Label {
+                                            multiline:       true
+                                            textStyle.color: Color.White
+                                            text:            qsTr("Brush Opacity")
+                                        }
+                                        
+                                        Slider {
+                                            id:                  brushOpacitySlider
+                                            horizontalAlignment: HorizontalAlignment.Fill
+                                            fromValue:           0.0
+                                            toValue:             1.0
+                                            value:               0.75
+                                            accessibility.name:  qsTr("Brush opacity slider")
+                                        }
+                                        
+                                        Divider {
+                                            accessibility.name: qsTr("Divider")
+                                        }
                                     }
 
-                                    Divider {
-                                        accessibility.name: qsTr("Divider")
-                                    }
-                                    
                                     ImageView {
                                         id:                  brushPreviewImageView
                                         horizontalAlignment: HorizontalAlignment.Center
+                                        verticalAlignment:   VerticalAlignment.Center
                                         scalingMethod:       ScalingMethod.None
                                         accessibility.name:  qsTr("Brush preview")
+                                        
+                                        layoutProperties: StackLayoutProperties {
+                                            spaceQuota: 1
+                                        }
                                         
                                         attachedObjects: [
                                             BrushPreviewGenerator {
@@ -141,10 +158,6 @@ NavigationPane {
                                                 }
                                             }
                                         ]
-                                    }
-
-                                    Divider {
-                                        accessibility.name: qsTr("Divider")
                                     }
                                 }
                             }
