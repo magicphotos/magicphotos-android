@@ -151,17 +151,18 @@ namespace MagicPhotos
                 }
             }
 
-            Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
-            Rect pre_rect = new Rect(((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelWidth)  / 2,
-                                     ((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelHeight) / 2,
-                                     this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+            WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth,     this.brushTemplateBitmap.PixelHeight);
+            this.brushPreviewBitmap       = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
 
-            WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+            Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+            Rect pre_rect = new Rect(((int)this.brushPreviewBitmap.PixelWidth  - this.brushTemplateBitmap.PixelWidth)  / 2,
+                                     ((int)this.brushPreviewBitmap.PixelHeight - this.brushTemplateBitmap.PixelHeight) / 2,
+                                     this.brushTemplateBitmap.PixelWidth,
+                                     this.brushTemplateBitmap.PixelHeight);
 
             brush_preview.Clear(Colors.Red);
             brush_preview.Blit(brt_rect, this.brushTemplateBitmap, brt_rect, WriteableBitmapExtensions.BlendMode.Mask);
 
-            this.brushPreviewBitmap = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
             this.brushPreviewBitmap.Clear(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
             this.brushPreviewBitmap.Blit(pre_rect, brush_preview, brt_rect, WriteableBitmapExtensions.BlendMode.None);
 
@@ -310,15 +311,15 @@ namespace MagicPhotos
         {
             if (visible)
             {
-                int width  = (int)(this.HelperImage.Width  / this.currentScale) < this.editedBitmap.PixelWidth  ? (int)(this.HelperImage.Width  / this.currentScale) : this.editedBitmap.PixelWidth;
-                int height = (int)(this.HelperImage.Height / this.currentScale) < this.editedBitmap.PixelHeight ? (int)(this.HelperImage.Height / this.currentScale) : this.editedBitmap.PixelHeight;
+                int width  = Math.Min((int)(this.HelperImage.Width  / this.currentScale), this.editedBitmap.PixelWidth);
+                int height = Math.Min((int)(this.HelperImage.Height / this.currentScale), this.editedBitmap.PixelHeight);
 
-                int x = (x = (int)(touch_point.X - width  / 2 < 0 ? 0 : touch_point.X - width  / 2)) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : x;
-                int y = (y = (int)(touch_point.Y - height / 2 < 0 ? 0 : touch_point.Y - height / 2)) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : y;
+                int x = Math.Min(Math.Max(0, (int)(touch_point.X - width  / 2)), this.editedBitmap.PixelWidth  - width);
+                int y = Math.Min(Math.Max(0, (int)(touch_point.Y - height / 2)), this.editedBitmap.PixelHeight - height);
 
                 this.helperBitmap = this.editedBitmap.Crop(x, y, width, height);
 
-                int helper_point_radius = (int)(HELPER_POINT_RADIUS / this.currentScale) < 1 ? 1 : (int)(HELPER_POINT_RADIUS / this.currentScale);
+                int helper_point_radius = Math.Max(1, (int)(HELPER_POINT_RADIUS / this.currentScale));
 
                 this.helperBitmap.FillEllipseCentered(width / 2, height / 2, helper_point_radius, helper_point_radius, 0x00FFFFFF);
 
@@ -371,10 +372,9 @@ namespace MagicPhotos
                 this.EditorImageTransform.ScaleX     = this.currentScale;
                 this.EditorImageTransform.ScaleY     = this.currentScale;
 
-                int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+                int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
 
-                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
 
                 UpdateModeButtons();
                 UpdateSamplingPointImage();
@@ -407,20 +407,20 @@ namespace MagicPhotos
             {
                 if (this.samplingPointValid)
                 {
-                    int width  = this.brushBitmap.PixelWidth;
-                    int height = this.brushBitmap.PixelHeight;
+                    int width  = Math.Min(this.brushBitmap.PixelWidth,  this.editedBitmap.PixelWidth);
+                    int height = Math.Min(this.brushBitmap.PixelHeight, this.editedBitmap.PixelHeight);
 
                     Rect src_rect = new Rect();
 
-                    src_rect.X      = (src_rect.X = this.samplingPoint.X - width  / 2 < 0 ? 0 : this.samplingPoint.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : src_rect.X;
-                    src_rect.Y      = (src_rect.Y = this.samplingPoint.Y - height / 2 < 0 ? 0 : this.samplingPoint.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : src_rect.Y;
+                    src_rect.X      = Math.Min(Math.Max(0, this.samplingPoint.X - width  / 2), this.editedBitmap.PixelWidth  - width);
+                    src_rect.Y      = Math.Min(Math.Max(0, this.samplingPoint.Y - height / 2), this.editedBitmap.PixelHeight - height);
                     src_rect.Width  = width;
                     src_rect.Height = height;
 
                     Rect dst_rect = new Rect();
 
-                    dst_rect.X      = (dst_rect.X = this.clonePoint.X - width  / 2 < 0 ? 0 : this.clonePoint.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : dst_rect.X;
-                    dst_rect.Y      = (dst_rect.Y = this.clonePoint.Y - height / 2 < 0 ? 0 : this.clonePoint.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : dst_rect.Y;
+                    dst_rect.X      = Math.Min(Math.Max(0, this.clonePoint.X - width  / 2), this.editedBitmap.PixelWidth  - width);
+                    dst_rect.Y      = Math.Min(Math.Max(0, this.clonePoint.Y - height / 2), this.editedBitmap.PixelHeight - height);
                     dst_rect.Width  = width;
                     dst_rect.Height = height;
 
@@ -437,13 +437,13 @@ namespace MagicPhotos
             }
             else if (this.selectedMode == MODE_BLUR)
             {
-                int width  = this.brushBitmap.PixelWidth;
-                int height = this.brushBitmap.PixelHeight;
+                int width  = Math.Min(this.brushBitmap.PixelWidth,  this.editedBitmap.PixelWidth);
+                int height = Math.Min(this.brushBitmap.PixelHeight, this.editedBitmap.PixelHeight);
 
                 Rect src_rect = new Rect();
 
-                src_rect.X      = (src_rect.X = this.blurPoint.X - width  / 2 < 0 ? 0 : this.blurPoint.X - width  / 2) > this.editedBitmap.PixelWidth  - width  ? this.editedBitmap.PixelWidth  - width  : src_rect.X;
-                src_rect.Y      = (src_rect.Y = this.blurPoint.Y - height / 2 < 0 ? 0 : this.blurPoint.Y - height / 2) > this.editedBitmap.PixelHeight - height ? this.editedBitmap.PixelHeight - height : src_rect.Y;
+                src_rect.X      = Math.Min(Math.Max(0, this.blurPoint.X - width  / 2), this.editedBitmap.PixelWidth  - width);
+                src_rect.Y      = Math.Min(Math.Max(0, this.blurPoint.Y - height / 2), this.editedBitmap.PixelHeight - height);
                 src_rect.Width  = width;
                 src_rect.Height = height;
 
@@ -955,10 +955,9 @@ namespace MagicPhotos
                     this.EditorImageTransform.ScaleX     = this.currentScale;
                     this.EditorImageTransform.ScaleY     = this.currentScale;
 
-                    int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                    int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+                    int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
 
-                    this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+                    this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
 
                     UpdateSamplingPointImage();
                 }
@@ -997,25 +996,25 @@ namespace MagicPhotos
 
             if (this.editedBitmap != null)
             {
-                int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+                int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
 
-                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
             }
 
             if (this.BrushRadiusSlider != null && this.BrushPreviewImage != null)
             {
-                Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
-                Rect pre_rect = new Rect(((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelWidth)  / 2,
-                                         ((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelHeight) / 2,
-                                         this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth,     this.brushTemplateBitmap.PixelHeight);
+                this.brushPreviewBitmap       = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
 
-                WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                Rect pre_rect = new Rect(((int)this.brushPreviewBitmap.PixelWidth  - this.brushTemplateBitmap.PixelWidth)  / 2,
+                                         ((int)this.brushPreviewBitmap.PixelHeight - this.brushTemplateBitmap.PixelHeight) / 2,
+                                         this.brushTemplateBitmap.PixelWidth,
+                                         this.brushTemplateBitmap.PixelHeight);
 
                 brush_preview.Clear(Colors.Red);
                 brush_preview.Blit(brt_rect, this.brushTemplateBitmap, brt_rect, WriteableBitmapExtensions.BlendMode.Mask);
 
-                this.brushPreviewBitmap = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
                 this.brushPreviewBitmap.Clear(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
                 this.brushPreviewBitmap.Blit(pre_rect, brush_preview, brt_rect, WriteableBitmapExtensions.BlendMode.None);
 
@@ -1061,25 +1060,25 @@ namespace MagicPhotos
 
             if (this.editedBitmap != null)
             {
-                int brush_width  = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelWidth  ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelWidth;
-                int brush_height = (int)(this.brushRadius / this.currentScale) * 2 < this.editedBitmap.PixelHeight ? (int)(this.brushRadius / this.currentScale) * 2 : this.editedBitmap.PixelHeight;
+                int brush_width = Math.Min(Math.Min((int)(this.brushRadius / this.currentScale) * 2, this.editedBitmap.PixelWidth), this.editedBitmap.PixelHeight);
 
-                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_height, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+                this.brushBitmap = this.brushTemplateBitmap.Resize(brush_width, brush_width, WriteableBitmapExtensions.Interpolation.NearestNeighbor);
             }
 
             if (this.BrushRadiusSlider != null && this.BrushPreviewImage != null)
             {
-                Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
-                Rect pre_rect = new Rect(((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelWidth)  / 2,
-                                         ((int)this.BrushRadiusSlider.Maximum * 2 - this.brushTemplateBitmap.PixelHeight) / 2,
-                                         this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth,     this.brushTemplateBitmap.PixelHeight);
+                this.brushPreviewBitmap       = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
 
-                WriteableBitmap brush_preview = new WriteableBitmap(this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                Rect brt_rect = new Rect(0, 0, this.brushTemplateBitmap.PixelWidth, this.brushTemplateBitmap.PixelHeight);
+                Rect pre_rect = new Rect(((int)this.brushPreviewBitmap.PixelWidth  - this.brushTemplateBitmap.PixelWidth)  / 2,
+                                         ((int)this.brushPreviewBitmap.PixelHeight - this.brushTemplateBitmap.PixelHeight) / 2,
+                                         this.brushTemplateBitmap.PixelWidth,
+                                         this.brushTemplateBitmap.PixelHeight);
 
                 brush_preview.Clear(Colors.Red);
                 brush_preview.Blit(brt_rect, this.brushTemplateBitmap, brt_rect, WriteableBitmapExtensions.BlendMode.Mask);
 
-                this.brushPreviewBitmap = new WriteableBitmap((int)this.BrushRadiusSlider.Maximum * 2, (int)this.BrushRadiusSlider.Maximum * 2);
                 this.brushPreviewBitmap.Clear(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
                 this.brushPreviewBitmap.Blit(pre_rect, brush_preview, brt_rect, WriteableBitmapExtensions.BlendMode.None);
 
