@@ -283,7 +283,7 @@ namespace MagicPhotos
             {
                 Point sampling_point = this.EditorImage.TransformToVisual(this.EditorImageGrid).Transform(this.samplingPoint);
 
-                this.SamplingPointImage.Margin     = new Thickness(sampling_point.X - (this.SamplingPointImage.ActualWidth / 2), sampling_point.Y - (this.SamplingPointImage.ActualHeight / 2), 0, 0);
+                this.SamplingPointImage.Margin     = new Thickness(sampling_point.X - (this.SamplingPointImage.Width / 2), sampling_point.Y - (this.SamplingPointImage.Height / 2), 0, 0);
                 this.SamplingPointImage.Visibility = System.Windows.Visibility.Visible;
             }
             else

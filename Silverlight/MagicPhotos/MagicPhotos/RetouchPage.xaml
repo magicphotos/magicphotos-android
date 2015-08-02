@@ -50,7 +50,7 @@
                     <Image Name="HelperImage" Stretch="Uniform" Width="140" Height="140" IsHitTestVisible="False" />
                 </Border>
                 <Grid x:Name="EditorImageGrid" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Image Name="SamplingPointImage" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.ZIndex="1" Visibility="Collapsed" Source="/Images/sampling_point.png" IsHitTestVisible="False" />
+                    <Image Name="SamplingPointImage" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Width="48" Height="48" Canvas.ZIndex="1" Visibility="Collapsed" Source="/Images/sampling_point.png" IsHitTestVisible="False" />
                     <Image Name="EditorImage" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" MouseLeftButtonDown="EditorImage_MouseLeftButtonDown" MouseMove="EditorImage_MouseMove" MouseLeftButtonUp="EditorImage_MouseLeftButtonUp" MouseLeave="EditorImage_MouseLeave">
                         <Image.RenderTransform>
                             <CompositeTransform x:Name="EditorImageTransform" />
