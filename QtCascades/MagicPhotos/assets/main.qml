@@ -81,83 +81,87 @@ NavigationPane {
                                     
                                     leftPadding:  ui.sdu(1)
                                     rightPadding: ui.sdu(1)
-                                    
-                                    layout: StackLayout {
-                                        orientation: LayoutOrientation.LeftToRight
+
+                                    Divider {
+                                        accessibility.name: qsTr("Divider")
                                     }
 
                                     Container {
                                         background: Color.Transparent
                                         
                                         layout: StackLayout {
+                                            orientation: LayoutOrientation.LeftToRight
                                         }
                                         
-                                        layoutProperties: StackLayoutProperties {
-                                            spaceQuota: 3
+                                        Container {
+                                            background: Color.Transparent
+                                            
+                                            layout: StackLayout {
+                                            }
+                                            
+                                            layoutProperties: StackLayoutProperties {
+                                                spaceQuota: 3
+                                            }
+                                            
+                                            Label {
+                                                multiline:       true
+                                                textStyle.color: Color.White
+                                                text:            qsTr("Brush Size")
+                                            }
+                                            
+                                            Slider {
+                                                id:                  brushSizeSlider
+                                                horizontalAlignment: HorizontalAlignment.Fill
+                                                fromValue:           ui.sdu(2)
+                                                toValue:             ui.sdu(4)
+                                                value:               ui.sdu(3)
+                                                accessibility.name:  qsTr("Brush size slider")
+                                            }
+                                            
+                                            Label {
+                                                multiline:       true
+                                                textStyle.color: Color.White
+                                                text:            qsTr("Brush Opacity")
+                                            }
+                                            
+                                            Slider {
+                                                id:                  brushOpacitySlider
+                                                horizontalAlignment: HorizontalAlignment.Fill
+                                                fromValue:           0.0
+                                                toValue:             1.0
+                                                value:               0.75
+                                                accessibility.name:  qsTr("Brush opacity slider")
+                                            }
                                         }
                                         
-                                        Divider {
-                                            accessibility.name: qsTr("Divider")
-                                        }
-                                        
-                                        Label {
-                                            multiline:       true
-                                            textStyle.color: Color.White
-                                            text:            qsTr("Brush Size")
-                                        }
-                                        
-                                        Slider {
-                                            id:                  brushSizeSlider
-                                            horizontalAlignment: HorizontalAlignment.Fill
-                                            fromValue:           ui.sdu(2)
-                                            toValue:             ui.sdu(4)
-                                            value:               ui.sdu(3)
-                                            accessibility.name:  qsTr("Brush size slider")
-                                        }
-                                        
-                                        Label {
-                                            multiline:       true
-                                            textStyle.color: Color.White
-                                            text:            qsTr("Brush Opacity")
-                                        }
-                                        
-                                        Slider {
-                                            id:                  brushOpacitySlider
-                                            horizontalAlignment: HorizontalAlignment.Fill
-                                            fromValue:           0.0
-                                            toValue:             1.0
-                                            value:               0.75
-                                            accessibility.name:  qsTr("Brush opacity slider")
-                                        }
-                                        
-                                        Divider {
-                                            accessibility.name: qsTr("Divider")
+                                        ImageView {
+                                            id:                  brushPreviewImageView
+                                            horizontalAlignment: HorizontalAlignment.Center
+                                            verticalAlignment:   VerticalAlignment.Center
+                                            scalingMethod:       ScalingMethod.None
+                                            accessibility.name:  qsTr("Brush preview")
+                                            
+                                            layoutProperties: StackLayoutProperties {
+                                                spaceQuota: 1
+                                            }
+                                            
+                                            attachedObjects: [
+                                                BrushPreviewGenerator {
+                                                    id:      brushPreviewGenerator
+                                                    size:    brushSizeSlider.immediateValue
+                                                    maxSize: brushSizeSlider.toValue
+                                                    opacity: brushOpacitySlider.immediateValue
+                                                    
+                                                    onNeedRepaint: {
+                                                        brushPreviewImageView.image = image;
+                                                    }
+                                                }
+                                            ]
                                         }
                                     }
 
-                                    ImageView {
-                                        id:                  brushPreviewImageView
-                                        horizontalAlignment: HorizontalAlignment.Center
-                                        verticalAlignment:   VerticalAlignment.Center
-                                        scalingMethod:       ScalingMethod.None
-                                        accessibility.name:  qsTr("Brush preview")
-                                        
-                                        layoutProperties: StackLayoutProperties {
-                                            spaceQuota: 1
-                                        }
-                                        
-                                        attachedObjects: [
-                                            BrushPreviewGenerator {
-                                                id:      brushPreviewGenerator
-                                                size:    brushSizeSlider.immediateValue
-                                                maxSize: brushSizeSlider.toValue
-                                                opacity: brushOpacitySlider.immediateValue
-                                                
-                                                onNeedRepaint: {
-                                                    brushPreviewImageView.image = image;
-                                                }
-                                            }
-                                        ]
+                                    Divider {
+                                        accessibility.name: qsTr("Divider")
                                     }
                                 }
                             }

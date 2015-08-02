@@ -833,106 +833,106 @@
         <location filename="../assets/main.qml" line="39"/>
         <location filename="../assets/main.qml" line="73"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="42"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="61"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="100"/>
-        <location filename="../assets/main.qml" line="134"/>
+        <location filename="../assets/main.qml" line="86"/>
+        <location filename="../assets/main.qml" line="164"/>
         <source>Divider</source>
-        <translation type="unfinished"></translation>
+        <translation>Cloison</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="106"/>
+        <location filename="../assets/main.qml" line="109"/>
         <source>Brush Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="115"/>
+        <location filename="../assets/main.qml" line="118"/>
         <source>Brush size slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Brosse le curseur de taille</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="121"/>
+        <location filename="../assets/main.qml" line="124"/>
         <source>Brush Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="130"/>
+        <location filename="../assets/main.qml" line="133"/>
         <source>Brush opacity slider</source>
-        <translation type="unfinished"></translation>
+        <translation>Dureté du pinceau curseur</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="143"/>
+        <location filename="../assets/main.qml" line="142"/>
         <source>Brush preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Brosse aperçu</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="193"/>
+        <location filename="../assets/main.qml" line="197"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="214"/>
+        <location filename="../assets/main.qml" line="218"/>
         <source>List of modes</source>
         <translation>Liste des modes</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="314"/>
+        <location filename="../assets/main.qml" line="318"/>
         <source>Decolorize</source>
         <translation>Décolorer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="316"/>
+        <location filename="../assets/main.qml" line="320"/>
         <source>Sketch</source>
         <translation>Dans l&apos;esquisse</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="318"/>
+        <location filename="../assets/main.qml" line="322"/>
         <source>Cartoon</source>
         <translation>Dans la bande dessinée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="320"/>
+        <location filename="../assets/main.qml" line="324"/>
         <source>Blur</source>
         <translation>Faire flou</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="322"/>
+        <location filename="../assets/main.qml" line="326"/>
         <source>Pixelate</source>
         <translation>Pixéliser</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="324"/>
+        <location filename="../assets/main.qml" line="328"/>
         <source>Recolor</source>
         <translation>Recolorier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="326"/>
+        <location filename="../assets/main.qml" line="330"/>
         <source>Retouch</source>
         <translation>Retoucher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="365"/>
+        <location filename="../assets/main.qml" line="369"/>
         <source>Example image</source>
         <translation>Exemple d&apos;image</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="403"/>
+        <location filename="../assets/main.qml" line="407"/>
         <source>Open Image</source>
         <translation>Ouvrir la Photo</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="430"/>
+        <location filename="../assets/main.qml" line="434"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation>Faites glisser la liste avec un doigt pour passer entre les modes</translation>
     </message>

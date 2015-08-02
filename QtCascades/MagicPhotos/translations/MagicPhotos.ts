@@ -846,93 +846,93 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="100"/>
-        <location filename="../assets/main.qml" line="134"/>
+        <location filename="../assets/main.qml" line="86"/>
+        <location filename="../assets/main.qml" line="164"/>
         <source>Divider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="106"/>
+        <location filename="../assets/main.qml" line="109"/>
         <source>Brush Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="115"/>
+        <location filename="../assets/main.qml" line="118"/>
         <source>Brush size slider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="121"/>
+        <location filename="../assets/main.qml" line="124"/>
         <source>Brush Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="130"/>
+        <location filename="../assets/main.qml" line="133"/>
         <source>Brush opacity slider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="143"/>
+        <location filename="../assets/main.qml" line="142"/>
         <source>Brush preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="193"/>
+        <location filename="../assets/main.qml" line="197"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="214"/>
+        <location filename="../assets/main.qml" line="218"/>
         <source>List of modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="314"/>
+        <location filename="../assets/main.qml" line="318"/>
         <source>Decolorize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="316"/>
+        <location filename="../assets/main.qml" line="320"/>
         <source>Sketch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="318"/>
+        <location filename="../assets/main.qml" line="322"/>
         <source>Cartoon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="320"/>
+        <location filename="../assets/main.qml" line="324"/>
         <source>Blur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="322"/>
+        <location filename="../assets/main.qml" line="326"/>
         <source>Pixelate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="324"/>
+        <location filename="../assets/main.qml" line="328"/>
         <source>Recolor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="326"/>
+        <location filename="../assets/main.qml" line="330"/>
         <source>Retouch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="365"/>
+        <location filename="../assets/main.qml" line="369"/>
         <source>Example image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="403"/>
+        <location filename="../assets/main.qml" line="407"/>
         <source>Open Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="430"/>
+        <location filename="../assets/main.qml" line="434"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation type="unfinished"></translation>
     </message>
