@@ -5,7 +5,8 @@ import CustomTimer 1.0
 import ImageEditor 1.0
 
 Page {
-    id: cartoonPage
+    id:         cartoonPage
+    objectName: "editorPage"
 
     function openImage(image_file, gaussian_radius, threshold) {
         activityIndicator.visible = true;
@@ -16,6 +17,15 @@ Page {
         cartoonEditor.openImage(image_file);
     }
 
+    function updateEditorParameters() {
+        cartoonEditor.brushSize    = AppSettings.brushSize;
+        cartoonEditor.brushOpacity = AppSettings.brushOpacity;
+    }
+    
+    onCreationCompleted: {
+        updateEditorParameters();
+    }
+    
     paneProperties: NavigationPaneProperties {
         backButton: ActionItem {
             onTriggered: {
@@ -238,11 +248,11 @@ Page {
                         if (event.touchType === TouchType.Down) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            cartoonEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                            cartoonEditor.changeImageAt(true, event.localX, event.localY);
                         } else if (event.touchType === TouchType.Move) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            cartoonEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                            cartoonEditor.changeImageAt(false, event.localX, event.localY);
                         } else {
                             helperImageView.visible = false;
                         }
@@ -252,7 +262,7 @@ Page {
                         CartoonEditor {
                             id:         cartoonEditor
                             mode:       CartoonEditor.ModeScroll 
-                            brushSize:  ui.sdu(3)
+                            scale:      imageScrollView.contentScale
                             helperSize: ui.sdu(20)
                             
                             onImageOpened: {

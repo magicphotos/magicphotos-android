@@ -16,18 +16,20 @@ class RetouchEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode               READ mode               WRITE setMode)
-    Q_PROPERTY(int  brushSize          READ brushSize          WRITE setBrushSize)
-    Q_PROPERTY(int  helperSize         READ helperSize         WRITE setHelperSize)
-    Q_PROPERTY(bool samplingPointValid READ samplingPointValid WRITE setSamplingPointValid)
-    Q_PROPERTY(bool lastBlurPointValid READ lastBlurPointValid WRITE setLastBlurPointValid)
-    Q_PROPERTY(int  samplingPointX     READ samplingPointX     WRITE setSamplingPointX)
-    Q_PROPERTY(int  samplingPointY     READ samplingPointY     WRITE setSamplingPointY)
-    Q_PROPERTY(int  lastBlurPointX     READ lastBlurPointX     WRITE setLastBlurPointX)
-    Q_PROPERTY(int  lastBlurPointY     READ lastBlurPointY     WRITE setLastBlurPointY)
-    Q_PROPERTY(bool changed            READ changed)
-    Q_PROPERTY(int  imageWidth         READ imageWidth)
-    Q_PROPERTY(int  imageHeight        READ imageHeight)
+    Q_PROPERTY(int   mode               READ mode               WRITE setMode)
+    Q_PROPERTY(int   brushSize          READ brushSize          WRITE setBrushSize)
+    Q_PROPERTY(int   helperSize         READ helperSize         WRITE setHelperSize)
+    Q_PROPERTY(bool  samplingPointValid READ samplingPointValid WRITE setSamplingPointValid)
+    Q_PROPERTY(bool  lastBlurPointValid READ lastBlurPointValid WRITE setLastBlurPointValid)
+    Q_PROPERTY(int   samplingPointX     READ samplingPointX     WRITE setSamplingPointX)
+    Q_PROPERTY(int   samplingPointY     READ samplingPointY     WRITE setSamplingPointY)
+    Q_PROPERTY(int   lastBlurPointX     READ lastBlurPointX     WRITE setLastBlurPointX)
+    Q_PROPERTY(int   lastBlurPointY     READ lastBlurPointY     WRITE setLastBlurPointY)
+    Q_PROPERTY(qreal brushOpacity       READ brushOpacity       WRITE setBrushOpacity)
+    Q_PROPERTY(qreal scale              READ scale              WRITE setScale)
+    Q_PROPERTY(bool  changed            READ changed)
+    Q_PROPERTY(int   imageWidth         READ imageWidth)
+    Q_PROPERTY(int   imageHeight        READ imageHeight)
 
     Q_ENUMS(Mode)
 
@@ -62,6 +64,12 @@ public:
     int  lastBlurPointY() const;
     void setLastBlurPointY(const int &y);
 
+    qreal brushOpacity() const;
+    void  setBrushOpacity(const qreal &opacity);
+
+    qreal scale() const;
+    void  setScale(const qreal &scale);
+
     bool changed() const;
     int  imageWidth() const;
     int  imageHeight() const;
@@ -69,8 +77,8 @@ public:
     Q_INVOKABLE void openImage(const QString &image_file);
     Q_INVOKABLE void saveImage(const QString &image_file);
 
-    Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level);
-    Q_INVOKABLE void updateHelperAt(int center_x, int center_y, qreal zoom_level);
+    Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y);
+    Q_INVOKABLE void updateHelperAt(int center_x, int center_y);
 
     Q_INVOKABLE void undo();
 
@@ -97,7 +105,7 @@ private:
     void SaveUndoImage();
 
     void RepaintImage(bool full, QRect rect = QRect());
-    void RepaintHelper(int center_x, int center_y, qreal zoom_level);
+    void RepaintHelper(int center_x, int center_y);
 
     static const int UNDO_DEPTH      = 4,
                      GAUSSIAN_RADIUS = 4;
@@ -106,8 +114,9 @@ private:
 
     bool           IsChanged, IsSamplingPointValid, IsLastBlurPointValid;
     int            CurrentMode, BrushSize, HelperSize;
+    qreal          BrushOpacity, Scale;
     QPoint         SamplingPoint, LastBlurPoint;
-    QImage         LoadedImage, CurrentImage;
+    QImage         LoadedImage, CurrentImage, BrushTemplateImage, BrushImage;
     QStack<QImage> UndoStack;
     bb::ImageData  CurrentImageData;
 };

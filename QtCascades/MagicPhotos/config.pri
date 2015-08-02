@@ -133,6 +133,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/MagicPhotos.cpp) \
         $$quote($$BASEDIR/src/appsettings.cpp) \
         $$quote($$BASEDIR/src/blureditor.cpp) \
+        $$quote($$BASEDIR/src/brushpreviewgenerator.cpp) \
         $$quote($$BASEDIR/src/cartooneditor.cpp) \
         $$quote($$BASEDIR/src/customtimer.cpp) \
         $$quote($$BASEDIR/src/decolorizeeditor.cpp) \
@@ -149,6 +150,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/MagicPhotos.hpp) \
         $$quote($$BASEDIR/src/appsettings.h) \
         $$quote($$BASEDIR/src/blureditor.h) \
+        $$quote($$BASEDIR/src/brushpreviewgenerator.h) \
         $$quote($$BASEDIR/src/cartooneditor.h) \
         $$quote($$BASEDIR/src/customtimer.h) \
         $$quote($$BASEDIR/src/decolorizeeditor.h) \

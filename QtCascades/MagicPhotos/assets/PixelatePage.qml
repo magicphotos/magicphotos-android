@@ -5,7 +5,8 @@ import CustomTimer 1.0
 import ImageEditor 1.0
 
 Page {
-    id: pixelatePage
+    id:         pixelatePage
+    objectName: "editorPage"
 
     function openImage(image_file, pix_denom) {
         activityIndicator.visible = true;
@@ -15,6 +16,15 @@ Page {
         pixelateEditor.openImage(image_file);
     }
 
+    function updateEditorParameters() {
+        pixelateEditor.brushSize    = AppSettings.brushSize;
+        pixelateEditor.brushOpacity = AppSettings.brushOpacity;
+    }
+    
+    onCreationCompleted: {
+        updateEditorParameters();
+    }
+    
     paneProperties: NavigationPaneProperties {
         backButton: ActionItem {
             onTriggered: {
@@ -237,11 +247,11 @@ Page {
                         if (event.touchType === TouchType.Down) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            pixelateEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                            pixelateEditor.changeImageAt(true, event.localX, event.localY);
                         } else if (event.touchType === TouchType.Move) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            pixelateEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                            pixelateEditor.changeImageAt(false, event.localX, event.localY);
                         } else {
                             helperImageView.visible = false;
                         }
@@ -251,7 +261,7 @@ Page {
                         PixelateEditor {
                             id:         pixelateEditor
                             mode:       PixelateEditor.ModeScroll 
-                            brushSize:  ui.sdu(3)
+                            scale:      imageScrollView.contentScale
                             helperSize: ui.sdu(20)
                             
                             onImageOpened: {

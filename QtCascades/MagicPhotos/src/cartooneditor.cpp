@@ -20,6 +20,8 @@ CartoonEditor::CartoonEditor() : bb::cascades::CustomControl()
     HelperSize       = 0;
     GaussianRadius   = 0;
     CartoonThreshold = 0;
+    BrushOpacity     = 0.0;
+    Scale            = 1.0;
 }
 
 CartoonEditor::~CartoonEditor()
@@ -44,6 +46,28 @@ int CartoonEditor::brushSize() const
 void CartoonEditor::setBrushSize(const int &size)
 {
     BrushSize = size;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / Scale) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 int CartoonEditor::helperSize() const
@@ -74,6 +98,52 @@ int CartoonEditor::threshold() const
 void CartoonEditor::setThreshold(const int &threshold)
 {
     CartoonThreshold = threshold;
+}
+
+qreal CartoonEditor::brushOpacity() const
+{
+    return BrushOpacity;
+}
+
+void CartoonEditor::setBrushOpacity(const qreal &opacity)
+{
+    BrushOpacity = opacity;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / Scale) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
+}
+
+qreal CartoonEditor::scale() const
+{
+    return Scale;
+}
+
+void CartoonEditor::setScale(const qreal &scale)
+{
+    Scale = scale;
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / Scale) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 bool CartoonEditor::changed() const
@@ -199,31 +269,42 @@ void CartoonEditor::saveImage(const QString &image_file)
     }
 }
 
-void CartoonEditor::changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level)
+void CartoonEditor::changeImageAt(bool save_undo, int center_x, int center_y)
 {
     if (CurrentMode != ModeScroll) {
         if (save_undo) {
             SaveUndoImage();
         }
 
-        int radius = BrushSize / zoom_level;
+        int width  = qMin(BrushImage.width(),  CurrentImage.width());
+        int height = qMin(BrushImage.height(), CurrentImage.height());
 
-        for (int x = center_x - radius; x <= center_x + radius; x++) {
-            for (int y = center_y - radius; y <= center_y + radius; y++) {
-                if (x >= 0 && x < CurrentImage.width() && y >= 0 && y < CurrentImage.height() && qSqrt(qPow(x - center_x, 2) + qPow(y - center_y, 2)) <= radius) {
-                    if (CurrentMode == ModeOriginal) {
-                        CurrentImage.setPixel(x, y, OriginalImage.pixel(x, y));
-                    } else {
-                        CurrentImage.setPixel(x, y, EffectedImage.pixel(x, y));
-                    }
-                }
-            }
+        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
+        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
+
+        QImage   brush_image(width, height, QImage::Format_ARGB32);
+        QPainter brush_painter(&brush_image);
+
+        brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
+
+        if (CurrentMode == ModeOriginal) {
+            brush_painter.drawImage(QPoint(0, 0), OriginalImage, QRect(img_x, img_y, width, height));
+        } else {
+            brush_painter.drawImage(QPoint(0, 0), EffectedImage, QRect(img_x, img_y, width, height));
         }
+
+        QPainter image_painter(&CurrentImage);
+
+        brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+        image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        image_painter.drawImage(QPoint(img_x, img_y), brush_image);
 
         IsChanged = true;
 
-        RepaintImage(false, QRect(center_x - radius, center_y - radius, radius * 2, radius * 2));
-        RepaintHelper(center_x, center_y, zoom_level);
+        RepaintImage(false, QRect(img_x, img_y, width, height));
+        RepaintHelper(center_x, center_y);
     }
 }
 
@@ -255,6 +336,10 @@ void CartoonEditor::effectedImageReady(const QImage &effected_image)
     IsChanged = true;
 
     RepaintImage(true);
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / Scale) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 
     emit undoAvailabilityChanged(false);
     emit imageOpened();
@@ -345,13 +430,13 @@ void CartoonEditor::RepaintImage(bool full, QRect rect)
     }
 }
 
-void CartoonEditor::RepaintHelper(int center_x, int center_y, qreal zoom_level)
+void CartoonEditor::RepaintHelper(int center_x, int center_y)
 {
     if (CurrentImage.isNull()) {
         emit needHelperRepaint(bb::cascades::Image());
     } else {
-        QImage   helper_image = CurrentImage.copy(center_x - HelperSize / (zoom_level * 2),
-                                                  center_y - HelperSize / (zoom_level * 2), HelperSize / zoom_level, HelperSize / zoom_level).scaledToWidth(HelperSize);
+        QImage   helper_image = CurrentImage.copy(center_x - HelperSize / (Scale * 2),
+                                                  center_y - HelperSize / (Scale * 2), HelperSize / Scale, HelperSize / Scale).scaledToWidth(HelperSize);
         QPainter painter(&helper_image);
 
         painter.setPen(QPen(Qt::white, 4, Qt::SolidLine));

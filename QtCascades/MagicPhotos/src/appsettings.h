@@ -1,6 +1,7 @@
 #ifndef APPSETTINGS_H
 #define APPSETTINGS_H
 
+#include <QtCore/qmath.h>
 #include <QtCore/QObject>
 #include <QtCore/QSettings>
 
@@ -8,10 +9,13 @@ class AppSettings : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  launchNumber                     READ launchNumber                     WRITE setLaunchNumber)
-    Q_PROPERTY(int  lastFeedbackRequestLaunchNumber  READ lastFeedbackRequestLaunchNumber  WRITE setLastFeedbackRequestLaunchNumber)
-    Q_PROPERTY(bool requestFeedback                  READ requestFeedback                  WRITE setRequestFeedback)
-    Q_PROPERTY(bool showModeChangeSuggestion         READ showModeChangeSuggestion         WRITE setShowModeChangeSuggestion)
+    Q_PROPERTY(int   launchNumber                     READ launchNumber                     WRITE setLaunchNumber)
+    Q_PROPERTY(int   lastFeedbackRequestLaunchNumber  READ lastFeedbackRequestLaunchNumber  WRITE setLastFeedbackRequestLaunchNumber)
+    Q_PROPERTY(int   defaultBrushSize                 READ defaultBrushSize                 WRITE setDefaultBrushSize)
+    Q_PROPERTY(int   brushSize                        READ brushSize                        WRITE setBrushSize)
+    Q_PROPERTY(bool  requestFeedback                  READ requestFeedback                  WRITE setRequestFeedback)
+    Q_PROPERTY(bool  showModeChangeSuggestion         READ showModeChangeSuggestion         WRITE setShowModeChangeSuggestion)
+    Q_PROPERTY(qreal brushOpacity                     READ brushOpacity                     WRITE setBrushOpacity)
 
 public:
     explicit AppSettings(QObject *parent = 0);
@@ -23,13 +27,23 @@ public:
     int  lastFeedbackRequestLaunchNumber() const;
     void setLastFeedbackRequestLaunchNumber(const int &number);
 
+    int  defaultBrushSize() const;
+    void setDefaultBrushSize(const int &size);
+
+    int  brushSize() const;
+    void setBrushSize(const int &size);
+
     bool requestFeedback() const;
     void setRequestFeedback(const bool &request);
 
     bool showModeChangeSuggestion() const;
     void setShowModeChangeSuggestion(const bool &show);
 
+    qreal brushOpacity() const;
+    void  setBrushOpacity(const qreal &opacity);
+
 private:
+    int        DefaultBrushSize;
     QSettings *Settings;
 };
 

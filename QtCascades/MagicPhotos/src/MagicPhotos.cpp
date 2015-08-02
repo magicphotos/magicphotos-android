@@ -16,6 +16,7 @@
 #include "invocationhelper.h"
 #include "customtimer.h"
 #include "downloadinviter.h"
+#include "brushpreviewgenerator.h"
 #include "decolorizeeditor.h"
 #include "sketcheditor.h"
 #include "cartooneditor.h"
@@ -41,6 +42,8 @@ MagicPhotos::MagicPhotos(bb::cascades::Application *app) : QObject(app)
     qmlRegisterType<CustomTimer>("CustomTimer", 1, 0, "CustomTimer");
 
     qmlRegisterType<DownloadInviter>("DownloadInviter", 1, 0, "DownloadInviter");
+
+    qmlRegisterType<BrushPreviewGenerator>("ImageEditor", 1, 0, "BrushPreviewGenerator");
 
     qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 

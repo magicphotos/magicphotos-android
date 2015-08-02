@@ -15,11 +15,13 @@ class PixelateEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
-    Q_PROPERTY(int  brushSize  READ brushSize  WRITE setBrushSize)
-    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
-    Q_PROPERTY(int  pixDenom   READ pixDenom   WRITE setPixDenom)
-    Q_PROPERTY(bool changed    READ changed)
+    Q_PROPERTY(int   mode         READ mode         WRITE setMode)
+    Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
+    Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
+    Q_PROPERTY(int   pixDenom     READ pixDenom     WRITE setPixDenom)
+    Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
+    Q_PROPERTY(qreal scale        READ scale        WRITE setScale)
+    Q_PROPERTY(bool  changed      READ changed)
 
     Q_ENUMS(Mode)
 
@@ -39,12 +41,18 @@ public:
     int  pixDenom() const;
     void setPixDenom(const int &pix_denom);
 
+    qreal brushOpacity() const;
+    void  setBrushOpacity(const qreal &opacity);
+
+    qreal scale() const;
+    void  setScale(const qreal &scale);
+
     bool changed() const;
 
     Q_INVOKABLE void openImage(const QString &image_file);
     Q_INVOKABLE void saveImage(const QString &image_file);
 
-    Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y, qreal zoom_level);
+    Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y);
 
     Q_INVOKABLE void undo();
 
@@ -73,7 +81,7 @@ private:
     void SaveUndoImage();
 
     void RepaintImage(bool full, QRect rect = QRect());
-    void RepaintHelper(int center_x, int center_y, qreal zoom_level);
+    void RepaintHelper(int center_x, int center_y);
 
     static const int UNDO_DEPTH = 4;
 
@@ -81,7 +89,8 @@ private:
 
     bool           IsChanged;
     int            CurrentMode, BrushSize, HelperSize, PixelDenom;
-    QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
+    qreal          BrushOpacity, Scale;
+    QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage, BrushTemplateImage, BrushImage;
     QStack<QImage> UndoStack;
     bb::ImageData  CurrentImageData;
 };

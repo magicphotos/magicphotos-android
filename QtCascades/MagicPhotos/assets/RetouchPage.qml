@@ -5,7 +5,8 @@ import CustomTimer 1.0
 import ImageEditor 1.0
 
 Page {
-    id: retouchPage
+    id:         retouchPage
+    objectName: "editorPage"
 
     function openImage(image_file) {
         activityIndicator.visible = true;
@@ -14,6 +15,15 @@ Page {
         retouchEditor.openImage(image_file);
     }
 
+    function updateEditorParameters() {
+        retouchEditor.brushSize    = AppSettings.brushSize;
+        retouchEditor.brushOpacity = AppSettings.brushOpacity;
+    }
+    
+    onCreationCompleted: {
+        updateEditorParameters();
+    }
+    
     paneProperties: NavigationPaneProperties {
         backButton: ActionItem {
             onTriggered: {
@@ -277,7 +287,7 @@ Page {
 
                                     imageContainer.showHelper(event.localX, event.localY);
 
-                                    retouchEditor.updateHelperAt(sampling_point_x, sampling_point_y, imageScrollView.contentScale);
+                                    retouchEditor.updateHelperAt(sampling_point_x, sampling_point_y);
                                 } else {
                                     helperImageView.visible = false;
                                 }
@@ -291,7 +301,7 @@ Page {
                                         
                                         imageContainer.showHelper(event.localX, event.localY);
                                         
-                                        retouchEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                                        retouchEditor.changeImageAt(true, event.localX, event.localY);
                                     } else if (event.touchType === TouchType.Move) {
                                         var sampling_point_x = Math.max(samplingPointImageView.preferredWidth  / 2, Math.min(retouchEditor.imageWidth  - samplingPointImageView.preferredWidth  / 2, initial_sampling_point_x + event.localX - initial_touch_point_x));
                                         var sampling_point_y = Math.max(samplingPointImageView.preferredHeight / 2, Math.min(retouchEditor.imageHeight - samplingPointImageView.preferredHeight / 2, initial_sampling_point_y + event.localY - initial_touch_point_y));
@@ -304,7 +314,7 @@ Page {
 
                                         imageContainer.showHelper(event.localX, event.localY);
 
-                                        retouchEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                                        retouchEditor.changeImageAt(false, event.localX, event.localY);
                                     } else {
                                         helperImageView.visible = false;
                                     }
@@ -313,7 +323,7 @@ Page {
                                 if (event.touchType === TouchType.Down) {
                                     imageContainer.showHelper(event.localX, event.localY);
                                     
-                                    retouchEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                                    retouchEditor.changeImageAt(true, event.localX, event.localY);
                                     
                                     retouchEditor.lastBlurPointValid = true;
                                     retouchEditor.lastBlurPointX     = event.localX;
@@ -321,7 +331,7 @@ Page {
                                 } else if (event.touchType === TouchType.Move) {
                                     imageContainer.showHelper(event.localX, event.localY);
 
-                                    retouchEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                                    retouchEditor.changeImageAt(false, event.localX, event.localY);
 
                                     retouchEditor.lastBlurPointX = event.localX;
                                     retouchEditor.lastBlurPointY = event.localY;
@@ -341,7 +351,7 @@ Page {
                             RetouchEditor {
                                 id:         retouchEditor
                                 mode:       RetouchEditor.ModeScroll
-                                brushSize:  ui.sdu(3)
+                                scale:      imageScrollView.contentScale
                                 helperSize: ui.sdu(20)
                                 
                                 onImageOpened: {

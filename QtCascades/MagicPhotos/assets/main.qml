@@ -2,6 +2,7 @@ import bb.cascades 1.3
 import bb.system 1.2
 import FilePicker 1.0
 import CustomTimer 1.0
+import ImageEditor 1.0
 
 NavigationPane {
     id:          navigationPane
@@ -10,7 +11,8 @@ NavigationPane {
     onCreationCompleted: {
         OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
 
-        AppSettings.launchNumber = AppSettings.launchNumber + 1;
+        AppSettings.launchNumber     = AppSettings.launchNumber + 1;
+        AppSettings.defaultBrushSize = ui.sdu(3);
     }
 
     onPopTransitionEnded: {
@@ -18,6 +20,140 @@ NavigationPane {
     }
 
     Menu.definition: MenuDefinition {
+        settingsAction: SettingsActionItem {
+            onTriggered: {
+                brushSizeSlider.value    = AppSettings.brushSize;
+                brushOpacitySlider.value = AppSettings.brushOpacity;
+                
+                settingsSheet.open();
+            }
+            
+            attachedObjects: [
+                Sheet {
+                    id: settingsSheet
+                    
+                    Page {
+                        id: settingsPage
+                        
+                        titleBar: TitleBar {
+                            title: qsTr("Settings")
+                            
+                            acceptAction: ActionItem {
+                                title: qsTr("OK")
+                                
+                                onTriggered: {
+                                    AppSettings.brushSize    = brushSizeSlider.value;
+                                    AppSettings.brushOpacity = brushOpacitySlider.value;
+                                    
+                                    for (var i = 0; i < navigationPane.count(); i++) {
+                                        var page = navigationPane.at(i);
+                                        
+                                        if (page.objectName === "editorPage") {
+                                            page.updateEditorParameters();
+                                        }
+                                    }
+                                    
+                                    settingsSheet.close();
+                                }
+                            }
+                            
+                            dismissAction: ActionItem {
+                                title: qsTr("Cancel")
+                                
+                                onTriggered: {
+                                    settingsSheet.close();
+                                }
+                            }
+                        }
+                        
+                        Container {
+                            background: Color.Black
+                            
+                            ScrollView {
+                                accessibility.name: qsTr("Settings")
+                                
+                                scrollViewProperties {
+                                    scrollMode: ScrollMode.Vertical
+                                }
+                                
+                                Container {
+                                    background: Color.Transparent
+                                    
+                                    leftPadding:  ui.sdu(1)
+                                    rightPadding: ui.sdu(1)
+                                    
+                                    layout: StackLayout {
+                                    }
+                                    
+                                    Divider {
+                                        accessibility.name: qsTr("Divider")
+                                    }
+                                    
+                                    Label {
+                                        multiline:       true
+                                        textStyle.color: Color.White
+                                        text:            qsTr("Brush Size")
+                                    }
+                                    
+                                    Slider {
+                                        id:                  brushSizeSlider
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        fromValue:           ui.sdu(2)
+                                        toValue:             ui.sdu(4)
+                                        value:               ui.sdu(3)
+                                        accessibility.name:  qsTr("Brush size slider")
+                                    }
+
+                                    Label {
+                                        multiline:       true
+                                        textStyle.color: Color.White
+                                        text:            qsTr("Brush Opacity")
+                                    }
+                                    
+                                    Slider {
+                                        id:                  brushOpacitySlider
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        fromValue:           0.0
+                                        toValue:             1.0
+                                        value:               0.75
+                                        accessibility.name:  qsTr("Brush opacity slider")
+                                    }
+
+                                    Divider {
+                                        accessibility.name: qsTr("Divider")
+                                    }
+                                    
+                                    ImageView {
+                                        id:                  brushPreviewImageView
+                                        horizontalAlignment: HorizontalAlignment.Center
+                                        scalingMethod:       ScalingMethod.None
+                                        accessibility.name:  qsTr("Brush preview")
+                                        
+                                        attachedObjects: [
+                                            BrushPreviewGenerator {
+                                                id:      brushPreviewGenerator
+                                                size:    brushSizeSlider.immediateValue
+                                                maxSize: brushSizeSlider.toValue
+                                                opacity: brushOpacitySlider.immediateValue
+                                                
+                                                onNeedRepaint: {
+                                                    brushPreviewImageView.image = image;
+                                                }
+                                            }
+                                        ]
+                                    }
+
+                                    Divider {
+                                        accessibility.name: qsTr("Divider")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        
         helpAction: HelpActionItem {
             onTriggered: {
                 navigationPane.push(helpPageDefinition.createObject());

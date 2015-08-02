@@ -5,7 +5,8 @@ import CustomTimer 1.0
 import ImageEditor 1.0
 
 Page {
-    id: recolorPage
+    id:         recolorPage
+    objectName: "editorPage"
 
     function openImage(image_file) {
         activityIndicator.visible = true;
@@ -14,6 +15,15 @@ Page {
         recolorEditor.openImage(image_file);
     }
 
+    function updateEditorParameters() {
+        recolorEditor.brushSize    = AppSettings.brushSize;
+        recolorEditor.brushOpacity = AppSettings.brushOpacity;
+    }
+    
+    onCreationCompleted: {
+        updateEditorParameters();
+    }
+    
     paneProperties: NavigationPaneProperties {
         backButton: ActionItem {
             onTriggered: {
@@ -248,11 +258,11 @@ Page {
                         if (event.touchType === TouchType.Down) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            recolorEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                            recolorEditor.changeImageAt(true, event.localX, event.localY);
                         } else if (event.touchType === TouchType.Move) {
                             imageContainer.showHelper(event.localX, event.localY);
 
-                            recolorEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                            recolorEditor.changeImageAt(false, event.localX, event.localY);
                         } else {
                             helperImageView.visible = false;
                         }
@@ -262,7 +272,7 @@ Page {
                         RecolorEditor {
                             id:         recolorEditor
                             mode:       RecolorEditor.ModeScroll
-                            brushSize:  ui.sdu(3)
+                            scale:      imageScrollView.contentScale
                             helperSize: ui.sdu(20)
                             hue:        180
 

@@ -5,15 +5,25 @@ import CustomTimer 1.0
 import ImageEditor 1.0
 
 Page {
-    id: decolorizePage
-
+    id:         decolorizePage
+    objectName: "editorPage"
+    
     function openImage(image_file) {
         activityIndicator.visible = true;
         activityIndicator.start();
-
+        
         decolorizeEditor.openImage(image_file);
     }
-
+    
+    function updateEditorParameters() {
+        decolorizeEditor.brushSize    = AppSettings.brushSize;
+        decolorizeEditor.brushOpacity = AppSettings.brushOpacity;
+    }
+    
+    onCreationCompleted: {
+        updateEditorParameters();
+    }
+    
     paneProperties: NavigationPaneProperties {
         backButton: ActionItem {
             onTriggered: {
@@ -39,7 +49,7 @@ Page {
             ]
         }
     }
-
+    
     actions: [
         ActionItem {
             id:                  saveActionItem
@@ -47,7 +57,7 @@ Page {
             imageSource:         "images/save.png"
             ActionBar.placement: ActionBarPlacement.Signature
             enabled:             false
-
+            
             onTriggered: {
                 if (TrialManager.trialMode) {
                     trialModeDialog.show();
@@ -86,11 +96,11 @@ Page {
                     confirmButton.label: qsTr("Yes")
                     cancelButton.label:  qsTr("Later")
                     customButton.label:  qsTr("Never")
-
+                    
                     onFinished: {
                         if (result === SystemUiResult.ConfirmButtonSelection) {
                             appWorldFullInvocation.trigger("bb.action.OPEN");
-
+                            
                             AppSettings.requestFeedback = false;
                         } else if (result === SystemUiResult.CancelButtonSelection) {
                             AppSettings.lastFeedbackRequestLaunchNumber = AppSettings.launchNumber;
@@ -103,7 +113,7 @@ Page {
                     id:         requestFeedbackTimer
                     singleShot: true
                     interval:   1000
-
+                    
                     onTimeout: {
                         if (AppSettings.requestFeedback && AppSettings.launchNumber > 1 && AppSettings.lastFeedbackRequestLaunchNumber !== AppSettings.launchNumber) {
                             requestFeedbackDialog.show();
@@ -112,7 +122,7 @@ Page {
                 },
                 Invocation {
                     id: appWorldFullInvocation
-
+                    
                     query: InvokeQuery {
                         mimeType: "application/x-bb-appworld"
                         uri:      "appworld://content/20356189"
@@ -126,7 +136,7 @@ Page {
             imageSource:         "images/undo.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             enabled:             false
-
+            
             onTriggered: {
                 decolorizeEditor.undo();
             }
@@ -137,10 +147,10 @@ Page {
         id:         decolorizePageContainer
         background: Color.Black
         topPadding: ui.sdu(2)
-
+        
         layout: StackLayout {
         }
-
+        
         SegmentedControl {
             id:                  modeSegmentedControl
             horizontalAlignment: HorizontalAlignment.Center
@@ -155,24 +165,24 @@ Page {
                 
                 decolorizeEditor.mode = selectedValue;
             }
-
+            
             layoutProperties: StackLayoutProperties {
                 spaceQuota: -1
             }
-
+            
             Option {
                 id:          scrollModeOption
                 value:       DecolorizeEditor.ModeScroll
                 imageSource: "images/mode_scroll.png"
             }
-
+            
             Option {
                 id:          originalModeOption
                 value:       DecolorizeEditor.ModeOriginal
                 imageSource: "images/mode_original.png"
                 enabled:     false
             }
-
+            
             Option {
                 id:          effectedModeOption
                 value:       DecolorizeEditor.ModeEffected
@@ -180,27 +190,27 @@ Page {
                 enabled:     false
             }
         }
-
+        
         Container {
             id:                  imageContainer
             preferredWidth:      ui.px(65535)
             horizontalAlignment: HorizontalAlignment.Center 
             background:          Color.Transparent
-
+            
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1
             }
-
+            
             layout: DockLayout {
             }
-
+            
             function showHelper(touch_x, touch_y) {
                 if (modeSegmentedControl.selectedValue !== DecolorizeEditor.ModeScroll) {
                     helperImageView.visible = true;
-
+                    
                     var local_x = imageScrollViewLayoutUpdateHandler.layoutFrame.x + touch_x * imageScrollView.contentScale - imageScrollView.viewableArea.x;
                     var local_y = imageScrollViewLayoutUpdateHandler.layoutFrame.y + touch_y * imageScrollView.contentScale - imageScrollView.viewableArea.y;
-    
+                    
                     if (local_y < helperImageViewLayoutUpdateHandler.layoutFrame.height * 2) {
                         if (local_x < helperImageViewLayoutUpdateHandler.layoutFrame.width * 2) {
                             helperImageView.horizontalAlignment = HorizontalAlignment.Right;
@@ -212,7 +222,7 @@ Page {
                     helperImageView.visible = false;
                 }
             }
-
+            
             ScrollView {
                 id:                   imageScrollView
                 horizontalAlignment:  HorizontalAlignment.Center
@@ -235,22 +245,22 @@ Page {
                     onTouch: {
                         if (event.touchType === TouchType.Down) {
                             imageContainer.showHelper(event.localX, event.localY);
-
-                            decolorizeEditor.changeImageAt(true, event.localX, event.localY, imageScrollView.contentScale);
+                            
+                            decolorizeEditor.changeImageAt(true, event.localX, event.localY);
                         } else if (event.touchType === TouchType.Move) {
                             imageContainer.showHelper(event.localX, event.localY);
-
-                            decolorizeEditor.changeImageAt(false, event.localX, event.localY, imageScrollView.contentScale);
+                            
+                            decolorizeEditor.changeImageAt(false, event.localX, event.localY);
                         } else {
                             helperImageView.visible = false;
                         }
                     }
-
+                    
                     attachedObjects: [
                         DecolorizeEditor {
                             id:         decolorizeEditor
                             mode:       DecolorizeEditor.ModeScroll
-                            brushSize:  ui.sdu(3)
+                            scale:      imageScrollView.contentScale
                             helperSize: ui.sdu(20) 
                             
                             onImageOpened: {
@@ -279,13 +289,13 @@ Page {
                                 effectedModeOption.enabled = false;
                                 
                                 imageScrollView.resetViewableArea(ScrollAnimation.Default);
-
+                                
                                 imageOpenFailedToast.show();
                             }
                             
                             onImageSaved: {
                                 imageSavedToast.show();
-
+                                
                                 requestFeedbackTimer.start();
                             }
                             
@@ -344,7 +354,7 @@ Page {
                     }
                 ]
             } 
-
+            
             ActivityIndicator {
                 id:                  activityIndicator
                 preferredWidth:      ui.sdu(24)
@@ -354,7 +364,7 @@ Page {
                 visible:             false
                 accessibility.name:  qsTr("Activity indicator")
             }
-
+            
             attachedObjects: [
                 LayoutUpdateHandler {
                     id: imageContainerLayoutUpdateHandler
