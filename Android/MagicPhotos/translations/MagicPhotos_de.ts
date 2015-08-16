@@ -4,6 +4,14 @@
 <context>
     <name>BlurPage</name>
     <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
+    <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
@@ -66,6 +74,14 @@
 <context>
     <name>CartoonPage</name>
     <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
+    <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
@@ -127,6 +143,14 @@
 </context>
 <context>
     <name>DecolorizePage</name>
+    <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
@@ -210,6 +234,14 @@
 <context>
     <name>PixelatePage</name>
     <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
+    <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
@@ -272,6 +304,14 @@
 <context>
     <name>RecolorPage</name>
     <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
+    <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
@@ -315,6 +355,14 @@
 <context>
     <name>RetouchPage</name>
     <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
+    <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
@@ -357,6 +405,14 @@
 </context>
 <context>
     <name>SketchPage</name>
+    <message>
+        <source>Brush Size</source>
+        <translation>Pinselgröße</translation>
+    </message>
+    <message>
+        <source>Brush Opacity</source>
+        <translation>Pinsel Härte</translation>
+    </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
