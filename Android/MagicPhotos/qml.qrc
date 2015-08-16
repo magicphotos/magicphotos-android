@@ -8,9 +8,9 @@
         <file alias="edit_mode_retouch.png">images/edit_mode_retouch.png</file>
         <file alias="edit_mode_sketch.png">images/edit_mode_sketch.png</file>
         <file alias="busy_indicator.png">images/busy_indicator.png</file>
-        <file alias="back.png">images/back.png</file>
         <file alias="help.png">images/help.png</file>
         <file alias="save.png">images/save.png</file>
+        <file alias="settings.png">images/settings.png</file>
         <file alias="share.png">images/share.png</file>
         <file alias="undo.png">images/undo.png</file>
         <file alias="mode_effected.png">images/mode_effected.png</file>

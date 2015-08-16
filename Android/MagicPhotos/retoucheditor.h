@@ -1,6 +1,7 @@
 #ifndef RETOUCHEDITOR_H
 #define RETOUCHEDITOR_H
 
+#include <QtCore/qmath.h>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
 #include <QtCore/QString>
@@ -16,6 +17,7 @@ class RetouchEditor : public QQuickPaintedItem
     Q_PROPERTY(int    mode               READ mode               WRITE  setMode)
     Q_PROPERTY(int    brushSize          READ brushSize          WRITE  setBrushSize)
     Q_PROPERTY(int    helperSize         READ helperSize         WRITE  setHelperSize)
+    Q_PROPERTY(qreal  brushOpacity       READ brushOpacity       WRITE setBrushOpacity)
     Q_PROPERTY(bool   changed            READ changed)
     Q_PROPERTY(bool   samplingPointValid READ samplingPointValid NOTIFY samplingPointValidChanged)
     Q_PROPERTY(QPoint samplingPoint      READ samplingPoint      NOTIFY samplingPointChanged)
@@ -35,6 +37,9 @@ public:
 
     int  helperSize() const;
     void setHelperSize(const int &size);
+
+    qreal brushOpacity() const;
+    void  setBrushOpacity(const qreal &opacity);
 
     bool   changed() const;
     bool   samplingPointValid() const;
@@ -59,6 +64,9 @@ public:
         MouseMoved,
         MouseReleased
     };
+
+private slots:
+    void scaleWasChanged();
 
 signals:
     void imageOpened();
@@ -92,8 +100,9 @@ private:
 
     bool           IsChanged, IsSamplingPointValid, IsLastBlurPointValid;
     int            CurrentMode, BrushSize, HelperSize;
+    qreal          BrushOpacity;
     QPoint         SamplingPoint, InitialSamplingPoint, LastBlurPoint, InitialTouchPoint;
-    QImage         LoadedImage, CurrentImage;
+    QImage         LoadedImage, CurrentImage, BrushTemplateImage, BrushImage;
     QStack<QImage> UndoStack;
 };
 

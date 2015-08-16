@@ -6,8 +6,9 @@
 
 #include "appsettings.h"
 #include "androidgw.h"
-#include "decolorizeeditor.h"
 #include "helper.h"
+#include "brushpreviewgenerator.h"
+#include "decolorizeeditor.h"
 #include "sketcheditor.h"
 #include "cartooneditor.h"
 #include "blureditor.h"
@@ -24,8 +25,9 @@ int main(int argc, char *argv[])
         app.installTranslator(&translator);
     }
 
-    qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
+    qmlRegisterType<BrushPreviewGenerator>("ImageEditor", 1, 0, "BrushPreviewGenerator");
+    qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 
     qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
     qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");

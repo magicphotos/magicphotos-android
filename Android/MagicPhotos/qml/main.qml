@@ -1,11 +1,15 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
 
+import "Util.js" as UtilScript
+
 ApplicationWindow {
     id:      mainWindow
     visible: true
 
     Component.onCompleted: {
+        AppSettings.defaultBrushSize = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16);
+
         mainStackView.push(modeSelectionPage);
     }
 

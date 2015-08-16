@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtCore/QThread>
 #include <QtGui/QTransform>
@@ -14,12 +13,15 @@ BlurEditor::BlurEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     BrushSize      = 0;
     HelperSize     = 0;
     GaussianRadius = 0;
+    BrushOpacity   = 0.0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
     setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
+
+    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
 }
 
 BlurEditor::~BlurEditor()
@@ -44,6 +46,28 @@ int BlurEditor::brushSize() const
 void BlurEditor::setBrushSize(const int &size)
 {
     BrushSize = size;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 int BlurEditor::helperSize() const
@@ -64,6 +88,38 @@ int BlurEditor::radius() const
 void BlurEditor::setRadius(const int &radius)
 {
     GaussianRadius = radius;
+}
+
+qreal BlurEditor::brushOpacity() const
+{
+    return BrushOpacity;
+}
+
+void BlurEditor::setBrushOpacity(const qreal &opacity)
+{
+    BrushOpacity = opacity;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 bool BlurEditor::changed() const
@@ -217,8 +273,19 @@ void BlurEditor::effectedImageReady(const QImage &effected_image)
 
     update();
 
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
+
     emit undoAvailabilityChanged(false);
     emit imageOpened();
+}
+
+void BlurEditor::scaleWasChanged()
+{
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 void BlurEditor::mousePressEvent(QMouseEvent *event)
@@ -266,19 +333,30 @@ void BlurEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = BrushSize / scale();
+        int width  = qMin(BrushImage.width(),  CurrentImage.width());
+        int height = qMin(BrushImage.height(), CurrentImage.height());
 
-        for (int x = center_x - radius; x <= center_x + radius; x++) {
-            for (int y = center_y - radius; y <= center_y + radius; y++) {
-                if (x >= 0 && x < CurrentImage.width() && y >= 0 && y < CurrentImage.height() && qSqrt(qPow(x - center_x, 2) + qPow(y - center_y, 2)) <= radius) {
-                    if (CurrentMode == ModeOriginal) {
-                        CurrentImage.setPixel(x, y, OriginalImage.pixel(x, y));
-                    } else {
-                        CurrentImage.setPixel(x, y, EffectedImage.pixel(x, y));
-                    }
-                }
-            }
+        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
+        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
+
+        QImage   brush_image(width, height, QImage::Format_ARGB32);
+        QPainter brush_painter(&brush_image);
+
+        brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
+
+        if (CurrentMode == ModeOriginal) {
+            brush_painter.drawImage(QPoint(0, 0), OriginalImage, QRect(img_x, img_y, width, height));
+        } else {
+            brush_painter.drawImage(QPoint(0, 0), EffectedImage, QRect(img_x, img_y, width, height));
         }
+
+        QPainter image_painter(&CurrentImage);
+
+        brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+        image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        image_painter.drawImage(QPoint(img_x, img_y), brush_image);
 
         IsChanged = true;
 

@@ -16,13 +16,22 @@ Item {
 
     property string imageFile:         ""
 
+    function updateEditorParameters() {
+        retouchEditor.brushSize    = AppSettings.brushSize;
+        retouchEditor.brushOpacity = AppSettings.brushOpacity;
+    }
+
     Component.onCompleted: {
         retouchEditor.helperImageReady.connect(helper.helperImageReady);
+
+        updateEditorParameters();
     }
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
-            if (retouchEditor.changed) {
+            if (brushSettingsRectangle.visible) {
+                brushSettingsRectangle.visible = false;
+            } else if (retouchEditor.changed) {
                 backMessageDialog.open();
             } else {
                 mainStackView.pop();
@@ -265,7 +274,6 @@ Item {
                                          editorFlickable.initialContentWidth > 0.0 ?
                                          editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
                         transformOrigin: Item.TopLeft
-                        brushSize:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
                         helperSize:      helper.width
 
                         onImageOpened: {
@@ -432,6 +440,133 @@ Item {
         }
     }
 
+    Rectangle {
+        id:             brushSettingsRectangle
+        anchors.bottom: bottomToolBar.top
+        anchors.left:   parent.left
+        anchors.right:  parent.right
+        height:         Math.max(brushSizeRectangle.height    + brushSizeRectangle.anchors.bottomMargin    +
+                                 brushOpacityRectangle.height + brushOpacityRectangle.anchors.bottomMargin + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12), brushPreviewGenerator.height)
+        z:              15
+        color:          "black"
+        visible:        false
+
+        onVisibleChanged: {
+            if (visible) {
+                brushSizeSlider.value    = AppSettings.brushSize;
+                brushOpacitySlider.value = AppSettings.brushOpacity;
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+
+            Rectangle {
+                id:                   brushSizeRectangle
+                anchors.bottom:       brushOpacityRectangle.top
+                anchors.left:         parent.left
+                anchors.right:        brushPreviewGenerator.left
+                anchors.bottomMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
+                anchors.rightMargin:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
+                height:               brushSizeTextRectangle.height
+                color:                "transparent"
+
+                Rectangle {
+                    id:           brushSizeTextRectangle
+                    anchors.left: parent.left
+                    width:        Math.max(brushSizeText.width, brushOpacityText.width)
+                    height:       Math.max(brushSizeText.height, brushSizeSlider.height)
+                    color:        "transparent"
+
+                    Text {
+                        id:                     brushSizeText
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left:           parent.left
+                        color:                  "white"
+                        text:                   qsTr("Brush Size")
+                    }
+                }
+
+                Slider {
+                    id:                     brushSizeSlider
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left:           brushSizeTextRectangle.right
+                    anchors.right:          parent.right
+                    anchors.leftMargin:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
+                    minimumValue:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
+                    maximumValue:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 24)
+                    value:                  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+                    stepSize:               1.0
+
+                    onPressedChanged: {
+                        if (!pressed) {
+                            AppSettings.brushSize = value;
+
+                            retouchPage.updateEditorParameters();
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id:                   brushOpacityRectangle
+                anchors.bottom:       parent.bottom
+                anchors.left:         parent.left
+                anchors.right:        brushPreviewGenerator.left
+                anchors.bottomMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
+                anchors.rightMargin:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
+                height:               brushOpacityTextRectangle.height
+                color:                "transparent"
+
+                Rectangle {
+                    id:                     brushOpacityTextRectangle
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left:           parent.left
+                    width:                  Math.max(brushSizeText.width, brushOpacityText.width)
+                    height:                 Math.max(brushOpacityText.height, brushOpacitySlider.height)
+                    color:                  "transparent"
+
+                    Text {
+                        id:                     brushOpacityText
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left:           parent.left
+                        color:                  "white"
+                        text:                   qsTr("Brush Opacity")
+                    }
+                }
+
+                Slider {
+                    id:                     brushOpacitySlider
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left:           brushOpacityTextRectangle.right
+                    anchors.right:          parent.right
+                    anchors.leftMargin:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
+                    minimumValue:           0.0
+                    maximumValue:           1.0
+                    value:                  0.75
+                    stepSize:               0.1
+
+                    onPressedChanged: {
+                        if (!pressed) {
+                            AppSettings.brushOpacity = value;
+
+                            retouchPage.updateEditorParameters();
+                        }
+                    }
+                }
+            }
+
+            BrushPreviewGenerator {
+                id:                     brushPreviewGenerator
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right:          parent.right
+                size:                   brushSizeSlider.value
+                maxSize:                brushSizeSlider.maximumValue
+                opacity:                brushOpacitySlider.value
+            }
+        }
+    }
+
     ToolBar {
         id:             bottomToolBar
         anchors.bottom: parent.bottom
@@ -440,34 +575,6 @@ Item {
 
         RowLayout {
             anchors.fill: parent
-
-            ToolButton {
-                width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/back.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    if (retouchEditor.changed) {
-                        backMessageDialog.open();
-                    } else {
-                        mainStackView.pop();
-                    }
-                }
-            }
 
             ToolButton {
                 id:      saveToolButton
@@ -586,6 +693,30 @@ Item {
 
                 onClicked: {
                     retouchEditor.undo();
+                }
+            }
+
+            ToolButton {
+                width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+
+                style: ButtonStyle {
+                    background: Rectangle {
+                        implicitWidth:  control.width
+                        implicitHeight: control.height
+                        color:          "transparent"
+
+                        Image {
+                            anchors.fill:    parent
+                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+                            source:          "images/settings.png"
+                            fillMode:        Image.PreserveAspectFit
+                        }
+                    }
+                }
+
+                onClicked: {
+                    brushSettingsRectangle.visible = !brushSettingsRectangle.visible;
                 }
             }
 

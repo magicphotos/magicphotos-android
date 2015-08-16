@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtGui/QTransform>
 #include <QtGui/QImageReader>
@@ -14,12 +13,15 @@ RetouchEditor::RetouchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     CurrentMode          = ModeScroll;
     BrushSize            = 0;
     HelperSize           = 0;
+    BrushOpacity         = 0.0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
     setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
+
+    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
 }
 
 RetouchEditor::~RetouchEditor()
@@ -44,6 +46,28 @@ int RetouchEditor::brushSize() const
 void RetouchEditor::setBrushSize(const int &size)
 {
     BrushSize = size;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 int RetouchEditor::helperSize() const
@@ -54,6 +78,38 @@ int RetouchEditor::helperSize() const
 void RetouchEditor::setHelperSize(const int &size)
 {
     HelperSize = size;
+}
+
+qreal RetouchEditor::brushOpacity() const
+{
+    return BrushOpacity;
+}
+
+void RetouchEditor::setBrushOpacity(const qreal &opacity)
+{
+    BrushOpacity = opacity;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 bool RetouchEditor::changed() const
@@ -128,6 +184,10 @@ void RetouchEditor::openImage(const QString &image_file, const int &image_orient
 
                     update();
 
+                    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+                    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
+
                     emit samplingPointValidChanged();
                     emit undoAvailabilityChanged(false);
                     emit imageOpened();
@@ -200,6 +260,13 @@ void RetouchEditor::paint(QPainter *painter)
     painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+}
+
+void RetouchEditor::scaleWasChanged()
+{
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 void RetouchEditor::mousePressEvent(QMouseEvent *event)
@@ -346,19 +413,32 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int radius = BrushSize / scale();
+        int width  = qMin(BrushImage.width(),  CurrentImage.width());
+        int height = qMin(BrushImage.height(), CurrentImage.height());
+
+        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
+        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
 
         if (CurrentMode == ModeClone) {
-            for (int from_x = SamplingPoint.x() - radius, to_x = center_x - radius; from_x <= SamplingPoint.x() + radius && to_x <= center_x + radius; from_x++, to_x++) {
-                for (int from_y = SamplingPoint.y() - radius, to_y = center_y - radius; from_y <= SamplingPoint.y() + radius && to_y <= center_y + radius; from_y++, to_y++) {
-                    if (from_x >= 0 && from_x < CurrentImage.width() && from_y >= 0 && from_y < CurrentImage.height() && qSqrt(qPow(from_x - SamplingPoint.x(), 2) + qPow(from_y - SamplingPoint.y(), 2)) <= radius &&
-                        to_x   >= 0 && to_x   < CurrentImage.width() && to_y   >= 0 && to_y   < CurrentImage.height() && qSqrt(qPow(to_x   - center_x,      2) + qPow(to_y   - center_y,      2)) <= radius) {
-                        CurrentImage.setPixel(to_x, to_y, CurrentImage.pixel(from_x, from_y));
-                    }
-                }
-            }
+            int src_x = qMin(qMax(0, SamplingPoint.x() - width  / 2), CurrentImage.width()  - width);
+            int src_y = qMin(qMax(0, SamplingPoint.y() - height / 2), CurrentImage.height() - height);
+
+            QImage   brush_image(width, height, QImage::Format_ARGB32);
+            QPainter brush_painter(&brush_image);
+
+            brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
+
+            brush_painter.drawImage(QPoint(0, 0), CurrentImage, QRect(src_x, src_y, width, height));
+
+            QPainter image_painter(&CurrentImage);
+
+            brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+            brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+            image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+            image_painter.drawImage(QPoint(img_x, img_y), brush_image);
         } else if (CurrentMode == ModeBlur) {
-            QRect  last_blur_rect(LastBlurPoint.x() - radius, LastBlurPoint.y() - radius, radius * 2, radius * 2);
+            QRect  last_blur_rect(LastBlurPoint.x() - width / 2, LastBlurPoint.y() - height / 2, width, height);
             QImage last_blur_image;
 
             if (IsLastBlurPointValid) {
@@ -384,7 +464,7 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
                 last_blur_image = CurrentImage.copy(last_blur_rect);
             }
 
-            QRect blur_rect(center_x - radius, center_y - radius, radius * 2, radius * 2);
+            QRect blur_rect(img_x, img_y, width, height);
 
             if (blur_rect.x() >= CurrentImage.width()) {
                 blur_rect.setX(CurrentImage.width() - 1);

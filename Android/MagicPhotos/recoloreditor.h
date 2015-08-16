@@ -1,6 +1,7 @@
 #ifndef RECOLOREDITOR_H
 #define RECOLOREDITOR_H
 
+#include <QtCore/qmath.h>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStack>
@@ -13,11 +14,12 @@ class RecolorEditor : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
-    Q_PROPERTY(int  brushSize  READ brushSize  WRITE setBrushSize)
-    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
-    Q_PROPERTY(int  hue        READ hue        WRITE setHue)
-    Q_PROPERTY(bool changed    READ changed)
+    Q_PROPERTY(int   mode         READ mode         WRITE setMode)
+    Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
+    Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
+    Q_PROPERTY(int   hue          READ hue          WRITE setHue)
+    Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
+    Q_PROPERTY(bool  changed      READ changed)
 
     Q_ENUMS(Mode)
     Q_ENUMS(MouseState)
@@ -37,6 +39,9 @@ public:
 
     int  hue() const;
     void setHue(const int &hue);
+
+    qreal brushOpacity() const;
+    void  setBrushOpacity(const qreal &opacity);
 
     bool changed() const;
 
@@ -58,6 +63,9 @@ public:
         MouseMoved,
         MouseReleased
     };
+
+private slots:
+    void scaleWasChanged();
 
 signals:
     void imageOpened();
@@ -106,7 +114,8 @@ private:
 
     bool                    IsChanged;
     int                     CurrentMode, BrushSize, HelperSize, CurrentHue;
-    QImage                  LoadedImage, OriginalImage, CurrentImage;
+    qreal                   BrushOpacity;
+    QImage                  LoadedImage, OriginalImage, CurrentImage, BrushTemplateImage, BrushImage;
     QStack<QImage>          UndoStack;
     QHash<quint16, quint32> RGB16ToHSVMap;
 };

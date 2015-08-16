@@ -1,4 +1,3 @@
-#include <QtCore/qmath.h>
 #include <QtCore/QFileInfo>
 #include <QtGui/QColor>
 #include <QtGui/QTransform>
@@ -9,11 +8,12 @@
 
 RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    IsChanged   = false;
-    CurrentMode = ModeScroll;
-    BrushSize   = 0;
-    HelperSize  = 0;
-    CurrentHue  = 0;
+    IsChanged    = false;
+    CurrentMode  = ModeScroll;
+    BrushSize    = 0;
+    HelperSize   = 0;
+    CurrentHue   = 0;
+    BrushOpacity = 0.0;
 
     RGB16  rgb16;
     HSV    hsv;
@@ -39,6 +39,8 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
+
+    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
 }
 
 RecolorEditor::~RecolorEditor()
@@ -63,6 +65,28 @@ int RecolorEditor::brushSize() const
 void RecolorEditor::setBrushSize(const int &size)
 {
     BrushSize = size;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 int RecolorEditor::helperSize() const
@@ -83,6 +107,38 @@ int RecolorEditor::hue() const
 void RecolorEditor::setHue(const int &hue)
 {
     CurrentHue = hue;
+}
+
+qreal RecolorEditor::brushOpacity() const
+{
+    return BrushOpacity;
+}
+
+void RecolorEditor::setBrushOpacity(const qreal &opacity)
+{
+    BrushOpacity = opacity;
+
+    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
+
+    for (int x = 0; x < BrushTemplateImage.width(); x++) {
+        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
+
+            if (r <= BrushSize) {
+                if (r <= BrushSize * BrushOpacity) {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                } else {
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                }
+            } else {
+                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+            }
+        }
+    }
+
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 bool RecolorEditor::changed() const
@@ -146,6 +202,10 @@ void RecolorEditor::openImage(const QString &image_file, const int &image_orient
                     setImplicitHeight(CurrentImage.height());
 
                     update();
+
+                    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+                    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 
                     emit undoAvailabilityChanged(false);
                     emit imageOpened();
@@ -220,6 +280,13 @@ void RecolorEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
+void RecolorEditor::scaleWasChanged()
+{
+    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+
+    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
+}
+
 void RecolorEditor::mousePressEvent(QMouseEvent *event)
 {
     if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
@@ -274,24 +341,38 @@ void RecolorEditor::SaveUndoImage()
 
 void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 {
-    if (CurrentMode != ModeScroll) {
+    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
         if (save_undo) {
             SaveUndoImage();
         }
 
-        int radius = BrushSize / scale();
+        int width  = qMin(BrushImage.width(),  CurrentImage.width());
+        int height = qMin(BrushImage.height(), CurrentImage.height());
 
-        for (int x = center_x - radius; x <= center_x + radius; x++) {
-            for (int y = center_y - radius; y <= center_y + radius; y++) {
-                if (x >= 0 && x < CurrentImage.width() && y >= 0 && y < CurrentImage.height() && qSqrt(qPow(x - center_x, 2) + qPow(y - center_y, 2)) <= radius) {
-                    if (CurrentMode == ModeOriginal) {
-                        CurrentImage.setPixel(x, y, OriginalImage.pixel(x, y));
-                    } else {
-                        CurrentImage.setPixel(x, y, AdjustHue(OriginalImage.pixel(x, y)));
-                    }
+        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
+        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
+
+        QImage   brush_image(width, height, QImage::Format_ARGB32);
+        QPainter brush_painter(&brush_image);
+
+        if (CurrentMode == ModeOriginal) {
+            brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
+            brush_painter.drawImage(QPoint(0, 0), OriginalImage, QRect(img_x, img_y, width, height));
+        } else if (CurrentMode == ModeEffected) {
+            for (int x = img_x; x < img_x + width; x++) {
+                for (int y = img_y; y < img_y + height; y++) {
+                    brush_image.setPixel(x - img_x, y - img_y, AdjustHue(OriginalImage.pixel(x, y)));
                 }
             }
         }
+
+        QPainter image_painter(&CurrentImage);
+
+        brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+        image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        image_painter.drawImage(QPoint(img_x, img_y), brush_image);
 
         IsChanged = true;
 

@@ -167,31 +167,6 @@ Item {
             anchors.fill: parent
 
             ToolButton {
-                anchors.left: parent.left
-                width:        UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/back.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    mainStackView.pop();
-                }
-            }
-
-            ToolButton {
                 anchors.centerIn: parent
                 width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)

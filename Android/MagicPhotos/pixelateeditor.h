@@ -1,6 +1,7 @@
 #ifndef PIXELATEEDITOR_H
 #define PIXELATEEDITOR_H
 
+#include <QtCore/qmath.h>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStack>
@@ -12,11 +13,12 @@ class PixelateEditor : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int  mode       READ mode       WRITE setMode)
-    Q_PROPERTY(int  brushSize  READ brushSize  WRITE setBrushSize)
-    Q_PROPERTY(int  helperSize READ helperSize WRITE setHelperSize)
-    Q_PROPERTY(int  pixDenom   READ pixDenom   WRITE setPixDenom)
-    Q_PROPERTY(bool changed    READ changed)
+    Q_PROPERTY(int   mode         READ mode         WRITE setMode)
+    Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
+    Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
+    Q_PROPERTY(int   pixDenom     READ pixDenom     WRITE setPixDenom)
+    Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
+    Q_PROPERTY(bool  changed      READ changed)
 
     Q_ENUMS(Mode)
     Q_ENUMS(MouseState)
@@ -36,6 +38,9 @@ public:
 
     int  pixDenom() const;
     void setPixDenom(const int &pix_denom);
+
+    qreal brushOpacity() const;
+    void  setBrushOpacity(const qreal &opacity);
 
     bool changed() const;
 
@@ -60,6 +65,9 @@ public:
 
 public slots:
     void effectedImageReady(const QImage &effected_image);
+
+private slots:
+    void scaleWasChanged();
 
 signals:
     void imageOpened();
@@ -89,7 +97,8 @@ private:
 
     bool           IsChanged;
     int            CurrentMode, BrushSize, HelperSize, PixelDenom;
-    QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage;
+    qreal          BrushOpacity;
+    QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage, BrushTemplateImage, BrushImage;
     QStack<QImage> UndoStack;
 };
 

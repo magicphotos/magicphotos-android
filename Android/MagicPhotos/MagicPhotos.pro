@@ -4,27 +4,29 @@ QT += gui widgets qml quick androidextras
 
 SOURCES += main.cpp \
     appsettings.cpp \
-    decolorizeeditor.cpp \
+    androidgw.cpp \
     helper.cpp \
+    brushpreviewgenerator.cpp \
+    decolorizeeditor.cpp \
     sketcheditor.cpp \
     cartooneditor.cpp \
     blureditor.cpp \
     pixelateeditor.cpp \
     recoloreditor.cpp \
-    retoucheditor.cpp \
-    androidgw.cpp
+    retoucheditor.cpp
 
 HEADERS += \
     appsettings.h \
-    decolorizeeditor.h \
+    androidgw.h \
     helper.h \
+    brushpreviewgenerator.h \
+    decolorizeeditor.h \
     sketcheditor.h \
     cartooneditor.h \
     blureditor.h \
     pixelateeditor.h \
     recoloreditor.h \
-    retoucheditor.h \
-    androidgw.h
+    retoucheditor.h
 
 RESOURCES += \
     qml.qrc \
