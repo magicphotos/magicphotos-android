@@ -532,11 +532,20 @@ namespace MagicPhotos
 
         private void photoChooserTask_Completed(object sender, PhotoResult e)
         {
-            if (e != null && e.TaskResult == TaskResult.OK && e.ChosenPhoto != null)
+            if (e != null && e.ChosenPhoto != null)
             {
-                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(e.ChosenPhoto, MAX_LOADED_WIDTH, MAX_LOADED_HEIGHT);
+                if (e.TaskResult == TaskResult.OK)
+                {
+                    WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(e.ChosenPhoto, MAX_LOADED_WIDTH, MAX_LOADED_HEIGHT);
 
-                LoadImage(bitmap);
+                    LoadImage(bitmap);
+                }
+                else
+                {
+                    this.loadImageCancelled = true;
+                }
+
+                e.ChosenPhoto.Dispose();
             }
             else
             {
