@@ -31,6 +31,9 @@ namespace MagicPhotos
                           MODE_ORIGINAL = 2,
                           MODE_EFFECTED = 3;
 
+        private const int MAX_LOADED_WIDTH  = 2048,
+                          MAX_LOADED_HEIGHT = 2048;
+
         private const int MAX_IMAGE_WIDTH  = 2800,
                           MAX_IMAGE_HEIGHT = 2800;
 
@@ -39,8 +42,7 @@ namespace MagicPhotos
         private const int DEFAULT_BRUSH_RADIUS = 24,
                           UNDO_DEPTH           = 4;
 
-        private const double REDUCTION_MPIX_LIMIT  = 1.0,
-                             DEFAULT_BRUSH_OPACITY = 0.75;
+        private const double DEFAULT_BRUSH_OPACITY = 0.75;
 
         class SketchGenTaskData
         {
@@ -51,7 +53,6 @@ namespace MagicPhotos
 
         private bool                  loadImageOnLayoutUpdate,
                                       pageNavigationComplete,
-                                      needImageReduction,
                                       editedImageChanged;
         private int                   selectedMode,
                                       brushRadius,
@@ -89,24 +90,6 @@ namespace MagicPhotos
             this.effectedBitmap          = null;
             this.helperBitmap            = null;
             this.brushBitmap             = null;
-
-            try
-            {
-                long limit = (long)DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit");
-
-                if (limit <= 90L * 1024L * 1024L)
-                {
-                    this.needImageReduction = true;
-                }
-                else
-                {
-                    this.needImageReduction = false;
-                }
-            }
-            catch (Exception)
-            {
-                this.needImageReduction = false;
-            }
 
             if (!IsolatedStorageSettings.ApplicationSettings.TryGetValue<int>("BrushRadius", out this.brushRadius))
             {
@@ -310,13 +293,6 @@ namespace MagicPhotos
 
         private void LoadImage(WriteableBitmap bitmap)
         {
-            if (this.needImageReduction && bitmap.PixelWidth * bitmap.PixelHeight > REDUCTION_MPIX_LIMIT * 1000000.0)
-            {
-                double factor = Math.Sqrt((bitmap.PixelWidth * bitmap.PixelHeight) / (REDUCTION_MPIX_LIMIT * 1000000.0));
-
-                bitmap = bitmap.Resize((int)(bitmap.PixelWidth / factor), (int)(bitmap.PixelHeight / factor), WriteableBitmapExtensions.Interpolation.NearestNeighbor);
-            }
-
             if (bitmap.PixelWidth != 0 && bitmap.PixelHeight != 0)
             {
                 this.loadedBitmap = bitmap;
@@ -402,7 +378,7 @@ namespace MagicPhotos
                         {
                             using (IsolatedStorageFileStream stream = store.OpenFile(file_name, FileMode.Open, FileAccess.Read))
                             {
-                                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(stream);
+                                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(stream, MAX_LOADED_WIDTH, MAX_LOADED_HEIGHT);
 
                                 LoadImage(bitmap);
                             }

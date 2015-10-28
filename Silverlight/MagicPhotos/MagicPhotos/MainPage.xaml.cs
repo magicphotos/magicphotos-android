@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Phone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Xna.Framework.Media;
@@ -20,8 +21,11 @@ namespace MagicPhotos
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private const int MAX_LOADED_WIDTH  = 2048,
+                          MAX_LOADED_HEIGHT = 2048;
+
         private string startupImageToken;
-        
+
         public MainPage()
         {
             InitializeComponent();
@@ -54,25 +58,6 @@ namespace MagicPhotos
 
         private void createTemporaryImage(string token)
         {
-            WriteableBitmap bitmap = new WriteableBitmap(0, 0);
-
-            if (token != null && token != "")
-            {
-                using (MediaLibrary library = new MediaLibrary())
-                {
-                    Picture picture = library.GetPictureFromToken(token);
-
-                    if (picture != null)
-                    {
-                        bitmap.SetSource(picture.GetImage());
-                    }
-                }
-            }
-            else
-            {
-                throw new Exception("Internal error");
-            }
-
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 string file_name = "image.jpg";
@@ -82,9 +67,23 @@ namespace MagicPhotos
                     store.DeleteFile(file_name);
                 }
 
-                using (IsolatedStorageFileStream stream = store.CreateFile(file_name))
+                using (MediaLibrary library = new MediaLibrary())
                 {
-                    bitmap.SaveJpeg(stream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
+                    using (Picture picture = library.GetPictureFromToken(token))
+                    {
+                        if (picture != null)
+                        {
+                            using (Stream picture_stream = picture.GetImage())
+                            {
+                                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(picture_stream, MAX_LOADED_WIDTH, MAX_LOADED_HEIGHT);
+
+                                using (IsolatedStorageFileStream stream = store.CreateFile(file_name))
+                                {
+                                    bitmap.SaveJpeg(stream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

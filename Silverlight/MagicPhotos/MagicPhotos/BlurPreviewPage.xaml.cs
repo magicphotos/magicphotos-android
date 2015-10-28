@@ -25,8 +25,10 @@ namespace MagicPhotos
 {
     public partial class BlurPreviewPage : PhoneApplicationPage
     {
-        private const double REDUCTION_MPIX_LIMIT = 1.0,
-                             PREVIEW_MPIX_LIMIT   = 0.5;
+        private const int MAX_LOADED_WIDTH  = 2048,
+                          MAX_LOADED_HEIGHT = 2048;
+
+        private const double PREVIEW_MPIX_LIMIT = 0.5;
 
         class BlurGenTaskData
         {
@@ -38,7 +40,6 @@ namespace MagicPhotos
         private bool             loadImageOnLayoutUpdate,
                                  loadImageCancelled,
                                  pageNavigationComplete,
-                                 needImageReduction,
                                  restartBlurGenerator;
         private int              gaussianRadius;
         private WriteableBitmap  loadedBitmap,
@@ -59,24 +60,6 @@ namespace MagicPhotos
             this.loadedBitmap            = null;
             this.scaledBitmap            = null;
             this.previewBitmap           = null;
-
-            try
-            {
-                long limit = (long)DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit");
-
-                if (limit <= 90L * 1024L * 1024L)
-                {
-                    this.needImageReduction = true;
-                }
-                else
-                {
-                    this.needImageReduction = false;
-                }
-            }
-            catch (Exception)
-            {
-                this.needImageReduction = false;
-            }
 
             this.blurGeneratorWorker                     = new BackgroundWorker();
             this.blurGeneratorWorker.DoWork             += new DoWorkEventHandler(blurGeneratorWorker_DoWork);
@@ -138,13 +121,6 @@ namespace MagicPhotos
 
         private void LoadImage(WriteableBitmap bitmap)
         {
-            if (this.needImageReduction && bitmap.PixelWidth * bitmap.PixelHeight > REDUCTION_MPIX_LIMIT * 1000000.0)
-            {
-                double factor = Math.Sqrt((bitmap.PixelWidth * bitmap.PixelHeight) / (REDUCTION_MPIX_LIMIT * 1000000.0));
-
-                bitmap = bitmap.Resize((int)(bitmap.PixelWidth / factor), (int)(bitmap.PixelHeight / factor), WriteableBitmapExtensions.Interpolation.NearestNeighbor);
-            }
-
             if (bitmap.PixelWidth != 0 && bitmap.PixelHeight != 0)
             {
                 this.loadedBitmap = bitmap;
@@ -179,7 +155,7 @@ namespace MagicPhotos
                         {
                             using (IsolatedStorageFileStream stream = store.OpenFile(file_name, FileMode.Open, FileAccess.Read))
                             {
-                                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(stream);
+                                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(stream, MAX_LOADED_WIDTH, MAX_LOADED_HEIGHT);
 
                                 LoadImage(bitmap);
                             }
@@ -407,9 +383,7 @@ namespace MagicPhotos
         {
             if (e != null && e.TaskResult == TaskResult.OK && e.ChosenPhoto != null)
             {
-                WriteableBitmap bitmap = new WriteableBitmap(0, 0);
-
-                bitmap.SetSource(e.ChosenPhoto);
+                WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(e.ChosenPhoto, MAX_LOADED_WIDTH, MAX_LOADED_HEIGHT);
 
                 LoadImage(bitmap);
             }
