@@ -94,12 +94,12 @@ public class MagicActivity extends QtActivity
                                 isFullVersion = true;
                             } else {
                                 isFullVersion = is_full_version;
+
+                                SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+
+                                editor.putBoolean("FullVersion", isFullVersion);
+                                editor.commit();
                             }
-
-                            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-
-                            editor.putBoolean("FullVersion", isFullVersion);
-                            editor.commit();
                         }
                     } catch (Exception ex) {
                         // Ignored
