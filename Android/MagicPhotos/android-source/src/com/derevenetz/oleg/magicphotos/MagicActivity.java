@@ -39,7 +39,7 @@ public class MagicActivity extends QtActivity
     private static final boolean DEBUG_GOOGLE_IAP_AUTO_CONSUME        = false,
                                  DEBUG_GOOGLE_IAP_ALWAYS_TRIAL        = false,
                                  DEBUG_GOOGLE_IAP_ALWAYS_FULL         = false,
-                                 PROMO_FULL_VERSION                   = true;
+                                 PROMO_FULL_VERSION                   = false;
 
     private static final int     GOOGLE_IAP_RESULT_OK                 = 0,
                                  GOOGLE_IAP_RESULT_ITEM_ALREADY_OWNED = 7,
@@ -49,7 +49,8 @@ public class MagicActivity extends QtActivity
     private static final String  GOOGLE_IAP_FULL_VERSION_PRODUCT_ID   = "magicphotos.version.full",
                                  GOOGLE_IAP_DEVELOPER_PAYLOAD         = "PXV0HzqSbr1ZT";
 
-    private static boolean       isFullVersion                        = false;
+    private static boolean       isFullVersion                        = false,
+                                 isPromoFullVersion                   = false;
     private static MagicActivity instance                             = null;
 
     private IInAppBillingService androidIAPService                    = null;
@@ -88,9 +89,7 @@ public class MagicActivity extends QtActivity
                                 isFullVersion = false;
                             } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
                                 isFullVersion = true;
-                            } else if (PROMO_FULL_VERSION) {
-                                isFullVersion = true;
-                            } else if (getPreferences(MODE_PRIVATE).getBoolean("PromoFullVersion", false)) {
+                            } else if (isPromoFullVersion) {
                                 isFullVersion = true;
                             } else {
                                 isFullVersion = is_full_version;
@@ -129,19 +128,32 @@ public class MagicActivity extends QtActivity
     {
         super.onCreate(savedInstanceState);
 
+        int prev_version_code = getPreferences(MODE_PRIVATE).getInt("VersionCode", 0);
+
+        try {
+            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+
+            editor.putInt("VersionCode", getPackageManager().getPackageInfo(getPackageName(), 0).versionCode);
+            editor.commit();
+        } catch (Exception ex) {
+            // Ignored
+        }
+
         if (DEBUG_GOOGLE_IAP_ALWAYS_TRIAL) {
             isFullVersion = false;
         } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
             isFullVersion = true;
-        } else if (PROMO_FULL_VERSION) {
-            isFullVersion = true;
+        } else if (PROMO_FULL_VERSION && prev_version_code == 0) {
+            isFullVersion      = true;
+            isPromoFullVersion = true;
 
             SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 
             editor.putBoolean("PromoFullVersion", true);
             editor.commit();
         } else if (getPreferences(MODE_PRIVATE).getBoolean("PromoFullVersion", false)) {
-            isFullVersion = true;
+            isFullVersion      = true;
+            isPromoFullVersion = true;
         } else {
             isFullVersion = getPreferences(MODE_PRIVATE).getBoolean("FullVersion", false);
         }
