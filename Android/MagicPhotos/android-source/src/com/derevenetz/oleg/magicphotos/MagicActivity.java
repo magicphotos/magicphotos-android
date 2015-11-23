@@ -38,7 +38,8 @@ public class MagicActivity extends QtActivity
 {
     private static final boolean DEBUG_GOOGLE_IAP_AUTO_CONSUME        = false,
                                  DEBUG_GOOGLE_IAP_ALWAYS_TRIAL        = false,
-                                 DEBUG_GOOGLE_IAP_ALWAYS_FULL         = false;
+                                 DEBUG_GOOGLE_IAP_ALWAYS_FULL         = false,
+                                 PROMO_FULL_VERSION                   = true;
 
     private static final int     GOOGLE_IAP_RESULT_OK                 = 0,
                                  GOOGLE_IAP_RESULT_ITEM_ALREADY_OWNED = 7,
@@ -87,6 +88,10 @@ public class MagicActivity extends QtActivity
                                 isFullVersion = false;
                             } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
                                 isFullVersion = true;
+                            } else if (PROMO_FULL_VERSION) {
+                                isFullVersion = true;
+                            } else if (getPreferences(MODE_PRIVATE).getBoolean("PromoFullVersion", false)) {
+                                isFullVersion = true;
                             } else {
                                 isFullVersion = is_full_version;
                             }
@@ -127,6 +132,15 @@ public class MagicActivity extends QtActivity
         if (DEBUG_GOOGLE_IAP_ALWAYS_TRIAL) {
             isFullVersion = false;
         } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
+            isFullVersion = true;
+        } else if (PROMO_FULL_VERSION) {
+            isFullVersion = true;
+
+            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+
+            editor.putBoolean("PromoFullVersion", true);
+            editor.commit();
+        } else if (getPreferences(MODE_PRIVATE).getBoolean("PromoFullVersion", false)) {
             isFullVersion = true;
         } else {
             isFullVersion = getPreferences(MODE_PRIVATE).getBoolean("FullVersion", false);
