@@ -236,57 +236,67 @@
 <context>
     <name>ModeSelectionPage</name>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="87"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="108"/>
         <source>DECOLORIZE</source>
         <translation>ОБЕСЦВЕТИТЬ</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="89"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="110"/>
         <source>SKETCH</source>
         <translation>В ЭСКИЗ</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="91"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="112"/>
         <source>CARTOON</source>
         <translation>В КОМИКС</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="93"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="114"/>
         <source>BLUR</source>
         <translation>РАЗМЫТЬ</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="95"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="116"/>
         <source>PIXELATE</source>
         <translation>ПИКСЕЛИЗИРОВАТЬ</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="97"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="118"/>
         <source>RECOLOR</source>
         <translation>ПЕРЕКРАСИТЬ</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="99"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="120"/>
         <source>RETOUCH</source>
         <translation>РЕТУШИРОВАТЬ</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="220"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="241"/>
         <source>Open Image</source>
         <translation>Открыть Фото</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="264"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="285"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="323"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="325"/>
+        <source>Content unlocked!</source>
+        <translation>Контент разблокирован!</translation>
+    </message>
+    <message>
+        <location filename="../qml/ModeSelectionPage.qml" line="334"/>
+        <source>Thank you!</source>
+        <translation>Спасибо!</translation>
+    </message>
+    <message>
+        <location filename="../qml/ModeSelectionPage.qml" line="407"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="325"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="409"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>

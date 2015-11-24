@@ -12,6 +12,7 @@ class AppSettings : public QObject
     Q_PROPERTY(int   defaultBrushSize         READ defaultBrushSize         WRITE setDefaultBrushSize)
     Q_PROPERTY(int   brushSize                READ brushSize                WRITE setBrushSize)
     Q_PROPERTY(bool  showModeChangeSuggestion READ showModeChangeSuggestion WRITE setShowModeChangeSuggestion)
+    Q_PROPERTY(bool  showPromoPopup           READ showPromoPopup           WRITE setShowPromoPopup)
     Q_PROPERTY(qreal brushOpacity             READ brushOpacity             WRITE setBrushOpacity)
 
 public:
@@ -26,6 +27,9 @@ public:
 
     bool showModeChangeSuggestion() const;
     void setShowModeChangeSuggestion(const bool &show);
+
+    bool showPromoPopup() const;
+    void setShowPromoPopup(const bool &show);
 
     qreal brushOpacity() const;
     void  setBrushOpacity(const qreal &opacity);

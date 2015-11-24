@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Dialogs 1.1
+import QtQuick.Layouts 1.1
 
 import "Util.js" as UtilScript
 
@@ -13,6 +14,26 @@ Item {
             modeChangeSuggestionAnimationTimer.start();
 
             AppSettings.showModeChangeSuggestion = false;
+        }
+    }
+
+    function showPromoPopup() {
+        if (AndroidGW.getPromoFullVersion()) {
+            if (AppSettings.showPromoPopup) {
+                promoPopupRectangle.visible = true;
+
+                AppSettings.showPromoPopup = false;
+            }
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            if (promoPopupRectangle.visible) {
+                promoPopupRectangle.visible = false;
+
+                event.accepted = true;
+            }
         }
     }
 
@@ -262,6 +283,69 @@ Item {
 
             onClicked: {
                 Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
+            }
+        }
+    }
+
+    Rectangle {
+        id:           promoPopupRectangle
+        anchors.fill: parent
+        z:            5
+        color:        "transparent"
+        visible:      false
+
+        MouseArea {
+            anchors.fill: parent
+
+            Rectangle {
+                anchors.centerIn: parent
+                width:            promoPopupLayout.width  + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+                height:           promoPopupLayout.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+                color:            "white"
+
+                ColumnLayout {
+                    id:               promoPopupLayout
+                    anchors.centerIn: parent
+                    spacing:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+
+                    Image {
+                        id:                       promoImage
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        source:                   "images/promo_myappfree.png"
+                        fillMode:                 Image.PreserveAspectFit
+                        Layout.maximumWidth:      promoPopupRectangle.width  - UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16) * 2
+                        Layout.maximumHeight:     promoPopupRectangle.height - UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16) * 4 -
+                                                                               promoPopupText.height - promoPopupButton.height
+                    }
+
+                    Text {
+                        id:                       promoPopupText
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        color:                    "black"
+                        text:                     qsTr("Content unlocked!")
+                        horizontalAlignment:      Text.AlignHCenter
+                        wrapMode:                 Text.Wrap
+                        Layout.maximumWidth:      promoPopupRectangle.width - UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16) * 2
+                    }
+
+                    Button {
+                        id:                       promoPopupButton
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text:                     qsTr("Thank you!")
+
+                        style: ButtonStyle {
+                            background: Rectangle {
+                                implicitWidth:  control.width
+                                implicitHeight: control.height
+                                color:          "#00BCF2"
+                            }
+                        }
+
+                        onClicked: {
+                            promoPopupRectangle.visible = false;
+                        }
+                    }
+                }
             }
         }
     }

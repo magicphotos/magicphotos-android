@@ -223,6 +223,14 @@
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
+        <source>Content unlocked!</source>
+        <translation>Funktionalität freigeschaltet!</translation>
+    </message>
+    <message>
+        <source>Thank you!</source>
+        <translation>Danke!</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>

@@ -17,6 +17,7 @@
         <file alias="mode_original.png">images/mode_original.png</file>
         <file alias="mode_scroll.png">images/mode_scroll.png</file>
         <file alias="mode_hue_selection.png">images/mode_hue_selection.png</file>
+        <file alias="promo_myappfree.png">images/promo_myappfree.png</file>
         <file alias="sampling_point.png">images/sampling_point.png</file>
         <file alias="mode_blur.png">images/mode_blur.png</file>
         <file alias="mode_clone.png">images/mode_clone.png</file>

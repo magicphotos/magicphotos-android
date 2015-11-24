@@ -38,6 +38,12 @@ bool AndroidGW::buyFullVersion()
                                                          "buyFullVersion");
 }
 
+bool AndroidGW::getPromoFullVersion()
+{
+    return QAndroidJniObject::callStaticMethod<jboolean>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                                         "getPromoFullVersion");
+}
+
 void AndroidGW::showGallery()
 {
     QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",

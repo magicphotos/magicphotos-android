@@ -230,6 +230,11 @@ public class MagicActivity extends QtActivity
         }
     }
 
+    public static boolean getPromoFullVersion()
+    {
+        return isPromoFullVersion;
+    }
+
     public static void showGallery()
     {
         try {

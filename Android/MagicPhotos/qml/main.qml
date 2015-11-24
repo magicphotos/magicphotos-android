@@ -36,6 +36,7 @@ ApplicationWindow {
 
                 if (depth === 1) {
                     modeSelectionPage.playModeChangeSuggestionAnimation();
+                    modeSelectionPage.showPromoPopup();
                 }
             }
         }

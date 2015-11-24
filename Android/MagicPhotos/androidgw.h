@@ -18,6 +18,7 @@ public:
     Q_INVOKABLE int     getScreenDPI();
     Q_INVOKABLE bool    getFullVersion();
     Q_INVOKABLE bool    buyFullVersion();
+    Q_INVOKABLE bool    getPromoFullVersion();
     Q_INVOKABLE void    showGallery();
     Q_INVOKABLE void    refreshGallery(const QString &image_file);
     Q_INVOKABLE void    shareImage(const QString &image_file);

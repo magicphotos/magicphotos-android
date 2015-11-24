@@ -49,6 +49,20 @@ void AppSettings::setShowModeChangeSuggestion(const bool &show)
     Settings->setValue("ShowModeChangeSuggestion", show);
 }
 
+bool AppSettings::showPromoPopup() const
+{
+    if (Settings->contains("ShowPromoPopup")) {
+        return Settings->value("ShowPromoPopup").toBool();
+    } else {
+        return true;
+    }
+}
+
+void AppSettings::setShowPromoPopup(const bool &show)
+{
+    Settings->setValue("ShowPromoPopup", show);
+}
+
 qreal AppSettings::brushOpacity() const
 {
     if (Settings->contains("BrushOpacity")) {
