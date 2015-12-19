@@ -14,55 +14,55 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="672"/>
+        <location filename="../qml/BlurPage.qml" line="676"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="680"/>
-        <location filename="../qml/BlurPage.qml" line="696"/>
-        <location filename="../qml/BlurPage.qml" line="730"/>
+        <location filename="../qml/BlurPage.qml" line="684"/>
+        <location filename="../qml/BlurPage.qml" line="700"/>
+        <location filename="../qml/BlurPage.qml" line="734"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="682"/>
+        <location filename="../qml/BlurPage.qml" line="686"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="688"/>
+        <location filename="../qml/BlurPage.qml" line="692"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="690"/>
+        <location filename="../qml/BlurPage.qml" line="694"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="698"/>
+        <location filename="../qml/BlurPage.qml" line="702"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="704"/>
-        <location filename="../qml/BlurPage.qml" line="716"/>
+        <location filename="../qml/BlurPage.qml" line="708"/>
+        <location filename="../qml/BlurPage.qml" line="720"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="706"/>
+        <location filename="../qml/BlurPage.qml" line="710"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="718"/>
+        <location filename="../qml/BlurPage.qml" line="722"/>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Cette fonction n&apos;est disponible que dans la version complete. Voulez-vous acheter la version complete?</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPage.qml" line="732"/>
+        <location filename="../qml/BlurPage.qml" line="736"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
@@ -75,17 +75,17 @@
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPreviewPage.qml" line="210"/>
+        <location filename="../qml/BlurPreviewPage.qml" line="214"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPreviewPage.qml" line="218"/>
+        <location filename="../qml/BlurPreviewPage.qml" line="222"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/BlurPreviewPage.qml" line="220"/>
+        <location filename="../qml/BlurPreviewPage.qml" line="224"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
@@ -103,55 +103,55 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="685"/>
+        <location filename="../qml/CartoonPage.qml" line="689"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="693"/>
-        <location filename="../qml/CartoonPage.qml" line="709"/>
-        <location filename="../qml/CartoonPage.qml" line="743"/>
+        <location filename="../qml/CartoonPage.qml" line="697"/>
+        <location filename="../qml/CartoonPage.qml" line="713"/>
+        <location filename="../qml/CartoonPage.qml" line="747"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="695"/>
+        <location filename="../qml/CartoonPage.qml" line="699"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="701"/>
+        <location filename="../qml/CartoonPage.qml" line="705"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="703"/>
+        <location filename="../qml/CartoonPage.qml" line="707"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="711"/>
+        <location filename="../qml/CartoonPage.qml" line="715"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="717"/>
-        <location filename="../qml/CartoonPage.qml" line="729"/>
+        <location filename="../qml/CartoonPage.qml" line="721"/>
+        <location filename="../qml/CartoonPage.qml" line="733"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="719"/>
+        <location filename="../qml/CartoonPage.qml" line="723"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="731"/>
+        <location filename="../qml/CartoonPage.qml" line="735"/>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Cette fonction n&apos;est disponible que dans la version complete. Voulez-vous acheter la version complete?</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPage.qml" line="745"/>
+        <location filename="../qml/CartoonPage.qml" line="749"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
@@ -164,17 +164,17 @@
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPreviewPage.qml" line="241"/>
+        <location filename="../qml/CartoonPreviewPage.qml" line="245"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPreviewPage.qml" line="249"/>
+        <location filename="../qml/CartoonPreviewPage.qml" line="253"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/CartoonPreviewPage.qml" line="251"/>
+        <location filename="../qml/CartoonPreviewPage.qml" line="255"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
@@ -192,43 +192,43 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="651"/>
+        <location filename="../qml/DecolorizePage.qml" line="655"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="659"/>
-        <location filename="../qml/DecolorizePage.qml" line="675"/>
+        <location filename="../qml/DecolorizePage.qml" line="663"/>
+        <location filename="../qml/DecolorizePage.qml" line="679"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="661"/>
+        <location filename="../qml/DecolorizePage.qml" line="665"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="667"/>
+        <location filename="../qml/DecolorizePage.qml" line="671"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="669"/>
+        <location filename="../qml/DecolorizePage.qml" line="673"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="677"/>
+        <location filename="../qml/DecolorizePage.qml" line="681"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="683"/>
+        <location filename="../qml/DecolorizePage.qml" line="687"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/DecolorizePage.qml" line="685"/>
+        <location filename="../qml/DecolorizePage.qml" line="689"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
@@ -276,27 +276,27 @@
         <translation>Ouvrir la Photo</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="319"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="323"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="359"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="363"/>
         <source>Content unlocked!</source>
         <translation>Fonctionnalité débloqué!</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="368"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="372"/>
         <source>Thank you!</source>
         <translation>Merci!</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="446"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="450"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/ModeSelectionPage.qml" line="448"/>
+        <location filename="../qml/ModeSelectionPage.qml" line="452"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
@@ -314,55 +314,55 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="672"/>
+        <location filename="../qml/PixelatePage.qml" line="676"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="680"/>
-        <location filename="../qml/PixelatePage.qml" line="696"/>
-        <location filename="../qml/PixelatePage.qml" line="730"/>
+        <location filename="../qml/PixelatePage.qml" line="684"/>
+        <location filename="../qml/PixelatePage.qml" line="700"/>
+        <location filename="../qml/PixelatePage.qml" line="734"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="682"/>
+        <location filename="../qml/PixelatePage.qml" line="686"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="688"/>
+        <location filename="../qml/PixelatePage.qml" line="692"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="690"/>
+        <location filename="../qml/PixelatePage.qml" line="694"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="698"/>
+        <location filename="../qml/PixelatePage.qml" line="702"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="704"/>
-        <location filename="../qml/PixelatePage.qml" line="716"/>
+        <location filename="../qml/PixelatePage.qml" line="708"/>
+        <location filename="../qml/PixelatePage.qml" line="720"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="706"/>
+        <location filename="../qml/PixelatePage.qml" line="710"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="718"/>
+        <location filename="../qml/PixelatePage.qml" line="722"/>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Cette fonction n&apos;est disponible que dans la version complete. Voulez-vous acheter la version complete?</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePage.qml" line="732"/>
+        <location filename="../qml/PixelatePage.qml" line="736"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
@@ -375,17 +375,17 @@
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePreviewPage.qml" line="210"/>
+        <location filename="../qml/PixelatePreviewPage.qml" line="214"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePreviewPage.qml" line="218"/>
+        <location filename="../qml/PixelatePreviewPage.qml" line="222"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/PixelatePreviewPage.qml" line="220"/>
+        <location filename="../qml/PixelatePreviewPage.qml" line="224"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
@@ -403,55 +403,55 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="753"/>
+        <location filename="../qml/RecolorPage.qml" line="757"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="761"/>
-        <location filename="../qml/RecolorPage.qml" line="777"/>
-        <location filename="../qml/RecolorPage.qml" line="811"/>
+        <location filename="../qml/RecolorPage.qml" line="765"/>
+        <location filename="../qml/RecolorPage.qml" line="781"/>
+        <location filename="../qml/RecolorPage.qml" line="815"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="763"/>
+        <location filename="../qml/RecolorPage.qml" line="767"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="769"/>
+        <location filename="../qml/RecolorPage.qml" line="773"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="771"/>
+        <location filename="../qml/RecolorPage.qml" line="775"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="779"/>
+        <location filename="../qml/RecolorPage.qml" line="783"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="785"/>
-        <location filename="../qml/RecolorPage.qml" line="797"/>
+        <location filename="../qml/RecolorPage.qml" line="789"/>
+        <location filename="../qml/RecolorPage.qml" line="801"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="787"/>
+        <location filename="../qml/RecolorPage.qml" line="791"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="799"/>
+        <location filename="../qml/RecolorPage.qml" line="803"/>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Cette fonction n&apos;est disponible que dans la version complete. Voulez-vous acheter la version complete?</translation>
     </message>
     <message>
-        <location filename="../qml/RecolorPage.qml" line="813"/>
+        <location filename="../qml/RecolorPage.qml" line="817"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
@@ -469,55 +469,55 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="749"/>
+        <location filename="../qml/RetouchPage.qml" line="753"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="757"/>
-        <location filename="../qml/RetouchPage.qml" line="773"/>
-        <location filename="../qml/RetouchPage.qml" line="807"/>
+        <location filename="../qml/RetouchPage.qml" line="761"/>
+        <location filename="../qml/RetouchPage.qml" line="777"/>
+        <location filename="../qml/RetouchPage.qml" line="811"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="759"/>
+        <location filename="../qml/RetouchPage.qml" line="763"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="765"/>
+        <location filename="../qml/RetouchPage.qml" line="769"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="767"/>
+        <location filename="../qml/RetouchPage.qml" line="771"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="775"/>
+        <location filename="../qml/RetouchPage.qml" line="779"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="781"/>
-        <location filename="../qml/RetouchPage.qml" line="793"/>
+        <location filename="../qml/RetouchPage.qml" line="785"/>
+        <location filename="../qml/RetouchPage.qml" line="797"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="783"/>
+        <location filename="../qml/RetouchPage.qml" line="787"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="795"/>
+        <location filename="../qml/RetouchPage.qml" line="799"/>
         <source>This function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Cette fonction n&apos;est disponible que dans la version complete. Voulez-vous acheter la version complete?</translation>
     </message>
     <message>
-        <location filename="../qml/RetouchPage.qml" line="809"/>
+        <location filename="../qml/RetouchPage.qml" line="813"/>
         <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation>Faute à l&apos;achat, les achats dans l&apos;application ne peuvent pas être soutenus à ce dispositif</translation>
     </message>
@@ -535,43 +535,43 @@
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="664"/>
+        <location filename="../qml/SketchPage.qml" line="668"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="672"/>
-        <location filename="../qml/SketchPage.qml" line="688"/>
+        <location filename="../qml/SketchPage.qml" line="676"/>
+        <location filename="../qml/SketchPage.qml" line="692"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="674"/>
+        <location filename="../qml/SketchPage.qml" line="678"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="680"/>
+        <location filename="../qml/SketchPage.qml" line="684"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="682"/>
+        <location filename="../qml/SketchPage.qml" line="686"/>
         <source>Image saved successfully</source>
         <translation>Image enregistrée avec succès</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="690"/>
+        <location filename="../qml/SketchPage.qml" line="694"/>
         <source>Could not save image</source>
         <translation>Impossible d&apos;enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="696"/>
+        <location filename="../qml/SketchPage.qml" line="700"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPage.qml" line="698"/>
+        <location filename="../qml/SketchPage.qml" line="702"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Etes-vous sur? Toutes les modifications non enregistrees seront perdues.</translation>
     </message>
@@ -584,17 +584,17 @@
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPreviewPage.qml" line="210"/>
+        <location filename="../qml/SketchPreviewPage.qml" line="214"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPreviewPage.qml" line="218"/>
+        <location filename="../qml/SketchPreviewPage.qml" line="222"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qml/SketchPreviewPage.qml" line="220"/>
+        <location filename="../qml/SketchPreviewPage.qml" line="224"/>
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
