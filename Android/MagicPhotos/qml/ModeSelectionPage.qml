@@ -225,6 +225,20 @@ Item {
                     fillMode:       Image.PreserveAspectFit
                     smooth:         true
                     source:         image
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: {
+                            waitRectangle.visible = true;
+
+                            AndroidGW.imageSelected.connect(modeSelectionItemDelegate.fileSelected);
+                            AndroidGW.imageSelectionCancelled.connect(modeSelectionItemDelegate.fileSelectionCancelled);
+                            AndroidGW.imageSelectionFailed.connect(modeSelectionItemDelegate.fileSelectionFailed);
+
+                            AndroidGW.showGallery();
+                        }
+                    }
                 }
 
                 Rectangle {
@@ -239,6 +253,20 @@ Item {
                         id:               modeButton
                         anchors.centerIn: parent
                         text:             qsTr("Open Image")
+
+                        style: ButtonStyle {
+                            background: Rectangle {
+                                implicitWidth:  control.width
+                                implicitHeight: control.height
+                                color:          "lightgray"
+                                radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+                            }
+
+                            label: Text {
+                                color: "black"
+                                text:  control.text
+                            }
+                        }
 
                         onClicked: {
                             waitRectangle.visible = true;
@@ -260,6 +288,12 @@ Item {
         anchors.bottom: parent.bottom
         height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
         z:              1
+
+        style: ToolBarStyle {
+            background: Rectangle {
+                color: "lightgray"
+            }
+        }
 
         ToolButton {
             anchors.centerIn: parent
@@ -338,6 +372,11 @@ Item {
                                 implicitWidth:  control.width
                                 implicitHeight: control.height
                                 color:          "#00BCF2"
+                            }
+
+                            label: Text {
+                                color: "black"
+                                text:  control.text
                             }
                         }
 

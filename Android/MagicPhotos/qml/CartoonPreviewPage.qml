@@ -176,6 +176,20 @@ Item {
             enabled:          false
             text:             qsTr("Apply")
 
+            style: ButtonStyle {
+                background: Rectangle {
+                    implicitWidth:  control.width
+                    implicitHeight: control.height
+                    color:          "lightgray"
+                    radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+                }
+
+                label: Text {
+                    color: "black"
+                    text:  control.text
+                }
+            }
+
             onClicked: {
                 var component = Qt.createComponent("CartoonPage.qml");
 
@@ -193,6 +207,12 @@ Item {
         anchors.bottom: parent.bottom
         height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
         z:              1
+
+        style: ToolBarStyle {
+            background: Rectangle {
+                color: "lightgray"
+            }
+        }
 
         RowLayout {
             anchors.fill: parent

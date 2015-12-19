@@ -509,6 +509,12 @@ Item {
         height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
         z:              1
 
+        style: ToolBarStyle {
+            background: Rectangle {
+                color: "lightgray"
+            }
+        }
+
         RowLayout {
             anchors.fill: parent
 
