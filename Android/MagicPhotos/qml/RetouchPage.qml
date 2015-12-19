@@ -576,6 +576,10 @@ Item {
         style: ToolBarStyle {
             background: Rectangle {
                 color: "lightgray"
+
+                MouseArea {
+                    anchors.fill: parent
+                }
             }
         }
 
