@@ -4,23 +4,27 @@
 #include <QtCore/qmath.h>
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QPair>
+#include <QtCore/QList>
 #include <QtCore/QStack>
+#include <QtCore/QMap>
 #include <QtGui/QImage>
 
-#include <bb/ImageData>
-#include <bb/cascades/Image>
+#include <bb/cascades/ImageView>
 #include <bb/cascades/CustomControl>
 
 class DecolorizeEditor : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int   mode         READ mode         WRITE setMode)
-    Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
-    Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
-    Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
-    Q_PROPERTY(qreal scale        READ scale        WRITE setScale)
-    Q_PROPERTY(bool  changed      READ changed)
+    Q_PROPERTY(int                      mode            READ mode            WRITE setMode)
+    Q_PROPERTY(int                      brushSize       READ brushSize       WRITE setBrushSize)
+    Q_PROPERTY(int                      helperSize      READ helperSize      WRITE setHelperSize)
+    Q_PROPERTY(qreal                    brushOpacity    READ brushOpacity    WRITE setBrushOpacity)
+    Q_PROPERTY(qreal                    scale           READ scale           WRITE setScale)
+    Q_PROPERTY(qreal                    resolutionLimit READ resolutionLimit WRITE setResolutionLimit)
+    Q_PROPERTY(bb::cascades::ImageView* helper          READ helper          WRITE setHelper)
+    Q_PROPERTY(bool                     changed         READ changed)
 
     Q_ENUMS(Mode)
 
@@ -43,6 +47,12 @@ public:
     qreal scale() const;
     void  setScale(const qreal &scale);
 
+    qreal resolutionLimit() const;
+    void  setResolutionLimit(const qreal &limit);
+
+    bb::cascades::ImageView *helper() const;
+    void                     setHelper(bb::cascades::ImageView *helper);
+
     bool changed() const;
 
     Q_INVOKABLE void openImage(const QString &image_file);
@@ -51,6 +61,10 @@ public:
     Q_INVOKABLE void changeImageAt(bool save_undo, int center_x, int center_y);
 
     Q_INVOKABLE void undo();
+
+    Q_INVOKABLE void            addImageFragment(int x, int y, bb::cascades::ImageView *fragment);
+    Q_INVOKABLE void            delImageFragment(int x, int y);
+    Q_INVOKABLE QList<QObject*> getImageFragments();
 
     enum Mode {
         ModeScroll,
@@ -70,8 +84,7 @@ signals:
 
     void undoAvailabilityChanged(bool available);
 
-    void needImageRepaint(const bb::cascades::Image &image);
-    void needHelperRepaint(const bb::cascades::Image &image);
+    void prepareImageFragments(int fragmentSize, int imageWidth, int imageHeight);
 
 private:
     void SaveUndoImage();
@@ -79,16 +92,16 @@ private:
     void RepaintImage(bool full, QRect rect = QRect());
     void RepaintHelper(int center_x, int center_y);
 
-    static const int UNDO_DEPTH = 4;
+    static const int UNDO_DEPTH    = 4,
+                     FRAGMENT_SIZE = 64;
 
-    static const qreal IMAGE_MPIX_LIMIT = 1.0;
-
-    bool           IsChanged;
-    int            CurrentMode, BrushSize, HelperSize;
-    qreal          BrushOpacity, Scale;
-    QImage         LoadedImage, OriginalImage, EffectedImage, CurrentImage, BrushTemplateImage, BrushImage;
-    QStack<QImage> UndoStack;
-    bb::ImageData  CurrentImageData;
+    bool                                            IsChanged;
+    int                                             CurrentMode, BrushSize, HelperSize;
+    qreal                                           BrushOpacity, Scale, ResolutionLimit;
+    QImage                                          LoadedImage, OriginalImage, EffectedImage, CurrentImage, BrushTemplateImage, BrushImage;
+    QStack<QImage>                                  UndoStack;
+    bb::cascades::ImageView                        *Helper;
+    QMap<QPair<int, int>, bb::cascades::ImageView*> ImageFragmentsMap;
 };
 
 class GrayscaleImageGenerator : public QObject

@@ -255,94 +255,98 @@
 <context>
     <name>DecolorizePage</name>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="135"/>
+        <location filename="../assets/DecolorizePage.qml" line="136"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="56"/>
+        <location filename="../assets/DecolorizePage.qml" line="57"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="40"/>
+        <location filename="../assets/DecolorizePage.qml" line="41"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="41"/>
+        <location filename="../assets/DecolorizePage.qml" line="42"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="75"/>
+        <location filename="../assets/DecolorizePage.qml" line="76"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="83"/>
-        <location filename="../assets/DecolorizePage.qml" line="94"/>
+        <location filename="../assets/DecolorizePage.qml" line="84"/>
+        <location filename="../assets/DecolorizePage.qml" line="95"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="84"/>
+        <location filename="../assets/DecolorizePage.qml" line="85"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="95"/>
+        <location filename="../assets/DecolorizePage.qml" line="96"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="96"/>
+        <location filename="../assets/DecolorizePage.qml" line="97"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="97"/>
+        <location filename="../assets/DecolorizePage.qml" line="98"/>
         <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="98"/>
+        <location filename="../assets/DecolorizePage.qml" line="99"/>
         <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="157"/>
+        <location filename="../assets/DecolorizePage.qml" line="158"/>
         <source>Editor modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="231"/>
-        <location filename="../assets/DecolorizePage.qml" line="243"/>
+        <location filename="../assets/DecolorizePage.qml" line="232"/>
         <source>Image editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="324"/>
+        <location filename="../assets/DecolorizePage.qml" line="362"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/DecolorizePage.qml" line="381"/>
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="328"/>
+        <location filename="../assets/DecolorizePage.qml" line="385"/>
         <source>Image saved successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="332"/>
+        <location filename="../assets/DecolorizePage.qml" line="389"/>
         <source>Could not save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="349"/>
+        <location filename="../assets/DecolorizePage.qml" line="406"/>
         <source>Helper image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/DecolorizePage.qml" line="365"/>
+        <location filename="../assets/DecolorizePage.qml" line="422"/>
         <source>Activity indicator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -830,109 +834,135 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="39"/>
-        <location filename="../assets/main.qml" line="73"/>
+        <location filename="../assets/main.qml" line="51"/>
+        <location filename="../assets/main.qml" line="98"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="42"/>
+        <location filename="../assets/main.qml" line="54"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="61"/>
+        <location filename="../assets/main.qml" line="86"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="86"/>
-        <location filename="../assets/main.qml" line="164"/>
+        <location filename="../assets/main.qml" line="111"/>
+        <location filename="../assets/main.qml" line="189"/>
+        <location filename="../assets/main.qml" line="214"/>
         <source>Divider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="109"/>
+        <location filename="../assets/main.qml" line="134"/>
         <source>Brush Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="118"/>
+        <location filename="../assets/main.qml" line="143"/>
         <source>Brush size slider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="124"/>
+        <location filename="../assets/main.qml" line="149"/>
         <source>Brush Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="133"/>
+        <location filename="../assets/main.qml" line="158"/>
         <source>Brush opacity slider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="142"/>
+        <location filename="../assets/main.qml" line="167"/>
         <source>Brush preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="194"/>
+        <source>Image Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/main.qml" line="197"/>
+        <source>Low (&lt;= 0.5 Mpix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="201"/>
+        <source>Medium (&lt;= 1.0 Mpix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="205"/>
+        <source>High (&lt;= 2.0 Mpix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="209"/>
+        <source>Original</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="247"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="218"/>
+        <location filename="../assets/main.qml" line="268"/>
         <source>List of modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="318"/>
+        <location filename="../assets/main.qml" line="368"/>
         <source>Decolorize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="320"/>
+        <location filename="../assets/main.qml" line="370"/>
         <source>Sketch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="322"/>
+        <location filename="../assets/main.qml" line="372"/>
         <source>Cartoon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="324"/>
+        <location filename="../assets/main.qml" line="374"/>
         <source>Blur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="326"/>
+        <location filename="../assets/main.qml" line="376"/>
         <source>Pixelate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="328"/>
+        <location filename="../assets/main.qml" line="378"/>
         <source>Recolor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="330"/>
+        <location filename="../assets/main.qml" line="380"/>
         <source>Retouch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="369"/>
+        <location filename="../assets/main.qml" line="419"/>
         <source>Example image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="407"/>
+        <location filename="../assets/main.qml" line="457"/>
         <source>Open Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="434"/>
+        <location filename="../assets/main.qml" line="484"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation type="unfinished"></translation>
     </message>

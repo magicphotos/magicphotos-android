@@ -4,7 +4,6 @@
 #include <QtCore/QTranslator>
 #include <Qt/qdeclarativedebug.h>
 
-#include <bb/cascades/Image>
 #include <bb/cascades/Application>
 
 #include "MagicPhotos.hpp"
@@ -35,8 +34,6 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 #ifdef DEBUG_CONSOLE
     qInstallMsgHandler(consoleMessageOutput);
 #endif
-
-    qRegisterMetaType<bb::cascades::Image>();
 
     Application app(argc, argv);
 

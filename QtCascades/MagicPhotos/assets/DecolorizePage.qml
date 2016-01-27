@@ -16,8 +16,9 @@ Page {
     }
     
     function updateEditorParameters() {
-        decolorizeEditor.brushSize    = AppSettings.brushSize;
-        decolorizeEditor.brushOpacity = AppSettings.brushOpacity;
+        decolorizeEditor.brushSize       = AppSettings.brushSize;
+        decolorizeEditor.brushOpacity    = AppSettings.brushOpacity;
+        decolorizeEditor.resolutionLimit = AppSettings.imageResolutionLimit;
     }
     
     onCreationCompleted: {
@@ -233,14 +234,17 @@ Page {
                 scrollViewProperties {
                     scrollMode:         ScrollMode.Both
                     pinchToZoomEnabled: true
-                    minContentScale:    1.0
+                    minContentScale:    0.5
                     maxContentScale:    8.0
                 }            
                 
-                ImageView {
-                    id:                 imageView
-                    scalingMethod:      ScalingMethod.AspectFit
-                    accessibility.name: qsTr("Image editor")
+                Container {
+                    id:              fragmentsContainer
+                    preferredWidth:  ui.px(0)
+                    preferredHeight: ui.px(0)
+                    
+                    layout: AbsoluteLayout {
+                    }
                     
                     onTouch: {
                         if (event.touchType === TouchType.Down) {
@@ -261,7 +265,8 @@ Page {
                             id:         decolorizeEditor
                             mode:       DecolorizeEditor.ModeScroll
                             scale:      imageScrollView.contentScale
-                            helperSize: ui.sdu(20) 
+                            helper:     helperImageView
+                            helperSize: ui.sdu(20)
                             
                             onImageOpened: {
                                 activityIndicator.stop();
@@ -311,12 +316,64 @@ Page {
                                 }
                             }
                             
-                            onNeedImageRepaint: {
-                                imageView.image = image;                            
+                            onPrepareImageFragments: {
+                                var fragments = getImageFragments();
+                                
+                                for (var i = 0; i < fragments.length; i++) {
+                                    delImageFragment(fragments[i].posX, fragments[i].posY);
+                                    
+                                    fragmentsContainer.remove(fragments[i]);
+                                    
+                                    fragments[i].destroy();
+                                }
+                                
+                                fragmentsContainer.preferredWidth  = imageWidth;
+                                fragmentsContainer.preferredHeight = imageHeight;
+                                
+                                for (var x = 0; x < imageWidth;) {
+                                    var fragment_width = Math.max(0, Math.min(fragmentSize, imageWidth - x));
+                                    
+                                    for (var y = 0; y < imageHeight;) {
+                                        var fragment_height = Math.max(0, Math.min(fragmentSize, imageHeight - y));
+                                        
+                                        var fragment = fragmentImageViewDefinition.createObject();
+                                        
+                                        fragmentsContainer.add(fragment);
+                                        
+                                        fragment.posX            = x;
+                                        fragment.posY            = y;
+                                        fragment.preferredWidth  = fragment_width;
+                                        fragment.preferredHeight = fragment_height;
+                                        
+                                        addImageFragment(x, y, fragment);
+                                        
+                                        y = y + fragment_height;
+                                    }
+                                    
+                                    x = x + fragment_width;
+                                }
                             }
+                        },
+                        ComponentDefinition {
+                            id: fragmentImageViewDefinition
                             
-                            onNeedHelperRepaint: {
-                                helperImageView.image = image;
+                            ImageView {
+                                scalingMethod:      ScalingMethod.AspectFit
+                                accessibility.name: qsTr("Image fragment")
+                                preferredWidth:     ui.px(0)
+                                preferredHeight:    ui.px(0)
+                                minWidth:           preferredWidth
+                                minHeight:          preferredHeight
+                                maxWidth:           preferredWidth
+                                maxHeight:          preferredHeight
+                                
+                                property int posX: ui.px(0)
+                                property int posY: ui.px(0)
+                                
+                                layoutProperties: AbsoluteLayoutProperties {
+                                    positionX: posX
+                                    positionY: posY
+                                }
                             }
                         },
                         SystemToast {

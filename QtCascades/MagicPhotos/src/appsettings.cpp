@@ -104,3 +104,17 @@ void AppSettings::setBrushOpacity(const qreal &opacity)
 {
     Settings->setValue("BrushOpacity", opacity);
 }
+
+qreal AppSettings::imageResolutionLimit() const
+{
+    if (Settings->contains("ImageResolutionLimit")) {
+        return Settings->value("ImageResolutionLimit").toDouble();
+    } else {
+        return 1.0;
+    }
+}
+
+void AppSettings::setImageResolutionLimit(const qreal &limit)
+{
+    Settings->setValue("ImageResolutionLimit", limit);
+}

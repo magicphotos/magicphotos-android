@@ -266,10 +266,10 @@ Page {
                         scalingMethod:      ScalingMethod.AspectFit
                         accessibility.name: qsTr("Image editor")
 
-                        property int initial_sampling_point_x: 0
-                        property int initial_sampling_point_y: 0
-                        property int initial_touch_point_x:    0
-                        property int initial_touch_point_y:    0
+                        property int initialSamplingPointX: 0
+                        property int initialSamplingPointY: 0
+                        property int initialTouchPointX:    0
+                        property int initialTouchPointY:    0
 
                         onTouch: {
                             if (modeSegmentedControl.selectedValue === RetouchEditor.ModeSamplingPoint) {
@@ -294,17 +294,17 @@ Page {
                             } else if (modeSegmentedControl.selectedValue === RetouchEditor.ModeClone) {
                                 if (retouchEditor.samplingPointValid) {
                                     if (event.touchType === TouchType.Down) {
-                                        initial_sampling_point_x = retouchEditor.samplingPointX;
-                                        initial_sampling_point_y = retouchEditor.samplingPointY;
-                                        initial_touch_point_x    = event.localX;
-                                        initial_touch_point_y    = event.localY;
+                                        initialSamplingPointX = retouchEditor.samplingPointX;
+                                        initialSamplingPointY = retouchEditor.samplingPointY;
+                                        initialTouchPointX    = event.localX;
+                                        initialTouchPointY    = event.localY;
                                         
                                         imageContainer.showHelper(event.localX, event.localY);
                                         
                                         retouchEditor.changeImageAt(true, event.localX, event.localY);
                                     } else if (event.touchType === TouchType.Move) {
-                                        var sampling_point_x = Math.max(samplingPointImageView.preferredWidth  / 2, Math.min(retouchEditor.imageWidth  - samplingPointImageView.preferredWidth  / 2, initial_sampling_point_x + event.localX - initial_touch_point_x));
-                                        var sampling_point_y = Math.max(samplingPointImageView.preferredHeight / 2, Math.min(retouchEditor.imageHeight - samplingPointImageView.preferredHeight / 2, initial_sampling_point_y + event.localY - initial_touch_point_y));
+                                        var sampling_point_x = Math.max(samplingPointImageView.preferredWidth  / 2, Math.min(retouchEditor.imageWidth  - samplingPointImageView.preferredWidth  / 2, initialSamplingPointX + event.localX - initialTouchPointX));
+                                        var sampling_point_y = Math.max(samplingPointImageView.preferredHeight / 2, Math.min(retouchEditor.imageHeight - samplingPointImageView.preferredHeight / 2, initialSamplingPointY + event.localY - initialTouchPointY));
 
                                         retouchEditor.samplingPointX = sampling_point_x;
                                         retouchEditor.samplingPointY = sampling_point_y;

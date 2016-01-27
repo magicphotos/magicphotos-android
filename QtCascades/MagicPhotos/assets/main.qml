@@ -22,9 +22,21 @@ NavigationPane {
     Menu.definition: MenuDefinition {
         settingsAction: SettingsActionItem {
             onTriggered: {
+                var resolution_limit = AppSettings.imageResolutionLimit;
+
                 brushSizeSlider.value    = AppSettings.brushSize;
                 brushOpacitySlider.value = AppSettings.brushOpacity;
-                
+
+                if (resolution_limit > 1.9) {
+                    imageResolutionLimitDropDown.selectedIndex = 2;
+                } else if (resolution_limit > 0.9) {
+                    imageResolutionLimitDropDown.selectedIndex = 1;
+                } else if (resolution_limit > 0.4) {
+                    imageResolutionLimitDropDown.selectedIndex = 0;
+                } else {
+                    imageResolutionLimitDropDown.selectedIndex = 3;
+                }
+
                 settingsSheet.open();
             }
             
@@ -42,8 +54,21 @@ NavigationPane {
                                 title: qsTr("OK")
                                 
                                 onTriggered: {
-                                    AppSettings.brushSize    = brushSizeSlider.value;
-                                    AppSettings.brushOpacity = brushOpacitySlider.value;
+                                    var resolution_limit = AppSettings.imageResolutionLimit;
+
+                                    if (imageResolutionLimitDropDown.selectedIndex === 0) {
+                                        resolution_limit = 0.5;
+                                    } else if (imageResolutionLimitDropDown.selectedIndex === 1) {
+                                        resolution_limit = 1.0;
+                                    } else if (imageResolutionLimitDropDown.selectedIndex === 2) {
+                                        resolution_limit = 2.0;
+                                    } else if (imageResolutionLimitDropDown.selectedIndex === 3) {
+                                        resolution_limit = 0.0;
+                                    }
+
+                                    AppSettings.brushSize            = brushSizeSlider.value;
+                                    AppSettings.brushOpacity         = brushOpacitySlider.value;
+                                    AppSettings.imageResolutionLimit = resolution_limit;
                                     
                                     for (var i = 0; i < navigationPane.count(); i++) {
                                         var page = navigationPane.at(i);
@@ -157,6 +182,31 @@ NavigationPane {
                                                     }
                                                 }
                                             ]
+                                        }
+                                    }
+
+                                    Divider {
+                                        accessibility.name: qsTr("Divider")
+                                    }
+
+                                    DropDown {
+                                        id:    imageResolutionLimitDropDown
+                                        title: qsTr("Image Quality")
+
+                                        Option {
+                                            text: qsTr("Low (<= 0.5 Mpix)")
+                                        }
+
+                                        Option {
+                                            text: qsTr("Medium (<= 1.0 Mpix)")
+                                        }
+
+                                        Option {
+                                            text: qsTr("High (<= 2.0 Mpix)")
+                                        }
+
+                                        Option {
+                                            text: qsTr("Original")
                                         }
                                     }
 
