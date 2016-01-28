@@ -125,7 +125,7 @@
     <env var="CASCADES_THEME" value="dark"/>
 
     <!-- Handle invocations -->
-    <invoke-target id="com.derevenetz.oleg.MagicPhotosTrial.image.open.share">
+    <invoke-target id="com.derevenetz.oleg.MagicPhotosTrial.img.open">
         <invoke-target-type>application</invoke-target-type>
         <filter>
             <action>bb.action.OPEN</action>
