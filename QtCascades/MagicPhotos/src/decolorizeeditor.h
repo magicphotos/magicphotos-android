@@ -62,9 +62,9 @@ public:
 
     Q_INVOKABLE void undo();
 
-    Q_INVOKABLE void            addImageFragment(int x, int y, bb::cascades::ImageView *fragment);
-    Q_INVOKABLE void            delImageFragment(int x, int y);
-    Q_INVOKABLE QList<QObject*> getImageFragments();
+    Q_INVOKABLE void            addFragment(int x, int y, bb::cascades::ImageView *fragment);
+    Q_INVOKABLE void            delFragment(int x, int y);
+    Q_INVOKABLE QList<QObject*> getFragments();
 
     enum Mode {
         ModeScroll,
@@ -84,7 +84,7 @@ signals:
 
     void undoAvailabilityChanged(bool available);
 
-    void prepareImageFragments(int fragmentSize, int imageWidth, int imageHeight);
+    void prepareFragments(int fragmentSize, int imageWidth, int imageHeight);
 
 private:
     void SaveUndoImage();
@@ -101,7 +101,7 @@ private:
     QImage                                          LoadedImage, OriginalImage, EffectedImage, CurrentImage, BrushTemplateImage, BrushImage;
     QStack<QImage>                                  UndoStack;
     bb::cascades::ImageView                        *Helper;
-    QMap<QPair<int, int>, bb::cascades::ImageView*> ImageFragmentsMap;
+    QMap<QPair<int, int>, bb::cascades::ImageView*> FragmentsMap;
 };
 
 class GrayscaleImageGenerator : public QObject

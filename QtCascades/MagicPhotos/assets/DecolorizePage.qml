@@ -316,11 +316,11 @@ Page {
                                 }
                             }
                             
-                            onPrepareImageFragments: {
-                                var fragments = getImageFragments();
+                            onPrepareFragments: {
+                                var fragments = getFragments();
                                 
                                 for (var i = 0; i < fragments.length; i++) {
-                                    delImageFragment(fragments[i].posX, fragments[i].posY);
+                                    delFragment(fragments[i].posX, fragments[i].posY);
                                     
                                     fragmentsContainer.remove(fragments[i]);
                                     
@@ -345,7 +345,7 @@ Page {
                                         fragment.preferredWidth  = fragment_width;
                                         fragment.preferredHeight = fragment_height;
                                         
-                                        addImageFragment(x, y, fragment);
+                                        addFragment(x, y, fragment);
                                         
                                         y = y + fragment_height;
                                     }

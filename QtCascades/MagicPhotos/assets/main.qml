@@ -176,10 +176,7 @@ NavigationPane {
                                                     size:    brushSizeSlider.immediateValue
                                                     maxSize: brushSizeSlider.toValue
                                                     opacity: brushOpacitySlider.immediateValue
-                                                    
-                                                    onNeedRepaint: {
-                                                        brushPreviewImageView.image = image;
-                                                    }
+                                                    preview: brushPreviewImageView
                                                 }
                                             ]
                                         }

@@ -73,8 +73,9 @@ Page {
 
                 attachedObjects: [
                     SketchPreviewGenerator {
-                        id: sketchPreviewGenerator
-                        
+                        id:      sketchPreviewGenerator
+                        preview: previewImageView
+
                         property int activityIndicatorUsageCounter: 0
                         
                         onImageOpened: {
@@ -107,10 +108,6 @@ Page {
                             if (activityIndicatorUsageCounter > 0) {
                                 activityIndicatorUsageCounter = activityIndicatorUsageCounter - 1;
                             }
-                        }
-
-                        onNeedRepaint: {
-                            previewImageView.image = image;                            
                         }
                     },
                     SystemToast {

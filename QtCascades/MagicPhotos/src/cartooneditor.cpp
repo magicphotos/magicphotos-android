@@ -6,6 +6,9 @@
 #include <QtGui/QImageReader>
 #include <QtGui/QPainter>
 
+#include <bb/ImageData>
+#include <bb/cascades/Image>
+
 #include <libexif/exif-loader.h>
 #include <libexif/exif-data.h>
 #include <libexif/exif-entry.h>
@@ -22,6 +25,8 @@ CartoonEditor::CartoonEditor() : bb::cascades::CustomControl()
     CartoonThreshold = 0;
     BrushOpacity     = 0.0;
     Scale            = 1.0;
+    ResolutionLimit  = 0.0;
+    Helper           = NULL;
 }
 
 CartoonEditor::~CartoonEditor()
@@ -146,6 +151,26 @@ void CartoonEditor::setScale(const qreal &scale)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
+qreal CartoonEditor::resolutionLimit() const
+{
+    return ResolutionLimit;
+}
+
+void CartoonEditor::setResolutionLimit(const qreal &limit)
+{
+    ResolutionLimit = limit;
+}
+
+bb::cascades::ImageView *CartoonEditor::helper() const
+{
+    return Helper;
+}
+
+void CartoonEditor::setHelper(bb::cascades::ImageView *helper)
+{
+    Helper = helper;
+}
+
 bool CartoonEditor::changed() const
 {
     return IsChanged;
@@ -184,8 +209,8 @@ void CartoonEditor::openImage(const QString &image_file)
     if (reader.canRead()) {
         QSize size = reader.size();
 
-        if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
-            qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
+        if (ResolutionLimit > 0.1 && size.width() * size.height() > ResolutionLimit * 1000000.0) {
+            qreal factor = qSqrt((size.width() * size.height()) / (ResolutionLimit * 1000000.0));
 
             size.setWidth(size.width()   / factor);
             size.setHeight(size.height() / factor);
@@ -323,6 +348,27 @@ void CartoonEditor::undo()
     }
 }
 
+void CartoonEditor::addFragment(int x, int y, bb::cascades::ImageView *fragment)
+{
+    FragmentsMap[QPair<int, int>(x, y)] = fragment;
+}
+
+void CartoonEditor::delFragment(int x, int y)
+{
+    FragmentsMap.remove(QPair<int, int>(x, y));
+}
+
+QList<QObject*> CartoonEditor::getFragments()
+{
+    QList<QObject*> result;
+
+    for (int i = 0; i < FragmentsMap.keys().size(); i++) {
+        result.append(FragmentsMap[FragmentsMap.keys().at(i)]);
+    }
+
+    return result;
+}
+
 void CartoonEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
@@ -334,6 +380,8 @@ void CartoonEditor::effectedImageReady(const QImage &effected_image)
     UndoStack.clear();
 
     IsChanged = true;
+
+    emit prepareFragments(FRAGMENT_SIZE, CurrentImage.width(), CurrentImage.height());
 
     RepaintImage(true);
 
@@ -360,81 +408,75 @@ void CartoonEditor::SaveUndoImage()
 
 void CartoonEditor::RepaintImage(bool full, QRect rect)
 {
-    if (CurrentImage.isNull()) {
-        CurrentImageData = bb::ImageData();
+    if (!CurrentImage.isNull()) {
+        int fragment_size = FRAGMENT_SIZE;
 
-        emit needImageRepaint(bb::cascades::Image());
-    } else if (full) {
-        CurrentImageData = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, CurrentImage.width(), CurrentImage.height());
-
-        unsigned char *dst_line = CurrentImageData.pixels();
-
-        for (int y = 0; y < CurrentImageData.height(); y++) {
-            unsigned char *dst = dst_line;
-
-            for (int x = 0; x < CurrentImageData.width(); x++) {
-                QRgb pixel = CurrentImage.pixel(x, y);
-
-                *dst++ = qRed(pixel);
-                *dst++ = qGreen(pixel);
-                *dst++ = qBlue(pixel);
-                *dst++ = qAlpha(pixel);
-            }
-
-            dst_line += CurrentImageData.bytesPerLine();
-        }
-
-        emit needImageRepaint(bb::cascades::Image(CurrentImageData));
-    } else {
-        unsigned char *dst_line = CurrentImageData.pixels();
-
-        if (rect.x() >= CurrentImageData.width()) {
-            rect.setX(CurrentImageData.width() - 1);
-        }
-        if (rect.y() >= CurrentImageData.height()) {
-            rect.setY(CurrentImageData.height() - 1);
-        }
-        if (rect.x() < 0) {
+        if (full) {
             rect.setX(0);
-        }
-        if (rect.y() < 0) {
             rect.setY(0);
+            rect.setWidth(CurrentImage.width());
+            rect.setHeight(CurrentImage.height());
+        } else {
+            if (rect.x() >= CurrentImage.width()) {
+                rect.setX(CurrentImage.width() - 1);
+            }
+            if (rect.y() >= CurrentImage.height()) {
+                rect.setY(CurrentImage.height() - 1);
+            }
+            if (rect.x() < 0) {
+                rect.setX(0);
+            }
+            if (rect.y() < 0) {
+                rect.setY(0);
+            }
+            if (rect.x() + rect.width() > CurrentImage.width()) {
+                rect.setWidth(CurrentImage.width() - rect.x());
+            }
+            if (rect.y() + rect.height() > CurrentImage.height()) {
+                rect.setHeight(CurrentImage.height() - rect.y());
+            }
         }
-        if (rect.x() + rect.width() > CurrentImageData.width()) {
-            rect.setWidth(CurrentImageData.width() - rect.x());
-        }
-        if (rect.y() + rect.height() > CurrentImageData.height()) {
-            rect.setHeight(CurrentImageData.height() - rect.y());
-        }
 
-        dst_line += rect.y() * CurrentImageData.bytesPerLine();
+        for (int fx = fragment_size * (rect.x() / fragment_size); fx < rect.x() + rect.width();) {
+            int fragment_width = qMax(0, qMin(fragment_size, CurrentImage.width() - fx));
 
-        for (int y = rect.y(); y < rect.y() + rect.height(); y++) {
-            unsigned char *dst = dst_line;
+            for (int fy = fragment_size * (rect.y() / fragment_size); fy < rect.y() + rect.height();) {
+                int fragment_height = qMax(0, qMin(fragment_size, CurrentImage.height() - fy));
 
-            dst += rect.x() * 4;
+                bb::ImageData fragment_data = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, fragment_width, fragment_height);
 
-            for (int x = rect.x(); x < rect.x() + rect.width(); x++) {
-                QRgb pixel = CurrentImage.pixel(x, y);
+                unsigned char *dst_line = fragment_data.pixels();
 
-                *dst++ = qRed(pixel);
-                *dst++ = qGreen(pixel);
-                *dst++ = qBlue(pixel);
-                *dst++ = qAlpha(pixel);
+                for (int sy = fy; sy < fy + fragment_height; sy++) {
+                    unsigned char *dst = dst_line;
+
+                    for (int sx = fx; sx < fx + fragment_width; sx++) {
+                        QRgb pixel = CurrentImage.pixel(sx, sy);
+
+                        *dst++ = qRed(pixel);
+                        *dst++ = qGreen(pixel);
+                        *dst++ = qBlue(pixel);
+                        *dst++ = qAlpha(pixel);
+                    }
+
+                    dst_line += fragment_data.bytesPerLine();
+                }
+
+                if (FragmentsMap.contains(QPair<int, int>(fx, fy))) {
+                    FragmentsMap[QPair<int, int>(fx, fy)]->setImage(bb::cascades::Image(fragment_data));
+                }
+
+                fy = fy + fragment_height;
             }
 
-            dst_line += CurrentImageData.bytesPerLine();
+            fx = fx + fragment_width;
         }
-
-        emit needImageRepaint(bb::cascades::Image(CurrentImageData));
     }
 }
 
 void CartoonEditor::RepaintHelper(int center_x, int center_y)
 {
-    if (CurrentImage.isNull()) {
-        emit needHelperRepaint(bb::cascades::Image());
-    } else {
+    if (!CurrentImage.isNull()) {
         QImage   helper_image = CurrentImage.copy(center_x - HelperSize / (Scale * 2),
                                                   center_y - HelperSize / (Scale * 2), HelperSize / Scale, HelperSize / Scale).scaledToWidth(HelperSize);
         QPainter painter(&helper_image);
@@ -461,7 +503,9 @@ void CartoonEditor::RepaintHelper(int center_x, int center_y)
             dst_line += helper_image_data.bytesPerLine();
         }
 
-        emit needHelperRepaint(bb::cascades::Image(helper_image_data));
+        if (Helper != NULL) {
+            Helper->setImage(bb::cascades::Image(helper_image_data));
+        }
     }
 }
 
@@ -469,6 +513,7 @@ CartoonPreviewGenerator::CartoonPreviewGenerator() : bb::cascades::CustomControl
 {
     GaussianRadius   = 0;
     CartoonThreshold = 0;
+    Preview          = NULL;
 }
 
 CartoonPreviewGenerator::~CartoonPreviewGenerator()
@@ -535,6 +580,16 @@ void CartoonPreviewGenerator::setThreshold(const int &threshold)
 
         emit generationStarted();
     }
+}
+
+bb::cascades::ImageView *CartoonPreviewGenerator::preview() const
+{
+    return Preview;
+}
+
+void CartoonPreviewGenerator::setPreview(bb::cascades::ImageView *preview)
+{
+    Preview = preview;
 }
 
 void CartoonPreviewGenerator::openImage(const QString &image_file)
@@ -646,9 +701,7 @@ void CartoonPreviewGenerator::cartoonImageReady(const QImage &cartoon_image)
 
 void CartoonPreviewGenerator::Repaint()
 {
-    if (CartoonImage.isNull()) {
-        emit needRepaint(bb::cascades::Image());
-    } else {
+    if (!CartoonImage.isNull()) {
         bb::ImageData image_data = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, CartoonImage.width(), CartoonImage.height());
 
         unsigned char *dst_line = image_data.pixels();
@@ -668,7 +721,9 @@ void CartoonPreviewGenerator::Repaint()
             dst_line += image_data.bytesPerLine();
         }
 
-        emit needRepaint(bb::cascades::Image(image_data));
+        if (Preview != NULL) {
+            Preview->setImage(bb::cascades::Image(image_data));
+        }
     }
 }
 

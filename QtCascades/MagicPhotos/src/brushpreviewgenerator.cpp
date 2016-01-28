@@ -2,6 +2,9 @@
 #include <QtGui/QTransform>
 #include <QtGui/QPainter>
 
+#include <bb/ImageData>
+#include <bb/cascades/Image>
+
 #include "brushpreviewgenerator.h"
 
 BrushPreviewGenerator::BrushPreviewGenerator() : bb::cascades::CustomControl()
@@ -9,6 +12,7 @@ BrushPreviewGenerator::BrushPreviewGenerator() : bb::cascades::CustomControl()
     Size    = 0;
     MaxSize = 0;
     Opacity = 0.0;
+    Preview = NULL;
 }
 
 BrushPreviewGenerator::~BrushPreviewGenerator()
@@ -51,6 +55,16 @@ void BrushPreviewGenerator::setOpacity(const qreal &opacity)
     Repaint();
 }
 
+bb::cascades::ImageView *BrushPreviewGenerator::preview() const
+{
+    return Preview;
+}
+
+void BrushPreviewGenerator::setPreview(bb::cascades::ImageView *preview)
+{
+    Preview = preview;
+}
+
 void BrushPreviewGenerator::Repaint()
 {
     if (Size != 0 && MaxSize != 0) {
@@ -89,9 +103,7 @@ void BrushPreviewGenerator::Repaint()
         result_painter.drawImage(QPoint((result.width()  - brush_preview.width())  / 2,
                                         (result.height() - brush_preview.height()) / 2), brush_preview);
 
-        if (result.isNull()) {
-            emit needRepaint(bb::cascades::Image());
-        } else {
+        if (!result.isNull()) {
             bb::ImageData image_data = bb::ImageData(bb::PixelFormat::RGBA_Premultiplied, result.width(), result.height());
 
             unsigned char *dst_line = image_data.pixels();
@@ -111,9 +123,9 @@ void BrushPreviewGenerator::Repaint()
                 dst_line += image_data.bytesPerLine();
             }
 
-            emit needRepaint(bb::cascades::Image(image_data));
+            if (Preview != NULL) {
+                Preview->setImage(bb::cascades::Image(image_data));
+            }
         }
-    } else {
-        emit needRepaint(bb::cascades::Image());
     }
 }

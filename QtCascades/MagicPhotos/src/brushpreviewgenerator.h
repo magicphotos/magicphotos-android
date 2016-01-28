@@ -4,17 +4,17 @@
 #include <QtCore/qmath.h>
 #include <QtCore/QObject>
 
-#include <bb/ImageData>
-#include <bb/cascades/Image>
+#include <bb/cascades/ImageView>
 #include <bb/cascades/CustomControl>
 
 class BrushPreviewGenerator : public bb::cascades::CustomControl
 {
     Q_OBJECT
 
-    Q_PROPERTY(int   size    READ size    WRITE setSize)
-    Q_PROPERTY(int   maxSize READ maxSize WRITE setMaxSize)
-    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
+    Q_PROPERTY(int                      size    READ size    WRITE setSize)
+    Q_PROPERTY(int                      maxSize READ maxSize WRITE setMaxSize)
+    Q_PROPERTY(qreal                    opacity READ opacity WRITE setOpacity)
+    Q_PROPERTY(bb::cascades::ImageView* preview READ preview WRITE setPreview)
 
 public:
     explicit BrushPreviewGenerator();
@@ -29,14 +29,15 @@ public:
     qreal opacity() const;
     void  setOpacity(const qreal &opacity);
 
-signals:
-    void needRepaint(const bb::cascades::Image &image);
+    bb::cascades::ImageView *preview() const;
+    void                     setPreview(bb::cascades::ImageView *preview);
 
 private:
     void Repaint();
 
-    int   Size, MaxSize;
-    qreal Opacity;
+    int                      Size, MaxSize;
+    qreal                    Opacity;
+    bb::cascades::ImageView *Preview;
 };
 
 #endif // BRUSHPREVIEWGENERATOR_H

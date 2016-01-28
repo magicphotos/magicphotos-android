@@ -323,22 +323,22 @@ void DecolorizeEditor::undo()
     }
 }
 
-void DecolorizeEditor::addImageFragment(int x, int y, bb::cascades::ImageView *fragment)
+void DecolorizeEditor::addFragment(int x, int y, bb::cascades::ImageView *fragment)
 {
-    ImageFragmentsMap[QPair<int, int>(x, y)] = fragment;
+    FragmentsMap[QPair<int, int>(x, y)] = fragment;
 }
 
-void DecolorizeEditor::delImageFragment(int x, int y)
+void DecolorizeEditor::delFragment(int x, int y)
 {
-    ImageFragmentsMap.remove(QPair<int, int>(x, y));
+    FragmentsMap.remove(QPair<int, int>(x, y));
 }
 
-QList<QObject*> DecolorizeEditor::getImageFragments()
+QList<QObject*> DecolorizeEditor::getFragments()
 {
     QList<QObject*> result;
 
-    for (int i = 0; i < ImageFragmentsMap.keys().size(); i++) {
-        result.append(ImageFragmentsMap[ImageFragmentsMap.keys().at(i)]);
+    for (int i = 0; i < FragmentsMap.keys().size(); i++) {
+        result.append(FragmentsMap[FragmentsMap.keys().at(i)]);
     }
 
     return result;
@@ -356,7 +356,7 @@ void DecolorizeEditor::effectedImageReady(const QImage &effected_image)
 
     IsChanged = true;
 
-    emit prepareImageFragments(FRAGMENT_SIZE, CurrentImage.width(), CurrentImage.height());
+    emit prepareFragments(FRAGMENT_SIZE, CurrentImage.width(), CurrentImage.height());
 
     RepaintImage(true);
 
@@ -437,8 +437,8 @@ void DecolorizeEditor::RepaintImage(bool full, QRect rect)
                     dst_line += fragment_data.bytesPerLine();
                 }
 
-                if (ImageFragmentsMap.contains(QPair<int, int>(fx, fy))) {
-                    ImageFragmentsMap[QPair<int, int>(fx, fy)]->setImage(bb::cascades::Image(fragment_data));
+                if (FragmentsMap.contains(QPair<int, int>(fx, fy))) {
+                    FragmentsMap[QPair<int, int>(fx, fy)]->setImage(bb::cascades::Image(fragment_data));
                 }
 
                 fy = fy + fragment_height;

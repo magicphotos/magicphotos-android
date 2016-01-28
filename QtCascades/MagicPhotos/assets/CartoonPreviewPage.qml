@@ -73,7 +73,8 @@ Page {
 
                 attachedObjects: [
                     CartoonPreviewGenerator {
-                        id: cartoonPreviewGenerator
+                        id:      cartoonPreviewGenerator
+                        preview: previewImageView
                         
                         property int activityIndicatorUsageCounter: 0
                         
@@ -109,10 +110,6 @@ Page {
                             if (activityIndicatorUsageCounter > 0) {
                                 activityIndicatorUsageCounter = activityIndicatorUsageCounter - 1;
                             }
-                        }
-
-                        onNeedRepaint: {
-                            previewImageView.image = image;                            
                         }
                     },
                     SystemToast {

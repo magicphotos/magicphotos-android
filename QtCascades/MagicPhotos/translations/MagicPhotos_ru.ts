@@ -4,94 +4,98 @@
 <context>
     <name>BlurPage</name>
     <message>
-        <location filename="../assets/BlurPage.qml" line="136"/>
+        <location filename="../assets/BlurPage.qml" line="137"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="57"/>
+        <location filename="../assets/BlurPage.qml" line="58"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="41"/>
+        <location filename="../assets/BlurPage.qml" line="42"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="42"/>
+        <location filename="../assets/BlurPage.qml" line="43"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="76"/>
+        <location filename="../assets/BlurPage.qml" line="77"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="84"/>
-        <location filename="../assets/BlurPage.qml" line="95"/>
+        <location filename="../assets/BlurPage.qml" line="85"/>
+        <location filename="../assets/BlurPage.qml" line="96"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="85"/>
+        <location filename="../assets/BlurPage.qml" line="86"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="96"/>
+        <location filename="../assets/BlurPage.qml" line="97"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation>Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="97"/>
+        <location filename="../assets/BlurPage.qml" line="98"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="98"/>
+        <location filename="../assets/BlurPage.qml" line="99"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="99"/>
+        <location filename="../assets/BlurPage.qml" line="100"/>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="158"/>
+        <location filename="../assets/BlurPage.qml" line="159"/>
         <source>Editor modes</source>
         <translation>Режимы редактора</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="232"/>
-        <location filename="../assets/BlurPage.qml" line="244"/>
+        <location filename="../assets/BlurPage.qml" line="233"/>
         <source>Image editor</source>
         <translation>Редактор фото</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="325"/>
+        <location filename="../assets/BlurPage.qml" line="363"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BlurPage.qml" line="382"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="329"/>
+        <location filename="../assets/BlurPage.qml" line="386"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="333"/>
+        <location filename="../assets/BlurPage.qml" line="390"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="350"/>
+        <location filename="../assets/BlurPage.qml" line="407"/>
         <source>Helper image</source>
         <translation>Вспомогательное изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPage.qml" line="366"/>
+        <location filename="../assets/BlurPage.qml" line="423"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
@@ -104,17 +108,17 @@
         <translation>Предварительный просмотр результата</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="118"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="115"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="130"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="127"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
     <message>
-        <location filename="../assets/BlurPreviewPage.qml" line="141"/>
+        <location filename="../assets/BlurPreviewPage.qml" line="138"/>
         <source>Gaussian radius slider</source>
         <translation>Ползунок радиуса фильтра Гаусса</translation>
     </message>
@@ -127,94 +131,98 @@
 <context>
     <name>CartoonPage</name>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="137"/>
+        <location filename="../assets/CartoonPage.qml" line="138"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="58"/>
+        <location filename="../assets/CartoonPage.qml" line="59"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="42"/>
+        <location filename="../assets/CartoonPage.qml" line="43"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="43"/>
+        <location filename="../assets/CartoonPage.qml" line="44"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="77"/>
+        <location filename="../assets/CartoonPage.qml" line="78"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="85"/>
-        <location filename="../assets/CartoonPage.qml" line="96"/>
+        <location filename="../assets/CartoonPage.qml" line="86"/>
+        <location filename="../assets/CartoonPage.qml" line="97"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="86"/>
+        <location filename="../assets/CartoonPage.qml" line="87"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="97"/>
+        <location filename="../assets/CartoonPage.qml" line="98"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation>Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="98"/>
+        <location filename="../assets/CartoonPage.qml" line="99"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="99"/>
+        <location filename="../assets/CartoonPage.qml" line="100"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="100"/>
+        <location filename="../assets/CartoonPage.qml" line="101"/>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="159"/>
+        <location filename="../assets/CartoonPage.qml" line="160"/>
         <source>Editor modes</source>
         <translation>Режимы редактора</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="233"/>
-        <location filename="../assets/CartoonPage.qml" line="245"/>
+        <location filename="../assets/CartoonPage.qml" line="234"/>
         <source>Image editor</source>
         <translation>Редактор фото</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="326"/>
+        <location filename="../assets/CartoonPage.qml" line="364"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CartoonPage.qml" line="383"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="330"/>
+        <location filename="../assets/CartoonPage.qml" line="387"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="334"/>
+        <location filename="../assets/CartoonPage.qml" line="391"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="351"/>
+        <location filename="../assets/CartoonPage.qml" line="408"/>
         <source>Helper image</source>
         <translation>Вспомогательное изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPage.qml" line="367"/>
+        <location filename="../assets/CartoonPage.qml" line="424"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
@@ -227,22 +235,22 @@
         <translation>Предварительный просмотр результата</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="120"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="117"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="132"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="129"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="143"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="140"/>
         <source>Gaussian radius slider</source>
         <translation>Ползунок радиуса фильтра Гаусса</translation>
     </message>
     <message>
-        <location filename="../assets/CartoonPreviewPage.qml" line="161"/>
+        <location filename="../assets/CartoonPreviewPage.qml" line="158"/>
         <source>Threshold slider</source>
         <translation>Ползунок порогового фильтра</translation>
     </message>
@@ -383,94 +391,98 @@
 <context>
     <name>PixelatePage</name>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="41"/>
+        <location filename="../assets/PixelatePage.qml" line="42"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="42"/>
+        <location filename="../assets/PixelatePage.qml" line="43"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="57"/>
+        <location filename="../assets/PixelatePage.qml" line="58"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="76"/>
+        <location filename="../assets/PixelatePage.qml" line="77"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="84"/>
-        <location filename="../assets/PixelatePage.qml" line="95"/>
+        <location filename="../assets/PixelatePage.qml" line="85"/>
+        <location filename="../assets/PixelatePage.qml" line="96"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="85"/>
+        <location filename="../assets/PixelatePage.qml" line="86"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="96"/>
+        <location filename="../assets/PixelatePage.qml" line="97"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation>Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="97"/>
+        <location filename="../assets/PixelatePage.qml" line="98"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="98"/>
+        <location filename="../assets/PixelatePage.qml" line="99"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="99"/>
+        <location filename="../assets/PixelatePage.qml" line="100"/>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="136"/>
+        <location filename="../assets/PixelatePage.qml" line="137"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="158"/>
+        <location filename="../assets/PixelatePage.qml" line="159"/>
         <source>Editor modes</source>
         <translation>Режимы редактора</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="232"/>
-        <location filename="../assets/PixelatePage.qml" line="244"/>
+        <location filename="../assets/PixelatePage.qml" line="233"/>
         <source>Image editor</source>
         <translation>Редактор фото</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="325"/>
+        <location filename="../assets/PixelatePage.qml" line="363"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/PixelatePage.qml" line="382"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="329"/>
+        <location filename="../assets/PixelatePage.qml" line="386"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="333"/>
+        <location filename="../assets/PixelatePage.qml" line="390"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="350"/>
+        <location filename="../assets/PixelatePage.qml" line="407"/>
         <source>Helper image</source>
         <translation>Вспомогательное изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePage.qml" line="366"/>
+        <location filename="../assets/PixelatePage.qml" line="423"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
@@ -483,17 +495,17 @@
         <translation>Предварительный просмотр результата</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePreviewPage.qml" line="118"/>
+        <location filename="../assets/PixelatePreviewPage.qml" line="115"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePreviewPage.qml" line="130"/>
+        <location filename="../assets/PixelatePreviewPage.qml" line="127"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
     <message>
-        <location filename="../assets/PixelatePreviewPage.qml" line="141"/>
+        <location filename="../assets/PixelatePreviewPage.qml" line="138"/>
         <source>Pixelate denominator slider</source>
         <translation>Ползунок знаменателя фильтра пикселизации</translation>
     </message>
@@ -506,104 +518,108 @@
 <context>
     <name>RecolorPage</name>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="135"/>
+        <location filename="../assets/RecolorPage.qml" line="136"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="56"/>
+        <location filename="../assets/RecolorPage.qml" line="57"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="40"/>
+        <location filename="../assets/RecolorPage.qml" line="41"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="41"/>
+        <location filename="../assets/RecolorPage.qml" line="42"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="75"/>
+        <location filename="../assets/RecolorPage.qml" line="76"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="83"/>
-        <location filename="../assets/RecolorPage.qml" line="94"/>
+        <location filename="../assets/RecolorPage.qml" line="84"/>
+        <location filename="../assets/RecolorPage.qml" line="95"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="84"/>
+        <location filename="../assets/RecolorPage.qml" line="85"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="95"/>
+        <location filename="../assets/RecolorPage.qml" line="96"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation>Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="96"/>
+        <location filename="../assets/RecolorPage.qml" line="97"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="97"/>
+        <location filename="../assets/RecolorPage.qml" line="98"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="98"/>
+        <location filename="../assets/RecolorPage.qml" line="99"/>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="157"/>
+        <location filename="../assets/RecolorPage.qml" line="158"/>
         <source>Editor modes</source>
         <translation>Режимы редактора</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="243"/>
-        <location filename="../assets/RecolorPage.qml" line="255"/>
+        <location filename="../assets/RecolorPage.qml" line="244"/>
         <source>Image editor</source>
         <translation>Редактор фото</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="339"/>
+        <location filename="../assets/RecolorPage.qml" line="377"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RecolorPage.qml" line="396"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="343"/>
+        <location filename="../assets/RecolorPage.qml" line="400"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="347"/>
+        <location filename="../assets/RecolorPage.qml" line="404"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="383"/>
+        <location filename="../assets/RecolorPage.qml" line="440"/>
         <source>Hue bar</source>
         <translation>Полоска палитры оттенков</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="410"/>
+        <location filename="../assets/RecolorPage.qml" line="467"/>
         <source>Hue slider</source>
         <translation>Ползунок палитры оттенков</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="424"/>
+        <location filename="../assets/RecolorPage.qml" line="481"/>
         <source>Helper image</source>
         <translation>Вспомогательное изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RecolorPage.qml" line="440"/>
+        <location filename="../assets/RecolorPage.qml" line="497"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
@@ -611,99 +627,103 @@
 <context>
     <name>RetouchPage</name>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="135"/>
+        <location filename="../assets/RetouchPage.qml" line="136"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="56"/>
+        <location filename="../assets/RetouchPage.qml" line="57"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="40"/>
+        <location filename="../assets/RetouchPage.qml" line="41"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="41"/>
+        <location filename="../assets/RetouchPage.qml" line="42"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="75"/>
+        <location filename="../assets/RetouchPage.qml" line="76"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="83"/>
-        <location filename="../assets/RetouchPage.qml" line="94"/>
+        <location filename="../assets/RetouchPage.qml" line="84"/>
+        <location filename="../assets/RetouchPage.qml" line="95"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="84"/>
+        <location filename="../assets/RetouchPage.qml" line="85"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="95"/>
+        <location filename="../assets/RetouchPage.qml" line="96"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation>Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="96"/>
+        <location filename="../assets/RetouchPage.qml" line="97"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="97"/>
+        <location filename="../assets/RetouchPage.qml" line="98"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="98"/>
+        <location filename="../assets/RetouchPage.qml" line="99"/>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="157"/>
+        <location filename="../assets/RetouchPage.qml" line="158"/>
         <source>Editor modes</source>
         <translation>Режимы редактора</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="238"/>
-        <location filename="../assets/RetouchPage.qml" line="267"/>
+        <location filename="../assets/RetouchPage.qml" line="239"/>
         <source>Image editor</source>
         <translation>Редактор фото</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="423"/>
+        <location filename="../assets/RetouchPage.qml" line="461"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/RetouchPage.qml" line="480"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="427"/>
+        <location filename="../assets/RetouchPage.qml" line="484"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="431"/>
+        <location filename="../assets/RetouchPage.qml" line="488"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="451"/>
+        <location filename="../assets/RetouchPage.qml" line="508"/>
         <source>Sampling point</source>
         <translation>Исходная точка</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="472"/>
+        <location filename="../assets/RetouchPage.qml" line="529"/>
         <source>Helper image</source>
         <translation>Вспомогательное изображение</translation>
     </message>
     <message>
-        <location filename="../assets/RetouchPage.qml" line="488"/>
+        <location filename="../assets/RetouchPage.qml" line="545"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
@@ -711,94 +731,98 @@
 <context>
     <name>SketchPage</name>
     <message>
-        <location filename="../assets/SketchPage.qml" line="136"/>
+        <location filename="../assets/SketchPage.qml" line="137"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="57"/>
+        <location filename="../assets/SketchPage.qml" line="58"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="41"/>
+        <location filename="../assets/SketchPage.qml" line="42"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="42"/>
+        <location filename="../assets/SketchPage.qml" line="43"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="76"/>
+        <location filename="../assets/SketchPage.qml" line="77"/>
         <source>Save Image</source>
         <translation>Сохранить Фото</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="84"/>
-        <location filename="../assets/SketchPage.qml" line="95"/>
+        <location filename="../assets/SketchPage.qml" line="85"/>
+        <location filename="../assets/SketchPage.qml" line="96"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="85"/>
+        <location filename="../assets/SketchPage.qml" line="86"/>
         <source>The save function is available in the full version only. Do you want to purchase full version now?</source>
         <translation>Функция сохранения доступна только в полной версии. Хотите купить полную версию?</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="96"/>
+        <location filename="../assets/SketchPage.qml" line="97"/>
         <source>If you like this app, please take a moment to provide a feedback and rate it. Do you want to provide a feedback?</source>
         <translation>Если вам понравилось приложение, пожалуйста, найдите минутку для того, чтобы оставить о нем отзыв. Хотите оставить отзыв?</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="97"/>
+        <location filename="../assets/SketchPage.qml" line="98"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="98"/>
+        <location filename="../assets/SketchPage.qml" line="99"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="99"/>
+        <location filename="../assets/SketchPage.qml" line="100"/>
         <source>Never</source>
         <translation>Никогда</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="158"/>
+        <location filename="../assets/SketchPage.qml" line="159"/>
         <source>Editor modes</source>
         <translation>Режимы редактора</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="232"/>
-        <location filename="../assets/SketchPage.qml" line="244"/>
+        <location filename="../assets/SketchPage.qml" line="233"/>
         <source>Image editor</source>
         <translation>Редактор фото</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="325"/>
+        <location filename="../assets/SketchPage.qml" line="363"/>
+        <source>Image fragment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SketchPage.qml" line="382"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="329"/>
+        <location filename="../assets/SketchPage.qml" line="386"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="333"/>
+        <location filename="../assets/SketchPage.qml" line="390"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="350"/>
+        <location filename="../assets/SketchPage.qml" line="407"/>
         <source>Helper image</source>
         <translation>Вспомогательное изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPage.qml" line="366"/>
+        <location filename="../assets/SketchPage.qml" line="423"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
@@ -811,17 +835,17 @@
         <translation>Предварительный просмотр результата</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="118"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="115"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="130"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="127"/>
         <source>Activity indicator</source>
         <translation>Индикатор активности</translation>
     </message>
     <message>
-        <location filename="../assets/SketchPreviewPage.qml" line="141"/>
+        <location filename="../assets/SketchPreviewPage.qml" line="138"/>
         <source>Gaussian radius slider</source>
         <translation>Ползунок радиуса фильтра Гаусса</translation>
     </message>
@@ -851,8 +875,8 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="111"/>
-        <location filename="../assets/main.qml" line="189"/>
-        <location filename="../assets/main.qml" line="214"/>
+        <location filename="../assets/main.qml" line="186"/>
+        <location filename="../assets/main.qml" line="211"/>
         <source>Divider</source>
         <translation>Разделитель</translation>
     </message>
@@ -882,87 +906,87 @@
         <translation>Предпросмотр кисти</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="194"/>
+        <location filename="../assets/main.qml" line="191"/>
         <source>Image Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="197"/>
+        <location filename="../assets/main.qml" line="194"/>
         <source>Low (&lt;= 0.5 Mpix)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="201"/>
+        <location filename="../assets/main.qml" line="198"/>
         <source>Medium (&lt;= 1.0 Mpix)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="205"/>
+        <location filename="../assets/main.qml" line="202"/>
         <source>High (&lt;= 2.0 Mpix)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="209"/>
+        <location filename="../assets/main.qml" line="206"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="247"/>
+        <location filename="../assets/main.qml" line="244"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="268"/>
+        <location filename="../assets/main.qml" line="265"/>
         <source>List of modes</source>
         <translation>Список режимов</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="368"/>
+        <location filename="../assets/main.qml" line="365"/>
         <source>Decolorize</source>
         <translation>Обесцветить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="370"/>
+        <location filename="../assets/main.qml" line="367"/>
         <source>Sketch</source>
         <translation>В эскиз</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="372"/>
+        <location filename="../assets/main.qml" line="369"/>
         <source>Cartoon</source>
         <translation>В комикс</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="374"/>
+        <location filename="../assets/main.qml" line="371"/>
         <source>Blur</source>
         <translation>Размыть</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="376"/>
+        <location filename="../assets/main.qml" line="373"/>
         <source>Pixelate</source>
         <translation>Пикселизировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="378"/>
+        <location filename="../assets/main.qml" line="375"/>
         <source>Recolor</source>
         <translation>Перекрасить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="380"/>
+        <location filename="../assets/main.qml" line="377"/>
         <source>Retouch</source>
         <translation>Ретушировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="419"/>
+        <location filename="../assets/main.qml" line="416"/>
         <source>Example image</source>
         <translation>Пример изображения</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="457"/>
+        <location filename="../assets/main.qml" line="454"/>
         <source>Open Image</source>
         <translation>Открыть Фото</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="484"/>
+        <location filename="../assets/main.qml" line="481"/>
         <source>Slide your finger over the mode selection screen to switch between modes</source>
         <translation>Пролистните список пальцем для переключения между режимами</translation>
     </message>
