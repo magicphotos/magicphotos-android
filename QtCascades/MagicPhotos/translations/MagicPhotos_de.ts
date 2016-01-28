@@ -72,7 +72,7 @@
     <message>
         <location filename="../assets/BlurPage.qml" line="363"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/BlurPage.qml" line="382"/>
@@ -199,7 +199,7 @@
     <message>
         <location filename="../assets/CartoonPage.qml" line="364"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/CartoonPage.qml" line="383"/>
@@ -331,7 +331,7 @@
     <message>
         <location filename="../assets/DecolorizePage.qml" line="362"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/DecolorizePage.qml" line="381"/>
@@ -459,7 +459,7 @@
     <message>
         <location filename="../assets/PixelatePage.qml" line="363"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/PixelatePage.qml" line="382"/>
@@ -586,7 +586,7 @@
     <message>
         <location filename="../assets/RecolorPage.qml" line="377"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/RecolorPage.qml" line="396"/>
@@ -695,7 +695,7 @@
     <message>
         <location filename="../assets/RetouchPage.qml" line="461"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/RetouchPage.qml" line="480"/>
@@ -799,7 +799,7 @@
     <message>
         <location filename="../assets/SketchPage.qml" line="363"/>
         <source>Image fragment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildfragment</translation>
     </message>
     <message>
         <location filename="../assets/SketchPage.qml" line="382"/>
@@ -908,27 +908,27 @@
     <message>
         <location filename="../assets/main.qml" line="191"/>
         <source>Image Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildqualität</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="194"/>
         <source>Low (&lt;= 0.5 Mpix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig (&lt;= 0.5 Mpix)</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="198"/>
         <source>Medium (&lt;= 1.0 Mpix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittel (&lt;= 1.0 Mpix)</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="202"/>
         <source>High (&lt;= 2.0 Mpix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch (&lt;= 2.0 Mpix)</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="206"/>
         <source>Original</source>
-        <translation type="unfinished"></translation>
+        <translation>Original</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="244"/>

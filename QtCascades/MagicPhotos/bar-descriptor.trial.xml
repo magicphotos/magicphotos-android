@@ -125,10 +125,11 @@
     <env var="CASCADES_THEME" value="dark"/>
 
     <!-- Handle invocations -->
-    <invoke-target id="com.derevenetz.oleg.MagicPhotosTrial.image.open">
+    <invoke-target id="com.derevenetz.oleg.MagicPhotosTrial.image.open.share">
         <invoke-target-type>application</invoke-target-type>
         <filter>
             <action>bb.action.OPEN</action>
+            <action>bb.action.SHARE</action>
             <mime-type>*</mime-type>
             <property var="uris" value="file://"/>
             <property var="exts" value="png,jpg,bmp"/>
