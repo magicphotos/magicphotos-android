@@ -10,7 +10,7 @@ ApplicationWindow {
     id:      mainWindow
     visible: true
 
-    Material.theme:   Material.Light
+    Material.theme:   Material.System
     Material.primary: Material.Teal
 
     Component.onCompleted: {

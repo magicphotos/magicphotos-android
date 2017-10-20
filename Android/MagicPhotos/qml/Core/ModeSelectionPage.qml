@@ -10,7 +10,7 @@ Page {
     id: modeSelectionPage
 
     header: Pane {
-        Material.background: Material.Purple
+        Material.background: Material.Red
 
         Label {
             anchors.centerIn: parent
