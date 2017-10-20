@@ -1,14 +1,54 @@
-import QtQuick 2.2
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.1
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
+import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.3
 import ImageEditor 1.0
 
-import "Util.js" as UtilScript
+import "../Util.js" as UtilScript
 
-Item {
+Page {
     id: blurPreviewPage
+
+    header: Pane {
+        Material.background: Material.Green
+
+        Label {
+            anchors.centerIn: parent
+            text:             qsTr("Blur")
+            font.pointSize:   24
+        }
+    }
+
+    footer: ToolBar {
+        RowLayout {
+            anchors.fill: parent
+
+            ToolButton {
+                id:             applyToolButton
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:        false
+
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_apply.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    var component = Qt.createComponent("BlurPage.qml");
+
+                    if (component.status === Component.Ready) {
+                        mainStackView.push(component, {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, imageFile: blurPreviewPage.imageFile});
+                    } else {
+                        console.log(component.errorString());
+                    }
+                }
+            }
+        }
+    }
 
     property int    imageOrientation: -1
 
@@ -38,148 +78,66 @@ Item {
         }
     }
 
-    Rectangle {
-        anchors.top:    parent.top
-        anchors.bottom: gaussianRadiusSliderRectangle.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        color:          "transparent"
-
-        BlurPreviewGenerator {
-            id:           blurPreviewGenerator
-            anchors.fill: parent
-
-            property int waitRectangleUsageCounter: 0
-
-            onImageOpened: {
-                gaussianRadiusSlider.enabled = true;
-                applyButton.enabled          = true;
-            }
-
-            onImageOpenFailed: {
-                gaussianRadiusSlider.enabled = false;
-                applyButton.enabled          = false;
-
-                imageOpenFailedMessageDialog.open();
-            }
-
-            onGenerationStarted: {
-                waitRectangleUsageCounter = waitRectangleUsageCounter + 1;
-
-                if (waitRectangleUsageCounter === 1) {
-                    waitRectangle.visible = true;
-                }
-            }
-
-            onGenerationFinished: {
-                if (waitRectangleUsageCounter === 1) {
-                    waitRectangle.visible = false;
-                }
-
-                if (waitRectangleUsageCounter > 0) {
-                    waitRectangleUsageCounter = waitRectangleUsageCounter - 1;
-                }
-            }
-        }
+    ColumnLayout {
+        anchors.fill:    parent
+        anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+        spacing:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
 
         Rectangle {
-            id:           waitRectangle
-            anchors.fill: parent
-            z:            10
-            visible:      false
-            color:        "black"
-            opacity:      0.75
+            color: "transparent"
 
-            MouseArea {
+            Layout.fillWidth:  true
+            Layout.fillHeight: true
+
+            BlurPreviewGenerator {
+                id:           blurPreviewGenerator
                 anchors.fill: parent
 
-                Image {
+                property int waitRectangleUsageCounter: 0
+
+                onImageOpened: {
+                    gaussianRadiusSlider.enabled = true;
+                    applyToolButton.enabled      = true;
+                }
+
+                onImageOpenFailed: {
+                    gaussianRadiusSlider.enabled = false;
+                    applyToolButton.enabled      = false;
+
+                    imageOpenFailedMessageDialog.open();
+                }
+
+                onGenerationStarted: {
+                    waitRectangleUsageCounter = waitRectangleUsageCounter + 1;
+
+                    if (waitRectangleUsageCounter === 1) {
+                        waitRectangle.visible = true;
+                    }
+                }
+
+                onGenerationFinished: {
+                    if (waitRectangleUsageCounter === 1) {
+                        waitRectangle.visible = false;
+                    }
+
+                    if (waitRectangleUsageCounter > 0) {
+                        waitRectangleUsageCounter = waitRectangleUsageCounter - 1;
+                    }
+                }
+            }
+
+            Rectangle {
+                id:           waitRectangle
+                anchors.fill: parent
+                z:            10
+                color:        "black"
+                opacity:      0.75
+                visible:      false
+
+                BusyIndicator {
                     anchors.centerIn: parent
-                    width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                    height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                    source:           "images/busy_indicator.png"
-                    fillMode:         Image.PreserveAspectFit
+                    running:          parent.visible
                 }
-            }
-        }
-    }
-
-    Rectangle {
-        id:             gaussianRadiusSliderRectangle
-        anchors.bottom: applyButtonRectangle.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        height:         gaussianRadiusSlider.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
-        color:          "transparent"
-
-        Slider {
-            id:                     gaussianRadiusSlider
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left:           parent.left
-            anchors.right:          parent.right
-            enabled:                false
-            minimumValue:           4
-            maximumValue:           18
-            value:                  11
-            stepSize:               1.0
-
-            onPressedChanged: {
-                if (!pressed) {
-                    blurPreviewGenerator.radius = value;
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id:             applyButtonRectangle
-        anchors.bottom: bottomToolBar.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        height:         applyButton.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
-        color:          "transparent"
-
-        Button {
-            id:               applyButton
-            anchors.centerIn: parent
-            enabled:          false
-            text:             qsTr("Apply")
-
-            style: ButtonStyle {
-                background: Rectangle {
-                    implicitWidth:  control.width
-                    implicitHeight: control.height
-                    color:          "lightgray"
-                    radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                }
-
-                label: Text {
-                    color: "black"
-                    text:  control.text
-                }
-            }
-
-            onClicked: {
-                var component = Qt.createComponent("BlurPage.qml");
-
-                if (component.status === Component.Ready) {
-                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, imageFile: blurPreviewPage.imageFile}});
-                } else {
-                    console.log(component.errorString());
-                }
-            }
-        }
-    }
-
-    ToolBar {
-        id:             bottomToolBar
-        anchors.bottom: parent.bottom
-        height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-        z:              1
-
-        style: ToolBarStyle {
-            background: Rectangle {
-                color: "lightgray"
 
                 MouseArea {
                     anchors.fill: parent
@@ -187,31 +145,19 @@ Item {
             }
         }
 
-        RowLayout {
-            anchors.fill: parent
+        Slider {
+            id:       gaussianRadiusSlider
+            enabled:  false
+            from:     4
+            to:       18
+            value:    11
+            stepSize: 1.0
 
-            ToolButton {
-                anchors.centerIn: parent
-                width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+            Layout.fillWidth: true
 
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/help.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
+            onPressedChanged: {
+                if (!pressed) {
+                    blurPreviewGenerator.radius = value;
                 }
             }
         }

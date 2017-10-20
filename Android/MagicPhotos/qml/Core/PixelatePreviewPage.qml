@@ -1,14 +1,54 @@
-import QtQuick 2.2
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.1
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
+import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.3
 import ImageEditor 1.0
 
-import "Util.js" as UtilScript
+import "../Util.js" as UtilScript
 
-Item {
+Page {
     id: pixelatePreviewPage
+
+    header: Pane {
+        Material.background: Material.Green
+
+        Label {
+            anchors.centerIn: parent
+            text:             qsTr("Pixelate")
+            font.pointSize:   24
+        }
+    }
+
+    footer: ToolBar {
+        RowLayout {
+            anchors.fill: parent
+
+            ToolButton {
+                id:             applyToolButton
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:        false
+
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_apply.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    var component = Qt.createComponent("PixelatePage.qml");
+
+                    if (component.status === Component.Ready) {
+                        mainStackView.push(component, {imageOrientation: imageOrientation, pixelDenom: pixDenomSlider.value, imageFile: pixelatePreviewPage.imageFile});
+                    } else {
+                        console.log(component.errorString());
+                    }
+                }
+            }
+        }
+    }
 
     property int    imageOrientation: -1
 
@@ -38,148 +78,66 @@ Item {
         }
     }
 
-    Rectangle {
-        anchors.top:    parent.top
-        anchors.bottom: pixDenomSliderRectangle.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        color:          "transparent"
-
-        PixelatePreviewGenerator {
-            id:           pixelatePreviewGenerator
-            anchors.fill: parent
-
-            property int waitRectangleUsageCounter: 0
-
-            onImageOpened: {
-                pixDenomSlider.enabled = true;
-                applyButton.enabled    = true;
-            }
-
-            onImageOpenFailed: {
-                pixDenomSlider.enabled = false;
-                applyButton.enabled    = false;
-
-                imageOpenFailedMessageDialog.open();
-            }
-
-            onGenerationStarted: {
-                waitRectangleUsageCounter = waitRectangleUsageCounter + 1;
-
-                if (waitRectangleUsageCounter === 1) {
-                    waitRectangle.visible = true;
-                }
-            }
-
-            onGenerationFinished: {
-                if (waitRectangleUsageCounter === 1) {
-                    waitRectangle.visible = false;
-                }
-
-                if (waitRectangleUsageCounter > 0) {
-                    waitRectangleUsageCounter = waitRectangleUsageCounter - 1;
-                }
-            }
-        }
+    ColumnLayout {
+        anchors.fill:    parent
+        anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+        spacing:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
 
         Rectangle {
-            id:           waitRectangle
-            anchors.fill: parent
-            z:            10
-            visible:      false
-            color:        "black"
-            opacity:      0.75
+            color: "transparent"
 
-            MouseArea {
+            Layout.fillWidth:  true
+            Layout.fillHeight: true
+
+            PixelatePreviewGenerator {
+                id:           pixelatePreviewGenerator
                 anchors.fill: parent
 
-                Image {
+                property int waitRectangleUsageCounter: 0
+
+                onImageOpened: {
+                    pixDenomSlider.enabled  = true;
+                    applyToolButton.enabled = true;
+                }
+
+                onImageOpenFailed: {
+                    pixDenomSlider.enabled  = false;
+                    applyToolButton.enabled = false;
+
+                    imageOpenFailedMessageDialog.open();
+                }
+
+                onGenerationStarted: {
+                    waitRectangleUsageCounter = waitRectangleUsageCounter + 1;
+
+                    if (waitRectangleUsageCounter === 1) {
+                        waitRectangle.visible = true;
+                    }
+                }
+
+                onGenerationFinished: {
+                    if (waitRectangleUsageCounter === 1) {
+                        waitRectangle.visible = false;
+                    }
+
+                    if (waitRectangleUsageCounter > 0) {
+                        waitRectangleUsageCounter = waitRectangleUsageCounter - 1;
+                    }
+                }
+            }
+
+            Rectangle {
+                id:           waitRectangle
+                anchors.fill: parent
+                z:            10
+                color:        "black"
+                opacity:      0.75
+                visible:      false
+
+                BusyIndicator {
                     anchors.centerIn: parent
-                    width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                    height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                    source:           "images/busy_indicator.png"
-                    fillMode:         Image.PreserveAspectFit
+                    running:          parent.visible
                 }
-            }
-        }
-    }
-
-    Rectangle {
-        id:             pixDenomSliderRectangle
-        anchors.bottom: applyButtonRectangle.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        height:         pixDenomSlider.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
-        color:          "transparent"
-
-        Slider {
-            id:                     pixDenomSlider
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left:           parent.left
-            anchors.right:          parent.right
-            enabled:                false
-            minimumValue:           32
-            maximumValue:           192
-            value:                  112
-            stepSize:               8.0
-
-            onPressedChanged: {
-                if (!pressed) {
-                    pixelatePreviewGenerator.pixDenom = value;
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id:             applyButtonRectangle
-        anchors.bottom: bottomToolBar.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        height:         applyButton.height + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
-        color:          "transparent"
-
-        Button {
-            id:               applyButton
-            anchors.centerIn: parent
-            enabled:          false
-            text:             qsTr("Apply")
-
-            style: ButtonStyle {
-                background: Rectangle {
-                    implicitWidth:  control.width
-                    implicitHeight: control.height
-                    color:          "lightgray"
-                    radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                }
-
-                label: Text {
-                    color: "black"
-                    text:  control.text
-                }
-            }
-
-            onClicked: {
-                var component = Qt.createComponent("PixelatePage.qml");
-
-                if (component.status === Component.Ready) {
-                    mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: imageOrientation, pixelDenom: pixDenomSlider.value, imageFile: pixelatePreviewPage.imageFile}});
-                } else {
-                    console.log(component.errorString());
-                }
-            }
-        }
-    }
-
-    ToolBar {
-        id:             bottomToolBar
-        anchors.bottom: parent.bottom
-        height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-        z:              1
-
-        style: ToolBarStyle {
-            background: Rectangle {
-                color: "lightgray"
 
                 MouseArea {
                     anchors.fill: parent
@@ -187,31 +145,19 @@ Item {
             }
         }
 
-        RowLayout {
-            anchors.fill: parent
+        Slider {
+            id:       pixDenomSlider
+            enabled:  false
+            from:     32
+            to:       192
+            value:    112
+            stepSize: 8.0
 
-            ToolButton {
-                anchors.centerIn: parent
-                width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+            Layout.fillWidth: true
 
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/help.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
+            onPressedChanged: {
+                if (!pressed) {
+                    pixelatePreviewGenerator.pixDenom = value;
                 }
             }
         }

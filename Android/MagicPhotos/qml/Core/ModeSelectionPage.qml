@@ -88,7 +88,7 @@ Page {
             component = Qt.createComponent("CartoonPreviewPage.qml");
 
             if (component.status === Component.Ready) {
-                mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: image_orientation, imageFile: image_file}});
+                mainStackView.push(component, {imageOrientation: image_orientation, imageFile: image_file});
             } else {
                 console.log(component.errorString());
             }
@@ -96,7 +96,7 @@ Page {
             component = Qt.createComponent("BlurPreviewPage.qml");
 
             if (component.status === Component.Ready) {
-                mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: image_orientation, imageFile: image_file}});
+                mainStackView.push(component, {imageOrientation: image_orientation, imageFile: image_file});
             } else {
                 console.log(component.errorString());
             }
@@ -104,7 +104,7 @@ Page {
             component = Qt.createComponent("PixelatePreviewPage.qml");
 
             if (component.status === Component.Ready) {
-                mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: image_orientation, imageFile: image_file}});
+                mainStackView.push(component, {imageOrientation: image_orientation, imageFile: image_file});
             } else {
                 console.log(component.errorString());
             }
@@ -112,7 +112,7 @@ Page {
             component = Qt.createComponent("RecolorPage.qml");
 
             if (component.status === Component.Ready) {
-                mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: image_orientation, imageFile: image_file}});
+                mainStackView.push(component, {imageOrientation: image_orientation, imageFile: image_file});
             } else {
                 console.log(component.errorString());
             }
@@ -120,7 +120,7 @@ Page {
             component = Qt.createComponent("RetouchPage.qml");
 
             if (component.status === Component.Ready) {
-                mainStackView.push({item: component.createObject(null), destroyOnPop: true, properties: {imageOrientation: image_orientation, imageFile: image_file}});
+                mainStackView.push(component, {imageOrientation: image_orientation, imageFile: image_file});
             } else {
                 console.log(component.errorString());
             }

@@ -1,14 +1,207 @@
-import QtQuick 2.2
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.1
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
+import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.3
 import ImageEditor 1.0
 
-import "Util.js" as UtilScript
+import "../Util.js" as UtilScript
 
-Item {
+Page {
     id: sketchPage
+
+    header: Pane {
+        Material.background: Material.LightBlue
+
+        ButtonGroup {
+            buttons: headerRow.children
+        }
+
+        Row {
+            id:               headerRow
+            anchors.centerIn: parent
+
+            Button {
+                id:        scrollModeButton
+                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:   false
+                checkable: true
+                checked:   true
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/mode_scroll.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onCheckedChanged: {
+                    if (checked) {
+                        sketchEditor.mode           = SketchEditor.ModeScroll;
+                        editorFlickable.interactive = true;
+                        editorPinchArea.enabled     = true;
+                    }
+                }
+            }
+
+            Button {
+                id:        originalModeButton
+                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:   false
+                checkable: true
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/mode_original.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onCheckedChanged: {
+                    if (checked) {
+                        sketchEditor.mode           = SketchEditor.ModeOriginal;
+                        editorFlickable.interactive = false;
+                        editorPinchArea.enabled     = false;
+                    }
+                }
+            }
+
+            Button {
+                id:        effectedModeButton
+                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:   false
+                checkable: true
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/mode_effected.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onCheckedChanged: {
+                    if (checked) {
+                        sketchEditor.mode           = SketchEditor.ModeEffected;
+                        editorFlickable.interactive = false;
+                        editorPinchArea.enabled     = false;
+                    }
+                }
+            }
+        }
+    }
+
+    footer: ToolBar {
+        RowLayout {
+            anchors.fill: parent
+
+            ToolButton {
+                id:             saveToolButton
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:        false
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_save.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    var date  = new Date();
+                    var year  = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var day   = date.getDate();
+                    var hour  = date.getHours();
+                    var min   = date.getMinutes();
+                    var sec   = date.getSeconds();
+
+                    var file_name = "IMG_" + year                              + "-" +
+                                             (month > 9 ? month : "0" + month) + "-" +
+                                             (day   > 9 ? day   : "0" + day)   + "_" +
+                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                             (min   > 9 ? min   : "0" + min)   + "-" +
+                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+
+                    sketchPage.shareActionActive = false;
+
+                    sketchEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                }
+            }
+
+            ToolButton {
+                id:             shareToolButton
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:        false
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_share.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    var date  = new Date();
+                    var year  = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var day   = date.getDate();
+                    var hour  = date.getHours();
+                    var min   = date.getMinutes();
+                    var sec   = date.getSeconds();
+
+                    var file_name = "IMG_" + year                              + "-" +
+                                             (month > 9 ? month : "0" + month) + "-" +
+                                             (day   > 9 ? day   : "0" + day)   + "_" +
+                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                             (min   > 9 ? min   : "0" + min)   + "-" +
+                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+
+                    sketchPage.shareActionActive = true;
+
+                    sketchEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                }
+            }
+
+            ToolButton {
+                id:             undoToolButton
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:        false
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_undo.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    sketchEditor.undo();
+                }
+            }
+
+            ToolButton {
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_settings.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    brushSettingsPane.visible = !brushSettingsPane.visible;
+                }
+            }
+
+            ToolButton {
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_help.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
+                }
+            }
+        }
+    }
 
     property bool   shareActionActive: false
 
@@ -30,8 +223,8 @@ Item {
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
-            if (brushSettingsRectangle.visible) {
-                brushSettingsRectangle.visible = false;
+            if (brushSettingsPane.visible) {
+                brushSettingsPane.visible = false;
             } else if (sketchEditor.changed) {
                 backMessageDialog.open();
             } else {
@@ -67,131 +260,9 @@ Item {
     }
 
     Rectangle {
-        id:            topButtonGroupRectangle
-        anchors.top:   parent.top
-        anchors.left:  parent.left
-        anchors.right: parent.right
-        height:        modeButtonRow.height
-        z:             1
-        color:         "transparent"
-
-        ExclusiveGroup {
-            id: buttonExclusiveGroup
-        }
-
-        Row {
-            id:               modeButtonRow
-            anchors.centerIn: parent
-
-            Button {
-                id:             scrollModeButton
-                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                exclusiveGroup: buttonExclusiveGroup
-                checkable:      true
-                checked:        true
-                enabled:        false
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/mode_scroll.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        sketchEditor.mode           = SketchEditor.ModeScroll;
-                        editorFlickable.interactive = true;
-                        editorPinchArea.enabled     = true;
-                    }
-                }
-            }
-
-            Button {
-                id:             originalModeButton
-                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                exclusiveGroup: buttonExclusiveGroup
-                checkable:      true
-                enabled:        false
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/mode_original.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        sketchEditor.mode           = SketchEditor.ModeOriginal;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
-                }
-            }
-
-            Button {
-                id:             effectedModeButton
-                width:          UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                exclusiveGroup: buttonExclusiveGroup
-                checkable:      true
-                enabled:        false
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          control.checked ? "gray" : "lightgray"
-                        radius:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/mode_effected.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        sketchEditor.mode           = SketchEditor.ModeEffected;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id:             editorRectangle
-        anchors.top:    topButtonGroupRectangle.bottom
-        anchors.bottom: bottomToolBar.top
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        color:          "transparent"
+        id:           editorRectangle
+        anchors.fill: parent
+        color:        "transparent"
 
         Flickable {
             id:             editorFlickable
@@ -349,30 +420,26 @@ Item {
             color:        "black"
             opacity:      0.75
 
+            BusyIndicator {
+                anchors.centerIn: parent
+                running:          parent.visible
+            }
+
             MouseArea {
                 anchors.fill: parent
-
-                Image {
-                    anchors.centerIn: parent
-                    width:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                    height:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                    source:           "images/busy_indicator.png"
-                    fillMode:         Image.PreserveAspectFit
-                }
             }
         }
     }
 
-    Rectangle {
-        id:             brushSettingsRectangle
-        anchors.bottom: bottomToolBar.top
+    Pane {
+        id:             brushSettingsPane
+        anchors.bottom: parent.bottom
         anchors.left:   parent.left
         anchors.right:  parent.right
-        height:         Math.max(brushSizeRectangle.height    + brushSizeRectangle.anchors.bottomMargin    +
-                                 brushOpacityRectangle.height + brushOpacityRectangle.anchors.bottomMargin + UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12), brushPreviewGenerator.height)
         z:              15
-        color:          "black"
         visible:        false
+
+        Material.elevation: 5
 
         onVisibleChanged: {
             if (visible) {
@@ -381,292 +448,69 @@ Item {
             }
         }
 
-        MouseArea {
-            anchors.fill: parent
-
-            Rectangle {
-                id:                   brushSizeRectangle
-                anchors.bottom:       brushOpacityRectangle.top
-                anchors.left:         parent.left
-                anchors.right:        brushPreviewGenerator.left
-                anchors.bottomMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
-                anchors.rightMargin:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
-                height:               brushSizeTextRectangle.height
-                color:                "transparent"
-
-                Rectangle {
-                    id:           brushSizeTextRectangle
-                    anchors.left: parent.left
-                    width:        Math.max(brushSizeText.width, brushOpacityText.width)
-                    height:       Math.max(brushSizeText.height, brushSizeSlider.height)
-                    color:        "transparent"
-
-                    Text {
-                        id:                     brushSizeText
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left:           parent.left
-                        color:                  "white"
-                        text:                   qsTr("Brush Size")
-                    }
-                }
-
-                Slider {
-                    id:                     brushSizeSlider
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left:           brushSizeTextRectangle.right
-                    anchors.right:          parent.right
-                    anchors.leftMargin:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
-                    minimumValue:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
-                    maximumValue:           UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 24)
-                    value:                  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
-                    stepSize:               1.0
-
-                    onPressedChanged: {
-                        if (!pressed) {
-                            AppSettings.brushSize = value;
-
-                            sketchPage.updateEditorParameters();
-                        }
-                    }
-                }
-            }
-
-            Rectangle {
-                id:                   brushOpacityRectangle
-                anchors.bottom:       parent.bottom
-                anchors.left:         parent.left
-                anchors.right:        brushPreviewGenerator.left
-                anchors.bottomMargin: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
-                anchors.rightMargin:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
-                height:               brushOpacityTextRectangle.height
-                color:                "transparent"
-
-                Rectangle {
-                    id:                     brushOpacityTextRectangle
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left:           parent.left
-                    width:                  Math.max(brushSizeText.width, brushOpacityText.width)
-                    height:                 Math.max(brushOpacityText.height, brushOpacitySlider.height)
-                    color:                  "transparent"
-
-                    Text {
-                        id:                     brushOpacityText
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left:           parent.left
-                        color:                  "white"
-                        text:                   qsTr("Brush Opacity")
-                    }
-                }
-
-                Slider {
-                    id:                     brushOpacitySlider
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left:           brushOpacityTextRectangle.right
-                    anchors.right:          parent.right
-                    anchors.leftMargin:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 12)
-                    minimumValue:           0.0
-                    maximumValue:           1.0
-                    value:                  0.75
-                    stepSize:               0.1
-
-                    onPressedChanged: {
-                        if (!pressed) {
-                            AppSettings.brushOpacity = value;
-
-                            sketchPage.updateEditorParameters();
-                        }
-                    }
-                }
-            }
+        GridLayout {
+            anchors.fill:    parent
+            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+            rows:            2
+            columns:         3
+            rowSpacing:      UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
+            columnSpacing:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
 
             BrushPreviewGenerator {
-                id:                     brushPreviewGenerator
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right:          parent.right
-                size:                   brushSizeSlider.value
-                maxSize:                brushSizeSlider.maximumValue
-                opacity:                brushOpacitySlider.value
+                id:      brushPreviewGenerator
+                size:    brushSizeSlider.value
+                maxSize: brushSizeSlider.to
+                opacity: brushOpacitySlider.value
+
+                Layout.rowSpan: 2
             }
-        }
-    }
 
-    ToolBar {
-        id:             bottomToolBar
-        anchors.bottom: parent.bottom
-        height:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-        z:              1
+            Slider {
+                id:       brushSizeSlider
+                from:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
+                to:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 24)
+                value:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+                stepSize: 1.0
 
-        style: ToolBarStyle {
-            background: Rectangle {
-                color: "lightgray"
+                Layout.fillWidth: true
 
-                MouseArea {
-                    anchors.fill: parent
-                }
-            }
-        }
+                onPressedChanged: {
+                    if (!pressed) {
+                        AppSettings.brushSize = value;
 
-        RowLayout {
-            anchors.fill: parent
-
-            ToolButton {
-                id:      saveToolButton
-                width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled: false
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/save.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
+                        sketchPage.updateEditorParameters();
                     }
                 }
+            }
 
-                onClicked: {
-                    var date  = new Date();
-                    var year  = date.getFullYear();
-                    var month = date.getMonth() + 1;
-                    var day   = date.getDate();
-                    var hour  = date.getHours();
-                    var min   = date.getMinutes();
-                    var sec   = date.getSeconds();
+            Label {
+                id:             brushSizeLabel
+                text:           qsTr("Brush Size")
+                font.pointSize: 16
+            }
 
-                    var file_name = "IMG_" + year                              + "-" +
-                                             (month > 9 ? month : "0" + month) + "-" +
-                                             (day   > 9 ? day   : "0" + day)   + "_" +
-                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                             (min   > 9 ? min   : "0" + min)   + "-" +
-                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+            Slider {
+                id:       brushOpacitySlider
+                from:     0.0
+                to:       1.0
+                value:    0.75
+                stepSize: 0.1
 
-                    sketchPage.shareActionActive = false;
+                Layout.fillWidth: true
 
-                    sketchEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                onPressedChanged: {
+                    if (!pressed) {
+                        AppSettings.brushOpacity = value;
+
+                        sketchPage.updateEditorParameters();
+                    }
                 }
             }
 
-            ToolButton {
-                id:      shareToolButton
-                width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled: false
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/share.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    var date  = new Date();
-                    var year  = date.getFullYear();
-                    var month = date.getMonth() + 1;
-                    var day   = date.getDate();
-                    var hour  = date.getHours();
-                    var min   = date.getMinutes();
-                    var sec   = date.getSeconds();
-
-                    var file_name = "IMG_" + year                              + "-" +
-                                             (month > 9 ? month : "0" + month) + "-" +
-                                             (day   > 9 ? day   : "0" + day)   + "_" +
-                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                             (min   > 9 ? min   : "0" + min)   + "-" +
-                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
-
-                    sketchPage.shareActionActive = true;
-
-                    sketchEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
-                }
-            }
-
-            ToolButton {
-                id:      undoToolButton
-                width:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled: false
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/undo.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    sketchEditor.undo();
-                }
-            }
-
-            ToolButton {
-                width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/settings.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    brushSettingsRectangle.visible = !brushSettingsRectangle.visible;
-                }
-            }
-
-            ToolButton {
-                width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
-                style: ButtonStyle {
-                    background: Rectangle {
-                        implicitWidth:  control.width
-                        implicitHeight: control.height
-                        color:          "transparent"
-
-                        Image {
-                            anchors.fill:    parent
-                            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-                            source:          "images/help.png"
-                            fillMode:        Image.PreserveAspectFit
-                        }
-                    }
-                }
-
-                onClicked: {
-                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
-                }
+            Label {
+                id:             brushOpacityLabel
+                text:           qsTr("Brush Opacity")
+                font.pointSize: 16
             }
         }
     }
