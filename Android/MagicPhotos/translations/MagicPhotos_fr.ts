@@ -4,16 +4,16 @@
 <context>
     <name>BlurPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -55,12 +55,8 @@
 <context>
     <name>BlurPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+        <source>Blur</source>
+        <translation>Faire flou</translation>
     </message>
     <message>
         <source>Error</source>
@@ -74,16 +70,16 @@
 <context>
     <name>CartoonPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -125,12 +121,8 @@
 <context>
     <name>CartoonPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+        <source>Cartoon</source>
+        <translation>Dans la bande dessinée</translation>
     </message>
     <message>
         <source>Error</source>
@@ -144,16 +136,16 @@
 <context>
     <name>DecolorizePage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -187,48 +179,12 @@
 <context>
     <name>ModeSelectionPage</name>
     <message>
-        <source>DECOLORIZE</source>
-        <translation>DÉCOLORER</translation>
-    </message>
-    <message>
-        <source>SKETCH</source>
-        <translation>DANS L’ESQUISSE</translation>
-    </message>
-    <message>
-        <source>CARTOON</source>
-        <translation>DANS LA BANDE DESSINÉE</translation>
-    </message>
-    <message>
-        <source>BLUR</source>
-        <translation>FAIRE FLOU</translation>
-    </message>
-    <message>
-        <source>PIXELATE</source>
-        <translation>PIXÉLISER</translation>
-    </message>
-    <message>
-        <source>RECOLOR</source>
-        <translation>RECOLORIER</translation>
-    </message>
-    <message>
-        <source>RETOUCH</source>
-        <translation>RETOUCHER</translation>
-    </message>
-    <message>
-        <source>Open Image</source>
-        <translation>Ouvrir la Photo</translation>
+        <source>MagicPhotos</source>
+        <translation>MagicPhotos</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
-    </message>
-    <message>
-        <source>Content unlocked!</source>
-        <translation>Fonctionnalité débloqué!</translation>
-    </message>
-    <message>
-        <source>Thank you!</source>
-        <translation>Merci!</translation>
     </message>
     <message>
         <source>Error</source>
@@ -242,16 +198,16 @@
 <context>
     <name>PixelatePage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -293,12 +249,8 @@
 <context>
     <name>PixelatePreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+        <source>Pixelate</source>
+        <translation>Pixéliser</translation>
     </message>
     <message>
         <source>Error</source>
@@ -312,16 +264,16 @@
 <context>
     <name>RecolorPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -363,16 +315,16 @@
 <context>
     <name>RetouchPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -414,16 +366,16 @@
 <context>
     <name>SketchPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Taille de la brosse</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Dureté de la brosse</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -457,12 +409,8 @@
 <context>
     <name>SketchPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_fr.html</translation>
+        <source>Sketch</source>
+        <translation>Dans l’esquisse</translation>
     </message>
     <message>
         <source>Error</source>

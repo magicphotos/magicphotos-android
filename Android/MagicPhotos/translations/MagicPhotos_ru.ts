@@ -4,16 +4,16 @@
 <context>
     <name>BlurPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -55,12 +55,8 @@
 <context>
     <name>BlurPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <source>Blur</source>
+        <translation>Размытие</translation>
     </message>
     <message>
         <source>Error</source>
@@ -74,16 +70,16 @@
 <context>
     <name>CartoonPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -125,12 +121,8 @@
 <context>
     <name>CartoonPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <source>Cartoon</source>
+        <translation>Комикс</translation>
     </message>
     <message>
         <source>Error</source>
@@ -144,16 +136,16 @@
 <context>
     <name>DecolorizePage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -187,48 +179,12 @@
 <context>
     <name>ModeSelectionPage</name>
     <message>
-        <source>DECOLORIZE</source>
-        <translation>ОБЕСЦВЕТИТЬ</translation>
-    </message>
-    <message>
-        <source>SKETCH</source>
-        <translation>В ЭСКИЗ</translation>
-    </message>
-    <message>
-        <source>CARTOON</source>
-        <translation>В КОМИКС</translation>
-    </message>
-    <message>
-        <source>BLUR</source>
-        <translation>РАЗМЫТЬ</translation>
-    </message>
-    <message>
-        <source>PIXELATE</source>
-        <translation>ПИКСЕЛИЗИРОВАТЬ</translation>
-    </message>
-    <message>
-        <source>RECOLOR</source>
-        <translation>ПЕРЕКРАСИТЬ</translation>
-    </message>
-    <message>
-        <source>RETOUCH</source>
-        <translation>РЕТУШИРОВАТЬ</translation>
-    </message>
-    <message>
-        <source>Open Image</source>
-        <translation>Открыть Фото</translation>
+        <source>MagicPhotos</source>
+        <translation>Волшебные Фото</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
-    </message>
-    <message>
-        <source>Content unlocked!</source>
-        <translation>Контент разблокирован!</translation>
-    </message>
-    <message>
-        <source>Thank you!</source>
-        <translation>Спасибо!</translation>
     </message>
     <message>
         <source>Error</source>
@@ -242,16 +198,16 @@
 <context>
     <name>PixelatePage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -293,12 +249,8 @@
 <context>
     <name>PixelatePreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <source>Pixelate</source>
+        <translation>Пикселизация</translation>
     </message>
     <message>
         <source>Error</source>
@@ -312,16 +264,16 @@
 <context>
     <name>RecolorPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -363,16 +315,16 @@
 <context>
     <name>RetouchPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -414,16 +366,16 @@
 <context>
     <name>SketchPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Жесткость кисти</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -457,12 +409,8 @@
 <context>
     <name>SketchPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
+        <source>Sketch</source>
+        <translation>Эскиз</translation>
     </message>
     <message>
         <source>Error</source>

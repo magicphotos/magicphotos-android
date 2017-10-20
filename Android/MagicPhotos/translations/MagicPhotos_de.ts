@@ -4,16 +4,16 @@
 <context>
     <name>BlurPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -55,12 +55,8 @@
 <context>
     <name>BlurPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>Blur</source>
+        <translation>Verwischen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -74,16 +70,16 @@
 <context>
     <name>CartoonPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -125,12 +121,8 @@
 <context>
     <name>CartoonPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>Cartoon</source>
+        <translation>In den Comic Strip</translation>
     </message>
     <message>
         <source>Error</source>
@@ -144,16 +136,16 @@
 <context>
     <name>DecolorizePage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -187,48 +179,12 @@
 <context>
     <name>ModeSelectionPage</name>
     <message>
-        <source>DECOLORIZE</source>
-        <translation>ENTFÄRBEN</translation>
-    </message>
-    <message>
-        <source>SKETCH</source>
-        <translation>IN DIE SKIZZE</translation>
-    </message>
-    <message>
-        <source>CARTOON</source>
-        <translation>IN DEN COMIC STRIP</translation>
-    </message>
-    <message>
-        <source>BLUR</source>
-        <translation>VERWISCHEN</translation>
-    </message>
-    <message>
-        <source>PIXELATE</source>
-        <translation>PIXELN</translation>
-    </message>
-    <message>
-        <source>RECOLOR</source>
-        <translation>UMFÄRBEN</translation>
-    </message>
-    <message>
-        <source>RETOUCH</source>
-        <translation>RETUSCHIEREN</translation>
-    </message>
-    <message>
-        <source>Open Image</source>
-        <translation>Foto Öffnen</translation>
+        <source>MagicPhotos</source>
+        <translation>MagicPhotos</translation>
     </message>
     <message>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
-    </message>
-    <message>
-        <source>Content unlocked!</source>
-        <translation>Funktionalität freigeschaltet!</translation>
-    </message>
-    <message>
-        <source>Thank you!</source>
-        <translation>Danke!</translation>
     </message>
     <message>
         <source>Error</source>
@@ -242,16 +198,16 @@
 <context>
     <name>PixelatePage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -293,12 +249,8 @@
 <context>
     <name>PixelatePreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>Pixelate</source>
+        <translation>Pixeln</translation>
     </message>
     <message>
         <source>Error</source>
@@ -312,16 +264,16 @@
 <context>
     <name>RecolorPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -363,16 +315,16 @@
 <context>
     <name>RetouchPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -414,16 +366,16 @@
 <context>
     <name>SketchPage</name>
     <message>
+        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+    </message>
+    <message>
         <source>Brush Size</source>
         <translation>Pinselgröße</translation>
     </message>
     <message>
         <source>Brush Opacity</source>
         <translation>Pinsel Härte</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -457,12 +409,8 @@
 <context>
     <name>SketchPreviewPage</name>
     <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>Sketch</source>
+        <translation>In die skizze</translation>
     </message>
     <message>
         <source>Error</source>
