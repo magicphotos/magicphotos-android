@@ -1,8 +1,9 @@
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
-#include <QtWidgets/QApplication>
+#include <QtGui/QGuiApplication>
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
+#include <QtQuickControls2/QQuickStyle>
 
 #include "appsettings.h"
 #include "androidgw.h"
@@ -18,8 +19,8 @@
 
 int main(int argc, char *argv[])
 {
-    QTranslator  translator;
-    QApplication app(argc, argv);
+    QTranslator     translator;
+    QGuiApplication app(argc, argv);
 
     if (translator.load(QString(":/tr/MagicPhotos_%1").arg(QLocale::system().name()))) {
         app.installTranslator(&translator);
@@ -50,7 +51,12 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty(QStringLiteral("AppSettings"), new AppSettings(&app));
     engine.rootContext()->setContextProperty(QStringLiteral("AndroidGW"), new AndroidGW(&app));
 
-    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    QQuickStyle::setStyle("Material");
+
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+
+    if (engine.rootObjects().isEmpty())
+        return -1;
 
     return app.exec();
 }

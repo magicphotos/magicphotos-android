@@ -1,42 +1,18 @@
 <RCC>
-    <qresource prefix="/images">
-        <file alias="edit_mode_blur.png">images/edit_mode_blur.png</file>
-        <file alias="edit_mode_cartoon.png">images/edit_mode_cartoon.png</file>
-        <file alias="edit_mode_decolorize.png">images/edit_mode_decolorize.png</file>
-        <file alias="edit_mode_pixelate.png">images/edit_mode_pixelate.png</file>
-        <file alias="edit_mode_recolor.png">images/edit_mode_recolor.png</file>
-        <file alias="edit_mode_retouch.png">images/edit_mode_retouch.png</file>
-        <file alias="edit_mode_sketch.png">images/edit_mode_sketch.png</file>
-        <file alias="busy_indicator.png">images/busy_indicator.png</file>
-        <file alias="help.png">images/help.png</file>
-        <file alias="save.png">images/save.png</file>
-        <file alias="settings.png">images/settings.png</file>
-        <file alias="share.png">images/share.png</file>
-        <file alias="undo.png">images/undo.png</file>
-        <file alias="mode_effected.png">images/mode_effected.png</file>
-        <file alias="mode_original.png">images/mode_original.png</file>
-        <file alias="mode_scroll.png">images/mode_scroll.png</file>
-        <file alias="mode_hue_selection.png">images/mode_hue_selection.png</file>
-        <file alias="promo_myappfree.png">images/promo_myappfree.png</file>
-        <file alias="sampling_point.png">images/sampling_point.png</file>
-        <file alias="mode_blur.png">images/mode_blur.png</file>
-        <file alias="mode_clone.png">images/mode_clone.png</file>
-        <file alias="mode_sampling_point.png">images/mode_sampling_point.png</file>
-    </qresource>
     <qresource prefix="/">
-        <file alias="main.qml">qml/main.qml</file>
-        <file alias="ModeSelectionPage.qml">qml/ModeSelectionPage.qml</file>
-        <file alias="DecolorizePage.qml">qml/DecolorizePage.qml</file>
-        <file alias="SketchPreviewPage.qml">qml/SketchPreviewPage.qml</file>
-        <file alias="SketchPage.qml">qml/SketchPage.qml</file>
-        <file alias="CartoonPage.qml">qml/CartoonPage.qml</file>
-        <file alias="CartoonPreviewPage.qml">qml/CartoonPreviewPage.qml</file>
-        <file alias="BlurPage.qml">qml/BlurPage.qml</file>
-        <file alias="BlurPreviewPage.qml">qml/BlurPreviewPage.qml</file>
-        <file alias="PixelatePage.qml">qml/PixelatePage.qml</file>
-        <file alias="PixelatePreviewPage.qml">qml/PixelatePreviewPage.qml</file>
-        <file alias="RecolorPage.qml">qml/RecolorPage.qml</file>
-        <file alias="RetouchPage.qml">qml/RetouchPage.qml</file>
-        <file alias="Util.js">qml/Util.js</file>
+        <file>qml/main.qml</file>
+        <file>qml/Util.js</file>
+        <file>qml/Core/BlurPage.qml</file>
+        <file>qml/Core/BlurPreviewPage.qml</file>
+        <file>qml/Core/CartoonPage.qml</file>
+        <file>qml/Core/CartoonPreviewPage.qml</file>
+        <file>qml/Core/DecolorizePage.qml</file>
+        <file>qml/Core/ModeSelectionPage.qml</file>
+        <file>qml/Core/PixelatePage.qml</file>
+        <file>qml/Core/PixelatePreviewPage.qml</file>
+        <file>qml/Core/RecolorPage.qml</file>
+        <file>qml/Core/RetouchPage.qml</file>
+        <file>qml/Core/SketchPreviewPage.qml</file>
+        <file>qml/Core/SketchPage.qml</file>
     </qresource>
 </RCC>

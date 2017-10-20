@@ -1,5 +1,8 @@
-import QtQuick 2.2
-import QtQuick.Controls 1.1
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
+
+import "Core"
 
 import "Util.js" as UtilScript
 
@@ -7,48 +10,41 @@ ApplicationWindow {
     id:      mainWindow
     visible: true
 
+    Material.theme:   Material.Light
+    Material.primary: Material.Teal
+
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16);
 
         mainStackView.push(modeSelectionPage);
     }
 
-    Rectangle {
+    StackView {
+        id:           mainStackView
         anchors.fill: parent
-        color:        "black"
 
-        StackView {
-            id:           mainStackView
-            anchors.fill: parent
+        onCurrentItemChanged: {
+            for (var i = 0; i < depth; i++) {
+                var item = get(i, false);
 
-            onCurrentItemChanged: {
-                for (var i = 0; i < depth; i++) {
-                    var item = get(i, false);
-
-                    if (item !== null) {
-                        item.focus = false;
-                    }
-                }
-
-                if (depth > 0) {
-                    get(depth - 1).forceActiveFocus();
-                }
-
-                if (depth === 1) {
-                    modeSelectionPage.playModeChangeSuggestionAnimation();
-                    modeSelectionPage.showPromoPopup();
+                if (item !== null) {
+                    item.focus = false;
                 }
             }
-        }
 
-        ModeSelectionPage {
-            id: modeSelectionPage
+            if (depth > 0) {
+                get(depth - 1).forceActiveFocus();
+            }
         }
+    }
 
-        MouseArea {
-            anchors.fill: parent
-            z:            20
-            enabled:      mainStackView.busy
-        }
+    ModeSelectionPage {
+        id: modeSelectionPage
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        z:            20
+        enabled:      mainStackView.busy
     }
 }

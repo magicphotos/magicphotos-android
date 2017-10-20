@@ -1,35 +1,37 @@
-TEMPLATE = app
+QT += quick quickcontrols2 androidextras
+CONFIG += c++11
 
-QT += gui widgets qml quick androidextras
+DEFINES += QT_DEPRECATED_WARNINGS
 
-SOURCES += main.cpp \
-    appsettings.cpp \
-    androidgw.cpp \
-    helper.cpp \
-    brushpreviewgenerator.cpp \
-    decolorizeeditor.cpp \
-    sketcheditor.cpp \
-    cartooneditor.cpp \
-    blureditor.cpp \
-    pixelateeditor.cpp \
-    recoloreditor.cpp \
-    retoucheditor.cpp
+SOURCES += src/main.cpp \
+    src/appsettings.cpp \
+    src/androidgw.cpp \
+    src/helper.cpp \
+    src/brushpreviewgenerator.cpp \
+    src/decolorizeeditor.cpp \
+    src/sketcheditor.cpp \
+    src/cartooneditor.cpp \
+    src/blureditor.cpp \
+    src/pixelateeditor.cpp \
+    src/recoloreditor.cpp \
+    src/retoucheditor.cpp
 
 HEADERS += \
-    appsettings.h \
-    androidgw.h \
-    helper.h \
-    brushpreviewgenerator.h \
-    decolorizeeditor.h \
-    sketcheditor.h \
-    cartooneditor.h \
-    blureditor.h \
-    pixelateeditor.h \
-    recoloreditor.h \
-    retoucheditor.h
+    src/appsettings.h \
+    src/androidgw.h \
+    src/helper.h \
+    src/brushpreviewgenerator.h \
+    src/decolorizeeditor.h \
+    src/sketcheditor.h \
+    src/cartooneditor.h \
+    src/blureditor.h \
+    src/pixelateeditor.h \
+    src/recoloreditor.h \
+    src/retoucheditor.h
 
 RESOURCES += \
     qml.qrc \
+    resources.qrc \
     translations.qrc
 
 TRANSLATIONS += \
@@ -52,6 +54,9 @@ OTHER_FILES += \
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
+
+# Additional import path used to resolve QML modules just for Qt Quick Designer
+QML_DESIGNER_IMPORT_PATH =
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android-source
 

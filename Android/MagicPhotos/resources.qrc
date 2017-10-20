@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/images/edit_mode_blur.png</file>
+        <file>resources/images/edit_mode_cartoon.png</file>
+        <file>resources/images/edit_mode_decolorize.png</file>
+        <file>resources/images/edit_mode_pixelate.png</file>
+        <file>resources/images/edit_mode_recolor.png</file>
+        <file>resources/images/edit_mode_retouch.png</file>
+        <file>resources/images/edit_mode_sketch.png</file>
+        <file>resources/images/mode_blur.png</file>
+        <file>resources/images/mode_clone.png</file>
+        <file>resources/images/mode_effected.png</file>
+        <file>resources/images/mode_hue_selection.png</file>
+        <file>resources/images/mode_original.png</file>
+        <file>resources/images/mode_sampling_point.png</file>
+        <file>resources/images/mode_scroll.png</file>
+        <file>resources/images/sampling_point.png</file>
+        <file>resources/images/tool_apply.png</file>
+        <file>resources/images/tool_help.png</file>
+        <file>resources/images/tool_save.png</file>
+        <file>resources/images/tool_settings.png</file>
+        <file>resources/images/tool_share.png</file>
+        <file>resources/images/tool_undo.png</file>
+    </qresource>
+</RCC>
