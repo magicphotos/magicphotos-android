@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
@@ -339,13 +340,21 @@ public class MagicActivity extends QtActivity
                         public void onAdFailedToLoad(int errorCode)
                         {
                             if (interstitialAd != null) {
-                                AdRequest.Builder builder = new AdRequest.Builder();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        if (interstitialAd != null) {
+                                            AdRequest.Builder builder = new AdRequest.Builder();
 
-                                if (!test_device_id.equals("")) {
-                                    builder.addTestDevice(test_device_id);
-                                }
+                                            if (!test_device_id.equals("")) {
+                                                builder.addTestDevice(test_device_id);
+                                            }
 
-                                interstitialAd.loadAd(builder.build());
+                                            interstitialAd.loadAd(builder.build());
+                                        }
+                                    }
+                                }, 60000);
                             }
                         }
                     });
