@@ -11,6 +11,8 @@ Page {
     id: blurPage
 
     header: Pane {
+        topPadding: blurPage.bannerHeight
+
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -213,6 +215,7 @@ Page {
 
     property bool   shareActionActive: false
 
+    property int    bannerHeight:      0
     property int    imageOrientation:  -1
     property int    gaussianRadius:    -1
 

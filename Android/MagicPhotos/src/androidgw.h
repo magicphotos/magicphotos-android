@@ -19,6 +19,8 @@ public:
     Q_INVOKABLE void    showGallery();
     Q_INVOKABLE void    refreshGallery(const QString &image_file);
     Q_INVOKABLE void    shareImage(const QString &image_file);
+    Q_INVOKABLE void    showAdView(const QString &unit_id, const QString banner_size, const QString &test_device_id);
+    Q_INVOKABLE void    hideAdView();
 
 signals:
     void imageSelected(const QString &image_file, const int &image_orientation);

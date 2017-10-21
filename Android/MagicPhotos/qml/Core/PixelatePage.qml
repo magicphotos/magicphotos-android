@@ -11,6 +11,8 @@ Page {
     id: pixelatePage
 
     header: Pane {
+        topPadding: pixelatePage.bannerHeight
+
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -213,6 +215,7 @@ Page {
 
     property bool   shareActionActive: false
 
+    property int    bannerHeight:      0
     property int    imageOrientation:  -1
     property int    pixelDenom:        -1
 

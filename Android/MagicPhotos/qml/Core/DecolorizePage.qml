@@ -11,6 +11,8 @@ Page {
     id: decolorizePage
 
     header: Pane {
+        topPadding: decolorizePage.bannerHeight
+
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -205,6 +207,7 @@ Page {
 
     property bool   shareActionActive: false
 
+    property int    bannerHeight:      0
     property int    imageOrientation:  -1
 
     property string imageFile:         ""

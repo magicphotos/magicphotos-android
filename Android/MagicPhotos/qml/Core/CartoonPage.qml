@@ -11,6 +11,8 @@ Page {
     id: cartoonPage
 
     header: Pane {
+        topPadding: cartoonPage.bannerHeight
+
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -213,6 +215,7 @@ Page {
 
     property bool   shareActionActive: false
 
+    property int    bannerHeight:      0
     property int    imageOrientation:  -1
     property int    gaussianRadius:    -1
     property int    cartoonThreshold:  -1

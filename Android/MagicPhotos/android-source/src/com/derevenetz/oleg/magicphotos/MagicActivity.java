@@ -18,14 +18,25 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import org.qtproject.qt5.android.bindings.QtActivity;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class MagicActivity extends QtActivity
 {
     private static final int     REQUEST_CODE_SHOW_GALLERY = 1001;
 
+    private static int           statusBarHeight           = 0;
     private static MagicActivity instance                  = null;
+    private static AdView        adView                    = null;
 
     private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
@@ -40,11 +51,41 @@ public class MagicActivity extends QtActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        int resource_id = getResources().getIdentifier("status_bar_height", "dimen", "android");
+
+        if (resource_id > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resource_id);
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        if (adView != null) {
+            adView.pause();
+        }
+
+        super.onPause();
     }
 
     @Override
     public void onDestroy()
     {
+        if (adView != null) {
+            adView.destroy();
+        }
+
         super.onDestroy();
     }
 
@@ -96,6 +137,93 @@ public class MagicActivity extends QtActivity
         } catch (Exception ex) {
             // Ignore
         }
+    }
+
+    public static void showAdView(final String unit_id, final String banner_size, final String test_device_id)
+    {
+        instance.runOnUiThread(new Runnable() {
+            public void run()
+            {
+                View view = instance.getWindow().getDecorView().getRootView();
+
+                if (view instanceof ViewGroup) {
+                    ViewGroup view_group = (ViewGroup)view;
+
+                    if (adView != null) {
+                        view_group.removeView(adView);
+
+                        adView.destroy();
+
+                        adView = null;
+                    }
+
+                    AdSize ad_size = AdSize.BANNER;
+
+                    if (banner_size.equals("FULL_BANNER")) {
+                        ad_size = AdSize.FULL_BANNER;
+                    } else if (banner_size.equals("LARGE_BANNER")) {
+                        ad_size = AdSize.LARGE_BANNER;
+                    } else if (banner_size.equals("LEADERBOARD")) {
+                        ad_size = AdSize.LEADERBOARD;
+                    } else if (banner_size.equals("MEDIUM_RECTANGLE")) {
+                        ad_size = AdSize.MEDIUM_RECTANGLE;
+                    }
+
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
+                                                                                   FrameLayout.LayoutParams.WRAP_CONTENT,
+                                                                                   Gravity.CENTER_HORIZONTAL);
+
+                    adView = new AdView(instance);
+
+                    adView.setAdSize(ad_size);
+                    adView.setAdUnitId(unit_id);
+                    adView.setLayoutParams(params);
+                    adView.setY(statusBarHeight);
+                    adView.setVisibility(View.GONE);
+
+                    adView.setAdListener(new AdListener() {
+                         public void onAdLoaded()
+                         {
+                             if (adView != null) {
+                                 adView.setVisibility(View.VISIBLE);
+                             }
+                         }
+                    });
+
+                    view_group.addView(adView);
+
+                    AdRequest.Builder builder = new AdRequest.Builder();
+
+                    if (!test_device_id.equals("")) {
+                        builder.addTestDevice(test_device_id);
+                    }
+
+                    adView.loadAd(builder.build());
+                }
+            }
+        });
+    }
+
+    public static void hideAdView()
+    {
+        instance.runOnUiThread(new Runnable() {
+            public void run()
+            {
+                View view = instance.getWindow().getDecorView().getRootView();
+
+                if (view instanceof ViewGroup) {
+                    ViewGroup view_group = (ViewGroup)view;
+
+                    if (adView != null) {
+                        view_group.removeView(adView);
+
+                        adView.destroy();
+
+                        adView = null;
+                    }
+                }
+            }
+        });
     }
 
     @Override

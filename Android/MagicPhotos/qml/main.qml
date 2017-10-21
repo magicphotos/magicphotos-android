@@ -14,7 +14,11 @@ ApplicationWindow {
     Material.theme:   Material.System
     Material.primary: Material.Teal
 
-    property bool fullVersion: false
+    property bool   fullVersion:  false
+
+    property string adUnitId:     "ca-app-pub-3940256099942544/6300978111"
+    property string bannerSize:   "BANNER"
+    property string testDeviceId: ""
 
     function purchaseFullVersion() {
         fullVersionProduct.purchase();
@@ -30,6 +34,12 @@ ApplicationWindow {
 
     onFullVersionChanged: {
         AppSettings.isFullVersion = fullVersion;
+
+        if (fullVersion && mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
+            mainStackView.currentItem.bannerHeight = 0;
+
+            AndroidGW.hideAdView();
+        }
     }
 
     Store {
@@ -75,6 +85,32 @@ ApplicationWindow {
 
             if (depth > 0) {
                 get(depth - 1).forceActiveFocus();
+
+                if (item.hasOwnProperty("bannerHeight")) {
+                    if (mainWindow.fullVersion) {
+                        item.bannerHeight = 0;
+
+                        AndroidGW.hideAdView();
+                    } else {
+                        if (mainWindow.bannerSize === "BANNER") {
+                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 50);
+                        } else if (mainWindow.bannerSize === "FULL_BANNER") {
+                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 60);
+                        } else if (mainWindow.bannerSize === "LARGE_BANNER") {
+                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 100);
+                        } else if (mainWindow.bannerSize === "LEADERBOARD") {
+                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 90);
+                        } else if (mainWindow.bannerSize === "MEDIUM_RECTANGLE") {
+                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 250);
+                        } else {
+                            item.bannerHeight = 0;
+                        }
+
+                        AndroidGW.showAdView(mainWindow.adUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
+                    }
+                } else {
+                    AndroidGW.hideAdView();
+                }
             }
         }
     }

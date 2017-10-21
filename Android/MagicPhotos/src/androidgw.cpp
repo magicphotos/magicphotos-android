@@ -48,6 +48,24 @@ void AndroidGW::shareImage(const QString &image_file)
                                               "shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
+void AndroidGW::showAdView(const QString &unit_id, const QString banner_size, const QString &test_device_id)
+{
+    QAndroidJniObject j_unit_id        = QAndroidJniObject::fromString(unit_id);
+    QAndroidJniObject j_banner_size    = QAndroidJniObject::fromString(banner_size);
+    QAndroidJniObject j_test_device_id = QAndroidJniObject::fromString(test_device_id);
+
+    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                              "showAdView", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", j_unit_id.object<jstring>(),
+                                                                                                                         j_banner_size.object<jstring>(),
+                                                                                                                         j_test_device_id.object<jstring>());
+}
+
+void AndroidGW::hideAdView()
+{
+    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                              "hideAdView");
+}
+
 static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
 {
     const char* str        = jni_env->GetStringUTFChars(j_image_file, NULL);
