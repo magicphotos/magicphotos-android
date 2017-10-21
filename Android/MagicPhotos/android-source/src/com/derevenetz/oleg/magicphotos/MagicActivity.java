@@ -322,18 +322,32 @@ public class MagicActivity extends QtActivity
 
                     interstitialAd.setAdListener(new AdListener() {
                         @Override
-                         public void onAdClosed()
-                         {
-                             if (interstitialAd != null) {
-                                 AdRequest.Builder builder = new AdRequest.Builder();
+                        public void onAdClosed()
+                        {
+                            if (interstitialAd != null) {
+                                AdRequest.Builder builder = new AdRequest.Builder();
 
-                                 if (!test_device_id.equals("")) {
-                                     builder.addTestDevice(test_device_id);
-                                 }
+                                if (!test_device_id.equals("")) {
+                                    builder.addTestDevice(test_device_id);
+                                }
 
-                                 interstitialAd.loadAd(builder.build());
-                             }
-                         }
+                                interstitialAd.loadAd(builder.build());
+                            }
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(int errorCode)
+                        {
+                            if (interstitialAd != null) {
+                                AdRequest.Builder builder = new AdRequest.Builder();
+
+                                if (!test_device_id.equals("")) {
+                                    builder.addTestDevice(test_device_id);
+                                }
+
+                                interstitialAd.loadAd(builder.build());
+                            }
+                        }
                     });
 
                     AdRequest.Builder builder = new AdRequest.Builder();
