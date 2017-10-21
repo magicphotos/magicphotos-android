@@ -29,90 +29,14 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 
-import com.android.vending.billing.*;
-
 import org.qtproject.qt5.android.bindings.QtApplication;
 import org.qtproject.qt5.android.bindings.QtActivity;
 
 public class MagicActivity extends QtActivity
 {
-    private static final boolean DEBUG_GOOGLE_IAP_AUTO_CONSUME        = false,
-                                 DEBUG_GOOGLE_IAP_ALWAYS_TRIAL        = false,
-                                 DEBUG_GOOGLE_IAP_ALWAYS_FULL         = false,
-                                 PROMO_FULL_VERSION                   = false;
+    private static final int     REQUEST_CODE_SHOW_GALLERY = 1001;
 
-    private static final int     GOOGLE_IAP_RESULT_OK                 = 0,
-                                 GOOGLE_IAP_RESULT_ITEM_ALREADY_OWNED = 7,
-                                 REQUEST_CODE_SHOW_GALLERY            = 1001,
-                                 REQUEST_CODE_BUY_FULL_VERSION        = 1002;
-
-    private static final String  GOOGLE_IAP_FULL_VERSION_PRODUCT_ID   = "magicphotos.version.full",
-                                 GOOGLE_IAP_DEVELOPER_PAYLOAD         = "PXV0HzqSbr1ZT";
-
-    private static boolean       isFullVersion                        = false,
-                                 isPromoFullVersion                   = false;
-    private static MagicActivity instance                             = null;
-
-    private IInAppBillingService androidIAPService                    = null;
-
-    private ServiceConnection androidIAPServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service)
-        {
-            androidIAPService = IInAppBillingService.Stub.asInterface(service);
-
-            (new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Bundle owned_items = androidIAPService.getPurchases(3, getPackageName(), "inapp", null);
-
-                        if (owned_items.getInt("RESPONSE_CODE", -1) == GOOGLE_IAP_RESULT_OK) {
-                            boolean           is_full_version   = false;
-                            ArrayList<String> owned_products    = owned_items.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
-                            ArrayList<String> product_purchases = owned_items.getStringArrayList("INAPP_PURCHASE_DATA_LIST");
-
-                            for (int i = 0; i < owned_products.size(); i++) {
-                                String product  = owned_products.get(i);
-                                String purchase = product_purchases.get(i);
-
-                                if (product.equals(GOOGLE_IAP_FULL_VERSION_PRODUCT_ID)) {
-                                    is_full_version = true;
-
-                                    if (DEBUG_GOOGLE_IAP_AUTO_CONSUME) {
-                                        androidIAPService.consumePurchase(3, getPackageName(), (new JSONObject(purchase)).getString("purchaseToken"));
-                                    }
-                                }
-                            }
-
-                            if (DEBUG_GOOGLE_IAP_ALWAYS_TRIAL) {
-                                isFullVersion = false;
-                            } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
-                                isFullVersion = true;
-                            } else if (isPromoFullVersion) {
-                                isFullVersion = true;
-                            } else {
-                                isFullVersion = is_full_version;
-
-                                SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-
-                                editor.putBoolean("FullVersion", isFullVersion);
-                                editor.commit();
-                            }
-                        }
-                    } catch (Exception ex) {
-                        // Ignored
-                    }
-                }
-            })).start();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name)
-        {
-            androidIAPService = null;
-        }
-    };
+    private static MagicActivity instance                  = null;
 
     private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
@@ -127,52 +51,12 @@ public class MagicActivity extends QtActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        int prev_version_code = getPreferences(MODE_PRIVATE).getInt("VersionCode", 0);
-
-        try {
-            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-
-            editor.putInt("VersionCode", getPackageManager().getPackageInfo(getPackageName(), 0).versionCode);
-            editor.commit();
-        } catch (Exception ex) {
-            // Ignored
-        }
-
-        if (DEBUG_GOOGLE_IAP_ALWAYS_TRIAL) {
-            isFullVersion = false;
-        } else if (DEBUG_GOOGLE_IAP_ALWAYS_FULL) {
-            isFullVersion = true;
-        } else if (PROMO_FULL_VERSION && prev_version_code == 0) {
-            isFullVersion      = true;
-            isPromoFullVersion = true;
-
-            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-
-            editor.putBoolean("PromoFullVersion", true);
-            editor.commit();
-        } else if (getPreferences(MODE_PRIVATE).getBoolean("PromoFullVersion", false)) {
-            isFullVersion      = true;
-            isPromoFullVersion = true;
-        } else {
-            isFullVersion = getPreferences(MODE_PRIVATE).getBoolean("FullVersion", false);
-        }
-
-        Intent intent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-
-        intent.setPackage("com.android.vending");
-
-        bindService(intent, androidIAPServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public void onDestroy()
     {
         super.onDestroy();
-
-        if (androidIAPService != null) {
-            unbindService(androidIAPServiceConnection);
-        }
     }
 
     public static String getSaveDirectory()
@@ -191,48 +75,6 @@ public class MagicActivity extends QtActivity
         DisplayMetrics metrics = instance.getResources().getDisplayMetrics();
 
         return metrics.densityDpi;
-    }
-
-    public static boolean getFullVersion()
-    {
-        return isFullVersion;
-    }
-
-    public static boolean buyFullVersion()
-    {
-        try {
-            if (instance.androidIAPService != null) {
-                Bundle intent_bundle = instance.androidIAPService.getBuyIntent(3, instance.getPackageName(), GOOGLE_IAP_FULL_VERSION_PRODUCT_ID, "inapp", GOOGLE_IAP_DEVELOPER_PAYLOAD);
-
-                if (intent_bundle.getInt("RESPONSE_CODE", -1) == GOOGLE_IAP_RESULT_OK) {
-                    PendingIntent pending_intent = intent_bundle.getParcelable("BUY_INTENT");
-
-                    instance.startIntentSenderForResult(pending_intent.getIntentSender(), REQUEST_CODE_BUY_FULL_VERSION, new Intent(), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0));
-
-                    return true;
-                } else if (intent_bundle.getInt("RESPONSE_CODE", -1) == GOOGLE_IAP_RESULT_ITEM_ALREADY_OWNED) {
-                    isFullVersion = true;
-
-                    SharedPreferences.Editor editor = instance.getPreferences(MODE_PRIVATE).edit();
-
-                    editor.putBoolean("FullVersion", isFullVersion);
-                    editor.commit();
-
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
-    public static boolean getPromoFullVersion()
-    {
-        return isPromoFullVersion;
     }
 
     public static void showGallery()
@@ -390,24 +232,6 @@ public class MagicActivity extends QtActivity
                 }
             } else {
                 imageSelectionCancelled();
-            }
-        } else if (requestCode == REQUEST_CODE_BUY_FULL_VERSION) {
-            if (data.getIntExtra("RESPONSE_CODE", -1) == GOOGLE_IAP_RESULT_OK) {
-                try {
-                    JSONObject object = new JSONObject(data.getStringExtra("INAPP_PURCHASE_DATA"));
-
-                    if (object.getString("productId").equals(GOOGLE_IAP_FULL_VERSION_PRODUCT_ID) &&
-                        object.getString("developerPayload").equals(GOOGLE_IAP_DEVELOPER_PAYLOAD)) {
-                        isFullVersion = true;
-
-                        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-
-                        editor.putBoolean("FullVersion", isFullVersion);
-                        editor.commit();
-                    }
-                } catch (Exception ex) {
-                    // Ignored
-                }
             }
         }
     }

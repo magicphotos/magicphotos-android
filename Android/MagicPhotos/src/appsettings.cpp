@@ -35,32 +35,18 @@ void AppSettings::setBrushSize(const int &size)
     Settings->setValue("BrushSize", size);
 }
 
-bool AppSettings::showModeChangeSuggestion() const
+bool AppSettings::isFullVersion() const
 {
-    if (Settings->contains("ShowModeChangeSuggestion")) {
-        return Settings->value("ShowModeChangeSuggestion").toBool();
+    if (Settings->contains("IsFullVersion")) {
+        return Settings->value("IsFullVersion").toBool();
     } else {
-        return true;
+        return false;
     }
 }
 
-void AppSettings::setShowModeChangeSuggestion(const bool &show)
+void AppSettings::setIsFullVersion(const bool &full)
 {
-    Settings->setValue("ShowModeChangeSuggestion", show);
-}
-
-bool AppSettings::showPromoPopup() const
-{
-    if (Settings->contains("ShowPromoPopup")) {
-        return Settings->value("ShowPromoPopup").toBool();
-    } else {
-        return true;
-    }
-}
-
-void AppSettings::setShowPromoPopup(const bool &show)
-{
-    Settings->setValue("ShowPromoPopup", show);
+    Settings->setValue("IsFullVersion", full);
 }
 
 qreal AppSettings::brushOpacity() const

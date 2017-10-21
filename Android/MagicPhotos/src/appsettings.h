@@ -9,11 +9,10 @@ class AppSettings : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(int   defaultBrushSize         READ defaultBrushSize         WRITE setDefaultBrushSize)
-    Q_PROPERTY(int   brushSize                READ brushSize                WRITE setBrushSize)
-    Q_PROPERTY(bool  showModeChangeSuggestion READ showModeChangeSuggestion WRITE setShowModeChangeSuggestion)
-    Q_PROPERTY(bool  showPromoPopup           READ showPromoPopup           WRITE setShowPromoPopup)
-    Q_PROPERTY(qreal brushOpacity             READ brushOpacity             WRITE setBrushOpacity)
+    Q_PROPERTY(int   defaultBrushSize READ defaultBrushSize WRITE setDefaultBrushSize)
+    Q_PROPERTY(int   brushSize        READ brushSize        WRITE setBrushSize)
+    Q_PROPERTY(bool  isFullVersion    READ isFullVersion    WRITE setIsFullVersion)
+    Q_PROPERTY(qreal brushOpacity     READ brushOpacity     WRITE setBrushOpacity)
 
 public:
     explicit AppSettings(QObject *parent = 0);
@@ -25,11 +24,8 @@ public:
     int  brushSize() const;
     void setBrushSize(const int &size);
 
-    bool showModeChangeSuggestion() const;
-    void setShowModeChangeSuggestion(const bool &show);
-
-    bool showPromoPopup() const;
-    void setShowPromoPopup(const bool &show);
+    bool isFullVersion() const;
+    void setIsFullVersion(const bool &full);
 
     qreal brushOpacity() const;
     void  setBrushOpacity(const qreal &opacity);

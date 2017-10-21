@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 androidextras
+QT += quick quickcontrols2 purchasing androidextras
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -49,8 +49,7 @@ OTHER_FILES += \
     android-source/res/drawable-mdpi/ic_launcher.png \
     android-source/res/drawable-xhdpi/ic_launcher.png \
     android-source/res/drawable-xxhdpi/ic_launcher.png \
-    android-source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java \
-    android-source/src/com/android/vending/billing/IInAppBillingService.aidl
+    android-source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

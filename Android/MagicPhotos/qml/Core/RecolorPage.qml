@@ -127,7 +127,7 @@ Page {
                 }
 
                 onClicked: {
-                    if (AndroidGW.getFullVersion()) {
+                    if (mainWindow.fullVersion) {
                         var date  = new Date();
                         var year  = date.getFullYear();
                         var month = date.getMonth() + 1;
@@ -164,7 +164,7 @@ Page {
                 }
 
                 onClicked: {
-                    if (AndroidGW.getFullVersion()) {
+                    if (mainWindow.fullVersion) {
                         var date  = new Date();
                         var year  = date.getFullYear();
                         var month = date.getMonth() + 1;
@@ -636,17 +636,7 @@ Page {
         standardButtons: StandardButton.Yes | StandardButton.No
 
         onYes: {
-            if (!AndroidGW.buyFullVersion()) {
-                purchaseFailedMessageDialog.open();
-            }
+            mainWindow.purchaseFullVersion();
         }
-    }
-
-    MessageDialog {
-        id:              purchaseFailedMessageDialog
-        title:           qsTr("Error")
-        icon:            StandardIcon.Critical
-        text:            qsTr("Purchase attempt failed, in-app billing may be not supported on this device")
-        standardButtons: StandardButton.Ok
     }
 }
