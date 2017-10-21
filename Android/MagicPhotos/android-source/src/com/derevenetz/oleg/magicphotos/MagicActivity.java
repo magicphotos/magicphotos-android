@@ -192,6 +192,8 @@ public class MagicActivity extends QtActivity
 
                         adView.destroy();
 
+                        adViewHeightUpdated(0);
+
                         adView = null;
                     }
 
@@ -228,22 +230,32 @@ public class MagicActivity extends QtActivity
 
                     adView.setAdListener(new AdListener() {
                         @Override
-                         public void onAdLoaded()
-                         {
-                             if (adView != null) {
-                                 adView.setVisibility(View.VISIBLE);
+                        public void onAdLoaded()
+                        {
+                            if (adView != null) {
+                                adView.setVisibility(View.VISIBLE);
 
-                                 adView.post(new Runnable() {
-                                     @Override
-                                     public void run()
-                                     {
-                                         if (adView != null) {
-                                             adViewHeightUpdated(adView.getHeight());
-                                         }
-                                     }
-                                 });
-                             }
-                         }
+                                adView.post(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        if (adView != null) {
+                                            adViewHeightUpdated(adView.getHeight());
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(int errorCode)
+                        {
+                            if (adView != null) {
+                                adView.setVisibility(View.GONE);
+
+                                adViewHeightUpdated(0);
+                            }
+                        }
                     });
 
                     view_group.addView(adView);
@@ -275,6 +287,8 @@ public class MagicActivity extends QtActivity
                         view_group.removeView(adView);
 
                         adView.destroy();
+
+                        adViewHeightUpdated(0);
 
                         adView = null;
                     }
