@@ -66,6 +66,22 @@ void AndroidGW::hideAdView()
                                               "hideAdView");
 }
 
+void AndroidGW::prepareInterstitialAd(const QString &unit_id, const QString &test_device_id)
+{
+    QAndroidJniObject j_unit_id        = QAndroidJniObject::fromString(unit_id);
+    QAndroidJniObject j_test_device_id = QAndroidJniObject::fromString(test_device_id);
+
+    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                              "prepareInterstitialAd", "(Ljava/lang/String;Ljava/lang/String;)V", j_unit_id.object<jstring>(),
+                                                                                                                  j_test_device_id.object<jstring>());
+}
+
+void AndroidGW::showInterstitialAd()
+{
+    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
+                                              "showInterstitialAd");
+}
+
 static void adViewHeightUpdated(JNIEnv *, jclass, jint banner_height)
 {
     emit AndroidGW::instance()->adViewHeightUpdated(banner_height);

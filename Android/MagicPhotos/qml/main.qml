@@ -14,11 +14,12 @@ ApplicationWindow {
     Material.theme:   Material.System
     Material.primary: Material.Teal
 
-    property bool   fullVersion:  false
+    property bool   fullVersion:          false
 
-    property string adUnitId:     "ca-app-pub-3940256099942544/6300978111"
-    property string bannerSize:   "FLUID"
-    property string testDeviceId: ""
+    property string interstitialAdUnitId: "ca-app-pub-3940256099942544/1033173712"
+    property string adViewUnitId:         "ca-app-pub-3940256099942544/6300978111"
+    property string bannerSize:           "FLUID"
+    property string testDeviceId:         ""
 
     function purchaseFullVersion() {
         fullVersionProduct.purchase();
@@ -36,6 +37,7 @@ ApplicationWindow {
         fullVersion = AppSettings.isFullVersion;
 
         AndroidGW.adViewHeightUpdated.connect(adViewHeightUpdated);
+        AndroidGW.prepareInterstitialAd(interstitialAdUnitId, testDeviceId);
 
         mainStackView.push(modeSelectionPage);
     }
@@ -49,7 +51,7 @@ ApplicationWindow {
 
                 AndroidGW.hideAdView();
             } else {
-                AndroidGW.showAdView(mainWindow.adUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
+                AndroidGW.showAdView(mainWindow.adViewUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
             }
         }
     }
@@ -104,10 +106,14 @@ ApplicationWindow {
 
                         AndroidGW.hideAdView();
                     } else {
-                        AndroidGW.showAdView(mainWindow.adUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
+                        AndroidGW.showAdView(mainWindow.adViewUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
                     }
                 } else {
                     AndroidGW.hideAdView();
+                }
+
+                if (item.hasOwnProperty("allowInterstitial") && item.allowInterstitial && !mainWindow.fullVersion) {
+                    AndroidGW.showInterstitialAd();
                 }
             }
         }

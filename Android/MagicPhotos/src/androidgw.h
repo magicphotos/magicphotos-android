@@ -21,6 +21,8 @@ public:
     Q_INVOKABLE void    shareImage(const QString &image_file);
     Q_INVOKABLE void    showAdView(const QString &unit_id, const QString banner_size, const QString &test_device_id);
     Q_INVOKABLE void    hideAdView();
+    Q_INVOKABLE void    prepareInterstitialAd(const QString &unit_id, const QString &test_device_id);
+    Q_INVOKABLE void    showInterstitialAd();
 
 signals:
     void adViewHeightUpdated(const int &banner_height);

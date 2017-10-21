@@ -29,14 +29,17 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class MagicActivity extends QtActivity
 {
-    private static final int     REQUEST_CODE_SHOW_GALLERY = 1001;
+    private static final int      REQUEST_CODE_SHOW_GALLERY = 1001;
 
-    private static int           statusBarHeight           = 0;
-    private static MagicActivity instance                  = null;
-    private static AdView        adView                    = null;
+    private static boolean        statusBarVisible          = false;
+    private static int            statusBarHeight           = 0;
+    private static MagicActivity  instance                  = null;
+    private static AdView         adView                    = null;
+    private static InterstitialAd interstitialAd            = null;
 
     private static native void adViewHeightUpdated(int banner_height);
 
@@ -59,6 +62,30 @@ public class MagicActivity extends QtActivity
         if (resource_id > 0) {
             statusBarHeight = getResources().getDimensionPixelSize(resource_id);
         }
+
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility)
+            {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    statusBarVisible = true;
+
+                    if (adView != null) {
+                        adView.setVisibility(View.GONE);
+                        adView.setY(statusBarHeight);
+                        adView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    statusBarVisible = false;
+
+                    if (adView != null) {
+                        adView.setVisibility(View.GONE);
+                        adView.setY(0);
+                        adView.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -185,8 +212,13 @@ public class MagicActivity extends QtActivity
                     adView.setAdSize(ad_size);
                     adView.setAdUnitId(unit_id);
                     adView.setLayoutParams(params);
-                    adView.setY(statusBarHeight);
                     adView.setVisibility(View.GONE);
+
+                    if (statusBarVisible) {
+                        adView.setY(statusBarHeight);
+                    } else {
+                        adView.setY(0);
+                    }
 
                     adView.setAdListener(new AdListener() {
                         @Override
@@ -240,6 +272,58 @@ public class MagicActivity extends QtActivity
 
                         adView = null;
                     }
+                }
+            }
+        });
+    }
+
+    public static void prepareInterstitialAd(final String unit_id, final String test_device_id)
+    {
+        instance.runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                if (interstitialAd == null) {
+                    interstitialAd = new InterstitialAd(instance);
+
+                    interstitialAd.setAdUnitId(unit_id);
+
+                    interstitialAd.setAdListener(new AdListener() {
+                        @Override
+                         public void onAdClosed()
+                         {
+                             if (interstitialAd != null) {
+                                 AdRequest.Builder builder = new AdRequest.Builder();
+
+                                 if (!test_device_id.equals("")) {
+                                     builder.addTestDevice(test_device_id);
+                                 }
+
+                                 interstitialAd.loadAd(builder.build());
+                             }
+                         }
+                    });
+
+                    AdRequest.Builder builder = new AdRequest.Builder();
+
+                    if (!test_device_id.equals("")) {
+                        builder.addTestDevice(test_device_id);
+                    }
+
+                    interstitialAd.loadAd(builder.build());
+                }
+            }
+        });
+    }
+
+    public static void showInterstitialAd()
+    {
+        instance.runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                if (interstitialAd != null && interstitialAd.isLoaded()) {
+                    interstitialAd.show();
                 }
             }
         });

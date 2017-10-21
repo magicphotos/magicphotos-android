@@ -215,6 +215,7 @@ Page {
         }
     }
 
+    property bool   allowInterstitial: true
     property bool   shareActionActive: false
 
     property int    bannerHeight:      0
