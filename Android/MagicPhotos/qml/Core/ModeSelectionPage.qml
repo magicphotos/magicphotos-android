@@ -46,10 +46,6 @@ Page {
     function fileSelected(image_file, image_orientation) {
         waitRectangle.visible = false;
 
-        AndroidGW.imageSelected.disconnect(fileSelected);
-        AndroidGW.imageSelectionCancelled.disconnect(fileSelectionCancelled);
-        AndroidGW.imageSelectionFailed.disconnect(fileSelectionFailed);
-
         var component;
 
         if (selectedMode === "DECOLORIZE"){
@@ -116,32 +112,26 @@ Page {
     function fileSelectionCancelled() {
         waitRectangle.visible = false;
 
-        AndroidGW.imageSelected.disconnect(fileSelected);
-        AndroidGW.imageSelectionCancelled.disconnect(fileSelectionCancelled);
-        AndroidGW.imageSelectionFailed.disconnect(fileSelectionFailed);
-
         selectedMode = "";
     }
 
     function fileSelectionFailed() {
         waitRectangle.visible = false;
 
-        AndroidGW.imageSelected.disconnect(fileSelected);
-        AndroidGW.imageSelectionCancelled.disconnect(fileSelectionCancelled);
-        AndroidGW.imageSelectionFailed.disconnect(fileSelectionFailed);
-
         selectedMode = "";
 
         imageSelectionFailedMessageDialog.open();
     }
 
+    Component.onCompleted: {
+        AndroidGW.imageSelected.connect(fileSelected);
+        AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
+        AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
+    }
+
     onSelectedModeChanged: {
         if (selectedMode !== "") {
             waitRectangle.visible = true;
-
-            AndroidGW.imageSelected.connect(fileSelected);
-            AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
-            AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
 
             AndroidGW.showGallery();
         }
