@@ -63,7 +63,13 @@ public class MagicActivity extends QtActivity
             statusBarHeight = getResources().getDimensionPixelSize(resource_id);
         }
 
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+        if ((getWindow().getDecorView().getSystemUiVisibility() & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+            statusBarVisible = true;
+        } else {
+            statusBarVisible = false;
+        }
+
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             @Override
             public void onSystemUiVisibilityChange(int visibility)
             {
