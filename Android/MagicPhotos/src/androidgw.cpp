@@ -66,6 +66,11 @@ void AndroidGW::hideAdView()
                                               "hideAdView");
 }
 
+static void adViewHeightUpdated(JNIEnv *, jclass, jint banner_height)
+{
+    emit AndroidGW::instance()->adViewHeightUpdated(banner_height);
+}
+
 static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
 {
     const char* str        = jni_env->GetStringUTFChars(j_image_file, NULL);
@@ -87,6 +92,7 @@ static void imageSelectionFailed(JNIEnv *)
 }
 
 static JNINativeMethod methods[] = {
+    { "adViewHeightUpdated",     "(I)V",                   (void *)adViewHeightUpdated },
     { "imageSelected",           "(Ljava/lang/String;I)V", (void *)imageSelected },
     { "imageSelectionCancelled", "()V",                    (void *)imageSelectionCancelled },
     { "imageSelectionFailed",    "()V",                    (void *)imageSelectionFailed }

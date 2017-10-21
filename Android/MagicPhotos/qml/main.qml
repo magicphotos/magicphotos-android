@@ -17,11 +17,17 @@ ApplicationWindow {
     property bool   fullVersion:  false
 
     property string adUnitId:     "ca-app-pub-3940256099942544/6300978111"
-    property string bannerSize:   "BANNER"
+    property string bannerSize:   "FLUID"
     property string testDeviceId: ""
 
     function purchaseFullVersion() {
         fullVersionProduct.purchase();
+    }
+
+    function adViewHeightUpdated(banner_height) {
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
+            mainStackView.currentItem.bannerHeight = banner_height;
+        }
     }
 
     Component.onCompleted: {
@@ -29,16 +35,22 @@ ApplicationWindow {
 
         fullVersion = AppSettings.isFullVersion;
 
+        AndroidGW.adViewHeightUpdated.connect(adViewHeightUpdated);
+
         mainStackView.push(modeSelectionPage);
     }
 
     onFullVersionChanged: {
         AppSettings.isFullVersion = fullVersion;
 
-        if (fullVersion && mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
-            mainStackView.currentItem.bannerHeight = 0;
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
+            if (fullVersion) {
+                mainStackView.currentItem.bannerHeight = 0;
 
-            AndroidGW.hideAdView();
+                AndroidGW.hideAdView();
+            } else {
+                AndroidGW.showAdView(mainWindow.adUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
+            }
         }
     }
 
@@ -92,20 +104,6 @@ ApplicationWindow {
 
                         AndroidGW.hideAdView();
                     } else {
-                        if (mainWindow.bannerSize === "BANNER") {
-                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 50);
-                        } else if (mainWindow.bannerSize === "FULL_BANNER") {
-                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 60);
-                        } else if (mainWindow.bannerSize === "LARGE_BANNER") {
-                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 100);
-                        } else if (mainWindow.bannerSize === "LEADERBOARD") {
-                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 90);
-                        } else if (mainWindow.bannerSize === "MEDIUM_RECTANGLE") {
-                            item.bannerHeight = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 250);
-                        } else {
-                            item.bannerHeight = 0;
-                        }
-
                         AndroidGW.showAdView(mainWindow.adUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
                     }
                 } else {

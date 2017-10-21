@@ -38,6 +38,8 @@ public class MagicActivity extends QtActivity
     private static MagicActivity instance                  = null;
     private static AdView        adView                    = null;
 
+    private static native void adViewHeightUpdated(int banner_height);
+
     private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
     private static native void imageSelectionFailed();
@@ -84,6 +86,8 @@ public class MagicActivity extends QtActivity
     {
         if (adView != null) {
             adView.destroy();
+
+            adView = null;
         }
 
         super.onDestroy();
@@ -142,6 +146,7 @@ public class MagicActivity extends QtActivity
     public static void showAdView(final String unit_id, final String banner_size, final String test_device_id)
     {
         instance.runOnUiThread(new Runnable() {
+            @Override
             public void run()
             {
                 View view = instance.getWindow().getDecorView().getRootView();
@@ -159,7 +164,9 @@ public class MagicActivity extends QtActivity
 
                     AdSize ad_size = AdSize.BANNER;
 
-                    if (banner_size.equals("FULL_BANNER")) {
+                    if (banner_size.equals("FLUID")) {
+                        ad_size = AdSize.FLUID;
+                    } else if (banner_size.equals("FULL_BANNER")) {
                         ad_size = AdSize.FULL_BANNER;
                     } else if (banner_size.equals("LARGE_BANNER")) {
                         ad_size = AdSize.LARGE_BANNER;
@@ -182,10 +189,21 @@ public class MagicActivity extends QtActivity
                     adView.setVisibility(View.GONE);
 
                     adView.setAdListener(new AdListener() {
+                        @Override
                          public void onAdLoaded()
                          {
                              if (adView != null) {
                                  adView.setVisibility(View.VISIBLE);
+
+                                 adView.post(new Runnable() {
+                                     @Override
+                                     public void run()
+                                     {
+                                         if (adView != null) {
+                                             adViewHeightUpdated(adView.getHeight());
+                                         }
+                                     }
+                                 });
                              }
                          }
                     });
@@ -207,6 +225,7 @@ public class MagicActivity extends QtActivity
     public static void hideAdView()
     {
         instance.runOnUiThread(new Runnable() {
+            @Override
             public void run()
             {
                 View view = instance.getWindow().getDecorView().getRootView();
@@ -237,7 +256,8 @@ public class MagicActivity extends QtActivity
                 if (image_uri != null) {
                     (new Thread(new Runnable() {
                         @Override
-                        public void run() {
+                        public void run()
+                        {
                             InputStream      input_stream       = null;
                             FileOutputStream file_output_stream = null;
                             OutputStream     output_stream      = null;
@@ -290,7 +310,8 @@ public class MagicActivity extends QtActivity
 
                                         runOnUiThread(new Runnable() {
                                             @Override
-                                            public void run() {
+                                            public void run()
+                                            {
                                                 if (final_image_orientation == null) {
                                                     imageSelected(cache_file.getAbsolutePath(), 0);
                                                 } else if (final_image_orientation.equals("0")) {
@@ -315,7 +336,8 @@ public class MagicActivity extends QtActivity
                             } catch (Exception ex) {
                                 runOnUiThread(new Runnable() {
                                     @Override
-                                    public void run() {
+                                    public void run()
+                                    {
                                         imageSelectionFailed();
                                     }
                                 });

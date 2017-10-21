@@ -23,6 +23,8 @@ public:
     Q_INVOKABLE void    hideAdView();
 
 signals:
+    void adViewHeightUpdated(const int &banner_height);
+
     void imageSelected(const QString &image_file, const int &image_orientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
