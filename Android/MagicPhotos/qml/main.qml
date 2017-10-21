@@ -47,8 +47,6 @@ ApplicationWindow {
 
         if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
             if (fullVersion) {
-                mainStackView.currentItem.bannerHeight = 0;
-
                 AndroidGW.hideAdView();
             } else {
                 AndroidGW.showAdView(mainWindow.adViewUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
@@ -102,8 +100,6 @@ ApplicationWindow {
 
                 if (item.hasOwnProperty("bannerHeight")) {
                     if (mainWindow.fullVersion) {
-                        item.bannerHeight = 0;
-
                         AndroidGW.hideAdView();
                     } else {
                         AndroidGW.showAdView(mainWindow.adViewUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);

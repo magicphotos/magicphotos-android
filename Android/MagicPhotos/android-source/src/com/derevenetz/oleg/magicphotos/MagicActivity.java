@@ -255,9 +255,17 @@ public class MagicActivity extends QtActivity
                         public void onAdFailedToLoad(int errorCode)
                         {
                             if (adView != null) {
-                                adView.setVisibility(View.GONE);
+                                adView.setVisibility(View.VISIBLE);
 
-                                adViewHeightUpdated(0);
+                                adView.post(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        if (adView != null) {
+                                            adViewHeightUpdated(adView.getHeight());
+                                        }
+                                    }
+                                });
                             }
                         }
                     });
