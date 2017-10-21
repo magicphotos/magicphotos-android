@@ -27,7 +27,7 @@ Page {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_help.png"
@@ -36,6 +36,23 @@ Page {
 
                 onClicked: {
                     Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
+                }
+            }
+
+            ToolButton {
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                visible:        !mainWindow.fullVersion
+
+                Layout.alignment: Qt.AlignHCenter
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_purchase.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    purchaseMessageDialog.open();
                 }
             }
         }
@@ -288,5 +305,17 @@ Page {
         icon:            StandardIcon.Critical
         text:            qsTr("Could not open image")
         standardButtons: StandardButton.Ok
+    }
+
+    MessageDialog {
+        id:              purchaseMessageDialog
+        title:           qsTr("Info")
+        icon:            StandardIcon.Information
+        text:            qsTr("Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?")
+        standardButtons: StandardButton.Yes | StandardButton.No
+
+        onYes: {
+            mainWindow.purchaseFullVersion();
+        }
     }
 }

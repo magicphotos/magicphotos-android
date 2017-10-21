@@ -123,34 +123,32 @@ Page {
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
 
+                Layout.alignment: Qt.AlignHCenter
+
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_save.png"
                     fillMode: Image.PreserveAspectFit
                 }
 
                 onClicked: {
-                    if (mainWindow.fullVersion) {
-                        var date  = new Date();
-                        var year  = date.getFullYear();
-                        var month = date.getMonth() + 1;
-                        var day   = date.getDate();
-                        var hour  = date.getHours();
-                        var min   = date.getMinutes();
-                        var sec   = date.getSeconds();
+                    var date  = new Date();
+                    var year  = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var day   = date.getDate();
+                    var hour  = date.getHours();
+                    var min   = date.getMinutes();
+                    var sec   = date.getSeconds();
 
-                        var file_name = "IMG_" + year                              + "-" +
-                                                 (month > 9 ? month : "0" + month) + "-" +
-                                                 (day   > 9 ? day   : "0" + day)   + "_" +
-                                                 (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                                 (min   > 9 ? min   : "0" + min)   + "-" +
-                                                 (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+                    var file_name = "IMG_" + year                              + "-" +
+                                             (month > 9 ? month : "0" + month) + "-" +
+                                             (day   > 9 ? day   : "0" + day)   + "_" +
+                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                             (min   > 9 ? min   : "0" + min)   + "-" +
+                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
 
-                        recolorPage.shareActionActive = false;
+                    recolorPage.shareActionActive = false;
 
-                        recolorEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
-                    } else {
-                        purchaseMessageDialog.open();
-                    }
+                    recolorEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -160,34 +158,32 @@ Page {
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
 
+                Layout.alignment: Qt.AlignHCenter
+
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_share.png"
                     fillMode: Image.PreserveAspectFit
                 }
 
                 onClicked: {
-                    if (mainWindow.fullVersion) {
-                        var date  = new Date();
-                        var year  = date.getFullYear();
-                        var month = date.getMonth() + 1;
-                        var day   = date.getDate();
-                        var hour  = date.getHours();
-                        var min   = date.getMinutes();
-                        var sec   = date.getSeconds();
+                    var date  = new Date();
+                    var year  = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var day   = date.getDate();
+                    var hour  = date.getHours();
+                    var min   = date.getMinutes();
+                    var sec   = date.getSeconds();
 
-                        var file_name = "IMG_" + year                              + "-" +
-                                                 (month > 9 ? month : "0" + month) + "-" +
-                                                 (day   > 9 ? day   : "0" + day)   + "_" +
-                                                 (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                                 (min   > 9 ? min   : "0" + min)   + "-" +
-                                                 (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
+                    var file_name = "IMG_" + year                              + "-" +
+                                             (month > 9 ? month : "0" + month) + "-" +
+                                             (day   > 9 ? day   : "0" + day)   + "_" +
+                                             (hour  > 9 ? hour  : "0" + hour)  + "-" +
+                                             (min   > 9 ? min   : "0" + min)   + "-" +
+                                             (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
 
-                        recolorPage.shareActionActive = true;
+                    recolorPage.shareActionActive = true;
 
-                        recolorEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
-                    } else {
-                        purchaseMessageDialog.open();
-                    }
+                    recolorEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -196,6 +192,8 @@ Page {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
+
+                Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_undo.png"
@@ -211,6 +209,8 @@ Page {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
+                Layout.alignment: Qt.AlignHCenter
+
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_settings.png"
                     fillMode: Image.PreserveAspectFit
@@ -224,6 +224,8 @@ Page {
             ToolButton {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+
+                Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_help.png"
@@ -628,18 +630,6 @@ Page {
 
         onYes: {
             mainStackView.pop();
-        }
-    }
-
-    MessageDialog {
-        id:              purchaseMessageDialog
-        title:           qsTr("Warning")
-        icon:            StandardIcon.Warning
-        text:            qsTr("This function is available in the full version only. Do you want to purchase full version now?")
-        standardButtons: StandardButton.Yes | StandardButton.No
-
-        onYes: {
-            mainWindow.purchaseFullVersion();
         }
     }
 }

@@ -30,7 +30,7 @@ Page {
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
 
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_apply.png"

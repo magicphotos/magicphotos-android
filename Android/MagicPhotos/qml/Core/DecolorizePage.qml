@@ -99,6 +99,8 @@ Page {
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
 
+                Layout.alignment: Qt.AlignHCenter
+
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_save.png"
                     fillMode: Image.PreserveAspectFit
@@ -131,6 +133,8 @@ Page {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
+
+                Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_share.png"
@@ -165,6 +169,8 @@ Page {
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 enabled:        false
 
+                Layout.alignment: Qt.AlignHCenter
+
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_undo.png"
                     fillMode: Image.PreserveAspectFit
@@ -179,6 +185,8 @@ Page {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
 
+                Layout.alignment: Qt.AlignHCenter
+
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_settings.png"
                     fillMode: Image.PreserveAspectFit
@@ -192,6 +200,8 @@ Page {
             ToolButton {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+
+                Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/tool_help.png"
