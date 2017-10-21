@@ -77,17 +77,21 @@ public class MagicActivity extends QtActivity
                     statusBarVisible = true;
 
                     if (adView != null) {
+                        int ad_visibility = adView.getVisibility();
+
                         adView.setVisibility(View.GONE);
                         adView.setY(statusBarHeight);
-                        adView.setVisibility(View.VISIBLE);
+                        adView.setVisibility(ad_visibility);
                     }
                 } else {
                     statusBarVisible = false;
 
                     if (adView != null) {
+                        int ad_visibility = adView.getVisibility();
+
                         adView.setVisibility(View.GONE);
                         adView.setY(0);
-                        adView.setVisibility(View.VISIBLE);
+                        adView.setVisibility(ad_visibility);
                     }
                 }
             }
