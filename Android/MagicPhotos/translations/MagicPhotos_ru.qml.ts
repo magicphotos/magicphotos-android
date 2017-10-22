@@ -202,7 +202,7 @@
 <context>
     <name>ModeSelectionPage</name>
     <message>
-        <location filename="../qml/Core/ModeSelectionPage.qml" line="38"/>
+        <location filename="../qml/Core/ModeSelectionPage.qml" line="55"/>
         <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
         <translation>http://magicphotos.sourceforge.net/help/android/help_ru.html</translation>
     </message>
