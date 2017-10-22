@@ -16,10 +16,10 @@ ApplicationWindow {
 
     property bool   fullVersion:          false
 
-    property string interstitialAdUnitId: "ca-app-pub-3940256099942544/1033173712"
-    property string adViewUnitId:         "ca-app-pub-3940256099942544/6300978111"
+    property string interstitialAdUnitId: "ca-app-pub-2455088855015693/6662028461"
+    property string adViewUnitId:         "ca-app-pub-2455088855015693/1811713388"
     property string bannerSize:           "FLUID"
-    property string testDeviceId:         ""
+    property string testDeviceId:         "217F8CE186D0849DE13B0AFB1B1D7B3E"
 
     function purchaseFullVersion() {
         fullVersionProduct.purchase();
