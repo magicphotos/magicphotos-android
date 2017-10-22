@@ -43,14 +43,6 @@
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>BlurPreviewPage</name>
@@ -107,14 +99,6 @@
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -194,6 +178,14 @@
         <source>Could not open image</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PixelatePage</name>
@@ -235,14 +227,6 @@
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -303,14 +287,6 @@
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>RetouchPage</name>
@@ -352,14 +328,6 @@
     </message>
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

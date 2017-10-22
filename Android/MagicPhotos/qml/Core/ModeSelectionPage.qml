@@ -26,22 +26,6 @@ Page {
             ToolButton {
                 implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
-                Layout.alignment: Qt.AlignHCenter
-
-                contentItem: Image {
-                    source:   "qrc:/resources/images/tool_help.png"
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                onClicked: {
-                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
-                }
-            }
-
-            ToolButton {
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 visible:        !mainWindow.fullVersion
 
                 Layout.alignment: Qt.AlignHCenter
@@ -53,6 +37,22 @@ Page {
 
                 onClicked: {
                     purchaseMessageDialog.open();
+                }
+            }
+
+            ToolButton {
+                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+
+                Layout.alignment: Qt.AlignHCenter
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_help.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    Qt.openUrlExternally(qsTr("http://magicphotos.sourceforge.net/help/android/help.html"));
                 }
             }
         }

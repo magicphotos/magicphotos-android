@@ -43,14 +43,6 @@
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
-    </message>
 </context>
 <context>
     <name>BlurPreviewPage</name>
@@ -108,14 +100,6 @@
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>
@@ -194,6 +178,14 @@
         <source>Could not open image</source>
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
+    <message>
+        <source>Info</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <source>Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?</source>
+        <translation>Müde von Werbung? In der Vollversion dieser Anwendung gibt es keine Werbung. Mochten Sie die Vollversion kaufen?</translation>
+    </message>
 </context>
 <context>
     <name>PixelatePage</name>
@@ -236,14 +228,6 @@
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>
@@ -303,14 +287,6 @@
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
-    </message>
 </context>
 <context>
     <name>RetouchPage</name>
@@ -353,14 +329,6 @@
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Funktion ist nur in der Vollversion verfugbar. Mochten Sie die Vollversion kaufen?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Fehler beim Kauf, die Einkäufe in der Anwendung können auf diesem Gerät nicht unterstützt werden</translation>
     </message>
 </context>
 <context>

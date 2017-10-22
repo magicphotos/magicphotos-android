@@ -43,14 +43,6 @@
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
-    </message>
 </context>
 <context>
     <name>BlurPreviewPage</name>
@@ -108,14 +100,6 @@
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
     </message>
 </context>
 <context>
@@ -194,6 +178,14 @@
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
+    <message>
+        <source>Info</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <source>Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?</source>
+        <translation>Надоела реклама? Больше никакой рекламы при покупке полной версии приложения. Хотите купить полную версию?</translation>
+    </message>
 </context>
 <context>
     <name>PixelatePage</name>
@@ -236,14 +228,6 @@
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
     </message>
 </context>
 <context>
@@ -303,14 +287,6 @@
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
-    </message>
 </context>
 <context>
     <name>RetouchPage</name>
@@ -353,14 +329,6 @@
     <message>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
-    </message>
-    <message>
-        <source>This function is available in the full version only. Do you want to purchase full version now?</source>
-        <translation>Эта функция доступна только в полной версии. Хотите купить полную версию?</translation>
-    </message>
-    <message>
-        <source>Purchase attempt failed, in-app billing may be not supported on this device</source>
-        <translation>Ошибка при покупке, покупки внутри приложения могут не поддерживаться на данном устройстве</translation>
     </message>
 </context>
 <context>
