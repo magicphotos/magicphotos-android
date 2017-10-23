@@ -14,20 +14,15 @@ ApplicationWindow {
     Material.theme:   Material.System
     Material.primary: Material.Teal
 
-    property bool   fullVersion:          false
-
-    property string interstitialAdUnitId: "ca-app-pub-2455088855015693/6662028461"
-    property string adViewUnitId:         "ca-app-pub-2455088855015693/1811713388"
-    property string bannerSize:           "FLUID"
-    property string testDeviceId:         "217F8CE186D0849DE13B0AFB1B1D7B3E"
+    property bool fullVersion: false
 
     function purchaseFullVersion() {
         fullVersionProduct.purchase();
     }
 
-    function adViewHeightUpdated(banner_height) {
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
-            mainStackView.currentItem.bannerHeight = banner_height;
+    function adViewHeightUpdated(adview_height) {
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
+            mainStackView.currentItem.adViewHeight = adview_height;
         }
     }
 
@@ -37,7 +32,7 @@ ApplicationWindow {
         fullVersion = AppSettings.isFullVersion;
 
         AndroidGW.adViewHeightUpdated.connect(adViewHeightUpdated);
-        AndroidGW.prepareInterstitialAd(interstitialAdUnitId, testDeviceId);
+        AndroidGW.createInterstitialAd();
 
         mainStackView.push(modeSelectionPage);
     }
@@ -45,11 +40,11 @@ ApplicationWindow {
     onFullVersionChanged: {
         AppSettings.isFullVersion = fullVersion;
 
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerHeight")) {
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
             if (fullVersion) {
                 AndroidGW.hideAdView();
             } else {
-                AndroidGW.showAdView(mainWindow.adViewUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
+                AndroidGW.showAdView();
             }
         }
     }
@@ -98,17 +93,17 @@ ApplicationWindow {
             if (depth > 0) {
                 get(depth - 1).forceActiveFocus();
 
-                if (item.hasOwnProperty("bannerHeight")) {
+                if (item.hasOwnProperty("adViewHeight")) {
                     if (mainWindow.fullVersion) {
                         AndroidGW.hideAdView();
                     } else {
-                        AndroidGW.showAdView(mainWindow.adViewUnitId, mainWindow.bannerSize, mainWindow.testDeviceId);
+                        AndroidGW.showAdView();
                     }
                 } else {
                     AndroidGW.hideAdView();
                 }
 
-                if (item.hasOwnProperty("allowInterstitial") && item.allowInterstitial && !mainWindow.fullVersion) {
+                if (item.hasOwnProperty("allowInterstitialAd") && item.allowInterstitialAd && !mainWindow.fullVersion) {
                     AndroidGW.showInterstitialAd();
                 }
             }

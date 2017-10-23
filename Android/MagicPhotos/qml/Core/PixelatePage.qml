@@ -11,7 +11,7 @@ Page {
     id: pixelatePage
 
     header: Pane {
-        topPadding: pixelatePage.bannerHeight
+        topPadding: pixelatePage.adViewHeight
 
         Material.background: Material.LightBlue
 
@@ -215,14 +215,14 @@ Page {
         }
     }
 
-    property bool   allowInterstitial: true
-    property bool   shareActionActive: false
+    property bool   allowInterstitialAd: true
+    property bool   shareActionActive:   false
 
-    property int    bannerHeight:      0
-    property int    imageOrientation:  -1
-    property int    pixelDenom:        -1
+    property int    adViewHeight:        0
+    property int    imageOrientation:    -1
+    property int    pixelDenom:          -1
 
-    property string imageFile:         ""
+    property string imageFile:           ""
 
     function updateEditorParameters() {
         pixelateEditor.brushSize    = AppSettings.brushSize;

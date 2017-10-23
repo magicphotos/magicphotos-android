@@ -11,7 +11,7 @@ Page {
     id: recolorPage
 
     header: Pane {
-        topPadding: recolorPage.bannerHeight
+        topPadding: recolorPage.adViewHeight
 
         Material.background: Material.LightBlue
 
@@ -239,13 +239,13 @@ Page {
         }
     }
 
-    property bool   allowInterstitial: true
-    property bool   shareActionActive: false
+    property bool   allowInterstitialAd: true
+    property bool   shareActionActive:   false
 
-    property int    bannerHeight:      0
-    property int    imageOrientation:  -1
+    property int    adViewHeight:        0
+    property int    imageOrientation:    -1
 
-    property string imageFile:         ""
+    property string imageFile:           ""
 
     function updateEditorParameters() {
         recolorEditor.brushSize    = AppSettings.brushSize;

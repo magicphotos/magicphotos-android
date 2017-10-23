@@ -11,7 +11,7 @@ Page {
     id: cartoonPage
 
     header: Pane {
-        topPadding: cartoonPage.bannerHeight
+        topPadding: cartoonPage.adViewHeight
 
         Material.background: Material.LightBlue
 
@@ -215,15 +215,15 @@ Page {
         }
     }
 
-    property bool   allowInterstitial: true
-    property bool   shareActionActive: false
+    property bool   allowInterstitialAd: true
+    property bool   shareActionActive:   false
 
-    property int    bannerHeight:      0
-    property int    imageOrientation:  -1
-    property int    gaussianRadius:    -1
-    property int    cartoonThreshold:  -1
+    property int    adViewHeight:        0
+    property int    imageOrientation:    -1
+    property int    gaussianRadius:      -1
+    property int    cartoonThreshold:    -1
 
-    property string imageFile:         ""
+    property string imageFile:           ""
 
     function updateEditorParameters() {
         cartoonEditor.brushSize    = AppSettings.brushSize;

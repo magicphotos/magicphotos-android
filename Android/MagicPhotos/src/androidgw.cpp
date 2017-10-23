@@ -48,16 +48,10 @@ void AndroidGW::shareImage(const QString &image_file)
                                               "shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
-void AndroidGW::showAdView(const QString &unit_id, const QString banner_size, const QString &test_device_id)
+void AndroidGW::showAdView()
 {
-    QAndroidJniObject j_unit_id        = QAndroidJniObject::fromString(unit_id);
-    QAndroidJniObject j_banner_size    = QAndroidJniObject::fromString(banner_size);
-    QAndroidJniObject j_test_device_id = QAndroidJniObject::fromString(test_device_id);
-
     QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "showAdView", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", j_unit_id.object<jstring>(),
-                                                                                                                         j_banner_size.object<jstring>(),
-                                                                                                                         j_test_device_id.object<jstring>());
+                                              "showAdView");
 }
 
 void AndroidGW::hideAdView()
@@ -66,14 +60,10 @@ void AndroidGW::hideAdView()
                                               "hideAdView");
 }
 
-void AndroidGW::prepareInterstitialAd(const QString &unit_id, const QString &test_device_id)
+void AndroidGW::createInterstitialAd()
 {
-    QAndroidJniObject j_unit_id        = QAndroidJniObject::fromString(unit_id);
-    QAndroidJniObject j_test_device_id = QAndroidJniObject::fromString(test_device_id);
-
     QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "prepareInterstitialAd", "(Ljava/lang/String;Ljava/lang/String;)V", j_unit_id.object<jstring>(),
-                                                                                                                  j_test_device_id.object<jstring>());
+                                              "createInterstitialAd");
 }
 
 void AndroidGW::showInterstitialAd()
@@ -82,9 +72,9 @@ void AndroidGW::showInterstitialAd()
                                               "showInterstitialAd");
 }
 
-static void adViewHeightUpdated(JNIEnv *, jclass, jint banner_height)
+static void adViewHeightUpdated(JNIEnv *, jclass, jint adview_height)
 {
-    emit AndroidGW::instance()->adViewHeightUpdated(banner_height);
+    emit AndroidGW::instance()->adViewHeightUpdated(adview_height);
 }
 
 static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
