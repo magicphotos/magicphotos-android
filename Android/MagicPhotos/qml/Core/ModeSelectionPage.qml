@@ -58,6 +58,20 @@ Page {
 
     property string selectedMode: ""
 
+    Component.onCompleted: {
+        AndroidGW.imageSelected.connect(fileSelected);
+        AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
+        AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
+    }
+
+    onSelectedModeChanged: {
+        if (selectedMode !== "") {
+            waitRectangle.visible = true;
+
+            AndroidGW.showGallery();
+        }
+    }
+
     function fileSelected(image_file, image_orientation) {
         waitRectangle.visible = false;
 
@@ -136,20 +150,6 @@ Page {
         selectedMode = "";
 
         imageSelectionFailedMessageDialog.open();
-    }
-
-    Component.onCompleted: {
-        AndroidGW.imageSelected.connect(fileSelected);
-        AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
-        AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
-    }
-
-    onSelectedModeChanged: {
-        if (selectedMode !== "") {
-            waitRectangle.visible = true;
-
-            AndroidGW.showGallery();
-        }
     }
 
     ScrollView {

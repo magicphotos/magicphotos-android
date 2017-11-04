@@ -218,11 +218,6 @@ Page {
 
     property string imageFile:           ""
 
-    function updateEditorParameters() {
-        blurEditor.brushSize    = AppSettings.brushSize;
-        blurEditor.brushOpacity = AppSettings.brushOpacity;
-    }
-
     Component.onCompleted: {
         blurEditor.helperImageReady.connect(helper.helperImageReady);
 
@@ -265,6 +260,11 @@ Page {
 
             blurEditor.openImage(imageFile, imageOrientation);
         }
+    }
+
+    function updateEditorParameters() {
+        blurEditor.brushSize    = AppSettings.brushSize;
+        blurEditor.brushOpacity = AppSettings.brushOpacity;
     }
 
     Rectangle {

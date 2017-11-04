@@ -20,16 +20,6 @@ ApplicationWindow {
 
     property int screenOrientation: Screen.orientation
 
-    function purchaseFullVersion() {
-        fullVersionProduct.purchase();
-    }
-
-    function adViewHeightUpdated(adview_height) {
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
-            mainStackView.currentItem.adViewHeight = adview_height;
-        }
-    }
-
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16);
 
@@ -60,6 +50,16 @@ ApplicationWindow {
             } else {
                 AndroidGW.showAdView();
             }
+        }
+    }
+
+    function purchaseFullVersion() {
+        fullVersionProduct.purchase();
+    }
+
+    function adViewHeightUpdated(adview_height) {
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
+            mainStackView.currentItem.adViewHeight = adview_height;
         }
     }
 

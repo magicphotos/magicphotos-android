@@ -218,11 +218,6 @@ Page {
 
     property string imageFile:           ""
 
-    function updateEditorParameters() {
-        pixelateEditor.brushSize    = AppSettings.brushSize;
-        pixelateEditor.brushOpacity = AppSettings.brushOpacity;
-    }
-
     Component.onCompleted: {
         pixelateEditor.helperImageReady.connect(helper.helperImageReady);
 
@@ -265,6 +260,11 @@ Page {
 
             pixelateEditor.openImage(imageFile, imageOrientation);
         }
+    }
+
+    function updateEditorParameters() {
+        pixelateEditor.brushSize    = AppSettings.brushSize;
+        pixelateEditor.brushOpacity = AppSettings.brushOpacity;
     }
 
     Rectangle {

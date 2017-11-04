@@ -217,11 +217,6 @@ Page {
 
     property string imageFile:           ""
 
-    function updateEditorParameters() {
-        decolorizeEditor.brushSize    = AppSettings.brushSize;
-        decolorizeEditor.brushOpacity = AppSettings.brushOpacity;
-    }
-
     Component.onCompleted: {
         decolorizeEditor.helperImageReady.connect(helper.helperImageReady);
 
@@ -252,6 +247,11 @@ Page {
         if (imageOrientation !== -1 && imageFile !== "") {
             decolorizeEditor.openImage(imageFile, imageOrientation);
         }
+    }
+
+    function updateEditorParameters() {
+        decolorizeEditor.brushSize    = AppSettings.brushSize;
+        decolorizeEditor.brushOpacity = AppSettings.brushOpacity;
     }
 
     Rectangle {

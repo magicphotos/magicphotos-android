@@ -219,11 +219,6 @@ Page {
 
     property string imageFile:           ""
 
-    function updateEditorParameters() {
-        cartoonEditor.brushSize    = AppSettings.brushSize;
-        cartoonEditor.brushOpacity = AppSettings.brushOpacity;
-    }
-
     Component.onCompleted: {
         cartoonEditor.helperImageReady.connect(helper.helperImageReady);
 
@@ -278,6 +273,11 @@ Page {
 
             cartoonEditor.openImage(imageFile, imageOrientation);
         }
+    }
+
+    function updateEditorParameters() {
+        cartoonEditor.brushSize    = AppSettings.brushSize;
+        cartoonEditor.brushOpacity = AppSettings.brushOpacity;
     }
 
     Rectangle {

@@ -241,11 +241,6 @@ Page {
 
     property string imageFile:           ""
 
-    function updateEditorParameters() {
-        recolorEditor.brushSize    = AppSettings.brushSize;
-        recolorEditor.brushOpacity = AppSettings.brushOpacity;
-    }
-
     Component.onCompleted: {
         recolorEditor.helperImageReady.connect(helper.helperImageReady);
 
@@ -276,6 +271,11 @@ Page {
         if (imageOrientation !== -1 && imageFile !== "") {
             recolorEditor.openImage(imageFile, imageOrientation);
         }
+    }
+
+    function updateEditorParameters() {
+        recolorEditor.brushSize    = AppSettings.brushSize;
+        recolorEditor.brushOpacity = AppSettings.brushOpacity;
     }
 
     Rectangle {

@@ -218,11 +218,6 @@ Page {
 
     property string imageFile:           ""
 
-    function updateEditorParameters() {
-        sketchEditor.brushSize    = AppSettings.brushSize;
-        sketchEditor.brushOpacity = AppSettings.brushOpacity;
-    }
-
     Component.onCompleted: {
         sketchEditor.helperImageReady.connect(helper.helperImageReady);
 
@@ -265,6 +260,11 @@ Page {
 
             sketchEditor.openImage(imageFile, imageOrientation);
         }
+    }
+
+    function updateEditorParameters() {
+        sketchEditor.brushSize    = AppSettings.brushSize;
+        sketchEditor.brushOpacity = AppSettings.brushOpacity;
     }
 
     Rectangle {
