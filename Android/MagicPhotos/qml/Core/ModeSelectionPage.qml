@@ -58,12 +58,6 @@ Page {
 
     property string selectedMode: ""
 
-    Component.onCompleted: {
-        AndroidGW.imageSelected.connect(fileSelected);
-        AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
-        AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
-    }
-
     onSelectedModeChanged: {
         if (selectedMode !== "") {
             waitRectangle.visible = true;
@@ -308,5 +302,11 @@ Page {
         onYes: {
             mainWindow.purchaseFullVersion();
         }
+    }
+
+    Component.onCompleted: {
+        AndroidGW.imageSelected.connect(fileSelected);
+        AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
+        AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
     }
 }

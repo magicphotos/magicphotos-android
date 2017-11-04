@@ -20,17 +20,6 @@ ApplicationWindow {
 
     property int screenOrientation: Screen.orientation
 
-    Component.onCompleted: {
-        AppSettings.defaultBrushSize = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16);
-
-        fullVersion = AppSettings.isFullVersion;
-
-        AndroidGW.adViewHeightUpdated.connect(adViewHeightUpdated);
-        AndroidGW.createInterstitialAd();
-
-        mainStackView.push(modeSelectionPage);
-    }
-
     onFullVersionChanged: {
         AppSettings.isFullVersion = fullVersion;
 
@@ -132,5 +121,16 @@ ApplicationWindow {
         anchors.fill: parent
         z:            20
         enabled:      mainStackView.busy
+    }
+
+    Component.onCompleted: {
+        AppSettings.defaultBrushSize = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16);
+
+        fullVersion = AppSettings.isFullVersion;
+
+        AndroidGW.adViewHeightUpdated.connect(adViewHeightUpdated);
+        AndroidGW.createInterstitialAd();
+
+        mainStackView.push(modeSelectionPage);
     }
 }

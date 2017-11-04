@@ -241,12 +241,6 @@ Page {
 
     property string imageFile:           ""
 
-    Component.onCompleted: {
-        recolorEditor.helperImageReady.connect(helper.helperImageReady);
-
-        updateEditorParameters();
-    }
-
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
             if (brushSettingsPane.visible) {
@@ -622,5 +616,11 @@ Page {
         onYes: {
             mainStackView.pop();
         }
+    }
+
+    Component.onCompleted: {
+        recolorEditor.helperImageReady.connect(helper.helperImageReady);
+
+        updateEditorParameters();
     }
 }
