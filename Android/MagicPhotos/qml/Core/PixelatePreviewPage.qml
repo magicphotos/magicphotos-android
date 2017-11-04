@@ -25,11 +25,10 @@ Page {
             anchors.fill: parent
 
             ToolButton {
-                id:             applyToolButton
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled:        false
-
+                id:               applyToolButton
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -84,8 +83,7 @@ Page {
         spacing:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
 
         Rectangle {
-            color: "transparent"
-
+            color:             "transparent"
             Layout.fillWidth:  true
             Layout.fillHeight: true
 
@@ -146,13 +144,12 @@ Page {
         }
 
         Slider {
-            id:       pixDenomSlider
-            enabled:  false
-            from:     32
-            to:       192
-            value:    112
-            stepSize: 8.0
-
+            id:               pixDenomSlider
+            enabled:          false
+            from:             32
+            to:               192
+            value:            112
+            stepSize:         8.0
             Layout.fillWidth: true
 
             onPressedChanged: {

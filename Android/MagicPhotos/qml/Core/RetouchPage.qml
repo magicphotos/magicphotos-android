@@ -11,8 +11,7 @@ Page {
     id: retouchPage
 
     header: Pane {
-        topPadding: retouchPage.adViewHeight
-
+        topPadding:          retouchPage.adViewHeight
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -115,11 +114,10 @@ Page {
             anchors.fill: parent
 
             ToolButton {
-                id:             saveToolButton
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled:        false
-
+                id:               saveToolButton
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -150,11 +148,10 @@ Page {
             }
 
             ToolButton {
-                id:             shareToolButton
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled:        false
-
+                id:               shareToolButton
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -185,11 +182,10 @@ Page {
             }
 
             ToolButton {
-                id:             undoToolButton
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled:        false
-
+                id:               undoToolButton
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -203,9 +199,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -219,9 +214,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -511,13 +505,12 @@ Page {
     }
 
     Pane {
-        id:             brushSettingsPane
-        anchors.bottom: parent.bottom
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        z:              15
-        visible:        false
-
+        id:                 brushSettingsPane
+        anchors.bottom:     parent.bottom
+        anchors.left:       parent.left
+        anchors.right:      parent.right
+        z:                  15
+        visible:            false
         Material.elevation: 5
 
         onVisibleChanged: {
@@ -536,21 +529,19 @@ Page {
             columnSpacing:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
 
             BrushPreviewGenerator {
-                id:      brushPreviewGenerator
-                size:    brushSizeSlider.value
-                maxSize: brushSizeSlider.to
-                opacity: brushOpacitySlider.value
-
+                id:             brushPreviewGenerator
+                size:           brushSizeSlider.value
+                maxSize:        brushSizeSlider.to
+                opacity:        brushOpacitySlider.value
                 Layout.rowSpan: 2
             }
 
             Slider {
-                id:       brushSizeSlider
-                from:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
-                to:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 24)
-                value:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
-                stepSize: 1.0
-
+                id:               brushSizeSlider
+                from:             UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
+                to:               UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 24)
+                value:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+                stepSize:         1.0
                 Layout.fillWidth: true
 
                 onPressedChanged: {
@@ -569,12 +560,11 @@ Page {
             }
 
             Slider {
-                id:       brushOpacitySlider
-                from:     0.0
-                to:       1.0
-                value:    0.75
-                stepSize: 0.1
-
+                id:               brushOpacitySlider
+                from:             0.0
+                to:               1.0
+                value:            0.75
+                stepSize:         0.1
                 Layout.fillWidth: true
 
                 onPressedChanged: {

@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtPurchasing 1.0
@@ -8,13 +9,16 @@ import "Core"
 import "Util.js" as UtilScript
 
 ApplicationWindow {
-    id:      mainWindow
-    visible: true
+    id:                           mainWindow
+    visible:                      true
+    Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
+                                  Qt.InvertedPortraitOrientation | Qt.InvertedLandscapeOrientation
+    Material.theme:               Material.System
+    Material.primary:             Material.Teal
 
-    Material.theme:   Material.System
-    Material.primary: Material.Teal
+    property bool fullVersion:      false
 
-    property bool fullVersion: false
+    property int screenOrientation: Screen.orientation
 
     function purchaseFullVersion() {
         fullVersionProduct.purchase();
@@ -40,6 +44,16 @@ ApplicationWindow {
     onFullVersionChanged: {
         AppSettings.isFullVersion = fullVersion;
 
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
+            if (fullVersion) {
+                AndroidGW.hideAdView();
+            } else {
+                AndroidGW.showAdView();
+            }
+        }
+    }
+
+    onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
             if (fullVersion) {
                 AndroidGW.hideAdView();

@@ -24,10 +24,9 @@ Page {
             anchors.fill: parent
 
             ToolButton {
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                visible:        !mainWindow.fullVersion
-
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                visible:          !mainWindow.fullVersion
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -41,9 +40,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -168,9 +166,8 @@ Page {
             property int itemSize: (width - columnSpacing * (columns - 1)) / columns
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_decolorize.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_decolorize.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 
@@ -184,9 +181,8 @@ Page {
             }
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_sketch.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_sketch.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 
@@ -200,9 +196,8 @@ Page {
             }
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_cartoon.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_cartoon.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 
@@ -216,9 +211,8 @@ Page {
             }
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_blur.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_blur.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 
@@ -232,9 +226,8 @@ Page {
             }
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_pixelate.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_pixelate.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 
@@ -248,9 +241,8 @@ Page {
             }
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_recolor.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_recolor.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 
@@ -264,9 +256,8 @@ Page {
             }
 
             Image {
-                source:   "qrc:/resources/images/edit_mode_retouch.png"
-                fillMode: Image.PreserveAspectFit
-
+                source:                 "qrc:/resources/images/edit_mode_retouch.png"
+                fillMode:               Image.PreserveAspectFit
                 Layout.preferredWidth:  parent.itemSize
                 Layout.preferredHeight: parent.itemSize
 

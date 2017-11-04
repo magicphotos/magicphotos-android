@@ -25,11 +25,10 @@ Page {
             anchors.fill: parent
 
             ToolButton {
-                id:             applyToolButton
-                implicitWidth:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                enabled:        false
-
+                id:               applyToolButton
+                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -86,8 +85,7 @@ Page {
         spacing:         UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
 
         Rectangle {
-            color: "transparent"
-
+            color:             "transparent"
             Layout.fillWidth:  true
             Layout.fillHeight: true
 
@@ -150,13 +148,12 @@ Page {
         }
 
         Slider {
-            id:       gaussianRadiusSlider
-            enabled:  false
-            from:     0
-            to:       10
-            value:    5
-            stepSize: 1.0
-
+            id:               gaussianRadiusSlider
+            enabled:          false
+            from:             0
+            to:               10
+            value:            5
+            stepSize:         1.0
             Layout.fillWidth: true
 
             onPressedChanged: {
@@ -167,13 +164,12 @@ Page {
         }
 
         Slider {
-            id:       thresholdSlider
-            enabled:  false
-            from:     32
-            to:       128
-            value:    80
-            stepSize: 8.0
-
+            id:               thresholdSlider
+            enabled:          false
+            from:             32
+            to:               128
+            value:            80
+            stepSize:         8.0
             Layout.fillWidth: true
 
             onPressedChanged: {
