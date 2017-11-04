@@ -37,11 +37,15 @@ void AppSettings::setBrushSize(const int &size)
 
 bool AppSettings::isFullVersion() const
 {
+#ifdef FULL_VERSION
+    return true;
+#else
     if (Settings->contains("IsFullVersion")) {
         return Settings->value("IsFullVersion").toBool();
     } else {
         return false;
     }
+#endif
 }
 
 void AppSettings::setIsFullVersion(const bool &full)
