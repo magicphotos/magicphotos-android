@@ -94,9 +94,9 @@ ApplicationWindow {
             }
 
             if (depth > 0) {
-                get(depth - 1).forceActiveFocus();
+                currentItem.forceActiveFocus();
 
-                if (item.hasOwnProperty("adViewHeight")) {
+                if (currentItem.hasOwnProperty("adViewHeight")) {
                     if (mainWindow.fullVersion) {
                         AndroidGW.hideAdView();
                     } else {
@@ -106,7 +106,7 @@ ApplicationWindow {
                     AndroidGW.hideAdView();
                 }
 
-                if (item.hasOwnProperty("allowInterstitialAd") && item.allowInterstitialAd && !mainWindow.fullVersion) {
+                if (currentItem.hasOwnProperty("allowInterstitialAd") && currentItem.allowInterstitialAd && !mainWindow.fullVersion) {
                     AndroidGW.showInterstitialAd();
                 }
             }
