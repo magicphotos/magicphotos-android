@@ -43,16 +43,16 @@ TRANSLATIONS += \
     translations/MagicPhotos_fr.ts
 
 OTHER_FILES += \
-    android-source/AndroidManifest.xml \
-    android-source/res/values/strings.xml \
-    android-source/res/values-ru/strings.xml \
-    android-source/res/values-de/strings.xml \
-    android-source/res/values-fr/strings.xml \
-    android-source/res/drawable-hdpi/ic_launcher.png \
-    android-source/res/drawable-mdpi/ic_launcher.png \
-    android-source/res/drawable-xhdpi/ic_launcher.png \
-    android-source/res/drawable-xxhdpi/ic_launcher.png \
-    android-source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
+    android/source/AndroidManifest.xml \
+    android/source/res/values/strings.xml \
+    android/source/res/values-ru/strings.xml \
+    android/source/res/values-de/strings.xml \
+    android/source/res/values-fr/strings.xml \
+    android/source/res/drawable-hdpi/ic_launcher.png \
+    android/source/res/drawable-mdpi/ic_launcher.png \
+    android/source/res/drawable-xhdpi/ic_launcher.png \
+    android/source/res/drawable-xxhdpi/ic_launcher.png \
+    android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -60,7 +60,7 @@ QML_IMPORT_PATH =
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android-source
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/source
 
 # Default rules for deployment.
 include(deployment.pri)
