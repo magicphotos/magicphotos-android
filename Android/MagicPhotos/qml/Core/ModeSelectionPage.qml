@@ -24,8 +24,8 @@ Page {
             anchors.fill: parent
 
             ToolButton {
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 visible:          !mainWindow.fullVersion
                 Layout.alignment: Qt.AlignHCenter
 
@@ -40,8 +40,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -154,8 +154,8 @@ Page {
         GridLayout {
             width:         scrollView.width
             columns:       2
-            rowSpacing:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
-            columnSpacing: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+            rowSpacing:    UtilScript.pt(4)
+            columnSpacing: UtilScript.pt(4)
 
             property int itemSize: (width - columnSpacing * (columns - 1)) / columns
 

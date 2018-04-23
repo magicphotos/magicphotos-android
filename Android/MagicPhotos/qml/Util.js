@@ -1,4 +1,6 @@
-function mapSizeToDevice(screen_dpi, size) {
+function pt(size) {
+    var screen_dpi = AndroidGW.getScreenDPI();
+
     if (screen_dpi >= 640) {
         return Math.floor(size * 4);
     } else if (screen_dpi >= 480) {

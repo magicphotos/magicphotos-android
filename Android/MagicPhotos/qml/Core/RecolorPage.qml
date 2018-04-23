@@ -24,8 +24,8 @@ Page {
 
             Button {
                 id:        scrollModeButton
-                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                width:     UtilScript.pt(48)
+                height:    UtilScript.pt(48)
                 enabled:   false
                 checkable: true
                 checked:   true
@@ -46,8 +46,8 @@ Page {
 
             Button {
                 id:        originalModeButton
-                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                width:     UtilScript.pt(48)
+                height:    UtilScript.pt(48)
                 enabled:   false
                 checkable: true
 
@@ -67,8 +67,8 @@ Page {
 
             Button {
                 id:        effectedModeButton
-                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                width:     UtilScript.pt(48)
+                height:    UtilScript.pt(48)
                 enabled:   false
                 checkable: true
 
@@ -88,8 +88,8 @@ Page {
 
             Button {
                 id:        hueSelectionModeButton
-                width:     UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                height:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                width:     UtilScript.pt(48)
+                height:    UtilScript.pt(48)
                 enabled:   false
                 checkable: true
 
@@ -118,8 +118,8 @@ Page {
 
             ToolButton {
                 id:               saveToolButton
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -152,8 +152,8 @@ Page {
 
             ToolButton {
                 id:               shareToolButton
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -186,8 +186,8 @@ Page {
 
             ToolButton {
                 id:               undoToolButton
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -202,8 +202,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -217,8 +217,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:    UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
-                implicitHeight:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -415,13 +415,13 @@ Page {
             id:           helperRectangle
             anchors.top:  parent.top
             anchors.left: parent.left
-            width:        UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 128)
-            height:       UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 128)
+            width:        UtilScript.pt(128)
+            height:       UtilScript.pt(128)
             z:            5
             visible:      false
             color:        "black"
             border.color: "white"
-            border.width: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 2)
+            border.width: UtilScript.pt(2)
 
             Helper {
                 id:           helper
@@ -451,7 +451,7 @@ Page {
         id:                     hueZoneRectangle
         anchors.right:          parent.right
         anchors.verticalCenter: parent.verticalCenter
-        width:                  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 48)
+        width:                  UtilScript.pt(48)
         height:                 parent.height * 3 / 4
         z:                      10
         color:                  "transparent"
@@ -480,12 +480,12 @@ Page {
                 id:            hueSliderRectangle
                 anchors.left:  parent.left
                 anchors.right: parent.right
-                height:        UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 6)
+                height:        UtilScript.pt(6)
                 y:             (parent.height - height) * 0.5
                 z:             11
                 color:         "transparent"
                 border.color:  "black"
-                border.width:  UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 2)
+                border.width:  UtilScript.pt(2)
             }
 
             onPositionChanged: {
@@ -520,11 +520,11 @@ Page {
 
         GridLayout {
             anchors.fill:    parent
-            anchors.margins: UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+            anchors.margins: UtilScript.pt(4)
             rows:            2
             columns:         3
-            rowSpacing:      UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
-            columnSpacing:   UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 4)
+            rowSpacing:      UtilScript.pt(8)
+            columnSpacing:   UtilScript.pt(4)
 
             BrushPreviewGenerator {
                 id:             brushPreviewGenerator
@@ -536,9 +536,9 @@ Page {
 
             Slider {
                 id:               brushSizeSlider
-                from:             UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 8)
-                to:               UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 24)
-                value:            UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16)
+                from:             UtilScript.pt(8)
+                to:               UtilScript.pt(24)
+                value:            UtilScript.pt(16)
                 stepSize:         1.0
                 Layout.fillWidth: true
 

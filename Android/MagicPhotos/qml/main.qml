@@ -124,7 +124,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        AppSettings.defaultBrushSize = UtilScript.mapSizeToDevice(AndroidGW.getScreenDPI(), 16);
+        AppSettings.defaultBrushSize = UtilScript.pt(16);
 
         fullVersion = AppSettings.isFullVersion;
 

@@ -40,7 +40,7 @@ public class MagicActivity extends QtActivity
     private static final String   ADMOB_APP_ID                 = "ca-app-pub-2455088855015693~7279538773";
     private static final String   ADMOB_ADVIEW_UNIT_ID         = "ca-app-pub-2455088855015693/1811713388";
     private static final String   ADMOB_INTERSTITIALAD_UNIT_ID = "ca-app-pub-2455088855015693/6662028461";
-    private static final String   ADMOB_TEST_DEVICE_ID         = "217F8CE186D0849DE13B0AFB1B1D7B3E";
+    private static final String   ADMOB_TEST_DEVICE_ID         = "51E39B9A66DB11AF629C81F3D70FCC57";
 
     private static final AdSize   ADMOB_ADVIEW_ADSIZE          = AdSize.SMART_BANNER;
 
