@@ -28,24 +28,24 @@ public:
     virtual ~BlurEditor();
 
     int  mode() const;
-    void setMode(const int &mode);
+    void setMode(int mode);
 
     int  brushSize() const;
-    void setBrushSize(const int &size);
+    void setBrushSize(int size);
 
     int  helperSize() const;
-    void setHelperSize(const int &size);
+    void setHelperSize(int size);
 
     int  radius() const;
-    void setRadius(const int &radius);
+    void setRadius(int radius);
 
     qreal brushOpacity() const;
-    void  setBrushOpacity(const qreal &opacity);
+    void  setBrushOpacity(qreal opacity);
 
     bool changed() const;
 
-    Q_INVOKABLE void openImage(const QString &image_file, const int &image_orientation);
-    Q_INVOKABLE void saveImage(const QString &image_file);
+    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
+    Q_INVOKABLE void saveImage(QString image_file);
 
     Q_INVOKABLE void undo();
 
@@ -64,7 +64,7 @@ public:
     };
 
 public slots:
-    void effectedImageReady(const QImage &effected_image);
+    void effectedImageReady(QImage effected_image);
 
 private slots:
     void scaleWasChanged();
@@ -73,14 +73,14 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(const QString &image_file);
+    void imageSaved(QString image_file);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
     void mouseEvent(int event_type, int x, int y);
 
-    void helperImageReady(const QImage &helper_image);
+    void helperImageReady(QImage helper_image);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);
@@ -113,14 +113,14 @@ public:
     virtual ~BlurPreviewGenerator();
 
     int  radius() const;
-    void setRadius(const int &radius);
+    void setRadius(int radius);
 
-    Q_INVOKABLE void openImage(const QString &image_file, const int &image_orientation);
+    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
 
     virtual void paint(QPainter *painter);
 
 public slots:
-    void blurImageReady(const QImage &blur_image);
+    void blurImageReady(QImage blur_image);
 
 signals:
     void imageOpened();
@@ -147,14 +147,14 @@ public:
     explicit BlurImageGenerator(QObject *parent = 0);
     virtual ~BlurImageGenerator();
 
-    void setGaussianRadius(const int &radius);
-    void setInput(const QImage &input_image);
+    void setGaussianRadius(int radius);
+    void setInput(QImage input_image);
 
 public slots:
     void start();
 
 signals:
-    void imageReady(const QImage &output_image);
+    void imageReady(QImage output_image);
     void finished();
 
 private:

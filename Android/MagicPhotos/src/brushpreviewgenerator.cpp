@@ -24,7 +24,7 @@ int BrushPreviewGenerator::size() const
     return Size;
 }
 
-void BrushPreviewGenerator::setSize(const int &size)
+void BrushPreviewGenerator::setSize(int size)
 {
     Size = size;
 
@@ -36,7 +36,7 @@ int BrushPreviewGenerator::maxSize() const
     return MaxSize;
 }
 
-void BrushPreviewGenerator::setMaxSize(const int &max_size)
+void BrushPreviewGenerator::setMaxSize(int max_size)
 {
     MaxSize = max_size;
 
@@ -51,7 +51,7 @@ qreal BrushPreviewGenerator::opacity() const
     return Opacity;
 }
 
-void BrushPreviewGenerator::setOpacity(const qreal &opacity)
+void BrushPreviewGenerator::setOpacity(qreal opacity)
 {
     Opacity = opacity;
 

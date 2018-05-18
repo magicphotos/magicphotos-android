@@ -16,7 +16,7 @@ int AppSettings::defaultBrushSize() const
     return DefaultBrushSize;
 }
 
-void AppSettings::setDefaultBrushSize(const int &size)
+void AppSettings::setDefaultBrushSize(int size)
 {
     DefaultBrushSize = size;
 }
@@ -30,7 +30,7 @@ int AppSettings::brushSize() const
     }
 }
 
-void AppSettings::setBrushSize(const int &size)
+void AppSettings::setBrushSize(int size)
 {
     Settings->setValue("BrushSize", size);
 }
@@ -48,7 +48,7 @@ bool AppSettings::isFullVersion() const
 #endif
 }
 
-void AppSettings::setIsFullVersion(const bool &full)
+void AppSettings::setIsFullVersion(bool full)
 {
     Settings->setValue("IsFullVersion", full);
 }
@@ -62,7 +62,7 @@ qreal AppSettings::brushOpacity() const
     }
 }
 
-void AppSettings::setBrushOpacity(const qreal &opacity)
+void AppSettings::setBrushOpacity(qreal opacity)
 {
     Settings->setValue("BrushOpacity", opacity);
 }

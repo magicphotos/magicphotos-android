@@ -33,7 +33,7 @@ int BlurEditor::mode() const
     return CurrentMode;
 }
 
-void BlurEditor::setMode(const int &mode)
+void BlurEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -43,7 +43,7 @@ int BlurEditor::brushSize() const
     return BrushSize;
 }
 
-void BlurEditor::setBrushSize(const int &size)
+void BlurEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -75,7 +75,7 @@ int BlurEditor::helperSize() const
     return HelperSize;
 }
 
-void BlurEditor::setHelperSize(const int &size)
+void BlurEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -85,7 +85,7 @@ int BlurEditor::radius() const
     return GaussianRadius;
 }
 
-void BlurEditor::setRadius(const int &radius)
+void BlurEditor::setRadius(int radius)
 {
     GaussianRadius = radius;
 }
@@ -95,7 +95,7 @@ qreal BlurEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void BlurEditor::setBrushOpacity(const qreal &opacity)
+void BlurEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -127,7 +127,7 @@ bool BlurEditor::changed() const
     return IsChanged;
 }
 
-void BlurEditor::openImage(const QString &image_file, const int &image_orientation)
+void BlurEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -175,11 +175,11 @@ void BlurEditor::openImage(const QString &image_file, const int &image_orientati
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(effectedImageReady(const QImage &)));
-                    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
+                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
                     generator->setGaussianRadius(GaussianRadius);
                     generator->setInput(LoadedImage);
@@ -199,7 +199,7 @@ void BlurEditor::openImage(const QString &image_file, const int &image_orientati
     }
 }
 
-void BlurEditor::saveImage(const QString &image_file)
+void BlurEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 
@@ -256,7 +256,7 @@ void BlurEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void BlurEditor::effectedImageReady(const QImage &effected_image)
+void BlurEditor::effectedImageReady(QImage effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -391,7 +391,7 @@ int BlurPreviewGenerator::radius() const
     return GaussianRadius;
 }
 
-void BlurPreviewGenerator::setRadius(const int &radius)
+void BlurPreviewGenerator::setRadius(int radius)
 {
     GaussianRadius = radius;
 
@@ -404,7 +404,7 @@ void BlurPreviewGenerator::setRadius(const int &radius)
     }
 }
 
-void BlurPreviewGenerator::openImage(const QString &image_file, const int &image_orientation)
+void BlurPreviewGenerator::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -491,7 +491,7 @@ void BlurPreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void BlurPreviewGenerator::blurImageReady(const QImage &blur_image)
+void BlurPreviewGenerator::blurImageReady(QImage blur_image)
 {
     BlurGeneratorRunning = false;
     BlurImage            = blur_image;
@@ -517,11 +517,11 @@ void BlurPreviewGenerator::StartBlurGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(blurImageReady(const QImage &)));
-    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(blurImageReady(QImage)));
+    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
     generator->setGaussianRadius(GaussianRadius);
     generator->setInput(LoadedImage);
@@ -542,12 +542,12 @@ BlurImageGenerator::~BlurImageGenerator()
 {
 }
 
-void BlurImageGenerator::setGaussianRadius(const int &radius)
+void BlurImageGenerator::setGaussianRadius(int radius)
 {
     GaussianRadius = radius;
 }
 
-void BlurImageGenerator::setInput(const QImage &input_image)
+void BlurImageGenerator::setInput(QImage input_image)
 {
     InputImage = input_image;
 }

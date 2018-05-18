@@ -29,24 +29,24 @@ public:
     virtual ~RecolorEditor();
 
     int  mode() const;
-    void setMode(const int &mode);
+    void setMode(int mode);
 
     int  brushSize() const;
-    void setBrushSize(const int &size);
+    void setBrushSize(int size);
 
     int  helperSize() const;
-    void setHelperSize(const int &size);
+    void setHelperSize(int size);
 
     int  hue() const;
-    void setHue(const int &hue);
+    void setHue(int hue);
 
     qreal brushOpacity() const;
-    void  setBrushOpacity(const qreal &opacity);
+    void  setBrushOpacity(qreal opacity);
 
     bool changed() const;
 
-    Q_INVOKABLE void openImage(const QString &image_file, const int &image_orientation);
-    Q_INVOKABLE void saveImage(const QString &image_file);
+    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
+    Q_INVOKABLE void saveImage(QString image_file);
 
     Q_INVOKABLE void undo();
 
@@ -71,14 +71,14 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(const QString &image_file);
+    void imageSaved(QString image_file);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
     void mouseEvent(int event_type, int x, int y);
 
-    void helperImageReady(const QImage &helper_image);
+    void helperImageReady(QImage helper_image);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);

@@ -32,7 +32,7 @@ void AndroidGW::showGallery()
                                               "showGallery");
 }
 
-void AndroidGW::refreshGallery(const QString &image_file)
+void AndroidGW::refreshGallery(QString image_file)
 {
     QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
 
@@ -40,7 +40,7 @@ void AndroidGW::refreshGallery(const QString &image_file)
                                               "refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
-void AndroidGW::shareImage(const QString &image_file)
+void AndroidGW::shareImage(QString image_file)
 {
     QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
 

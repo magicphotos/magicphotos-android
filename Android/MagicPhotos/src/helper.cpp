@@ -28,7 +28,7 @@ void Helper::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void Helper::helperImageReady(const QImage &helper_image)
+void Helper::helperImageReady(QImage helper_image)
 {
     HelperImage = helper_image;
 

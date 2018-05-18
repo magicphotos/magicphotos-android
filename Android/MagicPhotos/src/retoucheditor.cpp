@@ -33,7 +33,7 @@ int RetouchEditor::mode() const
     return CurrentMode;
 }
 
-void RetouchEditor::setMode(const int &mode)
+void RetouchEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -43,7 +43,7 @@ int RetouchEditor::brushSize() const
     return BrushSize;
 }
 
-void RetouchEditor::setBrushSize(const int &size)
+void RetouchEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -75,7 +75,7 @@ int RetouchEditor::helperSize() const
     return HelperSize;
 }
 
-void RetouchEditor::setHelperSize(const int &size)
+void RetouchEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -85,7 +85,7 @@ qreal RetouchEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void RetouchEditor::setBrushOpacity(const qreal &opacity)
+void RetouchEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -127,7 +127,7 @@ QPoint RetouchEditor::samplingPoint() const
     return SamplingPoint;
 }
 
-void RetouchEditor::openImage(const QString &image_file, const int &image_orientation)
+void RetouchEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -205,7 +205,7 @@ void RetouchEditor::openImage(const QString &image_file, const int &image_orient
     }
 }
 
-void RetouchEditor::saveImage(const QString &image_file)
+void RetouchEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 

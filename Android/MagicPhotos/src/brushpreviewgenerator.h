@@ -18,13 +18,13 @@ public:
     virtual ~BrushPreviewGenerator();
 
     int  size() const;
-    void setSize(const int &size);
+    void setSize(int size);
 
     int  maxSize() const;
-    void setMaxSize(const int &max_size);
+    void setMaxSize(int max_size);
 
     qreal opacity() const;
-    void  setOpacity(const qreal &opacity);
+    void  setOpacity(qreal opacity);
 
     virtual void paint(QPainter *painter);
 

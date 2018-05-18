@@ -19,16 +19,16 @@ public:
     virtual ~AppSettings();
 
     int  defaultBrushSize() const;
-    void setDefaultBrushSize(const int &size);
+    void setDefaultBrushSize(int size);
 
     int  brushSize() const;
-    void setBrushSize(const int &size);
+    void setBrushSize(int size);
 
     bool isFullVersion() const;
-    void setIsFullVersion(const bool &full);
+    void setIsFullVersion(bool full);
 
     qreal brushOpacity() const;
-    void  setBrushOpacity(const qreal &opacity);
+    void  setBrushOpacity(qreal opacity);
 
 private:
     int        DefaultBrushSize;

@@ -34,7 +34,7 @@ int CartoonEditor::mode() const
     return CurrentMode;
 }
 
-void CartoonEditor::setMode(const int &mode)
+void CartoonEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -44,7 +44,7 @@ int CartoonEditor::brushSize() const
     return BrushSize;
 }
 
-void CartoonEditor::setBrushSize(const int &size)
+void CartoonEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -76,7 +76,7 @@ int CartoonEditor::helperSize() const
     return HelperSize;
 }
 
-void CartoonEditor::setHelperSize(const int &size)
+void CartoonEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -86,7 +86,7 @@ int CartoonEditor::radius() const
     return GaussianRadius;
 }
 
-void CartoonEditor::setRadius(const int &radius)
+void CartoonEditor::setRadius(int radius)
 {
     GaussianRadius = radius;
 }
@@ -96,7 +96,7 @@ int CartoonEditor::threshold() const
     return CartoonThreshold;
 }
 
-void CartoonEditor::setThreshold(const int &threshold)
+void CartoonEditor::setThreshold(int threshold)
 {
     CartoonThreshold = threshold;
 }
@@ -106,7 +106,7 @@ qreal CartoonEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void CartoonEditor::setBrushOpacity(const qreal &opacity)
+void CartoonEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -138,7 +138,7 @@ bool CartoonEditor::changed() const
     return IsChanged;
 }
 
-void CartoonEditor::openImage(const QString &image_file, const int &image_orientation)
+void CartoonEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -186,11 +186,11 @@ void CartoonEditor::openImage(const QString &image_file, const int &image_orient
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(effectedImageReady(const QImage &)));
-                    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
+                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
                     generator->setGaussianRadius(GaussianRadius);
                     generator->setCartoonThreshold(CartoonThreshold);
@@ -211,7 +211,7 @@ void CartoonEditor::openImage(const QString &image_file, const int &image_orient
     }
 }
 
-void CartoonEditor::saveImage(const QString &image_file)
+void CartoonEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 
@@ -268,7 +268,7 @@ void CartoonEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void CartoonEditor::effectedImageReady(const QImage &effected_image)
+void CartoonEditor::effectedImageReady(QImage effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -404,7 +404,7 @@ int CartoonPreviewGenerator::radius() const
     return GaussianRadius;
 }
 
-void CartoonPreviewGenerator::setRadius(const int &radius)
+void CartoonPreviewGenerator::setRadius(int radius)
 {
     GaussianRadius = radius;
 
@@ -422,7 +422,7 @@ int CartoonPreviewGenerator::threshold() const
     return CartoonThreshold;
 }
 
-void CartoonPreviewGenerator::setThreshold(const int &threshold)
+void CartoonPreviewGenerator::setThreshold(int threshold)
 {
     CartoonThreshold = threshold;
 
@@ -435,7 +435,7 @@ void CartoonPreviewGenerator::setThreshold(const int &threshold)
     }
 }
 
-void CartoonPreviewGenerator::openImage(const QString &image_file, const int &image_orientation)
+void CartoonPreviewGenerator::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -522,7 +522,7 @@ void CartoonPreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void CartoonPreviewGenerator::cartoonImageReady(const QImage &cartoon_image)
+void CartoonPreviewGenerator::cartoonImageReady(QImage cartoon_image)
 {
     CartoonGeneratorRunning = false;
     CartoonImage            = cartoon_image;
@@ -548,11 +548,11 @@ void CartoonPreviewGenerator::StartCartoonGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(cartoonImageReady(const QImage &)));
-    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(cartoonImageReady(QImage)));
+    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
     generator->setGaussianRadius(GaussianRadius);
     generator->setCartoonThreshold(CartoonThreshold);
@@ -575,17 +575,17 @@ CartoonImageGenerator::~CartoonImageGenerator()
 {
 }
 
-void CartoonImageGenerator::setGaussianRadius(const int &radius)
+void CartoonImageGenerator::setGaussianRadius(int radius)
 {
     GaussianRadius = radius;
 }
 
-void CartoonImageGenerator::setCartoonThreshold(const int &threshold)
+void CartoonImageGenerator::setCartoonThreshold(int threshold)
 {
     CartoonThreshold = threshold;
 }
 
-void CartoonImageGenerator::setInput(const QImage &input_image)
+void CartoonImageGenerator::setInput(QImage input_image)
 {
     InputImage = input_image;
 }

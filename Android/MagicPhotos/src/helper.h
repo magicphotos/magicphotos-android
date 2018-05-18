@@ -15,7 +15,7 @@ public:
     virtual void paint(QPainter *painter);
 
 public slots:
-    void helperImageReady(const QImage &helper_image);
+    void helperImageReady(QImage helper_image);
 
 private:
     QImage HelperImage;

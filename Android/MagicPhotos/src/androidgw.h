@@ -17,17 +17,17 @@ public:
     Q_INVOKABLE QString getSaveDirectory();
     Q_INVOKABLE int     getScreenDPI();
     Q_INVOKABLE void    showGallery();
-    Q_INVOKABLE void    refreshGallery(const QString &image_file);
-    Q_INVOKABLE void    shareImage(const QString &image_file);
+    Q_INVOKABLE void    refreshGallery(QString image_file);
+    Q_INVOKABLE void    shareImage(QString image_file);
     Q_INVOKABLE void    showAdView();
     Q_INVOKABLE void    hideAdView();
     Q_INVOKABLE void    createInterstitialAd();
     Q_INVOKABLE void    showInterstitialAd();
 
 signals:
-    void adViewHeightUpdated(const int &adview_height);
+    void adViewHeightUpdated(int adview_height);
 
-    void imageSelected(const QString &image_file, const int &image_orientation);
+    void imageSelected(QString image_file, int image_orientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
 

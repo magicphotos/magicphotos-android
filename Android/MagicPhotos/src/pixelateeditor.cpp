@@ -33,7 +33,7 @@ int PixelateEditor::mode() const
     return CurrentMode;
 }
 
-void PixelateEditor::setMode(const int &mode)
+void PixelateEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -43,7 +43,7 @@ int PixelateEditor::brushSize() const
     return BrushSize;
 }
 
-void PixelateEditor::setBrushSize(const int &size)
+void PixelateEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -75,7 +75,7 @@ int PixelateEditor::helperSize() const
     return HelperSize;
 }
 
-void PixelateEditor::setHelperSize(const int &size)
+void PixelateEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -85,7 +85,7 @@ int PixelateEditor::pixDenom() const
     return PixelDenom;
 }
 
-void PixelateEditor::setPixDenom(const int &pix_denom)
+void PixelateEditor::setPixDenom(int pix_denom)
 {
     PixelDenom = pix_denom;
 }
@@ -95,7 +95,7 @@ qreal PixelateEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void PixelateEditor::setBrushOpacity(const qreal &opacity)
+void PixelateEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -127,7 +127,7 @@ bool PixelateEditor::changed() const
     return IsChanged;
 }
 
-void PixelateEditor::openImage(const QString &image_file, const int &image_orientation)
+void PixelateEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -175,11 +175,11 @@ void PixelateEditor::openImage(const QString &image_file, const int &image_orien
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(effectedImageReady(const QImage &)));
-                    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
+                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
                     generator->setPixelDenom(PixelDenom);
                     generator->setInput(LoadedImage);
@@ -199,7 +199,7 @@ void PixelateEditor::openImage(const QString &image_file, const int &image_orien
     }
 }
 
-void PixelateEditor::saveImage(const QString &image_file)
+void PixelateEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 
@@ -256,7 +256,7 @@ void PixelateEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void PixelateEditor::effectedImageReady(const QImage &effected_image)
+void PixelateEditor::effectedImageReady(QImage effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -391,7 +391,7 @@ int PixelatePreviewGenerator::pixDenom() const
     return PixelDenom;
 }
 
-void PixelatePreviewGenerator::setPixDenom(const int &pix_denom)
+void PixelatePreviewGenerator::setPixDenom(int pix_denom)
 {
     PixelDenom = pix_denom;
 
@@ -404,7 +404,7 @@ void PixelatePreviewGenerator::setPixDenom(const int &pix_denom)
     }
 }
 
-void PixelatePreviewGenerator::openImage(const QString &image_file, const int &image_orientation)
+void PixelatePreviewGenerator::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -491,7 +491,7 @@ void PixelatePreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void PixelatePreviewGenerator::pixelatedImageReady(const QImage &pixelated_image)
+void PixelatePreviewGenerator::pixelatedImageReady(QImage pixelated_image)
 {
     PixelateGeneratorRunning = false;
     PixelatedImage           = pixelated_image;
@@ -517,11 +517,11 @@ void PixelatePreviewGenerator::StartPixelateGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(pixelatedImageReady(const QImage &)));
-    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(pixelatedImageReady(QImage)));
+    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
     generator->setPixelDenom(PixelDenom);
     generator->setInput(LoadedImage);
@@ -542,12 +542,12 @@ PixelateImageGenerator::~PixelateImageGenerator()
 {
 }
 
-void PixelateImageGenerator::setPixelDenom(const int &pix_denom)
+void PixelateImageGenerator::setPixelDenom(int pix_denom)
 {
     PixelDenom = pix_denom;
 }
 
-void PixelateImageGenerator::setInput(const QImage &input_image)
+void PixelateImageGenerator::setInput(QImage input_image)
 {
     InputImage = input_image;
 }

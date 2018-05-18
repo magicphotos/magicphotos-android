@@ -33,7 +33,7 @@ int SketchEditor::mode() const
     return CurrentMode;
 }
 
-void SketchEditor::setMode(const int &mode)
+void SketchEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -43,7 +43,7 @@ int SketchEditor::brushSize() const
     return BrushSize;
 }
 
-void SketchEditor::setBrushSize(const int &size)
+void SketchEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -75,7 +75,7 @@ int SketchEditor::helperSize() const
     return HelperSize;
 }
 
-void SketchEditor::setHelperSize(const int &size)
+void SketchEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -85,7 +85,7 @@ int SketchEditor::radius() const
     return GaussianRadius;
 }
 
-void SketchEditor::setRadius(const int &radius)
+void SketchEditor::setRadius(int radius)
 {
     GaussianRadius = radius;
 }
@@ -95,7 +95,7 @@ qreal SketchEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void SketchEditor::setBrushOpacity(const qreal &opacity)
+void SketchEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -127,7 +127,7 @@ bool SketchEditor::changed() const
     return IsChanged;
 }
 
-void SketchEditor::openImage(const QString &image_file, const int &image_orientation)
+void SketchEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -175,11 +175,11 @@ void SketchEditor::openImage(const QString &image_file, const int &image_orienta
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(effectedImageReady(const QImage &)));
-                    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
+                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
                     generator->setGaussianRadius(GaussianRadius);
                     generator->setInput(LoadedImage);
@@ -199,7 +199,7 @@ void SketchEditor::openImage(const QString &image_file, const int &image_orienta
     }
 }
 
-void SketchEditor::saveImage(const QString &image_file)
+void SketchEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 
@@ -256,7 +256,7 @@ void SketchEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void SketchEditor::effectedImageReady(const QImage &effected_image)
+void SketchEditor::effectedImageReady(QImage effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -391,7 +391,7 @@ int SketchPreviewGenerator::radius() const
     return GaussianRadius;
 }
 
-void SketchPreviewGenerator::setRadius(const int &radius)
+void SketchPreviewGenerator::setRadius(int radius)
 {
     GaussianRadius = radius;
 
@@ -404,7 +404,7 @@ void SketchPreviewGenerator::setRadius(const int &radius)
     }
 }
 
-void SketchPreviewGenerator::openImage(const QString &image_file, const int &image_orientation)
+void SketchPreviewGenerator::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -491,7 +491,7 @@ void SketchPreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void SketchPreviewGenerator::sketchImageReady(const QImage &sketch_image)
+void SketchPreviewGenerator::sketchImageReady(QImage sketch_image)
 {
     SketchGeneratorRunning = false;
     SketchImage            = sketch_image;
@@ -517,11 +517,11 @@ void SketchPreviewGenerator::StartSketchGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(sketchImageReady(const QImage &)));
-    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(sketchImageReady(QImage)));
+    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
     generator->setGaussianRadius(GaussianRadius);
     generator->setInput(LoadedImage);
@@ -542,12 +542,12 @@ SketchImageGenerator::~SketchImageGenerator()
 {
 }
 
-void SketchImageGenerator::setGaussianRadius(const int &radius)
+void SketchImageGenerator::setGaussianRadius(int radius)
 {
     GaussianRadius = radius;
 }
 
-void SketchImageGenerator::setInput(const QImage &input_image)
+void SketchImageGenerator::setInput(QImage input_image)
 {
     InputImage = input_image;
 }

@@ -52,7 +52,7 @@ int RecolorEditor::mode() const
     return CurrentMode;
 }
 
-void RecolorEditor::setMode(const int &mode)
+void RecolorEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -62,7 +62,7 @@ int RecolorEditor::brushSize() const
     return BrushSize;
 }
 
-void RecolorEditor::setBrushSize(const int &size)
+void RecolorEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -94,7 +94,7 @@ int RecolorEditor::helperSize() const
     return HelperSize;
 }
 
-void RecolorEditor::setHelperSize(const int &size)
+void RecolorEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -104,7 +104,7 @@ int RecolorEditor::hue() const
     return CurrentHue;
 }
 
-void RecolorEditor::setHue(const int &hue)
+void RecolorEditor::setHue(int hue)
 {
     CurrentHue = hue;
 }
@@ -114,7 +114,7 @@ qreal RecolorEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void RecolorEditor::setBrushOpacity(const qreal &opacity)
+void RecolorEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -146,7 +146,7 @@ bool RecolorEditor::changed() const
     return IsChanged;
 }
 
-void RecolorEditor::openImage(const QString &image_file, const int &image_orientation)
+void RecolorEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -223,7 +223,7 @@ void RecolorEditor::openImage(const QString &image_file, const int &image_orient
     }
 }
 
-void RecolorEditor::saveImage(const QString &image_file)
+void RecolorEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 

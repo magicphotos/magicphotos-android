@@ -32,7 +32,7 @@ int DecolorizeEditor::mode() const
     return CurrentMode;
 }
 
-void DecolorizeEditor::setMode(const int &mode)
+void DecolorizeEditor::setMode(int mode)
 {
     CurrentMode = mode;
 }
@@ -42,7 +42,7 @@ int DecolorizeEditor::brushSize() const
     return BrushSize;
 }
 
-void DecolorizeEditor::setBrushSize(const int &size)
+void DecolorizeEditor::setBrushSize(int size)
 {
     BrushSize = size;
 
@@ -74,7 +74,7 @@ int DecolorizeEditor::helperSize() const
     return HelperSize;
 }
 
-void DecolorizeEditor::setHelperSize(const int &size)
+void DecolorizeEditor::setHelperSize(int size)
 {
     HelperSize = size;
 }
@@ -84,7 +84,7 @@ qreal DecolorizeEditor::brushOpacity() const
     return BrushOpacity;
 }
 
-void DecolorizeEditor::setBrushOpacity(const qreal &opacity)
+void DecolorizeEditor::setBrushOpacity(qreal opacity)
 {
     BrushOpacity = opacity;
 
@@ -116,7 +116,7 @@ bool DecolorizeEditor::changed() const
     return IsChanged;
 }
 
-void DecolorizeEditor::openImage(const QString &image_file, const int &image_orientation)
+void DecolorizeEditor::openImage(QString image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -164,11 +164,11 @@ void DecolorizeEditor::openImage(const QString &image_file, const int &image_ori
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),                  generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),                 thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(const QImage &)), this,      SLOT(effectedImageReady(const QImage &)));
-                    QObject::connect(generator, SIGNAL(finished()),                 thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),                 generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
+                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
+                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
+                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
+                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
 
                     generator->setInput(LoadedImage);
 
@@ -187,7 +187,7 @@ void DecolorizeEditor::openImage(const QString &image_file, const int &image_ori
     }
 }
 
-void DecolorizeEditor::saveImage(const QString &image_file)
+void DecolorizeEditor::saveImage(QString image_file)
 {
     QString file_name = image_file;
 
@@ -244,7 +244,7 @@ void DecolorizeEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void DecolorizeEditor::effectedImageReady(const QImage &effected_image)
+void DecolorizeEditor::effectedImageReady(QImage effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -367,7 +367,7 @@ GrayscaleImageGenerator::~GrayscaleImageGenerator()
 {
 }
 
-void GrayscaleImageGenerator::setInput(const QImage &input_image)
+void GrayscaleImageGenerator::setInput(QImage input_image)
 {
     InputImage = input_image;
 }
