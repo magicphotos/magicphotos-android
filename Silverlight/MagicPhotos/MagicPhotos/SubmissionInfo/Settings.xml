@@ -1,6 +1,0 @@
-<MarketplaceDetails>
-  <SmallAppTile>small_application_tile.png</SmallAppTile>
-  <LargeAppTile>large_application_tile.png</LargeAppTile>
-  <PCAppTile>marketplace_tile.png</PCAppTile>
-  <ScreenShots>mode_recolor.png;mode_decolorize.png;mode_sketch.png;mode_retouch.png;mode_cartoon.png;mode_blur.png;;;</ScreenShots>
-</MarketplaceDetails>
