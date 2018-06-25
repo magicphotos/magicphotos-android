@@ -35,21 +35,21 @@ import com.google.android.gms.ads.MobileAds;
 
 public class MagicActivity extends QtActivity
 {
-    private static final int      REQUEST_CODE_SHOW_GALLERY    = 1001;
+    private static final int    REQUEST_CODE_SHOW_GALLERY    = 1001;
 
-    private static final String   ADMOB_APP_ID                 = "ca-app-pub-2455088855015693~7279538773";
-    private static final String   ADMOB_ADVIEW_UNIT_ID         = "ca-app-pub-2455088855015693/1811713388";
-    private static final String   ADMOB_INTERSTITIALAD_UNIT_ID = "ca-app-pub-2455088855015693/6662028461";
-    private static final String   ADMOB_TEST_DEVICE_ID         = "51E39B9A66DB11AF629C81F3D70FCC57";
+    private static final String ADMOB_APP_ID                 = "ca-app-pub-2455088855015693~7279538773";
+    private static final String ADMOB_ADVIEW_UNIT_ID         = "ca-app-pub-2455088855015693/1811713388";
+    private static final String ADMOB_INTERSTITIALAD_UNIT_ID = "ca-app-pub-2455088855015693/6662028461";
+    private static final String ADMOB_TEST_DEVICE_ID         = "51E39B9A66DB11AF629C81F3D70FCC57";
 
-    private static final AdSize   ADMOB_ADVIEW_ADSIZE          = AdSize.SMART_BANNER;
+    private static final AdSize ADMOB_ADVIEW_ADSIZE          = AdSize.SMART_BANNER;
 
-    private static boolean        statusBarVisible             = false,
-                                  mobileAdsInitialized         = false;
-    private static int            statusBarHeight              = 0;
-    private static MagicActivity  instance                     = null;
-    private static AdView         adView                       = null;
-    private static InterstitialAd interstitialAd               = null;
+    private boolean             statusBarVisible             = false,
+                                mobileAdsInitialized         = false;
+    private int                 statusBarHeight              = 0;
+    private MagicActivity       activity                     = null;
+    private AdView              adView                       = null;
+    private InterstitialAd      interstitialAd               = null;
 
     private static native void adViewHeightUpdated(int adview_height);
 
@@ -59,7 +59,7 @@ public class MagicActivity extends QtActivity
 
     public MagicActivity()
     {
-        instance = this;
+        activity = this;
     }
 
     @Override
@@ -146,7 +146,7 @@ public class MagicActivity extends QtActivity
         super.onDestroy();
     }
 
-    public static String getSaveDirectory()
+    public String getSaveDirectory()
     {
         File save_dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/MagicPhotos");
 
@@ -157,32 +157,32 @@ public class MagicActivity extends QtActivity
         }
     }
 
-    public static int getScreenDPI()
+    public int getScreenDPI()
     {
-        DisplayMetrics metrics = instance.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
 
         return metrics.densityDpi;
     }
 
-    public static void showGallery()
+    public void showGallery()
     {
         try {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 
             intent.setType("image/*");
 
-            instance.startActivityForResult(intent, REQUEST_CODE_SHOW_GALLERY);
+            startActivityForResult(intent, REQUEST_CODE_SHOW_GALLERY);
         } catch (Exception ex) {
             imageSelectionFailed();
         }
     }
 
-    public static void refreshGallery(String image_file)
+    public void refreshGallery(String image_file)
     {
-        MediaScannerConnection.scanFile(instance, new String[] { image_file }, null, null);
+        MediaScannerConnection.scanFile(this, new String[] { image_file }, null, null);
     }
 
-    public static void shareImage(String image_file)
+    public void shareImage(String image_file)
     {
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -190,19 +190,19 @@ public class MagicActivity extends QtActivity
             intent.setType("image/*");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(image_file)));
 
-            instance.startActivity(Intent.createChooser(intent, instance.getString(R.string.activity_header_share_image)));
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.activity_header_share_image)));
         } catch (Exception ex) {
             // Ignore
         }
     }
 
-    public static void showAdView()
+    public void showAdView()
     {
-        instance.runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             @Override
             public void run()
             {
-                View view = instance.getWindow().getDecorView().getRootView();
+                View view = getWindow().getDecorView().getRootView();
 
                 if (view instanceof ViewGroup) {
                     ViewGroup view_group = (ViewGroup)view;
@@ -221,7 +221,7 @@ public class MagicActivity extends QtActivity
                                                                                    FrameLayout.LayoutParams.WRAP_CONTENT,
                                                                                    Gravity.CENTER_HORIZONTAL);
 
-                    adView = new AdView(instance);
+                    adView = new AdView(activity);
 
                     adView.setAdSize(ADMOB_ADVIEW_ADSIZE);
                     adView.setAdUnitId(ADMOB_ADVIEW_UNIT_ID);
@@ -286,13 +286,13 @@ public class MagicActivity extends QtActivity
         });
     }
 
-    public static void hideAdView()
+    public void hideAdView()
     {
-        instance.runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             @Override
             public void run()
             {
-                View view = instance.getWindow().getDecorView().getRootView();
+                View view = getWindow().getDecorView().getRootView();
 
                 if (view instanceof ViewGroup) {
                     ViewGroup view_group = (ViewGroup)view;
@@ -311,14 +311,14 @@ public class MagicActivity extends QtActivity
         });
     }
 
-    public static void createInterstitialAd()
+    public void createInterstitialAd()
     {
-        instance.runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             @Override
             public void run()
             {
                 if (interstitialAd == null) {
-                    interstitialAd = new InterstitialAd(instance);
+                    interstitialAd = new InterstitialAd(activity);
 
                     interstitialAd.setAdUnitId(ADMOB_INTERSTITIALAD_UNIT_ID);
 
@@ -372,9 +372,9 @@ public class MagicActivity extends QtActivity
         });
     }
 
-    public static void showInterstitialAd()
+    public void showInterstitialAd()
     {
-        instance.runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             @Override
             public void run()
             {

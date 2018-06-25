@@ -1,3 +1,6 @@
+#include <QtAndroidExtras/QtAndroid>
+#include <QtAndroidExtras/QAndroidJniObject>
+
 #include "androidgw.h"
 
 AndroidGW *AndroidGW::Instance = NULL;
@@ -14,62 +17,53 @@ AndroidGW *AndroidGW::instance()
 
 QString AndroidGW::getSaveDirectory()
 {
-    QAndroidJniObject str_object = QAndroidJniObject::callStaticObjectMethod<jstring>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                                                                      "getSaveDirectory");
+    QAndroidJniObject str_object = QtAndroid::androidActivity().callObjectMethod<jstring>("getSaveDirectory");
 
     return str_object.toString();
 }
 
 int AndroidGW::getScreenDPI()
 {
-    return QAndroidJniObject::callStaticMethod<jint>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                                     "getScreenDPI");
+    return QtAndroid::androidActivity().callMethod<jint>("getScreenDPI");
 }
 
 void AndroidGW::showGallery()
 {
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "showGallery");
+    QtAndroid::androidActivity().callMethod<void>("showGallery");
 }
 
 void AndroidGW::refreshGallery(QString image_file)
 {
     QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
 
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
+    QtAndroid::androidActivity().callMethod<void>("refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
 void AndroidGW::shareImage(QString image_file)
 {
     QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
 
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
+    QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
 void AndroidGW::showAdView()
 {
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "showAdView");
+    QtAndroid::androidActivity().callMethod<void>("showAdView");
 }
 
 void AndroidGW::hideAdView()
 {
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "hideAdView");
+    QtAndroid::androidActivity().callMethod<void>("hideAdView");
 }
 
 void AndroidGW::createInterstitialAd()
 {
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "createInterstitialAd");
+    QtAndroid::androidActivity().callMethod<void>("createInterstitialAd");
 }
 
 void AndroidGW::showInterstitialAd()
 {
-    QAndroidJniObject::callStaticMethod<void>("com/derevenetz/oleg/magicphotos/MagicActivity",
-                                              "showInterstitialAd");
+    QtAndroid::androidActivity().callMethod<void>("showInterstitialAd");
 }
 
 static void adViewHeightUpdated(JNIEnv *, jclass, jint adview_height)

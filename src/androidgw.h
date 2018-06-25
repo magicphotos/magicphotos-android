@@ -3,7 +3,6 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <QtAndroidExtras/QAndroidJniObject>
 
 class AndroidGW : public QObject
 {
