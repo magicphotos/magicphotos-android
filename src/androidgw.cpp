@@ -97,15 +97,25 @@ static JNINativeMethod methods[] = {
     { "imageSelectionCancelled", "()V",                    (void *)imageSelectionCancelled },
     { "imageSelectionFailed",    "()V",                    (void *)imageSelectionFailed }
 };
+static int methods_count = 4;
 
 jint JNICALL JNI_OnLoad(JavaVM *vm, void *)
 {
     JNIEnv *env;
 
     if (vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_4) == JNI_OK) {
-        jclass clazz = env->FindClass("com/derevenetz/oleg/magicphotos/MagicActivity");
+        bool   success = true;
+        jclass clazz   = env->FindClass("com/derevenetz/oleg/magicphotos/MagicActivity");
 
-        if (env->RegisterNatives(clazz, methods, sizeof(methods) / sizeof(methods[0])) >= 0) {
+        if (clazz != NULL) {
+            success = false;
+
+            if (env->RegisterNatives(clazz, methods, methods_count) >= 0) {
+                success = true;
+            }
+        }
+
+        if (success) {
             return JNI_VERSION_1_4;
         } else {
             return JNI_FALSE;
