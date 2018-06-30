@@ -178,14 +178,6 @@
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
-    <message>
-        <source>Info</source>
-        <translation>Информация</translation>
-    </message>
-    <message>
-        <source>Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?</source>
-        <translation>Надоела реклама? Больше никакой рекламы при покупке полной версии приложения. Хотите купить полную версию?</translation>
-    </message>
 </context>
 <context>
     <name>PixelatePage</name>

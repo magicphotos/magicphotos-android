@@ -35,7 +35,7 @@ Page {
                 }
 
                 onClicked: {
-                    purchaseMessageDialog.open();
+                    disabledAdsProduct.purchase();
                 }
             }
 
@@ -292,18 +292,6 @@ Page {
         icon:            StandardIcon.Critical
         text:            qsTr("Could not open image")
         standardButtons: StandardButton.Ok
-    }
-
-    MessageDialog {
-        id:              purchaseMessageDialog
-        title:           qsTr("Info")
-        icon:            StandardIcon.Information
-        text:            qsTr("Tired of ads? Do you want to disable ads now?")
-        standardButtons: StandardButton.Yes | StandardButton.No
-
-        onYes: {
-            disabledAdsProduct.purchase();
-        }
     }
 
     Component.onCompleted: {

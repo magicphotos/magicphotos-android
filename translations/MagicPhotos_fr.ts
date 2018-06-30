@@ -178,14 +178,6 @@
         <source>Could not open image</source>
         <translation>Impossible d&apos;ouvrir l&apos;image</translation>
     </message>
-    <message>
-        <source>Info</source>
-        <translation>Info</translation>
-    </message>
-    <message>
-        <source>Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?</source>
-        <translation>Fatigué des publicités? La version complète de cette application n&apos;a pas de publicité. Voulez-vous acheter la version complete?</translation>
-    </message>
 </context>
 <context>
     <name>PixelatePage</name>
