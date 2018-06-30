@@ -48,7 +48,7 @@ ApplicationWindow {
     Store {
         Product {
             id:         disabledAdsProduct
-            identifier: "vkgeo.unlockable.disabledads"
+            identifier: "magicphotos.unlockable.disabledads"
             type:       Product.Unlockable
 
             onPurchaseSucceeded: {
