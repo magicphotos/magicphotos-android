@@ -11,7 +11,7 @@ Page {
     id: recolorPage
 
     header: Pane {
-        topPadding:          recolorPage.adViewHeight
+        topPadding:          recolorPage.bannerViewHeight
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -146,7 +146,7 @@ Page {
 
                     recolorPage.shareActionActive = false;
 
-                    recolorEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    recolorEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -180,7 +180,7 @@ Page {
 
                     recolorPage.shareActionActive = true;
 
-                    recolorEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    recolorEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -233,13 +233,13 @@ Page {
         }
     }
 
-    property bool   allowInterstitialAd: true
-    property bool   shareActionActive:   false
+    property bool   allowInterstitial: true
+    property bool   shareActionActive: false
 
-    property int    adViewHeight:        0
-    property int    imageOrientation:    -1
+    property int    bannerViewHeight:  AdMobHelper.bannerViewHeight
+    property int    imageOrientation:  -1
 
-    property string imageFile:           ""
+    property string imageFile:         ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -355,10 +355,10 @@ Page {
                     }
 
                     onImageSaved: {
-                        AndroidGW.refreshGallery(image_file);
+                        UIHelper.refreshGallery(image_file);
 
                         if (recolorPage.shareActionActive) {
-                            AndroidGW.shareImage(image_file);
+                            UIHelper.shareImage(image_file);
                         } else {
                             imageSavedMessageDialog.open();
                         }

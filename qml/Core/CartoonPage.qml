@@ -11,7 +11,7 @@ Page {
     id: cartoonPage
 
     header: Pane {
-        topPadding:          cartoonPage.adViewHeight
+        topPadding:          cartoonPage.bannerViewHeight
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -122,7 +122,7 @@ Page {
 
                     cartoonPage.shareActionActive = false;
 
-                    cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    cartoonEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -156,7 +156,7 @@ Page {
 
                     cartoonPage.shareActionActive = true;
 
-                    cartoonEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    cartoonEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -209,15 +209,15 @@ Page {
         }
     }
 
-    property bool   allowInterstitialAd: true
-    property bool   shareActionActive:   false
+    property bool   allowInterstitial: true
+    property bool   shareActionActive: false
 
-    property int    adViewHeight:        0
-    property int    imageOrientation:    -1
-    property int    gaussianRadius:      -1
-    property int    cartoonThreshold:    -1
+    property int    bannerViewHeight:  AdMobHelper.bannerViewHeight
+    property int    imageOrientation:  -1
+    property int    gaussianRadius:    -1
+    property int    cartoonThreshold:  -1
 
-    property string imageFile:           ""
+    property string imageFile:         ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -354,10 +354,10 @@ Page {
                     }
 
                     onImageSaved: {
-                        AndroidGW.refreshGallery(image_file);
+                        UIHelper.refreshGallery(image_file);
 
                         if (cartoonPage.shareActionActive) {
-                            AndroidGW.shareImage(image_file);
+                            UIHelper.shareImage(image_file);
                         } else {
                             imageSavedMessageDialog.open();
                         }

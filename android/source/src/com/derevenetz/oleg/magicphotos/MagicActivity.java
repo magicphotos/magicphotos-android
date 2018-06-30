@@ -35,23 +35,15 @@ import com.google.android.gms.ads.MobileAds;
 
 public class MagicActivity extends QtActivity
 {
-    private static final int    REQUEST_CODE_SHOW_GALLERY    = 1001;
+    private static final int REQUEST_CODE_SHOW_GALLERY = 1001;
 
-    private static final String ADMOB_APP_ID                 = "ca-app-pub-2455088855015693~7279538773";
-    private static final String ADMOB_ADVIEW_UNIT_ID         = "ca-app-pub-2455088855015693/1811713388";
-    private static final String ADMOB_INTERSTITIALAD_UNIT_ID = "ca-app-pub-2455088855015693/6662028461";
-    private static final String ADMOB_TEST_DEVICE_ID         = "51E39B9A66DB11AF629C81F3D70FCC57";
+    private boolean          statusBarVisible          = false;
+    private int              statusBarHeight           = 0;
+    private MagicActivity    activity                  = null;
+    private AdView           bannerView                = null;
+    private InterstitialAd   interstitial              = null;
 
-    private static final AdSize ADMOB_ADVIEW_ADSIZE          = AdSize.SMART_BANNER;
-
-    private boolean             statusBarVisible             = false,
-                                mobileAdsInitialized         = false;
-    private int                 statusBarHeight              = 0;
-    private MagicActivity       activity                     = null;
-    private AdView              adView                       = null;
-    private InterstitialAd      interstitialAd               = null;
-
-    private static native void adViewHeightUpdated(int adview_height);
+    private static native void bannerViewHeightUpdated(int height);
 
     private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
@@ -86,32 +78,26 @@ public class MagicActivity extends QtActivity
                 if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                     statusBarVisible = true;
 
-                    if (adView != null) {
-                        int ad_visibility = adView.getVisibility();
+                    if (bannerView != null) {
+                        int ad_visibility = bannerView.getVisibility();
 
-                        adView.setVisibility(View.GONE);
-                        adView.setY(statusBarHeight);
-                        adView.setVisibility(ad_visibility);
+                        bannerView.setVisibility(View.GONE);
+                        bannerView.setY(statusBarHeight);
+                        bannerView.setVisibility(ad_visibility);
                     }
                 } else {
                     statusBarVisible = false;
 
-                    if (adView != null) {
-                        int ad_visibility = adView.getVisibility();
+                    if (bannerView != null) {
+                        int ad_visibility = bannerView.getVisibility();
 
-                        adView.setVisibility(View.GONE);
-                        adView.setY(0);
-                        adView.setVisibility(ad_visibility);
+                        bannerView.setVisibility(View.GONE);
+                        bannerView.setY(0);
+                        bannerView.setVisibility(ad_visibility);
                     }
                 }
             }
         });
-
-        if (!mobileAdsInitialized) {
-            MobileAds.initialize(this, ADMOB_APP_ID);
-
-            mobileAdsInitialized = true;
-        }
     }
 
     @Override
@@ -119,16 +105,16 @@ public class MagicActivity extends QtActivity
     {
         super.onResume();
 
-        if (adView != null) {
-            adView.resume();
+        if (bannerView != null) {
+            bannerView.resume();
         }
     }
 
     @Override
     public void onPause()
     {
-        if (adView != null) {
-            adView.pause();
+        if (bannerView != null) {
+            bannerView.pause();
         }
 
         super.onPause();
@@ -137,13 +123,20 @@ public class MagicActivity extends QtActivity
     @Override
     public void onDestroy()
     {
-        if (adView != null) {
-            adView.destroy();
+        if (bannerView != null) {
+            bannerView.destroy();
 
-            adView = null;
+            bannerView = null;
         }
 
         super.onDestroy();
+    }
+
+    public int getScreenDPI()
+    {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+
+        return metrics.densityDpi;
     }
 
     public String getSaveDirectory()
@@ -155,13 +148,6 @@ public class MagicActivity extends QtActivity
         } else {
             return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
         }
-    }
-
-    public int getScreenDPI()
-    {
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-
-        return metrics.densityDpi;
     }
 
     public void showGallery()
@@ -196,8 +182,62 @@ public class MagicActivity extends QtActivity
         }
     }
 
-    public void showAdView()
+    public void initAds(String app_id, String interstitial_unit_id)
     {
+        final String f_app_id               = app_id;
+        final String f_interstitial_unit_id = interstitial_unit_id;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                MobileAds.initialize(activity, f_app_id);
+
+                interstitial = new InterstitialAd(activity);
+
+                interstitial.setAdUnitId(f_interstitial_unit_id);
+
+                interstitial.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdClosed()
+                    {
+                        if (interstitial != null) {
+                            AdRequest.Builder builder = new AdRequest.Builder();
+
+                            interstitial.loadAd(builder.build());
+                        }
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(int errorCode)
+                    {
+                        if (interstitial != null) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run()
+                                {
+                                    if (interstitial != null) {
+                                        AdRequest.Builder builder = new AdRequest.Builder();
+
+                                        interstitial.loadAd(builder.build());
+                                    }
+                                }
+                            }, 60000);
+                        }
+                    }
+                });
+
+                AdRequest.Builder builder = new AdRequest.Builder();
+
+                interstitial.loadAd(builder.build());
+            }
+        });
+    }
+
+    public void showBannerView(String unit_id)
+    {
+        final String f_unit_id = unit_id;
+
         runOnUiThread(new Runnable() {
             @Override
             public void run()
@@ -207,46 +247,46 @@ public class MagicActivity extends QtActivity
                 if (view instanceof ViewGroup) {
                     ViewGroup view_group = (ViewGroup)view;
 
-                    if (adView != null) {
-                        view_group.removeView(adView);
+                    if (bannerView != null) {
+                        view_group.removeView(bannerView);
 
-                        adView.destroy();
+                        bannerView.destroy();
 
-                        adViewHeightUpdated(0);
+                        bannerViewHeightUpdated(0);
 
-                        adView = null;
+                        bannerView = null;
                     }
 
                     FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
                                                                                    FrameLayout.LayoutParams.WRAP_CONTENT,
                                                                                    Gravity.CENTER_HORIZONTAL);
 
-                    adView = new AdView(activity);
+                    bannerView = new AdView(activity);
 
-                    adView.setAdSize(ADMOB_ADVIEW_ADSIZE);
-                    adView.setAdUnitId(ADMOB_ADVIEW_UNIT_ID);
-                    adView.setLayoutParams(params);
-                    adView.setVisibility(View.GONE);
+                    bannerView.setAdSize(AdSize.SMART_BANNER);
+                    bannerView.setAdUnitId(f_unit_id);
+                    bannerView.setLayoutParams(params);
+                    bannerView.setVisibility(View.GONE);
 
                     if (statusBarVisible) {
-                        adView.setY(statusBarHeight);
+                        bannerView.setY(statusBarHeight);
                     } else {
-                        adView.setY(0);
+                        bannerView.setY(0);
                     }
 
-                    adView.setAdListener(new AdListener() {
+                    bannerView.setAdListener(new AdListener() {
                         @Override
                         public void onAdLoaded()
                         {
-                            if (adView != null) {
-                                adView.setVisibility(View.VISIBLE);
+                            if (bannerView != null) {
+                                bannerView.setVisibility(View.VISIBLE);
 
-                                adView.post(new Runnable() {
+                                bannerView.post(new Runnable() {
                                     @Override
                                     public void run()
                                     {
-                                        if (adView != null) {
-                                            adViewHeightUpdated(adView.getHeight());
+                                        if (bannerView != null) {
+                                            bannerViewHeightUpdated(bannerView.getHeight());
                                         }
                                     }
                                 });
@@ -256,15 +296,15 @@ public class MagicActivity extends QtActivity
                         @Override
                         public void onAdFailedToLoad(int errorCode)
                         {
-                            if (adView != null) {
-                                adView.setVisibility(View.VISIBLE);
+                            if (bannerView != null) {
+                                bannerView.setVisibility(View.VISIBLE);
 
-                                adView.post(new Runnable() {
+                                bannerView.post(new Runnable() {
                                     @Override
                                     public void run()
                                     {
-                                        if (adView != null) {
-                                            adViewHeightUpdated(adView.getHeight());
+                                        if (bannerView != null) {
+                                            bannerViewHeightUpdated(bannerView.getHeight());
                                         }
                                     }
                                 });
@@ -272,21 +312,17 @@ public class MagicActivity extends QtActivity
                         }
                     });
 
-                    view_group.addView(adView);
+                    view_group.addView(bannerView);
 
                     AdRequest.Builder builder = new AdRequest.Builder();
 
-                    if (!ADMOB_TEST_DEVICE_ID.equals("")) {
-                        builder.addTestDevice(ADMOB_TEST_DEVICE_ID);
-                    }
-
-                    adView.loadAd(builder.build());
+                    bannerView.loadAd(builder.build());
                 }
             }
         });
     }
 
-    public void hideAdView()
+    public void hideBannerView()
     {
         runOnUiThread(new Runnable() {
             @Override
@@ -297,89 +333,28 @@ public class MagicActivity extends QtActivity
                 if (view instanceof ViewGroup) {
                     ViewGroup view_group = (ViewGroup)view;
 
-                    if (adView != null) {
-                        view_group.removeView(adView);
+                    if (bannerView != null) {
+                        view_group.removeView(bannerView);
 
-                        adView.destroy();
+                        bannerView.destroy();
 
-                        adViewHeightUpdated(0);
+                        bannerViewHeightUpdated(0);
 
-                        adView = null;
+                        bannerView = null;
                     }
                 }
             }
         });
     }
 
-    public void createInterstitialAd()
+    public void showInterstitial()
     {
         runOnUiThread(new Runnable() {
             @Override
             public void run()
             {
-                if (interstitialAd == null) {
-                    interstitialAd = new InterstitialAd(activity);
-
-                    interstitialAd.setAdUnitId(ADMOB_INTERSTITIALAD_UNIT_ID);
-
-                    interstitialAd.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdClosed()
-                        {
-                            if (interstitialAd != null) {
-                                AdRequest.Builder builder = new AdRequest.Builder();
-
-                                if (!ADMOB_TEST_DEVICE_ID.equals("")) {
-                                    builder.addTestDevice(ADMOB_TEST_DEVICE_ID);
-                                }
-
-                                interstitialAd.loadAd(builder.build());
-                            }
-                        }
-
-                        @Override
-                        public void onAdFailedToLoad(int errorCode)
-                        {
-                            if (interstitialAd != null) {
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run()
-                                    {
-                                        if (interstitialAd != null) {
-                                            AdRequest.Builder builder = new AdRequest.Builder();
-
-                                            if (!ADMOB_TEST_DEVICE_ID.equals("")) {
-                                                builder.addTestDevice(ADMOB_TEST_DEVICE_ID);
-                                            }
-
-                                            interstitialAd.loadAd(builder.build());
-                                        }
-                                    }
-                                }, 60000);
-                            }
-                        }
-                    });
-
-                    AdRequest.Builder builder = new AdRequest.Builder();
-
-                    if (!ADMOB_TEST_DEVICE_ID.equals("")) {
-                        builder.addTestDevice(ADMOB_TEST_DEVICE_ID);
-                    }
-
-                    interstitialAd.loadAd(builder.build());
-                }
-            }
-        });
-    }
-
-    public void showInterstitialAd()
-    {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run()
-            {
-                if (interstitialAd != null && interstitialAd.isLoaded()) {
-                    interstitialAd.show();
+                if (interstitial != null && interstitial.isLoaded()) {
+                    interstitial.show();
                 }
             }
         });

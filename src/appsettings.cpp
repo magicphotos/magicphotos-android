@@ -35,12 +35,14 @@ void AppSettings::setBrushSize(int size)
     Settings->setValue("BrushSize", size);
 }
 
-bool AppSettings::isFullVersion() const
+bool AppSettings::disableAds() const
 {
 #ifdef FULL_VERSION
     return true;
 #else
-    if (Settings->contains("IsFullVersion")) {
+    if (Settings->contains("DisableAds")) {
+        return Settings->value("DisableAds").toBool();
+    } else if (Settings->contains("IsFullVersion")) {
         return Settings->value("IsFullVersion").toBool();
     } else {
         return false;
@@ -48,9 +50,9 @@ bool AppSettings::isFullVersion() const
 #endif
 }
 
-void AppSettings::setIsFullVersion(bool full)
+void AppSettings::setDisableAds(bool disable)
 {
-    Settings->setValue("IsFullVersion", full);
+    Settings->setValue("DisableAds", disable);
 }
 
 qreal AppSettings::brushOpacity() const

@@ -16,56 +16,49 @@ ApplicationWindow {
     Material.theme:               Material.System
     Material.primary:             Material.Teal
 
-    property bool fullVersion:      false
-
+    property bool disableAds:       false
     property int screenOrientation: Screen.orientation
 
-    onFullVersionChanged: {
-        AppSettings.isFullVersion = fullVersion;
+    onDisableAdsChanged: {
+        AppSettings.disableAds = disableAds;
 
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
-            if (fullVersion) {
-                AndroidGW.hideAdView();
-            } else {
-                AndroidGW.showAdView();
-            }
-        }
+        updateFeatures();
     }
 
     onScreenOrientationChanged: {
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
-            if (fullVersion) {
-                AndroidGW.hideAdView();
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
+            if (disableAds) {
+                AdMobHelper.hideBannerView();
             } else {
-                AndroidGW.showAdView();
+                AdMobHelper.showBannerView();
             }
         }
     }
 
-    function purchaseFullVersion() {
-        fullVersionProduct.purchase();
-    }
-
-    function adViewHeightUpdated(adview_height) {
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("adViewHeight")) {
-            mainStackView.currentItem.adViewHeight = adview_height;
+    function updateFeatures() {
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
+            if (disableAds) {
+                AdMobHelper.hideBannerView();
+            } else {
+                AdMobHelper.showBannerView();
+            }
         }
     }
 
     Store {
         Product {
-            id:         fullVersionProduct
-            identifier: "magicphotos.version.full"
+            id:         disabledAdsProduct
+            identifier: "vkgeo.unlockable.disabledads"
             type:       Product.Unlockable
 
             onPurchaseSucceeded: {
-                mainWindow.fullVersion = true;
+                mainWindow.disableAds = true;
 
                 transaction.finalize();
             }
 
             onPurchaseRestored: {
-                mainWindow.fullVersion = true;
+                mainWindow.disableAds = true;
 
                 transaction.finalize();
             }
@@ -96,18 +89,18 @@ ApplicationWindow {
             if (depth > 0) {
                 currentItem.forceActiveFocus();
 
-                if (currentItem.hasOwnProperty("adViewHeight")) {
-                    if (mainWindow.fullVersion) {
-                        AndroidGW.hideAdView();
+                if (currentItem.hasOwnProperty("bannerViewHeight")) {
+                    if (disableAds) {
+                        AdMobHelper.hideBannerView();
                     } else {
-                        AndroidGW.showAdView();
+                        AdMobHelper.showBannerView();
                     }
                 } else {
-                    AndroidGW.hideAdView();
+                    AdMobHelper.hideBannerView();
                 }
 
-                if (currentItem.hasOwnProperty("allowInterstitialAd") && currentItem.allowInterstitialAd && !mainWindow.fullVersion) {
-                    AndroidGW.showInterstitialAd();
+                if (currentItem.hasOwnProperty("allowInterstitial") && currentItem.allowInterstitial && !mainWindow.disableAds) {
+                    AdMobHelper.showInterstitial();
                 }
             }
         }
@@ -126,10 +119,11 @@ ApplicationWindow {
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.pt(16);
 
-        fullVersion = AppSettings.isFullVersion;
+        disableAds = AppSettings.disableAds;
 
-        AndroidGW.adViewHeightUpdated.connect(adViewHeightUpdated);
-        AndroidGW.createInterstitialAd();
+        updateFeatures();
+
+        AdMobHelper.initialize();
 
         mainStackView.push(modeSelectionPage);
     }

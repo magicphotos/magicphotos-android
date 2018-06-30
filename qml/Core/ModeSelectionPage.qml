@@ -26,7 +26,7 @@ Page {
             ToolButton {
                 implicitWidth:    UtilScript.pt(48)
                 implicitHeight:   UtilScript.pt(48)
-                visible:          !mainWindow.fullVersion
+                visible:          !mainWindow.disableAds
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -62,7 +62,7 @@ Page {
         if (selectedMode !== "") {
             waitRectangle.visible = true;
 
-            AndroidGW.showGallery();
+            UIHelper.showGallery();
         }
     }
 
@@ -296,17 +296,17 @@ Page {
         id:              purchaseMessageDialog
         title:           qsTr("Info")
         icon:            StandardIcon.Information
-        text:            qsTr("Tired of ads? No more ads with full version of this app. Do you want to purchase full version now?")
+        text:            qsTr("Tired of ads? Do you want to disable ads now?")
         standardButtons: StandardButton.Yes | StandardButton.No
 
         onYes: {
-            mainWindow.purchaseFullVersion();
+            disabledAdsProduct.purchase();
         }
     }
 
     Component.onCompleted: {
-        AndroidGW.imageSelected.connect(fileSelected);
-        AndroidGW.imageSelectionCancelled.connect(fileSelectionCancelled);
-        AndroidGW.imageSelectionFailed.connect(fileSelectionFailed);
+        UIHelper.imageSelected.connect(fileSelected);
+        UIHelper.imageSelectionCancelled.connect(fileSelectionCancelled);
+        UIHelper.imageSelectionFailed.connect(fileSelectionFailed);
     }
 }

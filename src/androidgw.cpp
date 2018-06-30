@@ -1,4 +1,3 @@
-#include <QtAndroidExtras/QtAndroid>
 #include <QtAndroidExtras/QAndroidJniObject>
 
 #include "androidgw.h"
@@ -15,60 +14,9 @@ AndroidGW *AndroidGW::instance()
     return Instance;
 }
 
-QString AndroidGW::getSaveDirectory()
+static void bannerViewHeightUpdated(JNIEnv *, jclass, jint height)
 {
-    QAndroidJniObject str_object = QtAndroid::androidActivity().callObjectMethod<jstring>("getSaveDirectory");
-
-    return str_object.toString();
-}
-
-int AndroidGW::getScreenDPI()
-{
-    return QtAndroid::androidActivity().callMethod<jint>("getScreenDPI");
-}
-
-void AndroidGW::showGallery()
-{
-    QtAndroid::androidActivity().callMethod<void>("showGallery");
-}
-
-void AndroidGW::refreshGallery(QString image_file)
-{
-    QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
-
-    QtAndroid::androidActivity().callMethod<void>("refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
-}
-
-void AndroidGW::shareImage(QString image_file)
-{
-    QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
-
-    QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
-}
-
-void AndroidGW::showAdView()
-{
-    QtAndroid::androidActivity().callMethod<void>("showAdView");
-}
-
-void AndroidGW::hideAdView()
-{
-    QtAndroid::androidActivity().callMethod<void>("hideAdView");
-}
-
-void AndroidGW::createInterstitialAd()
-{
-    QtAndroid::androidActivity().callMethod<void>("createInterstitialAd");
-}
-
-void AndroidGW::showInterstitialAd()
-{
-    QtAndroid::androidActivity().callMethod<void>("showInterstitialAd");
-}
-
-static void adViewHeightUpdated(JNIEnv *, jclass, jint adview_height)
-{
-    emit AndroidGW::instance()->adViewHeightUpdated(adview_height);
+    emit AndroidGW::instance()->setBannerViewHeight(height);
 }
 
 static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
@@ -78,21 +26,21 @@ static void imageSelected(JNIEnv *jni_env, jclass, jstring j_image_file, jint im
 
     jni_env->ReleaseStringUTFChars(j_image_file, str);
 
-    emit AndroidGW::instance()->imageSelected(image_file, image_orientation);
+    emit AndroidGW::instance()->processImageSelection(image_file, image_orientation);
 }
 
 static void imageSelectionCancelled(JNIEnv *)
 {
-    emit AndroidGW::instance()->imageSelectionCancelled();
+    emit AndroidGW::instance()->processImageSelectionCancel();
 }
 
 static void imageSelectionFailed(JNIEnv *)
 {
-    emit AndroidGW::instance()->imageSelectionFailed();
+    emit AndroidGW::instance()->processImageSelectionFailure();
 }
 
 static JNINativeMethod methods[] = {
-    { "adViewHeightUpdated",     "(I)V",                   (void *)adViewHeightUpdated },
+    { "bannerViewHeightUpdated", "(I)V",                   (void *)bannerViewHeightUpdated },
     { "imageSelected",           "(Ljava/lang/String;I)V", (void *)imageSelected },
     { "imageSelectionCancelled", "()V",                    (void *)imageSelectionCancelled },
     { "imageSelectionFailed",    "()V",                    (void *)imageSelectionFailed }

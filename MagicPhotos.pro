@@ -9,6 +9,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += src/main.cpp \
     src/appsettings.cpp \
     src/androidgw.cpp \
+    src/admobhelper.cpp \
+    src/uihelper.cpp \
     src/helper.cpp \
     src/brushpreviewgenerator.cpp \
     src/decolorizeeditor.cpp \
@@ -22,6 +24,8 @@ SOURCES += src/main.cpp \
 HEADERS += \
     src/appsettings.h \
     src/androidgw.h \
+    src/admobhelper.h \
+    src/uihelper.h \
     src/helper.h \
     src/brushpreviewgenerator.h \
     src/decolorizeeditor.h \

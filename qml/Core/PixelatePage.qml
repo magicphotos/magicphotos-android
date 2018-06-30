@@ -11,7 +11,7 @@ Page {
     id: pixelatePage
 
     header: Pane {
-        topPadding:          pixelatePage.adViewHeight
+        topPadding:          pixelatePage.bannerViewHeight
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -122,7 +122,7 @@ Page {
 
                     pixelatePage.shareActionActive = false;
 
-                    pixelateEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    pixelateEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -156,7 +156,7 @@ Page {
 
                     pixelatePage.shareActionActive = true;
 
-                    pixelateEditor.saveImage(AndroidGW.getSaveDirectory() + "/" + file_name);
+                    pixelateEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
                 }
             }
 
@@ -209,14 +209,14 @@ Page {
         }
     }
 
-    property bool   allowInterstitialAd: true
-    property bool   shareActionActive:   false
+    property bool   allowInterstitial: true
+    property bool   shareActionActive: false
 
-    property int    adViewHeight:        0
-    property int    imageOrientation:    -1
-    property int    pixelDenom:          -1
+    property int    bannerViewHeight:  AdMobHelper.bannerViewHeight
+    property int    imageOrientation:  -1
+    property int    pixelDenom:        -1
 
-    property string imageFile:           ""
+    property string imageFile:         ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -341,10 +341,10 @@ Page {
                     }
 
                     onImageSaved: {
-                        AndroidGW.refreshGallery(image_file);
+                        UIHelper.refreshGallery(image_file);
 
                         if (pixelatePage.shareActionActive) {
-                            AndroidGW.shareImage(image_file);
+                            UIHelper.shareImage(image_file);
                         } else {
                             imageSavedMessageDialog.open();
                         }
