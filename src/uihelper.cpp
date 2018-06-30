@@ -23,6 +23,36 @@ QString UIHelper::getSaveDirectory()
     return str_object.toString();
 }
 
+bool UIHelper::requestReadStoragePermission()
+{
+    if (QtAndroid::checkPermission("android.permission.READ_EXTERNAL_STORAGE") == QtAndroid::PermissionResult::Granted) {
+        return true;
+    } else {
+        QtAndroid::PermissionResultMap result = QtAndroid::requestPermissionsSync(QStringList("android.permission.READ_EXTERNAL_STORAGE"));
+
+        if (result.contains("android.permission.READ_EXTERNAL_STORAGE") && result["android.permission.READ_EXTERNAL_STORAGE"] == QtAndroid::PermissionResult::Granted) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+bool UIHelper::requestWriteStoragePermission()
+{
+    if (QtAndroid::checkPermission("android.permission.WRITE_EXTERNAL_STORAGE") == QtAndroid::PermissionResult::Granted) {
+        return true;
+    } else {
+        QtAndroid::PermissionResultMap result = QtAndroid::requestPermissionsSync(QStringList("android.permission.WRITE_EXTERNAL_STORAGE"));
+
+        if (result.contains("android.permission.WRITE_EXTERNAL_STORAGE") && result["android.permission.WRITE_EXTERNAL_STORAGE"] == QtAndroid::PermissionResult::Granted) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 void UIHelper::showGallery()
 {
     QtAndroid::androidActivity().callMethod<void>("showGallery");

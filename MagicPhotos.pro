@@ -52,6 +52,7 @@ OTHER_FILES += \
     android/source/res/values-ru/strings.xml \
     android/source/res/values-de/strings.xml \
     android/source/res/values-fr/strings.xml \
+    android/source/res/xml/provider_paths.xml \
     android/source/res/drawable-hdpi/ic_launcher.png \
     android/source/res/drawable-mdpi/ic_launcher.png \
     android/source/res/drawable-xhdpi/ic_launcher.png \

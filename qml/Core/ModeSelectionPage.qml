@@ -60,9 +60,11 @@ Page {
 
     onSelectedModeChanged: {
         if (selectedMode !== "") {
-            waitRectangle.visible = true;
+            if (UIHelper.requestReadStoragePermission()) {
+                waitRectangle.visible = true;
 
-            UIHelper.showGallery();
+                UIHelper.showGallery();
+            }
         }
     }
 

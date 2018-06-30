@@ -14,6 +14,9 @@ public:
     Q_INVOKABLE int getScreenDPI();
     Q_INVOKABLE QString getSaveDirectory();
 
+    Q_INVOKABLE bool requestReadStoragePermission();
+    Q_INVOKABLE bool requestWriteStoragePermission();
+
     Q_INVOKABLE void showGallery();
     Q_INVOKABLE void refreshGallery(QString image_file);
     Q_INVOKABLE void shareImage(QString image_file);

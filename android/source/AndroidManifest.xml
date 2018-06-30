@@ -37,10 +37,19 @@
             <!-- extract android style -->
             <meta-data android:name="android.app.extract_android_style" android:value="full"/>
         </activity>
+
+        <provider android:name="android.support.v4.content.FileProvider"
+                  android:authorities="${applicationId}.provider"
+                  android:exported="false"
+                  android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="27"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- The following comment will be replaced upon deployment with default permissions based on the dependencies of the application.
          Remove the comment if you do not require these default permissions. -->

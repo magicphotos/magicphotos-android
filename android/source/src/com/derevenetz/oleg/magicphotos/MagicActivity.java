@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -174,7 +175,7 @@ public class MagicActivity extends QtActivity
             Intent intent = new Intent(Intent.ACTION_SEND);
 
             intent.setType("image/*");
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(image_file)));
+            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_file)));
 
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.activity_header_share_image)));
         } catch (Exception ex) {
