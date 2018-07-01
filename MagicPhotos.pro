@@ -57,6 +57,7 @@ OTHER_FILES += \
     android/source/res/drawable-mdpi/ic_launcher.png \
     android/source/res/drawable-xhdpi/ic_launcher.png \
     android/source/res/drawable-xxhdpi/ic_launcher.png \
+    android/source/res/drawable-xxxhdpi/ic_launcher.png \
     android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
