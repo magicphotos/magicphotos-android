@@ -48,16 +48,16 @@ TRANSLATIONS += \
 
 OTHER_FILES += \
     android/source/AndroidManifest.xml \
-    android/source/res/values/strings.xml \
-    android/source/res/values-ru/strings.xml \
-    android/source/res/values-de/strings.xml \
-    android/source/res/values-fr/strings.xml \
-    android/source/res/xml/provider_paths.xml \
     android/source/res/mipmap-hdpi/ic_launcher.png \
     android/source/res/mipmap-mdpi/ic_launcher.png \
     android/source/res/mipmap-xhdpi/ic_launcher.png \
     android/source/res/mipmap-xxhdpi/ic_launcher.png \
     android/source/res/mipmap-xxxhdpi/ic_launcher.png \
+    android/source/res/values/strings.xml \
+    android/source/res/values-ru/strings.xml \
+    android/source/res/values-de/strings.xml \
+    android/source/res/values-fr/strings.xml \
+    android/source/res/xml/provider_paths.xml \
     android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
