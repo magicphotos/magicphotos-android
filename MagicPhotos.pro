@@ -48,11 +48,17 @@ TRANSLATIONS += \
 
 OTHER_FILES += \
     android/source/AndroidManifest.xml \
+    android/source/build.gradle \
+    android/source/gradlew \
+    android/source/gradlew.bat \
+    android/source/gradle/wrapper/gradle-wrapper.jar \
+    android/source/gradle/wrapper/gradle-wrapper.properties \
     android/source/res/mipmap-hdpi/ic_launcher.png \
     android/source/res/mipmap-mdpi/ic_launcher.png \
     android/source/res/mipmap-xhdpi/ic_launcher.png \
     android/source/res/mipmap-xxhdpi/ic_launcher.png \
     android/source/res/mipmap-xxxhdpi/ic_launcher.png \
+    android/source/res/values/libs.xml \
     android/source/res/values/strings.xml \
     android/source/res/values-ru/strings.xml \
     android/source/res/values-de/strings.xml \

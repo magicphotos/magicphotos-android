@@ -1,16 +1,18 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.1.0'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -18,7 +20,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.gms:play-services-ads:15.0.1'
 }
 
 android {
@@ -54,5 +56,12 @@ android {
 
     lintOptions {
         abortOnError false
+    }
+
+    /* Temporary fix for zipalign issue, may be fixed in later Qt versions */
+    applicationVariants.all {
+        variant -> variant.outputs.all {
+            outputFileName = "../" + outputFileName
+        }
     }
 }
