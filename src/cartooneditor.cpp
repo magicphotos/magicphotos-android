@@ -22,7 +22,7 @@ CartoonEditor::CartoonEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
+    QObject::connect(this, &CartoonEditor::scaleChanged, this, &CartoonEditor::scaleWasChanged);
 }
 
 CartoonEditor::~CartoonEditor()
@@ -186,11 +186,11 @@ void CartoonEditor::openImage(QString image_file, int image_orientation)
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
-                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    &QThread::started,                  generator, &CartoonImageGenerator::start);
+                    QObject::connect(thread,    &QThread::finished,                 thread,    &QThread::deleteLater);
+                    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonEditor::effectedImageReady);
+                    QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
+                    QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
 
                     generator->setGaussianRadius(GaussianRadius);
                     generator->setCartoonThreshold(CartoonThreshold);
@@ -547,11 +547,11 @@ void CartoonPreviewGenerator::StartCartoonGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(cartoonImageReady(QImage)));
-    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+    QObject::connect(thread,    &QThread::started,                  generator, &CartoonImageGenerator::start);
+    QObject::connect(thread,    &QThread::finished,                 thread,    &QThread::deleteLater);
+    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonPreviewGenerator::cartoonImageReady);
+    QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
+    QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
 
     generator->setGaussianRadius(GaussianRadius);
     generator->setCartoonThreshold(CartoonThreshold);

@@ -21,7 +21,7 @@ BlurEditor::BlurEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
+    QObject::connect(this, &BlurEditor::scaleChanged, this, &BlurEditor::scaleWasChanged);
 }
 
 BlurEditor::~BlurEditor()
@@ -175,11 +175,11 @@ void BlurEditor::openImage(QString image_file, int image_orientation)
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
-                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    &QThread::started,               generator, &BlurImageGenerator::start);
+                    QObject::connect(thread,    &QThread::finished,              thread,    &QThread::deleteLater);
+                    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurEditor::effectedImageReady);
+                    QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
+                    QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
 
                     generator->setGaussianRadius(GaussianRadius);
                     generator->setInput(LoadedImage);
@@ -516,11 +516,11 @@ void BlurPreviewGenerator::StartBlurGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(blurImageReady(QImage)));
-    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+    QObject::connect(thread,    &QThread::started,               generator, &BlurImageGenerator::start);
+    QObject::connect(thread,    &QThread::finished,              thread,    &QThread::deleteLater);
+    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurPreviewGenerator::blurImageReady);
+    QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
+    QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
 
     generator->setGaussianRadius(GaussianRadius);
     generator->setInput(LoadedImage);

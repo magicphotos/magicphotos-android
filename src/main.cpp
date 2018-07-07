@@ -32,10 +32,10 @@ int main(int argc, char *argv[])
     AdMobHelper *admob_helper = new AdMobHelper(&app);
     UIHelper    *ui_helper    = new UIHelper(&app);
 
-    QObject::connect(android_gw, SIGNAL(setBannerViewHeight(int)),            admob_helper, SLOT(setBannerViewHeight(int)));
-    QObject::connect(android_gw, SIGNAL(processImageSelection(QString, int)), ui_helper,    SLOT(processImageSelection(QString, int)));
-    QObject::connect(android_gw, SIGNAL(processImageSelectionCancel()),       ui_helper,    SLOT(processImageSelectionCancel()));
-    QObject::connect(android_gw, SIGNAL(processImageSelectionFailure()),      ui_helper,    SLOT(processImageSelectionFailure()));
+    QObject::connect(android_gw, &AndroidGW::setBannerViewHeight,          admob_helper, &AdMobHelper::setBannerViewHeight);
+    QObject::connect(android_gw, &AndroidGW::processImageSelection,        ui_helper,    &UIHelper::processImageSelection);
+    QObject::connect(android_gw, &AndroidGW::processImageSelectionCancel,  ui_helper,    &UIHelper::processImageSelectionCancel);
+    QObject::connect(android_gw, &AndroidGW::processImageSelectionFailure, ui_helper,    &UIHelper::processImageSelectionFailure);
 
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
     qmlRegisterType<BrushPreviewGenerator>("ImageEditor", 1, 0, "BrushPreviewGenerator");

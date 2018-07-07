@@ -21,7 +21,7 @@ RetouchEditor::RetouchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
+    QObject::connect(this, &RetouchEditor::scaleChanged, this, &RetouchEditor::scaleWasChanged);
 }
 
 RetouchEditor::~RetouchEditor()

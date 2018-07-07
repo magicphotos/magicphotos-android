@@ -21,7 +21,7 @@ SketchEditor::SketchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
+    QObject::connect(this, &SketchEditor::scaleChanged, this, &SketchEditor::scaleWasChanged);
 }
 
 SketchEditor::~SketchEditor()
@@ -175,11 +175,11 @@ void SketchEditor::openImage(QString image_file, int image_orientation)
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
-                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    &QThread::started,                 generator, &SketchImageGenerator::start);
+                    QObject::connect(thread,    &QThread::finished,                thread,    &QThread::deleteLater);
+                    QObject::connect(generator, &SketchImageGenerator::imageReady, this,      &SketchEditor::effectedImageReady);
+                    QObject::connect(generator, &SketchImageGenerator::finished,   thread,    &QThread::quit);
+                    QObject::connect(generator, &SketchImageGenerator::finished,   generator, &SketchImageGenerator::deleteLater);
 
                     generator->setGaussianRadius(GaussianRadius);
                     generator->setInput(LoadedImage);
@@ -516,11 +516,11 @@ void SketchPreviewGenerator::StartSketchGenerator()
 
     generator->moveToThread(thread);
 
-    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(sketchImageReady(QImage)));
-    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+    QObject::connect(thread,    &QThread::started,                 generator, &SketchImageGenerator::start);
+    QObject::connect(thread,    &QThread::finished,                thread,    &QThread::deleteLater);
+    QObject::connect(generator, &SketchImageGenerator::imageReady, this,      &SketchPreviewGenerator::sketchImageReady);
+    QObject::connect(generator, &SketchImageGenerator::finished,   thread,    &QThread::quit);
+    QObject::connect(generator, &SketchImageGenerator::finished,   generator, &SketchImageGenerator::deleteLater);
 
     generator->setGaussianRadius(GaussianRadius);
     generator->setInput(LoadedImage);

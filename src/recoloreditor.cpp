@@ -40,7 +40,7 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
+    QObject::connect(this, &RecolorEditor::scaleChanged, this, &RecolorEditor::scaleWasChanged);
 }
 
 RecolorEditor::~RecolorEditor()

@@ -20,7 +20,7 @@ DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) : QQuickPaintedItem(paren
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, SIGNAL(scaleChanged()), this, SLOT(scaleWasChanged()));
+    QObject::connect(this, &DecolorizeEditor::scaleChanged, this, &DecolorizeEditor::scaleWasChanged);
 }
 
 DecolorizeEditor::~DecolorizeEditor()
@@ -164,11 +164,11 @@ void DecolorizeEditor::openImage(QString image_file, int image_orientation)
 
                     generator->moveToThread(thread);
 
-                    QObject::connect(thread,    SIGNAL(started()),          generator, SLOT(start()));
-                    QObject::connect(thread,    SIGNAL(finished()),         thread,    SLOT(deleteLater()));
-                    QObject::connect(generator, SIGNAL(imageReady(QImage)), this,      SLOT(effectedImageReady(QImage)));
-                    QObject::connect(generator, SIGNAL(finished()),         thread,    SLOT(quit()));
-                    QObject::connect(generator, SIGNAL(finished()),         generator, SLOT(deleteLater()));
+                    QObject::connect(thread,    &QThread::started,                    generator, &GrayscaleImageGenerator::start);
+                    QObject::connect(thread,    &QThread::finished,                   thread,    &QThread::deleteLater);
+                    QObject::connect(generator, &GrayscaleImageGenerator::imageReady, this,      &DecolorizeEditor::effectedImageReady);
+                    QObject::connect(generator, &GrayscaleImageGenerator::finished,   thread,    &QThread::quit);
+                    QObject::connect(generator, &GrayscaleImageGenerator::finished,   generator, &GrayscaleImageGenerator::deleteLater);
 
                     generator->setInput(LoadedImage);
 
