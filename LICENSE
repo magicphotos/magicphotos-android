@@ -16,6 +16,11 @@ more details.
 You  should  have  received  a copy of the GNU General Public License along
 with this program. If not, see <http://www.gnu.org/licenses/>.
 
-This  software  uses  Qt  library  licensed  under the terms of GNU LGPLv3.
-Please   visit   <https://sourceforge.net/projects/qthost/files/>   to  get
-complete source code of Qt.
+This  software  uses Qt library licensed under the terms of GNU LGPLv3. You
+should  have received a copy of the GNU Lesser General Public License along
+with this program. If not, see <http://www.gnu.org/licenses/>.
+
+Please  visit  <http://www.qt.io/offline-installers/> if you need to obtain
+complete        source       code       of       Qt       library       and
+<http://doc.qt.io/qt-5/gettingstarted.html>    to   get   Qt   installation
+instructions and platform requirements.
