@@ -3,22 +3,34 @@ Software License Agreement
 Copyright (c) 2011, Oleg Derevenetz <oleg.derevenetz@gmail.com>. All rights
 reserved.
 
-This  program  is  free  software: you can redistribute it and/or modify it
-under  the terms of the GNU General Public License as published by the Free
-Software  Foundation,  either version 3 of the License, or (at your option)
-any later version.
+Use  of  this  software  in  source  and  binary  forms,  with  or  without
+modification, is permitted.
 
-This program is distributed in the hope that it will be useful, but WITHOUT
-ANY  WARRANTY;  without  even  the  implied  warranty of MERCHANTABILITY or
-FITNESS  FOR  A PARTICULAR PURPOSE.  See the GNU General Public License for
-more details.
+Redistribution   of   this   software  in  source  form,  with  or  without
+modification,  is  permitted  provided that the following condition is met:
+redistributions  of  source code must retain the above copyright notice and
+this License Agreement in the documentation and/or other materials provided
+with the distribution.
 
-You  should  have  received  a copy of the GNU General Public License along
-with this program. If not, see <http://www.gnu.org/licenses/>.
+Redistribution of this software in binary form is not permitted without the
+author's prior consent.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND  ANY  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE  DISCLAIMED.  IN  NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE  FOR  ANY  DIRECT,  INDIRECT,  INCIDENTAL,  SPECIAL,  EXEMPLARY,  OR
+CONSEQUENTIAL  DAMAGES  (INCLUDING,  BUT  NOT  LIMITED  TO,  PROCUREMENT OF
+SUBSTITUTE  GOODS  OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION)  HOWEVER  CAUSED  AND  ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT,  STRICT  LIABILITY,  OR  TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING  IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
 
 This  software  uses Qt library licensed under the terms of GNU LGPLv3. You
-should  have received a copy of the GNU Lesser General Public License along
-with this program. If not, see <http://www.gnu.org/licenses/>.
+should  have  received a copy of the GNU General Public License and the GNU
+Lesser  General  Public  License  along  with  this  program.  If  not, see
+<http://www.gnu.org/licenses/>.
 
 Please  visit  <http://www.qt.io/offline-installers/> if you need to obtain
 complete        source       code       of       Qt       library       and
