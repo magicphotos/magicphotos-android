@@ -123,8 +123,6 @@ ApplicationWindow {
 
         updateFeatures();
 
-        AdMobHelper.initialize();
-
         mainStackView.push(modeSelectionPage);
     }
 }

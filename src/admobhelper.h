@@ -20,7 +20,6 @@ public:
 
     int bannerViewHeight() const;
 
-    Q_INVOKABLE void initialize();
     Q_INVOKABLE void showBannerView();
     Q_INVOKABLE void hideBannerView();
     Q_INVOKABLE void showInterstitial();
@@ -32,8 +31,7 @@ public slots:
     void setBannerViewHeight(int height);
 
 private:
-    bool Initialized;
-    int  BannerViewHeight;
+    int BannerViewHeight;
 };
 
 #endif // ADMOBHELPER_H
