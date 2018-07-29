@@ -1,3 +1,4 @@
+#include <QtCore/QtMath>
 #include <QtGui/QImage>
 #include <QtGui/QTransform>
 #include <QtGui/QPainter>

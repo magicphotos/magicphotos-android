@@ -1,7 +1,7 @@
 #ifndef BRUSHPREVIEWGENERATOR_H
 #define BRUSHPREVIEWGENERATOR_H
 
-#include <QtCore/qmath.h>
+#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtQuick/QQuickPaintedItem>
 

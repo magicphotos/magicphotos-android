@@ -1,7 +1,7 @@
 #ifndef RETOUCHEDITOR_H
 #define RETOUCHEDITOR_H
 
-#include <QtCore/qmath.h>
+#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
 #include <QtCore/QString>

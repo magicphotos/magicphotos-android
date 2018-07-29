@@ -1,3 +1,4 @@
+#include <QtCore/QtMath>
 #include <QtCore/QFileInfo>
 #include <QtCore/QThread>
 #include <QtGui/QTransform>

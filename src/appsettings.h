@@ -1,7 +1,7 @@
 #ifndef APPSETTINGS_H
 #define APPSETTINGS_H
 
-#include <QtCore/qmath.h>
+#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QSettings>
 

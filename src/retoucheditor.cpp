@@ -1,3 +1,4 @@
+#include <QtCore/QtMath>
 #include <QtCore/QFileInfo>
 #include <QtGui/QTransform>
 #include <QtGui/QImageReader>

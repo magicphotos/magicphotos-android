@@ -1,7 +1,7 @@
 #ifndef PIXELATEEDITOR_H
 #define PIXELATEEDITOR_H
 
-#include <QtCore/qmath.h>
+#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStack>
