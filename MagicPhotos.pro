@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 purchasing androidextras
+QT += quick quickcontrols2 purchasing
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -46,33 +46,37 @@ TRANSLATIONS += \
     translations/MagicPhotos_de.ts \
     translations/MagicPhotos_fr.ts
 
-OTHER_FILES += \
-    android/source/AndroidManifest.xml \
-    android/source/build.gradle \
-    android/source/gradlew \
-    android/source/gradlew.bat \
-    android/source/gradle/wrapper/gradle-wrapper.jar \
-    android/source/gradle/wrapper/gradle-wrapper.properties \
-    android/source/res/mipmap-hdpi/ic_launcher.png \
-    android/source/res/mipmap-mdpi/ic_launcher.png \
-    android/source/res/mipmap-xhdpi/ic_launcher.png \
-    android/source/res/mipmap-xxhdpi/ic_launcher.png \
-    android/source/res/mipmap-xxxhdpi/ic_launcher.png \
-    android/source/res/values/libs.xml \
-    android/source/res/values/strings.xml \
-    android/source/res/values-ru/strings.xml \
-    android/source/res/values-de/strings.xml \
-    android/source/res/values-fr/strings.xml \
-    android/source/res/xml/provider_paths.xml \
-    android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
-
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/source
+android {
+    QT += androidextras
+
+    OTHER_FILES += \
+        android/source/AndroidManifest.xml \
+        android/source/build.gradle \
+        android/source/gradlew \
+        android/source/gradlew.bat \
+        android/source/gradle/wrapper/gradle-wrapper.jar \
+        android/source/gradle/wrapper/gradle-wrapper.properties \
+        android/source/res/mipmap-hdpi/ic_launcher.png \
+        android/source/res/mipmap-mdpi/ic_launcher.png \
+        android/source/res/mipmap-xhdpi/ic_launcher.png \
+        android/source/res/mipmap-xxhdpi/ic_launcher.png \
+        android/source/res/mipmap-xxxhdpi/ic_launcher.png \
+        android/source/res/values/libs.xml \
+        android/source/res/values/strings.xml \
+        android/source/res/values-ru/strings.xml \
+        android/source/res/values-de/strings.xml \
+        android/source/res/values-fr/strings.xml \
+        android/source/res/xml/provider_paths.xml \
+        android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
+
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/source
+}
 
 # Default rules for deployment.
 include(deployment.pri)
