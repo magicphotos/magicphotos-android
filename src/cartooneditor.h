@@ -25,7 +25,7 @@ class CartoonEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit CartoonEditor(QQuickItem *parent = 0);
+    explicit CartoonEditor(QQuickItem *parent = nullptr);
     virtual ~CartoonEditor();
 
     int  mode() const;
@@ -114,7 +114,7 @@ class CartoonPreviewGenerator : public QQuickPaintedItem
     Q_PROPERTY(int threshold READ threshold WRITE setThreshold)
 
 public:
-    explicit CartoonPreviewGenerator(QQuickItem *parent = 0);
+    explicit CartoonPreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~CartoonPreviewGenerator();
 
     int  radius() const;
@@ -152,7 +152,7 @@ class CartoonImageGenerator : public QObject
     Q_OBJECT
 
 public:
-    explicit CartoonImageGenerator(QObject *parent = 0);
+    explicit CartoonImageGenerator(QObject *parent = nullptr);
     virtual ~CartoonImageGenerator();
 
     void setGaussianRadius(int radius);

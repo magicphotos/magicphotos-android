@@ -15,7 +15,7 @@ class AppSettings : public QObject
     Q_PROPERTY(qreal brushOpacity     READ brushOpacity     WRITE setBrushOpacity)
 
 public:
-    explicit AppSettings(QObject *parent = 0);
+    explicit AppSettings(QObject *parent = nullptr);
     virtual ~AppSettings();
 
     int  defaultBrushSize() const;

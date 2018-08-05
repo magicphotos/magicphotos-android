@@ -14,7 +14,7 @@ class BrushPreviewGenerator : public QQuickPaintedItem
     Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
 
 public:
-    explicit BrushPreviewGenerator(QQuickItem *parent = 0);
+    explicit BrushPreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~BrushPreviewGenerator();
 
     int  size() const;

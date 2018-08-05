@@ -24,7 +24,7 @@ class PixelateEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit PixelateEditor(QQuickItem *parent = 0);
+    explicit PixelateEditor(QQuickItem *parent = nullptr);
     virtual ~PixelateEditor();
 
     int  mode() const;
@@ -109,7 +109,7 @@ class PixelatePreviewGenerator : public QQuickPaintedItem
     Q_PROPERTY(int pixDenom READ pixDenom WRITE setPixDenom)
 
 public:
-    explicit PixelatePreviewGenerator(QQuickItem *parent = 0);
+    explicit PixelatePreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~PixelatePreviewGenerator();
 
     int  pixDenom() const;
@@ -144,7 +144,7 @@ class PixelateImageGenerator : public QObject
     Q_OBJECT
 
 public:
-    explicit PixelateImageGenerator(QObject *parent = 0);
+    explicit PixelateImageGenerator(QObject *parent = nullptr);
     virtual ~PixelateImageGenerator();
 
     void setPixelDenom(int pix_denom);

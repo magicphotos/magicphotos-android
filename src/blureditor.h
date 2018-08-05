@@ -24,7 +24,7 @@ class BlurEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit BlurEditor(QQuickItem *parent = 0);
+    explicit BlurEditor(QQuickItem *parent = nullptr);
     virtual ~BlurEditor();
 
     int  mode() const;
@@ -109,7 +109,7 @@ class BlurPreviewGenerator : public QQuickPaintedItem
     Q_PROPERTY(int radius READ radius WRITE setRadius)
 
 public:
-    explicit BlurPreviewGenerator(QQuickItem *parent = 0);
+    explicit BlurPreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~BlurPreviewGenerator();
 
     int  radius() const;
@@ -144,7 +144,7 @@ class BlurImageGenerator : public QObject
     Q_OBJECT
 
 public:
-    explicit BlurImageGenerator(QObject *parent = 0);
+    explicit BlurImageGenerator(QObject *parent = nullptr);
     virtual ~BlurImageGenerator();
 
     void setGaussianRadius(int radius);

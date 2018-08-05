@@ -80,7 +80,7 @@ void BrushPreviewGenerator::paint(QPainter *painter)
                     if (r <= Size * Opacity) {
                         brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                     } else {
-                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (Size - r) / (Size * (1.0 - Opacity)))));
+                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (Size - r) / (Size * (1.0 - Opacity)))));
                     }
                 } else {
                     brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -106,12 +106,12 @@ void BrushPreviewGenerator::paint(QPainter *painter)
                                         (result.height() - brush_preview.height()) / 2), brush_preview);
 
         if (!result.isNull()) {
-            QImage image = result.scaled(QSize(contentsBoundingRect().width(),
-                                               contentsBoundingRect().height()),
+            QImage image = result.scaled(QSize(qFloor(contentsBoundingRect().width()),
+                                               qFloor(contentsBoundingRect().height())),
                                          Qt::KeepAspectRatio, Qt::FastTransformation);
 
-            painter->drawPixmap(QPoint((contentsBoundingRect().width()  - image.width())  / 2,
-                                       (contentsBoundingRect().height() - image.height()) / 2), QPixmap::fromImage(image));
+            painter->drawPixmap(QPoint(qFloor((contentsBoundingRect().width()  - image.width())  / 2),
+                                       qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
         }
     }
 

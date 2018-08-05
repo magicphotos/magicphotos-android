@@ -15,7 +15,7 @@ public:
                          ADMOB_BANNERVIEW_UNIT_ID,
                          ADMOB_INTERSTITIAL_UNIT_ID;
 
-    explicit AdMobHelper(QObject *parent = 0);
+    explicit AdMobHelper(QObject *parent = nullptr);
     virtual ~AdMobHelper();
 
     int bannerViewHeight() const;

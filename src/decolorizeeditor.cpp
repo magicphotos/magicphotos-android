@@ -57,7 +57,7 @@ void DecolorizeEditor::setBrushSize(int size)
                 if (r <= BrushSize * BrushOpacity) {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
                 }
             } else {
                 BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -65,7 +65,7 @@ void DecolorizeEditor::setBrushSize(int size)
         }
     }
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -99,7 +99,7 @@ void DecolorizeEditor::setBrushOpacity(qreal opacity)
                 if (r <= BrushSize * BrushOpacity) {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
                 }
             } else {
                 BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -107,7 +107,7 @@ void DecolorizeEditor::setBrushOpacity(qreal opacity)
         }
     }
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -128,8 +128,8 @@ void DecolorizeEditor::openImage(QString image_file, int image_orientation)
             if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
                 qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
 
-                size.setWidth(size.width()   / factor);
-                size.setHeight(size.height() / factor);
+                size.setWidth(qFloor(size.width()   / factor));
+                size.setHeight(qFloor(size.height() / factor));
 
                 reader.setScaledSize(size);
             }
@@ -262,7 +262,7 @@ void DecolorizeEditor::effectedImageReady(QImage effected_image)
 
     update();
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 
@@ -272,7 +272,7 @@ void DecolorizeEditor::effectedImageReady(QImage effected_image)
 
 void DecolorizeEditor::scaleWasChanged()
 {
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -351,10 +351,10 @@ void DecolorizeEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         update();
 
-        QImage helper_image = CurrentImage.copy(center_x - (HelperSize / scale()) / 2,
-                                                center_y - (HelperSize / scale()) / 2,
-                                                HelperSize / scale(),
-                                                HelperSize / scale()).scaledToWidth(HelperSize);
+        QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
+                                                center_y - qFloor((HelperSize / scale()) / 2),
+                                                qFloor(HelperSize / scale()),
+                                                qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
 
         emit helperImageReady(helper_image);
     }

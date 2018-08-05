@@ -25,7 +25,7 @@ class RecolorEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit RecolorEditor(QQuickItem *parent = 0);
+    explicit RecolorEditor(QQuickItem *parent = nullptr);
     virtual ~RecolorEditor();
 
     int  mode() const;
@@ -89,10 +89,10 @@ private:
     union RGB16 {
         quint16 rgb;
         struct {
-            unsigned r : 5;
-            unsigned g : 6;
-            unsigned b : 5;
-        };
+            unsigned int r : 5;
+            unsigned int g : 6;
+            unsigned int b : 5;
+        } srgb;
     };
 
     union HSV {
@@ -101,7 +101,7 @@ private:
             qint16 h;
             quint8 s;
             quint8 v;
-        };
+        } shsv;
     };
 
     QRgb AdjustHue(QRgb rgb);

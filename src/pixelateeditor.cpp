@@ -58,7 +58,7 @@ void PixelateEditor::setBrushSize(int size)
                 if (r <= BrushSize * BrushOpacity) {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
                 }
             } else {
                 BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -66,7 +66,7 @@ void PixelateEditor::setBrushSize(int size)
         }
     }
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -110,7 +110,7 @@ void PixelateEditor::setBrushOpacity(qreal opacity)
                 if (r <= BrushSize * BrushOpacity) {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
                 }
             } else {
                 BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -118,7 +118,7 @@ void PixelateEditor::setBrushOpacity(qreal opacity)
         }
     }
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -139,8 +139,8 @@ void PixelateEditor::openImage(QString image_file, int image_orientation)
             if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
                 qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
 
-                size.setWidth(size.width()   / factor);
-                size.setHeight(size.height() / factor);
+                size.setWidth(qFloor(size.width()   / factor));
+                size.setHeight(qFloor(size.height() / factor));
 
                 reader.setScaledSize(size);
             }
@@ -274,7 +274,7 @@ void PixelateEditor::effectedImageReady(QImage effected_image)
 
     update();
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 
@@ -284,7 +284,7 @@ void PixelateEditor::effectedImageReady(QImage effected_image)
 
 void PixelateEditor::scaleWasChanged()
 {
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -363,10 +363,10 @@ void PixelateEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         update();
 
-        QImage helper_image = CurrentImage.copy(center_x - (HelperSize / scale()) / 2,
-                                                center_y - (HelperSize / scale()) / 2,
-                                                HelperSize / scale(),
-                                                HelperSize / scale()).scaledToWidth(HelperSize);
+        QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
+                                                center_y - qFloor((HelperSize / scale()) / 2),
+                                                qFloor(HelperSize / scale()),
+                                                qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
 
         emit helperImageReady(helper_image);
     }
@@ -416,8 +416,8 @@ void PixelatePreviewGenerator::openImage(QString image_file, int image_orientati
             if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
                 qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
 
-                size.setWidth(size.width()   / factor);
-                size.setHeight(size.height() / factor);
+                size.setWidth(qFloor(size.width()   / factor));
+                size.setHeight(qFloor(size.height() / factor));
 
                 reader.setScaledSize(size);
             }
@@ -480,12 +480,12 @@ void PixelatePreviewGenerator::paint(QPainter *painter)
     }
 
     if (!PixelatedImage.isNull()) {
-        QImage image = PixelatedImage.scaled(QSize(contentsBoundingRect().width(),
-                                                   contentsBoundingRect().height()),
+        QImage image = PixelatedImage.scaled(QSize(qFloor(contentsBoundingRect().width()),
+                                                   qFloor(contentsBoundingRect().height())),
                                              Qt::KeepAspectRatio, Qt::FastTransformation);
 
-        painter->drawPixmap(QPoint((contentsBoundingRect().width()  - image.width())  / 2,
-                                   (contentsBoundingRect().height() - image.height()) / 2), QPixmap::fromImage(image));
+        painter->drawPixmap(QPoint(qFloor((contentsBoundingRect().width()  - image.width())  / 2),
+                                   qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
     }
 
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
@@ -568,7 +568,7 @@ void PixelateImageGenerator::start()
 
                 for (int x = i * pix_size; x < (i + 1) * pix_size && x < pixelated_image.width(); x++) {
                     for (int y = j * pix_size; y < (j + 1) * pix_size && y < pixelated_image.height(); y++) {
-                        int pixel = pixelated_image.pixel(x, y);
+                        unsigned int pixel = pixelated_image.pixel(x, y);
 
                         avg_r += qRed(pixel);
                         avg_g += qGreen(pixel);

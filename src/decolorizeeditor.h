@@ -23,7 +23,7 @@ class DecolorizeEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit DecolorizeEditor(QQuickItem *parent = 0);
+    explicit DecolorizeEditor(QQuickItem *parent = nullptr);
     virtual ~DecolorizeEditor();
 
     int  mode() const;
@@ -103,7 +103,7 @@ class GrayscaleImageGenerator : public QObject
     Q_OBJECT
 
 public:
-    explicit GrayscaleImageGenerator(QObject *parent = 0);
+    explicit GrayscaleImageGenerator(QObject *parent = nullptr);
     virtual ~GrayscaleImageGenerator();
 
     void setInput(QImage input_image);

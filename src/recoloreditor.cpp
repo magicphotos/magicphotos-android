@@ -22,15 +22,15 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     QColor color;
 
     for (int i = 0; i < 65536; i++) {
-        rgb16.rgb = i;
+        rgb16.rgb = static_cast<quint16>(i);
 
-        rgb = qRgb(rgb16.r << 3, rgb16.g << 2, rgb16.b << 3);
+        rgb = qRgb(rgb16.srgb.r << 3, rgb16.srgb.g << 2, rgb16.srgb.b << 3);
 
         color.setRgb(rgb);
 
-        hsv.h = color.hue();
-        hsv.s = color.saturation();
-        hsv.v = color.value();
+        hsv.shsv.h = static_cast<qint16>(color.hue());
+        hsv.shsv.s = static_cast<quint8>(color.saturation());
+        hsv.shsv.v = static_cast<quint8>(color.value());
 
         RGB16ToHSVMap[rgb16.rgb] = hsv.hsv;
     }
@@ -77,7 +77,7 @@ void RecolorEditor::setBrushSize(int size)
                 if (r <= BrushSize * BrushOpacity) {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
                 }
             } else {
                 BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -85,7 +85,7 @@ void RecolorEditor::setBrushSize(int size)
         }
     }
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -129,7 +129,7 @@ void RecolorEditor::setBrushOpacity(qreal opacity)
                 if (r <= BrushSize * BrushOpacity) {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, (int)(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
                 }
             } else {
                 BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -137,7 +137,7 @@ void RecolorEditor::setBrushOpacity(qreal opacity)
         }
     }
 
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -158,8 +158,8 @@ void RecolorEditor::openImage(QString image_file, int image_orientation)
             if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
                 qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
 
-                size.setWidth(size.width()   / factor);
-                size.setHeight(size.height() / factor);
+                size.setWidth(qFloor(size.width()   / factor));
+                size.setHeight(qFloor(size.height() / factor));
 
                 reader.setScaledSize(size);
             }
@@ -204,7 +204,7 @@ void RecolorEditor::openImage(QString image_file, int image_orientation)
 
                     update();
 
-                    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+                    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
                     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 
@@ -283,7 +283,7 @@ void RecolorEditor::paint(QPainter *painter)
 
 void RecolorEditor::scaleWasChanged()
 {
-    int brush_width = qMax(1, qMin(qMin((int)(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
@@ -318,13 +318,13 @@ QRgb RecolorEditor::AdjustHue(QRgb rgb)
     RGB16 rgb16;
     HSV   hsv;
 
-    rgb16.r = (qRed(rgb)   & 0xf8) >> 3;
-    rgb16.g = (qGreen(rgb) & 0xfc) >> 2;
-    rgb16.b = (qBlue(rgb)  & 0xf8) >> 3;
+    rgb16.srgb.r = (qRed(rgb)   & 0xf8) >> 3;
+    rgb16.srgb.g = (qGreen(rgb) & 0xfc) >> 2;
+    rgb16.srgb.b = (qBlue(rgb)  & 0xf8) >> 3;
 
     hsv.hsv = RGB16ToHSVMap[rgb16.rgb];
 
-    return QColor::fromHsv(CurrentHue, hsv.s, hsv.v, qAlpha(rgb)).rgba();
+    return QColor::fromHsv(CurrentHue, hsv.shsv.s, hsv.shsv.v, qAlpha(rgb)).rgba();
 }
 
 void RecolorEditor::SaveUndoImage()
@@ -379,10 +379,10 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         update();
 
-        QImage helper_image = CurrentImage.copy(center_x - (HelperSize / scale()) / 2,
-                                                center_y - (HelperSize / scale()) / 2,
-                                                HelperSize / scale(),
-                                                HelperSize / scale()).scaledToWidth(HelperSize);
+        QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
+                                                center_y - qFloor((HelperSize / scale()) / 2),
+                                                qFloor(HelperSize / scale()),
+                                                qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
 
         emit helperImageReady(helper_image);
     }

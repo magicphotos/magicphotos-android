@@ -24,7 +24,7 @@ class SketchEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit SketchEditor(QQuickItem *parent = 0);
+    explicit SketchEditor(QQuickItem *parent = nullptr);
     virtual ~SketchEditor();
 
     int  mode() const;
@@ -109,7 +109,7 @@ class SketchPreviewGenerator : public QQuickPaintedItem
     Q_PROPERTY(int radius READ radius WRITE setRadius)
 
 public:
-    explicit SketchPreviewGenerator(QQuickItem *parent = 0);
+    explicit SketchPreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~SketchPreviewGenerator();
 
     int  radius() const;
@@ -144,7 +144,7 @@ class SketchImageGenerator : public QObject
     Q_OBJECT
 
 public:
-    explicit SketchImageGenerator(QObject *parent = 0);
+    explicit SketchImageGenerator(QObject *parent = nullptr);
     virtual ~SketchImageGenerator();
 
     void setGaussianRadius(int radius);

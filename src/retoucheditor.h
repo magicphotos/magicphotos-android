@@ -26,7 +26,7 @@ class RetouchEditor : public QQuickPaintedItem
     Q_ENUMS(MouseState)
 
 public:
-    explicit RetouchEditor(QQuickItem *parent = 0);
+    explicit RetouchEditor(QQuickItem *parent = nullptr);
     virtual ~RetouchEditor();
 
     int  mode() const;

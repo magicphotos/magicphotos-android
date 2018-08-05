@@ -9,7 +9,7 @@ class Helper : public QQuickPaintedItem
     Q_OBJECT
 
 public:
-    explicit Helper(QQuickPaintedItem *parent = 0);
+    explicit Helper(QQuickPaintedItem *parent = nullptr);
     virtual ~Helper();
 
     virtual void paint(QPainter *painter);
