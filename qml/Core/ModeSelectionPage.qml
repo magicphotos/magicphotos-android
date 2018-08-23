@@ -50,7 +50,7 @@ Page {
                 }
 
                 onClicked: {
-                    Qt.openUrlExternally(qsTr("https://magicphotos.sourceforge.net/help/android/help.html"));
+                    Qt.openUrlExternally(qsTr("https://magicphotos.sourceforge.io/help/android/help.html"));
                 }
             }
         }
