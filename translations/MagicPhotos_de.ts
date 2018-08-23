@@ -4,8 +4,8 @@
 <context>
     <name>BlurPage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
@@ -62,8 +62,8 @@
 <context>
     <name>CartoonPage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
@@ -120,8 +120,8 @@
 <context>
     <name>DecolorizePage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
@@ -167,8 +167,8 @@
         <translation>MagicPhotos</translation>
     </message>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Error</source>
@@ -182,8 +182,8 @@
 <context>
     <name>PixelatePage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
@@ -240,8 +240,8 @@
 <context>
     <name>RecolorPage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
@@ -283,8 +283,8 @@
 <context>
     <name>RetouchPage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
@@ -326,8 +326,8 @@
 <context>
     <name>SketchPage</name>
     <message>
-        <source>http://magicphotos.sourceforge.net/help/android/help.html</source>
-        <translation>http://magicphotos.sourceforge.net/help/android/help_de.html</translation>
+        <source>https://magicphotos.sourceforge.net/help/android/help.html</source>
+        <translation>https://magicphotos.sourceforge.net/help/android/help_de.html</translation>
     </message>
     <message>
         <source>Brush Size</source>
