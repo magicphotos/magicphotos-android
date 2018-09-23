@@ -56,11 +56,4 @@ android {
     lintOptions {
         disable 'MissingTranslation'
     }
-
-    /* Temporary fix for zipalign issue, may be fixed in later Qt versions */
-    applicationVariants.all {
-        variant -> variant.outputs.all {
-            outputFileName = "../" + outputFileName
-        }
-    }
 }
