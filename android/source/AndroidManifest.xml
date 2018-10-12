@@ -45,9 +45,9 @@
             <meta-data android:value="@string/fatal_error_msg" android:name="android.app.fatal_error_msg"/>
             <!-- Background running -->
             <meta-data android:name="android.app.background_running" android:value="false"/>
-            <!-- auto screen scale factor -->
+            <!-- Auto screen scale factor -->
             <meta-data android:name="android.app.auto_screen_scale_factor" android:value="false"/>
-            <!-- extract android style -->
+            <!-- Extract android style -->
             <meta-data android:name="android.app.extract_android_style" android:value="full"/>
         </activity>
 
