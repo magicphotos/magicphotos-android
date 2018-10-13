@@ -10,6 +10,7 @@ import "Util.js" as UtilScript
 
 ApplicationWindow {
     id:                           mainWindow
+    title:                        qsTr("MagicPhotos")
     visible:                      true
     Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
                                   Qt.InvertedPortraitOrientation | Qt.InvertedLandscapeOrientation
