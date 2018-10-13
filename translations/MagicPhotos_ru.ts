@@ -381,4 +381,11 @@
         <translation>Невозможно открыть изображение</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>MagicPhotos</source>
+        <translation>Волшебные Фото</translation>
+    </message>
+</context>
 </TS>

@@ -381,4 +381,11 @@
         <translation>Bild kann nicht geöffnet werden</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>MagicPhotos</source>
+        <translation>MagicPhotos</translation>
+    </message>
+</context>
 </TS>
