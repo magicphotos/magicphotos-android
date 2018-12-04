@@ -2,7 +2,6 @@ import QtQuick 2.9
 import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
-import QtPurchasing 1.0
 
 import "Core"
 
@@ -17,60 +16,11 @@ ApplicationWindow {
     Material.theme:               Material.System
     Material.primary:             Material.Teal
 
-    property bool disableAds:       false
     property int screenOrientation: Screen.orientation
-
-    onDisableAdsChanged: {
-        AppSettings.disableAds = disableAds;
-
-        updateFeatures();
-    }
 
     onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
-            if (disableAds) {
-                AdMobHelper.hideBannerView();
-            } else {
-                AdMobHelper.showBannerView();
-            }
-        }
-    }
-
-    function updateFeatures() {
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
-            if (disableAds) {
-                AdMobHelper.hideBannerView();
-            } else {
-                AdMobHelper.showBannerView();
-            }
-        }
-    }
-
-    Store {
-        Product {
-            id:         disabledAdsProduct
-            identifier: "magicphotos.unlockable.disabledads"
-            type:       Product.Unlockable
-
-            onPurchaseSucceeded: {
-                mainWindow.disableAds = true;
-
-                transaction.finalize();
-            }
-
-            onPurchaseRestored: {
-                mainWindow.disableAds = true;
-
-                transaction.finalize();
-            }
-
-            onPurchaseFailed: {
-                if (transaction.failureReason === Transaction.ErrorOccurred) {
-                    console.log(transaction.errorString);
-                }
-
-                transaction.finalize();
-            }
+            AdMobHelper.showBannerView();
         }
     }
 
@@ -91,16 +41,12 @@ ApplicationWindow {
                 currentItem.forceActiveFocus();
 
                 if (currentItem.hasOwnProperty("bannerViewHeight")) {
-                    if (disableAds) {
-                        AdMobHelper.hideBannerView();
-                    } else {
-                        AdMobHelper.showBannerView();
-                    }
+                    AdMobHelper.showBannerView();
                 } else {
                     AdMobHelper.hideBannerView();
                 }
 
-                if (currentItem.hasOwnProperty("allowInterstitial") && currentItem.allowInterstitial && !mainWindow.disableAds) {
+                if (currentItem.hasOwnProperty("allowInterstitial") && currentItem.allowInterstitial) {
                     AdMobHelper.showInterstitial();
                 }
             }
@@ -119,10 +65,6 @@ ApplicationWindow {
 
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.pt(16);
-
-        disableAds = AppSettings.disableAds;
-
-        updateFeatures();
 
         mainStackView.push(modeSelectionPage);
     }

@@ -26,22 +26,6 @@ Page {
             ToolButton {
                 implicitWidth:    UtilScript.pt(48)
                 implicitHeight:   UtilScript.pt(48)
-                visible:          !mainWindow.disableAds
-                Layout.alignment: Qt.AlignHCenter
-
-                contentItem: Image {
-                    source:   "qrc:/resources/images/tool_purchase.png"
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                onClicked: {
-                    disabledAdsProduct.purchase();
-                }
-            }
-
-            ToolButton {
-                implicitWidth:    UtilScript.pt(48)
-                implicitHeight:   UtilScript.pt(48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {

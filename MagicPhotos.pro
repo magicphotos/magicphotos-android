@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 purchasing
+QT += quick quickcontrols2
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
