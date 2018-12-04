@@ -73,7 +73,7 @@ android {
         android/source/res/values-de/strings.xml \
         android/source/res/values-fr/strings.xml \
         android/source/res/xml/provider_paths.xml \
-        android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
+        android/source/src/com/derevenetz/oleg/magicphotos/stdalone/MagicActivity.java
 
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/source
 }

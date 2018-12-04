@@ -1,4 +1,4 @@
-package com.derevenetz.oleg.magicphotos;
+package com.derevenetz.oleg.magicphotos.stdalone;
 
 import java.io.File;
 import java.io.InputStream;
