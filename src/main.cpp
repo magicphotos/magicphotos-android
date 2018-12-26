@@ -4,6 +4,7 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
 #include <QtQuickControls2/QQuickStyle>
+#include <QtAndroidExtras/QtAndroid>
 
 #include "appsettings.h"
 #include "androidgw.h"
@@ -66,6 +67,8 @@ int main(int argc, char *argv[])
     QQuickStyle::setStyle("Material");
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+
+    QtAndroid::hideSplashScreen();
 
     if (engine.rootObjects().isEmpty())
         return -1;
