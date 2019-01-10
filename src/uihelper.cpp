@@ -18,9 +18,9 @@ int UIHelper::getScreenDPI()
 
 QString UIHelper::getSaveDirectory()
 {
-    QAndroidJniObject str_object = QtAndroid::androidActivity().callObjectMethod<jstring>("getSaveDirectory");
+    QAndroidJniObject j_save_directory = QtAndroid::androidActivity().callObjectMethod<jstring>("getSaveDirectory");
 
-    return str_object.toString();
+    return j_save_directory.toString();
 }
 
 bool UIHelper::requestReadStoragePermission()
