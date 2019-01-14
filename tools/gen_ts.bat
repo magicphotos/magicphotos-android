@@ -1,3 +1,3 @@
-PATH=%PATH%;C:\Qt\5.11.2\mingw53_32\bin;C:\Qt\Tools\mingw530_32\bin
+PATH=%PATH%;C:\Qt\5.12.0\mingw73_64\bin;C:\Qt\Tools\mingw730_64\bin
 
 lupdate ..\magicphotos.pro
