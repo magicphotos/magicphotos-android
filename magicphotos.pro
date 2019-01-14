@@ -42,9 +42,9 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/MagicPhotos_ru.ts \
-    translations/MagicPhotos_de.ts \
-    translations/MagicPhotos_fr.ts
+    translations/magicphotos_ru.ts \
+    translations/magicphotos_de.ts \
+    translations/magicphotos_fr.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

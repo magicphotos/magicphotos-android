@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QTranslator     translator;
     QGuiApplication app(argc, argv);
 
-    if (translator.load(QString(":/tr/MagicPhotos_%1").arg(QLocale::system().name()))) {
+    if (translator.load(QString(":/tr/magicphotos_%1").arg(QLocale::system().name()))) {
         app.installTranslator(&translator);
     }
 
