@@ -11,7 +11,6 @@ class AppSettings : public QObject
 
     Q_PROPERTY(int   defaultBrushSize READ defaultBrushSize WRITE setDefaultBrushSize)
     Q_PROPERTY(int   brushSize        READ brushSize        WRITE setBrushSize)
-    Q_PROPERTY(bool  disableAds       READ disableAds       WRITE setDisableAds)
     Q_PROPERTY(qreal brushOpacity     READ brushOpacity     WRITE setBrushOpacity)
 
 public:
@@ -23,9 +22,6 @@ public:
 
     int  brushSize() const;
     void setBrushSize(int size);
-
-    bool disableAds() const;
-    void setDisableAds(bool disable);
 
     qreal brushOpacity() const;
     void  setBrushOpacity(qreal opacity);

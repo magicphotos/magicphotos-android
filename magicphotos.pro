@@ -3,9 +3,6 @@ CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# Uncomment to build full version
-# DEFINES += FULL_VERSION
-
 SOURCES += src/main.cpp \
     src/appsettings.cpp \
     src/androidgw.cpp \
