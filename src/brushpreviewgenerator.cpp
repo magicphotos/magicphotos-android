@@ -11,8 +11,6 @@ BrushPreviewGenerator::BrushPreviewGenerator(QQuickItem *parent) : QQuickPainted
     MaxSize = 0;
     Opacity = 0.0;
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 }
 

@@ -18,8 +18,6 @@ SketchEditor::SketchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &SketchEditor::scaleChanged, this, &SketchEditor::scaleWasChanged);
@@ -377,8 +375,6 @@ SketchPreviewGenerator::SketchPreviewGenerator(QQuickItem *parent) : QQuickPaint
     SketchGeneratorRunning = false;
     RestartSketchGenerator = false;
     GaussianRadius         = 0;
-
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
 }

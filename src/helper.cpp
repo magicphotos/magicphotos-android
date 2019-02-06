@@ -4,8 +4,6 @@
 
 Helper::Helper(QQuickPaintedItem *parent) : QQuickPaintedItem(parent)
 {
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 }
 

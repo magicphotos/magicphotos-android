@@ -18,8 +18,6 @@ BlurEditor::BlurEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &BlurEditor::scaleChanged, this, &BlurEditor::scaleWasChanged);
@@ -377,8 +375,6 @@ BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) : QQuickPaintedIt
     BlurGeneratorRunning = false;
     RestartBlurGenerator = false;
     GaussianRadius       = 0;
-
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
 }

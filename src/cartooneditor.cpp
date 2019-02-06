@@ -19,8 +19,6 @@ CartoonEditor::CartoonEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &CartoonEditor::scaleChanged, this, &CartoonEditor::scaleWasChanged);
@@ -390,8 +388,6 @@ CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) : QQuickPai
     RestartCartoonGenerator = false;
     GaussianRadius          = 0;
     CartoonThreshold        = 0;
-
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
 }
