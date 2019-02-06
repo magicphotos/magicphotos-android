@@ -17,8 +17,6 @@ DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) : QQuickPaintedItem(paren
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &DecolorizeEditor::scaleChanged, this, &DecolorizeEditor::scaleWasChanged);

@@ -18,8 +18,6 @@ PixelateEditor::PixelateEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &PixelateEditor::scaleChanged, this, &PixelateEditor::scaleWasChanged);
@@ -377,8 +375,6 @@ PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : QQuickP
     PixelateGeneratorRunning = false;
     RestartPixelateGenerator = false;
     PixelDenom               = 0;
-
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
 
     setFlag(QQuickItem::ItemHasContents, true);
 }

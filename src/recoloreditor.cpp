@@ -37,8 +37,6 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
-
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &RecolorEditor::scaleChanged, this, &RecolorEditor::scaleWasChanged);
