@@ -1,8 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.3
+import QtQuick.Layouts 1.12
 
 import "../Util.js" as UtilScript
 
@@ -133,12 +133,15 @@ Page {
     }
 
     ScrollView {
-        id:           scrollView
-        anchors.fill: parent
-        clip:         true
+        id:            modeSelectionScrollView
+        anchors.fill:  parent
+        contentWidth:  modeSelectionLayout.width
+        contentHeight: modeSelectionLayout.height
+        clip:          true
 
         GridLayout {
-            width:         scrollView.width
+            id:            modeSelectionLayout
+            width:         modeSelectionScrollView.width
             columns:       2
             rowSpacing:    UtilScript.pt(4)
             columnSpacing: UtilScript.pt(4)
