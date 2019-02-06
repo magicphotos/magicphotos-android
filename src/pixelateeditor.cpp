@@ -482,7 +482,8 @@ void PixelatePreviewGenerator::paint(QPainter *painter)
     if (!PixelatedImage.isNull()) {
         QImage image = PixelatedImage.scaled(QSize(qFloor(contentsBoundingRect().width()),
                                                    qFloor(contentsBoundingRect().height())),
-                                             Qt::KeepAspectRatio, Qt::FastTransformation);
+                                             Qt::KeepAspectRatio,
+                                             smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
 
         painter->drawPixmap(QPoint(qFloor((contentsBoundingRect().width()  - image.width())  / 2),
                                    qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
