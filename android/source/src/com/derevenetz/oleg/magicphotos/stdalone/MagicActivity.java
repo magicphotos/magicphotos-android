@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -40,7 +41,6 @@ public class MagicActivity extends QtActivity
 
     private boolean          statusBarVisible          = false;
     private int              statusBarHeight           = 0;
-    private MagicActivity    activity                  = null;
     private AdView           bannerView                = null;
     private InterstitialAd   interstitial              = null;
 
@@ -49,11 +49,6 @@ public class MagicActivity extends QtActivity
     private static native void imageSelected(String image_file, int image_orientation);
     private static native void imageSelectionCancelled();
     private static native void imageSelectionFailed();
-
-    public MagicActivity()
-    {
-        activity = this;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -185,16 +180,17 @@ public class MagicActivity extends QtActivity
 
     public void initAds(String app_id, String interstitial_unit_id)
     {
-        final String f_app_id               = app_id;
-        final String f_interstitial_unit_id = interstitial_unit_id;
+        final String  f_app_id               = app_id;
+        final String  f_interstitial_unit_id = interstitial_unit_id;
+        final Context f_context              = this;
 
         runOnUiThread(new Runnable() {
             @Override
             public void run()
             {
-                MobileAds.initialize(activity, f_app_id);
+                MobileAds.initialize(f_context, f_app_id);
 
-                interstitial = new InterstitialAd(activity);
+                interstitial = new InterstitialAd(f_context);
 
                 interstitial.setAdUnitId(f_interstitial_unit_id);
 
@@ -237,7 +233,8 @@ public class MagicActivity extends QtActivity
 
     public void showBannerView(String unit_id)
     {
-        final String f_unit_id = unit_id;
+        final String  f_unit_id = unit_id;
+        final Context f_context = this;
 
         runOnUiThread(new Runnable() {
             @Override
@@ -262,7 +259,7 @@ public class MagicActivity extends QtActivity
                                                                                    FrameLayout.LayoutParams.WRAP_CONTENT,
                                                                                    Gravity.CENTER_HORIZONTAL);
 
-                    bannerView = new AdView(activity);
+                    bannerView = new AdView(f_context);
 
                     bannerView.setAdSize(AdSize.SMART_BANNER);
                     bannerView.setAdUnitId(f_unit_id);
