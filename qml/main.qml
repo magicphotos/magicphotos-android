@@ -4,8 +4,6 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import QtPurchasing 1.0
 
-import "Core"
-
 import "Util.js" as UtilScript
 
 ApplicationWindow {
@@ -107,10 +105,6 @@ ApplicationWindow {
         }
     }
 
-    ModeSelectionPage {
-        id: modeSelectionPage
-    }
-
     MouseArea {
         anchors.fill: parent
         z:            20
@@ -124,6 +118,12 @@ ApplicationWindow {
 
         updateFeatures();
 
-        mainStackView.push(modeSelectionPage);
+        var component = Qt.createComponent("Core/ModeSelectionPage.qml");
+
+        if (component.status === Component.Ready) {
+            mainStackView.push(component);
+        } else {
+            console.log(component.errorString());
+        }
     }
 }
