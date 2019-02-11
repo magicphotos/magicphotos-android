@@ -3,8 +3,6 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 
-import "Core"
-
 import "Util.js" as UtilScript
 
 ApplicationWindow {
@@ -53,10 +51,6 @@ ApplicationWindow {
         }
     }
 
-    ModeSelectionPage {
-        id: modeSelectionPage
-    }
-
     MouseArea {
         anchors.fill: parent
         z:            20
@@ -66,6 +60,12 @@ ApplicationWindow {
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.pt(16);
 
-        mainStackView.push(modeSelectionPage);
+        var component = Qt.createComponent("Core/ModeSelectionPage.qml");
+
+        if (component.status === Component.Ready) {
+            mainStackView.push(component);
+        } else {
+            console.log(component.errorString());
+        }
     }
 }
