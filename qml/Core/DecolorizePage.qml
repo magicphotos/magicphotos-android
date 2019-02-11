@@ -507,7 +507,6 @@ Page {
     MessageDialog {
         id:              imageOpenFailedMessageDialog
         title:           qsTr("Error")
-        icon:            StandardIcon.Critical
         text:            qsTr("Could not open image")
         standardButtons: StandardButton.Ok
     }
@@ -515,7 +514,6 @@ Page {
     MessageDialog {
         id:              imageSavedMessageDialog
         title:           qsTr("Info")
-        icon:            StandardIcon.Information
         text:            qsTr("Image saved successfully")
         standardButtons: StandardButton.Ok
     }
@@ -523,7 +521,6 @@ Page {
     MessageDialog {
         id:              imageSaveFailedMessageDialog
         title:           qsTr("Error")
-        icon:            StandardIcon.Critical
         text:            qsTr("Could not save image")
         standardButtons: StandardButton.Ok
     }
@@ -531,7 +528,6 @@ Page {
     MessageDialog {
         id:              backMessageDialog
         title:           qsTr("Warning")
-        icon:            StandardIcon.Warning
         text:            qsTr("Are you sure? Current image is not saved and will be lost.")
         standardButtons: StandardButton.Yes | StandardButton.No
 
