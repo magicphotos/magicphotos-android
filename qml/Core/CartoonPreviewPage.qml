@@ -183,7 +183,6 @@ Page {
     MessageDialog {
         id:              imageOpenFailedMessageDialog
         title:           qsTr("Error")
-        icon:            StandardIcon.Critical
         text:            qsTr("Could not open image")
         standardButtons: StandardButton.Ok
     }
