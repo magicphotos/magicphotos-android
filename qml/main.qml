@@ -19,6 +19,8 @@ ApplicationWindow {
     onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
             AdMobHelper.showBannerView();
+        } else {
+            AdMobHelper.hideBannerView();
         }
     }
 
@@ -47,6 +49,8 @@ ApplicationWindow {
                 if (currentItem.hasOwnProperty("allowInterstitial") && currentItem.allowInterstitial) {
                     AdMobHelper.showInterstitial();
                 }
+            } else {
+                AdMobHelper.hideBannerView();
             }
         }
     }
