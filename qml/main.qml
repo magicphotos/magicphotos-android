@@ -31,6 +31,8 @@ ApplicationWindow {
             } else {
                 AdMobHelper.showBannerView();
             }
+        } else {
+            AdMobHelper.hideBannerView();
         }
     }
 
@@ -41,6 +43,8 @@ ApplicationWindow {
             } else {
                 AdMobHelper.showBannerView();
             }
+        } else {
+            AdMobHelper.hideBannerView();
         }
     }
 
@@ -101,6 +105,8 @@ ApplicationWindow {
                 if (currentItem.hasOwnProperty("allowInterstitial") && currentItem.allowInterstitial && !mainWindow.disableAds) {
                     AdMobHelper.showInterstitial();
                 }
+            } else {
+                AdMobHelper.hideBannerView();
             }
         }
     }
