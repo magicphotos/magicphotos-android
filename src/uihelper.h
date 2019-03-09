@@ -22,15 +22,15 @@ public:
     Q_INVOKABLE void refreshGallery(QString image_file);
     Q_INVOKABLE void shareImage(QString image_file);
 
-signals:
-    void imageSelected(QString image_file, int image_orientation);
-    void imageSelectionCancelled();
-    void imageSelectionFailed();
-
 public slots:
     void processImageSelection(QString image_file, int image_orientation);
     void processImageSelectionCancel();
     void processImageSelectionFailure();
+
+signals:
+    void imageSelected(QString image_file, int image_orientation);
+    void imageSelectionCancelled();
+    void imageSelectionFailed();
 };
 
 #endif // UIHELPER_H
