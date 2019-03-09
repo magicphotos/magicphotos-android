@@ -27,6 +27,11 @@ RetouchEditor::~RetouchEditor()
 {
 }
 
+bool RetouchEditor::changed() const
+{
+    return IsChanged;
+}
+
 int RetouchEditor::mode() const
 {
     return CurrentMode;
@@ -111,11 +116,6 @@ void RetouchEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-bool RetouchEditor::changed() const
-{
-    return IsChanged;
-}
-
 bool RetouchEditor::samplingPointValid() const
 {
     return IsSamplingPointValid;
@@ -187,7 +187,7 @@ void RetouchEditor::openImage(QString image_file, int image_orientation)
 
                     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 
-                    emit samplingPointValidChanged();
+                    emit samplingPointValidChanged(IsSamplingPointValid);
                     emit undoAvailabilityChanged(false);
                     emit imageOpened();
                 } else {
@@ -292,8 +292,8 @@ void RetouchEditor::mousePressEvent(QMouseEvent *event)
         SamplingPoint.setX(sampling_point_x);
         SamplingPoint.setY(sampling_point_y);
 
-        emit samplingPointValidChanged();
-        emit samplingPointChanged();
+        emit samplingPointValidChanged(IsSamplingPointValid);
+        emit samplingPointChanged(SamplingPoint);
     } else if (CurrentMode == ModeClone) {
         if (IsSamplingPointValid) {
             InitialSamplingPoint.setX(SamplingPoint.x());
@@ -342,8 +342,8 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
         SamplingPoint.setX(sampling_point_x);
         SamplingPoint.setY(sampling_point_y);
 
-        emit samplingPointValidChanged();
-        emit samplingPointChanged();
+        emit samplingPointValidChanged(IsSamplingPointValid);
+        emit samplingPointChanged(SamplingPoint);
     } else if (CurrentMode == ModeClone) {
         if (IsSamplingPointValid) {
             int sampling_point_x = InitialSamplingPoint.x() + (event->pos().x() - InitialTouchPoint.x());
@@ -365,7 +365,7 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
             SamplingPoint.setX(sampling_point_x);
             SamplingPoint.setY(sampling_point_y);
 
-            emit samplingPointChanged();
+            emit samplingPointChanged(SamplingPoint);
 
             ChangeImageAt(false, event->pos().x(), event->pos().y());
 

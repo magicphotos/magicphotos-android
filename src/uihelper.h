@@ -28,7 +28,7 @@ public slots:
     void processImageSelectionFailure();
 
 signals:
-    void imageSelected(QString image_file, int image_orientation);
+    void imageSelected(QString imageFile, int imageOrientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
 };

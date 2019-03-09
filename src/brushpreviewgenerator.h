@@ -17,14 +17,14 @@ public:
     explicit BrushPreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~BrushPreviewGenerator();
 
-    int  size() const;
+    int size() const;
     void setSize(int size);
 
-    int  maxSize() const;
+    int maxSize() const;
     void setMaxSize(int max_size);
 
     qreal opacity() const;
-    void  setOpacity(qreal opacity);
+    void setOpacity(qreal opacity);
 
     virtual void paint(QPainter *painter);
 

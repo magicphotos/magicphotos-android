@@ -345,10 +345,10 @@ Page {
                     }
 
                     onImageSaved: {
-                        UIHelper.refreshGallery(image_file);
+                        UIHelper.refreshGallery(imageFile);
 
                         if (blurPage.shareActionActive) {
-                            UIHelper.shareImage(image_file);
+                            UIHelper.shareImage(imageFile);
                         } else {
                             imageSavedMessageDialog.open();
                         }
@@ -369,7 +369,7 @@ Page {
                     onMouseEvent: {
                         var rect = mapToItem(editorRectangle, x, y);
 
-                        if (event_type === BlurEditor.MousePressed) {
+                        if (eventType === BlurEditor.MousePressed) {
                             helperRectangle.visible = true;
 
                             if (rect.y < editorRectangle.height / 2) {
@@ -381,7 +381,7 @@ Page {
                                     helperRectangle.anchors.left  = editorRectangle.left;
                                 }
                             }
-                        } else if (event_type === BlurEditor.MouseMoved) {
+                        } else if (eventType === BlurEditor.MouseMoved) {
                             helperRectangle.visible = true;
 
                             if (rect.y < editorRectangle.height / 2) {
@@ -393,7 +393,7 @@ Page {
                                     helperRectangle.anchors.left  = editorRectangle.left;
                                 }
                             }
-                        } else if (event_type === BlurEditor.MouseReleased) {
+                        } else if (eventType === BlurEditor.MouseReleased) {
                             helperRectangle.visible = false;
                         }
                     }

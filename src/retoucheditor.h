@@ -14,11 +14,13 @@ class RetouchEditor : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int    mode               READ mode               WRITE  setMode)
-    Q_PROPERTY(int    brushSize          READ brushSize          WRITE  setBrushSize)
-    Q_PROPERTY(int    helperSize         READ helperSize         WRITE  setHelperSize)
-    Q_PROPERTY(qreal  brushOpacity       READ brushOpacity       WRITE setBrushOpacity)
-    Q_PROPERTY(bool   changed            READ changed)
+    Q_PROPERTY(bool changed READ changed)
+
+    Q_PROPERTY(int   mode         READ mode         WRITE setMode)
+    Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
+    Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
+    Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
+
     Q_PROPERTY(bool   samplingPointValid READ samplingPointValid NOTIFY samplingPointValidChanged)
     Q_PROPERTY(QPoint samplingPoint      READ samplingPoint      NOTIFY samplingPointChanged)
 
@@ -29,20 +31,21 @@ public:
     explicit RetouchEditor(QQuickItem *parent = nullptr);
     virtual ~RetouchEditor();
 
-    int  mode() const;
+    bool changed() const;
+
+    int mode() const;
     void setMode(int mode);
 
-    int  brushSize() const;
+    int brushSize() const;
     void setBrushSize(int size);
 
-    int  helperSize() const;
+    int helperSize() const;
     void setHelperSize(int size);
 
     qreal brushOpacity() const;
-    void  setBrushOpacity(qreal opacity);
+    void setBrushOpacity(qreal opacity);
 
-    bool   changed() const;
-    bool   samplingPointValid() const;
+    bool samplingPointValid() const;
     QPoint samplingPoint() const;
 
     Q_INVOKABLE void openImage(QString image_file, int image_orientation);
@@ -72,17 +75,17 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(QString image_file);
+    void imageSaved(QString imageFile);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
-    void mouseEvent(int event_type, int x, int y);
+    void mouseEvent(int eventType, int x, int y);
 
-    void helperImageReady(QImage helper_image);
+    void helperImageReady(QImage helperImage);
 
-    void samplingPointValidChanged();
-    void samplingPointChanged();
+    void samplingPointValidChanged(bool samplingPointValid);
+    void samplingPointChanged(QPoint samplingPoint);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);

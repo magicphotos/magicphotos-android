@@ -27,6 +27,11 @@ BlurEditor::~BlurEditor()
 {
 }
 
+bool BlurEditor::changed() const
+{
+    return IsChanged;
+}
+
 int BlurEditor::mode() const
 {
     return CurrentMode;
@@ -119,11 +124,6 @@ void BlurEditor::setBrushOpacity(qreal opacity)
     int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-}
-
-bool BlurEditor::changed() const
-{
-    return IsChanged;
 }
 
 void BlurEditor::openImage(QString image_file, int image_orientation)

@@ -359,10 +359,10 @@ Page {
                     }
 
                     onImageSaved: {
-                        UIHelper.refreshGallery(image_file);
+                        UIHelper.refreshGallery(imageFile);
 
                         if (recolorPage.shareActionActive) {
-                            UIHelper.shareImage(image_file);
+                            UIHelper.shareImage(imageFile);
                         } else {
                             imageSavedMessageDialog.open();
                         }
@@ -383,7 +383,7 @@ Page {
                     onMouseEvent: {
                         var rect = mapToItem(editorRectangle, x, y);
 
-                        if (event_type === RecolorEditor.MousePressed) {
+                        if (eventType === RecolorEditor.MousePressed) {
                             helperRectangle.visible = true;
 
                             if (rect.y < editorRectangle.height / 2) {
@@ -395,7 +395,7 @@ Page {
                                     helperRectangle.anchors.left  = editorRectangle.left;
                                 }
                             }
-                        } else if (event_type === RecolorEditor.MouseMoved) {
+                        } else if (eventType === RecolorEditor.MouseMoved) {
                             helperRectangle.visible = true;
 
                             if (rect.y < editorRectangle.height / 2) {
@@ -407,7 +407,7 @@ Page {
                                     helperRectangle.anchors.left  = editorRectangle.left;
                                 }
                             }
-                        } else if (event_type === RecolorEditor.MouseReleased) {
+                        } else if (eventType === RecolorEditor.MouseReleased) {
                             helperRectangle.visible = false;
                         }
                     }
