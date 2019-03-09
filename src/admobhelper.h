@@ -24,11 +24,11 @@ public:
     Q_INVOKABLE void hideBannerView();
     Q_INVOKABLE void showInterstitial();
 
-signals:
-    void bannerViewHeightChanged(int bannerViewHeight);
-
 public slots:
     void setBannerViewHeight(int height);
+
+signals:
+    void bannerViewHeightChanged(int bannerViewHeight);
 
 private:
     int BannerViewHeight;
