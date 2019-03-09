@@ -18,17 +18,17 @@ public:
     explicit AppSettings(QObject *parent = nullptr);
     virtual ~AppSettings();
 
-    int  defaultBrushSize() const;
+    int defaultBrushSize() const;
     void setDefaultBrushSize(int size);
 
-    int  brushSize() const;
+    int brushSize() const;
     void setBrushSize(int size);
 
     bool disableAds() const;
     void setDisableAds(bool disable);
 
     qreal brushOpacity() const;
-    void  setBrushOpacity(qreal opacity);
+    void setBrushOpacity(qreal opacity);
 
 private:
     int        DefaultBrushSize;

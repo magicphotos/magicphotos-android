@@ -13,13 +13,14 @@ class CartoonEditor : public QQuickPaintedItem
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool changed READ changed)
+
     Q_PROPERTY(int   mode         READ mode         WRITE setMode)
     Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
     Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
     Q_PROPERTY(int   radius       READ radius       WRITE setRadius)
     Q_PROPERTY(int   threshold    READ threshold    WRITE setThreshold)
     Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
-    Q_PROPERTY(bool  changed      READ changed)
 
     Q_ENUMS(Mode)
     Q_ENUMS(MouseState)
@@ -28,25 +29,25 @@ public:
     explicit CartoonEditor(QQuickItem *parent = nullptr);
     virtual ~CartoonEditor();
 
-    int  mode() const;
+    bool changed() const;
+
+    int mode() const;
     void setMode(int mode);
 
-    int  brushSize() const;
+    int brushSize() const;
     void setBrushSize(int size);
 
-    int  helperSize() const;
+    int helperSize() const;
     void setHelperSize(int size);
 
-    int  radius() const;
+    int radius() const;
     void setRadius(int radius);
 
-    int  threshold() const;
+    int threshold() const;
     void setThreshold(int threshold);
 
     qreal brushOpacity() const;
-    void  setBrushOpacity(qreal opacity);
-
-    bool changed() const;
+    void setBrushOpacity(qreal opacity);
 
     Q_INVOKABLE void openImage(QString image_file, int image_orientation);
     Q_INVOKABLE void saveImage(QString image_file);
@@ -77,14 +78,14 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(QString image_file);
+    void imageSaved(QString imageFile);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
-    void mouseEvent(int event_type, int x, int y);
+    void mouseEvent(int eventType, int x, int y);
 
-    void helperImageReady(QImage helper_image);
+    void helperImageReady(QImage helperImage);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);
@@ -117,10 +118,10 @@ public:
     explicit CartoonPreviewGenerator(QQuickItem *parent = nullptr);
     virtual ~CartoonPreviewGenerator();
 
-    int  radius() const;
+    int radius() const;
     void setRadius(int radius);
 
-    int  threshold() const;
+    int threshold() const;
     void setThreshold(int threshold);
 
     Q_INVOKABLE void openImage(QString image_file, int image_orientation);

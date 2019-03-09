@@ -28,6 +28,11 @@ CartoonEditor::~CartoonEditor()
 {
 }
 
+bool CartoonEditor::changed() const
+{
+    return IsChanged;
+}
+
 int CartoonEditor::mode() const
 {
     return CurrentMode;
@@ -130,11 +135,6 @@ void CartoonEditor::setBrushOpacity(qreal opacity)
     int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-}
-
-bool CartoonEditor::changed() const
-{
-    return IsChanged;
 }
 
 void CartoonEditor::openImage(QString image_file, int image_orientation)

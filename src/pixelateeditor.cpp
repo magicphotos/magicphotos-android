@@ -27,6 +27,11 @@ PixelateEditor::~PixelateEditor()
 {
 }
 
+bool PixelateEditor::changed() const
+{
+    return IsChanged;
+}
+
 int PixelateEditor::mode() const
 {
     return CurrentMode;
@@ -119,11 +124,6 @@ void PixelateEditor::setBrushOpacity(qreal opacity)
     int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
 
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-}
-
-bool PixelateEditor::changed() const
-{
-    return IsChanged;
 }
 
 void PixelateEditor::openImage(QString image_file, int image_orientation)
