@@ -172,7 +172,7 @@ public class MagicActivity extends QtActivity
             intent.setType("image/*");
             intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_file)));
 
-            startActivity(Intent.createChooser(intent, getResources().getString(R.string.activity_header_share_image)));
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
         } catch (Exception ex) {
             // Ignore
         }
