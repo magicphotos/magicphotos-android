@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MagicPhotos</string>
-    <string name="activity_header_share_image">Partager par</string>
+    <string name="share_image_chooser_title">Partager par</string>
 </resources>
