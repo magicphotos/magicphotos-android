@@ -688,10 +688,8 @@ void CartoonImageGenerator::start()
     int  blue, green, red;
     bool exceeds_threshold;
 
-    for (int y = 1; y < blur_image.height() - 1; y++)
-    {
-        for (int x = 1; x < blur_image.width() - 1; x++)
-        {
+    for (int y = 1; y < blur_image.height() - 1; y++) {
+        for (int x = 1; x < blur_image.width() - 1; x++) {
             offset = y * blur_image.width() * 4 + x * 4;
 
             blue_g  = abs(src_buf[offset - 4]                      - src_buf[offset + 4]);
@@ -707,12 +705,9 @@ void CartoonImageGenerator::start()
             red_g  = abs(src_buf[offset - 4]                      - src_buf[offset + 4]);
             red_g += abs(src_buf[offset - blur_image.width() * 4] - src_buf[offset + blur_image.width() * 4]);
 
-            if (blue_g + green_g + red_g > CartoonThreshold)
-            {
+            if (blue_g + green_g + red_g > CartoonThreshold) {
                 exceeds_threshold = true;
-            }
-            else
-            {
+            } else {
                 offset -= 2;
 
                 blue_g = abs(src_buf[offset - 4] - src_buf[offset + 4]);
@@ -725,12 +720,9 @@ void CartoonImageGenerator::start()
 
                 red_g = abs(src_buf[offset - 4] - src_buf[offset + 4]);
 
-                if (blue_g + green_g + red_g > CartoonThreshold)
-                {
+                if (blue_g + green_g + red_g > CartoonThreshold) {
                     exceeds_threshold = true;
-                }
-                else
-                {
+                } else {
                     offset -= 2;
 
                     blue_g = abs(src_buf[offset - blur_image.width() * 4] - src_buf[offset + blur_image.width() * 4]);
@@ -743,12 +735,9 @@ void CartoonImageGenerator::start()
 
                     red_g = abs(src_buf[offset - blur_image.width() * 4] - src_buf[offset + blur_image.width() * 4]);
 
-                    if (blue_g + green_g + red_g > CartoonThreshold)
-                    {
+                    if (blue_g + green_g + red_g > CartoonThreshold) {
                         exceeds_threshold = true;
-                    }
-                    else
-                    {
+                    } else {
                         offset -= 2;
 
                         blue_g  = abs(src_buf[offset - 4 - blur_image.width() * 4] - src_buf[offset + 4 + blur_image.width() * 4]);
@@ -771,14 +760,11 @@ void CartoonImageGenerator::start()
 
             offset -= 2;
 
-            if (exceeds_threshold)
-            {
+            if (exceeds_threshold) {
                 blue  = 0;
                 green = 0;
                 red   = 0;
-            }
-            else
-            {
+            } else {
                 blue  = src_buf[offset];
                 green = src_buf[offset + 1];
                 red   = src_buf[offset + 2];
