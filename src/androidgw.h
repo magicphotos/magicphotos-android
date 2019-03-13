@@ -10,13 +10,14 @@ class AndroidGW : public QObject
 
 public:
     explicit AndroidGW(QObject *parent = nullptr);
+    ~AndroidGW() override = default;
 
     static AndroidGW *instance();
 
 signals:
     void setBannerViewHeight(int height);
 
-    void processImageSelection(QString image_file, int image_orientation);
+    void processImageSelection(const QString &image_file, int image_orientation);
     void processImageSelectionCancel();
     void processImageSelectionFailure();
 

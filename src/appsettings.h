@@ -15,7 +15,7 @@ class AppSettings : public QObject
 
 public:
     explicit AppSettings(QObject *parent = nullptr);
-    virtual ~AppSettings();
+    ~AppSettings() override;
 
     int defaultBrushSize() const;
     void setDefaultBrushSize(int size);

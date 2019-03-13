@@ -24,10 +24,6 @@ CartoonEditor::CartoonEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     QObject::connect(this, &CartoonEditor::scaleChanged, this, &CartoonEditor::scaleWasChanged);
 }
 
-CartoonEditor::~CartoonEditor()
-{
-}
-
 bool CartoonEditor::changed() const
 {
     return IsChanged;
@@ -137,7 +133,7 @@ void CartoonEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-void CartoonEditor::openImage(QString image_file, int image_orientation)
+void CartoonEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -180,8 +176,8 @@ void CartoonEditor::openImage(QString image_file, int image_orientation)
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {
-                    QThread               *thread    = new QThread();
-                    CartoonImageGenerator *generator = new CartoonImageGenerator();
+                    auto thread    = new QThread();
+                    auto generator = new CartoonImageGenerator();
 
                     generator->moveToThread(thread);
 
@@ -210,7 +206,7 @@ void CartoonEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void CartoonEditor::saveImage(QString image_file)
+void CartoonEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -239,10 +235,10 @@ void CartoonEditor::saveImage(QString image_file)
 
 void CartoonEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -267,7 +263,7 @@ void CartoonEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void CartoonEditor::effectedImageReady(QImage effected_image)
+void CartoonEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -328,8 +324,8 @@ void CartoonEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }
@@ -392,10 +388,6 @@ CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) : QQuickPai
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-CartoonPreviewGenerator::~CartoonPreviewGenerator()
-{
-}
-
 int CartoonPreviewGenerator::radius() const
 {
     return GaussianRadius;
@@ -432,7 +424,7 @@ void CartoonPreviewGenerator::setThreshold(int threshold)
     }
 }
 
-void CartoonPreviewGenerator::openImage(QString image_file, int image_orientation)
+void CartoonPreviewGenerator::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -519,7 +511,7 @@ void CartoonPreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void CartoonPreviewGenerator::cartoonImageReady(QImage cartoon_image)
+void CartoonPreviewGenerator::cartoonImageReady(const QImage &cartoon_image)
 {
     CartoonGeneratorRunning = false;
     CartoonImage            = cartoon_image;
@@ -540,8 +532,8 @@ void CartoonPreviewGenerator::cartoonImageReady(QImage cartoon_image)
 
 void CartoonPreviewGenerator::StartCartoonGenerator()
 {
-    QThread               *thread    = new QThread();
-    CartoonImageGenerator *generator = new CartoonImageGenerator();
+    auto thread    = new QThread();
+    auto generator = new CartoonImageGenerator();
 
     generator->moveToThread(thread);
 
@@ -568,10 +560,6 @@ CartoonImageGenerator::CartoonImageGenerator(QObject *parent) : QObject(parent)
     CartoonThreshold = 0;
 }
 
-CartoonImageGenerator::~CartoonImageGenerator()
-{
-}
-
 void CartoonImageGenerator::setGaussianRadius(int radius)
 {
     GaussianRadius = radius;
@@ -582,7 +570,7 @@ void CartoonImageGenerator::setCartoonThreshold(int threshold)
     CartoonThreshold = threshold;
 }
 
-void CartoonImageGenerator::setInput(QImage input_image)
+void CartoonImageGenerator::setInput(const QImage &input_image)
 {
     InputImage = input_image;
 }
@@ -776,14 +764,7 @@ void CartoonImageGenerator::start()
                         red_g  = abs(src_buf[offset - 4 - blur_image.width() * 4] - src_buf[offset + 4 + blur_image.width() * 4]);
                         red_g += abs(src_buf[offset + 4 - blur_image.width() * 4] - src_buf[offset - 4 + blur_image.width() * 4]);
 
-                        if (blue_g + green_g + red_g > CartoonThreshold)
-                        {
-                            exceeds_threshold = true;
-                        }
-                        else
-                        {
-                            exceeds_threshold = false;
-                        }
+                        exceeds_threshold = (blue_g + green_g + red_g > CartoonThreshold);
                     }
                 }
             }

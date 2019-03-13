@@ -29,7 +29,7 @@ class RetouchEditor : public QQuickPaintedItem
 
 public:
     explicit RetouchEditor(QQuickItem *parent = nullptr);
-    virtual ~RetouchEditor();
+    ~RetouchEditor() override = default;
 
     bool changed() const;
 
@@ -48,12 +48,12 @@ public:
     bool samplingPointValid() const;
     QPoint samplingPoint() const;
 
-    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
-    Q_INVOKABLE void saveImage(QString image_file);
+    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
+    Q_INVOKABLE void saveImage(const QString &image_file);
 
     Q_INVOKABLE void undo();
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
     enum Mode {
         ModeScroll,
@@ -75,22 +75,22 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(QString imageFile);
+    void imageSaved(const QString &imageFile);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
     void mouseEvent(int eventType, int x, int y);
 
-    void helperImageReady(QImage helperImage);
+    void helperImageReady(const QImage &helperImage);
 
     void samplingPointValidChanged(bool samplingPointValid);
     void samplingPointChanged(QPoint samplingPoint);
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void SaveUndoImage();

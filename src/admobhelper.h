@@ -16,7 +16,7 @@ public:
                          ADMOB_INTERSTITIAL_UNIT_ID;
 
     explicit AdMobHelper(QObject *parent = nullptr);
-    virtual ~AdMobHelper();
+    ~AdMobHelper() override = default;
 
     int bannerViewHeight() const;
 
