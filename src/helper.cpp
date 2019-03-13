@@ -7,10 +7,6 @@ Helper::Helper(QQuickPaintedItem *parent) : QQuickPaintedItem(parent)
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-Helper::~Helper()
-{
-}
-
 void Helper::paint(QPainter *painter)
 {
     bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
@@ -26,7 +22,7 @@ void Helper::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void Helper::helperImageReady(QImage helper_image)
+void Helper::helperImageReady(const QImage &helper_image)
 {
     HelperImage = helper_image;
 

@@ -22,10 +22,6 @@ DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) : QQuickPaintedItem(paren
     QObject::connect(this, &DecolorizeEditor::scaleChanged, this, &DecolorizeEditor::scaleWasChanged);
 }
 
-DecolorizeEditor::~DecolorizeEditor()
-{
-}
-
 bool DecolorizeEditor::changed() const
 {
     return IsChanged;
@@ -115,7 +111,7 @@ void DecolorizeEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-void DecolorizeEditor::openImage(QString image_file, int image_orientation)
+void DecolorizeEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -158,8 +154,8 @@ void DecolorizeEditor::openImage(QString image_file, int image_orientation)
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {
-                    QThread                 *thread    = new QThread();
-                    GrayscaleImageGenerator *generator = new GrayscaleImageGenerator();
+                    auto thread    = new QThread();
+                    auto generator = new GrayscaleImageGenerator();
 
                     generator->moveToThread(thread);
 
@@ -186,7 +182,7 @@ void DecolorizeEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void DecolorizeEditor::saveImage(QString image_file)
+void DecolorizeEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -215,10 +211,10 @@ void DecolorizeEditor::saveImage(QString image_file)
 
 void DecolorizeEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -243,7 +239,7 @@ void DecolorizeEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void DecolorizeEditor::effectedImageReady(QImage effected_image)
+void DecolorizeEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -304,8 +300,8 @@ void DecolorizeEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }
@@ -362,11 +358,7 @@ GrayscaleImageGenerator::GrayscaleImageGenerator(QObject *parent) : QObject(pare
 {
 }
 
-GrayscaleImageGenerator::~GrayscaleImageGenerator()
-{
-}
-
-void GrayscaleImageGenerator::setInput(QImage input_image)
+void GrayscaleImageGenerator::setInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

@@ -16,8 +16,8 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     CurrentHue   = 0;
     BrushOpacity = 0.0;
 
-    RGB16  rgb16;
-    HSV    hsv;
+    RGB16  rgb16 = {};
+    HSV    hsv   = {};
     QRgb   rgb;
     QColor color;
 
@@ -40,10 +40,6 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     setFlag(QQuickItem::ItemHasContents, true);
 
     QObject::connect(this, &RecolorEditor::scaleChanged, this, &RecolorEditor::scaleWasChanged);
-}
-
-RecolorEditor::~RecolorEditor()
-{
 }
 
 bool RecolorEditor::changed() const
@@ -145,7 +141,7 @@ void RecolorEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-void RecolorEditor::openImage(QString image_file, int image_orientation)
+void RecolorEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -222,7 +218,7 @@ void RecolorEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void RecolorEditor::saveImage(QString image_file)
+void RecolorEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -251,10 +247,10 @@ void RecolorEditor::saveImage(QString image_file)
 
 void RecolorEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -313,8 +309,8 @@ void RecolorEditor::mouseReleaseEvent(QMouseEvent *event)
 
 QRgb RecolorEditor::AdjustHue(QRgb rgb)
 {
-    RGB16 rgb16;
-    HSV   hsv;
+    RGB16 rgb16 = {};
+    HSV   hsv   = {};
 
     rgb16.srgb.r = (qRed(rgb)   & 0xf8) >> 3;
     rgb16.srgb.g = (qGreen(rgb) & 0xfc) >> 2;
@@ -329,8 +325,8 @@ void RecolorEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }

@@ -15,7 +15,7 @@ class BrushPreviewGenerator : public QQuickPaintedItem
 
 public:
     explicit BrushPreviewGenerator(QQuickItem *parent = nullptr);
-    virtual ~BrushPreviewGenerator();
+    ~BrushPreviewGenerator() override = default;
 
     int size() const;
     void setSize(int size);
@@ -26,7 +26,7 @@ public:
     qreal opacity() const;
     void setOpacity(qreal opacity);
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
 private:
     int   Size, MaxSize;

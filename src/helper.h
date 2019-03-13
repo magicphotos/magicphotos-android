@@ -10,12 +10,12 @@ class Helper : public QQuickPaintedItem
 
 public:
     explicit Helper(QQuickPaintedItem *parent = nullptr);
-    virtual ~Helper();
+    ~Helper() override = default;
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
 public slots:
-    void helperImageReady(QImage helper_image);
+    void helperImageReady(const QImage &helper_image);
 
 private:
     QImage HelperImage;

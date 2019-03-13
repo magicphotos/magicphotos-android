@@ -23,10 +23,6 @@ RetouchEditor::RetouchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     QObject::connect(this, &RetouchEditor::scaleChanged, this, &RetouchEditor::scaleWasChanged);
 }
 
-RetouchEditor::~RetouchEditor()
-{
-}
-
 bool RetouchEditor::changed() const
 {
     return IsChanged;
@@ -126,7 +122,7 @@ QPoint RetouchEditor::samplingPoint() const
     return SamplingPoint;
 }
 
-void RetouchEditor::openImage(QString image_file, int image_orientation)
+void RetouchEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -204,7 +200,7 @@ void RetouchEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void RetouchEditor::saveImage(QString image_file)
+void RetouchEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -233,10 +229,10 @@ void RetouchEditor::saveImage(QString image_file)
 
 void RetouchEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -396,8 +392,8 @@ void RetouchEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }

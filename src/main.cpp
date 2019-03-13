@@ -26,12 +26,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     if (translator.load(QString(":/tr/magicphotos_%1").arg(QLocale::system().name()))) {
-        app.installTranslator(&translator);
+        QGuiApplication::installTranslator(&translator);
     }
 
-    AndroidGW   *android_gw   = new AndroidGW(&app);
-    AdMobHelper *admob_helper = new AdMobHelper(&app);
-    UIHelper    *ui_helper    = new UIHelper(&app);
+    auto android_gw   = new AndroidGW(&app);
+    auto admob_helper = new AdMobHelper(&app);
+    auto ui_helper    = new UIHelper(&app);
 
     QObject::connect(android_gw, &AndroidGW::setBannerViewHeight,          admob_helper, &AdMobHelper::setBannerViewHeight);
     QObject::connect(android_gw, &AndroidGW::processImageSelection,        ui_helper,    &UIHelper::processImageSelection);
@@ -73,5 +73,5 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    return app.exec();
+    return QGuiApplication::exec();
 }

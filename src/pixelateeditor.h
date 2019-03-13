@@ -26,7 +26,7 @@ class PixelateEditor : public QQuickPaintedItem
 
 public:
     explicit PixelateEditor(QQuickItem *parent = nullptr);
-    virtual ~PixelateEditor();
+    ~PixelateEditor() override = default;
 
     bool changed() const;
 
@@ -45,12 +45,12 @@ public:
     qreal brushOpacity() const;
     void setBrushOpacity(qreal opacity);
 
-    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
-    Q_INVOKABLE void saveImage(QString image_file);
+    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
+    Q_INVOKABLE void saveImage(const QString &image_file);
 
     Q_INVOKABLE void undo();
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
     enum Mode {
         ModeScroll,
@@ -65,7 +65,7 @@ public:
     };
 
 public slots:
-    void effectedImageReady(QImage effected_image);
+    void effectedImageReady(const QImage &effected_image);
 
 private slots:
     void scaleWasChanged();
@@ -74,19 +74,19 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(QString imageFile);
+    void imageSaved(const QString &imageFile);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
     void mouseEvent(int eventType, int x, int y);
 
-    void helperImageReady(QImage helperImage);
+    void helperImageReady(const QImage &helperImage);
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void SaveUndoImage();
@@ -111,17 +111,17 @@ class PixelatePreviewGenerator : public QQuickPaintedItem
 
 public:
     explicit PixelatePreviewGenerator(QQuickItem *parent = nullptr);
-    virtual ~PixelatePreviewGenerator();
+    ~PixelatePreviewGenerator() override = default;
 
     int pixDenom() const;
     void setPixDenom(int pix_denom);
 
-    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
+    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
 public slots:
-    void pixelatedImageReady(QImage pixelated_image);
+    void pixelatedImageReady(const QImage &pixelated_image);
 
 signals:
     void imageOpened();
@@ -146,16 +146,16 @@ class PixelateImageGenerator : public QObject
 
 public:
     explicit PixelateImageGenerator(QObject *parent = nullptr);
-    virtual ~PixelateImageGenerator();
+    ~PixelateImageGenerator() override = default;
 
     void setPixelDenom(int pix_denom);
-    void setInput(QImage input_image);
+    void setInput(const QImage &input_image);
 
 public slots:
     void start();
 
 signals:
-    void imageReady(QImage output_image);
+    void imageReady(const QImage &output_image);
     void finished();
 
 private:

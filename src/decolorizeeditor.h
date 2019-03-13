@@ -25,7 +25,7 @@ class DecolorizeEditor : public QQuickPaintedItem
 
 public:
     explicit DecolorizeEditor(QQuickItem *parent = nullptr);
-    virtual ~DecolorizeEditor();
+    ~DecolorizeEditor() override = default;
 
     bool changed() const;
 
@@ -41,12 +41,12 @@ public:
     qreal brushOpacity() const;
     void setBrushOpacity(qreal opacity);
 
-    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
-    Q_INVOKABLE void saveImage(QString image_file);
+    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
+    Q_INVOKABLE void saveImage(const QString &image_file);
 
     Q_INVOKABLE void undo();
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
     enum Mode {
         ModeScroll,
@@ -61,7 +61,7 @@ public:
     };
 
 public slots:
-    void effectedImageReady(QImage effected_image);
+    void effectedImageReady(const QImage &effected_image);
 
 private slots:
     void scaleWasChanged();
@@ -70,19 +70,19 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(QString imageFile);
+    void imageSaved(const QString &imageFile);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
     void mouseEvent(int eventType, int x, int y);
 
-    void helperImageReady(QImage helperImage);
+    void helperImageReady(const QImage &helperImage);
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void SaveUndoImage();
@@ -105,15 +105,15 @@ class GrayscaleImageGenerator : public QObject
 
 public:
     explicit GrayscaleImageGenerator(QObject *parent = nullptr);
-    virtual ~GrayscaleImageGenerator();
+    ~GrayscaleImageGenerator() override = default;
 
-    void setInput(QImage input_image);
+    void setInput(const QImage &input_image);
 
 public slots:
     void start();
 
 signals:
-    void imageReady(QImage output_image);
+    void imageReady(const QImage &output_image);
     void finished();
 
 private:

@@ -10,7 +10,7 @@ class UIHelper : public QObject
 
 public:
     explicit UIHelper(QObject *parent = nullptr);
-    virtual ~UIHelper();
+    ~UIHelper() override = default;
 
     Q_INVOKABLE int getScreenDPI();
     Q_INVOKABLE QString getSaveDirectory();
@@ -19,16 +19,16 @@ public:
     Q_INVOKABLE bool requestWriteStoragePermission();
 
     Q_INVOKABLE void showGallery();
-    Q_INVOKABLE void refreshGallery(QString image_file);
-    Q_INVOKABLE void shareImage(QString image_file);
+    Q_INVOKABLE void refreshGallery(const QString &image_file);
+    Q_INVOKABLE void shareImage(const QString &image_file);
 
 public slots:
-    void processImageSelection(QString image_file, int image_orientation);
+    void processImageSelection(const QString &image_file, int image_orientation);
     void processImageSelectionCancel();
     void processImageSelectionFailure();
 
 signals:
-    void imageSelected(QString imageFile, int imageOrientation);
+    void imageSelected(const QString &imageFile, int imageOrientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
 };

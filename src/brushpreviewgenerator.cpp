@@ -14,10 +14,6 @@ BrushPreviewGenerator::BrushPreviewGenerator(QQuickItem *parent) : QQuickPainted
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-BrushPreviewGenerator::~BrushPreviewGenerator()
-{
-}
-
 int BrushPreviewGenerator::size() const
 {
     return Size;

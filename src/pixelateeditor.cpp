@@ -23,10 +23,6 @@ PixelateEditor::PixelateEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     QObject::connect(this, &PixelateEditor::scaleChanged, this, &PixelateEditor::scaleWasChanged);
 }
 
-PixelateEditor::~PixelateEditor()
-{
-}
-
 bool PixelateEditor::changed() const
 {
     return IsChanged;
@@ -126,7 +122,7 @@ void PixelateEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-void PixelateEditor::openImage(QString image_file, int image_orientation)
+void PixelateEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -169,8 +165,8 @@ void PixelateEditor::openImage(QString image_file, int image_orientation)
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {
-                    QThread                *thread    = new QThread();
-                    PixelateImageGenerator *generator = new PixelateImageGenerator();
+                    auto thread    = new QThread();
+                    auto generator = new PixelateImageGenerator();
 
                     generator->moveToThread(thread);
 
@@ -198,7 +194,7 @@ void PixelateEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void PixelateEditor::saveImage(QString image_file)
+void PixelateEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -227,10 +223,10 @@ void PixelateEditor::saveImage(QString image_file)
 
 void PixelateEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -255,7 +251,7 @@ void PixelateEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void PixelateEditor::effectedImageReady(QImage effected_image)
+void PixelateEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -316,8 +312,8 @@ void PixelateEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }
@@ -379,10 +375,6 @@ PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : QQuickP
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-PixelatePreviewGenerator::~PixelatePreviewGenerator()
-{
-}
-
 int PixelatePreviewGenerator::pixDenom() const
 {
     return PixelDenom;
@@ -401,7 +393,7 @@ void PixelatePreviewGenerator::setPixDenom(int pix_denom)
     }
 }
 
-void PixelatePreviewGenerator::openImage(QString image_file, int image_orientation)
+void PixelatePreviewGenerator::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -488,7 +480,7 @@ void PixelatePreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void PixelatePreviewGenerator::pixelatedImageReady(QImage pixelated_image)
+void PixelatePreviewGenerator::pixelatedImageReady(const QImage &pixelated_image)
 {
     PixelateGeneratorRunning = false;
     PixelatedImage           = pixelated_image;
@@ -509,8 +501,8 @@ void PixelatePreviewGenerator::pixelatedImageReady(QImage pixelated_image)
 
 void PixelatePreviewGenerator::StartPixelateGenerator()
 {
-    QThread                *thread    = new QThread();
-    PixelateImageGenerator *generator = new PixelateImageGenerator();
+    auto thread    = new QThread();
+    auto generator = new PixelateImageGenerator();
 
     generator->moveToThread(thread);
 
@@ -535,16 +527,12 @@ PixelateImageGenerator::PixelateImageGenerator(QObject *parent) : QObject(parent
     PixelDenom = 0;
 }
 
-PixelateImageGenerator::~PixelateImageGenerator()
-{
-}
-
 void PixelateImageGenerator::setPixelDenom(int pix_denom)
 {
     PixelDenom = pix_denom;
 }
 
-void PixelateImageGenerator::setInput(QImage input_image)
+void PixelateImageGenerator::setInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

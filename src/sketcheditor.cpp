@@ -23,10 +23,6 @@ SketchEditor::SketchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     QObject::connect(this, &SketchEditor::scaleChanged, this, &SketchEditor::scaleWasChanged);
 }
 
-SketchEditor::~SketchEditor()
-{
-}
-
 bool SketchEditor::changed() const
 {
     return IsChanged;
@@ -126,7 +122,7 @@ void SketchEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-void SketchEditor::openImage(QString image_file, int image_orientation)
+void SketchEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -169,8 +165,8 @@ void SketchEditor::openImage(QString image_file, int image_orientation)
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {
-                    QThread              *thread    = new QThread();
-                    SketchImageGenerator *generator = new SketchImageGenerator();
+                    auto thread    = new QThread();
+                    auto generator = new SketchImageGenerator();
 
                     generator->moveToThread(thread);
 
@@ -198,7 +194,7 @@ void SketchEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void SketchEditor::saveImage(QString image_file)
+void SketchEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -227,10 +223,10 @@ void SketchEditor::saveImage(QString image_file)
 
 void SketchEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -255,7 +251,7 @@ void SketchEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void SketchEditor::effectedImageReady(QImage effected_image)
+void SketchEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -316,8 +312,8 @@ void SketchEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }
@@ -379,10 +375,6 @@ SketchPreviewGenerator::SketchPreviewGenerator(QQuickItem *parent) : QQuickPaint
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-SketchPreviewGenerator::~SketchPreviewGenerator()
-{
-}
-
 int SketchPreviewGenerator::radius() const
 {
     return GaussianRadius;
@@ -401,7 +393,7 @@ void SketchPreviewGenerator::setRadius(int radius)
     }
 }
 
-void SketchPreviewGenerator::openImage(QString image_file, int image_orientation)
+void SketchPreviewGenerator::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -488,7 +480,7 @@ void SketchPreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void SketchPreviewGenerator::sketchImageReady(QImage sketch_image)
+void SketchPreviewGenerator::sketchImageReady(const QImage &sketch_image)
 {
     SketchGeneratorRunning = false;
     SketchImage            = sketch_image;
@@ -509,8 +501,8 @@ void SketchPreviewGenerator::sketchImageReady(QImage sketch_image)
 
 void SketchPreviewGenerator::StartSketchGenerator()
 {
-    QThread              *thread    = new QThread();
-    SketchImageGenerator *generator = new SketchImageGenerator();
+    auto thread    = new QThread();
+    auto generator = new SketchImageGenerator();
 
     generator->moveToThread(thread);
 
@@ -535,16 +527,12 @@ SketchImageGenerator::SketchImageGenerator(QObject *parent) : QObject(parent)
     GaussianRadius = 0;
 }
 
-SketchImageGenerator::~SketchImageGenerator()
-{
-}
-
 void SketchImageGenerator::setGaussianRadius(int radius)
 {
     GaussianRadius = radius;
 }
 
-void SketchImageGenerator::setInput(QImage input_image)
+void SketchImageGenerator::setInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

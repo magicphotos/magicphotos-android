@@ -26,7 +26,7 @@ class BlurEditor : public QQuickPaintedItem
 
 public:
     explicit BlurEditor(QQuickItem *parent = nullptr);
-    virtual ~BlurEditor();
+    ~BlurEditor() override = default;
 
     bool changed() const;
 
@@ -45,12 +45,12 @@ public:
     qreal brushOpacity() const;
     void setBrushOpacity(qreal opacity);
 
-    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
-    Q_INVOKABLE void saveImage(QString image_file);
+    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
+    Q_INVOKABLE void saveImage(const QString &image_file);
 
     Q_INVOKABLE void undo();
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
     enum Mode {
         ModeScroll,
@@ -65,7 +65,7 @@ public:
     };
 
 public slots:
-    void effectedImageReady(QImage effected_image);
+    void effectedImageReady(const QImage &effected_image);
 
 private slots:
     void scaleWasChanged();
@@ -74,19 +74,19 @@ signals:
     void imageOpened();
     void imageOpenFailed();
 
-    void imageSaved(QString imageFile);
+    void imageSaved(const QString &imageFile);
     void imageSaveFailed();
 
     void undoAvailabilityChanged(bool available);
 
     void mouseEvent(int eventType, int x, int y);
 
-    void helperImageReady(QImage helperImage);
+    void helperImageReady(const QImage &helperImage);
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void SaveUndoImage();
@@ -111,17 +111,17 @@ class BlurPreviewGenerator : public QQuickPaintedItem
 
 public:
     explicit BlurPreviewGenerator(QQuickItem *parent = nullptr);
-    virtual ~BlurPreviewGenerator();
+    ~BlurPreviewGenerator() override = default;
 
     int radius() const;
     void setRadius(int radius);
 
-    Q_INVOKABLE void openImage(QString image_file, int image_orientation);
+    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
 
-    virtual void paint(QPainter *painter);
+    void paint(QPainter *painter) override;
 
 public slots:
-    void blurImageReady(QImage blur_image);
+    void blurImageReady(const QImage &blur_image);
 
 signals:
     void imageOpened();
@@ -146,16 +146,16 @@ class BlurImageGenerator : public QObject
 
 public:
     explicit BlurImageGenerator(QObject *parent = nullptr);
-    virtual ~BlurImageGenerator();
+    ~BlurImageGenerator() override = default;
 
     void setGaussianRadius(int radius);
-    void setInput(QImage input_image);
+    void setInput(const QImage &input_image);
 
 public slots:
     void start();
 
 signals:
-    void imageReady(QImage output_image);
+    void imageReady(const QImage &output_image);
     void finished();
 
 private:

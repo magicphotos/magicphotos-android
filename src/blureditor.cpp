@@ -23,10 +23,6 @@ BlurEditor::BlurEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     QObject::connect(this, &BlurEditor::scaleChanged, this, &BlurEditor::scaleWasChanged);
 }
 
-BlurEditor::~BlurEditor()
-{
-}
-
 bool BlurEditor::changed() const
 {
     return IsChanged;
@@ -126,7 +122,7 @@ void BlurEditor::setBrushOpacity(qreal opacity)
     BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
-void BlurEditor::openImage(QString image_file, int image_orientation)
+void BlurEditor::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -169,8 +165,8 @@ void BlurEditor::openImage(QString image_file, int image_orientation)
                 LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
 
                 if (!LoadedImage.isNull()) {
-                    QThread            *thread    = new QThread();
-                    BlurImageGenerator *generator = new BlurImageGenerator();
+                    auto thread    = new QThread();
+                    auto generator = new BlurImageGenerator();
 
                     generator->moveToThread(thread);
 
@@ -198,7 +194,7 @@ void BlurEditor::openImage(QString image_file, int image_orientation)
     }
 }
 
-void BlurEditor::saveImage(QString image_file)
+void BlurEditor::saveImage(const QString &image_file)
 {
     QString file_name = image_file;
 
@@ -227,10 +223,10 @@ void BlurEditor::saveImage(QString image_file)
 
 void BlurEditor::undo()
 {
-    if (UndoStack.size() > 0) {
+    if (UndoStack.count() > 0) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.size() == 0) {
+        if (UndoStack.count() == 0) {
             emit undoAvailabilityChanged(false);
         }
 
@@ -255,7 +251,7 @@ void BlurEditor::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void BlurEditor::effectedImageReady(QImage effected_image)
+void BlurEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
     EffectedImage = effected_image;
@@ -316,8 +312,8 @@ void BlurEditor::SaveUndoImage()
 {
     UndoStack.push(CurrentImage);
 
-    if (UndoStack.size() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.size() - UNDO_DEPTH; i++) {
+    if (UndoStack.count() > UNDO_DEPTH) {
+        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
             UndoStack.remove(0);
         }
     }
@@ -379,10 +375,6 @@ BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) : QQuickPaintedIt
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-BlurPreviewGenerator::~BlurPreviewGenerator()
-{
-}
-
 int BlurPreviewGenerator::radius() const
 {
     return GaussianRadius;
@@ -401,7 +393,7 @@ void BlurPreviewGenerator::setRadius(int radius)
     }
 }
 
-void BlurPreviewGenerator::openImage(QString image_file, int image_orientation)
+void BlurPreviewGenerator::openImage(const QString &image_file, int image_orientation)
 {
     if (!image_file.isNull()) {
         QImageReader reader(image_file);
@@ -488,7 +480,7 @@ void BlurPreviewGenerator::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
 }
 
-void BlurPreviewGenerator::blurImageReady(QImage blur_image)
+void BlurPreviewGenerator::blurImageReady(const QImage &blur_image)
 {
     BlurGeneratorRunning = false;
     BlurImage            = blur_image;
@@ -509,8 +501,8 @@ void BlurPreviewGenerator::blurImageReady(QImage blur_image)
 
 void BlurPreviewGenerator::StartBlurGenerator()
 {
-    QThread            *thread    = new QThread();
-    BlurImageGenerator *generator = new BlurImageGenerator();
+    auto thread    = new QThread();
+    auto generator = new BlurImageGenerator();
 
     generator->moveToThread(thread);
 
@@ -535,16 +527,12 @@ BlurImageGenerator::BlurImageGenerator(QObject *parent) : QObject(parent)
     GaussianRadius = 0;
 }
 
-BlurImageGenerator::~BlurImageGenerator()
-{
-}
-
 void BlurImageGenerator::setGaussianRadius(int radius)
 {
     GaussianRadius = radius;
 }
 
-void BlurImageGenerator::setInput(QImage input_image)
+void BlurImageGenerator::setInput(const QImage &input_image)
 {
     InputImage = input_image;
 }
