@@ -238,7 +238,7 @@ void BlurEditor::undo()
 
 void BlurEditor::paint(QPainter *painter)
 {
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -248,7 +248,7 @@ void BlurEditor::paint(QPainter *painter)
 
     painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }
 
 void BlurEditor::effectedImageReady(const QImage &effected_image)
@@ -458,8 +458,8 @@ void BlurPreviewGenerator::openImage(const QString &image_file, int image_orient
 }
 
 void BlurPreviewGenerator::paint(QPainter *painter)
-{        
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+{
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -477,7 +477,7 @@ void BlurPreviewGenerator::paint(QPainter *painter)
                                    qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
     }
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }
 
 void BlurPreviewGenerator::blurImageReady(const QImage &blur_image)

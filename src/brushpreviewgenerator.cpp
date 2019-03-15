@@ -55,7 +55,7 @@ void BrushPreviewGenerator::setOpacity(qreal opacity)
 
 void BrushPreviewGenerator::paint(QPainter *painter)
 {
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -110,5 +110,5 @@ void BrushPreviewGenerator::paint(QPainter *painter)
         }
     }
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }

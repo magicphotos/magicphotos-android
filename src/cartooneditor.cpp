@@ -250,7 +250,7 @@ void CartoonEditor::undo()
 
 void CartoonEditor::paint(QPainter *painter)
 {
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -260,7 +260,7 @@ void CartoonEditor::paint(QPainter *painter)
 
     painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }
 
 void CartoonEditor::effectedImageReady(const QImage &effected_image)
@@ -490,7 +490,7 @@ void CartoonPreviewGenerator::openImage(const QString &image_file, int image_ori
 
 void CartoonPreviewGenerator::paint(QPainter *painter)
 {
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -508,7 +508,7 @@ void CartoonPreviewGenerator::paint(QPainter *painter)
                                    qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
     }
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }
 
 void CartoonPreviewGenerator::cartoonImageReady(const QImage &cartoon_image)
