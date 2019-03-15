@@ -238,7 +238,7 @@ void SketchEditor::undo()
 
 void SketchEditor::paint(QPainter *painter)
 {
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -248,7 +248,7 @@ void SketchEditor::paint(QPainter *painter)
 
     painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }
 
 void SketchEditor::effectedImageReady(const QImage &effected_image)
@@ -459,7 +459,7 @@ void SketchPreviewGenerator::openImage(const QString &image_file, int image_orie
 
 void SketchPreviewGenerator::paint(QPainter *painter)
 {
-    bool smooth_pixmap = painter->testRenderHint(QPainter::SmoothPixmapTransform);
+    painter->save();
 
     if (smooth()) {
         painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -477,7 +477,7 @@ void SketchPreviewGenerator::paint(QPainter *painter)
                                    qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
     }
 
-    painter->setRenderHint(QPainter::SmoothPixmapTransform, smooth_pixmap);
+    painter->restore();
 }
 
 void SketchPreviewGenerator::sketchImageReady(const QImage &sketch_image)
