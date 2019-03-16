@@ -87,25 +87,14 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
-    union RGB16 {
-        quint16 rgb;
-        struct {
-            unsigned int r : 5;
-            unsigned int g : 6;
-            unsigned int b : 5;
-        } srgb;
-    };
+    quint16 PackRGB16(quint8 r, quint8 g, quint8 b);
+    std::tuple<quint8, quint8, quint8> UnpackRGB16(quint16 rgb);
 
-    union HSV {
-        quint32 hsv;
-        struct {
-            qint16 h;
-            quint8 s;
-            quint8 v;
-        } shsv;
-    };
+    quint32 PackHSV(qint16 h, quint8 s, quint8 v);
+    std::tuple<qint16, quint8, quint8> UnpackHSV(quint32 hsv);
 
     QRgb AdjustHue(QRgb rgb);
+
     void SaveUndoImage();
     void ChangeImageAt(bool save_undo, int center_x, int center_y);
 

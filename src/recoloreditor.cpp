@@ -16,23 +16,21 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
     CurrentHue   = 0;
     BrushOpacity = 0.0;
 
-    RGB16  rgb16 = {};
-    HSV    hsv   = {};
     QRgb   rgb;
     QColor color;
 
     for (int i = 0; i < 65536; i++) {
-        rgb16.rgb = static_cast<quint16>(i);
+        quint8 r, g, b;
 
-        rgb = qRgb(rgb16.srgb.r << 3, rgb16.srgb.g << 2, rgb16.srgb.b << 3);
+        std::tie(r, g, b) = UnpackRGB16(static_cast<quint16>(i));
+
+        rgb = qRgb(r, g, b);
 
         color.setRgb(rgb);
 
-        hsv.shsv.h = static_cast<qint16>(color.hue());
-        hsv.shsv.s = static_cast<quint8>(color.saturation());
-        hsv.shsv.v = static_cast<quint8>(color.value());
-
-        RGB16ToHSVMap[rgb16.rgb] = hsv.hsv;
+        RGB16ToHSVMap[static_cast<quint16>(i)] = PackHSV(static_cast<qint16>(color.hue()),
+                                                         static_cast<quint8>(color.saturation()),
+                                                         static_cast<quint8>(color.value()));
     }
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
@@ -307,18 +305,49 @@ void RecolorEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
+quint16 RecolorEditor::PackRGB16(quint8 r, quint8 g, quint8 b)
+{
+    return static_cast<quint16>(((static_cast<quint16>(r) & 0xf8) << 8) |
+                                ((static_cast<quint16>(g) & 0xfc) << 3) |
+                                ((static_cast<quint16>(b) & 0xf8) >> 3));
+}
+
+std::tuple<quint8, quint8, quint8> RecolorEditor::UnpackRGB16(quint16 rgb)
+{
+    auto r = static_cast<quint8>(((rgb >> 11) & 0x1f) << 3);
+    auto g = static_cast<quint8>(((rgb >> 5)  & 0x3f) << 2);
+    auto b = static_cast<quint8>(((rgb)       & 0x1f) << 3);
+
+    return std::make_tuple(r, g, b);
+}
+
+quint32 RecolorEditor::PackHSV(qint16 h, quint8 s, quint8 v)
+{
+    quint16 n_h = h % 360 >= 0 ? h % 360 : h % 360 + 360;
+
+    return static_cast<quint32>((static_cast<quint32>(n_h) << 16) |
+                                (static_cast<quint32>(s)   << 8)  |
+                                 static_cast<quint32>(v));
+}
+
+std::tuple<qint16, quint8, quint8> RecolorEditor::UnpackHSV(quint32 hsv)
+{
+    auto h = static_cast<qint16>((hsv >> 16) & 0xffff);
+    auto s = static_cast<quint8>((hsv >> 8)  & 0xff);
+    auto v = static_cast<quint8>((hsv)       & 0xff);
+
+    return std::make_tuple(h, s, v);
+}
+
 QRgb RecolorEditor::AdjustHue(QRgb rgb)
 {
-    RGB16 rgb16 = {};
-    HSV   hsv   = {};
+    quint8 s, v;
 
-    rgb16.srgb.r = (qRed(rgb)   & 0xf8) >> 3;
-    rgb16.srgb.g = (qGreen(rgb) & 0xfc) >> 2;
-    rgb16.srgb.b = (qBlue(rgb)  & 0xf8) >> 3;
+    std::tie(std::ignore, s, v) = UnpackHSV(RGB16ToHSVMap[PackRGB16(static_cast<quint8>(qRed(rgb)),
+                                                                    static_cast<quint8>(qGreen(rgb)),
+                                                                    static_cast<quint8>(qBlue(rgb)))]);
 
-    hsv.hsv = RGB16ToHSVMap[rgb16.rgb];
-
-    return QColor::fromHsv(CurrentHue, hsv.shsv.s, hsv.shsv.v, qAlpha(rgb)).rgba();
+    return QColor::fromHsv(CurrentHue, s, v, qAlpha(rgb)).rgba();
 }
 
 void RecolorEditor::SaveUndoImage()
