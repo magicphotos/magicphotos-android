@@ -179,7 +179,7 @@ void RecolorEditor::openImage(const QString &image_file, int image_orientation)
                     LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
                 }
 
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
+                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
 
                 if (!LoadedImage.isNull()) {
                     OriginalImage = LoadedImage;
