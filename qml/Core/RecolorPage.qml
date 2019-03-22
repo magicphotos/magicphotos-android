@@ -315,11 +315,11 @@ Page {
             }
 
             Flickable {
-                id:               editorFlickable
-                anchors.centerIn: parent
-                width:            Math.min(parent.width,  contentWidth)
-                height:           Math.min(parent.height, contentHeight)
-                boundsBehavior:   Flickable.StopAtBounds
+                id:             editorFlickable
+                anchors.fill:   parent
+                leftMargin:     width  > contentWidth  ? (width  - contentWidth)  / 2 : 0
+                topMargin:      height > contentHeight ? (height - contentHeight) / 2 : 0
+                boundsBehavior: Flickable.StopAtBounds
 
                 property real initialContentWidth:  0.0
                 property real initialContentHeight: 0.0
