@@ -162,7 +162,7 @@ void SketchEditor::openImage(const QString &image_file, int image_orientation)
                     LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
                 }
 
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
+                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
 
                 if (!LoadedImage.isNull()) {
                     auto thread    = new QThread();
@@ -423,7 +423,7 @@ void SketchPreviewGenerator::openImage(const QString &image_file, int image_orie
                     LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
                 }
 
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB16);
+                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
 
                 if (!LoadedImage.isNull()) {
                     emit imageOpened();
