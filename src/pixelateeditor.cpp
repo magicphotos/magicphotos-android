@@ -531,7 +531,7 @@ void PixelateImageGenerator::start()
 
                 for (int x = i * pix_size; x < (i + 1) * pix_size && x < pixelated_image.width(); x++) {
                     for (int y = j * pix_size; y < (j + 1) * pix_size && y < pixelated_image.height(); y++) {
-                        unsigned int pixel = pixelated_image.pixel(x, y);
+                        QRgb pixel = pixelated_image.pixel(x, y);
 
                         avg_r += qRed(pixel);
                         avg_g += qGreen(pixel);
