@@ -66,8 +66,8 @@ void RecolorEditor::setBrushSize(int size)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -118,8 +118,8 @@ void RecolorEditor::setBrushOpacity(qreal opacity)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -373,8 +373,8 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
             brush_painter.drawImage(QPoint(0, 0), OriginalImage, QRect(img_x, img_y, width, height));
         } else if (CurrentMode == ModeEffected) {
-            for (int x = img_x; x < img_x + width; x++) {
-                for (int y = img_y; y < img_y + height; y++) {
+            for (int y = img_y; y < img_y + height; y++) {
+                for (int x = img_x; x < img_x + width; x++) {
                     brush_image.setPixel(x - img_x, y - img_y, AdjustHue(OriginalImage.pixel(x, y)));
                 }
             }

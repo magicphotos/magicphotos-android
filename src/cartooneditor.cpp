@@ -50,8 +50,8 @@ void CartoonEditor::setBrushSize(int size)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -112,8 +112,8 @@ void CartoonEditor::setBrushOpacity(qreal opacity)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {

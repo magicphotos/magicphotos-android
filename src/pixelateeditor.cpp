@@ -49,8 +49,8 @@ void PixelateEditor::setBrushSize(int size)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -101,8 +101,8 @@ void PixelateEditor::setBrushOpacity(qreal opacity)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -522,15 +522,15 @@ void PixelateImageGenerator::start()
     int pix_size = pixelated_image.width() > pixelated_image.height() ? pixelated_image.width() / PixelDenom : pixelated_image.height() / PixelDenom;
 
     if (pix_size != 0) {
-        for (int i = 0; i < pixelated_image.width() / pix_size + 1; i++) {
-            for (int j = 0; j < pixelated_image.height() / pix_size + 1; j++) {
+        for (int pix_y = 0; pix_y < pixelated_image.height() / pix_size + 1; pix_y++) {
+            for (int pix_x = 0; pix_x < pixelated_image.width() / pix_size + 1; pix_x++) {
                 int avg_r  = 0;
                 int avg_g  = 0;
                 int avg_b  = 0;
                 int pixels = 0;
 
-                for (int x = i * pix_size; x < (i + 1) * pix_size && x < pixelated_image.width(); x++) {
-                    for (int y = j * pix_size; y < (j + 1) * pix_size && y < pixelated_image.height(); y++) {
+                for (int y = pix_y * pix_size; y < (pix_y + 1) * pix_size && y < pixelated_image.height(); y++) {
+                    for (int x = pix_x * pix_size; x < (pix_x + 1) * pix_size && x < pixelated_image.width(); x++) {
                         QRgb pixel = pixelated_image.pixel(x, y);
 
                         avg_r += qRed(pixel);
@@ -546,8 +546,8 @@ void PixelateImageGenerator::start()
                     avg_g = avg_g / pixels;
                     avg_b = avg_b / pixels;
 
-                    for (int x = i * pix_size; x < (i + 1) * pix_size && x < pixelated_image.width(); x++) {
-                        for (int y = j * pix_size; y < (j + 1) * pix_size && y < pixelated_image.height(); y++) {
+                    for (int y = pix_y * pix_size; y < (pix_y + 1) * pix_size && y < pixelated_image.height(); y++) {
+                        for (int x = pix_x * pix_size; x < (pix_x + 1) * pix_size && x < pixelated_image.width(); x++) {
                             pixelated_image.setPixel(x, y, qRgba(avg_r, avg_g, avg_b, qAlpha(pixelated_image.pixel(x, y))));
                         }
                     }
