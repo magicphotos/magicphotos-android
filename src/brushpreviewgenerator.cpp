@@ -55,14 +55,6 @@ void BrushPreviewGenerator::setOpacity(qreal opacity)
 
 void BrushPreviewGenerator::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
     if (Size != 0 && MaxSize != 0) {
         QImage brush_template(Size * 2, Size * 2, QImage::Format_ARGB32);
 
@@ -100,15 +92,11 @@ void BrushPreviewGenerator::paint(QPainter *painter)
                                         (result.height() - brush_preview.height()) / 2), brush_preview);
 
         if (!result.isNull()) {
-            QImage image = result.scaled(QSize(qFloor(contentsBoundingRect().width()),
-                                               qFloor(contentsBoundingRect().height())),
-                                         Qt::KeepAspectRatio,
+            QImage image = result.scaled(QSize(qFloor(width()), qFloor(height())), Qt::KeepAspectRatio,
                                          smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
 
-            painter->drawPixmap(QPoint(qFloor((contentsBoundingRect().width()  - image.width())  / 2),
-                                       qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
+            painter->drawImage(QPointF((width()  - image.width())  / 2,
+                                       (height() - image.height()) / 2), image);
         }
     }
-
-    painter->restore();
 }

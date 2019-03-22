@@ -238,17 +238,7 @@ void SketchEditor::undo()
 
 void SketchEditor::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
-    painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
-
-    painter->restore();
+    painter->drawImage(QRectF(0, 0, width(), height()), CurrentImage, QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 }
 
 void SketchEditor::effectedImageReady(const QImage &effected_image)
@@ -459,25 +449,13 @@ void SketchPreviewGenerator::openImage(const QString &image_file, int image_orie
 
 void SketchPreviewGenerator::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
     if (!SketchImage.isNull()) {
-        QImage image = SketchImage.scaled(QSize(qFloor(contentsBoundingRect().width()),
-                                                qFloor(contentsBoundingRect().height())),
-                                          Qt::KeepAspectRatio,
+        QImage image = SketchImage.scaled(QSize(qFloor(width()), qFloor(height())), Qt::KeepAspectRatio,
                                           smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
 
-        painter->drawPixmap(QPoint(qFloor((contentsBoundingRect().width()  - image.width())  / 2),
-                                   qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
+        painter->drawImage(QPointF((width()  - image.width())  / 2,
+                                   (height() - image.height()) / 2), image);
     }
-
-    painter->restore();
 }
 
 void SketchPreviewGenerator::sketchImageReady(const QImage &sketch_image)
