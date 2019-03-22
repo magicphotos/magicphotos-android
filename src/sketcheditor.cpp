@@ -49,8 +49,8 @@ void SketchEditor::setBrushSize(int size)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -101,8 +101,8 @@ void SketchEditor::setBrushOpacity(qreal opacity)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -607,8 +607,8 @@ void SketchImageGenerator::start()
 
     // Make grayscale image from original image & inverted grayscale from blurred
 
-    for (int x = 0; x < InputImage.width(); x++) {
-        for (int y = 0; y < InputImage.height(); y++) {
+    for (int y = 0; y < InputImage.height(); y++) {
+        for (int x = 0; x < InputImage.width(); x++) {
             int gray  = qGray(InputImage.pixel(x, y));
             int alpha = qAlpha(InputImage.pixel(x, y));
 
@@ -623,8 +623,8 @@ void SketchImageGenerator::start()
 
     // Apply Color Dodge mixing to grayscale & inverted blurred grayscale images for sketch
 
-    for (int x = 0; x < sketch_image.width(); x++) {
-        for (int y = 0; y < sketch_image.height(); y++) {
+    for (int y = 0; y < sketch_image.height(); y++) {
+        for (int x = 0; x < sketch_image.width(); x++) {
             int top_gray = qGray(sketch_image.pixel(x, y));
             int btm_gray = qGray(grayscale_image.pixel(x, y));
             int res_gray = top_gray >= 255 ? 255 : qMin(btm_gray * 255 / (255 - top_gray), 255);

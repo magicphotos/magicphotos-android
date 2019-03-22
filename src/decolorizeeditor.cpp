@@ -48,8 +48,8 @@ void DecolorizeEditor::setBrushSize(int size)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -90,8 +90,8 @@ void DecolorizeEditor::setBrushOpacity(qreal opacity)
 
     BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
-    for (int x = 0; x < BrushTemplateImage.width(); x++) {
-        for (int y = 0; y < BrushTemplateImage.height(); y++) {
+    for (int y = 0; y < BrushTemplateImage.height(); y++) {
+        for (int x = 0; x < BrushTemplateImage.width(); x++) {
             qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
             if (r <= BrushSize) {
@@ -357,8 +357,8 @@ void GrayscaleImageGenerator::start()
 {
     QImage grayscale_image = InputImage;
 
-    for (int x = 0; x < grayscale_image.width(); x++) {
-        for (int y = 0; y < grayscale_image.height(); y++) {
+    for (int y = 0; y < grayscale_image.height(); y++) {
+        for (int x = 0; x < grayscale_image.width(); x++) {
             int gray  = qGray(grayscale_image.pixel(x, y));
             int alpha = qAlpha(grayscale_image.pixel(x, y));
 

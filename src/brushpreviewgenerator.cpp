@@ -58,8 +58,8 @@ void BrushPreviewGenerator::paint(QPainter *painter)
     if (Size != 0 && MaxSize != 0) {
         QImage brush_template(Size * 2, Size * 2, QImage::Format_ARGB32);
 
-        for (int x = 0; x < brush_template.width(); x++) {
-            for (int y = 0; y < brush_template.height(); y++) {
+        for (int y = 0; y < brush_template.height(); y++) {
+            for (int x = 0; x < brush_template.width(); x++) {
                 qreal r = qSqrt(qPow(x - Size, 2) + qPow(y - Size, 2));
 
                 if (r <= Size) {
