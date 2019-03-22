@@ -9,17 +9,7 @@ Helper::Helper(QQuickPaintedItem *parent) : QQuickPaintedItem(parent)
 
 void Helper::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
-    painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(HelperImage), QRectF(0, 0, HelperImage.width(), HelperImage.height()));
-
-    painter->restore();
+    painter->drawImage(QRectF(0, 0, width(), height()), HelperImage, QRectF(0, 0, HelperImage.width(), HelperImage.height()));
 }
 
 void Helper::helperImageReady(const QImage &helper_image)

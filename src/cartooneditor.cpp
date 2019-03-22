@@ -250,17 +250,7 @@ void CartoonEditor::undo()
 
 void CartoonEditor::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
-    painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
-
-    painter->restore();
+    painter->drawImage(QRectF(0, 0, width(), height()), CurrentImage, QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 }
 
 void CartoonEditor::effectedImageReady(const QImage &effected_image)
@@ -490,25 +480,13 @@ void CartoonPreviewGenerator::openImage(const QString &image_file, int image_ori
 
 void CartoonPreviewGenerator::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
     if (!CartoonImage.isNull()) {
-        QImage image = CartoonImage.scaled(QSize(qFloor(contentsBoundingRect().width()),
-                                                 qFloor(contentsBoundingRect().height())),
-                                           Qt::KeepAspectRatio,
+        QImage image = CartoonImage.scaled(QSize(qFloor(width()), qFloor(height())), Qt::KeepAspectRatio,
                                            smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
 
-        painter->drawPixmap(QPoint(qFloor((contentsBoundingRect().width()  - image.width())  / 2),
-                                   qFloor((contentsBoundingRect().height() - image.height()) / 2)), QPixmap::fromImage(image));
+        painter->drawImage(QPointF((width()  - image.width())  / 2,
+                                   (height() - image.height()) / 2), image);
     }
-
-    painter->restore();
 }
 
 void CartoonPreviewGenerator::cartoonImageReady(const QImage &cartoon_image)

@@ -226,17 +226,7 @@ void DecolorizeEditor::undo()
 
 void DecolorizeEditor::paint(QPainter *painter)
 {
-    painter->save();
-
-    if (smooth()) {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    } else {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
-    }
-
-    painter->drawPixmap(contentsBoundingRect(), QPixmap::fromImage(CurrentImage), QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
-
-    painter->restore();
+    painter->drawImage(QRectF(0, 0, width(), height()), CurrentImage, QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 }
 
 void DecolorizeEditor::effectedImageReady(const QImage &effected_image)
