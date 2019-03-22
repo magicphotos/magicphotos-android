@@ -278,53 +278,59 @@ Page {
         anchors.fill: parent
         color:        "transparent"
 
-        Flickable {
-            id:             editorFlickable
-            anchors.fill:   parent
-            boundsBehavior: Flickable.StopAtBounds
+        PinchArea {
+            id:           editorPinchArea
+            anchors.fill: parent
 
-            property real initialContentWidth:  0.0
-            property real initialContentHeight: 0.0
+            onPinchUpdated: {
+                var pinch_prev_center = mapToItem(editorFlickable.contentItem, pinch.previousCenter.x, pinch.previousCenter.y);
+                var pinch_center      = mapToItem(editorFlickable.contentItem, pinch.center.x, pinch.center.y);
+                var pinch_prev_scale  = pinch.previousScale;
+                var pinch_scale       = pinch.scale;
 
-            onContentWidthChanged: {
-                if (contentWidth >= 0.0) {
-                    samplingPointImage.updatePosition();
+                if (editorFlickable.initialContentWidth > 0.0) {
+                    editorFlickable.contentX += pinch_prev_center.x - pinch_center.x;
+                    editorFlickable.contentY += pinch_prev_center.y - pinch_center.y;
+
+                    var scale  = 1.0 + pinch_scale - pinch_prev_scale;
+
+                    if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
+                        editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
+                        editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch_center);
+                    }
                 }
             }
 
-            onContentHeightChanged: {
-                if (contentHeight >= 0.0) {
-                    samplingPointImage.updatePosition();
-                }
+            onPinchStarted: {
+                editorFlickable.interactive = false;
             }
 
-            PinchArea {
-                id:             editorPinchArea
-                anchors.fill:   parent
-                pinch.dragAxis: Pinch.NoDrag
+            onPinchFinished: {
+                editorFlickable.interactive = true;
 
-                onPinchUpdated: {
-                    if (editorFlickable.initialContentWidth > 0.0) {
-                        editorFlickable.contentX += pinch.previousCenter.x - pinch.center.x;
-                        editorFlickable.contentY += pinch.previousCenter.y - pinch.center.y;
+                editorFlickable.returnToBounds();
+            }
 
-                        var scale = 1.0 + pinch.scale - pinch.previousScale;
+            Flickable {
+                id:               editorFlickable
+                anchors.centerIn: parent
+                width:            Math.min(parent.width,  contentWidth)
+                height:           Math.min(parent.height, contentHeight)
+                boundsBehavior:   Flickable.StopAtBounds
 
-                        if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
-                            editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
-                            editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
-                        }
+                property real initialContentWidth:  0.0
+                property real initialContentHeight: 0.0
+
+                onContentWidthChanged: {
+                    if (contentWidth >= 0.0) {
+                        samplingPointImage.updatePosition();
                     }
                 }
 
-                onPinchStarted: {
-                    editorFlickable.interactive = false;
-                }
-
-                onPinchFinished: {
-                    editorFlickable.interactive = true;
-
-                    editorFlickable.returnToBounds();
+                onContentHeightChanged: {
+                    if (contentHeight >= 0.0) {
+                        samplingPointImage.updatePosition();
+                    }
                 }
 
                 Rectangle {

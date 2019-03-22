@@ -270,42 +270,48 @@ Page {
         anchors.fill: parent
         color:        "transparent"
 
-        Flickable {
-            id:             editorFlickable
-            anchors.fill:   parent
-            boundsBehavior: Flickable.StopAtBounds
+        PinchArea {
+            id:           editorPinchArea
+            anchors.fill: parent
 
-            property real initialContentWidth:  0.0
-            property real initialContentHeight: 0.0
+            onPinchUpdated: {
+                var pinch_prev_center = mapToItem(editorFlickable.contentItem, pinch.previousCenter.x, pinch.previousCenter.y);
+                var pinch_center      = mapToItem(editorFlickable.contentItem, pinch.center.x, pinch.center.y);
+                var pinch_prev_scale  = pinch.previousScale;
+                var pinch_scale       = pinch.scale;
 
-            PinchArea {
-                id:             editorPinchArea
-                anchors.fill:   parent
-                pinch.dragAxis: Pinch.NoDrag
+                if (editorFlickable.initialContentWidth > 0.0) {
+                    editorFlickable.contentX += pinch_prev_center.x - pinch_center.x;
+                    editorFlickable.contentY += pinch_prev_center.y - pinch_center.y;
 
-                onPinchUpdated: {
-                    if (editorFlickable.initialContentWidth > 0.0) {
-                        editorFlickable.contentX += pinch.previousCenter.x - pinch.center.x;
-                        editorFlickable.contentY += pinch.previousCenter.y - pinch.center.y;
+                    var scale  = 1.0 + pinch_scale - pinch_prev_scale;
 
-                        var scale = 1.0 + pinch.scale - pinch.previousScale;
-
-                        if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
-                            editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
-                            editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch.center);
-                        }
+                    if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
+                        editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
+                        editorFlickable.resizeContent(editorFlickable.contentWidth * scale, editorFlickable.contentHeight * scale, pinch_center);
                     }
                 }
+            }
 
-                onPinchStarted: {
-                    editorFlickable.interactive = false;
-                }
+            onPinchStarted: {
+                editorFlickable.interactive = false;
+            }
 
-                onPinchFinished: {
-                    editorFlickable.interactive = true;
+            onPinchFinished: {
+                editorFlickable.interactive = true;
 
-                    editorFlickable.returnToBounds();
-                }
+                editorFlickable.returnToBounds();
+            }
+
+            Flickable {
+                id:               editorFlickable
+                anchors.centerIn: parent
+                width:            Math.min(parent.width,  contentWidth)
+                height:           Math.min(parent.height, contentHeight)
+                boundsBehavior:   Flickable.StopAtBounds
+
+                property real initialContentWidth:  0.0
+                property real initialContentHeight: 0.0
 
                 SketchEditor {
                     id:              sketchEditor
