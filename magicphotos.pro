@@ -15,6 +15,8 @@ SOURCES += src/main.cpp \
     src/admobhelper.cpp \
     src/uihelper.cpp \
     src/helper.cpp \
+    src/editor.cpp \
+    src/previewgenerator.cpp \
     src/brushpreviewgenerator.cpp \
     src/decolorizeeditor.cpp \
     src/sketcheditor.cpp \
@@ -30,6 +32,8 @@ HEADERS += \
     src/admobhelper.h \
     src/uihelper.h \
     src/helper.h \
+    src/editor.h \
+    src/previewgenerator.h \
     src/brushpreviewgenerator.h \
     src/decolorizeeditor.h \
     src/sketcheditor.h \
