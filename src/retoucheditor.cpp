@@ -1,115 +1,13 @@
 #include <QtCore/QtMath>
-#include <QtCore/QFileInfo>
-#include <QtGui/QTransform>
-#include <QtGui/QImageReader>
+#include <QtGui/QImage>
 #include <QtGui/QPainter>
 
 #include "retoucheditor.h"
 
-RetouchEditor::RetouchEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
+RetouchEditor::RetouchEditor(QQuickItem *parent) : Editor(parent)
 {
-    IsChanged            = false;
     IsSamplingPointValid = false;
     IsLastBlurPointValid = false;
-    CurrentMode          = ModeScroll;
-    BrushSize            = 0;
-    HelperSize           = 0;
-    BrushOpacity         = 0.0;
-
-    setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
-
-    setFlag(QQuickItem::ItemHasContents, true);
-
-    QObject::connect(this, &RetouchEditor::scaleChanged, this, &RetouchEditor::scaleWasChanged);
-}
-
-bool RetouchEditor::changed() const
-{
-    return IsChanged;
-}
-
-int RetouchEditor::mode() const
-{
-    return CurrentMode;
-}
-
-void RetouchEditor::setMode(int mode)
-{
-    CurrentMode = mode;
-}
-
-int RetouchEditor::brushSize() const
-{
-    return BrushSize;
-}
-
-void RetouchEditor::setBrushSize(int size)
-{
-    BrushSize = size;
-
-    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
-
-    for (int y = 0; y < BrushTemplateImage.height(); y++) {
-        for (int x = 0; x < BrushTemplateImage.width(); x++) {
-            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
-
-            if (r <= BrushSize) {
-                if (r <= BrushSize * BrushOpacity) {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
-                } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
-                }
-            } else {
-                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
-            }
-        }
-    }
-
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-}
-
-int RetouchEditor::helperSize() const
-{
-    return HelperSize;
-}
-
-void RetouchEditor::setHelperSize(int size)
-{
-    HelperSize = size;
-}
-
-qreal RetouchEditor::brushOpacity() const
-{
-    return BrushOpacity;
-}
-
-void RetouchEditor::setBrushOpacity(qreal opacity)
-{
-    BrushOpacity = opacity;
-
-    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
-
-    for (int y = 0; y < BrushTemplateImage.height(); y++) {
-        for (int x = 0; x < BrushTemplateImage.width(); x++) {
-            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
-
-            if (r <= BrushSize) {
-                if (r <= BrushSize * BrushOpacity) {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
-                } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
-                }
-            } else {
-                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
-            }
-        }
-    }
-
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 bool RetouchEditor::samplingPointValid() const
@@ -120,138 +18,6 @@ bool RetouchEditor::samplingPointValid() const
 QPoint RetouchEditor::samplingPoint() const
 {
     return SamplingPoint;
-}
-
-void RetouchEditor::openImage(const QString &image_file, int image_orientation)
-{
-    if (!image_file.isNull()) {
-        QImageReader reader(image_file);
-
-        if (reader.canRead()) {
-            QSize size = reader.size();
-
-            if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
-                qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
-
-                size.setWidth(qFloor(size.width()   / factor));
-                size.setHeight(qFloor(size.height() / factor));
-
-                reader.setScaledSize(size);
-            }
-
-            LoadedImage = reader.read();
-
-            if (!LoadedImage.isNull()) {
-                if (image_orientation == 90) {
-                    QTransform transform;
-
-                    transform.rotate(90);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                } else if (image_orientation == 180) {
-                    QTransform transform;
-
-                    transform.rotate(180);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
-                } else if (image_orientation == 270) {
-                    QTransform transform;
-
-                    transform.rotate(270);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                }
-
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
-
-                if (!LoadedImage.isNull()) {
-                    CurrentImage = LoadedImage;
-
-                    LoadedImage = QImage();
-
-                    UndoStack.clear();
-
-                    IsChanged            = false;
-                    IsSamplingPointValid = false;
-
-                    setImplicitWidth(CurrentImage.width());
-                    setImplicitHeight(CurrentImage.height());
-
-                    update();
-
-                    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-                    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-
-                    emit samplingPointValidChanged(IsSamplingPointValid);
-                    emit undoAvailabilityChanged(false);
-                    emit imageOpened();
-                } else {
-                    emit imageOpenFailed();
-                }
-            } else {
-                emit imageOpenFailed();
-            }
-        } else {
-            emit imageOpenFailed();
-        }
-    } else {
-        emit imageOpenFailed();
-    }
-}
-
-void RetouchEditor::saveImage(const QString &image_file)
-{
-    QString file_name = image_file;
-
-    if (!file_name.isNull()) {
-        if (!CurrentImage.isNull()) {
-            if (QFileInfo(file_name).suffix().compare("png", Qt::CaseInsensitive) != 0 &&
-                QFileInfo(file_name).suffix().compare("jpg", Qt::CaseInsensitive) != 0 &&
-                QFileInfo(file_name).suffix().compare("bmp", Qt::CaseInsensitive) != 0) {
-                file_name = file_name + ".jpg";
-            }
-
-            if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_name)) {
-                IsChanged = false;
-
-                emit imageSaved(file_name);
-            } else {
-                emit imageSaveFailed();
-            }
-        } else {
-            emit imageSaveFailed();
-        }
-    } else {
-        emit imageSaveFailed();
-    }
-}
-
-void RetouchEditor::undo()
-{
-    if (UndoStack.count() > 0) {
-        CurrentImage = UndoStack.pop();
-
-        if (UndoStack.count() == 0) {
-            emit undoAvailabilityChanged(false);
-        }
-
-        IsChanged = true;
-
-        update();
-    }
-}
-
-void RetouchEditor::paint(QPainter *painter)
-{
-    painter->drawImage(QRectF(0, 0, width(), height()), CurrentImage, QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
-}
-
-void RetouchEditor::scaleWasChanged()
-{
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 void RetouchEditor::mousePressEvent(QMouseEvent *event)
@@ -378,17 +144,24 @@ void RetouchEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void RetouchEditor::SaveUndoImage()
+void RetouchEditor::processOpenedImage()
 {
-    UndoStack.push(CurrentImage);
+    CurrentImage = LoadedImage;
 
-    if (UndoStack.count() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
-            UndoStack.remove(0);
-        }
-    }
+    LoadedImage = QImage();
 
-    emit undoAvailabilityChanged(true);
+    IsChanged            = false;
+    IsSamplingPointValid = false;
+
+    emit samplingPointValidChanged(IsSamplingPointValid);
+
+    setImplicitWidth(CurrentImage.width());
+    setImplicitHeight(CurrentImage.height());
+
+    update();
+
+    emit scaleChanged();
+    emit imageOpened();
 }
 
 void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
@@ -566,11 +339,15 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         update();
 
-        QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
-                                                center_y - qFloor((HelperSize / scale()) / 2),
-                                                qFloor(HelperSize / scale()),
-                                                qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
+        if (qFloor(HelperSize / scale()) > 0) {
+            QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
+                                                    center_y - qFloor((HelperSize / scale()) / 2),
+                                                    qFloor(HelperSize / scale()),
+                                                    qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
 
-        emit helperImageReady(helper_image);
+            emit helperImageReady(helper_image);
+        } else {
+            emit helperImageReady(QImage());
+        }
     }
 }

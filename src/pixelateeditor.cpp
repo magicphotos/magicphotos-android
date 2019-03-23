@@ -1,83 +1,12 @@
 #include <QtCore/QtMath>
-#include <QtCore/QFileInfo>
 #include <QtCore/QThread>
-#include <QtGui/QTransform>
-#include <QtGui/QImageReader>
 #include <QtGui/QPainter>
 
 #include "pixelateeditor.h"
 
-PixelateEditor::PixelateEditor(QQuickItem *parent) : QQuickPaintedItem(parent)
+PixelateEditor::PixelateEditor(QQuickItem *parent) : Editor(parent)
 {
-    IsChanged    = false;
-    CurrentMode  = ModeScroll;
-    BrushSize    = 0;
-    HelperSize   = 0;
-    PixelDenom   = 0;
-    BrushOpacity = 0.0;
-
-    setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
-
-    setFlag(QQuickItem::ItemHasContents, true);
-
-    QObject::connect(this, &PixelateEditor::scaleChanged, this, &PixelateEditor::scaleWasChanged);
-}
-
-bool PixelateEditor::changed() const
-{
-    return IsChanged;
-}
-
-int PixelateEditor::mode() const
-{
-    return CurrentMode;
-}
-
-void PixelateEditor::setMode(int mode)
-{
-    CurrentMode = mode;
-}
-
-int PixelateEditor::brushSize() const
-{
-    return BrushSize;
-}
-
-void PixelateEditor::setBrushSize(int size)
-{
-    BrushSize = size;
-
-    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
-
-    for (int y = 0; y < BrushTemplateImage.height(); y++) {
-        for (int x = 0; x < BrushTemplateImage.width(); x++) {
-            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
-
-            if (r <= BrushSize) {
-                if (r <= BrushSize * BrushOpacity) {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
-                } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
-                }
-            } else {
-                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
-            }
-        }
-    }
-
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-}
-
-int PixelateEditor::helperSize() const
-{
-    return HelperSize;
-}
-
-void PixelateEditor::setHelperSize(int size)
-{
-    HelperSize = size;
+    PixelDenom = 0;
 }
 
 int PixelateEditor::pixDenom() const
@@ -90,157 +19,6 @@ void PixelateEditor::setPixDenom(int pix_denom)
     PixelDenom = pix_denom;
 }
 
-qreal PixelateEditor::brushOpacity() const
-{
-    return BrushOpacity;
-}
-
-void PixelateEditor::setBrushOpacity(qreal opacity)
-{
-    BrushOpacity = opacity;
-
-    BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
-
-    for (int y = 0; y < BrushTemplateImage.height(); y++) {
-        for (int x = 0; x < BrushTemplateImage.width(); x++) {
-            qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
-
-            if (r <= BrushSize) {
-                if (r <= BrushSize * BrushOpacity) {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
-                } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
-                }
-            } else {
-                BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
-            }
-        }
-    }
-
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-}
-
-void PixelateEditor::openImage(const QString &image_file, int image_orientation)
-{
-    if (!image_file.isNull()) {
-        QImageReader reader(image_file);
-
-        if (reader.canRead()) {
-            QSize size = reader.size();
-
-            if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
-                qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
-
-                size.setWidth(qFloor(size.width()   / factor));
-                size.setHeight(qFloor(size.height() / factor));
-
-                reader.setScaledSize(size);
-            }
-
-            LoadedImage = reader.read();
-
-            if (!LoadedImage.isNull()) {
-                if (image_orientation == 90) {
-                    QTransform transform;
-
-                    transform.rotate(90);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                } else if (image_orientation == 180) {
-                    QTransform transform;
-
-                    transform.rotate(180);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
-                } else if (image_orientation == 270) {
-                    QTransform transform;
-
-                    transform.rotate(270);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                }
-
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
-
-                if (!LoadedImage.isNull()) {
-                    auto thread    = new QThread();
-                    auto generator = new PixelateImageGenerator();
-
-                    generator->moveToThread(thread);
-
-                    QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
-                    QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
-                    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelateEditor::effectedImageReady);
-                    QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
-                    QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
-
-                    generator->setPixelDenom(PixelDenom);
-                    generator->setInput(LoadedImage);
-
-                    thread->start(QThread::LowPriority);
-                } else {
-                    emit imageOpenFailed();
-                }
-            } else {
-                emit imageOpenFailed();
-            }
-        } else {
-            emit imageOpenFailed();
-        }
-    } else {
-        emit imageOpenFailed();
-    }
-}
-
-void PixelateEditor::saveImage(const QString &image_file)
-{
-    QString file_name = image_file;
-
-    if (!file_name.isNull()) {
-        if (!CurrentImage.isNull()) {
-            if (QFileInfo(file_name).suffix().compare("png", Qt::CaseInsensitive) != 0 &&
-                QFileInfo(file_name).suffix().compare("jpg", Qt::CaseInsensitive) != 0 &&
-                QFileInfo(file_name).suffix().compare("bmp", Qt::CaseInsensitive) != 0) {
-                file_name = file_name + ".jpg";
-            }
-
-            if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_name)) {
-                IsChanged = false;
-
-                emit imageSaved(file_name);
-            } else {
-                emit imageSaveFailed();
-            }
-        } else {
-            emit imageSaveFailed();
-        }
-    } else {
-        emit imageSaveFailed();
-    }
-}
-
-void PixelateEditor::undo()
-{
-    if (UndoStack.count() > 0) {
-        CurrentImage = UndoStack.pop();
-
-        if (UndoStack.count() == 0) {
-            emit undoAvailabilityChanged(false);
-        }
-
-        IsChanged = true;
-
-        update();
-    }
-}
-
-void PixelateEditor::paint(QPainter *painter)
-{
-    painter->drawImage(QRectF(0, 0, width(), height()), CurrentImage, QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
-}
-
 void PixelateEditor::effectedImageReady(const QImage &effected_image)
 {
     OriginalImage = LoadedImage;
@@ -249,8 +27,6 @@ void PixelateEditor::effectedImageReady(const QImage &effected_image)
 
     LoadedImage = QImage();
 
-    UndoStack.clear();
-
     IsChanged = true;
 
     setImplicitWidth(CurrentImage.width());
@@ -258,19 +34,8 @@ void PixelateEditor::effectedImageReady(const QImage &effected_image)
 
     update();
 
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
-
-    emit undoAvailabilityChanged(false);
+    emit scaleChanged();
     emit imageOpened();
-}
-
-void PixelateEditor::scaleWasChanged()
-{
-    int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
-
-    BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
 }
 
 void PixelateEditor::mousePressEvent(QMouseEvent *event)
@@ -298,17 +63,23 @@ void PixelateEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void PixelateEditor::SaveUndoImage()
+void PixelateEditor::processOpenedImage()
 {
-    UndoStack.push(CurrentImage);
+    auto thread    = new QThread();
+    auto generator = new PixelateImageGenerator();
 
-    if (UndoStack.count() > UNDO_DEPTH) {
-        for (int i = 0; i < UndoStack.count() - UNDO_DEPTH; i++) {
-            UndoStack.remove(0);
-        }
-    }
+    generator->moveToThread(thread);
 
-    emit undoAvailabilityChanged(true);
+    QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
+    QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
+    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelateEditor::effectedImageReady);
+    QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
+    QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
+
+    generator->setPixelDenom(PixelDenom);
+    generator->setInput(LoadedImage);
+
+    thread->start(QThread::LowPriority);
 }
 
 void PixelateEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
@@ -347,22 +118,22 @@ void PixelateEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         update();
 
-        QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
-                                                center_y - qFloor((HelperSize / scale()) / 2),
-                                                qFloor(HelperSize / scale()),
-                                                qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
+        if (qFloor(HelperSize / scale()) > 0) {
+            QImage helper_image = CurrentImage.copy(center_x - qFloor((HelperSize / scale()) / 2),
+                                                    center_y - qFloor((HelperSize / scale()) / 2),
+                                                    qFloor(HelperSize / scale()),
+                                                    qFloor(HelperSize / scale())).scaledToWidth(HelperSize);
 
-        emit helperImageReady(helper_image);
+            emit helperImageReady(helper_image);
+        } else {
+            emit helperImageReady(QImage());
+        }
     }
 }
 
-PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : QQuickPaintedItem(parent)
+PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
 {
-    PixelateGeneratorRunning = false;
-    RestartPixelateGenerator = false;
-    PixelDenom               = 0;
-
-    setFlag(QQuickItem::ItemHasContents, true);
+    PixelDenom = 0;
 }
 
 int PixelatePreviewGenerator::pixDenom() const
@@ -375,109 +146,15 @@ void PixelatePreviewGenerator::setPixDenom(int pix_denom)
     PixelDenom = pix_denom;
 
     if (!LoadedImage.isNull()) {
-        if (PixelateGeneratorRunning) {
-            RestartPixelateGenerator = true;
+        if (ImageGeneratorRunning) {
+            RestartImageGenerator = true;
         } else {
-            StartPixelateGenerator();
+            StartImageGenerator();
         }
     }
 }
 
-void PixelatePreviewGenerator::openImage(const QString &image_file, int image_orientation)
-{
-    if (!image_file.isNull()) {
-        QImageReader reader(image_file);
-
-        if (reader.canRead()) {
-            QSize size = reader.size();
-
-            if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
-                qreal factor = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
-
-                size.setWidth(qFloor(size.width()   / factor));
-                size.setHeight(qFloor(size.height() / factor));
-
-                reader.setScaledSize(size);
-            }
-
-            LoadedImage = reader.read();
-
-            if (!LoadedImage.isNull()) {
-                if (image_orientation == 90) {
-                    QTransform transform;
-
-                    transform.rotate(90);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                } else if (image_orientation == 180) {
-                    QTransform transform;
-
-                    transform.rotate(180);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
-                } else if (image_orientation == 270) {
-                    QTransform transform;
-
-                    transform.rotate(270);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                }
-
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
-
-                if (!LoadedImage.isNull()) {
-                    emit imageOpened();
-
-                    if (PixelateGeneratorRunning) {
-                        RestartPixelateGenerator = true;
-                    } else {
-                        StartPixelateGenerator();
-                    }
-                } else {
-                    emit imageOpenFailed();
-                }
-            } else {
-                emit imageOpenFailed();
-            }
-        } else {
-            emit imageOpenFailed();
-        }
-    } else {
-        emit imageOpenFailed();
-    }
-}
-
-void PixelatePreviewGenerator::paint(QPainter *painter)
-{
-    if (!PixelatedImage.isNull()) {
-        QImage image = PixelatedImage.scaled(QSize(qFloor(width()), qFloor(height())), Qt::KeepAspectRatio,
-                                             smooth() ? Qt::SmoothTransformation : Qt::FastTransformation);
-
-        painter->drawImage(QPointF((width()  - image.width())  / 2,
-                                   (height() - image.height()) / 2), image);
-    }
-}
-
-void PixelatePreviewGenerator::pixelatedImageReady(const QImage &pixelated_image)
-{
-    PixelateGeneratorRunning = false;
-    PixelatedImage           = pixelated_image;
-
-    setImplicitWidth(PixelatedImage.width());
-    setImplicitHeight(PixelatedImage.height());
-
-    update();
-
-    emit generationFinished();
-
-    if (RestartPixelateGenerator) {
-        StartPixelateGenerator();
-
-        RestartPixelateGenerator = false;
-    }
-}
-
-void PixelatePreviewGenerator::StartPixelateGenerator()
+void PixelatePreviewGenerator::StartImageGenerator()
 {
     auto thread    = new QThread();
     auto generator = new PixelateImageGenerator();
@@ -486,7 +163,7 @@ void PixelatePreviewGenerator::StartPixelateGenerator()
 
     QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
-    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelatePreviewGenerator::pixelatedImageReady);
+    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelatePreviewGenerator::effectedImageReady);
     QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
 
@@ -495,7 +172,7 @@ void PixelatePreviewGenerator::StartPixelateGenerator()
 
     thread->start(QThread::LowPriority);
 
-    PixelateGeneratorRunning = true;
+    ImageGeneratorRunning = true;
 
     emit generationStarted();
 }
