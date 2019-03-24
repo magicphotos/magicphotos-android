@@ -92,7 +92,7 @@ protected:
 private:
     static const int UNDO_DEPTH = 8;
 
-    constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;
+    static constexpr qreal IMAGE_MPIX_LIMIT = 1.0;
 
     QStack<QImage> UndoStack;
 };

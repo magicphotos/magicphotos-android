@@ -37,7 +37,7 @@ protected:
     QImage LoadedImage, EffectedImage;
 
 private:
-    constexpr static const qreal IMAGE_MPIX_LIMIT = 0.2;
+    static constexpr qreal IMAGE_MPIX_LIMIT = 0.2;
 };
 
 #endif // PREVIEWGENERATOR_H
