@@ -3,6 +3,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
+import QtGraphicalEffects 1.0
 import ImageEditor 1.0
 
 import "../Util.js" as UtilScript
@@ -480,13 +481,26 @@ Page {
             height:       UtilScript.pt(128)
             z:            5
             visible:      false
-            color:        "black"
-            border.color: "white"
-            border.width: UtilScript.pt(2)
+            color:        "transparent"
 
-            Helper {
-                id:           helper
+            OpacityMask {
+                id:           opacityMask
                 anchors.fill: parent
+
+                source: Helper {
+                    id:      helper
+                    width:   opacityMask.width
+                    height:  opacityMask.height
+                    visible: false
+                }
+
+                maskSource: Image {
+                    width:    opacityMask.width
+                    height:   opacityMask.height
+                    source:   "qrc:/resources/images/helper_mask.png"
+                    fillMode: Image.PreserveAspectFit
+                    visible:  false
+                }
             }
         }
 
