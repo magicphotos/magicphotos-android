@@ -45,7 +45,7 @@ protected:
 private:
     void ChangeImageAt(bool save_undo, int center_x, int center_y);
 
-    constexpr static const int GAUSSIAN_RADIUS = 4;
+    static const int GAUSSIAN_RADIUS = 4;
 
     bool   IsSamplingPointValid, IsLastBlurPointValid;
     QPoint SamplingPoint, InitialSamplingPoint, LastBlurPoint, InitialTouchPoint;

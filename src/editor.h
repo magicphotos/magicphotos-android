@@ -90,7 +90,8 @@ protected:
     QImage LoadedImage, CurrentImage, BrushTemplateImage, BrushImage;
 
 private:
-    constexpr static const int   UNDO_DEPTH       = 8;
+    static const int UNDO_DEPTH = 8;
+
     constexpr static const qreal IMAGE_MPIX_LIMIT = 1.0;
 
     QStack<QImage> UndoStack;
