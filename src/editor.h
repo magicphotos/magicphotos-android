@@ -85,15 +85,17 @@ protected:
     void SaveUndoImage();
 
     bool   IsChanged;
-    int    CurrentMode, BrushSize, HelperSize;
-    qreal  BrushOpacity;
-    QImage LoadedImage, CurrentImage, BrushTemplateImage, BrushImage;
+    int    CurrentMode, HelperSize;
+    QImage LoadedImage, CurrentImage, BrushImage;
 
 private:
     static const int UNDO_DEPTH = 8;
 
     static constexpr qreal IMAGE_MPIX_LIMIT = 1.0;
 
+    int            BrushSize;
+    qreal          BrushOpacity;
+    QImage         BrushTemplateImage;
     QStack<QImage> UndoStack;
 };
 
