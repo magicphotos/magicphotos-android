@@ -1,4 +1,7 @@
 #include <QtCore/QtMath>
+#include <QtCore/QPoint>
+#include <QtCore/QPointF>
+#include <QtGui/QColor>
 #include <QtGui/QImage>
 #include <QtGui/QTransform>
 #include <QtGui/QPainter>

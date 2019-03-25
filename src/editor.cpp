@@ -1,5 +1,7 @@
 #include <QtCore/QtMath>
+#include <QtCore/QRectF>
 #include <QtCore/QFileInfo>
+#include <QtGui/QColor>
 #include <QtGui/QTransform>
 #include <QtGui/QImageReader>
 

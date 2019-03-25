@@ -20,7 +20,7 @@ public:
 
     void paint(QPainter *painter) override;
 
-public slots:
+protected slots:
     void effectedImageReady(const QImage &effected_image);
 
 signals:

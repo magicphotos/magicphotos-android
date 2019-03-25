@@ -1,5 +1,6 @@
 #include <QtCore/QtMath>
-#include <QtGui/QColor>
+#include <QtCore/QPoint>
+#include <QtCore/QRect>
 #include <QtGui/QPainter>
 
 #include "recoloreditor.h"

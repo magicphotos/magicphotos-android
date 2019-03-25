@@ -1,4 +1,5 @@
 #include <QtCore/QtMath>
+#include <QtCore/QPointF>
 #include <QtGui/QTransform>
 #include <QtGui/QImageReader>
 

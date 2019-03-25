@@ -1,22 +1,19 @@
 #ifndef CARTOONEDITOR_H
 #define CARTOONEDITOR_H
 
-#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QImage>
 
-#include "editor.h"
+#include "effecteditor.h"
 #include "previewgenerator.h"
 
-class CartoonEditor : public Editor
+class CartoonEditor : public EffectEditor
 {
     Q_OBJECT
 
     Q_PROPERTY(int radius    READ radius    WRITE setRadius)
     Q_PROPERTY(int threshold READ threshold WRITE setThreshold)
-
-    Q_ENUMS(Mode)
 
 public:
     explicit CartoonEditor(QQuickItem *parent = nullptr);
@@ -28,27 +25,11 @@ public:
     int threshold() const;
     void setThreshold(int threshold);
 
-    enum Mode {
-        ModeScroll,
-        ModeOriginal,
-        ModeEffected
-    };
-
-private slots:
-    void effectedImageReady(const QImage &effected_image);
-
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-
     void processOpenedImage() override;
 
 private:
-    void ChangeImageAt(bool save_undo, int center_x, int center_y);
-
-    int    GaussianRadius, CartoonThreshold;
-    QImage OriginalImage, EffectedImage;
+    int GaussianRadius, CartoonThreshold;
 };
 
 class CartoonPreviewGenerator : public PreviewGenerator

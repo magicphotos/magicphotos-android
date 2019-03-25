@@ -1,7 +1,6 @@
 #ifndef RETOUCHEDITOR_H
 #define RETOUCHEDITOR_H
 
-#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
 #include <QtGui/QMouseEvent>

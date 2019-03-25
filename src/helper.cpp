@@ -1,3 +1,4 @@
+#include <QtCore/QRectF>
 #include <QtGui/QPainter>
 
 #include "helper.h"
