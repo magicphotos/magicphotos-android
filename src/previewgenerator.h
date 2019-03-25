@@ -34,10 +34,12 @@ protected:
     virtual void StartImageGenerator() = 0;
 
     bool   ImageGeneratorRunning, RestartImageGenerator;
-    QImage LoadedImage, EffectedImage;
+    QImage LoadedImage;
 
 private:
     static constexpr qreal IMAGE_MPIX_LIMIT = 0.2;
+
+    QImage EffectedImage;
 };
 
 #endif // PREVIEWGENERATOR_H
