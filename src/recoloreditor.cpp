@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include <QtCore/QtMath>
 #include <QtCore/QPoint>
 #include <QtCore/QRect>
@@ -9,22 +11,20 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : Editor(parent)
 {
     CurrentHue = 0;
 
-    QRgb   rgb;
-    QColor color;
+    quint16 index = 0;
+    QColor  color;
 
-    for (int i = 0; i < 65536; i++) {
+    do {
         quint8 r, g, b;
 
-        std::tie(r, g, b) = UnpackRGB16(static_cast<quint16>(i));
+        std::tie(r, g, b) = UnpackRGB16(index);
 
-        rgb = qRgb(r, g, b);
+        color.setRgb(qRgb(r, g, b));
 
-        color.setRgb(rgb);
-
-        RGB16ToHSVMap[static_cast<quint16>(i)] = PackHSV(static_cast<qint16>(color.hue()),
-                                                         static_cast<quint8>(color.saturation()),
-                                                         static_cast<quint8>(color.value()));
-    }
+        RGB16ToHSVMap[index] = PackHSV(static_cast<qint16>(color.hue()),
+                                       static_cast<quint8>(color.saturation()),
+                                       static_cast<quint8>(color.value()));
+    } while (index++ != UINT16_MAX);
 }
 
 int RecolorEditor::hue() const
