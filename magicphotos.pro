@@ -16,6 +16,7 @@ SOURCES += src/main.cpp \
     src/uihelper.cpp \
     src/helper.cpp \
     src/editor.cpp \
+    src/effecteditor.cpp \
     src/previewgenerator.cpp \
     src/brushpreviewgenerator.cpp \
     src/decolorizeeditor.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     src/uihelper.h \
     src/helper.h \
     src/editor.h \
+    src/effecteditor.h \
     src/previewgenerator.h \
     src/brushpreviewgenerator.h \
     src/decolorizeeditor.h \

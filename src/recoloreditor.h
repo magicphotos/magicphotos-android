@@ -5,6 +5,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QColor>
 #include <QtGui/QImage>
 
 #include "editor.h"

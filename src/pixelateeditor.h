@@ -1,21 +1,18 @@
 #ifndef PIXELATEEDITOR_H
 #define PIXELATEEDITOR_H
 
-#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QImage>
 
-#include "editor.h"
+#include "effecteditor.h"
 #include "previewgenerator.h"
 
-class PixelateEditor : public Editor
+class PixelateEditor : public EffectEditor
 {
     Q_OBJECT
 
     Q_PROPERTY(int pixDenom READ pixDenom WRITE setPixDenom)
-
-    Q_ENUMS(Mode)
 
 public:
     explicit PixelateEditor(QQuickItem *parent = nullptr);
@@ -24,27 +21,11 @@ public:
     int pixDenom() const;
     void setPixDenom(int pix_denom);
 
-    enum Mode {
-        ModeScroll,
-        ModeOriginal,
-        ModeEffected
-    };
-
-private slots:
-    void effectedImageReady(const QImage &effected_image);
-
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-
     void processOpenedImage() override;
 
 private:
-    void ChangeImageAt(bool save_undo, int center_x, int center_y);
-
-    int    PixelDenom;
-    QImage OriginalImage, EffectedImage;
+    int PixelDenom;
 };
 
 class PixelatePreviewGenerator : public PreviewGenerator
