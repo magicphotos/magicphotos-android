@@ -1,3 +1,4 @@
+#include <QtCore/QString>
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
 #include <QtGui/QGuiApplication>
