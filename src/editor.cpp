@@ -248,6 +248,8 @@ void Editor::scaleWasChanged()
         } else {
             BrushImage = QImage();
         }
+    } else {
+        BrushImage = QImage();
     }
 }
 
