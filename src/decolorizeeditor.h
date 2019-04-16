@@ -13,7 +13,14 @@ class DecolorizeEditor : public EffectEditor
 
 public:
     explicit DecolorizeEditor(QQuickItem *parent = nullptr);
-    ~DecolorizeEditor() override = default;
+
+    DecolorizeEditor(const DecolorizeEditor&) = delete;
+    DecolorizeEditor(const DecolorizeEditor&&) noexcept = delete;
+
+    DecolorizeEditor& operator=(const DecolorizeEditor&) = delete;
+    DecolorizeEditor& operator=(const DecolorizeEditor&&) noexcept = delete;
+
+    ~DecolorizeEditor() noexcept override = default;
 
 protected:
     void processOpenedImage() override;
@@ -25,7 +32,14 @@ class GrayscaleImageGenerator : public QObject
 
 public:
     explicit GrayscaleImageGenerator(QObject *parent = nullptr);
-    ~GrayscaleImageGenerator() override = default;
+
+    GrayscaleImageGenerator(const GrayscaleImageGenerator&) = delete;
+    GrayscaleImageGenerator(const GrayscaleImageGenerator&&) noexcept = delete;
+
+    GrayscaleImageGenerator& operator=(const GrayscaleImageGenerator&) = delete;
+    GrayscaleImageGenerator& operator=(const GrayscaleImageGenerator&&) noexcept = delete;
+
+    ~GrayscaleImageGenerator() noexcept override = default;
 
     void setInput(const QImage &input_image);
 

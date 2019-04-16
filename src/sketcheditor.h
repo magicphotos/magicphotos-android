@@ -16,7 +16,14 @@ class SketchEditor : public EffectEditor
 
 public:
     explicit SketchEditor(QQuickItem *parent = nullptr);
-    ~SketchEditor() override = default;
+
+    SketchEditor(const SketchEditor&) = delete;
+    SketchEditor(const SketchEditor&&) noexcept = delete;
+
+    SketchEditor& operator=(const SketchEditor&) = delete;
+    SketchEditor& operator=(const SketchEditor&&) noexcept = delete;
+
+    ~SketchEditor() noexcept override = default;
 
     int radius() const;
     void setRadius(int radius);
@@ -36,7 +43,14 @@ class SketchPreviewGenerator : public PreviewGenerator
 
 public:
     explicit SketchPreviewGenerator(QQuickItem *parent = nullptr);
-    ~SketchPreviewGenerator() override = default;
+
+    SketchPreviewGenerator(const SketchPreviewGenerator&) = delete;
+    SketchPreviewGenerator(const SketchPreviewGenerator&&) noexcept = delete;
+
+    SketchPreviewGenerator& operator=(const SketchPreviewGenerator&) = delete;
+    SketchPreviewGenerator& operator=(const SketchPreviewGenerator&&) noexcept = delete;
+
+    ~SketchPreviewGenerator() noexcept override = default;
 
     int radius() const;
     void setRadius(int radius);
@@ -54,7 +68,14 @@ class SketchImageGenerator : public QObject
 
 public:
     explicit SketchImageGenerator(QObject *parent = nullptr);
-    ~SketchImageGenerator() override = default;
+
+    SketchImageGenerator(const SketchImageGenerator&) = delete;
+    SketchImageGenerator(const SketchImageGenerator&&) noexcept = delete;
+
+    SketchImageGenerator& operator=(const SketchImageGenerator&) = delete;
+    SketchImageGenerator& operator=(const SketchImageGenerator&&) noexcept = delete;
+
+    ~SketchImageGenerator() noexcept override = default;
 
     void setGaussianRadius(int radius);
     void setInput(const QImage &input_image);

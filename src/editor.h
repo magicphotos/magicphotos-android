@@ -21,12 +21,16 @@ class Editor : public QQuickPaintedItem
     Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
     Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
 
-    Q_ENUMS(Mode)
-    Q_ENUMS(MouseState)
-
 public:
     explicit Editor(QQuickItem *parent = nullptr);
-    ~Editor() override = default;
+
+    Editor(const Editor&) = delete;
+    Editor(const Editor&&) noexcept = delete;
+
+    Editor& operator=(const Editor&) = delete;
+    Editor& operator=(const Editor&&) noexcept = delete;
+
+    ~Editor() noexcept override = default;
 
     bool changed() const;
 
@@ -52,12 +56,14 @@ public:
     enum Mode {
         ModeScroll
     };
+    Q_ENUM(Mode)
 
     enum MouseState {
         MousePressed,
         MouseMoved,
         MouseReleased
     };
+    Q_ENUM(MouseState)
 
 private slots:
     void scaleWasChanged();

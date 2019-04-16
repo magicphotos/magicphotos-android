@@ -17,7 +17,14 @@ class CartoonEditor : public EffectEditor
 
 public:
     explicit CartoonEditor(QQuickItem *parent = nullptr);
-    ~CartoonEditor() override = default;
+
+    CartoonEditor(const CartoonEditor&) = delete;
+    CartoonEditor(const CartoonEditor&&) noexcept = delete;
+
+    CartoonEditor& operator=(const CartoonEditor&) = delete;
+    CartoonEditor& operator=(const CartoonEditor&&) noexcept = delete;
+
+    ~CartoonEditor() noexcept override = default;
 
     int radius() const;
     void setRadius(int radius);
@@ -41,7 +48,14 @@ class CartoonPreviewGenerator : public PreviewGenerator
 
 public:
     explicit CartoonPreviewGenerator(QQuickItem *parent = nullptr);
-    ~CartoonPreviewGenerator() override = default;
+
+    CartoonPreviewGenerator(const CartoonPreviewGenerator&) = delete;
+    CartoonPreviewGenerator(const CartoonPreviewGenerator&&) noexcept = delete;
+
+    CartoonPreviewGenerator& operator=(const CartoonPreviewGenerator&) = delete;
+    CartoonPreviewGenerator& operator=(const CartoonPreviewGenerator&&) noexcept = delete;
+
+    ~CartoonPreviewGenerator() noexcept override = default;
 
     int radius() const;
     void setRadius(int radius);
@@ -62,7 +76,14 @@ class CartoonImageGenerator : public QObject
 
 public:
     explicit CartoonImageGenerator(QObject *parent = nullptr);
-    ~CartoonImageGenerator() override = default;
+
+    CartoonImageGenerator(const CartoonImageGenerator&) = delete;
+    CartoonImageGenerator(const CartoonImageGenerator&&) noexcept = delete;
+
+    CartoonImageGenerator& operator=(const CartoonImageGenerator&) = delete;
+    CartoonImageGenerator& operator=(const CartoonImageGenerator&&) noexcept = delete;
+
+    ~CartoonImageGenerator() noexcept override = default;
 
     void setGaussianRadius(int radius);
     void setCartoonThreshold(int threshold);
