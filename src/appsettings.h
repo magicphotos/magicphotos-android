@@ -15,7 +15,14 @@ class AppSettings : public QObject
 
 public:
     explicit AppSettings(QObject *parent = nullptr);
-    ~AppSettings() override;
+
+    AppSettings(const AppSettings&) = delete;
+    AppSettings(const AppSettings&&) noexcept = delete;
+
+    AppSettings& operator=(const AppSettings&) = delete;
+    AppSettings& operator=(const AppSettings&&) noexcept = delete;
+
+    ~AppSettings() noexcept override;
 
     int defaultBrushSize() const;
     void setDefaultBrushSize(int size);

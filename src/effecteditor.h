@@ -11,17 +11,23 @@ class EffectEditor : public Editor
 {
     Q_OBJECT
 
-    Q_ENUMS(Mode)
-
 public:
     explicit EffectEditor(QQuickItem *parent = nullptr);
-    ~EffectEditor() override = default;
+
+    EffectEditor(const EffectEditor&) = delete;
+    EffectEditor(const EffectEditor&&) noexcept = delete;
+
+    EffectEditor& operator=(const EffectEditor&) = delete;
+    EffectEditor& operator=(const EffectEditor&&) noexcept = delete;
+
+    ~EffectEditor() noexcept override = default;
 
     enum Mode {
         ModeScroll,
         ModeOriginal,
         ModeEffected
     };
+    Q_ENUM(Mode)
 
 protected slots:
     void effectedImageReady(const QImage &effected_image);

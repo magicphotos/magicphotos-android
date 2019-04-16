@@ -16,11 +16,16 @@ class RecolorEditor : public Editor
 
     Q_PROPERTY(int hue READ hue WRITE setHue)
 
-    Q_ENUMS(Mode)
-
 public:
     explicit RecolorEditor(QQuickItem *parent = nullptr);
-    ~RecolorEditor() override = default;
+
+    RecolorEditor(const RecolorEditor&) = delete;
+    RecolorEditor(const RecolorEditor&&) noexcept = delete;
+
+    RecolorEditor& operator=(const RecolorEditor&) = delete;
+    RecolorEditor& operator=(const RecolorEditor&&) noexcept = delete;
+
+    ~RecolorEditor() noexcept override = default;
 
     int hue() const;
     void setHue(int hue);
@@ -30,6 +35,7 @@ public:
         ModeOriginal,
         ModeEffected
     };
+    Q_ENUM(Mode)
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

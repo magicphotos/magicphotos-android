@@ -15,7 +15,14 @@ class BrushPreviewGenerator : public QQuickPaintedItem
 
 public:
     explicit BrushPreviewGenerator(QQuickItem *parent = nullptr);
-    ~BrushPreviewGenerator() override = default;
+
+    BrushPreviewGenerator(const BrushPreviewGenerator&) = delete;
+    BrushPreviewGenerator(const BrushPreviewGenerator&&) noexcept = delete;
+
+    BrushPreviewGenerator& operator=(const BrushPreviewGenerator&) = delete;
+    BrushPreviewGenerator& operator=(const BrushPreviewGenerator&&) noexcept = delete;
+
+    ~BrushPreviewGenerator() noexcept override = default;
 
     int size() const;
     void setSize(int size);

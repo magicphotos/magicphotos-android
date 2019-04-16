@@ -6,7 +6,7 @@ AppSettings::AppSettings(QObject *parent) : QObject(parent)
     Settings         = new QSettings("Oleg Derevenetz", "MagicPhotos");
 }
 
-AppSettings::~AppSettings()
+AppSettings::~AppSettings() noexcept
 {
     delete Settings;
 }

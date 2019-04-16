@@ -14,11 +14,16 @@ class RetouchEditor : public Editor
     Q_PROPERTY(bool   samplingPointValid READ samplingPointValid NOTIFY samplingPointValidChanged)
     Q_PROPERTY(QPoint samplingPoint      READ samplingPoint      NOTIFY samplingPointChanged)
 
-    Q_ENUMS(Mode)
-
 public:
     explicit RetouchEditor(QQuickItem *parent = nullptr);
-    ~RetouchEditor() override = default;
+
+    RetouchEditor(const RetouchEditor&) = delete;
+    RetouchEditor(const RetouchEditor&&) noexcept = delete;
+
+    RetouchEditor& operator=(const RetouchEditor&) = delete;
+    RetouchEditor& operator=(const RetouchEditor&&) noexcept = delete;
+
+    ~RetouchEditor() noexcept override = default;
 
     bool samplingPointValid() const;
     QPoint samplingPoint() const;
@@ -29,6 +34,7 @@ public:
         ModeClone,
         ModeBlur
     };
+    Q_ENUM(Mode)
 
 signals:
     void samplingPointValidChanged(bool samplingPointValid);

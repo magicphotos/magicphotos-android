@@ -14,7 +14,14 @@ class PreviewGenerator : public QQuickPaintedItem
 
 public:
     explicit PreviewGenerator(QQuickItem *parent = nullptr);
-    ~PreviewGenerator() override = default;
+
+    PreviewGenerator(const PreviewGenerator&) = delete;
+    PreviewGenerator(const PreviewGenerator&&) noexcept = delete;
+
+    PreviewGenerator& operator=(const PreviewGenerator&) = delete;
+    PreviewGenerator& operator=(const PreviewGenerator&&) noexcept = delete;
+
+    ~PreviewGenerator() noexcept override = default;
 
     Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
 

@@ -16,7 +16,14 @@ class BlurEditor : public EffectEditor
 
 public:
     explicit BlurEditor(QQuickItem *parent = nullptr);
-    ~BlurEditor() override = default;
+
+    BlurEditor(const BlurEditor&) = delete;
+    BlurEditor(const BlurEditor&&) noexcept = delete;
+
+    BlurEditor& operator=(const BlurEditor&) = delete;
+    BlurEditor& operator=(const BlurEditor&&) noexcept = delete;
+
+    ~BlurEditor() noexcept override = default;
 
     int radius() const;
     void setRadius(int radius);
@@ -36,7 +43,14 @@ class BlurPreviewGenerator : public PreviewGenerator
 
 public:
     explicit BlurPreviewGenerator(QQuickItem *parent = nullptr);
-    ~BlurPreviewGenerator() override = default;
+
+    BlurPreviewGenerator(const BlurPreviewGenerator&) = delete;
+    BlurPreviewGenerator(const BlurPreviewGenerator&&) noexcept = delete;
+
+    BlurPreviewGenerator& operator=(const BlurPreviewGenerator&) = delete;
+    BlurPreviewGenerator& operator=(const BlurPreviewGenerator&&) noexcept = delete;
+
+    ~BlurPreviewGenerator() noexcept override = default;
 
     int radius() const;
     void setRadius(int radius);
@@ -54,7 +68,14 @@ class BlurImageGenerator : public QObject
 
 public:
     explicit BlurImageGenerator(QObject *parent = nullptr);
-    ~BlurImageGenerator() override = default;
+
+    BlurImageGenerator(const BlurImageGenerator&) = delete;
+    BlurImageGenerator(const BlurImageGenerator&&) noexcept = delete;
+
+    BlurImageGenerator& operator=(const BlurImageGenerator&) = delete;
+    BlurImageGenerator& operator=(const BlurImageGenerator&&) noexcept = delete;
+
+    ~BlurImageGenerator() noexcept override = default;
 
     void setGaussianRadius(int radius);
     void setInput(const QImage &input_image);

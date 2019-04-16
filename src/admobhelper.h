@@ -16,7 +16,14 @@ public:
                          ADMOB_INTERSTITIAL_UNIT_ID;
 
     explicit AdMobHelper(QObject *parent = nullptr);
-    ~AdMobHelper() override = default;
+
+    AdMobHelper(const AdMobHelper&) = delete;
+    AdMobHelper(const AdMobHelper&&) noexcept = delete;
+
+    AdMobHelper& operator=(const AdMobHelper&) = delete;
+    AdMobHelper& operator=(const AdMobHelper&&) noexcept = delete;
+
+    ~AdMobHelper() noexcept override = default;
 
     int bannerViewHeight() const;
 

@@ -10,7 +10,14 @@ class Helper : public QQuickPaintedItem
 
 public:
     explicit Helper(QQuickPaintedItem *parent = nullptr);
-    ~Helper() override = default;
+
+    Helper(const Helper&) = delete;
+    Helper(const Helper&&) noexcept = delete;
+
+    Helper& operator=(const Helper&) = delete;
+    Helper& operator=(const Helper&&) noexcept = delete;
+
+    ~Helper() noexcept override = default;
 
     void paint(QPainter *painter) override;
 

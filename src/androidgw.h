@@ -10,7 +10,14 @@ class AndroidGW : public QObject
 
 public:
     explicit AndroidGW(QObject *parent = nullptr);
-    ~AndroidGW() override = default;
+
+    AndroidGW(const AndroidGW&) = delete;
+    AndroidGW(const AndroidGW&&) noexcept = delete;
+
+    AndroidGW& operator=(const AndroidGW&) = delete;
+    AndroidGW& operator=(const AndroidGW&&) noexcept = delete;
+
+    ~AndroidGW() noexcept override = default;
 
     static AndroidGW *instance();
 
