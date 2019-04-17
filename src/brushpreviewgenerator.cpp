@@ -10,9 +10,9 @@
 
 BrushPreviewGenerator::BrushPreviewGenerator(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    Size    = 0;
-    MaxSize = 0;
-    Opacity = 0.0;
+    Size     = 0;
+    MaxSize  = 0;
+    Hardness = 0.0;
 
     setFlag(QQuickItem::ItemHasContents, true);
 }
@@ -44,14 +44,14 @@ void BrushPreviewGenerator::setMaxSize(int max_size)
     update();
 }
 
-qreal BrushPreviewGenerator::opacity() const
+qreal BrushPreviewGenerator::hardness() const
 {
-    return Opacity;
+    return Hardness;
 }
 
-void BrushPreviewGenerator::setOpacity(qreal opacity)
+void BrushPreviewGenerator::setHardness(qreal hardness)
 {
-    Opacity = opacity;
+    Hardness = hardness;
 
     update();
 }
@@ -66,10 +66,10 @@ void BrushPreviewGenerator::paint(QPainter *painter)
                 qreal r = qSqrt(qPow(x - Size, 2) + qPow(y - Size, 2));
 
                 if (r <= Size) {
-                    if (r <= Size * Opacity) {
+                    if (r <= Size * Hardness) {
                         brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                     } else {
-                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (Size - r) / (Size * (1.0 - Opacity)))));
+                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (Size - r) / (Size * (1.0 - Hardness)))));
                     }
                 } else {
                     brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));

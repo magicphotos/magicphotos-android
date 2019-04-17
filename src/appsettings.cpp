@@ -55,16 +55,16 @@ void AppSettings::setDisableAds(bool disable)
     Settings->setValue("DisableAds", disable);
 }
 
-qreal AppSettings::brushOpacity() const
+qreal AppSettings::brushHardness() const
 {
-    if (Settings->contains("BrushOpacity")) {
-        return Settings->value("BrushOpacity").toDouble();
+    if (Settings->contains("BrushHardness")) {
+        return Settings->value("BrushHardness").toDouble();
     } else {
         return 0.75;
     }
 }
 
-void AppSettings::setBrushOpacity(qreal opacity)
+void AppSettings::setBrushHardness(qreal hardness)
 {
-    Settings->setValue("BrushOpacity", opacity);
+    Settings->setValue("BrushHardness", hardness);
 }

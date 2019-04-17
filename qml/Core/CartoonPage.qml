@@ -275,8 +275,8 @@ Page {
     }
 
     function updateEditorParameters() {
-        cartoonEditor.brushSize    = AppSettings.brushSize;
-        cartoonEditor.brushOpacity = AppSettings.brushOpacity;
+        cartoonEditor.brushSize     = AppSettings.brushSize;
+        cartoonEditor.brushHardness = AppSettings.brushHardness;
     }
 
     Rectangle {
@@ -481,8 +481,8 @@ Page {
 
         onVisibleChanged: {
             if (visible) {
-                brushSizeSlider.value    = AppSettings.brushSize;
-                brushOpacitySlider.value = AppSettings.brushOpacity;
+                brushSizeSlider.value     = AppSettings.brushSize;
+                brushHardnessSlider.value = AppSettings.brushHardness;
             }
         }
 
@@ -498,7 +498,7 @@ Page {
                 id:             brushPreviewGenerator
                 size:           brushSizeSlider.value
                 maxSize:        brushSizeSlider.to
-                opacity:        brushOpacitySlider.value
+                hardness:       brushHardnessSlider.value
                 Layout.rowSpan: 2
             }
 
@@ -526,7 +526,7 @@ Page {
             }
 
             Slider {
-                id:               brushOpacitySlider
+                id:               brushHardnessSlider
                 from:             0.0
                 to:               1.0
                 value:            0.75
@@ -535,7 +535,7 @@ Page {
 
                 onPressedChanged: {
                     if (!pressed) {
-                        AppSettings.brushOpacity = value;
+                        AppSettings.brushHardness = value;
 
                         cartoonPage.updateEditorParameters();
                     }
@@ -543,8 +543,8 @@ Page {
             }
 
             Label {
-                id:             brushOpacityLabel
-                text:           qsTr("Brush Opacity")
+                id:             brushHardnessLabel
+                text:           qsTr("Brush Hardness")
                 font.pointSize: 16
             }
         }

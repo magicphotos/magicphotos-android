@@ -9,11 +9,11 @@
 
 Editor::Editor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    IsChanged    = false;
-    CurrentMode  = ModeScroll;
-    BrushSize    = 0;
-    HelperSize   = 0;
-    BrushOpacity = 0.0;
+    IsChanged     = false;
+    CurrentMode   = ModeScroll;
+    BrushSize     = 0;
+    HelperSize    = 0;
+    BrushHardness = 0.0;
 
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
@@ -54,10 +54,10 @@ void Editor::setBrushSize(int size)
                 qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
                 if (r <= BrushSize) {
-                    if (r <= BrushSize * BrushOpacity) {
+                    if (r <= BrushSize * BrushHardness) {
                         BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                     } else {
-                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -88,14 +88,14 @@ void Editor::setHelperSize(int size)
     HelperSize = size;
 }
 
-qreal Editor::brushOpacity() const
+qreal Editor::brushHardness() const
 {
-    return BrushOpacity;
+    return BrushHardness;
 }
 
-void Editor::setBrushOpacity(qreal opacity)
+void Editor::setBrushHardness(qreal hardness)
 {
-    BrushOpacity = opacity;
+    BrushHardness = hardness;
 
     if (BrushSize > 0) {
         BrushTemplateImage = QImage(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
@@ -105,10 +105,10 @@ void Editor::setBrushOpacity(qreal opacity)
                 qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
                 if (r <= BrushSize) {
-                    if (r <= BrushSize * BrushOpacity) {
+                    if (r <= BrushSize * BrushHardness) {
                         BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                     } else {
-                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushOpacity)))));
+                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
                     BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
