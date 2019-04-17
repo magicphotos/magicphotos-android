@@ -1,6 +1,8 @@
 #ifndef APPSETTINGS_H
 #define APPSETTINGS_H
 
+#include <memory>
+
 #include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QSettings>
@@ -23,7 +25,7 @@ public:
     AppSettings& operator=(const AppSettings&) = delete;
     AppSettings& operator=(const AppSettings&&) noexcept = delete;
 
-    ~AppSettings() noexcept override;
+    ~AppSettings() noexcept override = default;
 
     int defaultBrushSize() const;
     void setDefaultBrushSize(int size);
@@ -38,8 +40,8 @@ public:
     void setBrushHardness(qreal hardness);
 
 private:
-    int        DefaultBrushSize;
-    QSettings *Settings;
+    int                        DefaultBrushSize;
+    std::shared_ptr<QSettings> Settings;
 };
 
 #endif // APPSETTINGS_H
