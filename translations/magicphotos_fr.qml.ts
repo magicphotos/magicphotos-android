@@ -12,7 +12,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
@@ -70,7 +70,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
@@ -128,7 +128,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
@@ -190,7 +190,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
@@ -248,7 +248,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
@@ -291,7 +291,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
@@ -334,7 +334,7 @@
         <translation>Taille de la brosse</translation>
     </message>
     <message>
-        <source>Brush Opacity</source>
+        <source>Brush Hardness</source>
         <translation>Dureté de la brosse</translation>
     </message>
     <message>
