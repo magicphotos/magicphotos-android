@@ -6,6 +6,26 @@ AppSettings::AppSettings(QObject *parent) : QObject(parent)
     Settings         = std::make_shared<QSettings>("Oleg Derevenetz", "MagicPhotos");
 }
 
+bool AppSettings::disableAds() const
+{
+#ifdef FULL_VERSION
+    return true;
+#else
+    if (Settings->contains("DisableAds")) {
+        return Settings->value("DisableAds").toBool();
+    } else if (Settings->contains("IsFullVersion")) {
+        return Settings->value("IsFullVersion").toBool();
+    } else {
+        return false;
+    }
+#endif
+}
+
+void AppSettings::setDisableAds(bool disable)
+{
+    Settings->setValue("DisableAds", disable);
+}
+
 int AppSettings::defaultBrushSize() const
 {
     return DefaultBrushSize;
@@ -28,26 +48,6 @@ int AppSettings::brushSize() const
 void AppSettings::setBrushSize(int size)
 {
     Settings->setValue("BrushSize", size);
-}
-
-bool AppSettings::disableAds() const
-{
-#ifdef FULL_VERSION
-    return true;
-#else
-    if (Settings->contains("DisableAds")) {
-        return Settings->value("DisableAds").toBool();
-    } else if (Settings->contains("IsFullVersion")) {
-        return Settings->value("IsFullVersion").toBool();
-    } else {
-        return false;
-    }
-#endif
-}
-
-void AppSettings::setDisableAds(bool disable)
-{
-    Settings->setValue("DisableAds", disable);
 }
 
 qreal AppSettings::brushHardness() const

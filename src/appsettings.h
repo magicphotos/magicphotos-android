@@ -11,9 +11,9 @@ class AppSettings : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool  disableAds       READ disableAds       WRITE setDisableAds)
     Q_PROPERTY(int   defaultBrushSize READ defaultBrushSize WRITE setDefaultBrushSize)
     Q_PROPERTY(int   brushSize        READ brushSize        WRITE setBrushSize)
-    Q_PROPERTY(bool  disableAds       READ disableAds       WRITE setDisableAds)
     Q_PROPERTY(qreal brushHardness    READ brushHardness    WRITE setBrushHardness)
 
 public:
@@ -27,14 +27,14 @@ public:
 
     ~AppSettings() noexcept override = default;
 
+    bool disableAds() const;
+    void setDisableAds(bool disable);
+
     int defaultBrushSize() const;
     void setDefaultBrushSize(int size);
 
     int brushSize() const;
     void setBrushSize(int size);
-
-    bool disableAds() const;
-    void setDisableAds(bool disable);
 
     qreal brushHardness() const;
     void setBrushHardness(qreal hardness);
