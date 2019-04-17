@@ -9,9 +9,9 @@ class BrushPreviewGenerator : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int   size    READ size    WRITE setSize)
-    Q_PROPERTY(int   maxSize READ maxSize WRITE setMaxSize)
-    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
+    Q_PROPERTY(int   size     READ size     WRITE setSize)
+    Q_PROPERTY(int   maxSize  READ maxSize  WRITE setMaxSize)
+    Q_PROPERTY(qreal hardness READ hardness WRITE setHardness)
 
 public:
     explicit BrushPreviewGenerator(QQuickItem *parent = nullptr);
@@ -30,14 +30,14 @@ public:
     int maxSize() const;
     void setMaxSize(int max_size);
 
-    qreal opacity() const;
-    void setOpacity(qreal opacity);
+    qreal hardness() const;
+    void setHardness(qreal hardness);
 
     void paint(QPainter *painter) override;
 
 private:
     int   Size, MaxSize;
-    qreal Opacity;
+    qreal Hardness;
 };
 
 #endif // BRUSHPREVIEWGENERATOR_H

@@ -11,7 +11,7 @@ class AppSettings : public QObject
 
     Q_PROPERTY(int   defaultBrushSize READ defaultBrushSize WRITE setDefaultBrushSize)
     Q_PROPERTY(int   brushSize        READ brushSize        WRITE setBrushSize)
-    Q_PROPERTY(qreal brushOpacity     READ brushOpacity     WRITE setBrushOpacity)
+    Q_PROPERTY(qreal brushHardness    READ brushHardness    WRITE setBrushHardness)
 
 public:
     explicit AppSettings(QObject *parent = nullptr);
@@ -30,8 +30,8 @@ public:
     int brushSize() const;
     void setBrushSize(int size);
 
-    qreal brushOpacity() const;
-    void setBrushOpacity(qreal opacity);
+    qreal brushHardness() const;
+    void setBrushHardness(qreal hardness);
 
 private:
     int        DefaultBrushSize;

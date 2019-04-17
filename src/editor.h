@@ -16,10 +16,10 @@ class Editor : public QQuickPaintedItem
 
     Q_PROPERTY(bool changed READ changed)
 
-    Q_PROPERTY(int   mode         READ mode         WRITE setMode)
-    Q_PROPERTY(int   brushSize    READ brushSize    WRITE setBrushSize)
-    Q_PROPERTY(int   helperSize   READ helperSize   WRITE setHelperSize)
-    Q_PROPERTY(qreal brushOpacity READ brushOpacity WRITE setBrushOpacity)
+    Q_PROPERTY(int   mode          READ mode          WRITE setMode)
+    Q_PROPERTY(int   brushSize     READ brushSize     WRITE setBrushSize)
+    Q_PROPERTY(int   helperSize    READ helperSize    WRITE setHelperSize)
+    Q_PROPERTY(qreal brushHardness READ brushHardness WRITE setBrushHardness)
 
 public:
     explicit Editor(QQuickItem *parent = nullptr);
@@ -43,8 +43,8 @@ public:
     int helperSize() const;
     void setHelperSize(int size);
 
-    qreal brushOpacity() const;
-    void setBrushOpacity(qreal opacity);
+    qreal brushHardness() const;
+    void setBrushHardness(qreal hardness);
 
     Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
     Q_INVOKABLE void saveImage(const QString &image_file);
@@ -96,7 +96,7 @@ private:
     static constexpr qreal IMAGE_MPIX_LIMIT = 1.0;
 
     int            BrushSize;
-    qreal          BrushOpacity;
+    qreal          BrushHardness;
     QImage         BrushTemplateImage;
     QStack<QImage> UndoStack;
 };
