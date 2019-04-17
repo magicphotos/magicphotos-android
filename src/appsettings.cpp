@@ -8,9 +8,6 @@ AppSettings::AppSettings(QObject *parent) : QObject(parent)
 
 bool AppSettings::disableAds() const
 {
-#ifdef FULL_VERSION
-    return true;
-#else
     if (Settings->contains("DisableAds")) {
         return Settings->value("DisableAds").toBool();
     } else if (Settings->contains("IsFullVersion")) {
@@ -18,7 +15,6 @@ bool AppSettings::disableAds() const
     } else {
         return false;
     }
-#endif
 }
 
 void AppSettings::setDisableAds(bool disable)
