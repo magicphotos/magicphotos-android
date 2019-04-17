@@ -108,7 +108,7 @@ void BlurImageGenerator::start()
     blur_image = blur_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
     int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-    int alpha = (GaussianRadius < 1) ? 16 : (GaussianRadius > 17) ? 1 : tab[GaussianRadius - 1];
+    int alpha = GaussianRadius < 1 ? 16 : (GaussianRadius > 17 ? 1 : tab[GaussianRadius - 1]);
 
     int r1 = blur_image.rect().top();
     int r2 = blur_image.rect().bottom();

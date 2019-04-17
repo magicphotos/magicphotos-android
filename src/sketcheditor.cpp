@@ -111,7 +111,7 @@ void SketchImageGenerator::start()
     sketch_image = sketch_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
     int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-    int alpha = (GaussianRadius < 1) ? 16 : (GaussianRadius > 17) ? 1 : tab[GaussianRadius - 1];
+    int alpha = GaussianRadius < 1 ? 16 : (GaussianRadius > 17 ? 1 : tab[GaussianRadius - 1]);
 
     int r1 = sketch_image.rect().top();
     int r2 = sketch_image.rect().bottom();
@@ -193,15 +193,14 @@ void SketchImageGenerator::start()
 
     for (int y = 0; y < InputImage.height(); y++) {
         for (int x = 0; x < InputImage.width(); x++) {
-            int gray  = qGray(InputImage.pixel(x, y));
-            int alpha = qAlpha(InputImage.pixel(x, y));
+            int gray = qGray(InputImage.pixel(x, y));
 
-            grayscale_image.setPixel(x, y, qRgba(gray, gray, gray, alpha));
+            grayscale_image.setPixel(x, y, qRgba(gray, gray, gray, qAlpha(InputImage.pixel(x, y))));
 
             int blr_gray = qGray(sketch_image.pixel(x, y));
             int inv_gray = blr_gray >= 255 ? 0 : 255 - blr_gray;
 
-            sketch_image.setPixel(x, y, qRgba(inv_gray, inv_gray, inv_gray, alpha));
+            sketch_image.setPixel(x, y, qRgba(inv_gray, inv_gray, inv_gray, qAlpha(sketch_image.pixel(x, y))));
         }
     }
 
@@ -213,9 +212,7 @@ void SketchImageGenerator::start()
             int btm_gray = qGray(grayscale_image.pixel(x, y));
             int res_gray = top_gray >= 255 ? 255 : qMin(btm_gray * 255 / (255 - top_gray), 255);
 
-            int alpha    = qAlpha(sketch_image.pixel(x, y));
-
-            sketch_image.setPixel(x, y, qRgba(res_gray, res_gray, res_gray, alpha));
+            sketch_image.setPixel(x, y, qRgba(res_gray, res_gray, res_gray, qAlpha(sketch_image.pixel(x, y))));
         }
     }
 

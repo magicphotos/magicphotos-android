@@ -247,7 +247,7 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             QImage blur_image = CurrentImage.copy(blur_rect).convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
             int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-            int alpha = (GAUSSIAN_RADIUS < 1) ? 16 : (GAUSSIAN_RADIUS > 17) ? 1 : tab[GAUSSIAN_RADIUS - 1];
+            int alpha = GAUSSIAN_RADIUS < 1 ? 16 : (GAUSSIAN_RADIUS > 17 ? 1 : tab[GAUSSIAN_RADIUS - 1]);
 
             int r1 = blur_image.rect().top();
             int r2 = blur_image.rect().bottom();
