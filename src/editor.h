@@ -82,10 +82,6 @@ signals:
     void helperImageReady(const QImage &helperImage);
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override = 0;
-    void mouseMoveEvent(QMouseEvent *event) override = 0;
-    void mouseReleaseEvent(QMouseEvent *event) override = 0;
-
     virtual void processOpenedImage() = 0;
 
     void SaveUndoImage();
