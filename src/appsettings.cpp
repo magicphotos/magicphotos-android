@@ -3,12 +3,7 @@
 AppSettings::AppSettings(QObject *parent) : QObject(parent)
 {
     DefaultBrushSize = 0;
-    Settings         = new QSettings("Oleg Derevenetz", "MagicPhotos");
-}
-
-AppSettings::~AppSettings() noexcept
-{
-    delete Settings;
+    Settings         = std::make_shared<QSettings>("Oleg Derevenetz", "MagicPhotos");
 }
 
 int AppSettings::defaultBrushSize() const
