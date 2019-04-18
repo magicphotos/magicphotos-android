@@ -2,8 +2,6 @@ package com.derevenetz.oleg.magicphotos.stdalone;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 
 import android.content.Context;
@@ -372,29 +370,18 @@ public class MagicActivity extends QtActivity
                         @Override
                         public void run()
                         {
-                            InputStream      input_stream       = null;
-                            FileOutputStream file_output_stream = null;
-                            OutputStream     output_stream      = null;
-
-                            try {
-                                input_stream = getContentResolver().openInputStream(image_uri);
-
+                            try (InputStream input_stream = getContentResolver().openInputStream(image_uri)) {
                                 Bitmap bitmap = BitmapFactory.decodeStream(input_stream);
 
                                 if (bitmap != null) {
                                     final File cache_file = new File(getApplicationContext().getCacheDir().getAbsolutePath() + "/cache.jpg");
 
                                     if (cache_file.getParentFile().mkdirs() || cache_file.getParentFile().isDirectory()) {
-                                        file_output_stream = new FileOutputStream(cache_file);
-                                        output_stream      = new BufferedOutputStream(file_output_stream);
-
-                                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output_stream);
-
-                                        output_stream.flush();
-                                        output_stream.close();
-
-                                        file_output_stream.flush();
-                                        file_output_stream.close();
+                                        try (FileOutputStream output_stream = new FileOutputStream(cache_file)) {
+                                            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output_stream);
+                                        } catch (Exception ex) {
+                                            throw(ex);
+                                        }
 
                                         String[] query_columns     = { MediaStore.Images.Media.ORIENTATION };
                                         String   image_orientation = null;
@@ -420,21 +407,21 @@ public class MagicActivity extends QtActivity
                                             }
                                         }
 
-                                        final String final_image_orientation = image_orientation;
+                                        final String f_image_orientation = image_orientation;
 
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run()
                                             {
-                                                if (final_image_orientation == null) {
+                                                if (f_image_orientation == null) {
                                                     imageSelected(cache_file.getAbsolutePath(), 0);
-                                                } else if (final_image_orientation.equals("0")) {
+                                                } else if (f_image_orientation.equals("0")) {
                                                     imageSelected(cache_file.getAbsolutePath(), 0);
-                                                } else if (final_image_orientation.equals("90")) {
+                                                } else if (f_image_orientation.equals("90")) {
                                                     imageSelected(cache_file.getAbsolutePath(), 90);
-                                                } else if (final_image_orientation.equals("180")) {
+                                                } else if (f_image_orientation.equals("180")) {
                                                     imageSelected(cache_file.getAbsolutePath(), 180);
-                                                } else if (final_image_orientation.equals("270")) {
+                                                } else if (f_image_orientation.equals("270")) {
                                                     imageSelected(cache_file.getAbsolutePath(), 270);
                                                 } else {
                                                     imageSelected(cache_file.getAbsolutePath(), 0);
@@ -455,28 +442,6 @@ public class MagicActivity extends QtActivity
                                         imageSelectionFailed();
                                     }
                                 });
-                            } finally {
-                                if (input_stream != null) {
-                                    try {
-                                        input_stream.close();
-                                    } catch (Exception ex) {
-                                        // Ignore
-                                    }
-                                }
-                                if (output_stream != null) {
-                                    try {
-                                        output_stream.close();
-                                    } catch (Exception ex) {
-                                        // Ignore
-                                    }
-                                }
-                                if (file_output_stream != null) {
-                                    try {
-                                        file_output_stream.close();
-                                    } catch (Exception ex) {
-                                        // Ignore
-                                    }
-                                }
                             }
                         }
                     })).start();
