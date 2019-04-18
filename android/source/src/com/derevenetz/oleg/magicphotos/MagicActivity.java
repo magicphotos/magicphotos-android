@@ -379,8 +379,6 @@ public class MagicActivity extends QtActivity
                                     if (cache_file.getParentFile().mkdirs() || cache_file.getParentFile().isDirectory()) {
                                         try (FileOutputStream output_stream = new FileOutputStream(cache_file)) {
                                             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output_stream);
-                                        } catch (Exception ex) {
-                                            throw(ex);
                                         }
 
                                         String[] query_columns     = { MediaStore.Images.Media.ORIENTATION };
@@ -429,10 +427,10 @@ public class MagicActivity extends QtActivity
                                             }
                                         });
                                     } else {
-                                        throw(new Exception("CACHE_DIR_ACCESS_FAILED"));
+                                        throw(new Exception("Cannot access cache directory"));
                                     }
                                 } else {
-                                    throw(new Exception("BITMAP_DECODE_FAILED"));
+                                    throw(new Exception("Bitmap decode failed"));
                                 }
                             } catch (Exception ex) {
                                 runOnUiThread(new Runnable() {
