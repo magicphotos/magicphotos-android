@@ -16,9 +16,11 @@ IF NOT "%~1"=="" (
                           -D"sonar.projectName=MagicPhotos Android" ^
                           -D"sonar.projectVersion=master" ^
                           -D"sonar.organization=magicphotos-github" ^
-                          -D"sonar.sources=src" ^
+                          -D"sonar.sources=." ^
                           -D"sonar.sourceEncoding=UTF-8" ^
+                          -D"sonar.exclusions=qml/**/*,translations/*" ^
                           -D"sonar.cfamily.build-wrapper-output=.sonarbuild\\bw-output" ^
+                          -D"sonar.java.source=1.7" ^
                           -D"sonar.host.url=https://sonarcloud.io" ^
                           -D"sonar.login=%~1"
 ) ELSE (
