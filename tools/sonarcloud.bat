@@ -12,10 +12,10 @@ IF NOT "%~1"=="" (
      && qmake.exe ..\magicphotos.pro ^
      && build-wrapper-win-x86-64.exe --out-dir bw-output make.exe clean all ^
      && CD .. ^
-     && sonar-scanner.bat -D"sonar.projectKey=oleg-derevenetz:magicphotos-android" ^
+     && sonar-scanner.bat -D"sonar.projectKey=magicphotos:magicphotos-android" ^
                           -D"sonar.projectName=MagicPhotos Android" ^
                           -D"sonar.projectVersion=master" ^
-                          -D"sonar.organization=oleg-derevenetz-github" ^
+                          -D"sonar.organization=magicphotos-github" ^
                           -D"sonar.sources=src" ^
                           -D"sonar.sourceEncoding=UTF-8" ^
                           -D"sonar.cfamily.build-wrapper-output=.sonarbuild\\bw-output" ^
