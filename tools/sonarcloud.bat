@@ -14,7 +14,6 @@ IF NOT "%~1"=="" (
      && CD .. ^
      && sonar-scanner.bat -D"sonar.projectKey=magicphotos:magicphotos-android" ^
                           -D"sonar.projectName=MagicPhotos Android" ^
-                          -D"sonar.projectVersion=master" ^
                           -D"sonar.organization=magicphotos-github" ^
                           -D"sonar.sources=." ^
                           -D"sonar.sourceEncoding=UTF-8" ^
