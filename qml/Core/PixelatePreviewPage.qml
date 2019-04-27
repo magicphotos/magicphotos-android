@@ -40,7 +40,7 @@ Page {
                     var component = Qt.createComponent("PixelatePage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {imageOrientation: imageOrientation, pixelDenom: pixDenomSlider.value, imageFile: pixelatePreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "pixelDenom": pixDenomSlider.value, "imageFile": pixelatePreviewPage.imageFile});
                     } else {
                         console.log(component.errorString());
                     }

@@ -40,7 +40,7 @@ Page {
                     var component = Qt.createComponent("SketchPage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, imageFile: sketchPreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "imageFile": sketchPreviewPage.imageFile});
                     } else {
                         console.log(component.errorString());
                     }
