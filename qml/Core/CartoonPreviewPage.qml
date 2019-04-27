@@ -40,7 +40,7 @@ Page {
                     var component = Qt.createComponent("CartoonPage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, cartoonThreshold: thresholdSlider.value, imageFile: cartoonPreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "cartoonThreshold": thresholdSlider.value, "imageFile": cartoonPreviewPage.imageFile});
                     } else {
                         console.log(component.errorString());
                     }

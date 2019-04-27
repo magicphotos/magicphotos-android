@@ -40,7 +40,7 @@ Page {
                     var component = Qt.createComponent("BlurPage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {imageOrientation: imageOrientation, gaussianRadius: gaussianRadiusSlider.value, imageFile: blurPreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "imageFile": blurPreviewPage.imageFile});
                     } else {
                         console.log(component.errorString());
                     }
