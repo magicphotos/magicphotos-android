@@ -15,10 +15,10 @@ public:
     explicit EffectEditor(QQuickItem *parent = nullptr);
 
     EffectEditor(const EffectEditor&) = delete;
-    EffectEditor(const EffectEditor&&) noexcept = delete;
+    EffectEditor(EffectEditor&&) noexcept = delete;
 
     EffectEditor& operator=(const EffectEditor&) = delete;
-    EffectEditor& operator=(const EffectEditor&&) noexcept = delete;
+    EffectEditor& operator=(EffectEditor&&) noexcept = delete;
 
     ~EffectEditor() noexcept override = default;
 

@@ -18,10 +18,10 @@ public:
     explicit SketchEditor(QQuickItem *parent = nullptr);
 
     SketchEditor(const SketchEditor&) = delete;
-    SketchEditor(const SketchEditor&&) noexcept = delete;
+    SketchEditor(SketchEditor&&) noexcept = delete;
 
     SketchEditor& operator=(const SketchEditor&) = delete;
-    SketchEditor& operator=(const SketchEditor&&) noexcept = delete;
+    SketchEditor& operator=(SketchEditor&&) noexcept = delete;
 
     ~SketchEditor() noexcept override = default;
 
@@ -45,10 +45,10 @@ public:
     explicit SketchPreviewGenerator(QQuickItem *parent = nullptr);
 
     SketchPreviewGenerator(const SketchPreviewGenerator&) = delete;
-    SketchPreviewGenerator(const SketchPreviewGenerator&&) noexcept = delete;
+    SketchPreviewGenerator(SketchPreviewGenerator&&) noexcept = delete;
 
     SketchPreviewGenerator& operator=(const SketchPreviewGenerator&) = delete;
-    SketchPreviewGenerator& operator=(const SketchPreviewGenerator&&) noexcept = delete;
+    SketchPreviewGenerator& operator=(SketchPreviewGenerator&&) noexcept = delete;
 
     ~SketchPreviewGenerator() noexcept override = default;
 
@@ -70,10 +70,10 @@ public:
     explicit SketchImageGenerator(QObject *parent = nullptr);
 
     SketchImageGenerator(const SketchImageGenerator&) = delete;
-    SketchImageGenerator(const SketchImageGenerator&&) noexcept = delete;
+    SketchImageGenerator(SketchImageGenerator&&) noexcept = delete;
 
     SketchImageGenerator& operator=(const SketchImageGenerator&) = delete;
-    SketchImageGenerator& operator=(const SketchImageGenerator&&) noexcept = delete;
+    SketchImageGenerator& operator=(SketchImageGenerator&&) noexcept = delete;
 
     ~SketchImageGenerator() noexcept override = default;
 

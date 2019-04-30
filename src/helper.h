@@ -12,10 +12,10 @@ public:
     explicit Helper(QQuickPaintedItem *parent = nullptr);
 
     Helper(const Helper&) = delete;
-    Helper(const Helper&&) noexcept = delete;
+    Helper(Helper&&) noexcept = delete;
 
     Helper& operator=(const Helper&) = delete;
-    Helper& operator=(const Helper&&) noexcept = delete;
+    Helper& operator=(Helper&&) noexcept = delete;
 
     ~Helper() noexcept override = default;
 

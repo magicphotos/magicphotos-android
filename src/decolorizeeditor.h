@@ -15,10 +15,10 @@ public:
     explicit DecolorizeEditor(QQuickItem *parent = nullptr);
 
     DecolorizeEditor(const DecolorizeEditor&) = delete;
-    DecolorizeEditor(const DecolorizeEditor&&) noexcept = delete;
+    DecolorizeEditor(DecolorizeEditor&&) noexcept = delete;
 
     DecolorizeEditor& operator=(const DecolorizeEditor&) = delete;
-    DecolorizeEditor& operator=(const DecolorizeEditor&&) noexcept = delete;
+    DecolorizeEditor& operator=(DecolorizeEditor&&) noexcept = delete;
 
     ~DecolorizeEditor() noexcept override = default;
 
@@ -34,10 +34,10 @@ public:
     explicit GrayscaleImageGenerator(QObject *parent = nullptr);
 
     GrayscaleImageGenerator(const GrayscaleImageGenerator&) = delete;
-    GrayscaleImageGenerator(const GrayscaleImageGenerator&&) noexcept = delete;
+    GrayscaleImageGenerator(GrayscaleImageGenerator&&) noexcept = delete;
 
     GrayscaleImageGenerator& operator=(const GrayscaleImageGenerator&) = delete;
-    GrayscaleImageGenerator& operator=(const GrayscaleImageGenerator&&) noexcept = delete;
+    GrayscaleImageGenerator& operator=(GrayscaleImageGenerator&&) noexcept = delete;
 
     ~GrayscaleImageGenerator() noexcept override = default;
 

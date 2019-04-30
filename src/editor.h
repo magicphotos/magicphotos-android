@@ -25,10 +25,10 @@ public:
     explicit Editor(QQuickItem *parent = nullptr);
 
     Editor(const Editor&) = delete;
-    Editor(const Editor&&) noexcept = delete;
+    Editor(Editor&&) noexcept = delete;
 
     Editor& operator=(const Editor&) = delete;
-    Editor& operator=(const Editor&&) noexcept = delete;
+    Editor& operator=(Editor&&) noexcept = delete;
 
     ~Editor() noexcept override = default;
 

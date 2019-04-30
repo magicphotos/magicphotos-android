@@ -18,10 +18,10 @@ public:
     explicit PixelateEditor(QQuickItem *parent = nullptr);
 
     PixelateEditor(const PixelateEditor&) = delete;
-    PixelateEditor(const PixelateEditor&&) noexcept = delete;
+    PixelateEditor(PixelateEditor&&) noexcept = delete;
 
     PixelateEditor& operator=(const PixelateEditor&) = delete;
-    PixelateEditor& operator=(const PixelateEditor&&) noexcept = delete;
+    PixelateEditor& operator=(PixelateEditor&&) noexcept = delete;
 
     ~PixelateEditor() noexcept override = default;
 
@@ -45,10 +45,10 @@ public:
     explicit PixelatePreviewGenerator(QQuickItem *parent = nullptr);
 
     PixelatePreviewGenerator(const PixelatePreviewGenerator&) = delete;
-    PixelatePreviewGenerator(const PixelatePreviewGenerator&&) noexcept = delete;
+    PixelatePreviewGenerator(PixelatePreviewGenerator&&) noexcept = delete;
 
     PixelatePreviewGenerator& operator=(const PixelatePreviewGenerator&) = delete;
-    PixelatePreviewGenerator& operator=(const PixelatePreviewGenerator&&) noexcept = delete;
+    PixelatePreviewGenerator& operator=(PixelatePreviewGenerator&&) noexcept = delete;
 
     ~PixelatePreviewGenerator() noexcept override = default;
 
@@ -70,10 +70,10 @@ public:
     explicit PixelateImageGenerator(QObject *parent = nullptr);
 
     PixelateImageGenerator(const PixelateImageGenerator&) = delete;
-    PixelateImageGenerator(const PixelateImageGenerator&&) noexcept = delete;
+    PixelateImageGenerator(PixelateImageGenerator&&) noexcept = delete;
 
     PixelateImageGenerator& operator=(const PixelateImageGenerator&) = delete;
-    PixelateImageGenerator& operator=(const PixelateImageGenerator&&) noexcept = delete;
+    PixelateImageGenerator& operator=(PixelateImageGenerator&&) noexcept = delete;
 
     ~PixelateImageGenerator() noexcept override = default;
 

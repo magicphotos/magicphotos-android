@@ -20,10 +20,10 @@ public:
     explicit AppSettings(QObject *parent = nullptr);
 
     AppSettings(const AppSettings&) = delete;
-    AppSettings(const AppSettings&&) noexcept = delete;
+    AppSettings(AppSettings&&) noexcept = delete;
 
     AppSettings& operator=(const AppSettings&) = delete;
-    AppSettings& operator=(const AppSettings&&) noexcept = delete;
+    AppSettings& operator=(AppSettings&&) noexcept = delete;
 
     ~AppSettings() noexcept override = default;
 
