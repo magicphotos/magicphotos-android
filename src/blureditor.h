@@ -18,10 +18,10 @@ public:
     explicit BlurEditor(QQuickItem *parent = nullptr);
 
     BlurEditor(const BlurEditor&) = delete;
-    BlurEditor(const BlurEditor&&) noexcept = delete;
+    BlurEditor(BlurEditor&&) noexcept = delete;
 
     BlurEditor& operator=(const BlurEditor&) = delete;
-    BlurEditor& operator=(const BlurEditor&&) noexcept = delete;
+    BlurEditor& operator=(BlurEditor&&) noexcept = delete;
 
     ~BlurEditor() noexcept override = default;
 
@@ -45,10 +45,10 @@ public:
     explicit BlurPreviewGenerator(QQuickItem *parent = nullptr);
 
     BlurPreviewGenerator(const BlurPreviewGenerator&) = delete;
-    BlurPreviewGenerator(const BlurPreviewGenerator&&) noexcept = delete;
+    BlurPreviewGenerator(BlurPreviewGenerator&&) noexcept = delete;
 
     BlurPreviewGenerator& operator=(const BlurPreviewGenerator&) = delete;
-    BlurPreviewGenerator& operator=(const BlurPreviewGenerator&&) noexcept = delete;
+    BlurPreviewGenerator& operator=(BlurPreviewGenerator&&) noexcept = delete;
 
     ~BlurPreviewGenerator() noexcept override = default;
 
@@ -70,10 +70,10 @@ public:
     explicit BlurImageGenerator(QObject *parent = nullptr);
 
     BlurImageGenerator(const BlurImageGenerator&) = delete;
-    BlurImageGenerator(const BlurImageGenerator&&) noexcept = delete;
+    BlurImageGenerator(BlurImageGenerator&&) noexcept = delete;
 
     BlurImageGenerator& operator=(const BlurImageGenerator&) = delete;
-    BlurImageGenerator& operator=(const BlurImageGenerator&&) noexcept = delete;
+    BlurImageGenerator& operator=(BlurImageGenerator&&) noexcept = delete;
 
     ~BlurImageGenerator() noexcept override = default;
 

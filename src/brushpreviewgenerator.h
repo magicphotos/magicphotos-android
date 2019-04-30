@@ -17,10 +17,10 @@ public:
     explicit BrushPreviewGenerator(QQuickItem *parent = nullptr);
 
     BrushPreviewGenerator(const BrushPreviewGenerator&) = delete;
-    BrushPreviewGenerator(const BrushPreviewGenerator&&) noexcept = delete;
+    BrushPreviewGenerator(BrushPreviewGenerator&&) noexcept = delete;
 
     BrushPreviewGenerator& operator=(const BrushPreviewGenerator&) = delete;
-    BrushPreviewGenerator& operator=(const BrushPreviewGenerator&&) noexcept = delete;
+    BrushPreviewGenerator& operator=(BrushPreviewGenerator&&) noexcept = delete;
 
     ~BrushPreviewGenerator() noexcept override = default;
 

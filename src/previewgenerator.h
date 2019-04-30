@@ -16,10 +16,10 @@ public:
     explicit PreviewGenerator(QQuickItem *parent = nullptr);
 
     PreviewGenerator(const PreviewGenerator&) = delete;
-    PreviewGenerator(const PreviewGenerator&&) noexcept = delete;
+    PreviewGenerator(PreviewGenerator&&) noexcept = delete;
 
     PreviewGenerator& operator=(const PreviewGenerator&) = delete;
-    PreviewGenerator& operator=(const PreviewGenerator&&) noexcept = delete;
+    PreviewGenerator& operator=(PreviewGenerator&&) noexcept = delete;
 
     ~PreviewGenerator() noexcept override = default;
 

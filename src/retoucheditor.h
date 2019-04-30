@@ -18,10 +18,10 @@ public:
     explicit RetouchEditor(QQuickItem *parent = nullptr);
 
     RetouchEditor(const RetouchEditor&) = delete;
-    RetouchEditor(const RetouchEditor&&) noexcept = delete;
+    RetouchEditor(RetouchEditor&&) noexcept = delete;
 
     RetouchEditor& operator=(const RetouchEditor&) = delete;
-    RetouchEditor& operator=(const RetouchEditor&&) noexcept = delete;
+    RetouchEditor& operator=(RetouchEditor&&) noexcept = delete;
 
     ~RetouchEditor() noexcept override = default;
 

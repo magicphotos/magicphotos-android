@@ -12,10 +12,10 @@ public:
     explicit UIHelper(QObject *parent = nullptr);
 
     UIHelper(const UIHelper&) = delete;
-    UIHelper(const UIHelper&&) noexcept = delete;
+    UIHelper(UIHelper&&) noexcept = delete;
 
     UIHelper& operator=(const UIHelper&) = delete;
-    UIHelper& operator=(const UIHelper&&) noexcept = delete;
+    UIHelper& operator=(UIHelper&&) noexcept = delete;
 
     ~UIHelper() noexcept override = default;
 

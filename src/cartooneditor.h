@@ -19,10 +19,10 @@ public:
     explicit CartoonEditor(QQuickItem *parent = nullptr);
 
     CartoonEditor(const CartoonEditor&) = delete;
-    CartoonEditor(const CartoonEditor&&) noexcept = delete;
+    CartoonEditor(CartoonEditor&&) noexcept = delete;
 
     CartoonEditor& operator=(const CartoonEditor&) = delete;
-    CartoonEditor& operator=(const CartoonEditor&&) noexcept = delete;
+    CartoonEditor& operator=(CartoonEditor&&) noexcept = delete;
 
     ~CartoonEditor() noexcept override = default;
 
@@ -50,10 +50,10 @@ public:
     explicit CartoonPreviewGenerator(QQuickItem *parent = nullptr);
 
     CartoonPreviewGenerator(const CartoonPreviewGenerator&) = delete;
-    CartoonPreviewGenerator(const CartoonPreviewGenerator&&) noexcept = delete;
+    CartoonPreviewGenerator(CartoonPreviewGenerator&&) noexcept = delete;
 
     CartoonPreviewGenerator& operator=(const CartoonPreviewGenerator&) = delete;
-    CartoonPreviewGenerator& operator=(const CartoonPreviewGenerator&&) noexcept = delete;
+    CartoonPreviewGenerator& operator=(CartoonPreviewGenerator&&) noexcept = delete;
 
     ~CartoonPreviewGenerator() noexcept override = default;
 
@@ -78,10 +78,10 @@ public:
     explicit CartoonImageGenerator(QObject *parent = nullptr);
 
     CartoonImageGenerator(const CartoonImageGenerator&) = delete;
-    CartoonImageGenerator(const CartoonImageGenerator&&) noexcept = delete;
+    CartoonImageGenerator(CartoonImageGenerator&&) noexcept = delete;
 
     CartoonImageGenerator& operator=(const CartoonImageGenerator&) = delete;
-    CartoonImageGenerator& operator=(const CartoonImageGenerator&&) noexcept = delete;
+    CartoonImageGenerator& operator=(CartoonImageGenerator&&) noexcept = delete;
 
     ~CartoonImageGenerator() noexcept override = default;
 
