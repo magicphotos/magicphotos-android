@@ -70,16 +70,22 @@ android {
         android/source/gradle/wrapper/gradle-wrapper.properties \
         android/source/res/drawable/splash_qt.xml \
         android/source/res/drawable/splash_theme.xml \
+        android/source/res/drawable-hdpi/ic_launcher_foreground.png \
         android/source/res/drawable-hdpi/ic_splash_qt.png \
         android/source/res/drawable-hdpi/ic_splash_theme.png \
+        android/source/res/drawable-mdpi/ic_launcher_foreground.png \
         android/source/res/drawable-mdpi/ic_splash_qt.png \
         android/source/res/drawable-mdpi/ic_splash_theme.png \
+        android/source/res/drawable-xhdpi/ic_launcher_foreground.png \
         android/source/res/drawable-xhdpi/ic_splash_qt.png \
         android/source/res/drawable-xhdpi/ic_splash_theme.png \
+        android/source/res/drawable-xxhdpi/ic_launcher_foreground.png \
         android/source/res/drawable-xxhdpi/ic_splash_qt.png \
         android/source/res/drawable-xxhdpi/ic_splash_theme.png \
+        android/source/res/drawable-xxxhdpi/ic_launcher_foreground.png \
         android/source/res/drawable-xxxhdpi/ic_splash_qt.png \
         android/source/res/drawable-xxxhdpi/ic_splash_theme.png \
+        android/source/res/mipmap-anydpi-v26/ic_launcher.xml \
         android/source/res/mipmap-hdpi/ic_launcher.png \
         android/source/res/mipmap-mdpi/ic_launcher.png \
         android/source/res/mipmap-xhdpi/ic_launcher.png \
@@ -89,9 +95,9 @@ android {
         android/source/res/values/libs.xml \
         android/source/res/values/strings.xml \
         android/source/res/values/themes.xml \
-        android/source/res/values-ru/strings.xml \
         android/source/res/values-de/strings.xml \
         android/source/res/values-fr/strings.xml \
+        android/source/res/values-ru/strings.xml \
         android/source/res/xml/provider_paths.xml \
         android/source/src/com/derevenetz/oleg/magicphotos/stdalone/MagicActivity.java
 
