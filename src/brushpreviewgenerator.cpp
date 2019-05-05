@@ -10,66 +10,66 @@
 
 BrushPreviewGenerator::BrushPreviewGenerator(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    Size     = 0;
-    MaxSize  = 0;
-    Hardness = 0.0;
+    BrushSize     = 0;
+    MaxBrushSize  = 0;
+    BrushHardness = 0.0;
 
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-int BrushPreviewGenerator::size() const
+int BrushPreviewGenerator::brushSize() const
 {
-    return Size;
+    return BrushSize;
 }
 
-void BrushPreviewGenerator::setSize(int size)
+void BrushPreviewGenerator::setBrushSize(int size)
 {
-    Size = size;
+    BrushSize = size;
 
     update();
 }
 
-int BrushPreviewGenerator::maxSize() const
+int BrushPreviewGenerator::maxBrushSize() const
 {
-    return MaxSize;
+    return MaxBrushSize;
 }
 
-void BrushPreviewGenerator::setMaxSize(int max_size)
+void BrushPreviewGenerator::setMaxBrushSize(int max_size)
 {
-    MaxSize = max_size;
+    MaxBrushSize = max_size;
 
-    setImplicitWidth(MaxSize * 2);
-    setImplicitHeight(MaxSize * 2);
+    setImplicitWidth(MaxBrushSize * 2);
+    setImplicitHeight(MaxBrushSize * 2);
 
     update();
 }
 
-qreal BrushPreviewGenerator::hardness() const
+qreal BrushPreviewGenerator::brushHardness() const
 {
-    return Hardness;
+    return BrushHardness;
 }
 
-void BrushPreviewGenerator::setHardness(qreal hardness)
+void BrushPreviewGenerator::setBrushHardness(qreal hardness)
 {
-    Hardness = hardness;
+    BrushHardness = hardness;
 
     update();
 }
 
 void BrushPreviewGenerator::paint(QPainter *painter)
 {
-    if (Size != 0 && MaxSize != 0) {
-        QImage brush_template(Size * 2, Size * 2, QImage::Format_ARGB32);
+    if (BrushSize != 0 && MaxBrushSize != 0) {
+        QImage brush_template(BrushSize * 2, BrushSize * 2, QImage::Format_ARGB32);
 
         for (int y = 0; y < brush_template.height(); y++) {
             for (int x = 0; x < brush_template.width(); x++) {
-                qreal r = qSqrt(qPow(x - Size, 2) + qPow(y - Size, 2));
+                qreal r = qSqrt(qPow(x - BrushSize, 2) + qPow(y - BrushSize, 2));
 
-                if (r <= Size) {
-                    if (r <= Size * Hardness) {
+                if (r <= BrushSize) {
+                    if (r <= BrushSize * BrushHardness) {
                         brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
                     } else {
-                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (Size - r) / (Size * (1.0 - Hardness)))));
+                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
                     brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
@@ -85,7 +85,7 @@ void BrushPreviewGenerator::paint(QPainter *painter)
         preview_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
         preview_painter.drawImage(QPoint(0, 0), brush_template);
 
-        QImage   result(MaxSize * 2, MaxSize * 2, QImage::Format_ARGB32);
+        QImage   result(MaxBrushSize * 2, MaxBrushSize * 2, QImage::Format_ARGB32);
         QPainter result_painter(&result);
 
         result.fill(QColor::fromRgba(qRgba(0x00, 0x00, 0x00, 0x00)));
