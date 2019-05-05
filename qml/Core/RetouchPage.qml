@@ -548,9 +548,9 @@ Page {
 
             BrushPreviewGenerator {
                 id:             brushPreviewGenerator
-                size:           brushSizeSlider.value
-                maxSize:        brushSizeSlider.to
-                hardness:       brushHardnessSlider.value
+                brushSize:      brushSizeSlider.value
+                maxBrushSize:   brushSizeSlider.to
+                brushHardness:  brushHardnessSlider.value
                 Layout.rowSpan: 2
             }
 
