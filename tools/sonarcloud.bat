@@ -13,8 +13,8 @@ IF NOT "%~1"=="" (
      && (IF NOT EXIST .sonarbuild (MKDIR .sonarbuild && ATTRIB +H .sonarbuild) || CD .) ^
      && CD .sonarbuild ^
      && qmake.exe ..\magicphotos.pro ^
-     && build-wrapper-win-x86-64.exe --out-dir bw-output make.exe clean all install INSTALL_ROOT=android-output ^
-     && androiddeployqt.exe --input android-libmagicphotos.so-deployment-settings.json --output android-output --android-platform %ANDROID_PLATFORM% --deployment bundled --gradle --no-gdbserver ^
+     && build-wrapper-win-x86-64.exe --out-dir bw-output make.exe clean all install INSTALL_ROOT=android-build ^
+     && androiddeployqt.exe --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform %ANDROID_PLATFORM% --deployment bundled --gradle --no-gdbserver ^
      && CD .. ^
      && sonar-scanner.bat -D"sonar.projectKey=magicphotos:magicphotos-android" ^
                           -D"sonar.projectName=MagicPhotos Android" ^
