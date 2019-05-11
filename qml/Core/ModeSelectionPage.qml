@@ -64,6 +64,8 @@ Page {
                 waitRectangle.visible = true;
 
                 UIHelper.showGallery();
+            } else {
+                selectedMode = "";
             }
         }
     }
