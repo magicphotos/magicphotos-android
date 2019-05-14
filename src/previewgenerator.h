@@ -18,8 +18,8 @@ public:
     PreviewGenerator(const PreviewGenerator&) = delete;
     PreviewGenerator(PreviewGenerator&&) noexcept = delete;
 
-    PreviewGenerator& operator=(const PreviewGenerator&) = delete;
-    PreviewGenerator& operator=(PreviewGenerator&&) noexcept = delete;
+    PreviewGenerator &operator=(const PreviewGenerator&) = delete;
+    PreviewGenerator &operator=(PreviewGenerator&&) noexcept = delete;
 
     ~PreviewGenerator() noexcept override = default;
 

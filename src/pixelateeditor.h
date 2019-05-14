@@ -20,8 +20,8 @@ public:
     PixelateEditor(const PixelateEditor&) = delete;
     PixelateEditor(PixelateEditor&&) noexcept = delete;
 
-    PixelateEditor& operator=(const PixelateEditor&) = delete;
-    PixelateEditor& operator=(PixelateEditor&&) noexcept = delete;
+    PixelateEditor &operator=(const PixelateEditor&) = delete;
+    PixelateEditor &operator=(PixelateEditor&&) noexcept = delete;
 
     ~PixelateEditor() noexcept override = default;
 
@@ -47,8 +47,8 @@ public:
     PixelatePreviewGenerator(const PixelatePreviewGenerator&) = delete;
     PixelatePreviewGenerator(PixelatePreviewGenerator&&) noexcept = delete;
 
-    PixelatePreviewGenerator& operator=(const PixelatePreviewGenerator&) = delete;
-    PixelatePreviewGenerator& operator=(PixelatePreviewGenerator&&) noexcept = delete;
+    PixelatePreviewGenerator &operator=(const PixelatePreviewGenerator&) = delete;
+    PixelatePreviewGenerator &operator=(PixelatePreviewGenerator&&) noexcept = delete;
 
     ~PixelatePreviewGenerator() noexcept override = default;
 
@@ -72,8 +72,8 @@ public:
     PixelateImageGenerator(const PixelateImageGenerator&) = delete;
     PixelateImageGenerator(PixelateImageGenerator&&) noexcept = delete;
 
-    PixelateImageGenerator& operator=(const PixelateImageGenerator&) = delete;
-    PixelateImageGenerator& operator=(PixelateImageGenerator&&) noexcept = delete;
+    PixelateImageGenerator &operator=(const PixelateImageGenerator&) = delete;
+    PixelateImageGenerator &operator=(PixelateImageGenerator&&) noexcept = delete;
 
     ~PixelateImageGenerator() noexcept override = default;
 

@@ -20,8 +20,8 @@ public:
     SketchEditor(const SketchEditor&) = delete;
     SketchEditor(SketchEditor&&) noexcept = delete;
 
-    SketchEditor& operator=(const SketchEditor&) = delete;
-    SketchEditor& operator=(SketchEditor&&) noexcept = delete;
+    SketchEditor &operator=(const SketchEditor&) = delete;
+    SketchEditor &operator=(SketchEditor&&) noexcept = delete;
 
     ~SketchEditor() noexcept override = default;
 
@@ -47,8 +47,8 @@ public:
     SketchPreviewGenerator(const SketchPreviewGenerator&) = delete;
     SketchPreviewGenerator(SketchPreviewGenerator&&) noexcept = delete;
 
-    SketchPreviewGenerator& operator=(const SketchPreviewGenerator&) = delete;
-    SketchPreviewGenerator& operator=(SketchPreviewGenerator&&) noexcept = delete;
+    SketchPreviewGenerator &operator=(const SketchPreviewGenerator&) = delete;
+    SketchPreviewGenerator &operator=(SketchPreviewGenerator&&) noexcept = delete;
 
     ~SketchPreviewGenerator() noexcept override = default;
 
@@ -72,8 +72,8 @@ public:
     SketchImageGenerator(const SketchImageGenerator&) = delete;
     SketchImageGenerator(SketchImageGenerator&&) noexcept = delete;
 
-    SketchImageGenerator& operator=(const SketchImageGenerator&) = delete;
-    SketchImageGenerator& operator=(SketchImageGenerator&&) noexcept = delete;
+    SketchImageGenerator &operator=(const SketchImageGenerator&) = delete;
+    SketchImageGenerator &operator=(SketchImageGenerator&&) noexcept = delete;
 
     ~SketchImageGenerator() noexcept override = default;
 

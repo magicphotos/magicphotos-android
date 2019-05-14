@@ -19,8 +19,8 @@ public:
     BrushPreviewGenerator(const BrushPreviewGenerator&) = delete;
     BrushPreviewGenerator(BrushPreviewGenerator&&) noexcept = delete;
 
-    BrushPreviewGenerator& operator=(const BrushPreviewGenerator&) = delete;
-    BrushPreviewGenerator& operator=(BrushPreviewGenerator&&) noexcept = delete;
+    BrushPreviewGenerator &operator=(const BrushPreviewGenerator&) = delete;
+    BrushPreviewGenerator &operator=(BrushPreviewGenerator&&) noexcept = delete;
 
     ~BrushPreviewGenerator() noexcept override = default;
 

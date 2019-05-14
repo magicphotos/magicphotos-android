@@ -17,8 +17,8 @@ public:
     DecolorizeEditor(const DecolorizeEditor&) = delete;
     DecolorizeEditor(DecolorizeEditor&&) noexcept = delete;
 
-    DecolorizeEditor& operator=(const DecolorizeEditor&) = delete;
-    DecolorizeEditor& operator=(DecolorizeEditor&&) noexcept = delete;
+    DecolorizeEditor &operator=(const DecolorizeEditor&) = delete;
+    DecolorizeEditor &operator=(DecolorizeEditor&&) noexcept = delete;
 
     ~DecolorizeEditor() noexcept override = default;
 
@@ -36,8 +36,8 @@ public:
     GrayscaleImageGenerator(const GrayscaleImageGenerator&) = delete;
     GrayscaleImageGenerator(GrayscaleImageGenerator&&) noexcept = delete;
 
-    GrayscaleImageGenerator& operator=(const GrayscaleImageGenerator&) = delete;
-    GrayscaleImageGenerator& operator=(GrayscaleImageGenerator&&) noexcept = delete;
+    GrayscaleImageGenerator &operator=(const GrayscaleImageGenerator&) = delete;
+    GrayscaleImageGenerator &operator=(GrayscaleImageGenerator&&) noexcept = delete;
 
     ~GrayscaleImageGenerator() noexcept override = default;
 
