@@ -20,8 +20,8 @@ public:
     BlurEditor(const BlurEditor&) = delete;
     BlurEditor(BlurEditor&&) noexcept = delete;
 
-    BlurEditor& operator=(const BlurEditor&) = delete;
-    BlurEditor& operator=(BlurEditor&&) noexcept = delete;
+    BlurEditor &operator=(const BlurEditor&) = delete;
+    BlurEditor &operator=(BlurEditor&&) noexcept = delete;
 
     ~BlurEditor() noexcept override = default;
 
@@ -47,8 +47,8 @@ public:
     BlurPreviewGenerator(const BlurPreviewGenerator&) = delete;
     BlurPreviewGenerator(BlurPreviewGenerator&&) noexcept = delete;
 
-    BlurPreviewGenerator& operator=(const BlurPreviewGenerator&) = delete;
-    BlurPreviewGenerator& operator=(BlurPreviewGenerator&&) noexcept = delete;
+    BlurPreviewGenerator &operator=(const BlurPreviewGenerator&) = delete;
+    BlurPreviewGenerator &operator=(BlurPreviewGenerator&&) noexcept = delete;
 
     ~BlurPreviewGenerator() noexcept override = default;
 
@@ -72,8 +72,8 @@ public:
     BlurImageGenerator(const BlurImageGenerator&) = delete;
     BlurImageGenerator(BlurImageGenerator&&) noexcept = delete;
 
-    BlurImageGenerator& operator=(const BlurImageGenerator&) = delete;
-    BlurImageGenerator& operator=(BlurImageGenerator&&) noexcept = delete;
+    BlurImageGenerator &operator=(const BlurImageGenerator&) = delete;
+    BlurImageGenerator &operator=(BlurImageGenerator&&) noexcept = delete;
 
     ~BlurImageGenerator() noexcept override = default;
 

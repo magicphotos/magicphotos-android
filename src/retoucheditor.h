@@ -20,8 +20,8 @@ public:
     RetouchEditor(const RetouchEditor&) = delete;
     RetouchEditor(RetouchEditor&&) noexcept = delete;
 
-    RetouchEditor& operator=(const RetouchEditor&) = delete;
-    RetouchEditor& operator=(RetouchEditor&&) noexcept = delete;
+    RetouchEditor &operator=(const RetouchEditor&) = delete;
+    RetouchEditor &operator=(RetouchEditor&&) noexcept = delete;
 
     ~RetouchEditor() noexcept override = default;
 
