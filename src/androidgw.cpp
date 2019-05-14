@@ -22,7 +22,7 @@ extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, bannerV
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelected)(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
 {
-    const char* str        = jni_env->GetStringUTFChars(j_image_file, nullptr);
+    const char *str        = jni_env->GetStringUTFChars(j_image_file, nullptr);
     QString     image_file = str;
 
     jni_env->ReleaseStringUTFChars(j_image_file, str);
