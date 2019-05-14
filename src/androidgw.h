@@ -8,18 +8,18 @@ class AndroidGW : public QObject
 {
     Q_OBJECT
 
-public:
+private:
     explicit AndroidGW(QObject *parent = nullptr);
+    ~AndroidGW() noexcept override = default;
 
+public:
     AndroidGW(const AndroidGW&) = delete;
     AndroidGW(AndroidGW&&) noexcept = delete;
 
     AndroidGW& operator=(const AndroidGW&) = delete;
     AndroidGW& operator=(AndroidGW&&) noexcept = delete;
 
-    ~AndroidGW() noexcept override = default;
-
-    static AndroidGW *instance();
+    static AndroidGW &GetInstance();
 
 signals:
     void setBannerViewHeight(int height);
@@ -27,9 +27,6 @@ signals:
     void processImageSelection(const QString &image_file, int image_orientation);
     void processImageSelectionCancel();
     void processImageSelectionFailure();
-
-private:
-    static AndroidGW *Instance;
 };
 
 #endif // ANDROIDGW_H

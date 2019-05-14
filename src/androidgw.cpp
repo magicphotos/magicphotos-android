@@ -4,21 +4,20 @@
 
 #define JAVA_NATIVE_METHOD_NAME(class_name, method_name) Java_com_derevenetz_oleg_magicphotos_stdalone_ ## class_name ## _ ## method_name
 
-AndroidGW *AndroidGW::Instance = nullptr;
-
 AndroidGW::AndroidGW(QObject *parent) : QObject(parent)
 {
-    Instance = this;
 }
 
-AndroidGW *AndroidGW::instance()
+AndroidGW &AndroidGW::GetInstance()
 {
-    return Instance;
+    static AndroidGW instance;
+
+    return instance;
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, bannerViewHeightUpdated)(JNIEnv *, jclass, jint height)
 {
-    emit AndroidGW::instance()->setBannerViewHeight(height);
+    emit AndroidGW::GetInstance().setBannerViewHeight(height);
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelected)(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
@@ -28,15 +27,15 @@ extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSe
 
     jni_env->ReleaseStringUTFChars(j_image_file, str);
 
-    emit AndroidGW::instance()->processImageSelection(image_file, image_orientation);
+    emit AndroidGW::GetInstance().processImageSelection(image_file, image_orientation);
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelectionCancelled)(JNIEnv *)
 {
-    emit AndroidGW::instance()->processImageSelectionCancel();
+    emit AndroidGW::GetInstance().processImageSelectionCancel();
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelectionFailed)(JNIEnv *)
 {
-    emit AndroidGW::instance()->processImageSelectionFailure();
+    emit AndroidGW::GetInstance().processImageSelectionFailure();
 }

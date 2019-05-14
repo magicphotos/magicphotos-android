@@ -8,16 +8,18 @@ class UIHelper : public QObject
 {
     Q_OBJECT
 
-public:
+private:
     explicit UIHelper(QObject *parent = nullptr);
+    ~UIHelper() noexcept override = default;
 
+public:
     UIHelper(const UIHelper&) = delete;
     UIHelper(UIHelper&&) noexcept = delete;
 
     UIHelper& operator=(const UIHelper&) = delete;
     UIHelper& operator=(UIHelper&&) noexcept = delete;
 
-    ~UIHelper() noexcept override = default;
+    static UIHelper &GetInstance();
 
     Q_INVOKABLE int getScreenDPI();
     Q_INVOKABLE QString getSaveDirectory();
