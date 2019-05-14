@@ -30,14 +30,10 @@ int main(int argc, char *argv[])
         QGuiApplication::installTranslator(&translator);
     }
 
-    auto android_gw   = new AndroidGW(&app);
-    auto admob_helper = new AdMobHelper(&app);
-    auto ui_helper    = new UIHelper(&app);
-
-    QObject::connect(android_gw, &AndroidGW::setBannerViewHeight,          admob_helper, &AdMobHelper::setBannerViewHeight);
-    QObject::connect(android_gw, &AndroidGW::processImageSelection,        ui_helper,    &UIHelper::processImageSelection);
-    QObject::connect(android_gw, &AndroidGW::processImageSelectionCancel,  ui_helper,    &UIHelper::processImageSelectionCancel);
-    QObject::connect(android_gw, &AndroidGW::processImageSelectionFailure, ui_helper,    &UIHelper::processImageSelectionFailure);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::setBannerViewHeight,          &AdMobHelper::GetInstance(), &AdMobHelper::setBannerViewHeight);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::processImageSelection,        &UIHelper::GetInstance(),    &UIHelper::processImageSelection);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::processImageSelectionCancel,  &UIHelper::GetInstance(),    &UIHelper::processImageSelectionCancel);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::processImageSelectionFailure, &UIHelper::GetInstance(),    &UIHelper::processImageSelectionFailure);
 
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
     qmlRegisterType<BrushPreviewGenerator>("ImageEditor", 1, 0, "BrushPreviewGenerator");
@@ -61,9 +57,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty(QStringLiteral("AppSettings"), new AppSettings(&app));
-    engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), admob_helper);
-    engine.rootContext()->setContextProperty(QStringLiteral("UIHelper"), ui_helper);
+    engine.rootContext()->setContextProperty(QStringLiteral("AppSettings"), &AppSettings::GetInstance());
+    engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), &AdMobHelper::GetInstance());
+    engine.rootContext()->setContextProperty(QStringLiteral("UIHelper"), &UIHelper::GetInstance());
 
     QQuickStyle::setStyle("Material");
 

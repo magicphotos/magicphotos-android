@@ -18,6 +18,13 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
                                                                                                         j_interstitial_unit_id.object<jstring>());
 }
 
+AdMobHelper &AdMobHelper::GetInstance()
+{
+    static AdMobHelper instance;
+
+    return instance;
+}
+
 int AdMobHelper::bannerViewHeight() const
 {
     return BannerViewHeight;

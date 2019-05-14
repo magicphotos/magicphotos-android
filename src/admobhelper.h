@@ -10,12 +10,14 @@ class AdMobHelper : public QObject
 
     Q_PROPERTY(int bannerViewHeight READ bannerViewHeight NOTIFY bannerViewHeightChanged)
 
+private:
+    explicit AdMobHelper(QObject *parent = nullptr);
+    ~AdMobHelper() noexcept override = default;
+
 public:
     static const QString ADMOB_APP_ID,
                          ADMOB_BANNERVIEW_UNIT_ID,
                          ADMOB_INTERSTITIAL_UNIT_ID;
-
-    explicit AdMobHelper(QObject *parent = nullptr);
 
     AdMobHelper(const AdMobHelper&) = delete;
     AdMobHelper(AdMobHelper&&) noexcept = delete;
@@ -23,7 +25,7 @@ public:
     AdMobHelper& operator=(const AdMobHelper&) = delete;
     AdMobHelper& operator=(AdMobHelper&&) noexcept = delete;
 
-    ~AdMobHelper() noexcept override = default;
+    static AdMobHelper &GetInstance();
 
     int bannerViewHeight() const;
 

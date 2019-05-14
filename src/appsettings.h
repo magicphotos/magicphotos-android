@@ -16,16 +16,18 @@ class AppSettings : public QObject
     Q_PROPERTY(int   brushSize        READ brushSize        WRITE setBrushSize)
     Q_PROPERTY(qreal brushHardness    READ brushHardness    WRITE setBrushHardness)
 
-public:
+private:
     explicit AppSettings(QObject *parent = nullptr);
+    ~AppSettings() noexcept override = default;
 
+public:
     AppSettings(const AppSettings&) = delete;
     AppSettings(AppSettings&&) noexcept = delete;
 
     AppSettings& operator=(const AppSettings&) = delete;
     AppSettings& operator=(AppSettings&&) noexcept = delete;
 
-    ~AppSettings() noexcept override = default;
+    static AppSettings &GetInstance();
 
     bool disableAds() const;
     void setDisableAds(bool disable);
