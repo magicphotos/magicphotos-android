@@ -19,11 +19,11 @@ class RecolorEditor : public Editor
 public:
     explicit RecolorEditor(QQuickItem *parent = nullptr);
 
-    RecolorEditor(const RecolorEditor&) = delete;
-    RecolorEditor(RecolorEditor&&) noexcept = delete;
+    RecolorEditor(const RecolorEditor &) = delete;
+    RecolorEditor(RecolorEditor &&) noexcept = delete;
 
-    RecolorEditor &operator=(const RecolorEditor&) = delete;
-    RecolorEditor &operator=(RecolorEditor&&) noexcept = delete;
+    RecolorEditor &operator=(const RecolorEditor &) = delete;
+    RecolorEditor &operator=(RecolorEditor &&) noexcept = delete;
 
     ~RecolorEditor() noexcept override = default;
 

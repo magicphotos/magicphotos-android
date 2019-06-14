@@ -14,11 +14,11 @@ class EffectEditor : public Editor
 public:
     explicit EffectEditor(QQuickItem *parent = nullptr);
 
-    EffectEditor(const EffectEditor&) = delete;
-    EffectEditor(EffectEditor&&) noexcept = delete;
+    EffectEditor(const EffectEditor &) = delete;
+    EffectEditor(EffectEditor &&) noexcept = delete;
 
-    EffectEditor &operator=(const EffectEditor&) = delete;
-    EffectEditor &operator=(EffectEditor&&) noexcept = delete;
+    EffectEditor &operator=(const EffectEditor &) = delete;
+    EffectEditor &operator=(EffectEditor &&) noexcept = delete;
 
     ~EffectEditor() noexcept override = default;
 

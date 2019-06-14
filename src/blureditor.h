@@ -17,11 +17,11 @@ class BlurEditor : public EffectEditor
 public:
     explicit BlurEditor(QQuickItem *parent = nullptr);
 
-    BlurEditor(const BlurEditor&) = delete;
-    BlurEditor(BlurEditor&&) noexcept = delete;
+    BlurEditor(const BlurEditor &) = delete;
+    BlurEditor(BlurEditor &&) noexcept = delete;
 
-    BlurEditor &operator=(const BlurEditor&) = delete;
-    BlurEditor &operator=(BlurEditor&&) noexcept = delete;
+    BlurEditor &operator=(const BlurEditor &) = delete;
+    BlurEditor &operator=(BlurEditor &&) noexcept = delete;
 
     ~BlurEditor() noexcept override = default;
 
@@ -44,11 +44,11 @@ class BlurPreviewGenerator : public PreviewGenerator
 public:
     explicit BlurPreviewGenerator(QQuickItem *parent = nullptr);
 
-    BlurPreviewGenerator(const BlurPreviewGenerator&) = delete;
-    BlurPreviewGenerator(BlurPreviewGenerator&&) noexcept = delete;
+    BlurPreviewGenerator(const BlurPreviewGenerator &) = delete;
+    BlurPreviewGenerator(BlurPreviewGenerator &&) noexcept = delete;
 
-    BlurPreviewGenerator &operator=(const BlurPreviewGenerator&) = delete;
-    BlurPreviewGenerator &operator=(BlurPreviewGenerator&&) noexcept = delete;
+    BlurPreviewGenerator &operator=(const BlurPreviewGenerator &) = delete;
+    BlurPreviewGenerator &operator=(BlurPreviewGenerator &&) noexcept = delete;
 
     ~BlurPreviewGenerator() noexcept override = default;
 
@@ -69,11 +69,11 @@ class BlurImageGenerator : public QObject
 public:
     explicit BlurImageGenerator(QObject *parent = nullptr);
 
-    BlurImageGenerator(const BlurImageGenerator&) = delete;
-    BlurImageGenerator(BlurImageGenerator&&) noexcept = delete;
+    BlurImageGenerator(const BlurImageGenerator &) = delete;
+    BlurImageGenerator(BlurImageGenerator &&) noexcept = delete;
 
-    BlurImageGenerator &operator=(const BlurImageGenerator&) = delete;
-    BlurImageGenerator &operator=(BlurImageGenerator&&) noexcept = delete;
+    BlurImageGenerator &operator=(const BlurImageGenerator &) = delete;
+    BlurImageGenerator &operator=(BlurImageGenerator &&) noexcept = delete;
 
     ~BlurImageGenerator() noexcept override = default;
 

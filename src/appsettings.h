@@ -21,11 +21,11 @@ private:
     ~AppSettings() noexcept override = default;
 
 public:
-    AppSettings(const AppSettings&) = delete;
-    AppSettings(AppSettings&&) noexcept = delete;
+    AppSettings(const AppSettings &) = delete;
+    AppSettings(AppSettings &&) noexcept = delete;
 
-    AppSettings &operator=(const AppSettings&) = delete;
-    AppSettings &operator=(AppSettings&&) noexcept = delete;
+    AppSettings &operator=(const AppSettings &) = delete;
+    AppSettings &operator=(AppSettings &&) noexcept = delete;
 
     static AppSettings &GetInstance();
 

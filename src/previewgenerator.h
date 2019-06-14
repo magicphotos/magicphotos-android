@@ -15,11 +15,11 @@ class PreviewGenerator : public QQuickPaintedItem
 public:
     explicit PreviewGenerator(QQuickItem *parent = nullptr);
 
-    PreviewGenerator(const PreviewGenerator&) = delete;
-    PreviewGenerator(PreviewGenerator&&) noexcept = delete;
+    PreviewGenerator(const PreviewGenerator &) = delete;
+    PreviewGenerator(PreviewGenerator &&) noexcept = delete;
 
-    PreviewGenerator &operator=(const PreviewGenerator&) = delete;
-    PreviewGenerator &operator=(PreviewGenerator&&) noexcept = delete;
+    PreviewGenerator &operator=(const PreviewGenerator &) = delete;
+    PreviewGenerator &operator=(PreviewGenerator &&) noexcept = delete;
 
     ~PreviewGenerator() noexcept override = default;
 

@@ -17,11 +17,11 @@ class PixelateEditor : public EffectEditor
 public:
     explicit PixelateEditor(QQuickItem *parent = nullptr);
 
-    PixelateEditor(const PixelateEditor&) = delete;
-    PixelateEditor(PixelateEditor&&) noexcept = delete;
+    PixelateEditor(const PixelateEditor &) = delete;
+    PixelateEditor(PixelateEditor &&) noexcept = delete;
 
-    PixelateEditor &operator=(const PixelateEditor&) = delete;
-    PixelateEditor &operator=(PixelateEditor&&) noexcept = delete;
+    PixelateEditor &operator=(const PixelateEditor &) = delete;
+    PixelateEditor &operator=(PixelateEditor &&) noexcept = delete;
 
     ~PixelateEditor() noexcept override = default;
 
@@ -44,11 +44,11 @@ class PixelatePreviewGenerator : public PreviewGenerator
 public:
     explicit PixelatePreviewGenerator(QQuickItem *parent = nullptr);
 
-    PixelatePreviewGenerator(const PixelatePreviewGenerator&) = delete;
-    PixelatePreviewGenerator(PixelatePreviewGenerator&&) noexcept = delete;
+    PixelatePreviewGenerator(const PixelatePreviewGenerator &) = delete;
+    PixelatePreviewGenerator(PixelatePreviewGenerator &&) noexcept = delete;
 
-    PixelatePreviewGenerator &operator=(const PixelatePreviewGenerator&) = delete;
-    PixelatePreviewGenerator &operator=(PixelatePreviewGenerator&&) noexcept = delete;
+    PixelatePreviewGenerator &operator=(const PixelatePreviewGenerator &) = delete;
+    PixelatePreviewGenerator &operator=(PixelatePreviewGenerator &&) noexcept = delete;
 
     ~PixelatePreviewGenerator() noexcept override = default;
 
@@ -69,11 +69,11 @@ class PixelateImageGenerator : public QObject
 public:
     explicit PixelateImageGenerator(QObject *parent = nullptr);
 
-    PixelateImageGenerator(const PixelateImageGenerator&) = delete;
-    PixelateImageGenerator(PixelateImageGenerator&&) noexcept = delete;
+    PixelateImageGenerator(const PixelateImageGenerator &) = delete;
+    PixelateImageGenerator(PixelateImageGenerator &&) noexcept = delete;
 
-    PixelateImageGenerator &operator=(const PixelateImageGenerator&) = delete;
-    PixelateImageGenerator &operator=(PixelateImageGenerator&&) noexcept = delete;
+    PixelateImageGenerator &operator=(const PixelateImageGenerator &) = delete;
+    PixelateImageGenerator &operator=(PixelateImageGenerator &&) noexcept = delete;
 
     ~PixelateImageGenerator() noexcept override = default;
 
