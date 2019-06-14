@@ -24,11 +24,11 @@ class Editor : public QQuickPaintedItem
 public:
     explicit Editor(QQuickItem *parent = nullptr);
 
-    Editor(const Editor&) = delete;
-    Editor(Editor&&) noexcept = delete;
+    Editor(const Editor &) = delete;
+    Editor(Editor &&) noexcept = delete;
 
-    Editor &operator=(const Editor&) = delete;
-    Editor &operator=(Editor&&) noexcept = delete;
+    Editor &operator=(const Editor &) = delete;
+    Editor &operator=(Editor &&) noexcept = delete;
 
     ~Editor() noexcept override = default;
 

@@ -19,11 +19,11 @@ public:
                          ADMOB_BANNERVIEW_UNIT_ID,
                          ADMOB_INTERSTITIAL_UNIT_ID;
 
-    AdMobHelper(const AdMobHelper&) = delete;
-    AdMobHelper(AdMobHelper&&) noexcept = delete;
+    AdMobHelper(const AdMobHelper &) = delete;
+    AdMobHelper(AdMobHelper &&) noexcept = delete;
 
-    AdMobHelper &operator=(const AdMobHelper&) = delete;
-    AdMobHelper &operator=(AdMobHelper&&) noexcept = delete;
+    AdMobHelper &operator=(const AdMobHelper &) = delete;
+    AdMobHelper &operator=(AdMobHelper &&) noexcept = delete;
 
     static AdMobHelper &GetInstance();
 

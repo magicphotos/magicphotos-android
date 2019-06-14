@@ -13,11 +13,11 @@ private:
     ~UIHelper() noexcept override = default;
 
 public:
-    UIHelper(const UIHelper&) = delete;
-    UIHelper(UIHelper&&) noexcept = delete;
+    UIHelper(const UIHelper &) = delete;
+    UIHelper(UIHelper &&) noexcept = delete;
 
-    UIHelper &operator=(const UIHelper&) = delete;
-    UIHelper &operator=(UIHelper&&) noexcept = delete;
+    UIHelper &operator=(const UIHelper &) = delete;
+    UIHelper &operator=(UIHelper &&) noexcept = delete;
 
     static UIHelper &GetInstance();
 

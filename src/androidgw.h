@@ -13,11 +13,11 @@ private:
     ~AndroidGW() noexcept override = default;
 
 public:
-    AndroidGW(const AndroidGW&) = delete;
-    AndroidGW(AndroidGW&&) noexcept = delete;
+    AndroidGW(const AndroidGW &) = delete;
+    AndroidGW(AndroidGW &&) noexcept = delete;
 
-    AndroidGW &operator=(const AndroidGW&) = delete;
-    AndroidGW &operator=(AndroidGW&&) noexcept = delete;
+    AndroidGW &operator=(const AndroidGW &) = delete;
+    AndroidGW &operator=(AndroidGW &&) noexcept = delete;
 
     static AndroidGW &GetInstance();
 

@@ -18,11 +18,11 @@ class CartoonEditor : public EffectEditor
 public:
     explicit CartoonEditor(QQuickItem *parent = nullptr);
 
-    CartoonEditor(const CartoonEditor&) = delete;
-    CartoonEditor(CartoonEditor&&) noexcept = delete;
+    CartoonEditor(const CartoonEditor &) = delete;
+    CartoonEditor(CartoonEditor &&) noexcept = delete;
 
-    CartoonEditor &operator=(const CartoonEditor&) = delete;
-    CartoonEditor &operator=(CartoonEditor&&) noexcept = delete;
+    CartoonEditor &operator=(const CartoonEditor &) = delete;
+    CartoonEditor &operator=(CartoonEditor &&) noexcept = delete;
 
     ~CartoonEditor() noexcept override = default;
 
@@ -49,11 +49,11 @@ class CartoonPreviewGenerator : public PreviewGenerator
 public:
     explicit CartoonPreviewGenerator(QQuickItem *parent = nullptr);
 
-    CartoonPreviewGenerator(const CartoonPreviewGenerator&) = delete;
-    CartoonPreviewGenerator(CartoonPreviewGenerator&&) noexcept = delete;
+    CartoonPreviewGenerator(const CartoonPreviewGenerator &) = delete;
+    CartoonPreviewGenerator(CartoonPreviewGenerator &&) noexcept = delete;
 
-    CartoonPreviewGenerator &operator=(const CartoonPreviewGenerator&) = delete;
-    CartoonPreviewGenerator &operator=(CartoonPreviewGenerator&&) noexcept = delete;
+    CartoonPreviewGenerator &operator=(const CartoonPreviewGenerator &) = delete;
+    CartoonPreviewGenerator &operator=(CartoonPreviewGenerator &&) noexcept = delete;
 
     ~CartoonPreviewGenerator() noexcept override = default;
 
@@ -77,11 +77,11 @@ class CartoonImageGenerator : public QObject
 public:
     explicit CartoonImageGenerator(QObject *parent = nullptr);
 
-    CartoonImageGenerator(const CartoonImageGenerator&) = delete;
-    CartoonImageGenerator(CartoonImageGenerator&&) noexcept = delete;
+    CartoonImageGenerator(const CartoonImageGenerator &) = delete;
+    CartoonImageGenerator(CartoonImageGenerator &&) noexcept = delete;
 
-    CartoonImageGenerator &operator=(const CartoonImageGenerator&) = delete;
-    CartoonImageGenerator &operator=(CartoonImageGenerator&&) noexcept = delete;
+    CartoonImageGenerator &operator=(const CartoonImageGenerator &) = delete;
+    CartoonImageGenerator &operator=(CartoonImageGenerator &&) noexcept = delete;
 
     ~CartoonImageGenerator() noexcept override = default;
 
