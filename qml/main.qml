@@ -17,7 +17,7 @@ ApplicationWindow {
     property int screenOrientation: Screen.orientation
 
     onScreenOrientationChanged: {
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
+        if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
             AdMobHelper.showBannerView();
         } else {
             AdMobHelper.hideBannerView();
@@ -40,13 +40,13 @@ ApplicationWindow {
             if (depth > 0) {
                 currentItem.forceActiveFocus();
 
-                if (currentItem.hasOwnProperty("bannerViewHeight")) {
+                if (typeof currentItem.bannerViewHeight === "number") {
                     AdMobHelper.showBannerView();
                 } else {
                     AdMobHelper.hideBannerView();
                 }
 
-                if (currentItem.hasOwnProperty("allowInterstitial") && currentItem.allowInterstitial) {
+                if (currentItem.allowInterstitial) {
                     AdMobHelper.showInterstitial();
                 }
             } else {
