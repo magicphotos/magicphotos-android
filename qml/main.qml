@@ -14,7 +14,7 @@ ApplicationWindow {
     Material.theme:               Material.System
     Material.primary:             Material.Teal
 
-    property int screenOrientation: Screen.orientation
+    readonly property int screenOrientation: Screen.orientation
 
     onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
