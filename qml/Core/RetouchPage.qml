@@ -235,13 +235,15 @@ Page {
         }
     }
 
-    property bool   allowInterstitial: true
-    property bool   shareActionActive: false
+    readonly property bool allowInterstitial: true
 
-    property int    bannerViewHeight:  AdMobHelper.bannerViewHeight
-    property int    imageOrientation:  -1
+    readonly property int bannerViewHeight:   AdMobHelper.bannerViewHeight
 
-    property string imageFile:         ""
+    property bool shareActionActive:          false
+
+    property int imageOrientation:            -1
+
+    property string imageFile:                ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -441,8 +443,8 @@ Page {
                         source:  "qrc:/resources/images/sampling_point.png"
                         visible: retouchEditor.samplingPointValid
 
-                        property int samplingPointX: retouchEditor.samplingPoint.x
-                        property int samplingPointY: retouchEditor.samplingPoint.y
+                        readonly property int samplingPointX: retouchEditor.samplingPoint.x
+                        readonly property int samplingPointY: retouchEditor.samplingPoint.y
 
                         onSamplingPointXChanged: {
                             if (editorFlickable.initialContentWidth > 0.0) {

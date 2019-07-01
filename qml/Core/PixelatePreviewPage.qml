@@ -49,9 +49,9 @@ Page {
         }
     }
 
-    property int    imageOrientation: -1
+    property int imageOrientation: -1
 
-    property string imageFile:        ""
+    property string imageFile:     ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {

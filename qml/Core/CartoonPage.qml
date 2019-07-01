@@ -214,15 +214,17 @@ Page {
         }
     }
 
-    property bool   allowInterstitial: true
-    property bool   shareActionActive: false
+    readonly property bool allowInterstitial: true
 
-    property int    bannerViewHeight:  AdMobHelper.bannerViewHeight
-    property int    imageOrientation:  -1
-    property int    gaussianRadius:    -1
-    property int    cartoonThreshold:  -1
+    readonly property int bannerViewHeight:   AdMobHelper.bannerViewHeight
 
-    property string imageFile:         ""
+    property bool shareActionActive:          false
+
+    property int imageOrientation:            -1
+    property int gaussianRadius:              -1
+    property int cartoonThreshold:            -1
+
+    property string imageFile:                ""
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {

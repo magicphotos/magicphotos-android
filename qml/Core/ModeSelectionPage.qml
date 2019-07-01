@@ -164,7 +164,7 @@ Page {
             rowSpacing:    UtilScript.pt(4)
             columnSpacing: UtilScript.pt(4)
 
-            property int itemSize: (width - columnSpacing * (columns - 1)) / columns
+            readonly property int itemSize: (width - columnSpacing * (columns - 1)) / columns
 
             Image {
                 source:                 "qrc:/resources/images/edit_mode_decolorize.png"

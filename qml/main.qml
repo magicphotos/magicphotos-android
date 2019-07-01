@@ -15,8 +15,9 @@ ApplicationWindow {
     Material.theme:               Material.System
     Material.primary:             Material.Teal
 
-    property bool disableAds:       false
-    property int screenOrientation: Screen.orientation
+    readonly property int screenOrientation: Screen.orientation
+
+    property bool disableAds:                false
 
     onDisableAdsChanged: {
         AppSettings.disableAds = disableAds;
