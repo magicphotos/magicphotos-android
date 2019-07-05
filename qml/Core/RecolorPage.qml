@@ -298,7 +298,7 @@ Page {
                     editorFlickable.contentX += pinch_prev_center.x - pinch_center.x;
                     editorFlickable.contentY += pinch_prev_center.y - pinch_center.y;
 
-                    var scale  = 1.0 + pinch_scale - pinch_prev_scale;
+                    var scale = 1.0 + pinch_scale - pinch_prev_scale;
 
                     if (editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth >= 0.5 &&
                         editorFlickable.contentWidth * scale / editorFlickable.initialContentWidth <= 4.0) {
