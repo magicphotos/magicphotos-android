@@ -416,7 +416,7 @@ Page {
             anchors.left: parent.left
             width:        UtilScript.pt(128)
             height:       UtilScript.pt(128)
-            z:            5
+            z:            1
             visible:      false
             color:        "transparent"
 
@@ -444,7 +444,7 @@ Page {
         Rectangle {
             id:           waitRectangle
             anchors.fill: parent
-            z:            10
+            z:            2
             color:        "black"
             opacity:      0.75
 
@@ -453,7 +453,7 @@ Page {
                 running:          parent.visible
             }
 
-            MouseArea {
+            MultiPointTouchArea {
                 anchors.fill: parent
             }
         }
@@ -464,7 +464,7 @@ Page {
         anchors.bottom:     parent.bottom
         anchors.left:       parent.left
         anchors.right:      parent.right
-        z:                  15
+        z:                  1
         visible:            false
         Material.elevation: 5
 

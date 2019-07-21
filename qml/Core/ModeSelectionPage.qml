@@ -260,7 +260,7 @@ Page {
     Rectangle {
         id:           waitRectangle
         anchors.fill: parent
-        z:            10
+        z:            1
         color:        "black"
         opacity:      0.75
         visible:      false
@@ -270,7 +270,7 @@ Page {
             running:          parent.visible
         }
 
-        MouseArea {
+        MultiPointTouchArea {
             anchors.fill: parent
         }
     }
