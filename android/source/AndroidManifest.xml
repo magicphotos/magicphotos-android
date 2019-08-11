@@ -64,5 +64,7 @@
 
         <!-- AdMob App ID -->
         <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-2455088855015693~7279538773"/>
+        <!-- Delay app measurement until AdMob initialization -->
+        <meta-data android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT" android:value="true"/>
     </application>
 </manifest>

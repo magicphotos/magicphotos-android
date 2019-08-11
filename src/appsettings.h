@@ -5,16 +5,18 @@
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtCore/QSettings>
 
 class AppSettings : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool  disableAds       READ disableAds       WRITE setDisableAds)
-    Q_PROPERTY(int   defaultBrushSize READ defaultBrushSize WRITE setDefaultBrushSize)
-    Q_PROPERTY(int   brushSize        READ brushSize        WRITE setBrushSize)
-    Q_PROPERTY(qreal brushHardness    READ brushHardness    WRITE setBrushHardness)
+    Q_PROPERTY(bool    disableAds       READ disableAds       WRITE setDisableAds)
+    Q_PROPERTY(int     defaultBrushSize READ defaultBrushSize WRITE setDefaultBrushSize)
+    Q_PROPERTY(int     brushSize        READ brushSize        WRITE setBrushSize)
+    Q_PROPERTY(qreal   brushHardness    READ brushHardness    WRITE setBrushHardness)
+    Q_PROPERTY(QString adMobConsent     READ adMobConsent     WRITE setAdMobConsent)
 
 private:
     explicit AppSettings(QObject *parent = nullptr);
@@ -40,6 +42,9 @@ public:
 
     qreal brushHardness() const;
     void setBrushHardness(qreal hardness);
+
+    QString adMobConsent() const;
+    void setAdMobConsent(QString &consent);
 
 private:
     int                        DefaultBrushSize;

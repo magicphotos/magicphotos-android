@@ -4,6 +4,8 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import QtPurchasing 1.0
 
+import "Core/Dialog"
+
 import "Util.js" as UtilScript
 
 ApplicationWindow {
@@ -19,11 +21,7 @@ ApplicationWindow {
 
     property bool disableAds:                false
 
-    onDisableAdsChanged: {
-        AppSettings.disableAds = disableAds;
-
-        updateFeatures();
-    }
+    property string adMobConsent:            ""
 
     onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
@@ -37,7 +35,25 @@ ApplicationWindow {
         }
     }
 
+    onDisableAdsChanged: {
+        AppSettings.disableAds = disableAds;
+
+        updateFeatures();
+    }
+
+    onAdMobConsentChanged: {
+        AppSettings.adMobConsent = adMobConsent;
+
+        updateFeatures();
+    }
+
     function updateFeatures() {
+        if (!disableAds && (adMobConsent === "PERSONALIZED" || adMobConsent === "NON_PERSONALIZED")) {
+            AdMobHelper.setPersonalization(adMobConsent === "PERSONALIZED");
+
+            AdMobHelper.initAds();
+        }
+
         if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
             if (disableAds) {
                 AdMobHelper.hideBannerView();
@@ -47,6 +63,10 @@ ApplicationWindow {
         } else {
             AdMobHelper.hideBannerView();
         }
+    }
+
+    function showAdMobConsentDialog() {
+        adMobConsentDialog.open();
     }
 
     Store {
@@ -118,10 +138,23 @@ ApplicationWindow {
         enabled:      mainStackView.busy
     }
 
+    AdMobConsentDialog {
+        id: adMobConsentDialog
+
+        onShowPersonalizedAds: {
+            mainWindow.adMobConsent = "PERSONALIZED";
+        }
+
+        onShowNonPersonalizedAds: {
+            mainWindow.adMobConsent = "NON_PERSONALIZED";
+        }
+    }
+
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.pt(16);
 
-        disableAds = AppSettings.disableAds;
+        disableAds   = AppSettings.disableAds;
+        adMobConsent = AppSettings.adMobConsent;
 
         updateFeatures();
 
@@ -131,6 +164,10 @@ ApplicationWindow {
             mainStackView.push(component);
         } else {
             console.log(component.errorString());
+        }
+
+        if (!disableAds && adMobConsent !== "PERSONALIZED" && adMobConsent !== "NON_PERSONALIZED") {
+            adMobConsentDialog.open();
         }
     }
 }
