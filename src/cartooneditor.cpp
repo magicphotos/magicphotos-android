@@ -7,28 +7,28 @@
 
 CartoonEditor::CartoonEditor(QQuickItem *parent) : EffectEditor(parent)
 {
-    GaussianRadius   = 0;
-    CartoonThreshold = 0;
+    Radius    = 0;
+    Threshold = 0;
 }
 
 int CartoonEditor::radius() const
 {
-    return GaussianRadius;
+    return Radius;
 }
 
 void CartoonEditor::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 }
 
 int CartoonEditor::threshold() const
 {
-    return CartoonThreshold;
+    return Threshold;
 }
 
 void CartoonEditor::setThreshold(int threshold)
 {
-    CartoonThreshold = threshold;
+    Threshold = threshold;
 }
 
 void CartoonEditor::processOpenedImage()
@@ -44,8 +44,8 @@ void CartoonEditor::processOpenedImage()
     QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
 
-    generator->setGaussianRadius(GaussianRadius);
-    generator->setCartoonThreshold(CartoonThreshold);
+    generator->setRadius(Radius);
+    generator->setThreshold(Threshold);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -53,18 +53,18 @@ void CartoonEditor::processOpenedImage()
 
 CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
 {
-    GaussianRadius   = 0;
-    CartoonThreshold = 0;
+    Radius    = 0;
+    Threshold = 0;
 }
 
 int CartoonPreviewGenerator::radius() const
 {
-    return GaussianRadius;
+    return Radius;
 }
 
 void CartoonPreviewGenerator::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 
     if (!LoadedImage.isNull()) {
         if (ImageGeneratorRunning) {
@@ -77,12 +77,12 @@ void CartoonPreviewGenerator::setRadius(int radius)
 
 int CartoonPreviewGenerator::threshold() const
 {
-    return CartoonThreshold;
+    return Threshold;
 }
 
 void CartoonPreviewGenerator::setThreshold(int threshold)
 {
-    CartoonThreshold = threshold;
+    Threshold = threshold;
 
     if (!LoadedImage.isNull()) {
         if (ImageGeneratorRunning) {
@@ -106,8 +106,8 @@ void CartoonPreviewGenerator::StartImageGenerator()
     QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
 
-    generator->setGaussianRadius(GaussianRadius);
-    generator->setCartoonThreshold(CartoonThreshold);
+    generator->setRadius(Radius);
+    generator->setThreshold(Threshold);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -119,18 +119,18 @@ void CartoonPreviewGenerator::StartImageGenerator()
 
 CartoonImageGenerator::CartoonImageGenerator(QObject *parent) : QObject(parent)
 {
-    GaussianRadius   = 0;
-    CartoonThreshold = 0;
+    Radius    = 0;
+    Threshold = 0;
 }
 
-void CartoonImageGenerator::setGaussianRadius(int radius)
+void CartoonImageGenerator::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 }
 
-void CartoonImageGenerator::setCartoonThreshold(int threshold)
+void CartoonImageGenerator::setThreshold(int threshold)
 {
-    CartoonThreshold = threshold;
+    Threshold = threshold;
 }
 
 void CartoonImageGenerator::setInput(const QImage &input_image)
@@ -145,13 +145,13 @@ void CartoonImageGenerator::start()
 
     // Make Gaussian blur of original image, if applicable
 
-    if (GaussianRadius != 0) {
+    if (Radius != 0) {
         QImage::Format format = blur_image.format();
 
         blur_image = blur_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
         int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-        int alpha = GaussianRadius < 1 ? 16 : (GaussianRadius > 17 ? 1 : tab[GaussianRadius - 1]);
+        int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
         int r1 = blur_image.rect().top();
         int r2 = blur_image.rect().bottom();
@@ -268,7 +268,7 @@ void CartoonImageGenerator::start()
             red_g  = abs(src_buf[offset - 4]                      - src_buf[offset + 4]);
             red_g += abs(src_buf[offset - blur_image.width() * 4] - src_buf[offset + blur_image.width() * 4]);
 
-            if (blue_g + green_g + red_g > CartoonThreshold) {
+            if (blue_g + green_g + red_g > Threshold) {
                 exceeds_threshold = true;
             } else {
                 offset -= 2;
@@ -283,7 +283,7 @@ void CartoonImageGenerator::start()
 
                 red_g = abs(src_buf[offset - 4] - src_buf[offset + 4]);
 
-                if (blue_g + green_g + red_g > CartoonThreshold) {
+                if (blue_g + green_g + red_g > Threshold) {
                     exceeds_threshold = true;
                 } else {
                     offset -= 2;
@@ -298,7 +298,7 @@ void CartoonImageGenerator::start()
 
                     red_g = abs(src_buf[offset - blur_image.width() * 4] - src_buf[offset + blur_image.width() * 4]);
 
-                    if (blue_g + green_g + red_g > CartoonThreshold) {
+                    if (blue_g + green_g + red_g > Threshold) {
                         exceeds_threshold = true;
                     } else {
                         offset -= 2;
@@ -316,7 +316,7 @@ void CartoonImageGenerator::start()
                         red_g  = abs(src_buf[offset - 4 - blur_image.width() * 4] - src_buf[offset + 4 + blur_image.width() * 4]);
                         red_g += abs(src_buf[offset + 4 - blur_image.width() * 4] - src_buf[offset - 4 + blur_image.width() * 4]);
 
-                        exceeds_threshold = (blue_g + green_g + red_g > CartoonThreshold);
+                        exceeds_threshold = (blue_g + green_g + red_g > Threshold);
                     }
                 }
             }

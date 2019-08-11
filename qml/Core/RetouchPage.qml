@@ -35,14 +35,6 @@ Page {
                     source:   "qrc:/resources/images/mode_scroll.png"
                     fillMode: Image.PreserveAspectFit
                 }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        retouchEditor.mode          = RetouchEditor.ModeScroll;
-                        editorFlickable.interactive = true;
-                        editorPinchArea.enabled     = true;
-                    }
-                }
             }
 
             Button {
@@ -55,14 +47,6 @@ Page {
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_sampling_point.png"
                     fillMode: Image.PreserveAspectFit
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        retouchEditor.mode          = RetouchEditor.ModeSamplingPoint;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
                 }
             }
 
@@ -77,14 +61,6 @@ Page {
                     source:   "qrc:/resources/images/mode_clone.png"
                     fillMode: Image.PreserveAspectFit
                 }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        retouchEditor.mode          = RetouchEditor.ModeClone;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
-                }
             }
 
             Button {
@@ -97,14 +73,6 @@ Page {
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_blur.png"
                     fillMode: Image.PreserveAspectFit
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        retouchEditor.mode          = RetouchEditor.ModeBlur;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
                 }
             }
         }
@@ -284,6 +252,7 @@ Page {
         PinchArea {
             id:           editorPinchArea
             anchors.fill: parent
+            enabled:      scrollModeButton.checked
 
             onPinchUpdated: {
                 var pinch_prev_center = mapToItem(editorFlickable.contentItem, pinch.previousCenter.x, pinch.previousCenter.y);
@@ -304,13 +273,7 @@ Page {
                 }
             }
 
-            onPinchStarted: {
-                editorFlickable.interactive = false;
-            }
-
             onPinchFinished: {
-                editorFlickable.interactive = true;
-
                 editorFlickable.returnToBounds();
             }
 
@@ -320,21 +283,10 @@ Page {
                 leftMargin:     width  > contentWidth  ? (width  - contentWidth)  / 2 : 0
                 topMargin:      height > contentHeight ? (height - contentHeight) / 2 : 0
                 boundsBehavior: Flickable.StopAtBounds
+                interactive:    scrollModeButton.checked
 
                 property real initialContentWidth:  0.0
                 property real initialContentHeight: 0.0
-
-                onContentWidthChanged: {
-                    if (contentWidth >= 0.0) {
-                        samplingPointImage.updatePosition();
-                    }
-                }
-
-                onContentHeightChanged: {
-                    if (contentHeight >= 0.0) {
-                        samplingPointImage.updatePosition();
-                    }
-                }
 
                 Rectangle {
                     width:  retouchEditor.width  * retouchEditor.scale
@@ -348,6 +300,7 @@ Page {
                                          editorFlickable.initialContentWidth > 0.0 ?
                                          editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
                         transformOrigin: Item.TopLeft
+                        mode:            editorMode(scrollModeButton.checked, samplingPointModeButton.checked, cloneModeButton.checked, blurModeButton.checked)
                         helperSize:      helper.width
 
                         onImageOpened: {
@@ -434,40 +387,44 @@ Page {
                                 helperRectangle.visible = false;
                             }
                         }
+
+                        function editorMode(scroll_mode, sampling_point_mode, clone_mode, blur_mode) {
+                            if (scroll_mode) {
+                                return RetouchEditor.ModeScroll;
+                            } else if (sampling_point_mode) {
+                                return RetouchEditor.ModeSamplingPoint;
+                            } else if (clone_mode) {
+                                return RetouchEditor.ModeClone;
+                            } else if (blur_mode) {
+                                return RetouchEditor.ModeBlur;
+                            } else {
+                                return RetouchEditor.ModeScroll;
+                            }
+                        }
                     }
 
                     Image {
                         id:      samplingPointImage
+                        x:       imageX(width,  retouchEditor.samplingPoint.x, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
+                        y:       imageY(height, retouchEditor.samplingPoint.y, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
                         width:   UtilScript.pt(48)
                         height:  UtilScript.pt(48)
                         source:  "qrc:/resources/images/sampling_point.png"
                         visible: retouchEditor.samplingPointValid
 
-                        readonly property int samplingPointX: retouchEditor.samplingPoint.x
-                        readonly property int samplingPointY: retouchEditor.samplingPoint.y
-
-                        onSamplingPointXChanged: {
-                            if (editorFlickable.initialContentWidth > 0.0) {
-                                var scale = editorFlickable.contentWidth / editorFlickable.initialContentWidth;
-
-                                x = samplingPointX * scale - width / 2;
+                        function imageX(width, sampling_point_x, content_width, initial_content_width) {
+                            if (content_width > 0.0 && initial_content_width > 0.0) {
+                                return sampling_point_x * content_width / initial_content_width - width / 2;
+                            } else {
+                                return 0;
                             }
                         }
 
-                        onSamplingPointYChanged: {
-                            if (editorFlickable.initialContentWidth > 0.0) {
-                                var scale = editorFlickable.contentWidth / editorFlickable.initialContentWidth;
-
-                                y = samplingPointY * scale - height / 2;
-                            }
-                        }
-
-                        function updatePosition() {
-                            if (editorFlickable.initialContentWidth > 0.0) {
-                                var scale = editorFlickable.contentWidth / editorFlickable.initialContentWidth;
-
-                                x = samplingPointX * scale - width  / 2;
-                                y = samplingPointY * scale - height / 2;
+                        function imageY(height, sampling_point_y, content_width, initial_content_width) {
+                            if (content_width > 0.0 && initial_content_width > 0.0) {
+                                return sampling_point_y * content_width / initial_content_width - height / 2;
+                            } else {
+                                return 0;
                             }
                         }
                     }
@@ -479,9 +436,9 @@ Page {
             id:           helperRectangle
             anchors.top:  parent.top
             anchors.left: parent.left
+            z:            1
             width:        UtilScript.pt(128)
             height:       UtilScript.pt(128)
-            z:            1
             visible:      false
             color:        "transparent"
 

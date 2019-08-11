@@ -6,17 +6,17 @@
 
 SketchEditor::SketchEditor(QQuickItem *parent) : EffectEditor(parent)
 {
-    GaussianRadius = 0;
+    Radius = 0;
 }
 
 int SketchEditor::radius() const
 {
-    return GaussianRadius;
+    return Radius;
 }
 
 void SketchEditor::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 }
 
 void SketchEditor::processOpenedImage()
@@ -32,7 +32,7 @@ void SketchEditor::processOpenedImage()
     QObject::connect(generator, &SketchImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &SketchImageGenerator::finished,   generator, &SketchImageGenerator::deleteLater);
 
-    generator->setGaussianRadius(GaussianRadius);
+    generator->setRadius(Radius);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -40,17 +40,17 @@ void SketchEditor::processOpenedImage()
 
 SketchPreviewGenerator::SketchPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
 {
-    GaussianRadius = 0;
+    Radius = 0;
 }
 
 int SketchPreviewGenerator::radius() const
 {
-    return GaussianRadius;
+    return Radius;
 }
 
 void SketchPreviewGenerator::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 
     if (!LoadedImage.isNull()) {
         if (ImageGeneratorRunning) {
@@ -74,7 +74,7 @@ void SketchPreviewGenerator::StartImageGenerator()
     QObject::connect(generator, &SketchImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &SketchImageGenerator::finished,   generator, &SketchImageGenerator::deleteLater);
 
-    generator->setGaussianRadius(GaussianRadius);
+    generator->setRadius(Radius);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -86,12 +86,12 @@ void SketchPreviewGenerator::StartImageGenerator()
 
 SketchImageGenerator::SketchImageGenerator(QObject *parent) : QObject(parent)
 {
-    GaussianRadius = 0;
+    Radius = 0;
 }
 
-void SketchImageGenerator::setGaussianRadius(int radius)
+void SketchImageGenerator::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 }
 
 void SketchImageGenerator::setInput(const QImage &input_image)
@@ -111,7 +111,7 @@ void SketchImageGenerator::start()
     sketch_image = sketch_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
     int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-    int alpha = GaussianRadius < 1 ? 16 : (GaussianRadius > 17 ? 1 : tab[GaussianRadius - 1]);
+    int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
     int r1 = sketch_image.rect().top();
     int r2 = sketch_image.rect().bottom();

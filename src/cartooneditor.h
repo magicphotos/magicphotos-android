@@ -36,7 +36,7 @@ protected:
     void processOpenedImage() override;
 
 private:
-    int GaussianRadius, CartoonThreshold;
+    int Radius, Threshold;
 };
 
 class CartoonPreviewGenerator : public PreviewGenerator
@@ -67,7 +67,7 @@ protected:
     void StartImageGenerator() override;
 
 private:
-    int GaussianRadius, CartoonThreshold;
+    int Radius, Threshold;
 };
 
 class CartoonImageGenerator : public QObject
@@ -85,8 +85,8 @@ public:
 
     ~CartoonImageGenerator() noexcept override = default;
 
-    void setGaussianRadius(int radius);
-    void setCartoonThreshold(int threshold);
+    void setRadius(int radius);
+    void setThreshold(int threshold);
     void setInput(const QImage &input_image);
 
 public slots:
@@ -97,7 +97,7 @@ signals:
     void finished();
 
 private:
-    int    GaussianRadius, CartoonThreshold;
+    int    Radius, Threshold;
     QImage InputImage;
 };
 

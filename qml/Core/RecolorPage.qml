@@ -35,14 +35,6 @@ Page {
                     source:   "qrc:/resources/images/mode_scroll.png"
                     fillMode: Image.PreserveAspectFit
                 }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeScroll;
-                        editorFlickable.interactive = true;
-                        editorPinchArea.enabled     = true;
-                    }
-                }
             }
 
             Button {
@@ -55,14 +47,6 @@ Page {
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_original.png"
                     fillMode: Image.PreserveAspectFit
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeOriginal;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
                 }
             }
 
@@ -77,14 +61,6 @@ Page {
                     source:   "qrc:/resources/images/mode_effected.png"
                     fillMode: Image.PreserveAspectFit
                 }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeEffected;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                    }
-                }
             }
 
             Button {
@@ -97,17 +73,6 @@ Page {
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_hue_selection.png"
                     fillMode: Image.PreserveAspectFit
-                }
-
-                onCheckedChanged: {
-                    if (checked) {
-                        recolorEditor.mode          = RecolorEditor.ModeEffected;
-                        editorFlickable.interactive = false;
-                        editorPinchArea.enabled     = false;
-                        hueZoneRectangle.visible    = true;
-                    } else {
-                        hueZoneRectangle.visible    = false;
-                    }
                 }
             }
         }
@@ -287,6 +252,7 @@ Page {
         PinchArea {
             id:           editorPinchArea
             anchors.fill: parent
+            enabled:      scrollModeButton.checked
 
             onPinchUpdated: {
                 var pinch_prev_center = mapToItem(editorFlickable.contentItem, pinch.previousCenter.x, pinch.previousCenter.y);
@@ -307,13 +273,7 @@ Page {
                 }
             }
 
-            onPinchStarted: {
-                editorFlickable.interactive = false;
-            }
-
             onPinchFinished: {
-                editorFlickable.interactive = true;
-
                 editorFlickable.returnToBounds();
             }
 
@@ -323,6 +283,7 @@ Page {
                 leftMargin:     width  > contentWidth  ? (width  - contentWidth)  / 2 : 0
                 topMargin:      height > contentHeight ? (height - contentHeight) / 2 : 0
                 boundsBehavior: Flickable.StopAtBounds
+                interactive:    scrollModeButton.checked
 
                 property real initialContentWidth:  0.0
                 property real initialContentHeight: 0.0
@@ -333,6 +294,7 @@ Page {
                                      editorFlickable.initialContentWidth > 0.0 ?
                                      editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
                     transformOrigin: Item.TopLeft
+                    mode:            editorMode(scrollModeButton.checked, originalModeButton.checked, effectedModeButton.checked, hueSelectionModeButton.checked)
                     helperSize:      helper.width
                     hue:             180
 
@@ -420,6 +382,20 @@ Page {
                             helperRectangle.visible = false;
                         }
                     }
+
+                    function editorMode(scroll_mode, original_mode, effected_mode, hue_selection_mode) {
+                        if (scroll_mode) {
+                            return RecolorEditor.ModeScroll;
+                        } else if (original_mode) {
+                            return RecolorEditor.ModeOriginal;
+                        } else if (effected_mode) {
+                            return RecolorEditor.ModeEffected;
+                        } else if (hue_selection_mode) {
+                            return RecolorEditor.ModeEffected;
+                        } else {
+                            return RecolorEditor.ModeScroll;
+                        }
+                    }
                 }
             }
         }
@@ -428,9 +404,9 @@ Page {
             id:           helperRectangle
             anchors.top:  parent.top
             anchors.left: parent.left
+            z:            1
             width:        UtilScript.pt(128)
             height:       UtilScript.pt(128)
-            z:            1
             visible:      false
             color:        "transparent"
 
@@ -477,13 +453,13 @@ Page {
         id:                     hueZoneRectangle
         anchors.right:          parent.right
         anchors.verticalCenter: parent.verticalCenter
+        z:                      1
         width:                  UtilScript.pt(48)
         height:                 parent.height * 3 / 4
-        z:                      1
         color:                  "transparent"
         border.color:           "black"
         border.width:           UtilScript.pt(1)
-        visible:                false
+        visible:                hueSelectionModeButton.checked
 
         gradient: Gradient {
             GradientStop { position: 1.0;  color: "#FF0000" }
@@ -495,10 +471,6 @@ Page {
             GradientStop { position: 0.0;  color: "#FF0000" }
         }
 
-        onHeightChanged: {
-            hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, height - recolorEditor.hue / (359 / height)));
-        }
-
         MouseArea {
             anchors.fill: parent
 
@@ -506,22 +478,18 @@ Page {
                 id:            hueSliderRectangle
                 anchors.left:  parent.left
                 anchors.right: parent.right
+                y:             Math.max(0, Math.min(hueZoneRectangle.height - height, hueZoneRectangle.height - recolorEditor.hue / (359 / hueZoneRectangle.height)));
                 height:        UtilScript.pt(6)
-                y:             (parent.height - height) * 0.5
                 color:         "transparent"
                 border.color:  "black"
                 border.width:  UtilScript.pt(2)
             }
 
             onPositionChanged: {
-                hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, mouse.y));
-
                 recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
             }
 
             onPressed: {
-                hueSliderRectangle.y = Math.max(0, Math.min(height - hueSliderRectangle.height, mouse.y));
-
                 recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
             }
         }

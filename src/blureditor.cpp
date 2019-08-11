@@ -6,17 +6,17 @@
 
 BlurEditor::BlurEditor(QQuickItem *parent) : EffectEditor(parent)
 {
-    GaussianRadius = 0;
+    Radius = 0;
 }
 
 int BlurEditor::radius() const
 {
-    return GaussianRadius;
+    return Radius;
 }
 
 void BlurEditor::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 }
 
 void BlurEditor::processOpenedImage()
@@ -32,7 +32,7 @@ void BlurEditor::processOpenedImage()
     QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
 
-    generator->setGaussianRadius(GaussianRadius);
+    generator->setRadius(Radius);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -40,17 +40,17 @@ void BlurEditor::processOpenedImage()
 
 BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
 {
-    GaussianRadius = 0;
+    Radius = 0;
 }
 
 int BlurPreviewGenerator::radius() const
 {
-    return GaussianRadius;
+    return Radius;
 }
 
 void BlurPreviewGenerator::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 
     if (!LoadedImage.isNull()) {
         if (ImageGeneratorRunning) {
@@ -74,7 +74,7 @@ void BlurPreviewGenerator::StartImageGenerator()
     QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
 
-    generator->setGaussianRadius(GaussianRadius);
+    generator->setRadius(Radius);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -86,12 +86,12 @@ void BlurPreviewGenerator::StartImageGenerator()
 
 BlurImageGenerator::BlurImageGenerator(QObject *parent) : QObject(parent)
 {
-    GaussianRadius = 0;
+    Radius = 0;
 }
 
-void BlurImageGenerator::setGaussianRadius(int radius)
+void BlurImageGenerator::setRadius(int radius)
 {
-    GaussianRadius = radius;
+    Radius = radius;
 }
 
 void BlurImageGenerator::setInput(const QImage &input_image)
@@ -108,7 +108,7 @@ void BlurImageGenerator::start()
     blur_image = blur_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
     int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-    int alpha = GaussianRadius < 1 ? 16 : (GaussianRadius > 17 ? 1 : tab[GaussianRadius - 1]);
+    int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
     int r1 = blur_image.rect().top();
     int r2 = blur_image.rect().bottom();

@@ -18,7 +18,7 @@ void EffectEditor::effectedImageReady(const QImage &effected_image)
 
     LoadedImage = QImage();
 
-    IsChanged = true;
+    Changed = true;
 
     setImplicitWidth(CurrentImage.width());
     setImplicitHeight(CurrentImage.height());
@@ -31,7 +31,7 @@ void EffectEditor::effectedImageReady(const QImage &effected_image)
 
 void EffectEditor::mousePressEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         ChangeImageAt(true, event->pos().x(), event->pos().y());
 
         emit mouseEvent(MousePressed, event->pos().x(), event->pos().y());
@@ -40,7 +40,7 @@ void EffectEditor::mousePressEvent(QMouseEvent *event)
 
 void EffectEditor::mouseMoveEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         ChangeImageAt(false, event->pos().x(), event->pos().y());
 
         emit mouseEvent(MouseMoved, event->pos().x(), event->pos().y());
@@ -49,14 +49,14 @@ void EffectEditor::mouseMoveEvent(QMouseEvent *event)
 
 void EffectEditor::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         emit mouseEvent(MouseReleased, event->pos().x(), event->pos().y());
     }
 }
 
 void EffectEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 {
-    if (CurrentMode != ModeScroll) {
+    if (Mode != ModeScroll) {
         if (save_undo) {
             SaveUndoImage();
         }
@@ -72,7 +72,7 @@ void EffectEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
         brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
 
-        if (CurrentMode == ModeOriginal) {
+        if (Mode == ModeOriginal) {
             brush_painter.drawImage(QPoint(0, 0), OriginalImage, QRect(img_x, img_y, width, height));
         } else {
             brush_painter.drawImage(QPoint(0, 0), EffectedImage, QRect(img_x, img_y, width, height));
@@ -86,7 +86,7 @@ void EffectEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
         image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         image_painter.drawImage(QPoint(img_x, img_y), brush_image);
 
-        IsChanged = true;
+        Changed = true;
 
         update();
 

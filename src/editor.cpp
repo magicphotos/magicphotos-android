@@ -9,8 +9,8 @@
 
 Editor::Editor(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-    IsChanged     = false;
-    CurrentMode   = ModeScroll;
+    Changed       = false;
+    Mode          = ModeScroll;
     BrushSize     = 0;
     HelperSize    = 0;
     BrushHardness = 0.0;
@@ -24,17 +24,17 @@ Editor::Editor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
 bool Editor::changed() const
 {
-    return IsChanged;
+    return Changed;
 }
 
 int Editor::mode() const
 {
-    return CurrentMode;
+    return Mode;
 }
 
 void Editor::setMode(int mode)
 {
-    CurrentMode = mode;
+    Mode = mode;
 }
 
 int Editor::brushSize() const
@@ -204,7 +204,7 @@ void Editor::saveImage(const QString &image_file)
             }
 
             if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_name)) {
-                IsChanged = false;
+                Changed = false;
 
                 emit imageSaved(file_name);
             } else {
@@ -227,7 +227,7 @@ void Editor::undo()
             emit undoAvailabilityChanged(false);
         }
 
-        IsChanged = true;
+        Changed = true;
 
         update();
     }

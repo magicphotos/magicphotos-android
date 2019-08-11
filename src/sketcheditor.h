@@ -32,7 +32,7 @@ protected:
     void processOpenedImage() override;
 
 private:
-    int GaussianRadius;
+    int Radius;
 };
 
 class SketchPreviewGenerator : public PreviewGenerator
@@ -59,7 +59,7 @@ protected:
     void StartImageGenerator() override;
 
 private:
-    int GaussianRadius;
+    int Radius;
 };
 
 class SketchImageGenerator : public QObject
@@ -77,7 +77,7 @@ public:
 
     ~SketchImageGenerator() noexcept override = default;
 
-    void setGaussianRadius(int radius);
+    void setRadius(int radius);
     void setInput(const QImage &input_image);
 
 public slots:
@@ -88,7 +88,7 @@ signals:
     void finished();
 
 private:
-    int    GaussianRadius;
+    int    Radius;
     QImage InputImage;
 };
 

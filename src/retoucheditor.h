@@ -28,13 +28,13 @@ public:
     bool samplingPointValid() const;
     QPoint samplingPoint() const;
 
-    enum Mode {
+    enum EditorMode {
         ModeScroll,
         ModeSamplingPoint,
         ModeClone,
         ModeBlur
     };
-    Q_ENUM(Mode)
+    Q_ENUM(EditorMode)
 
 signals:
     void samplingPointValidChanged(bool samplingPointValid);
@@ -50,9 +50,9 @@ protected:
 private:
     void ChangeImageAt(bool save_undo, int center_x, int center_y);
 
-    static const int GAUSSIAN_RADIUS = 4;
+    static const int BLUR_RADIUS = 4;
 
-    bool   IsSamplingPointValid, IsLastBlurPointValid;
+    bool   SamplingPointValid, LastBlurPointValid;
     QPoint SamplingPoint, InitialSamplingPoint, LastBlurPoint, InitialTouchPoint;
 };
 
