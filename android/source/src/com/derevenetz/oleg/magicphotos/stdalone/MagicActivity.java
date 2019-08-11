@@ -37,13 +37,15 @@ import com.google.android.gms.ads.MobileAds;
 
 public class MagicActivity extends QtActivity
 {
-    private static final int REQUEST_CODE_SHOW_GALLERY = 1001;
+    private static final int  REQUEST_CODE_SHOW_GALLERY  = 1001;
 
-    private boolean          statusBarVisible          = false,
-                             showPersonalizedAds       = false;
-    private int              statusBarHeight           = 0;
-    private AdView           bannerView                = null;
-    private InterstitialAd   interstitial              = null;
+    private static final long AD_RELOAD_ON_FAILURE_DELAY = 60000;
+
+    private boolean           statusBarVisible           = false,
+                              showPersonalizedAds        = false;
+    private int               statusBarHeight            = 0;
+    private AdView            bannerView                 = null;
+    private InterstitialAd    interstitial               = null;
 
     private static native void bannerViewHeightUpdated(int height);
 
@@ -246,7 +248,7 @@ public class MagicActivity extends QtActivity
                                         }
                                     }
                                 }
-                            }, 60000);
+                            }, AD_RELOAD_ON_FAILURE_DELAY);
                         }
                     }
                 });
