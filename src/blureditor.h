@@ -84,7 +84,7 @@ public slots:
     void start();
 
 signals:
-    void imageReady(const QImage &output_image);
+    void imageReady(const QImage &outputImage);
     void finished();
 
 private:

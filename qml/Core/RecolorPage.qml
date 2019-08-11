@@ -383,6 +383,10 @@ Page {
                         }
                     }
 
+                    onHelperImageReady: {
+                        helper.helperImageReady(helperImage);
+                    }
+
                     function editorMode(scroll_mode, original_mode, effected_mode, hue_selection_mode) {
                         if (scroll_mode) {
                             return RecolorEditor.ModeScroll;
@@ -608,8 +612,6 @@ Page {
     }
 
     Component.onCompleted: {
-        recolorEditor.helperImageReady.connect(helper.helperImageReady);
-
         updateEditorParameters();
     }
 }

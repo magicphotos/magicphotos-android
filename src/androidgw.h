@@ -24,7 +24,7 @@ public:
 signals:
     void setBannerViewHeight(int height);
 
-    void processImageSelection(const QString &image_file, int image_orientation);
+    void processImageSelection(const QString &imageFile, int imageOrientation);
     void processImageSelectionCancel();
     void processImageSelectionFailure();
 };

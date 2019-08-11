@@ -69,86 +69,6 @@ Page {
         }
     }
 
-    function fileSelected(image_file, image_orientation) {
-        waitRectangle.visible = false;
-
-        var component;
-
-        if (selectedMode === "DECOLORIZE"){
-            component = Qt.createComponent("DecolorizePage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        } else if (selectedMode === "SKETCH") {
-            component = Qt.createComponent("SketchPreviewPage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        } else if (selectedMode === "CARTOON") {
-            component = Qt.createComponent("CartoonPreviewPage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        } else if (selectedMode === "BLUR") {
-            component = Qt.createComponent("BlurPreviewPage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        } else if (selectedMode === "PIXELATE") {
-            component = Qt.createComponent("PixelatePreviewPage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        } else if (selectedMode === "RECOLOR") {
-            component = Qt.createComponent("RecolorPage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        } else if (selectedMode === "RETOUCH") {
-            component = Qt.createComponent("RetouchPage.qml");
-
-            if (component.status === Component.Ready) {
-                mainStackView.push(component, {"imageOrientation": image_orientation, "imageFile": image_file});
-            } else {
-                console.log(component.errorString());
-            }
-        }
-
-        selectedMode = "";
-    }
-
-    function fileSelectionCancelled() {
-        waitRectangle.visible = false;
-
-        selectedMode = "";
-    }
-
-    function fileSelectionFailed() {
-        waitRectangle.visible = false;
-
-        selectedMode = "";
-
-        imageSelectionFailedMessageDialog.open();
-    }
-
     ScrollView {
         id:            modeSelectionScrollView
         anchors.fill:  parent
@@ -297,9 +217,87 @@ Page {
         standardButtons: StandardButton.Ok
     }
 
-    Component.onCompleted: {
-        UIHelper.imageSelected.connect(fileSelected);
-        UIHelper.imageSelectionCancelled.connect(fileSelectionCancelled);
-        UIHelper.imageSelectionFailed.connect(fileSelectionFailed);
+    Connections {
+        target: UIHelper
+
+        onImageSelected: {
+            waitRectangle.visible = false;
+
+            var component;
+
+            if (modeSelectionPage.selectedMode === "DECOLORIZE"){
+                component = Qt.createComponent("DecolorizePage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            } else if (modeSelectionPage.selectedMode === "SKETCH") {
+                component = Qt.createComponent("SketchPreviewPage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            } else if (modeSelectionPage.selectedMode === "CARTOON") {
+                component = Qt.createComponent("CartoonPreviewPage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            } else if (modeSelectionPage.selectedMode === "BLUR") {
+                component = Qt.createComponent("BlurPreviewPage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            } else if (modeSelectionPage.selectedMode === "PIXELATE") {
+                component = Qt.createComponent("PixelatePreviewPage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            } else if (modeSelectionPage.selectedMode === "RECOLOR") {
+                component = Qt.createComponent("RecolorPage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            } else if (modeSelectionPage.selectedMode === "RETOUCH") {
+                component = Qt.createComponent("RetouchPage.qml");
+
+                if (component.status === Component.Ready) {
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                } else {
+                    console.log(component.errorString());
+                }
+            }
+
+            modeSelectionPage.selectedMode = "";
+        }
+
+        onImageSelectionCancelled: {
+            waitRectangle.visible = false;
+
+            modeSelectionPage.selectedMode = "";
+        }
+
+        onImageSelectionFailed: {
+            waitRectangle.visible = false;
+
+            modeSelectionPage.selectedMode = "";
+
+            imageSelectionFailedMessageDialog.open();
+        }
     }
 }

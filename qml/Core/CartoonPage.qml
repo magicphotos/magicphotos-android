@@ -393,6 +393,10 @@ Page {
                         }
                     }
 
+                    onHelperImageReady: {
+                        helper.helperImageReady(helperImage);
+                    }
+
                     function editorMode(scroll_mode, original_mode, effected_mode) {
                         if (scroll_mode) {
                             return CartoonEditor.ModeScroll;
@@ -570,8 +574,6 @@ Page {
     }
 
     Component.onCompleted: {
-        cartoonEditor.helperImageReady.connect(helper.helperImageReady);
-
         updateEditorParameters();
     }
 }

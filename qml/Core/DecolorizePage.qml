@@ -367,6 +367,10 @@ Page {
                         }
                     }
 
+                    onHelperImageReady: {
+                        helper.helperImageReady(helperImage);
+                    }
+
                     function editorMode(scroll_mode, original_mode, effected_mode) {
                         if (scroll_mode) {
                             return DecolorizeEditor.ModeScroll;
@@ -544,8 +548,6 @@ Page {
     }
 
     Component.onCompleted: {
-        decolorizeEditor.helperImageReady.connect(helper.helperImageReady);
-
         updateEditorParameters();
     }
 }
