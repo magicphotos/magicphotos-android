@@ -7,17 +7,17 @@
 
 PixelateEditor::PixelateEditor(QQuickItem *parent) : EffectEditor(parent)
 {
-    PixelDenom = 0;
+    PixDenom = 0;
 }
 
 int PixelateEditor::pixDenom() const
 {
-    return PixelDenom;
+    return PixDenom;
 }
 
 void PixelateEditor::setPixDenom(int pix_denom)
 {
-    PixelDenom = pix_denom;
+    PixDenom = pix_denom;
 }
 
 void PixelateEditor::processOpenedImage()
@@ -33,7 +33,7 @@ void PixelateEditor::processOpenedImage()
     QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
 
-    generator->setPixelDenom(PixelDenom);
+    generator->setPixDenom(PixDenom);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -41,17 +41,17 @@ void PixelateEditor::processOpenedImage()
 
 PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
 {
-    PixelDenom = 0;
+    PixDenom = 0;
 }
 
 int PixelatePreviewGenerator::pixDenom() const
 {
-    return PixelDenom;
+    return PixDenom;
 }
 
 void PixelatePreviewGenerator::setPixDenom(int pix_denom)
 {
-    PixelDenom = pix_denom;
+    PixDenom = pix_denom;
 
     if (!LoadedImage.isNull()) {
         if (ImageGeneratorRunning) {
@@ -75,7 +75,7 @@ void PixelatePreviewGenerator::StartImageGenerator()
     QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
 
-    generator->setPixelDenom(PixelDenom);
+    generator->setPixDenom(PixDenom);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
@@ -87,12 +87,12 @@ void PixelatePreviewGenerator::StartImageGenerator()
 
 PixelateImageGenerator::PixelateImageGenerator(QObject *parent) : QObject(parent)
 {
-    PixelDenom = 0;
+    PixDenom = 0;
 }
 
-void PixelateImageGenerator::setPixelDenom(int pix_denom)
+void PixelateImageGenerator::setPixDenom(int pix_denom)
 {
-    PixelDenom = pix_denom;
+    PixDenom = pix_denom;
 }
 
 void PixelateImageGenerator::setInput(const QImage &input_image)
@@ -104,7 +104,7 @@ void PixelateImageGenerator::start()
 {
     QImage pixelated_image = InputImage;
 
-    int pix_size = pixelated_image.width() > pixelated_image.height() ? pixelated_image.width() / PixelDenom : pixelated_image.height() / PixelDenom;
+    int pix_size = pixelated_image.width() > pixelated_image.height() ? pixelated_image.width() / PixDenom : pixelated_image.height() / PixDenom;
 
     if (pix_size != 0) {
         for (int pix_y = 0; pix_y < pixelated_image.height() / pix_size + 1; pix_y++) {

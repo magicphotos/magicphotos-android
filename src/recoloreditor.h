@@ -14,7 +14,7 @@ class RecolorEditor : public Editor
 {
     Q_OBJECT
 
-    Q_PROPERTY(int hue READ hue WRITE setHue)
+    Q_PROPERTY(int hue READ hue WRITE setHue NOTIFY hueChanged)
 
 public:
     explicit RecolorEditor(QQuickItem *parent = nullptr);
@@ -30,12 +30,15 @@ public:
     int hue() const;
     void setHue(int hue);
 
-    enum Mode {
+    enum EditorMode {
         ModeScroll,
         ModeOriginal,
         ModeEffected
     };
-    Q_ENUM(Mode)
+    Q_ENUM(EditorMode)
+
+signals:
+    void hueChanged(int hue);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -55,7 +58,7 @@ private:
 
     QRgb AdjustHue(QRgb rgb);
 
-    int                     CurrentHue;
+    int                     Hue;
     QImage                  OriginalImage;
     QHash<quint16, quint32> RGB16ToHSVMap;
 };

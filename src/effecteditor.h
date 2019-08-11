@@ -22,12 +22,12 @@ public:
 
     ~EffectEditor() noexcept override = default;
 
-    enum Mode {
+    enum EditorMode {
         ModeScroll,
         ModeOriginal,
         ModeEffected
     };
-    Q_ENUM(Mode)
+    Q_ENUM(EditorMode)
 
 protected slots:
     void effectedImageReady(const QImage &effected_image);

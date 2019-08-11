@@ -7,13 +7,13 @@
 
 RetouchEditor::RetouchEditor(QQuickItem *parent) : Editor(parent)
 {
-    IsSamplingPointValid = false;
-    IsLastBlurPointValid = false;
+    SamplingPointValid = false;
+    LastBlurPointValid = false;
 }
 
 bool RetouchEditor::samplingPointValid() const
 {
-    return IsSamplingPointValid;
+    return SamplingPointValid;
 }
 
 QPoint RetouchEditor::samplingPoint() const
@@ -23,7 +23,7 @@ QPoint RetouchEditor::samplingPoint() const
 
 void RetouchEditor::mousePressEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeSamplingPoint) {
+    if (Mode == ModeSamplingPoint) {
         int sampling_point_x = event->pos().x();
         int sampling_point_y = event->pos().y();
 
@@ -40,15 +40,15 @@ void RetouchEditor::mousePressEvent(QMouseEvent *event)
             sampling_point_y = 0;
         }
 
-        IsSamplingPointValid = true;
+        SamplingPointValid = true;
 
         SamplingPoint.setX(sampling_point_x);
         SamplingPoint.setY(sampling_point_y);
 
-        emit samplingPointValidChanged(IsSamplingPointValid);
+        emit samplingPointValidChanged(SamplingPointValid);
         emit samplingPointChanged(SamplingPoint);
-    } else if (CurrentMode == ModeClone) {
-        if (IsSamplingPointValid) {
+    } else if (Mode == ModeClone) {
+        if (SamplingPointValid) {
             InitialSamplingPoint.setX(SamplingPoint.x());
             InitialSamplingPoint.setY(SamplingPoint.y());
 
@@ -59,10 +59,10 @@ void RetouchEditor::mousePressEvent(QMouseEvent *event)
 
             emit mouseEvent(MousePressed, event->pos().x(), event->pos().y());
         }
-    } else if (CurrentMode == ModeBlur) {
+    } else if (Mode == ModeBlur) {
         ChangeImageAt(true, event->pos().x(), event->pos().y());
 
-        IsLastBlurPointValid = true;
+        LastBlurPointValid = true;
 
         LastBlurPoint.setX(event->pos().x());
         LastBlurPoint.setY(event->pos().y());
@@ -73,7 +73,7 @@ void RetouchEditor::mousePressEvent(QMouseEvent *event)
 
 void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeSamplingPoint) {
+    if (Mode == ModeSamplingPoint) {
         int sampling_point_x = event->pos().x();
         int sampling_point_y = event->pos().y();
 
@@ -90,15 +90,15 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
             sampling_point_y = 0;
         }
 
-        IsSamplingPointValid = true;
+        SamplingPointValid = true;
 
         SamplingPoint.setX(sampling_point_x);
         SamplingPoint.setY(sampling_point_y);
 
-        emit samplingPointValidChanged(IsSamplingPointValid);
+        emit samplingPointValidChanged(SamplingPointValid);
         emit samplingPointChanged(SamplingPoint);
-    } else if (CurrentMode == ModeClone) {
-        if (IsSamplingPointValid) {
+    } else if (Mode == ModeClone) {
+        if (SamplingPointValid) {
             int sampling_point_x = InitialSamplingPoint.x() + (event->pos().x() - InitialTouchPoint.x());
             int sampling_point_y = InitialSamplingPoint.y() + (event->pos().y() - InitialTouchPoint.y());
 
@@ -124,7 +124,7 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
 
             emit mouseEvent(MouseMoved, event->pos().x(), event->pos().y());
         }
-    } else if (CurrentMode == ModeBlur) {
+    } else if (Mode == ModeBlur) {
         ChangeImageAt(false, event->pos().x(), event->pos().y());
 
         LastBlurPoint.setX(event->pos().x());
@@ -136,10 +136,10 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
 
 void RetouchEditor::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeClone) {
+    if (Mode == ModeClone) {
         emit mouseEvent(MouseReleased, event->pos().x(), event->pos().y());
-    } else if (CurrentMode == ModeBlur) {
-        IsLastBlurPointValid = false;
+    } else if (Mode == ModeBlur) {
+        LastBlurPointValid = false;
 
         emit mouseEvent(MouseReleased, event->pos().x(), event->pos().y());
     }
@@ -151,10 +151,10 @@ void RetouchEditor::processOpenedImage()
 
     LoadedImage = QImage();
 
-    IsChanged            = false;
-    IsSamplingPointValid = false;
+    Changed            = false;
+    SamplingPointValid = false;
 
-    emit samplingPointValidChanged(IsSamplingPointValid);
+    emit samplingPointValidChanged(SamplingPointValid);
 
     setImplicitWidth(CurrentImage.width());
     setImplicitHeight(CurrentImage.height());
@@ -167,7 +167,7 @@ void RetouchEditor::processOpenedImage()
 
 void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 {
-    if (CurrentMode == ModeClone || CurrentMode == ModeBlur) {
+    if (Mode == ModeClone || Mode == ModeBlur) {
         if (save_undo) {
             SaveUndoImage();
         }
@@ -178,7 +178,7 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
         int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
         int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
 
-        if (CurrentMode == ModeClone) {
+        if (Mode == ModeClone) {
             int src_x = qMin(qMax(0, SamplingPoint.x() - width  / 2), CurrentImage.width()  - width);
             int src_y = qMin(qMax(0, SamplingPoint.y() - height / 2), CurrentImage.height() - height);
 
@@ -196,11 +196,11 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
             image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
             image_painter.drawImage(QPoint(img_x, img_y), brush_image);
-        } else if (CurrentMode == ModeBlur) {
+        } else if (Mode == ModeBlur) {
             QRect  last_blur_rect(LastBlurPoint.x() - width / 2, LastBlurPoint.y() - height / 2, width, height);
             QImage last_blur_image;
 
-            if (IsLastBlurPointValid) {
+            if (LastBlurPointValid) {
                 if (last_blur_rect.x() >= CurrentImage.width()) {
                     last_blur_rect.setX(CurrentImage.width() - 1);
                 }
@@ -247,7 +247,7 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             QImage blur_image = CurrentImage.copy(blur_rect).convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
             int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
-            int alpha = GAUSSIAN_RADIUS < 1 ? 16 : (GAUSSIAN_RADIUS > 17 ? 1 : tab[GAUSSIAN_RADIUS - 1]);
+            int alpha = BLUR_RADIUS < 1 ? 16 : (BLUR_RADIUS > 17 ? 1 : tab[BLUR_RADIUS - 1]);
 
             int r1 = blur_image.rect().top();
             int r2 = blur_image.rect().bottom();
@@ -329,14 +329,14 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
             painter.drawImage(blur_rect, blur_image);
 
-            if (IsLastBlurPointValid) {
+            if (LastBlurPointValid) {
                 painter.setClipRegion(QRegion(last_blur_rect, QRegion::Ellipse));
 
                 painter.drawImage(last_blur_rect, last_blur_image);
             }
         }
 
-        IsChanged = true;
+        Changed = true;
 
         update();
 

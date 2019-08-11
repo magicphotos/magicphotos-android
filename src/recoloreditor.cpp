@@ -9,7 +9,7 @@
 
 RecolorEditor::RecolorEditor(QQuickItem *parent) : Editor(parent)
 {
-    CurrentHue = 0;
+    Hue = 0;
 
     quint16 index = 0;
     QColor  color;
@@ -29,17 +29,19 @@ RecolorEditor::RecolorEditor(QQuickItem *parent) : Editor(parent)
 
 int RecolorEditor::hue() const
 {
-    return CurrentHue;
+    return Hue;
 }
 
 void RecolorEditor::setHue(int hue)
 {
-    CurrentHue = hue;
+    Hue = hue;
+
+    emit hueChanged(Hue);
 }
 
 void RecolorEditor::mousePressEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         ChangeImageAt(true, event->pos().x(), event->pos().y());
 
         emit mouseEvent(MousePressed, event->pos().x(), event->pos().y());
@@ -48,7 +50,7 @@ void RecolorEditor::mousePressEvent(QMouseEvent *event)
 
 void RecolorEditor::mouseMoveEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         ChangeImageAt(false, event->pos().x(), event->pos().y());
 
         emit mouseEvent(MouseMoved, event->pos().x(), event->pos().y());
@@ -57,7 +59,7 @@ void RecolorEditor::mouseMoveEvent(QMouseEvent *event)
 
 void RecolorEditor::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         emit mouseEvent(MouseReleased, event->pos().x(), event->pos().y());
     }
 }
@@ -69,7 +71,7 @@ void RecolorEditor::processOpenedImage()
 
     LoadedImage = QImage();
 
-    IsChanged = false;
+    Changed = false;
 
     setImplicitWidth(CurrentImage.width());
     setImplicitHeight(CurrentImage.height());
@@ -82,7 +84,7 @@ void RecolorEditor::processOpenedImage()
 
 void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 {
-    if (CurrentMode == ModeOriginal || CurrentMode == ModeEffected) {
+    if (Mode == ModeOriginal || Mode == ModeEffected) {
         if (save_undo) {
             SaveUndoImage();
         }
@@ -96,10 +98,10 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
         QImage   brush_image(width, height, QImage::Format_ARGB32);
         QPainter brush_painter(&brush_image);
 
-        if (CurrentMode == ModeOriginal) {
+        if (Mode == ModeOriginal) {
             brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
             brush_painter.drawImage(QPoint(0, 0), OriginalImage, QRect(img_x, img_y, width, height));
-        } else if (CurrentMode == ModeEffected) {
+        } else if (Mode == ModeEffected) {
             for (int y = img_y; y < img_y + height; y++) {
                 for (int x = img_x; x < img_x + width; x++) {
                     brush_image.setPixel(x - img_x, y - img_y, AdjustHue(OriginalImage.pixel(x, y)));
@@ -115,7 +117,7 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
         image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         image_painter.drawImage(QPoint(img_x, img_y), brush_image);
 
-        IsChanged = true;
+        Changed = true;
 
         update();
 
@@ -174,5 +176,5 @@ QRgb RecolorEditor::AdjustHue(QRgb rgb)
                                                                     static_cast<quint8>(qGreen(rgb)),
                                                                     static_cast<quint8>(qBlue(rgb)))]);
 
-    return QColor::fromHsv(CurrentHue, s, v, qAlpha(rgb)).rgba();
+    return QColor::fromHsv(Hue, s, v, qAlpha(rgb)).rgba();
 }

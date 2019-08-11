@@ -53,10 +53,10 @@ public:
 
     void paint(QPainter *painter) override;
 
-    enum Mode {
+    enum EditorMode {
         ModeScroll
     };
-    Q_ENUM(Mode)
+    Q_ENUM(EditorMode)
 
     enum MouseState {
         MousePressed,
@@ -86,8 +86,8 @@ protected:
 
     void SaveUndoImage();
 
-    bool   IsChanged;
-    int    CurrentMode, HelperSize;
+    bool   Changed;
+    int    Mode, HelperSize;
     QImage LoadedImage, CurrentImage, BrushImage;
 
 private:

@@ -32,7 +32,7 @@ protected:
     void processOpenedImage() override;
 
 private:
-    int PixelDenom;
+    int PixDenom;
 };
 
 class PixelatePreviewGenerator : public PreviewGenerator
@@ -59,7 +59,7 @@ protected:
     void StartImageGenerator() override;
 
 private:
-    int PixelDenom;
+    int PixDenom;
 };
 
 class PixelateImageGenerator : public QObject
@@ -77,7 +77,7 @@ public:
 
     ~PixelateImageGenerator() noexcept override = default;
 
-    void setPixelDenom(int pix_denom);
+    void setPixDenom(int pix_denom);
     void setInput(const QImage &input_image);
 
 public slots:
@@ -88,7 +88,7 @@ signals:
     void finished();
 
 private:
-    int    PixelDenom;
+    int    PixDenom;
     QImage InputImage;
 };
 
