@@ -19,6 +19,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,7 +178,7 @@ public class MagicActivity extends QtActivity
 
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
         } catch (Exception ex) {
-            // Ignore
+            Log.w("MagicActivity", "shareImage() : " + ex.toString());
         }
     }
 
@@ -468,7 +469,7 @@ public class MagicActivity extends QtActivity
                                                 image_orientation = cursor.getString(cursor.getColumnIndex(query_columns[0]));
                                             }
                                         } catch (Exception ex) {
-                                            // Ignore
+                                            Log.w("MagicActivity", "onActivityResult() : " + ex.toString());
                                         } finally {
                                             if (cursor != null) {
                                                 cursor.close();
