@@ -380,6 +380,10 @@ Page {
                         }
                     }
 
+                    onHelperImageReady: {
+                        helper.helperImageReady(helperImage);
+                    }
+
                     function editorMode(scroll_mode, original_mode, effected_mode) {
                         if (scroll_mode) {
                             return BlurEditor.ModeScroll;
@@ -557,8 +561,6 @@ Page {
     }
 
     Component.onCompleted: {
-        blurEditor.helperImageReady.connect(helper.helperImageReady);
-
         updateEditorParameters();
     }
 }

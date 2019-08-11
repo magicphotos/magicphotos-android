@@ -380,6 +380,10 @@ Page {
                         }
                     }
 
+                    onHelperImageReady: {
+                        helper.helperImageReady(helperImage);
+                    }
+
                     function editorMode(scroll_mode, original_mode, effected_mode) {
                         if (scroll_mode) {
                             return PixelateEditor.ModeScroll;
@@ -557,8 +561,6 @@ Page {
     }
 
     Component.onCompleted: {
-        pixelateEditor.helperImageReady.connect(helper.helperImageReady);
-
         updateEditorParameters();
     }
 }

@@ -388,6 +388,10 @@ Page {
                             }
                         }
 
+                        onHelperImageReady: {
+                            helper.helperImageReady(helperImage);
+                        }
+
                         function editorMode(scroll_mode, sampling_point_mode, clone_mode, blur_mode) {
                             if (scroll_mode) {
                                 return RetouchEditor.ModeScroll;
@@ -594,8 +598,6 @@ Page {
     }
 
     Component.onCompleted: {
-        retouchEditor.helperImageReady.connect(helper.helperImageReady);
-
         updateEditorParameters();
     }
 }
