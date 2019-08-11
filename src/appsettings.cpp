@@ -50,3 +50,17 @@ void AppSettings::setBrushHardness(qreal hardness)
 {
     Settings->setValue("BrushHardness", hardness);
 }
+
+QString AppSettings::adMobConsent() const
+{
+    if (Settings->contains("AdMobConsent")) {
+        return Settings->value("AdMobConsent").toString();
+    } else {
+        return "";
+    }
+}
+
+void AppSettings::setAdMobConsent(QString &consent)
+{
+    Settings->setValue("AdMobConsent", consent);
+}

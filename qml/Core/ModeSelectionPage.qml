@@ -1,8 +1,8 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
+import QtQuick.Dialogs 1.2
 
 import "../Util.js" as UtilScript
 
@@ -22,6 +22,21 @@ Page {
     footer: ToolBar {
         RowLayout {
             anchors.fill: parent
+
+            ToolButton {
+                implicitWidth:    UtilScript.pt(48)
+                implicitHeight:   UtilScript.pt(48)
+                Layout.alignment: Qt.AlignHCenter
+
+                contentItem: Image {
+                    source:   "qrc:/resources/images/tool_ad_privacy_settings.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                onClicked: {
+                    mainWindow.showAdMobConsentDialog();
+                }
+            }
 
             ToolButton {
                 implicitWidth:    UtilScript.pt(48)

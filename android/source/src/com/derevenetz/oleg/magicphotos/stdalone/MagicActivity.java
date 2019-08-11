@@ -26,6 +26,8 @@ import android.widget.FrameLayout;
 
 import org.qtproject.qt5.android.bindings.QtActivity;
 
+import com.google.ads.mediation.admob.AdMobAdapter;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -37,7 +39,8 @@ public class MagicActivity extends QtActivity
 {
     private static final int REQUEST_CODE_SHOW_GALLERY = 1001;
 
-    private boolean          statusBarVisible          = false;
+    private boolean          statusBarVisible          = false,
+                             showPersonalizedAds       = false;
     private int              statusBarHeight           = 0;
     private AdView           bannerView                = null;
     private InterstitialAd   interstitial              = null;
@@ -199,7 +202,16 @@ public class MagicActivity extends QtActivity
                         if (interstitial != null) {
                             AdRequest.Builder builder = new AdRequest.Builder();
 
-                            interstitial.loadAd(builder.build());
+                            if (showPersonalizedAds) {
+                                interstitial.loadAd(builder.build());
+                            } else {
+                                Bundle extras = new Bundle();
+
+                                extras.putString("npa", "1");
+
+                                interstitial.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                                                           .build());
+                            }
                         }
                     }
 
@@ -214,7 +226,16 @@ public class MagicActivity extends QtActivity
                                     if (interstitial != null) {
                                         AdRequest.Builder builder = new AdRequest.Builder();
 
-                                        interstitial.loadAd(builder.build());
+                                        if (showPersonalizedAds) {
+                                            interstitial.loadAd(builder.build());
+                                        } else {
+                                            Bundle extras = new Bundle();
+
+                                            extras.putString("npa", "1");
+
+                                            interstitial.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                                                                       .build());
+                                        }
                                     }
                                 }
                             }, 60000);
@@ -224,7 +245,29 @@ public class MagicActivity extends QtActivity
 
                 AdRequest.Builder builder = new AdRequest.Builder();
 
-                interstitial.loadAd(builder.build());
+                if (showPersonalizedAds) {
+                    interstitial.loadAd(builder.build());
+                } else {
+                    Bundle extras = new Bundle();
+
+                    extras.putString("npa", "1");
+
+                    interstitial.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                                               .build());
+                }
+            }
+        });
+    }
+
+    public void setAdsPersonalization(boolean personalized)
+    {
+        final boolean f_personalized = personalized;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                showPersonalizedAds = f_personalized;
             }
         });
     }
@@ -312,7 +355,16 @@ public class MagicActivity extends QtActivity
 
                     AdRequest.Builder builder = new AdRequest.Builder();
 
-                    bannerView.loadAd(builder.build());
+                    if (showPersonalizedAds) {
+                        bannerView.loadAd(builder.build());
+                    } else {
+                        Bundle extras = new Bundle();
+
+                        extras.putString("npa", "1");
+
+                        bannerView.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                                                 .build());
+                    }
                 }
             }
         });

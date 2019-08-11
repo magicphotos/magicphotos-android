@@ -3,6 +3,8 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 
+import "Core/Dialog"
+
 import "Util.js" as UtilScript
 
 ApplicationWindow {
@@ -16,12 +18,38 @@ ApplicationWindow {
 
     readonly property int screenOrientation: Screen.orientation
 
+    property string adMobConsent:            ""
+
     onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
             AdMobHelper.showBannerView();
         } else {
             AdMobHelper.hideBannerView();
         }
+    }
+
+    onAdMobConsentChanged: {
+        AppSettings.adMobConsent = adMobConsent;
+
+        updateFeatures();
+    }
+
+    function updateFeatures() {
+        if (adMobConsent === "PERSONALIZED" || adMobConsent === "NON_PERSONALIZED") {
+            AdMobHelper.setPersonalization(adMobConsent === "PERSONALIZED");
+
+            AdMobHelper.initAds();
+        }
+
+        if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
+            AdMobHelper.showBannerView();
+        } else {
+            AdMobHelper.hideBannerView();
+        }
+    }
+
+    function showAdMobConsentDialog() {
+        adMobConsentDialog.open();
     }
 
     StackView {
@@ -61,8 +89,24 @@ ApplicationWindow {
         enabled:      mainStackView.busy
     }
 
+    AdMobConsentDialog {
+        id: adMobConsentDialog
+
+        onShowPersonalizedAds: {
+            mainWindow.adMobConsent = "PERSONALIZED";
+        }
+
+        onShowNonPersonalizedAds: {
+            mainWindow.adMobConsent = "NON_PERSONALIZED";
+        }
+    }
+
     Component.onCompleted: {
         AppSettings.defaultBrushSize = UtilScript.pt(16);
+
+        adMobConsent = AppSettings.adMobConsent;
+
+        updateFeatures();
 
         var component = Qt.createComponent("Core/ModeSelectionPage.qml");
 
@@ -70,6 +114,10 @@ ApplicationWindow {
             mainStackView.push(component);
         } else {
             console.log(component.errorString());
+        }
+
+        if (adMobConsent !== "PERSONALIZED" && adMobConsent !== "NON_PERSONALIZED") {
+            adMobConsentDialog.open();
         }
     }
 }

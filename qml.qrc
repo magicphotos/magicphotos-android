@@ -14,5 +14,6 @@
         <file>qml/Core/RetouchPage.qml</file>
         <file>qml/Core/SketchPreviewPage.qml</file>
         <file>qml/Core/SketchPage.qml</file>
+        <file>qml/Core/Dialog/AdMobConsentDialog.qml</file>
     </qresource>
 </RCC>

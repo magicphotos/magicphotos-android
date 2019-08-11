@@ -1,8 +1,8 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
+import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import ImageEditor 1.0
 
@@ -24,12 +24,12 @@ Page {
             anchors.centerIn: parent
 
             Button {
-                id:        scrollModeButton
-                width:     UtilScript.pt(48)
-                height:    UtilScript.pt(48)
-                enabled:   false
-                checkable: true
-                checked:   true
+                id:             scrollModeButton
+                implicitWidth:  UtilScript.pt(48)
+                implicitHeight: UtilScript.pt(48)
+                enabled:        false
+                checkable:      true
+                checked:        true
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_scroll.png"
@@ -46,11 +46,11 @@ Page {
             }
 
             Button {
-                id:        samplingPointModeButton
-                width:     UtilScript.pt(48)
-                height:    UtilScript.pt(48)
-                enabled:   false
-                checkable: true
+                id:             samplingPointModeButton
+                implicitWidth:  UtilScript.pt(48)
+                implicitHeight: UtilScript.pt(48)
+                enabled:        false
+                checkable:      true
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_sampling_point.png"
@@ -67,11 +67,11 @@ Page {
             }
 
             Button {
-                id:        cloneModeButton
-                width:     UtilScript.pt(48)
-                height:    UtilScript.pt(48)
-                enabled:   false
-                checkable: true
+                id:             cloneModeButton
+                implicitWidth:  UtilScript.pt(48)
+                implicitHeight: UtilScript.pt(48)
+                enabled:        false
+                checkable:      true
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_clone.png"
@@ -88,11 +88,11 @@ Page {
             }
 
             Button {
-                id:        blurModeButton
-                width:     UtilScript.pt(48)
-                height:    UtilScript.pt(48)
-                enabled:   false
-                checkable: true
+                id:             blurModeButton
+                implicitWidth:  UtilScript.pt(48)
+                implicitHeight: UtilScript.pt(48)
+                enabled:        false
+                checkable:      true
 
                 contentItem: Image {
                     source:   "qrc:/resources/images/mode_blur.png"
