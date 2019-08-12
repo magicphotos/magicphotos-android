@@ -4,6 +4,8 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.12
 import QtQuick.Dialogs 1.2
 
+import "../Misc"
+
 import "../../Util.js" as UtilScript
 
 Dialog {
@@ -43,7 +45,7 @@ Dialog {
                 }
             }
 
-            Button {
+            MFButton {
                 implicitWidth:    UtilScript.pt(280)
                 implicitHeight:   UtilScript.pt(64)
                 text:             qsTr("Yes, show me relevant ads")
@@ -55,7 +57,7 @@ Dialog {
                 }
             }
 
-            Button {
+            MFButton {
                 implicitWidth:    UtilScript.pt(280)
                 implicitHeight:   UtilScript.pt(64)
                 text:             qsTr("No, show me ads that are less relevant")
