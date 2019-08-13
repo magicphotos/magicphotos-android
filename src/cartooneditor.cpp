@@ -40,7 +40,7 @@ void CartoonEditor::processOpenedImage()
 
     QObject::connect(thread,    &QThread::started,                  generator, &CartoonImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                 thread,    &QThread::deleteLater);
-    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonEditor::effectedImageReady);
+    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonEditor::setEffectedImage);
     QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
 
@@ -102,7 +102,7 @@ void CartoonPreviewGenerator::StartImageGenerator()
 
     QObject::connect(thread,    &QThread::started,                  generator, &CartoonImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                 thread,    &QThread::deleteLater);
-    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonPreviewGenerator::effectedImageReady);
+    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonPreviewGenerator::setEffectedImage);
     QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
 

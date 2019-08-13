@@ -28,7 +28,7 @@ void SketchEditor::processOpenedImage()
 
     QObject::connect(thread,    &QThread::started,                 generator, &SketchImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                thread,    &QThread::deleteLater);
-    QObject::connect(generator, &SketchImageGenerator::imageReady, this,      &SketchEditor::effectedImageReady);
+    QObject::connect(generator, &SketchImageGenerator::imageReady, this,      &SketchEditor::setEffectedImage);
     QObject::connect(generator, &SketchImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &SketchImageGenerator::finished,   generator, &SketchImageGenerator::deleteLater);
 
@@ -70,7 +70,7 @@ void SketchPreviewGenerator::StartImageGenerator()
 
     QObject::connect(thread,    &QThread::started,                 generator, &SketchImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                thread,    &QThread::deleteLater);
-    QObject::connect(generator, &SketchImageGenerator::imageReady, this,      &SketchPreviewGenerator::effectedImageReady);
+    QObject::connect(generator, &SketchImageGenerator::imageReady, this,      &SketchPreviewGenerator::setEffectedImage);
     QObject::connect(generator, &SketchImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &SketchImageGenerator::finished,   generator, &SketchImageGenerator::deleteLater);
 

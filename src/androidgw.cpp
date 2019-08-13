@@ -17,7 +17,7 @@ AndroidGW &AndroidGW::GetInstance()
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, bannerViewHeightUpdated)(JNIEnv *, jclass, jint height)
 {
-    emit AndroidGW::GetInstance().setBannerViewHeight(height);
+    emit AndroidGW::GetInstance().bannerViewHeightChanged(height);
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelected)(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
@@ -27,15 +27,15 @@ extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSe
 
     jni_env->ReleaseStringUTFChars(j_image_file, str);
 
-    emit AndroidGW::GetInstance().processImageSelection(image_file, image_orientation);
+    emit AndroidGW::GetInstance().imageSelected(image_file, image_orientation);
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelectionCancelled)(JNIEnv *)
 {
-    emit AndroidGW::GetInstance().processImageSelectionCancel();
+    emit AndroidGW::GetInstance().imageSelectionCancelled();
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelectionFailed)(JNIEnv *)
 {
-    emit AndroidGW::GetInstance().processImageSelectionFailure();
+    emit AndroidGW::GetInstance().imageSelectionFailed();
 }

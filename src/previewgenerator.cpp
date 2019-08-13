@@ -88,10 +88,10 @@ void PreviewGenerator::paint(QPainter *painter)
     }
 }
 
-void PreviewGenerator::effectedImageReady(const QImage &effected_image)
+void PreviewGenerator::setEffectedImage(const QImage &image)
 {
     ImageGeneratorRunning = false;
-    EffectedImage         = effected_image;
+    EffectedImage         = image;
 
     setImplicitWidth(EffectedImage.width());
     setImplicitHeight(EffectedImage.height());

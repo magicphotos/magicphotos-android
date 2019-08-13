@@ -66,7 +66,7 @@ public:
     Q_ENUM(MouseState)
 
 private slots:
-    void scaleWasChanged();
+    void scaleBrushImage();
 
 signals:
     void imageOpened();

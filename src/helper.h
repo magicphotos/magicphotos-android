@@ -19,10 +19,9 @@ public:
 
     ~Helper() noexcept override = default;
 
-    void paint(QPainter *painter) override;
+    Q_INVOKABLE void setHelperImage(const QImage &image);
 
-public slots:
-    void helperImageReady(const QImage &helper_image);
+    void paint(QPainter *painter) override;
 
 private:
     QImage HelperImage;

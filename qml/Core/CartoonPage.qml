@@ -394,7 +394,7 @@ Page {
                     }
 
                     onHelperImageReady: {
-                        helper.helperImageReady(helperImage);
+                        helper.setHelperImage(helperImage);
                     }
 
                     function editorMode(scroll_mode, original_mode, effected_mode) {

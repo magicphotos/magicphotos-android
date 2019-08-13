@@ -141,11 +141,11 @@ ApplicationWindow {
     AdMobConsentDialog {
         id: adMobConsentDialog
 
-        onShowPersonalizedAds: {
+        onPersonalizedAdsSelected: {
             mainWindow.adMobConsent = "PERSONALIZED";
         }
 
-        onShowNonPersonalizedAds: {
+        onNonPersonalizedAdsSelected: {
             mainWindow.adMobConsent = "NON_PERSONALIZED";
         }
     }

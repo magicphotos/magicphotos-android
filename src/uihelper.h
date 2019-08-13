@@ -32,9 +32,9 @@ public:
     Q_INVOKABLE void shareImage(const QString &image_file);
 
 public slots:
-    void processImageSelection(const QString &image_file, int image_orientation);
-    void processImageSelectionCancel();
-    void processImageSelectionFailure();
+    void handleImageSelection(const QString &image_file, int image_orientation);
+    void handleImageSelectionCancel();
+    void handleImageSelectionFailure();
 
 signals:
     void imageSelected(const QString &imageFile, int imageOrientation);

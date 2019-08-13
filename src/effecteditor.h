@@ -30,7 +30,7 @@ public:
     Q_ENUM(EditorMode)
 
 protected slots:
-    void effectedImageReady(const QImage &effected_image);
+    void setEffectedImage(const QImage &image);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
