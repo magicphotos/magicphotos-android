@@ -22,11 +22,11 @@ public:
     static AndroidGW &GetInstance();
 
 signals:
-    void setBannerViewHeight(int height);
+    void bannerViewHeightChanged(int bannerViewHeight);
 
-    void processImageSelection(const QString &imageFile, int imageOrientation);
-    void processImageSelectionCancel();
-    void processImageSelectionFailure();
+    void imageSelected(const QString &imageFile, int imageOrientation);
+    void imageSelectionCancelled();
+    void imageSelectionFailed();
 };
 
 #endif // ANDROIDGW_H

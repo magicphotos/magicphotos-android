@@ -389,7 +389,7 @@ Page {
                         }
 
                         onHelperImageReady: {
-                            helper.helperImageReady(helperImage);
+                            helper.setHelperImage(helperImage);
                         }
 
                         function editorMode(scroll_mode, sampling_point_mode, clone_mode, blur_mode) {

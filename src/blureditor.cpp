@@ -28,7 +28,7 @@ void BlurEditor::processOpenedImage()
 
     QObject::connect(thread,    &QThread::started,               generator, &BlurImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,              thread,    &QThread::deleteLater);
-    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurEditor::effectedImageReady);
+    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurEditor::setEffectedImage);
     QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
 
@@ -70,7 +70,7 @@ void BlurPreviewGenerator::StartImageGenerator()
 
     QObject::connect(thread,    &QThread::started,               generator, &BlurImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,              thread,    &QThread::deleteLater);
-    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurPreviewGenerator::effectedImageReady);
+    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurPreviewGenerator::setEffectedImage);
     QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
 

@@ -29,7 +29,7 @@ void PixelateEditor::processOpenedImage()
 
     QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
-    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelateEditor::effectedImageReady);
+    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelateEditor::setEffectedImage);
     QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
 
@@ -71,7 +71,7 @@ void PixelatePreviewGenerator::StartImageGenerator()
 
     QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
-    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelatePreviewGenerator::effectedImageReady);
+    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelatePreviewGenerator::setEffectedImage);
     QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
 

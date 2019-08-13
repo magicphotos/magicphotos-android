@@ -67,17 +67,17 @@ void UIHelper::shareImage(const QString &image_file)
     QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
-void UIHelper::processImageSelection(const QString &image_file, int image_orientation)
+void UIHelper::handleImageSelection(const QString &image_file, int image_orientation)
 {
     emit imageSelected(image_file, image_orientation);
 }
 
-void UIHelper::processImageSelectionCancel()
+void UIHelper::handleImageSelectionCancel()
 {
     emit imageSelectionCancelled();
 }
 
-void UIHelper::processImageSelectionFailure()
+void UIHelper::handleImageSelectionFailure()
 {
     emit imageSelectionFailed();
 }

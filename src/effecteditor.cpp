@@ -10,10 +10,10 @@ EffectEditor::EffectEditor(QQuickItem *parent) : Editor(parent)
 {
 }
 
-void EffectEditor::effectedImageReady(const QImage &effected_image)
+void EffectEditor::setEffectedImage(const QImage &image)
 {
     OriginalImage = LoadedImage;
-    EffectedImage = effected_image;
+    EffectedImage = image;
     CurrentImage  = EffectedImage;
 
     LoadedImage = QImage();

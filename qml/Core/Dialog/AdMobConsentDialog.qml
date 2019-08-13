@@ -11,8 +11,8 @@ import "../../Util.js" as UtilScript
 Dialog {
     id: adMobConsentDialog
 
-    signal showPersonalizedAds()
-    signal showNonPersonalizedAds()
+    signal personalizedAdsSelected()
+    signal nonPersonalizedAdsSelected()
 
     contentItem: Pane {
         implicitWidth:  UtilScript.pt(300)
@@ -52,7 +52,7 @@ Dialog {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 onClicked: {
-                    adMobConsentDialog.showPersonalizedAds();
+                    adMobConsentDialog.personalizedAdsSelected();
                     adMobConsentDialog.close();
                 }
             }
@@ -64,7 +64,7 @@ Dialog {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 onClicked: {
-                    adMobConsentDialog.showNonPersonalizedAds();
+                    adMobConsentDialog.nonPersonalizedAdsSelected();
                     adMobConsentDialog.close();
                 }
             }

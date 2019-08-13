@@ -19,7 +19,7 @@ Editor::Editor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, &Editor::scaleChanged, this, &Editor::scaleWasChanged);
+    QObject::connect(this, &Editor::scaleChanged, this, &Editor::scaleBrushImage);
 }
 
 bool Editor::changed() const
@@ -238,7 +238,7 @@ void Editor::paint(QPainter *painter)
     painter->drawImage(QRectF(0, 0, width(), height()), CurrentImage, QRectF(0, 0, CurrentImage.width(), CurrentImage.height()));
 }
 
-void Editor::scaleWasChanged()
+void Editor::scaleBrushImage()
 {
     if (!BrushTemplateImage.isNull()) {
         int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));

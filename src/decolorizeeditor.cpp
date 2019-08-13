@@ -18,7 +18,7 @@ void DecolorizeEditor::processOpenedImage()
 
     QObject::connect(thread,    &QThread::started,                    generator, &GrayscaleImageGenerator::start);
     QObject::connect(thread,    &QThread::finished,                   thread,    &QThread::deleteLater);
-    QObject::connect(generator, &GrayscaleImageGenerator::imageReady, this,      &DecolorizeEditor::effectedImageReady);
+    QObject::connect(generator, &GrayscaleImageGenerator::imageReady, this,      &DecolorizeEditor::setEffectedImage);
     QObject::connect(generator, &GrayscaleImageGenerator::finished,   thread,    &QThread::quit);
     QObject::connect(generator, &GrayscaleImageGenerator::finished,   generator, &GrayscaleImageGenerator::deleteLater);
 

@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
         QGuiApplication::installTranslator(&translator);
     }
 
-    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::setBannerViewHeight,          &AdMobHelper::GetInstance(), &AdMobHelper::setBannerViewHeight);
-    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::processImageSelection,        &UIHelper::GetInstance(),    &UIHelper::processImageSelection);
-    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::processImageSelectionCancel,  &UIHelper::GetInstance(),    &UIHelper::processImageSelectionCancel);
-    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::processImageSelectionFailure, &UIHelper::GetInstance(),    &UIHelper::processImageSelectionFailure);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::bannerViewHeightChanged, &AdMobHelper::GetInstance(), &AdMobHelper::setBannerViewHeight);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelected,           &UIHelper::GetInstance(),    &UIHelper::handleImageSelection);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionCancelled, &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionCancel);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionFailed,    &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionFailure);
 
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
     qmlRegisterType<BrushPreviewGenerator>("ImageEditor", 1, 0, "BrushPreviewGenerator");
