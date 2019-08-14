@@ -35,6 +35,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 
 public class MagicActivity extends QtActivity
 {
@@ -192,6 +193,11 @@ public class MagicActivity extends QtActivity
             @Override
             public void run()
             {
+                MobileAds.setRequestConfiguration(MobileAds.getRequestConfiguration()
+                                                           .toBuilder().setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
+                                                                       .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+                                                                       .build());
+
                 MobileAds.initialize(f_context, f_app_id);
 
                 interstitial = new InterstitialAd(f_context);
@@ -206,17 +212,13 @@ public class MagicActivity extends QtActivity
                             AdRequest.Builder builder = new AdRequest.Builder();
 
                             if (showPersonalizedAds) {
-                                interstitial.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                                           .tagForChildDirectedTreatment(true)
-                                                           .build());
+                                interstitial.loadAd(builder.build());
                             } else {
                                 Bundle extras = new Bundle();
 
                                 extras.putString("npa", "1");
 
-                                interstitial.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                                           .tagForChildDirectedTreatment(true)
-                                                           .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                                interstitial.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
                                                            .build());
                             }
                         }
@@ -234,17 +236,13 @@ public class MagicActivity extends QtActivity
                                         AdRequest.Builder builder = new AdRequest.Builder();
 
                                         if (showPersonalizedAds) {
-                                            interstitial.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                                                       .tagForChildDirectedTreatment(true)
-                                                                       .build());
+                                            interstitial.loadAd(builder.build());
                                         } else {
                                             Bundle extras = new Bundle();
 
                                             extras.putString("npa", "1");
 
-                                            interstitial.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                                                       .tagForChildDirectedTreatment(true)
-                                                                       .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                                            interstitial.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
                                                                        .build());
                                         }
                                     }
@@ -257,17 +255,13 @@ public class MagicActivity extends QtActivity
                 AdRequest.Builder builder = new AdRequest.Builder();
 
                 if (showPersonalizedAds) {
-                    interstitial.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                               .tagForChildDirectedTreatment(true)
-                                               .build());
+                    interstitial.loadAd(builder.build());
                 } else {
                     Bundle extras = new Bundle();
 
                     extras.putString("npa", "1");
 
-                    interstitial.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                               .tagForChildDirectedTreatment(true)
-                                               .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                    interstitial.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
                                                .build());
                 }
             }
@@ -371,17 +365,13 @@ public class MagicActivity extends QtActivity
                     AdRequest.Builder builder = new AdRequest.Builder();
 
                     if (showPersonalizedAds) {
-                        bannerView.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                                 .tagForChildDirectedTreatment(true)
-                                                 .build());
+                        bannerView.loadAd(builder.build());
                     } else {
                         Bundle extras = new Bundle();
 
                         extras.putString("npa", "1");
 
-                        bannerView.loadAd(builder.setMaxAdContentRating(AdRequest.MAX_AD_CONTENT_RATING_G)
-                                                 .tagForChildDirectedTreatment(true)
-                                                 .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                        bannerView.loadAd(builder.addNetworkExtrasBundle(AdMobAdapter.class, extras)
                                                  .build());
                     }
                 }
