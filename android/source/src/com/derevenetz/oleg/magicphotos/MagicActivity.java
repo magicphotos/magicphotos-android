@@ -167,7 +167,7 @@ public class MagicActivity extends QtActivity
 
     public void refreshGallery(String image_file)
     {
-        MediaScannerConnection.scanFile(this, new String[] { image_file }, null, null);
+        MediaScannerConnection.scanFile(this, new String[]{image_file}, null, null);
     }
 
     public void shareImage(String image_file)
@@ -443,7 +443,7 @@ public class MagicActivity extends QtActivity
                                             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output_stream);
                                         }
 
-                                        String[] query_columns     = { MediaStore.Images.Media.ORIENTATION };
+                                        String[] query_columns     = {MediaStore.Images.Media.ORIENTATION};
                                         String   image_orientation = null;
                                         Cursor   cursor            = null;
 

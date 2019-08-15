@@ -110,7 +110,7 @@ void SketchImageGenerator::start()
 
     sketch_image = sketch_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
-    int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
+    int tab[] = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
     int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
     int r1 = sketch_image.rect().top();
