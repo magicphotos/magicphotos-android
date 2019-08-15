@@ -1,32 +1,30 @@
 package com.derevenetz.oleg.magicphotos;
 
 import java.io.File;
-import java.io.InputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.FrameLayout;
 
 import androidx.core.content.FileProvider;
+import androidx.exifinterface.media.ExifInterface;
 
 import org.qtproject.qt5.android.bindings.QtActivity;
+
+import org.apache.commons.io.IOUtils;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
 
@@ -143,7 +141,7 @@ public class MagicActivity extends QtActivity
 
     public String getSaveDirectory()
     {
-        File save_dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/MagicPhotos");
+        File save_dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath(), "MagicPhotos");
 
         if (save_dir.mkdirs() || save_dir.isDirectory()) {
             return save_dir.getAbsolutePath();
@@ -433,55 +431,32 @@ public class MagicActivity extends QtActivity
                         public void run()
                         {
                             try (InputStream input_stream = getContentResolver().openInputStream(image_uri)) {
-                                Bitmap bitmap = BitmapFactory.decodeStream(input_stream);
+                                String image_content_type = getContentResolver().getType(image_uri);
 
-                                if (bitmap != null) {
-                                    final File cache_file = new File(getApplicationContext().getCacheDir().getAbsolutePath() + "/cache.jpg");
+                                if (image_content_type != null) {
+                                    String cache_file_extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(image_content_type);
 
-                                    if (cache_file.getParentFile().mkdirs() || cache_file.getParentFile().isDirectory()) {
+                                    if (cache_file_extension != null) {
+                                        final File cache_file = new File(getApplicationContext().getCacheDir().getAbsolutePath(), "cache." + cache_file_extension);
+
                                         try (FileOutputStream output_stream = new FileOutputStream(cache_file)) {
-                                            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output_stream);
+                                            IOUtils.copy(input_stream, output_stream);
                                         }
 
-                                        String[] query_columns     = {MediaStore.Images.Media.ORIENTATION};
-                                        String   image_orientation = null;
-                                        Cursor   cursor            = null;
-
-                                        try {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(getApplicationContext(), image_uri)) {
-                                                String id = DocumentsContract.getDocumentId(image_uri).split(":")[1];
-
-                                                cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, query_columns, MediaStore.Images.Media._ID + " = ?", new String[]{id}, null);
-                                            } else {
-                                                cursor = getContentResolver().query(image_uri, query_columns, null, null, null);
-                                            }
-
-                                            if (cursor != null && cursor.moveToFirst()) {
-                                                image_orientation = cursor.getString(cursor.getColumnIndex(query_columns[0]));
-                                            }
-                                        } catch (Exception ex) {
-                                            Log.w("MagicActivity", "onActivityResult() : " + ex.toString());
-                                        } finally {
-                                            if (cursor != null) {
-                                                cursor.close();
-                                            }
-                                        }
-
-                                        final String f_image_orientation = image_orientation;
+                                        final int image_orientation = (new ExifInterface(cache_file.getAbsolutePath())).getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                                                                                                                                        ExifInterface.ORIENTATION_NORMAL);
 
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run()
                                             {
-                                                if (f_image_orientation == null) {
+                                                if (image_orientation == ExifInterface.ORIENTATION_NORMAL) {
                                                     imageSelected(cache_file.getAbsolutePath(), 0);
-                                                } else if (f_image_orientation.equals("0")) {
-                                                    imageSelected(cache_file.getAbsolutePath(), 0);
-                                                } else if (f_image_orientation.equals("90")) {
+                                                } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_90) {
                                                     imageSelected(cache_file.getAbsolutePath(), 90);
-                                                } else if (f_image_orientation.equals("180")) {
+                                                } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_180) {
                                                     imageSelected(cache_file.getAbsolutePath(), 180);
-                                                } else if (f_image_orientation.equals("270")) {
+                                                } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_270) {
                                                     imageSelected(cache_file.getAbsolutePath(), 270);
                                                 } else {
                                                     imageSelected(cache_file.getAbsolutePath(), 0);
@@ -489,10 +464,10 @@ public class MagicActivity extends QtActivity
                                             }
                                         });
                                     } else {
-                                        throw(new Exception("Cannot access cache directory"));
+                                        throw(new Exception("Unknown image content type"));
                                     }
                                 } else {
-                                    throw(new Exception("Bitmap decode failed"));
+                                    throw(new Exception("Invalid image content type"));
                                 }
                             } catch (Exception ex) {
                                 runOnUiThread(new Runnable() {
