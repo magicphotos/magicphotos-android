@@ -449,9 +449,7 @@ public class MagicActivity extends QtActivity
                                             @Override
                                             public void run()
                                             {
-                                                if (image_orientation == ExifInterface.ORIENTATION_NORMAL) {
-                                                    imageSelected(cache_file.getAbsolutePath(), 0);
-                                                } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                                                if (image_orientation == ExifInterface.ORIENTATION_ROTATE_90) {
                                                     imageSelected(cache_file.getAbsolutePath(), 90);
                                                 } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_180) {
                                                     imageSelected(cache_file.getAbsolutePath(), 180);
