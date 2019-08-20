@@ -83,24 +83,9 @@ Page {
 
                 onClicked: {
                     if (UIHelper.requestWriteStoragePermission()) {
-                        var date  = new Date();
-                        var year  = date.getFullYear();
-                        var month = date.getMonth() + 1;
-                        var day   = date.getDate();
-                        var hour  = date.getHours();
-                        var min   = date.getMinutes();
-                        var sec   = date.getSeconds();
-
-                        var file_name = "IMG_" + year                              + "-" +
-                                                 (month > 9 ? month : "0" + month) + "-" +
-                                                 (day   > 9 ? day   : "0" + day)   + "_" +
-                                                 (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                                 (min   > 9 ? min   : "0" + min)   + "-" +
-                                                 (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
-
                         sketchPage.shareActionActive = false;
 
-                        sketchEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
+                        sketchEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
                     }
                 }
             }
@@ -119,24 +104,9 @@ Page {
 
                 onClicked: {
                     if (UIHelper.requestWriteStoragePermission()) {
-                        var date  = new Date();
-                        var year  = date.getFullYear();
-                        var month = date.getMonth() + 1;
-                        var day   = date.getDate();
-                        var hour  = date.getHours();
-                        var min   = date.getMinutes();
-                        var sec   = date.getSeconds();
-
-                        var file_name = "IMG_" + year                              + "-" +
-                                                 (month > 9 ? month : "0" + month) + "-" +
-                                                 (day   > 9 ? day   : "0" + day)   + "_" +
-                                                 (hour  > 9 ? hour  : "0" + hour)  + "-" +
-                                                 (min   > 9 ? min   : "0" + min)   + "-" +
-                                                 (sec   > 9 ? sec   : "0" + sec)   + ".jpg";
-
                         sketchPage.shareActionActive = true;
 
-                        sketchEditor.saveImage(UIHelper.getSaveDirectory() + "/" + file_name);
+                        sketchEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
                     }
                 }
             }
