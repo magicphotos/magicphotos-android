@@ -145,11 +145,11 @@ Page {
 
         Slider {
             id:               pixDenomSlider
-            enabled:          false
             from:             32
             to:               192
             value:            112
             stepSize:         8.0
+            enabled:          false
             Layout.fillWidth: true
 
             onPressedChanged: {

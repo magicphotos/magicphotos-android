@@ -145,11 +145,11 @@ Page {
 
         Slider {
             id:               gaussianRadiusSlider
-            enabled:          false
             from:             4
             to:               18
             value:            11
             stepSize:         1.0
+            enabled:          false
             Layout.fillWidth: true
 
             onPressedChanged: {

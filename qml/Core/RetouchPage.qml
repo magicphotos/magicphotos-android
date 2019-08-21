@@ -261,8 +261,8 @@ Page {
                 Rectangle {
                     width:  retouchEditor.width  * retouchEditor.scale
                     height: retouchEditor.height * retouchEditor.scale
-                    clip:   true
                     color:  "transparent"
+                    clip:   true
 
                     RetouchEditor {
                         id:              retouchEditor
@@ -413,8 +413,8 @@ Page {
             z:            1
             width:        UtilScript.pt(128)
             height:       UtilScript.pt(128)
-            visible:      false
             color:        "transparent"
+            visible:      false
 
             OpacityMask {
                 id:           opacityMask
