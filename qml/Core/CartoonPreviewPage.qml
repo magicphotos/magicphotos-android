@@ -149,11 +149,11 @@ Page {
 
         Slider {
             id:               gaussianRadiusSlider
-            enabled:          false
             from:             0
             to:               10
             value:            5
             stepSize:         1.0
+            enabled:          false
             Layout.fillWidth: true
 
             onPressedChanged: {
@@ -165,11 +165,11 @@ Page {
 
         Slider {
             id:               thresholdSlider
-            enabled:          false
             from:             32
             to:               128
             value:            80
             stepSize:         8.0
+            enabled:          false
             Layout.fillWidth: true
 
             onPressedChanged: {

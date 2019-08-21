@@ -381,8 +381,8 @@ Page {
             z:            1
             width:        UtilScript.pt(128)
             height:       UtilScript.pt(128)
-            visible:      false
             color:        "transparent"
+            visible:      false
 
             OpacityMask {
                 id:           opacityMask
