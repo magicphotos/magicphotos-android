@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/main.qml</file>
         <file>qml/Util.js</file>
+        <file>qml/main.qml</file>
         <file>qml/Core/BlurPage.qml</file>
         <file>qml/Core/BlurPreviewPage.qml</file>
         <file>qml/Core/CartoonPage.qml</file>
