@@ -3,7 +3,6 @@
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-2455088855015693~2942020662");
 const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-2455088855015693/8624758039");
 const QString AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID("ca-app-pub-2455088855015693/4390833707");
 
@@ -28,11 +27,9 @@ int AdMobHelper::bannerViewHeight() const
 void AdMobHelper::initAds()
 {
     if (!Initialized) {
-        QAndroidJniObject j_app_id               = QAndroidJniObject::fromString(ADMOB_APP_ID);
         QAndroidJniObject j_interstitial_unit_id = QAndroidJniObject::fromString(ADMOB_INTERSTITIAL_UNIT_ID);
 
-        QtAndroid::androidActivity().callMethod<void>("initAds", "(Ljava/lang/String;Ljava/lang/String;)V", j_app_id.object<jstring>(),
-                                                                                                            j_interstitial_unit_id.object<jstring>());
+        QtAndroid::androidActivity().callMethod<void>("initAds", "(Ljava/lang/String;)V", j_interstitial_unit_id.object<jstring>());
 
         Initialized = true;
     }

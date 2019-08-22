@@ -15,8 +15,7 @@ private:
     ~AdMobHelper() noexcept override = default;
 
 public:
-    static const QString ADMOB_APP_ID,
-                         ADMOB_BANNERVIEW_UNIT_ID,
+    static const QString ADMOB_BANNERVIEW_UNIT_ID,
                          ADMOB_INTERSTITIAL_UNIT_ID;
 
     AdMobHelper(const AdMobHelper &) = delete;
