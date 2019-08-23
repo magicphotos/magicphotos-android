@@ -34,7 +34,7 @@ Page {
                 }
 
                 onClicked: {
-                    mainWindow.showAdMobConsentDialog();
+                    adMobConsentDialog.open();
                 }
             }
 
