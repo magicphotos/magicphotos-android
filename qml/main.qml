@@ -65,10 +65,6 @@ ApplicationWindow {
         }
     }
 
-    function showAdMobConsentDialog() {
-        adMobConsentDialog.open();
-    }
-
     Store {
         Product {
             id:         disabledAdsProduct
