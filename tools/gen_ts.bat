@@ -1,10 +1,10 @@
 PATH=%PATH%;C:\Qt\5.12.4\mingw73_64\bin;C:\Qt\Tools\mingw730_64\bin
 
-lupdate ..\magicphotos.pro -ts ..\translations\magicphotos_ru.src.ts
+lupdate -locations absolute ..\magicphotos.pro -ts ..\translations\magicphotos_ru.src.ts
 
-lupdate ..\magicphotos.pro -ts ..\translations\magicphotos_de.src.ts
+lupdate -locations absolute ..\magicphotos.pro -ts ..\translations\magicphotos_de.src.ts
 
-lupdate ..\magicphotos.pro -ts ..\translations\magicphotos_fr.src.ts
+lupdate -locations absolute ..\magicphotos.pro -ts ..\translations\magicphotos_fr.src.ts
 
 lconvert ..\translations\magicphotos_ru.src.ts ..\translations\magicphotos_ru.qt.ts -o ..\translations\magicphotos_ru.ts
 lconvert ..\translations\magicphotos_de.src.ts ..\translations\magicphotos_de.qt.ts -o ..\translations\magicphotos_de.ts
