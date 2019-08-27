@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <QtCore/QtMath>
 #include <QtCore/QThread>
 #include <QtGui/QColor>
@@ -33,22 +35,25 @@ void CartoonEditor::setThreshold(int threshold)
 
 void CartoonEditor::processOpenedImage()
 {
-    auto thread    = new QThread();
-    auto generator = new CartoonImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<CartoonImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,                  generator, &CartoonImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,                 thread,    &QThread::deleteLater);
-    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonEditor::setEffectedImage);
-    QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,                  generator.get(), &CartoonImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,                 thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &CartoonImageGenerator::imageReady, this,            &CartoonEditor::setEffectedImage);
+    QObject::connect(generator.get(), &CartoonImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &CartoonImageGenerator::finished,   generator.get(), &CartoonImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setThreshold(Threshold);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 }
 
 CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -95,22 +100,25 @@ void CartoonPreviewGenerator::setThreshold(int threshold)
 
 void CartoonPreviewGenerator::StartImageGenerator()
 {
-    auto thread    = new QThread();
-    auto generator = new CartoonImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<CartoonImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,                  generator, &CartoonImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,                 thread,    &QThread::deleteLater);
-    QObject::connect(generator, &CartoonImageGenerator::imageReady, this,      &CartoonPreviewGenerator::setEffectedImage);
-    QObject::connect(generator, &CartoonImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &CartoonImageGenerator::finished,   generator, &CartoonImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,                  generator.get(), &CartoonImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,                 thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &CartoonImageGenerator::imageReady, this,            &CartoonPreviewGenerator::setEffectedImage);
+    QObject::connect(generator.get(), &CartoonImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &CartoonImageGenerator::finished,   generator.get(), &CartoonImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setThreshold(Threshold);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 
     ImageGeneratorRunning = true;
 
