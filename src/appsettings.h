@@ -48,7 +48,7 @@ public:
 
 private:
     int                        DefaultBrushSize;
-    std::shared_ptr<QSettings> Settings;
+    std::unique_ptr<QSettings> Settings;
 };
 
 #endif // APPSETTINGS_H

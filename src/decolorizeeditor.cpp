@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <QtCore/QtMath>
 #include <QtCore/QThread>
 #include <QtGui/QColor>
@@ -11,20 +13,23 @@ DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) : EffectEditor(parent)
 
 void DecolorizeEditor::processOpenedImage()
 {
-    auto thread    = new QThread();
-    auto generator = new GrayscaleImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<GrayscaleImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,                    generator, &GrayscaleImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,                   thread,    &QThread::deleteLater);
-    QObject::connect(generator, &GrayscaleImageGenerator::imageReady, this,      &DecolorizeEditor::setEffectedImage);
-    QObject::connect(generator, &GrayscaleImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &GrayscaleImageGenerator::finished,   generator, &GrayscaleImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,                    generator.get(), &GrayscaleImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,                   thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &GrayscaleImageGenerator::imageReady, this,            &DecolorizeEditor::setEffectedImage);
+    QObject::connect(generator.get(), &GrayscaleImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &GrayscaleImageGenerator::finished,   generator.get(), &GrayscaleImageGenerator::deleteLater);
 
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 }
 
 GrayscaleImageGenerator::GrayscaleImageGenerator(QObject *parent) : QObject(parent)

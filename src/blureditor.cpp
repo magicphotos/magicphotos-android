@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <QtCore/QtMath>
 #include <QtCore/QThread>
 #include <QtGui/QPainter>
@@ -21,21 +23,24 @@ void BlurEditor::setRadius(int radius)
 
 void BlurEditor::processOpenedImage()
 {
-    auto thread    = new QThread();
-    auto generator = new BlurImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<BlurImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,               generator, &BlurImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,              thread,    &QThread::deleteLater);
-    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurEditor::setEffectedImage);
-    QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,               generator.get(), &BlurImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,              thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &BlurImageGenerator::imageReady, this,            &BlurEditor::setEffectedImage);
+    QObject::connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 }
 
 BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -63,21 +68,24 @@ void BlurPreviewGenerator::setRadius(int radius)
 
 void BlurPreviewGenerator::StartImageGenerator()
 {
-    auto thread    = new QThread();
-    auto generator = new BlurImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<BlurImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,               generator, &BlurImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,              thread,    &QThread::deleteLater);
-    QObject::connect(generator, &BlurImageGenerator::imageReady, this,      &BlurPreviewGenerator::setEffectedImage);
-    QObject::connect(generator, &BlurImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &BlurImageGenerator::finished,   generator, &BlurImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,               generator.get(), &BlurImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,              thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &BlurImageGenerator::imageReady, this,            &BlurPreviewGenerator::setEffectedImage);
+    QObject::connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 
     ImageGeneratorRunning = true;
 

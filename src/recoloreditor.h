@@ -1,6 +1,8 @@
 #ifndef RECOLOREDITOR_H
 #define RECOLOREDITOR_H
 
+#include <tuple>
+
 #include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QHash>

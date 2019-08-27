@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = magicphotos
 
 QT += quick quickcontrols2 purchasing
-CONFIG += c++11
+CONFIG += c++14
 
 DEFINES += QT_DEPRECATED_WARNINGS
 

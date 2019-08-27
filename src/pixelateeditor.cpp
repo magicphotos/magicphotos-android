@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <QtCore/QtMath>
 #include <QtCore/QThread>
 #include <QtGui/QColor>
@@ -22,21 +24,24 @@ void PixelateEditor::setPixDenom(int pix_denom)
 
 void PixelateEditor::processOpenedImage()
 {
-    auto thread    = new QThread();
-    auto generator = new PixelateImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<PixelateImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
-    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelateEditor::setEffectedImage);
-    QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,                   generator.get(), &PixelateImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,                  thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &PixelateImageGenerator::imageReady, this,            &PixelateEditor::setEffectedImage);
+    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
 
     generator->setPixDenom(PixDenom);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 }
 
 PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -64,21 +69,24 @@ void PixelatePreviewGenerator::setPixDenom(int pix_denom)
 
 void PixelatePreviewGenerator::StartImageGenerator()
 {
-    auto thread    = new QThread();
-    auto generator = new PixelateImageGenerator();
+    auto thread    = std::make_unique<QThread>();
+    auto generator = std::make_unique<PixelateImageGenerator>();
 
-    generator->moveToThread(thread);
+    generator->moveToThread(thread.get());
 
-    QObject::connect(thread,    &QThread::started,                   generator, &PixelateImageGenerator::start);
-    QObject::connect(thread,    &QThread::finished,                  thread,    &QThread::deleteLater);
-    QObject::connect(generator, &PixelateImageGenerator::imageReady, this,      &PixelatePreviewGenerator::setEffectedImage);
-    QObject::connect(generator, &PixelateImageGenerator::finished,   thread,    &QThread::quit);
-    QObject::connect(generator, &PixelateImageGenerator::finished,   generator, &PixelateImageGenerator::deleteLater);
+    QObject::connect(thread.get(),    &QThread::started,                   generator.get(), &PixelateImageGenerator::start);
+    QObject::connect(thread.get(),    &QThread::finished,                  thread.get(),    &QThread::deleteLater);
+    QObject::connect(generator.get(), &PixelateImageGenerator::imageReady, this,            &PixelatePreviewGenerator::setEffectedImage);
+    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
+    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
 
     generator->setPixDenom(PixDenom);
     generator->setInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
+
+    (void)thread.release();
+    (void)generator.release();
 
     ImageGeneratorRunning = true;
 
