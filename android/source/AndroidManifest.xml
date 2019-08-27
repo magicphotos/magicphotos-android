@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<manifest package="com.derevenetz.oleg.magicphotos.stdalone" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="2.1.10" android:versionCode="55" android:installLocation="auto">
+<manifest package="com.derevenetz.oleg.magicphotos.stdalone" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="2.1.10" android:versionCode="57" android:installLocation="auto">
     <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28"/>
     <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
     <!-- Additional permissions not covered by Qt -->
