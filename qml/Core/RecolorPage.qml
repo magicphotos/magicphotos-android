@@ -459,11 +459,11 @@ Page {
                 border.width:  UtilScript.pt(2)
             }
 
-            onPositionChanged: {
+            onPressed: {
                 recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
             }
 
-            onPressed: {
+            onPositionChanged: {
                 recolorEditor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
             }
         }
