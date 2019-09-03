@@ -2,14 +2,16 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.2
 
 import "../Misc"
 
 import "../../Util.js" as UtilScript
 
-Dialog {
-    id: adMobConsentDialog
+Popup {
+    id:               adMobConsentDialog
+    anchors.centerIn: Overlay.overlay
+    modal:            true
+    closePolicy:      Popup.NoAutoClose
 
     signal personalizedAdsSelected()
     signal nonPersonalizedAdsSelected()
