@@ -10,21 +10,24 @@ import "../../Util.js" as UtilScript
 Popup {
     id:               adMobConsentDialog
     anchors.centerIn: Overlay.overlay
+    padding:          UtilScript.pt(8)
     modal:            true
     closePolicy:      Popup.NoAutoClose
 
     signal personalizedAdsSelected()
     signal nonPersonalizedAdsSelected()
 
-    contentItem: Pane {
+    background: Pane {
+    }
+
+    contentItem: Rectangle {
         implicitWidth:  UtilScript.pt(300)
         implicitHeight: UtilScript.pt(300)
+        color:          "transparent"
 
         ColumnLayout {
-            anchors.fill:         parent
-            anchors.topMargin:    UtilScript.pt(16)
-            anchors.bottomMargin: UtilScript.pt(16)
-            spacing:              UtilScript.pt(16)
+            anchors.fill: parent
+            spacing:      UtilScript.pt(8)
 
             Label {
                 text:                qsTr("We keep this app free by showing ads. Ad network will <a href=\"https://policies.google.com/technologies/ads\">collect data and use a unique identifier on your device</a> to show you ads. <b>Do you allow to use your data to tailor ads for you?</b>")
