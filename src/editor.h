@@ -71,14 +71,10 @@ private slots:
 signals:
     void imageOpened();
     void imageOpenFailed();
-
     void imageSaved(const QString &imageFile);
     void imageSaveFailed();
-
     void undoAvailabilityChanged(bool available);
-
     void mouseEvent(int eventType, int x, int y);
-
     void helperImageReady(const QImage &helperImage);
 
 protected:
