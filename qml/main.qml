@@ -13,7 +13,7 @@ ApplicationWindow {
     visible:                      true
     Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
                                   Qt.InvertedPortraitOrientation | Qt.InvertedLandscapeOrientation
-    Material.theme:               Material.System
+    Material.theme:               UIHelper.darkTheme ? Material.Dark : Material.Light
     Material.primary:             Material.Teal
 
     readonly property int screenOrientation: Screen.orientation

@@ -5,6 +5,7 @@
 
 UIHelper::UIHelper(QObject *parent) : QObject(parent)
 {
+    DarkTheme = QtAndroid::androidActivity().callMethod<jboolean>("getNightModeStatus");
 }
 
 UIHelper &UIHelper::GetInstance()
@@ -12,6 +13,11 @@ UIHelper &UIHelper::GetInstance()
     static UIHelper instance;
 
     return instance;
+}
+
+bool UIHelper::darkTheme() const
+{
+    return DarkTheme;
 }
 
 int UIHelper::getScreenDPI()
@@ -65,6 +71,13 @@ void UIHelper::shareImage(const QString &image_file)
     QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
 
     QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
+}
+
+void UIHelper::handleDeviceConfigurationChange()
+{
+    DarkTheme = QtAndroid::androidActivity().callMethod<jboolean>("getNightModeStatus");
+
+    emit darkThemeChanged(DarkTheme);
 }
 
 void UIHelper::handleImageSelection(const QString &image_file, int image_orientation)

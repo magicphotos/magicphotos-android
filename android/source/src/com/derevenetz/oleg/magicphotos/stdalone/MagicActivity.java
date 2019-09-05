@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,6 +48,8 @@ public class MagicActivity extends QtActivity
     private int               statusBarHeight            = 0;
     private AdView            bannerView                 = null;
     private InterstitialAd    interstitial               = null;
+
+    private static native void deviceConfigurationChanged();
 
     private static native void bannerViewHeightUpdated(int height);
 
@@ -132,11 +135,26 @@ public class MagicActivity extends QtActivity
         super.onDestroy();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+
+        deviceConfigurationChanged();
+    }
+
     public int getScreenDPI()
     {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
 
         return metrics.densityDpi;
+    }
+
+    public boolean getNightModeStatus()
+    {
+        Configuration config = getResources().getConfiguration();
+
+        return ((config.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES);
     }
 
     public String getSaveDirectory()

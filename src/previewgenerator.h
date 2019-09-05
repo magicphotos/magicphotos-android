@@ -33,7 +33,6 @@ protected slots:
 signals:
     void imageOpened();
     void imageOpenFailed();
-
     void generationStarted();
     void generationFinished();
 
