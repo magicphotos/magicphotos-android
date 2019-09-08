@@ -50,7 +50,7 @@ public class MagicActivity extends QtActivity
     private AdView            bannerView                 = null;
     private InterstitialAd    interstitial               = null;
 
-    private static native void deviceConfigurationChanged();
+    private static native void deviceConfigurationUpdated();
 
     private static native void bannerViewHeightUpdated(int height);
 
@@ -141,7 +141,7 @@ public class MagicActivity extends QtActivity
     {
         super.onConfigurationChanged(newConfig);
 
-        deviceConfigurationChanged();
+        deviceConfigurationUpdated();
     }
 
     public int getScreenDPI()

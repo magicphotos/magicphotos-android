@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
         QGuiApplication::installTranslator(&translator);
     }
 
-    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::deviceConfigurationChanged, &UIHelper::GetInstance(),    &UIHelper::handleDeviceConfigurationChange);
-    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::bannerViewHeightChanged,    &AdMobHelper::GetInstance(), &AdMobHelper::setBannerViewHeight);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::deviceConfigurationUpdated, &UIHelper::GetInstance(),    &UIHelper::handleDeviceConfigurationUpdate);
+    QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::bannerViewHeightUpdated,    &AdMobHelper::GetInstance(), &AdMobHelper::setBannerViewHeight);
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelected,              &UIHelper::GetInstance(),    &UIHelper::handleImageSelection);
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionCancelled,    &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionCancel);
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionFailed,       &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionFailure);

@@ -67,7 +67,9 @@ void AdMobHelper::showInterstitial()
 
 void AdMobHelper::setBannerViewHeight(int height)
 {
-    BannerViewHeight = height;
+    if (BannerViewHeight != height) {
+        BannerViewHeight = height;
 
-    emit bannerViewHeightChanged(BannerViewHeight);
+        emit bannerViewHeightChanged(BannerViewHeight);
+    }
 }

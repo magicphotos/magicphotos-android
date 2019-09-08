@@ -297,7 +297,7 @@ Page {
                         imageSaveFailedMessageDialog.open();
                     }
 
-                    onUndoAvailabilityChanged: {
+                    onUndoAvailabilityUpdated: {
                         if (available) {
                             undoToolButton.enabled = true;
                         } else {

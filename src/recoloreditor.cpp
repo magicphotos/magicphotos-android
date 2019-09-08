@@ -34,9 +34,11 @@ int RecolorEditor::hue() const
 
 void RecolorEditor::setHue(int hue)
 {
-    Hue = hue;
+    if (Hue != hue) {
+        Hue = hue;
 
-    emit hueChanged(Hue);
+        emit hueChanged(Hue);
+    }
 }
 
 void RecolorEditor::mousePressEvent(QMouseEvent *event)

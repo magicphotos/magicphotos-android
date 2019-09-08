@@ -40,13 +40,19 @@ void RetouchEditor::mousePressEvent(QMouseEvent *event)
             sampling_point_y = 0;
         }
 
-        SamplingPointValid = true;
+        if (!SamplingPointValid) {
+            SamplingPointValid = true;
 
-        SamplingPoint.setX(sampling_point_x);
-        SamplingPoint.setY(sampling_point_y);
+            emit samplingPointValidChanged(SamplingPointValid);
+        }
 
-        emit samplingPointValidChanged(SamplingPointValid);
-        emit samplingPointChanged(SamplingPoint);
+        if (SamplingPoint.x() != sampling_point_x ||
+            SamplingPoint.y() != sampling_point_y) {
+            SamplingPoint.setX(sampling_point_x);
+            SamplingPoint.setY(sampling_point_y);
+
+            emit samplingPointChanged(SamplingPoint);
+        }
     } else if (Mode == ModeClone) {
         if (SamplingPointValid) {
             InitialSamplingPoint.setX(SamplingPoint.x());
@@ -90,13 +96,19 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
             sampling_point_y = 0;
         }
 
-        SamplingPointValid = true;
+        if (!SamplingPointValid) {
+            SamplingPointValid = true;
 
-        SamplingPoint.setX(sampling_point_x);
-        SamplingPoint.setY(sampling_point_y);
+            emit samplingPointValidChanged(SamplingPointValid);
+        }
 
-        emit samplingPointValidChanged(SamplingPointValid);
-        emit samplingPointChanged(SamplingPoint);
+        if (SamplingPoint.x() != sampling_point_x ||
+            SamplingPoint.y() != sampling_point_y) {
+            SamplingPoint.setX(sampling_point_x);
+            SamplingPoint.setY(sampling_point_y);
+
+            emit samplingPointChanged(SamplingPoint);
+        }
     } else if (Mode == ModeClone) {
         if (SamplingPointValid) {
             int sampling_point_x = InitialSamplingPoint.x() + (event->pos().x() - InitialTouchPoint.x());
@@ -115,10 +127,13 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
                 sampling_point_y = 0;
             }
 
-            SamplingPoint.setX(sampling_point_x);
-            SamplingPoint.setY(sampling_point_y);
+            if (SamplingPoint.x() != sampling_point_x ||
+                SamplingPoint.y() != sampling_point_y) {
+                SamplingPoint.setX(sampling_point_x);
+                SamplingPoint.setY(sampling_point_y);
 
-            emit samplingPointChanged(SamplingPoint);
+                emit samplingPointChanged(SamplingPoint);
+            }
 
             ChangeImageAt(false, event->pos().x(), event->pos().y());
 
@@ -151,10 +166,13 @@ void RetouchEditor::processOpenedImage()
 
     LoadedImage = QImage();
 
-    Changed            = false;
-    SamplingPointValid = false;
+    Changed = false;
 
-    emit samplingPointValidChanged(SamplingPointValid);
+    if (SamplingPointValid) {
+        SamplingPointValid = false;
+
+        emit samplingPointValidChanged(SamplingPointValid);
+    }
 
     setImplicitWidth(CurrentImage.width());
     setImplicitHeight(CurrentImage.height());

@@ -36,7 +36,7 @@ public:
     Q_INVOKABLE void shareImage(const QString &image_file);
 
 public slots:
-    void handleDeviceConfigurationChange();
+    void handleDeviceConfigurationUpdate();
     void handleImageSelection(const QString &image_file, int image_orientation);
     void handleImageSelectionCancel();
     void handleImageSelectionFailure();

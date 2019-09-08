@@ -174,7 +174,7 @@ void Editor::openImage(const QString &image_file, int image_orientation)
                 if (!LoadedImage.isNull()) {
                     UndoStack.clear();
 
-                    emit undoAvailabilityChanged(false);
+                    emit undoAvailabilityUpdated(false);
 
                     processOpenedImage();
                 } else {
@@ -220,7 +220,7 @@ void Editor::undo()
         CurrentImage = UndoStack.pop();
 
         if (UndoStack.count() == 0) {
-            emit undoAvailabilityChanged(false);
+            emit undoAvailabilityUpdated(false);
         }
 
         Changed = true;
@@ -259,5 +259,5 @@ void Editor::SaveUndoImage()
         }
     }
 
-    emit undoAvailabilityChanged(true);
+    emit undoAvailabilityUpdated(true);
 }
