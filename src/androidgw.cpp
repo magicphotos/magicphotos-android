@@ -15,14 +15,14 @@ AndroidGW &AndroidGW::GetInstance()
     return instance;
 }
 
-extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, deviceConfigurationChanged)(JNIEnv *, jclass)
+extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, deviceConfigurationUpdated)(JNIEnv *, jclass)
 {
-    emit AndroidGW::GetInstance().deviceConfigurationChanged();
+    emit AndroidGW::GetInstance().deviceConfigurationUpdated();
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, bannerViewHeightUpdated)(JNIEnv *, jclass, jint height)
 {
-    emit AndroidGW::GetInstance().bannerViewHeightChanged(height);
+    emit AndroidGW::GetInstance().bannerViewHeightUpdated(height);
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelected)(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)

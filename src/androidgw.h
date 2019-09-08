@@ -22,8 +22,8 @@ public:
     static AndroidGW &GetInstance();
 
 signals:
-    void deviceConfigurationChanged();
-    void bannerViewHeightChanged(int bannerViewHeight);
+    void deviceConfigurationUpdated();
+    void bannerViewHeightUpdated(int bannerViewHeight);
     void imageSelected(const QString &imageFile, int imageOrientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();

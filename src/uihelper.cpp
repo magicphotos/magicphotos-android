@@ -73,11 +73,15 @@ void UIHelper::shareImage(const QString &image_file)
     QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
 }
 
-void UIHelper::handleDeviceConfigurationChange()
+void UIHelper::handleDeviceConfigurationUpdate()
 {
-    DarkTheme = QtAndroid::androidActivity().callMethod<jboolean>("getNightModeStatus");
+    bool dark_theme = QtAndroid::androidActivity().callMethod<jboolean>("getNightModeStatus");
 
-    emit darkThemeChanged(DarkTheme);
+    if (DarkTheme != dark_theme) {
+        DarkTheme = dark_theme;
+
+        emit darkThemeChanged(DarkTheme);
+    }
 }
 
 void UIHelper::handleImageSelection(const QString &image_file, int image_orientation)
