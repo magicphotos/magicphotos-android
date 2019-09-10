@@ -4,7 +4,7 @@ TARGET = magicphotos
 QT += quick quickcontrols2 purchasing
 CONFIG += c++14
 
-DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
 SOURCES += src/main.cpp \
     src/appsettings.cpp \
