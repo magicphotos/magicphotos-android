@@ -34,23 +34,25 @@ QString UIHelper::getSaveDirectory()
 
 bool UIHelper::requestReadStoragePermission()
 {
-    if (QtAndroid::checkPermission("android.permission.READ_EXTERNAL_STORAGE") == QtAndroid::PermissionResult::Granted) {
+    if (QtAndroid::checkPermission(QStringLiteral("android.permission.READ_EXTERNAL_STORAGE")) == QtAndroid::PermissionResult::Granted) {
         return true;
     } else {
-        QtAndroid::PermissionResultMap result = QtAndroid::requestPermissionsSync(QStringList("android.permission.READ_EXTERNAL_STORAGE"));
+        QtAndroid::PermissionResultMap result = QtAndroid::requestPermissionsSync(QStringList(QStringLiteral("android.permission.READ_EXTERNAL_STORAGE")));
 
-        return (result.contains("android.permission.READ_EXTERNAL_STORAGE") && result["android.permission.READ_EXTERNAL_STORAGE"] == QtAndroid::PermissionResult::Granted);
+        return (result.contains(QStringLiteral("android.permission.READ_EXTERNAL_STORAGE")) &&
+                result[QStringLiteral("android.permission.READ_EXTERNAL_STORAGE")] == QtAndroid::PermissionResult::Granted);
     }
 }
 
 bool UIHelper::requestWriteStoragePermission()
 {
-    if (QtAndroid::checkPermission("android.permission.WRITE_EXTERNAL_STORAGE") == QtAndroid::PermissionResult::Granted) {
+    if (QtAndroid::checkPermission(QStringLiteral("android.permission.WRITE_EXTERNAL_STORAGE")) == QtAndroid::PermissionResult::Granted) {
         return true;
     } else {
-        QtAndroid::PermissionResultMap result = QtAndroid::requestPermissionsSync(QStringList("android.permission.WRITE_EXTERNAL_STORAGE"));
+        QtAndroid::PermissionResultMap result = QtAndroid::requestPermissionsSync(QStringList(QStringLiteral("android.permission.WRITE_EXTERNAL_STORAGE")));
 
-        return (result.contains("android.permission.WRITE_EXTERNAL_STORAGE") && result["android.permission.WRITE_EXTERNAL_STORAGE"] == QtAndroid::PermissionResult::Granted);
+        return (result.contains(QStringLiteral("android.permission.WRITE_EXTERNAL_STORAGE")) &&
+                result[QStringLiteral("android.permission.WRITE_EXTERNAL_STORAGE")] == QtAndroid::PermissionResult::Granted);
     }
 }
 

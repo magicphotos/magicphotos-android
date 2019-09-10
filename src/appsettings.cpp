@@ -3,7 +3,7 @@
 AppSettings::AppSettings(QObject *parent) : QObject(parent)
 {
     DefaultBrushSize = 0;
-    Settings         = std::make_unique<QSettings>("Oleg Derevenetz", "MagicPhotos");
+    Settings         = std::make_unique<QSettings>(QStringLiteral("Oleg Derevenetz"), QStringLiteral("MagicPhotos"));
 }
 
 AppSettings &AppSettings::GetInstance()
@@ -25,8 +25,8 @@ void AppSettings::setDefaultBrushSize(int size)
 
 int AppSettings::brushSize() const
 {
-    if (Settings->contains("BrushSize")) {
-        return Settings->value("BrushSize").toInt();
+    if (Settings->contains(QStringLiteral("BrushSize"))) {
+        return Settings->value(QStringLiteral("BrushSize")).toInt();
     } else {
         return DefaultBrushSize;
     }
@@ -34,13 +34,13 @@ int AppSettings::brushSize() const
 
 void AppSettings::setBrushSize(int size)
 {
-    Settings->setValue("BrushSize", size);
+    Settings->setValue(QStringLiteral("BrushSize"), size);
 }
 
 qreal AppSettings::brushHardness() const
 {
-    if (Settings->contains("BrushHardness")) {
-        return Settings->value("BrushHardness").toDouble();
+    if (Settings->contains(QStringLiteral("BrushHardness"))) {
+        return Settings->value(QStringLiteral("BrushHardness")).toDouble();
     } else {
         return 0.75;
     }
@@ -48,19 +48,19 @@ qreal AppSettings::brushHardness() const
 
 void AppSettings::setBrushHardness(qreal hardness)
 {
-    Settings->setValue("BrushHardness", hardness);
+    Settings->setValue(QStringLiteral("BrushHardness"), hardness);
 }
 
 QString AppSettings::adMobConsent() const
 {
-    if (Settings->contains("AdMobConsent")) {
-        return Settings->value("AdMobConsent").toString();
+    if (Settings->contains(QStringLiteral("AdMobConsent"))) {
+        return Settings->value(QStringLiteral("AdMobConsent")).toString();
     } else {
-        return "";
+        return QStringLiteral("");
     }
 }
 
 void AppSettings::setAdMobConsent(QString &consent)
 {
-    Settings->setValue("AdMobConsent", consent);
+    Settings->setValue(QStringLiteral("AdMobConsent"), consent);
 }

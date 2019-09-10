@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     QTranslator     translator;
     QGuiApplication app(argc, argv);
 
-    if (translator.load(QString(":/tr/magicphotos_%1").arg(QLocale::system().name()))) {
+    if (translator.load(QStringLiteral(":/tr/magicphotos_%1").arg(QLocale::system().name()))) {
         QGuiApplication::installTranslator(&translator);
     }
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), &AdMobHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("UIHelper"), &UIHelper::GetInstance());
 
-    QQuickStyle::setStyle("Material");
+    QQuickStyle::setStyle(QStringLiteral("Material"));
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 

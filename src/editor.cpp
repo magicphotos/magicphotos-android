@@ -196,10 +196,10 @@ void Editor::saveImage(const QString &image_file)
     QString file_name = image_file;
 
     if (!file_name.isNull() && !CurrentImage.isNull()) {
-        if (QFileInfo(file_name).suffix().compare("png", Qt::CaseInsensitive) != 0 &&
-            QFileInfo(file_name).suffix().compare("jpg", Qt::CaseInsensitive) != 0 &&
-            QFileInfo(file_name).suffix().compare("bmp", Qt::CaseInsensitive) != 0) {
-            file_name = file_name + ".jpg";
+        if (QFileInfo(file_name).suffix().compare(QStringLiteral("png"), Qt::CaseInsensitive) != 0 &&
+            QFileInfo(file_name).suffix().compare(QStringLiteral("jpg"), Qt::CaseInsensitive) != 0 &&
+            QFileInfo(file_name).suffix().compare(QStringLiteral("bmp"), Qt::CaseInsensitive) != 0) {
+            file_name = file_name + QStringLiteral(".jpg");
         }
 
         if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_name)) {
