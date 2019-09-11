@@ -61,6 +61,10 @@ QML_DESIGNER_IMPORT_PATH =
 android {
     QT += androidextras
 
+    CONFIG(release, debug|release) {
+        CONFIG += qtquickcompiler
+    }
+
     OTHER_FILES += \
         android/source/AndroidManifest.xml \
         android/source/build.gradle \
@@ -102,8 +106,4 @@ android {
         android/source/src/com/derevenetz/oleg/magicphotos/MagicActivity.java
 
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/source
-}
-
-CONFIG(release, debug|release) {
-    CONFIG += qtquickcompiler
 }
