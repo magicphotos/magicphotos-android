@@ -26,8 +26,8 @@ Page {
 
             ToolButton {
                 id:               applyToolButton
-                implicitWidth:    UtilScript.pt(48)
-                implicitHeight:   UtilScript.pt(48)
+                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -79,8 +79,8 @@ Page {
 
     ColumnLayout {
         anchors.fill:    parent
-        anchors.margins: UtilScript.pt(16)
-        spacing:         UtilScript.pt(16)
+        anchors.margins: UtilScript.pt(UIHelper.screenDpi, 16)
+        spacing:         UtilScript.pt(UIHelper.screenDpi, 16)
 
         Rectangle {
             color:             "transparent"
