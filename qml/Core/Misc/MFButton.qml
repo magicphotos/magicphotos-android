@@ -9,7 +9,6 @@ Button {
         text:                   mfButton.text
         color:                  Material.foreground
         font.bold:              mfButton.font.bold
-        font.capitalization:    mfButton.font.capitalization
         font.family:            mfButton.font.family
         font.hintingPreference: mfButton.font.hintingPreference
         font.italic:            mfButton.font.italic
