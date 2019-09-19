@@ -9,6 +9,7 @@ class UIHelper : public QObject
     Q_OBJECT
 
     Q_PROPERTY(bool darkTheme READ darkTheme NOTIFY darkThemeChanged)
+    Q_PROPERTY(int  screenDpi READ screenDpi NOTIFY screenDpiChanged)
 
 private:
     explicit UIHelper(QObject *parent = nullptr);
@@ -24,8 +25,8 @@ public:
     static UIHelper &GetInstance();
 
     bool darkTheme() const;
+    int screenDpi() const;
 
-    Q_INVOKABLE int getScreenDPI();
     Q_INVOKABLE QString getSaveDirectory();
 
     Q_INVOKABLE bool requestReadStoragePermission();
@@ -43,12 +44,14 @@ public slots:
 
 signals:
     void darkThemeChanged(bool darkTheme);
+    void screenDpiChanged(int screenDpi);
     void imageSelected(const QString &imageFile, int imageOrientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
 
 private:
     bool DarkTheme;
+    int  ScreenDpi;
 };
 
 #endif // UIHELPER_H

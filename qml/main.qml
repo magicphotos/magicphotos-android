@@ -17,11 +17,24 @@ ApplicationWindow {
     Material.theme:               UIHelper.darkTheme ? Material.Dark : Material.Light
     Material.primary:             Material.Teal
 
+    readonly property int screenDpi:         UIHelper.screenDpi
     readonly property int screenOrientation: Screen.orientation
 
     property bool disableAds:                false
 
     property string adMobConsent:            ""
+
+    onScreenDpiChanged: {
+        if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
+            if (disableAds) {
+                AdMobHelper.hideBannerView();
+            } else {
+                AdMobHelper.showBannerView();
+            }
+        } else {
+            AdMobHelper.hideBannerView();
+        }
+    }
 
     onScreenOrientationChanged: {
         if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
@@ -147,7 +160,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        AppSettings.defaultBrushSize = UtilScript.pt(16);
+        AppSettings.defaultBrushSize = Qt.binding(function() { return UtilScript.pt(UIHelper.screenDpi, 16); });
 
         disableAds   = AppSettings.disableAds;
         adMobConsent = AppSettings.adMobConsent;

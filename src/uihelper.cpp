@@ -6,6 +6,7 @@
 UIHelper::UIHelper(QObject *parent) : QObject(parent)
 {
     DarkTheme = QtAndroid::androidActivity().callMethod<jboolean>("getNightModeStatus");
+    ScreenDpi = QtAndroid::androidActivity().callMethod<jint>("getScreenDpi");
 }
 
 UIHelper &UIHelper::GetInstance()
@@ -20,9 +21,9 @@ bool UIHelper::darkTheme() const
     return DarkTheme;
 }
 
-int UIHelper::getScreenDPI()
+int UIHelper::screenDpi() const
 {
-    return QtAndroid::androidActivity().callMethod<jint>("getScreenDPI");
+    return ScreenDpi;
 }
 
 QString UIHelper::getSaveDirectory()
@@ -77,6 +78,14 @@ void UIHelper::shareImage(const QString &image_file)
 
 void UIHelper::handleDeviceConfigurationUpdate()
 {
+    int screen_dpi = QtAndroid::androidActivity().callMethod<jint>("getScreenDpi");
+
+    if (ScreenDpi != screen_dpi) {
+        ScreenDpi = screen_dpi;
+
+        emit screenDpiChanged(ScreenDpi);
+    }
+
     bool dark_theme = QtAndroid::androidActivity().callMethod<jboolean>("getNightModeStatus");
 
     if (DarkTheme != dark_theme) {
