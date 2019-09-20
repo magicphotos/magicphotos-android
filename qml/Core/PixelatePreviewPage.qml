@@ -16,7 +16,7 @@ Page {
         Label {
             anchors.centerIn: parent
             text:             qsTr("Pixelate")
-            font.pointSize:   24
+            font.pixelSize:   UtilScript.dp(UIHelper.screenDpi, 24)
         }
     }
 
