@@ -15,7 +15,7 @@ Page {
         Label {
             anchors.centerIn: parent
             text:             qsTr("MagicPhotos")
-            font.pointSize:   24
+            font.pixelSize:   UtilScript.dp(UIHelper.screenDpi, 24)
         }
     }
 

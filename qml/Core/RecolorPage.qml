@@ -521,7 +521,7 @@ Page {
             Label {
                 id:             brushSizeLabel
                 text:           qsTr("Brush Size")
-                font.pointSize: 16
+                font.pixelSize: UtilScript.dp(UIHelper.screenDpi, 16)
             }
 
             Slider {
@@ -544,7 +544,7 @@ Page {
             Label {
                 id:             brushHardnessLabel
                 text:           qsTr("Brush Hardness")
-                font.pointSize: 16
+                font.pixelSize: UtilScript.dp(UIHelper.screenDpi, 16)
             }
         }
     }

@@ -9,13 +9,14 @@ Button {
         text:                   mfButton.text
         color:                  Material.foreground
         font.bold:              mfButton.font.bold
+        font.capitalization:    mfButton.font.capitalization
         font.family:            mfButton.font.family
         font.hintingPreference: mfButton.font.hintingPreference
         font.italic:            mfButton.font.italic
         font.kerning:           mfButton.font.kerning
         font.letterSpacing:     mfButton.font.letterSpacing
         font.overline:          mfButton.font.overline
-        font.pointSize:         16
+        font.pixelSize:         UtilScript.dp(UIHelper.screenDpi, 16)
         font.preferShaping:     mfButton.font.preferShaping
         font.strikeout:         mfButton.font.strikeout
         font.underline:         mfButton.font.underline
@@ -25,6 +26,6 @@ Button {
         verticalAlignment:      Text.AlignVCenter
         wrapMode:               Text.NoWrap
         fontSizeMode:           Text.Fit
-        minimumPointSize:       8
+        minimumPixelSize:       UtilScript.dp(UIHelper.screenDpi, 8)
     }
 }
