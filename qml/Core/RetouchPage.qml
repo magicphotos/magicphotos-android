@@ -25,8 +25,8 @@ Page {
 
             Button {
                 id:             scrollModeButton
-                implicitWidth:  UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight: UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:        false
                 checkable:      true
                 checked:        true
@@ -39,8 +39,8 @@ Page {
 
             Button {
                 id:             samplingPointModeButton
-                implicitWidth:  UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight: UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:        false
                 checkable:      true
 
@@ -52,8 +52,8 @@ Page {
 
             Button {
                 id:             cloneModeButton
-                implicitWidth:  UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight: UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:        false
                 checkable:      true
 
@@ -65,8 +65,8 @@ Page {
 
             Button {
                 id:             blurModeButton
-                implicitWidth:  UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight: UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:        false
                 checkable:      true
 
@@ -84,8 +84,8 @@ Page {
 
             ToolButton {
                 id:               saveToolButton
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -105,8 +105,8 @@ Page {
 
             ToolButton {
                 id:               shareToolButton
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -126,8 +126,8 @@ Page {
 
             ToolButton {
                 id:               undoToolButton
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 enabled:          false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -142,8 +142,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -157,8 +157,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -381,8 +381,8 @@ Page {
                         id:      samplingPointImage
                         x:       imageX(width,  retouchEditor.samplingPoint.x, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
                         y:       imageY(height, retouchEditor.samplingPoint.y, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
-                        width:   UtilScript.pt(UIHelper.screenDpi, 48)
-                        height:  UtilScript.pt(UIHelper.screenDpi, 48)
+                        width:   UtilScript.dp(UIHelper.screenDpi, 48)
+                        height:  UtilScript.dp(UIHelper.screenDpi, 48)
                         source:  "qrc:/resources/images/sampling_point.png"
                         visible: retouchEditor.samplingPointValid
 
@@ -411,8 +411,8 @@ Page {
             anchors.top:  parent.top
             anchors.left: parent.left
             z:            1
-            width:        UtilScript.pt(UIHelper.screenDpi, 128)
-            height:       UtilScript.pt(UIHelper.screenDpi, 128)
+            width:        UtilScript.dp(UIHelper.screenDpi, 128)
+            height:       UtilScript.dp(UIHelper.screenDpi, 128)
             color:        "transparent"
             visible:      false
 
@@ -473,11 +473,11 @@ Page {
 
         GridLayout {
             anchors.fill:    parent
-            anchors.margins: UtilScript.pt(UIHelper.screenDpi, 4)
+            anchors.margins: UtilScript.dp(UIHelper.screenDpi, 4)
             rows:            2
             columns:         3
-            rowSpacing:      UtilScript.pt(UIHelper.screenDpi, 8)
-            columnSpacing:   UtilScript.pt(UIHelper.screenDpi, 4)
+            rowSpacing:      UtilScript.dp(UIHelper.screenDpi, 8)
+            columnSpacing:   UtilScript.dp(UIHelper.screenDpi, 4)
 
             BrushPreviewGenerator {
                 id:             brushPreviewGenerator
@@ -489,9 +489,9 @@ Page {
 
             Slider {
                 id:               brushSizeSlider
-                from:             UtilScript.pt(UIHelper.screenDpi, 8)
-                to:               UtilScript.pt(UIHelper.screenDpi, 24)
-                value:            UtilScript.pt(UIHelper.screenDpi, 16)
+                from:             UtilScript.dp(UIHelper.screenDpi, 8)
+                to:               UtilScript.dp(UIHelper.screenDpi, 24)
+                value:            UtilScript.dp(UIHelper.screenDpi, 16)
                 stepSize:         1.0
                 Layout.fillWidth: true
 

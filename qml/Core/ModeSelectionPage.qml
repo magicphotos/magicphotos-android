@@ -24,8 +24,8 @@ Page {
             anchors.fill: parent
 
             ToolButton {
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -39,8 +39,8 @@ Page {
             }
 
             ToolButton {
-                implicitWidth:    UtilScript.pt(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.pt(UIHelper.screenDpi, 48)
+                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
+                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
                 Layout.alignment: Qt.AlignHCenter
 
                 contentItem: Image {
@@ -80,8 +80,8 @@ Page {
             id:            modeSelectionLayout
             width:         modeSelectionScrollView.width
             columns:       2
-            rowSpacing:    UtilScript.pt(UIHelper.screenDpi, 4)
-            columnSpacing: UtilScript.pt(UIHelper.screenDpi, 4)
+            rowSpacing:    UtilScript.dp(UIHelper.screenDpi, 4)
+            columnSpacing: UtilScript.dp(UIHelper.screenDpi, 4)
 
             readonly property int itemSize: (width - columnSpacing * (columns - 1)) / columns
 
