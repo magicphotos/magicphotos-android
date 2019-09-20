@@ -160,7 +160,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        AppSettings.defaultBrushSize = Qt.binding(function() { return UtilScript.pt(UIHelper.screenDpi, 16); });
+        AppSettings.defaultBrushSize = Qt.binding(function() { return UtilScript.dp(UIHelper.screenDpi, 16); });
 
         disableAds   = AppSettings.disableAds;
         adMobConsent = AppSettings.adMobConsent;

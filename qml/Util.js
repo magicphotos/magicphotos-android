@@ -1,4 +1,4 @@
-function pt(dpi, size) {
+function dp(dpi, size) {
     if (dpi >= 640) {
         return Math.floor(size * 4);
     } else if (dpi >= 480) {
