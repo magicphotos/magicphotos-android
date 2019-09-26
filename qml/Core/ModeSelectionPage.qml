@@ -16,6 +16,7 @@ Page {
             anchors.centerIn: parent
             text:             qsTr("MagicPhotos")
             font.pixelSize:   UtilScript.dp(UIHelper.screenDpi, 24)
+            font.family:      "Helvetica"
         }
     }
 

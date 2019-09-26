@@ -17,6 +17,7 @@ Page {
             anchors.centerIn: parent
             text:             qsTr("Sketch")
             font.pixelSize:   UtilScript.dp(UIHelper.screenDpi, 24)
+            font.family:      "Helvetica"
         }
     }
 
