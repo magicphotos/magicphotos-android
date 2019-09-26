@@ -458,6 +458,7 @@ Page {
                 id:             brushSizeLabel
                 text:           qsTr("Brush Size")
                 font.pixelSize: UtilScript.dp(UIHelper.screenDpi, 16)
+                font.family:    "Helvetica"
             }
 
             Slider {
@@ -481,6 +482,7 @@ Page {
                 id:             brushHardnessLabel
                 text:           qsTr("Brush Hardness")
                 font.pixelSize: UtilScript.dp(UIHelper.screenDpi, 16)
+                font.family:    "Helvetica"
             }
         }
     }

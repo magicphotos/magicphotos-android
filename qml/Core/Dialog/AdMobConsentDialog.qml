@@ -32,6 +32,7 @@ Popup {
             Label {
                 text:                qsTr("We keep this app free by showing ads. Ad network will <a href=\"https://policies.google.com/technologies/ads\">collect data and use a unique identifier on your device</a> to show you ads. <b>Do you allow to use your data to tailor ads for you?</b>")
                 font.pixelSize:      UtilScript.dp(UIHelper.screenDpi, 16)
+                font.family:         "Helvetica"
                 horizontalAlignment: Text.AlignJustify
                 verticalAlignment:   Text.AlignVCenter
                 wrapMode:            Text.Wrap
@@ -50,6 +51,7 @@ Popup {
                 implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 280)
                 implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 64)
                 text:             qsTr("Yes, show me relevant ads")
+                font.family:      "Helvetica"
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 onClicked: {
@@ -62,6 +64,7 @@ Popup {
                 implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 280)
                 implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 64)
                 text:             qsTr("No, show me ads that are less relevant")
+                font.family:      "Helvetica"
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 onClicked: {
