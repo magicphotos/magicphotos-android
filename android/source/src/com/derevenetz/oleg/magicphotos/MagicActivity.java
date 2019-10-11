@@ -212,6 +212,7 @@ public class MagicActivity extends QtActivity
             {
                 MobileAds.setRequestConfiguration(MobileAds.getRequestConfiguration()
                                                            .toBuilder().setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
+                                                                       .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
                                                                        .build());
 
                 MobileAds.initialize(f_context);
