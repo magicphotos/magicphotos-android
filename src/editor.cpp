@@ -19,7 +19,7 @@ Editor::Editor(QQuickItem *parent) : QQuickPaintedItem(parent)
 
     setFlag(QQuickItem::ItemHasContents, true);
 
-    QObject::connect(this, &Editor::scaleChanged, this, &Editor::scaleBrushImage);
+    connect(this, &Editor::scaleChanged, this, &Editor::scaleBrushImage);
 }
 
 bool Editor::changed() const

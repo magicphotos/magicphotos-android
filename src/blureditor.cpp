@@ -28,11 +28,11 @@ void BlurEditor::processOpenedImage()
 
     generator->moveToThread(thread.get());
 
-    QObject::connect(thread.get(),    &QThread::started,               generator.get(), &BlurImageGenerator::start);
-    QObject::connect(thread.get(),    &QThread::finished,              thread.get(),    &QThread::deleteLater);
-    QObject::connect(generator.get(), &BlurImageGenerator::imageReady, this,            &BlurEditor::setEffectedImage);
-    QObject::connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
-    QObject::connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
+    connect(thread.get(),    &QThread::started,               generator.get(), &BlurImageGenerator::start);
+    connect(thread.get(),    &QThread::finished,              thread.get(),    &QThread::deleteLater);
+    connect(generator.get(), &BlurImageGenerator::imageReady, this,            &BlurEditor::setEffectedImage);
+    connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
+    connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setInput(LoadedImage);
@@ -73,11 +73,11 @@ void BlurPreviewGenerator::StartImageGenerator()
 
     generator->moveToThread(thread.get());
 
-    QObject::connect(thread.get(),    &QThread::started,               generator.get(), &BlurImageGenerator::start);
-    QObject::connect(thread.get(),    &QThread::finished,              thread.get(),    &QThread::deleteLater);
-    QObject::connect(generator.get(), &BlurImageGenerator::imageReady, this,            &BlurPreviewGenerator::setEffectedImage);
-    QObject::connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
-    QObject::connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
+    connect(thread.get(),    &QThread::started,               generator.get(), &BlurImageGenerator::start);
+    connect(thread.get(),    &QThread::finished,              thread.get(),    &QThread::deleteLater);
+    connect(generator.get(), &BlurImageGenerator::imageReady, this,            &BlurPreviewGenerator::setEffectedImage);
+    connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
+    connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setInput(LoadedImage);

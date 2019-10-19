@@ -28,11 +28,11 @@ void SketchEditor::processOpenedImage()
 
     generator->moveToThread(thread.get());
 
-    QObject::connect(thread.get(),    &QThread::started,                 generator.get(), &SketchImageGenerator::start);
-    QObject::connect(thread.get(),    &QThread::finished,                thread.get(),    &QThread::deleteLater);
-    QObject::connect(generator.get(), &SketchImageGenerator::imageReady, this,            &SketchEditor::setEffectedImage);
-    QObject::connect(generator.get(), &SketchImageGenerator::finished,   thread.get(),    &QThread::quit);
-    QObject::connect(generator.get(), &SketchImageGenerator::finished,   generator.get(), &SketchImageGenerator::deleteLater);
+    connect(thread.get(),    &QThread::started,                 generator.get(), &SketchImageGenerator::start);
+    connect(thread.get(),    &QThread::finished,                thread.get(),    &QThread::deleteLater);
+    connect(generator.get(), &SketchImageGenerator::imageReady, this,            &SketchEditor::setEffectedImage);
+    connect(generator.get(), &SketchImageGenerator::finished,   thread.get(),    &QThread::quit);
+    connect(generator.get(), &SketchImageGenerator::finished,   generator.get(), &SketchImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setInput(LoadedImage);
@@ -73,11 +73,11 @@ void SketchPreviewGenerator::StartImageGenerator()
 
     generator->moveToThread(thread.get());
 
-    QObject::connect(thread.get(),    &QThread::started,                 generator.get(), &SketchImageGenerator::start);
-    QObject::connect(thread.get(),    &QThread::finished,                thread.get(),    &QThread::deleteLater);
-    QObject::connect(generator.get(), &SketchImageGenerator::imageReady, this,            &SketchPreviewGenerator::setEffectedImage);
-    QObject::connect(generator.get(), &SketchImageGenerator::finished,   thread.get(),    &QThread::quit);
-    QObject::connect(generator.get(), &SketchImageGenerator::finished,   generator.get(), &SketchImageGenerator::deleteLater);
+    connect(thread.get(),    &QThread::started,                 generator.get(), &SketchImageGenerator::start);
+    connect(thread.get(),    &QThread::finished,                thread.get(),    &QThread::deleteLater);
+    connect(generator.get(), &SketchImageGenerator::imageReady, this,            &SketchPreviewGenerator::setEffectedImage);
+    connect(generator.get(), &SketchImageGenerator::finished,   thread.get(),    &QThread::quit);
+    connect(generator.get(), &SketchImageGenerator::finished,   generator.get(), &SketchImageGenerator::deleteLater);
 
     generator->setRadius(Radius);
     generator->setInput(LoadedImage);
