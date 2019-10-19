@@ -29,11 +29,11 @@ void PixelateEditor::processOpenedImage()
 
     generator->moveToThread(thread.get());
 
-    QObject::connect(thread.get(),    &QThread::started,                   generator.get(), &PixelateImageGenerator::start);
-    QObject::connect(thread.get(),    &QThread::finished,                  thread.get(),    &QThread::deleteLater);
-    QObject::connect(generator.get(), &PixelateImageGenerator::imageReady, this,            &PixelateEditor::setEffectedImage);
-    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
-    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
+    connect(thread.get(),    &QThread::started,                   generator.get(), &PixelateImageGenerator::start);
+    connect(thread.get(),    &QThread::finished,                  thread.get(),    &QThread::deleteLater);
+    connect(generator.get(), &PixelateImageGenerator::imageReady, this,            &PixelateEditor::setEffectedImage);
+    connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
+    connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
 
     generator->setPixDenom(PixDenom);
     generator->setInput(LoadedImage);
@@ -74,11 +74,11 @@ void PixelatePreviewGenerator::StartImageGenerator()
 
     generator->moveToThread(thread.get());
 
-    QObject::connect(thread.get(),    &QThread::started,                   generator.get(), &PixelateImageGenerator::start);
-    QObject::connect(thread.get(),    &QThread::finished,                  thread.get(),    &QThread::deleteLater);
-    QObject::connect(generator.get(), &PixelateImageGenerator::imageReady, this,            &PixelatePreviewGenerator::setEffectedImage);
-    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
-    QObject::connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
+    connect(thread.get(),    &QThread::started,                   generator.get(), &PixelateImageGenerator::start);
+    connect(thread.get(),    &QThread::finished,                  thread.get(),    &QThread::deleteLater);
+    connect(generator.get(), &PixelateImageGenerator::imageReady, this,            &PixelatePreviewGenerator::setEffectedImage);
+    connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
+    connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
 
     generator->setPixDenom(PixDenom);
     generator->setInput(LoadedImage);
