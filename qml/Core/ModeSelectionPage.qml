@@ -249,7 +249,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             } else if (modeSelectionPage.selectedMode === "SKETCH") {
                 component = Qt.createComponent("SketchPreviewPage.qml");
@@ -257,7 +257,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             } else if (modeSelectionPage.selectedMode === "CARTOON") {
                 component = Qt.createComponent("CartoonPreviewPage.qml");
@@ -265,7 +265,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             } else if (modeSelectionPage.selectedMode === "BLUR") {
                 component = Qt.createComponent("BlurPreviewPage.qml");
@@ -273,7 +273,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             } else if (modeSelectionPage.selectedMode === "PIXELATE") {
                 component = Qt.createComponent("PixelatePreviewPage.qml");
@@ -281,7 +281,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             } else if (modeSelectionPage.selectedMode === "RECOLOR") {
                 component = Qt.createComponent("RecolorPage.qml");
@@ -289,7 +289,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             } else if (modeSelectionPage.selectedMode === "RETOUCH") {
                 component = Qt.createComponent("RetouchPage.qml");
@@ -297,7 +297,7 @@ Page {
                 if (component.status === Component.Ready) {
                     mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             }
 

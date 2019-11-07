@@ -98,7 +98,7 @@ ApplicationWindow {
 
             onPurchaseFailed: {
                 if (transaction.failureReason === Transaction.ErrorOccurred) {
-                    console.log(transaction.errorString);
+                    console.error(transaction.errorString);
                 }
 
                 transaction.finalize();
@@ -172,7 +172,7 @@ ApplicationWindow {
         if (component.status === Component.Ready) {
             mainStackView.push(component);
         } else {
-            console.log(component.errorString());
+            console.error(component.errorString());
         }
 
         if (!disableAds && adMobConsent !== "PERSONALIZED" && adMobConsent !== "NON_PERSONALIZED") {

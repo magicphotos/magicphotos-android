@@ -43,7 +43,7 @@ Page {
                     if (component.status === Component.Ready) {
                         mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "cartoonThreshold": thresholdSlider.value, "imageFile": cartoonPreviewPage.imageFile});
                     } else {
-                        console.log(component.errorString());
+                        console.error(component.errorString());
                     }
                 }
             }
