@@ -197,7 +197,7 @@ public class MagicActivity extends QtActivity
 
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
         } catch (Exception ex) {
-            Log.w("MagicActivity", "shareImage() : " + ex.toString());
+            Log.e("MagicActivity", "shareImage() : " + ex.toString());
         }
     }
 
