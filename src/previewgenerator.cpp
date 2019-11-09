@@ -28,42 +28,46 @@ void PreviewGenerator::openImage(const QString &image_file, int image_orientatio
 
                     size.setWidth(qFloor(size.width()   / scale));
                     size.setHeight(qFloor(size.height() / scale));
-
-                    reader.setScaledSize(size);
                 }
 
-                LoadedImage = reader.read();
+                if (!size.isEmpty()) {
+                    reader.setScaledSize(size);
 
-                if (!LoadedImage.isNull()) {
-                    if (image_orientation == 90) {
-                        QTransform transform;
-
-                        transform.rotate(90);
-
-                        LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                    } else if (image_orientation == 180) {
-                        QTransform transform;
-
-                        transform.rotate(180);
-
-                        LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
-                    } else if (image_orientation == 270) {
-                        QTransform transform;
-
-                        transform.rotate(270);
-
-                        LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                    }
-
-                    LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
+                    LoadedImage = reader.read();
 
                     if (!LoadedImage.isNull()) {
-                        emit imageOpened();
+                        if (image_orientation == 90) {
+                            QTransform transform;
 
-                        if (ImageGeneratorRunning) {
-                            RestartImageGenerator = true;
+                            transform.rotate(90);
+
+                            LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                        } else if (image_orientation == 180) {
+                            QTransform transform;
+
+                            transform.rotate(180);
+
+                            LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
+                        } else if (image_orientation == 270) {
+                            QTransform transform;
+
+                            transform.rotate(270);
+
+                            LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                        }
+
+                        LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
+
+                        if (!LoadedImage.isNull()) {
+                            emit imageOpened();
+
+                            if (ImageGeneratorRunning) {
+                                RestartImageGenerator = true;
+                            } else {
+                                StartImageGenerator();
+                            }
                         } else {
-                            StartImageGenerator();
+                            emit imageOpenFailed();
                         }
                     } else {
                         emit imageOpenFailed();
