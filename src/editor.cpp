@@ -1,4 +1,5 @@
 #include <QtCore/QtMath>
+#include <QtCore/QSize>
 #include <QtCore/QRectF>
 #include <QtCore/QFileInfo>
 #include <QtGui/QColor>
@@ -137,46 +138,50 @@ void Editor::openImage(const QString &image_file, int image_orientation)
         if (reader.canRead()) {
             QSize size = reader.size();
 
-            if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
-                qreal scale = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
+            if (!size.isEmpty()) {
+                if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
+                    qreal scale = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
 
-                size.setWidth(qFloor(size.width()   / scale));
-                size.setHeight(qFloor(size.height() / scale));
+                    size.setWidth(qFloor(size.width()   / scale));
+                    size.setHeight(qFloor(size.height() / scale));
 
-                reader.setScaledSize(size);
-            }
-
-            LoadedImage = reader.read();
-
-            if (!LoadedImage.isNull()) {
-                if (image_orientation == 90) {
-                    QTransform transform;
-
-                    transform.rotate(90);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
-                } else if (image_orientation == 180) {
-                    QTransform transform;
-
-                    transform.rotate(180);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
-                } else if (image_orientation == 270) {
-                    QTransform transform;
-
-                    transform.rotate(270);
-
-                    LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                    reader.setScaledSize(size);
                 }
 
-                LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
+                LoadedImage = reader.read();
 
                 if (!LoadedImage.isNull()) {
-                    UndoStack.clear();
+                    if (image_orientation == 90) {
+                        QTransform transform;
 
-                    emit undoAvailabilityUpdated(false);
+                        transform.rotate(90);
 
-                    processOpenedImage();
+                        LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                    } else if (image_orientation == 180) {
+                        QTransform transform;
+
+                        transform.rotate(180);
+
+                        LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.width(), LoadedImage.height());
+                    } else if (image_orientation == 270) {
+                        QTransform transform;
+
+                        transform.rotate(270);
+
+                        LoadedImage = LoadedImage.transformed(transform).scaled(LoadedImage.height(), LoadedImage.width());
+                    }
+
+                    LoadedImage = LoadedImage.convertToFormat(QImage::Format_RGB32);
+
+                    if (!LoadedImage.isNull()) {
+                        UndoStack.clear();
+
+                        emit undoAvailabilityUpdated(false);
+
+                        processOpenedImage();
+                    } else {
+                        emit imageOpenFailed();
+                    }
                 } else {
                     emit imageOpenFailed();
                 }
