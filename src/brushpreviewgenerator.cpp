@@ -1,4 +1,5 @@
 #include <QtCore/QtMath>
+#include <QtCore/QSize>
 #include <QtCore/QPoint>
 #include <QtCore/QPointF>
 #include <QtGui/QColor>
