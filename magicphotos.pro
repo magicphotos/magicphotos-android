@@ -6,41 +6,42 @@ CONFIG += c++14
 
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
-SOURCES += src/main.cpp \
-    src/appsettings.cpp \
-    src/androidgw.cpp \
+SOURCES += \
     src/admobhelper.cpp \
-    src/uihelper.cpp \
-    src/helper.cpp \
+    src/androidgw.cpp \
+    src/appsettings.cpp \
+    src/blureditor.cpp \
+    src/brushpreviewgenerator.cpp \
+    src/cartooneditor.cpp \
+    src/decolorizeeditor.cpp \
     src/editor.cpp \
     src/effecteditor.cpp \
-    src/previewgenerator.cpp \
-    src/brushpreviewgenerator.cpp \
-    src/decolorizeeditor.cpp \
-    src/sketcheditor.cpp \
-    src/cartooneditor.cpp \
-    src/blureditor.cpp \
+    src/helper.cpp \
+    src/main.cpp \
     src/pixelateeditor.cpp \
+    src/previewgenerator.cpp \
     src/recoloreditor.cpp \
-    src/retoucheditor.cpp
+    src/retoucheditor.cpp \
+    src/sketcheditor.cpp \
+    src/uihelper.cpp
 
 HEADERS += \
-    src/appsettings.h \
-    src/androidgw.h \
     src/admobhelper.h \
-    src/uihelper.h \
-    src/helper.h \
+    src/androidgw.h \
+    src/appsettings.h \
+    src/blureditor.h \
+    src/brushpreviewgenerator.h \
+    src/cartooneditor.h \
+    src/decolorizeeditor.h \
     src/editor.h \
     src/effecteditor.h \
-    src/previewgenerator.h \
-    src/brushpreviewgenerator.h \
-    src/decolorizeeditor.h \
-    src/sketcheditor.h \
-    src/cartooneditor.h \
-    src/blureditor.h \
+    src/helper.h \
     src/pixelateeditor.h \
+    src/previewgenerator.h \
     src/recoloreditor.h \
-    src/retoucheditor.h
+    src/retoucheditor.h \
+    src/sketcheditor.h \
+    src/uihelper.h
 
 RESOURCES += \
     qml.qrc \
@@ -48,9 +49,9 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/magicphotos_ru.ts \
     translations/magicphotos_de.ts \
-    translations/magicphotos_fr.ts
+    translations/magicphotos_fr.ts \
+    translations/magicphotos_ru.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
