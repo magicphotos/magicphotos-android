@@ -36,26 +36,26 @@ int main(int argc, char *argv[])
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionCancelled,    &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionCancel);
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionFailed,       &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionFailure);
 
-    qmlRegisterType<BlurEditor>("ImageEditor", 1, 0, "BlurEditor");
+    qmlRegisterType<BlurEditor>          ("ImageEditor", 1, 0, "BlurEditor");
     qmlRegisterType<BlurPreviewGenerator>("ImageEditor", 1, 0, "BlurPreviewGenerator");
 
     qmlRegisterType<BrushPreviewGenerator>("ImageEditor", 1, 0, "BrushPreviewGenerator");
 
-    qmlRegisterType<CartoonEditor>("ImageEditor", 1, 0, "CartoonEditor");
+    qmlRegisterType<CartoonEditor>          ("ImageEditor", 1, 0, "CartoonEditor");
     qmlRegisterType<CartoonPreviewGenerator>("ImageEditor", 1, 0, "CartoonPreviewGenerator");
 
     qmlRegisterType<DecolorizeEditor>("ImageEditor", 1, 0, "DecolorizeEditor");
 
     qmlRegisterType<Helper>("ImageEditor", 1, 0, "Helper");
 
-    qmlRegisterType<PixelateEditor>("ImageEditor", 1, 0, "PixelateEditor");
+    qmlRegisterType<PixelateEditor>          ("ImageEditor", 1, 0, "PixelateEditor");
     qmlRegisterType<PixelatePreviewGenerator>("ImageEditor", 1, 0, "PixelatePreviewGenerator");
 
     qmlRegisterType<RecolorEditor>("ImageEditor", 1, 0, "RecolorEditor");
 
     qmlRegisterType<RetouchEditor>("ImageEditor", 1, 0, "RetouchEditor");
 
-    qmlRegisterType<SketchEditor>("ImageEditor", 1, 0, "SketchEditor");
+    qmlRegisterType<SketchEditor>          ("ImageEditor", 1, 0, "SketchEditor");
     qmlRegisterType<SketchPreviewGenerator>("ImageEditor", 1, 0, "SketchPreviewGenerator");
 
     QQmlApplicationEngine engine;
