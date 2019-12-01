@@ -54,14 +54,6 @@ Page {
 
     property string imageFile:     ""
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            mainStackView.pop();
-
-            event.accepted = true;
-        }
-    }
-
     onImageOrientationChanged: {
         if (imageOrientation !== -1 && imageFile !== "") {
             sketchPreviewGenerator.radius = gaussianRadiusSlider.value;
@@ -75,6 +67,14 @@ Page {
             sketchPreviewGenerator.radius = gaussianRadiusSlider.value;
 
             sketchPreviewGenerator.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            mainStackView.pop();
+
+            event.accepted = true;
         }
     }
 

@@ -172,20 +172,6 @@ Page {
 
     property string imageFile:                ""
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            if (brushSettingsPane.visible) {
-                brushSettingsPane.visible = false;
-            } else if (cartoonEditor.changed) {
-                backMessageDialog.open();
-            } else {
-                mainStackView.pop();
-            }
-
-            event.accepted = true;
-        }
-    }
-
     onImageOrientationChanged: {
         if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
             cartoonEditor.radius    = gaussianRadius;
@@ -219,6 +205,20 @@ Page {
             cartoonEditor.threshold = cartoonThreshold;
 
             cartoonEditor.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            if (brushSettingsPane.visible) {
+                brushSettingsPane.visible = false;
+            } else if (cartoonEditor.changed) {
+                backMessageDialog.open();
+            } else {
+                mainStackView.pop();
+            }
+
+            event.accepted = true;
         }
     }
 
