@@ -54,14 +54,6 @@ Page {
 
     property string imageFile:     ""
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            mainStackView.pop();
-
-            event.accepted = true;
-        }
-    }
-
     onImageOrientationChanged: {
         if (imageOrientation !== -1 && imageFile !== "") {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
@@ -75,6 +67,14 @@ Page {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
             pixelatePreviewGenerator.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            mainStackView.pop();
+
+            event.accepted = true;
         }
     }
 

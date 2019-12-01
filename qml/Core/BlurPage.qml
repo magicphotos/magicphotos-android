@@ -171,20 +171,6 @@ Page {
 
     property string imageFile:                ""
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            if (brushSettingsPane.visible) {
-                brushSettingsPane.visible = false;
-            } else if (blurEditor.changed) {
-                backMessageDialog.open();
-            } else {
-                mainStackView.pop();
-            }
-
-            event.accepted = true;
-        }
-    }
-
     onImageOrientationChanged: {
         if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
             blurEditor.radius = gaussianRadius;
@@ -206,6 +192,20 @@ Page {
             blurEditor.radius = gaussianRadius;
 
             blurEditor.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            if (brushSettingsPane.visible) {
+                brushSettingsPane.visible = false;
+            } else if (blurEditor.changed) {
+                backMessageDialog.open();
+            } else {
+                mainStackView.pop();
+            }
+
+            event.accepted = true;
         }
     }
 

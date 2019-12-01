@@ -171,20 +171,6 @@ Page {
 
     property string imageFile:                ""
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            if (brushSettingsPane.visible) {
-                brushSettingsPane.visible = false;
-            } else if (pixelateEditor.changed) {
-                backMessageDialog.open();
-            } else {
-                mainStackView.pop();
-            }
-
-            event.accepted = true;
-        }
-    }
-
     onImageOrientationChanged: {
         if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
             pixelateEditor.pixDenom = pixelDenom;
@@ -206,6 +192,20 @@ Page {
             pixelateEditor.pixDenom = pixelDenom;
 
             pixelateEditor.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            if (brushSettingsPane.visible) {
+                brushSettingsPane.visible = false;
+            } else if (pixelateEditor.changed) {
+                backMessageDialog.open();
+            } else {
+                mainStackView.pop();
+            }
+
+            event.accepted = true;
         }
     }
 

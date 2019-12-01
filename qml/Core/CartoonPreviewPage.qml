@@ -54,14 +54,6 @@ Page {
 
     property string imageFile:     ""
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            mainStackView.pop();
-
-            event.accepted = true;
-        }
-    }
-
     onImageOrientationChanged: {
         if (imageOrientation !== -1 && imageFile !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
@@ -77,6 +69,14 @@ Page {
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
             cartoonPreviewGenerator.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            mainStackView.pop();
+
+            event.accepted = true;
         }
     }
 

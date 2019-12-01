@@ -183,6 +183,18 @@ Page {
 
     property string imageFile:                ""
 
+    onImageOrientationChanged: {
+        if (imageOrientation !== -1 && imageFile !== "") {
+            retouchEditor.openImage(imageFile, imageOrientation);
+        }
+    }
+
+    onImageFileChanged: {
+        if (imageOrientation !== -1 && imageFile !== "") {
+            retouchEditor.openImage(imageFile, imageOrientation);
+        }
+    }
+
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
             if (brushSettingsPane.visible) {
@@ -194,18 +206,6 @@ Page {
             }
 
             event.accepted = true;
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
-            retouchEditor.openImage(imageFile, imageOrientation);
-        }
-    }
-
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
-            retouchEditor.openImage(imageFile, imageOrientation);
         }
     }
 
