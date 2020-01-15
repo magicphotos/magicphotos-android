@@ -6,7 +6,7 @@ SET ANDROID_NDK_ROOT=D:\Users\%USERNAME%\Documents\Android\android-ndk-r19c
 SET SONARCLOUD_ROOT=D:\Users\%USERNAME%\Documents\SonarCloud
 SET ANDROID_PLATFORM=android-28
 
-PATH=%PATH%;C:\Qt\5.12.5\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows-x86_64\bin;%SONARCLOUD_ROOT%\build-wrapper-win-x86;%SONARCLOUD_ROOT%\sonar-scanner-3.3.0.1492-windows\bin
+PATH=%PATH%;C:\Qt\5.12.6\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows-x86_64\bin;%SONARCLOUD_ROOT%\build-wrapper-win-x86;%SONARCLOUD_ROOT%\sonar-scanner-3.3.0.1492-windows\bin
 
 IF NOT "%~1"=="" (
         CD .. ^
@@ -23,6 +23,7 @@ IF NOT "%~1"=="" (
                           -D"sonar.sourceEncoding=UTF-8" ^
                           -D"sonar.exclusions=qml/**/*,translations/*" ^
                           -D"sonar.cfamily.build-wrapper-output=.sonarbuild\\bw-output" ^
+                          -D"sonar.cfamily.cache.enabled=false" ^
                           -D"sonar.java.source=1.7" ^
                           -D"sonar.java.binaries=.sonarbuild" ^
                           -D"sonar.host.url=https://sonarcloud.io" ^
