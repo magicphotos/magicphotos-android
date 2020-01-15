@@ -23,8 +23,8 @@ void PreviewGenerator::openImage(const QString &image_file, int image_orientatio
             QSize size = reader.size();
 
             if (!size.isEmpty()) {
-                if (size.width() * size.height() > IMAGE_MPIX_LIMIT * 1000000.0) {
-                    qreal scale = qSqrt((size.width() * size.height()) / (IMAGE_MPIX_LIMIT * 1000000.0));
+                if (static_cast<qreal>(size.width()) * static_cast<qreal>(size.height()) > IMAGE_MPIX_LIMIT * 1000000.0) {
+                    qreal scale = qSqrt((static_cast<qreal>(size.width()) * static_cast<qreal>(size.height())) / (IMAGE_MPIX_LIMIT * 1000000.0));
 
                     size.setWidth(qFloor(size.width()   / scale));
                     size.setHeight(qFloor(size.height() / scale));
