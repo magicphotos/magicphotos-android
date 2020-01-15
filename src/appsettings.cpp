@@ -60,7 +60,7 @@ QString AppSettings::adMobConsent() const
     }
 }
 
-void AppSettings::setAdMobConsent(QString &consent)
+void AppSettings::setAdMobConsent(const QString &consent)
 {
     Settings->setValue(QStringLiteral("AdMobConsent"), consent);
 }
