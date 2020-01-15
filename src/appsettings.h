@@ -44,7 +44,7 @@ public:
     void setBrushHardness(qreal hardness);
 
     QString adMobConsent() const;
-    void setAdMobConsent(QString &consent);
+    void setAdMobConsent(const QString &consent);
 
 private:
     int                        DefaultBrushSize;
