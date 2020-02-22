@@ -82,11 +82,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        decolorizePage.shareActionActive = false;
+                    decolorizePage.shareActionActive = false;
 
-                        decolorizeEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    decolorizeEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -103,11 +101,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        decolorizePage.shareActionActive = true;
+                    decolorizePage.shareActionActive = true;
 
-                        decolorizeEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    decolorizeEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -284,12 +280,13 @@ Page {
                     }
 
                     onImageSaved: {
-                        UIHelper.refreshGallery(imageFile);
-
                         if (decolorizePage.shareActionActive) {
                             UIHelper.shareImage(imageFile);
-                        } else {
+                        } else if (UIHelper.requestWriteStoragePermission() &&
+                                   UIHelper.addImageToMediaLibrary(imageFile)) {
                             imageSavedMessageDialog.open();
+                        } else {
+                            imageSaveFailedMessageDialog.open();
                         }
                     }
 

@@ -82,11 +82,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        cartoonPage.shareActionActive = false;
+                    cartoonPage.shareActionActive = false;
 
-                        cartoonEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    cartoonEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -103,11 +101,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        cartoonPage.shareActionActive = true;
+                    cartoonPage.shareActionActive = true;
 
-                        cartoonEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    cartoonEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -310,12 +306,13 @@ Page {
                     }
 
                     onImageSaved: {
-                        UIHelper.refreshGallery(imageFile);
-
                         if (cartoonPage.shareActionActive) {
                             UIHelper.shareImage(imageFile);
-                        } else {
+                        } else if (UIHelper.requestWriteStoragePermission() &&
+                                   UIHelper.addImageToMediaLibrary(imageFile)) {
                             imageSavedMessageDialog.open();
+                        } else {
+                            imageSaveFailedMessageDialog.open();
                         }
                     }
 

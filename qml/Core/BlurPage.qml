@@ -82,11 +82,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        blurPage.shareActionActive = false;
+                    blurPage.shareActionActive = false;
 
-                        blurEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    blurEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -103,11 +101,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        blurPage.shareActionActive = true;
+                    blurPage.shareActionActive = true;
 
-                        blurEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    blurEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -297,12 +293,13 @@ Page {
                     }
 
                     onImageSaved: {
-                        UIHelper.refreshGallery(imageFile);
-
                         if (blurPage.shareActionActive) {
                             UIHelper.shareImage(imageFile);
-                        } else {
+                        } else if (UIHelper.requestWriteStoragePermission() &&
+                                   UIHelper.addImageToMediaLibrary(imageFile)) {
                             imageSavedMessageDialog.open();
+                        } else {
+                            imageSaveFailedMessageDialog.open();
                         }
                     }
 

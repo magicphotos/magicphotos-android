@@ -27,13 +27,13 @@ public:
     bool darkTheme() const;
     int screenDpi() const;
 
-    Q_INVOKABLE QString getSaveDirectory();
+    Q_INVOKABLE QString getSaveImageFilePath();
 
     Q_INVOKABLE bool requestReadStoragePermission();
     Q_INVOKABLE bool requestWriteStoragePermission();
 
     Q_INVOKABLE void showGallery();
-    Q_INVOKABLE void refreshGallery(const QString &image_file);
+    Q_INVOKABLE bool addImageToMediaLibrary(const QString &image_file);
     Q_INVOKABLE void shareImage(const QString &image_file);
 
 public slots:

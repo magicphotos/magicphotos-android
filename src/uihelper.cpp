@@ -1,3 +1,5 @@
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 #include <QtAndroidExtras/QtAndroid>
 #include <QtAndroidExtras/QAndroidJniObject>
 
@@ -26,11 +28,15 @@ int UIHelper::screenDpi() const
     return ScreenDpi;
 }
 
-QString UIHelper::getSaveDirectory()
+QString UIHelper::getSaveImageFilePath()
 {
-    QAndroidJniObject j_save_directory = QtAndroid::androidActivity().callObjectMethod<jstring>("getSaveDirectory");
+    QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
-    return j_save_directory.toString();
+    if (tmp_dir != QStringLiteral("")) {
+        QDir().mkpath(tmp_dir);
+    }
+
+    return QDir(tmp_dir).filePath(QStringLiteral("output.jpg"));
 }
 
 bool UIHelper::requestReadStoragePermission()
@@ -62,11 +68,11 @@ void UIHelper::showGallery()
     QtAndroid::androidActivity().callMethod<void>("showGallery");
 }
 
-void UIHelper::refreshGallery(const QString &image_file)
+bool UIHelper::addImageToMediaLibrary(const QString &image_file)
 {
     QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
 
-    QtAndroid::androidActivity().callMethod<void>("refreshGallery", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
+    return QtAndroid::androidActivity().callMethod<jboolean>("addImageToMediaLibrary", "(Ljava/lang/String;)Z", j_image_file.object<jstring>());
 }
 
 void UIHelper::shareImage(const QString &image_file)

@@ -82,11 +82,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        sketchPage.shareActionActive = false;
+                    sketchPage.shareActionActive = false;
 
-                        sketchEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    sketchEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -103,11 +101,9 @@ Page {
                 }
 
                 onClicked: {
-                    if (UIHelper.requestWriteStoragePermission()) {
-                        sketchPage.shareActionActive = true;
+                    sketchPage.shareActionActive = true;
 
-                        sketchEditor.saveImage(UtilScript.generateImageFileName(UIHelper.getSaveDirectory()));
-                    }
+                    sketchEditor.saveImage(UIHelper.getSaveImageFilePath());
                 }
             }
 
@@ -297,12 +293,13 @@ Page {
                     }
 
                     onImageSaved: {
-                        UIHelper.refreshGallery(imageFile);
-
                         if (sketchPage.shareActionActive) {
                             UIHelper.shareImage(imageFile);
-                        } else {
+                        } else if (UIHelper.requestWriteStoragePermission() &&
+                                   UIHelper.addImageToMediaLibrary(imageFile)) {
                             imageSavedMessageDialog.open();
+                        } else {
+                            imageSaveFailedMessageDialog.open();
                         }
                     }
 

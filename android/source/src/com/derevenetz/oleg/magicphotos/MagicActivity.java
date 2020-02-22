@@ -1,17 +1,20 @@
 package com.derevenetz.oleg.magicphotos;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +29,7 @@ import androidx.exifinterface.media.ExifInterface;
 
 import org.qtproject.qt5.android.bindings.QtActivity;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
@@ -158,17 +162,6 @@ public class MagicActivity extends QtActivity
         return ((config.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES);
     }
 
-    public String getSaveDirectory()
-    {
-        File save_dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath(), "MagicPhotos");
-
-        if (save_dir.mkdirs() || save_dir.isDirectory()) {
-            return save_dir.getAbsolutePath();
-        } else {
-            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-        }
-    }
-
     public void showGallery()
     {
         try {
@@ -178,13 +171,45 @@ public class MagicActivity extends QtActivity
 
             startActivityForResult(intent, REQUEST_CODE_SHOW_GALLERY);
         } catch (Exception ex) {
+            Log.e("MagicActivity", "showGallery() : " + ex.toString());
+
             imageSelectionFailed();
         }
     }
 
-    public void refreshGallery(String image_file)
+    public boolean addImageToMediaLibrary(String image_file)
     {
-        MediaScannerConnection.scanFile(this, new String[]{image_file}, null, null);
+        String image_file_extension = FilenameUtils.getExtension(image_file);
+
+        if (image_file_extension != null) {
+            String image_content_type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(image_file_extension);
+
+            if (image_content_type != null) {
+                long          current_time   = (new Date()).getTime();
+                ContentValues content_values = new ContentValues();
+
+                content_values.put(MediaStore.MediaColumns.MIME_TYPE,     image_content_type);
+                content_values.put(MediaStore.MediaColumns.DATE_ADDED,    current_time / 1000);
+                content_values.put(MediaStore.MediaColumns.DATE_MODIFIED, current_time / 1000);
+
+                try (
+                    FileInputStream input_stream  = new FileInputStream(image_file);
+                    OutputStream    output_stream = getContentResolver().openOutputStream(getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content_values))
+                ) {
+                    IOUtils.copy(input_stream, output_stream);
+
+                    return true;
+                } catch (Exception ex) {
+                    Log.e("MagicActivity", "addImageToMediaLibrary() : " + ex.toString());
+
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public void shareImage(String image_file)
@@ -447,16 +472,16 @@ public class MagicActivity extends QtActivity
                                 String image_content_type = getContentResolver().getType(image_uri);
 
                                 if (image_content_type != null) {
-                                    String cache_file_extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(image_content_type);
+                                    String image_file_extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(image_content_type);
 
-                                    if (cache_file_extension != null) {
-                                        final File cache_file = new File(getApplicationContext().getCacheDir().getAbsolutePath(), "cache." + cache_file_extension);
+                                    if (image_file_extension != null) {
+                                        final File image_file = new File(getApplicationContext().getCacheDir().getAbsolutePath(), "input." + image_file_extension);
 
-                                        try (FileOutputStream output_stream = new FileOutputStream(cache_file)) {
+                                        try (FileOutputStream output_stream = new FileOutputStream(image_file)) {
                                             IOUtils.copy(input_stream, output_stream);
                                         }
 
-                                        final int image_orientation = (new ExifInterface(cache_file.getAbsolutePath())).getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                                        final int image_orientation = (new ExifInterface(image_file.getAbsolutePath())).getAttributeInt(ExifInterface.TAG_ORIENTATION,
                                                                                                                                         ExifInterface.ORIENTATION_NORMAL);
 
                                         runOnUiThread(new Runnable() {
@@ -464,13 +489,13 @@ public class MagicActivity extends QtActivity
                                             public void run()
                                             {
                                                 if (image_orientation == ExifInterface.ORIENTATION_ROTATE_90) {
-                                                    imageSelected(cache_file.getAbsolutePath(), 90);
+                                                    imageSelected(image_file.getAbsolutePath(), 90);
                                                 } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_180) {
-                                                    imageSelected(cache_file.getAbsolutePath(), 180);
+                                                    imageSelected(image_file.getAbsolutePath(), 180);
                                                 } else if (image_orientation == ExifInterface.ORIENTATION_ROTATE_270) {
-                                                    imageSelected(cache_file.getAbsolutePath(), 270);
+                                                    imageSelected(image_file.getAbsolutePath(), 270);
                                                 } else {
-                                                    imageSelected(cache_file.getAbsolutePath(), 0);
+                                                    imageSelected(image_file.getAbsolutePath(), 0);
                                                 }
                                             }
                                         });
@@ -481,6 +506,8 @@ public class MagicActivity extends QtActivity
                                     throw(new Exception("Invalid image content type"));
                                 }
                             } catch (Exception ex) {
+                                Log.e("MagicActivity", "onActivityResult() : " + ex.toString());
+
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run()
