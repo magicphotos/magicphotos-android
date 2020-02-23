@@ -46,8 +46,8 @@ public:
     qreal brushHardness() const;
     void setBrushHardness(qreal hardness);
 
-    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
-    Q_INVOKABLE void saveImage(const QString &image_file);
+    Q_INVOKABLE void openImage(const QString &image_path, int image_orientation);
+    Q_INVOKABLE void saveImage(const QString &image_path);
 
     Q_INVOKABLE void undo();
 
@@ -71,7 +71,7 @@ private slots:
 signals:
     void imageOpened();
     void imageOpenFailed();
-    void imageSaved(const QString &imageFile);
+    void imageSaved(const QString &imagePath);
     void imageSaveFailed();
     void undoAvailabilityUpdated(bool available);
     void mouseEvent(int eventType, int x, int y);

@@ -41,7 +41,7 @@ Page {
                     var component = Qt.createComponent("CartoonPage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "cartoonThreshold": thresholdSlider.value, "imageFile": cartoonPreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "cartoonThreshold": thresholdSlider.value, "imagePath": cartoonPreviewPage.imagePath});
                     } else {
                         console.error(component.errorString());
                     }
@@ -52,23 +52,23 @@ Page {
 
     property int imageOrientation: -1
 
-    property string imageFile:     ""
+    property string imagePath:     ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && imagePath !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
-            cartoonPreviewGenerator.openImage(imageFile, imageOrientation);
+            cartoonPreviewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && imagePath !== "") {
             cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
             cartoonPreviewGenerator.threshold = thresholdSlider.value;
 
-            cartoonPreviewGenerator.openImage(imageFile, imageOrientation);
+            cartoonPreviewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 

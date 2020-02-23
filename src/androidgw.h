@@ -24,7 +24,7 @@ public:
 signals:
     void deviceConfigurationUpdated();
     void bannerViewHeightUpdated(int bannerViewHeight);
-    void imageSelected(const QString &imageFile, int imageOrientation);
+    void imageSelected(const QString &imagePath, int imageOrientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
 };

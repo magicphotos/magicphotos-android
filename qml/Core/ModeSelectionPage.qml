@@ -230,7 +230,7 @@ Page {
                 component = Qt.createComponent("DecolorizePage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }
@@ -238,7 +238,7 @@ Page {
                 component = Qt.createComponent("SketchPreviewPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }
@@ -246,7 +246,7 @@ Page {
                 component = Qt.createComponent("CartoonPreviewPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }
@@ -254,7 +254,7 @@ Page {
                 component = Qt.createComponent("BlurPreviewPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }
@@ -262,7 +262,7 @@ Page {
                 component = Qt.createComponent("PixelatePreviewPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }
@@ -270,7 +270,7 @@ Page {
                 component = Qt.createComponent("RecolorPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }
@@ -278,7 +278,7 @@ Page {
                 component = Qt.createComponent("RetouchPage.qml");
 
                 if (component.status === Component.Ready) {
-                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imageFile": imageFile});
+                    mainStackView.push(component, {"imageOrientation": imageOrientation, "imagePath": imagePath});
                 } else {
                     console.error(component.errorString());
                 }

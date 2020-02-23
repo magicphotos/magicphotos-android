@@ -8,6 +8,8 @@ class UIHelper : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString filePathToSaveImage READ filePathToSaveImage)
+
     Q_PROPERTY(bool darkTheme READ darkTheme NOTIFY darkThemeChanged)
     Q_PROPERTY(int  screenDpi READ screenDpi NOTIFY screenDpiChanged)
 
@@ -24,28 +26,28 @@ public:
 
     static UIHelper &GetInstance();
 
+    QString filePathToSaveImage() const;
+
     bool darkTheme() const;
     int screenDpi() const;
-
-    Q_INVOKABLE QString getSaveImageFilePath();
 
     Q_INVOKABLE bool requestReadStoragePermission();
     Q_INVOKABLE bool requestWriteStoragePermission();
 
     Q_INVOKABLE void showGallery();
-    Q_INVOKABLE bool addImageToMediaLibrary(const QString &image_file);
-    Q_INVOKABLE void shareImage(const QString &image_file);
+    Q_INVOKABLE bool addImageToMediaLibrary(const QString &image_path);
+    Q_INVOKABLE void shareImage(const QString &image_path);
 
 public slots:
     void handleDeviceConfigurationUpdate();
-    void handleImageSelection(const QString &image_file, int image_orientation);
+    void handleImageSelection(const QString &image_path, int image_orientation);
     void handleImageSelectionCancel();
     void handleImageSelectionFailure();
 
 signals:
     void darkThemeChanged(bool darkTheme);
     void screenDpiChanged(int screenDpi);
-    void imageSelected(const QString &imageFile, int imageOrientation);
+    void imageSelected(const QString &imagePath, int imageOrientation);
     void imageSelectionCancelled();
     void imageSelectionFailed();
 

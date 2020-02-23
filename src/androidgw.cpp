@@ -25,14 +25,14 @@ extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, bannerV
     emit AndroidGW::GetInstance().bannerViewHeightUpdated(height);
 }
 
-extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelected)(JNIEnv *jni_env, jclass, jstring j_image_file, jint image_orientation)
+extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelected)(JNIEnv *jni_env, jclass, jstring j_image_path, jint image_orientation)
 {
-    const char *str        = jni_env->GetStringUTFChars(j_image_file, nullptr);
-    QString     image_file = QString::fromUtf8(str);
+    const char *str        = jni_env->GetStringUTFChars(j_image_path, nullptr);
+    QString     image_path = QString::fromUtf8(str);
 
-    jni_env->ReleaseStringUTFChars(j_image_file, str);
+    jni_env->ReleaseStringUTFChars(j_image_path, str);
 
-    emit AndroidGW::GetInstance().imageSelected(image_file, image_orientation);
+    emit AndroidGW::GetInstance().imageSelected(image_path, image_orientation);
 }
 
 extern "C" JNIEXPORT void JNICALL JAVA_NATIVE_METHOD_NAME(MagicActivity, imageSelectionCancelled)(JNIEnv *)

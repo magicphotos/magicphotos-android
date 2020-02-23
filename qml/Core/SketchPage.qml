@@ -84,7 +84,7 @@ Page {
                 onClicked: {
                     sketchPage.shareActionActive = false;
 
-                    sketchEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    sketchEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -103,7 +103,7 @@ Page {
                 onClicked: {
                     sketchPage.shareActionActive = true;
 
-                    sketchEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    sketchEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -165,29 +165,29 @@ Page {
     property int imageOrientation:            -1
     property int gaussianRadius:              -1
 
-    property string imageFile:                ""
+    property string imagePath:                ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(imageFile, imageOrientation);
+            sketchEditor.openImage(imagePath, imageOrientation);
         }
     }
 
     onGaussianRadiusChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(imageFile, imageOrientation);
+            sketchEditor.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
             sketchEditor.radius = gaussianRadius;
 
-            sketchEditor.openImage(imageFile, imageOrientation);
+            sketchEditor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -294,9 +294,9 @@ Page {
 
                     onImageSaved: {
                         if (sketchPage.shareActionActive) {
-                            UIHelper.shareImage(imageFile);
+                            UIHelper.shareImage(imagePath);
                         } else if (UIHelper.requestWriteStoragePermission() &&
-                                   UIHelper.addImageToMediaLibrary(imageFile)) {
+                                   UIHelper.addImageToMediaLibrary(imagePath)) {
                             imageSavedMessageDialog.open();
                         } else {
                             imageSaveFailedMessageDialog.open();

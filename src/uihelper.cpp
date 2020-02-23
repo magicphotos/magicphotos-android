@@ -18,17 +18,7 @@ UIHelper &UIHelper::GetInstance()
     return instance;
 }
 
-bool UIHelper::darkTheme() const
-{
-    return DarkTheme;
-}
-
-int UIHelper::screenDpi() const
-{
-    return ScreenDpi;
-}
-
-QString UIHelper::getSaveImageFilePath()
+QString UIHelper::filePathToSaveImage() const
 {
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
@@ -37,6 +27,16 @@ QString UIHelper::getSaveImageFilePath()
     }
 
     return QDir(tmp_dir).filePath(QStringLiteral("output.jpg"));
+}
+
+bool UIHelper::darkTheme() const
+{
+    return DarkTheme;
+}
+
+int UIHelper::screenDpi() const
+{
+    return ScreenDpi;
 }
 
 bool UIHelper::requestReadStoragePermission()
@@ -68,18 +68,18 @@ void UIHelper::showGallery()
     QtAndroid::androidActivity().callMethod<void>("showGallery");
 }
 
-bool UIHelper::addImageToMediaLibrary(const QString &image_file)
+bool UIHelper::addImageToMediaLibrary(const QString &image_path)
 {
-    QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
+    QAndroidJniObject j_image_path = QAndroidJniObject::fromString(image_path);
 
-    return QtAndroid::androidActivity().callMethod<jboolean>("addImageToMediaLibrary", "(Ljava/lang/String;)Z", j_image_file.object<jstring>());
+    return QtAndroid::androidActivity().callMethod<jboolean>("addImageToMediaLibrary", "(Ljava/lang/String;)Z", j_image_path.object<jstring>());
 }
 
-void UIHelper::shareImage(const QString &image_file)
+void UIHelper::shareImage(const QString &image_path)
 {
-    QAndroidJniObject j_image_file = QAndroidJniObject::fromString(image_file);
+    QAndroidJniObject j_image_path = QAndroidJniObject::fromString(image_path);
 
-    QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_file.object<jstring>());
+    QtAndroid::androidActivity().callMethod<void>("shareImage", "(Ljava/lang/String;)V", j_image_path.object<jstring>());
 }
 
 void UIHelper::handleDeviceConfigurationUpdate()
@@ -101,9 +101,9 @@ void UIHelper::handleDeviceConfigurationUpdate()
     }
 }
 
-void UIHelper::handleImageSelection(const QString &image_file, int image_orientation)
+void UIHelper::handleImageSelection(const QString &image_path, int image_orientation)
 {
-    emit imageSelected(image_file, image_orientation);
+    emit imageSelected(image_path, image_orientation);
 }
 
 void UIHelper::handleImageSelectionCancel()

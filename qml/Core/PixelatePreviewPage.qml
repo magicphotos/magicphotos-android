@@ -41,7 +41,7 @@ Page {
                     var component = Qt.createComponent("PixelatePage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {"imageOrientation": imageOrientation, "pixelDenom": pixDenomSlider.value, "imageFile": pixelatePreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "pixelDenom": pixDenomSlider.value, "imagePath": pixelatePreviewPage.imagePath});
                     } else {
                         console.error(component.errorString());
                     }
@@ -52,21 +52,21 @@ Page {
 
     property int imageOrientation: -1
 
-    property string imageFile:     ""
+    property string imagePath:     ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && imagePath !== "") {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
-            pixelatePreviewGenerator.openImage(imageFile, imageOrientation);
+            pixelatePreviewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && imagePath !== "") {
             pixelatePreviewGenerator.pixDenom = pixDenomSlider.value;
 
-            pixelatePreviewGenerator.openImage(imageFile, imageOrientation);
+            pixelatePreviewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
