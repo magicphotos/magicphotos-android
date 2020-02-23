@@ -97,7 +97,7 @@ Page {
                 onClicked: {
                     retouchPage.shareActionActive = false;
 
-                    retouchEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    retouchEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -116,7 +116,7 @@ Page {
                 onClicked: {
                     retouchPage.shareActionActive = true;
 
-                    retouchEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    retouchEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -177,17 +177,17 @@ Page {
 
     property int imageOrientation:            -1
 
-    property string imageFile:                ""
+    property string imagePath:                ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
-            retouchEditor.openImage(imageFile, imageOrientation);
+        if (imageOrientation !== -1 && imagePath !== "") {
+            retouchEditor.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
-            retouchEditor.openImage(imageFile, imageOrientation);
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && imagePath !== "") {
+            retouchEditor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -302,9 +302,9 @@ Page {
 
                         onImageSaved: {
                             if (retouchPage.shareActionActive) {
-                                UIHelper.shareImage(imageFile);
+                                UIHelper.shareImage(imagePath);
                             } else if (UIHelper.requestWriteStoragePermission() &&
-                                       UIHelper.addImageToMediaLibrary(imageFile)) {
+                                       UIHelper.addImageToMediaLibrary(imagePath)) {
                                 imageSavedMessageDialog.open();
                             } else {
                                 imageSaveFailedMessageDialog.open();

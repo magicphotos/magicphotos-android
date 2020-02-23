@@ -58,7 +58,7 @@ public class MagicActivity extends QtActivity
 
     private static native void bannerViewHeightUpdated(int height);
 
-    private static native void imageSelected(String image_file, int image_orientation);
+    private static native void imageSelected(String image_path, int image_orientation);
     private static native void imageSelectionCancelled();
     private static native void imageSelectionFailed();
 
@@ -177,12 +177,12 @@ public class MagicActivity extends QtActivity
         }
     }
 
-    public boolean addImageToMediaLibrary(String image_file)
+    public boolean addImageToMediaLibrary(String image_path)
     {
-        String image_file_extension = FilenameUtils.getExtension(image_file);
+        String image_extension = FilenameUtils.getExtension(image_path);
 
-        if (image_file_extension != null) {
-            String image_content_type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(image_file_extension);
+        if (image_extension != null) {
+            String image_content_type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(image_extension);
 
             if (image_content_type != null) {
                 long          current_time   = (new Date()).getTime();
@@ -193,7 +193,7 @@ public class MagicActivity extends QtActivity
                 content_values.put(MediaStore.MediaColumns.DATE_MODIFIED, current_time / 1000);
 
                 try (
-                    FileInputStream input_stream  = new FileInputStream(image_file);
+                    FileInputStream input_stream  = new FileInputStream(image_path);
                     OutputStream    output_stream = getContentResolver().openOutputStream(getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content_values))
                 ) {
                     IOUtils.copy(input_stream, output_stream);
@@ -212,13 +212,13 @@ public class MagicActivity extends QtActivity
         }
     }
 
-    public void shareImage(String image_file)
+    public void shareImage(String image_path)
     {
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
 
             intent.setType("image/*");
-            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_file)));
+            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_path)));
 
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
         } catch (Exception ex) {
@@ -472,10 +472,10 @@ public class MagicActivity extends QtActivity
                                 String image_content_type = getContentResolver().getType(image_uri);
 
                                 if (image_content_type != null) {
-                                    String image_file_extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(image_content_type);
+                                    String image_extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(image_content_type);
 
-                                    if (image_file_extension != null) {
-                                        final File image_file = new File(getApplicationContext().getCacheDir().getAbsolutePath(), "input." + image_file_extension);
+                                    if (image_extension != null) {
+                                        final File image_file = new File(getApplicationContext().getCacheDir().getAbsolutePath(), "input." + image_extension);
 
                                         try (FileOutputStream output_stream = new FileOutputStream(image_file)) {
                                             IOUtils.copy(input_stream, output_stream);

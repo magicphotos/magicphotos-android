@@ -41,7 +41,7 @@ Page {
                     var component = Qt.createComponent("BlurPage.qml");
 
                     if (component.status === Component.Ready) {
-                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "imageFile": blurPreviewPage.imageFile});
+                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "imagePath": blurPreviewPage.imagePath});
                     } else {
                         console.error(component.errorString());
                     }
@@ -52,21 +52,21 @@ Page {
 
     property int imageOrientation: -1
 
-    property string imageFile:     ""
+    property string imagePath:     ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && imagePath !== "") {
             blurPreviewGenerator.radius = gaussianRadiusSlider.value;
 
-            blurPreviewGenerator.openImage(imageFile, imageOrientation);
+            blurPreviewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && imagePath !== "") {
             blurPreviewGenerator.radius = gaussianRadiusSlider.value;
 
-            blurPreviewGenerator.openImage(imageFile, imageOrientation);
+            blurPreviewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 

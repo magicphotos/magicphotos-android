@@ -130,10 +130,10 @@ void Editor::setBrushHardness(qreal hardness)
     }
 }
 
-void Editor::openImage(const QString &image_file, int image_orientation)
+void Editor::openImage(const QString &image_path, int image_orientation)
 {
-    if (!image_file.isNull()) {
-        QImageReader reader(image_file);
+    if (!image_path.isNull()) {
+        QImageReader reader(image_path);
 
         if (reader.canRead()) {
             QSize size = reader.size();
@@ -200,21 +200,21 @@ void Editor::openImage(const QString &image_file, int image_orientation)
     }
 }
 
-void Editor::saveImage(const QString &image_file)
+void Editor::saveImage(const QString &image_path)
 {
-    QString file_name = image_file;
+    QString file_path = image_path;
 
-    if (!file_name.isNull() && !CurrentImage.isNull()) {
-        if (QFileInfo(file_name).suffix().compare(QStringLiteral("png"), Qt::CaseInsensitive) != 0 &&
-            QFileInfo(file_name).suffix().compare(QStringLiteral("jpg"), Qt::CaseInsensitive) != 0 &&
-            QFileInfo(file_name).suffix().compare(QStringLiteral("bmp"), Qt::CaseInsensitive) != 0) {
-            file_name = file_name + QStringLiteral(".jpg");
+    if (!file_path.isNull() && !CurrentImage.isNull()) {
+        if (QFileInfo(file_path).suffix().compare(QStringLiteral("png"), Qt::CaseInsensitive) != 0 &&
+            QFileInfo(file_path).suffix().compare(QStringLiteral("jpg"), Qt::CaseInsensitive) != 0 &&
+            QFileInfo(file_path).suffix().compare(QStringLiteral("bmp"), Qt::CaseInsensitive) != 0) {
+            file_path = file_path + QStringLiteral(".jpg");
         }
 
-        if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_name)) {
+        if (CurrentImage.convertToFormat(QImage::Format_ARGB32).save(file_path)) {
             Changed = false;
 
-            emit imageSaved(file_name);
+            emit imageSaved(file_path);
         } else {
             emit imageSaveFailed();
         }

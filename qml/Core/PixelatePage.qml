@@ -84,7 +84,7 @@ Page {
                 onClicked: {
                     pixelatePage.shareActionActive = false;
 
-                    pixelateEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    pixelateEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -103,7 +103,7 @@ Page {
                 onClicked: {
                     pixelatePage.shareActionActive = true;
 
-                    pixelateEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    pixelateEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -165,29 +165,29 @@ Page {
     property int imageOrientation:            -1
     property int pixelDenom:                  -1
 
-    property string imageFile:                ""
+    property string imagePath:                ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && imagePath !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(imageFile, imageOrientation);
+            pixelateEditor.openImage(imagePath, imageOrientation);
         }
     }
 
     onPixelDenomChanged: {
-        if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && imagePath !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(imageFile, imageOrientation);
+            pixelateEditor.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && pixelDenom !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && pixelDenom !== -1 && imagePath !== "") {
             pixelateEditor.pixDenom = pixelDenom;
 
-            pixelateEditor.openImage(imageFile, imageOrientation);
+            pixelateEditor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -294,9 +294,9 @@ Page {
 
                     onImageSaved: {
                         if (pixelatePage.shareActionActive) {
-                            UIHelper.shareImage(imageFile);
+                            UIHelper.shareImage(imagePath);
                         } else if (UIHelper.requestWriteStoragePermission() &&
-                                   UIHelper.addImageToMediaLibrary(imageFile)) {
+                                   UIHelper.addImageToMediaLibrary(imagePath)) {
                             imageSavedMessageDialog.open();
                         } else {
                             imageSaveFailedMessageDialog.open();

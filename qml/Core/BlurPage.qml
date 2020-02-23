@@ -84,7 +84,7 @@ Page {
                 onClicked: {
                     blurPage.shareActionActive = false;
 
-                    blurEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    blurEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -103,7 +103,7 @@ Page {
                 onClicked: {
                     blurPage.shareActionActive = true;
 
-                    blurEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    blurEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -165,29 +165,29 @@ Page {
     property int imageOrientation:            -1
     property int gaussianRadius:              -1
 
-    property string imageFile:                ""
+    property string imagePath:                ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
             blurEditor.radius = gaussianRadius;
 
-            blurEditor.openImage(imageFile, imageOrientation);
+            blurEditor.openImage(imagePath, imageOrientation);
         }
     }
 
     onGaussianRadiusChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
             blurEditor.radius = gaussianRadius;
 
-            blurEditor.openImage(imageFile, imageOrientation);
+            blurEditor.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
             blurEditor.radius = gaussianRadius;
 
-            blurEditor.openImage(imageFile, imageOrientation);
+            blurEditor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -294,9 +294,9 @@ Page {
 
                     onImageSaved: {
                         if (blurPage.shareActionActive) {
-                            UIHelper.shareImage(imageFile);
+                            UIHelper.shareImage(imagePath);
                         } else if (UIHelper.requestWriteStoragePermission() &&
-                                   UIHelper.addImageToMediaLibrary(imageFile)) {
+                                   UIHelper.addImageToMediaLibrary(imagePath)) {
                             imageSavedMessageDialog.open();
                         } else {
                             imageSaveFailedMessageDialog.open();

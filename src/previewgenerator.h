@@ -23,7 +23,7 @@ public:
 
     ~PreviewGenerator() noexcept override = default;
 
-    Q_INVOKABLE void openImage(const QString &image_file, int image_orientation);
+    Q_INVOKABLE void openImage(const QString &image_path, int image_orientation);
 
     void paint(QPainter *painter) override;
 

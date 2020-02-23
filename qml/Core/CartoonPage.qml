@@ -84,7 +84,7 @@ Page {
                 onClicked: {
                     cartoonPage.shareActionActive = false;
 
-                    cartoonEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    cartoonEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -103,7 +103,7 @@ Page {
                 onClicked: {
                     cartoonPage.shareActionActive = true;
 
-                    cartoonEditor.saveImage(UIHelper.getSaveImageFilePath());
+                    cartoonEditor.saveImage(UIHelper.filePathToSaveImage);
                 }
             }
 
@@ -166,41 +166,41 @@ Page {
     property int gaussianRadius:              -1
     property int cartoonThreshold:            -1
 
-    property string imageFile:                ""
+    property string imagePath:                ""
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imagePath !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(imageFile, imageOrientation);
+            cartoonEditor.openImage(imagePath, imageOrientation);
         }
     }
 
     onGaussianRadiusChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imagePath !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(imageFile, imageOrientation);
+            cartoonEditor.openImage(imagePath, imageOrientation);
         }
     }
 
     onCartoonThresholdChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imagePath !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(imageFile, imageOrientation);
+            cartoonEditor.openImage(imagePath, imageOrientation);
         }
     }
 
-    onImageFileChanged: {
-        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imageFile !== "") {
+    onImagePathChanged: {
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && cartoonThreshold !== -1 && imagePath !== "") {
             cartoonEditor.radius    = gaussianRadius;
             cartoonEditor.threshold = cartoonThreshold;
 
-            cartoonEditor.openImage(imageFile, imageOrientation);
+            cartoonEditor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -307,9 +307,9 @@ Page {
 
                     onImageSaved: {
                         if (cartoonPage.shareActionActive) {
-                            UIHelper.shareImage(imageFile);
+                            UIHelper.shareImage(imagePath);
                         } else if (UIHelper.requestWriteStoragePermission() &&
-                                   UIHelper.addImageToMediaLibrary(imageFile)) {
+                                   UIHelper.addImageToMediaLibrary(imagePath)) {
                             imageSavedMessageDialog.open();
                         } else {
                             imageSaveFailedMessageDialog.open();

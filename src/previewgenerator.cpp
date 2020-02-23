@@ -14,10 +14,10 @@ PreviewGenerator::PreviewGenerator(QQuickItem *parent) : QQuickPaintedItem(paren
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-void PreviewGenerator::openImage(const QString &image_file, int image_orientation)
+void PreviewGenerator::openImage(const QString &image_path, int image_orientation)
 {
-    if (!image_file.isNull()) {
-        QImageReader reader(image_file);
+    if (!image_path.isNull()) {
+        QImageReader reader(image_path);
 
         if (reader.canRead()) {
             QSize size = reader.size();
