@@ -8,8 +8,6 @@ class UIHelper : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString filePathToSaveImage READ filePathToSaveImage)
-
     Q_PROPERTY(bool darkTheme READ darkTheme NOTIFY darkThemeChanged)
     Q_PROPERTY(int  screenDpi READ screenDpi NOTIFY screenDpiChanged)
 
@@ -26,8 +24,6 @@ public:
 
     static UIHelper &GetInstance();
 
-    QString filePathToSaveImage() const;
-
     bool darkTheme() const;
     int screenDpi() const;
 
@@ -35,7 +31,6 @@ public:
     Q_INVOKABLE bool requestWriteStoragePermission();
 
     Q_INVOKABLE void showGallery();
-    Q_INVOKABLE bool addImageToMediaLibrary(const QString &image_path);
     Q_INVOKABLE void shareImage(const QString &image_path);
 
 public slots:

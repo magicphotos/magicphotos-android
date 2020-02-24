@@ -84,7 +84,7 @@ Page {
                 onClicked: {
                     cartoonPage.shareActionActive = false;
 
-                    cartoonEditor.saveImage(UIHelper.filePathToSaveImage);
+                    cartoonEditor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -103,7 +103,7 @@ Page {
                 onClicked: {
                     cartoonPage.shareActionActive = true;
 
-                    cartoonEditor.saveImage(UIHelper.filePathToSaveImage);
+                    cartoonEditor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -309,7 +309,7 @@ Page {
                         if (cartoonPage.shareActionActive) {
                             UIHelper.shareImage(imagePath);
                         } else if (UIHelper.requestWriteStoragePermission() &&
-                                   UIHelper.addImageToMediaLibrary(imagePath)) {
+                                   MediaStoreHelper.addImageToMediaStore(imagePath)) {
                             imageSavedMessageDialog.open();
                         } else {
                             imageSaveFailedMessageDialog.open();

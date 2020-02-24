@@ -18,6 +18,7 @@ SOURCES += \
     src/effecteditor.cpp \
     src/helper.cpp \
     src/main.cpp \
+    src/mediastorehelper.cpp \
     src/pixelateeditor.cpp \
     src/previewgenerator.cpp \
     src/recoloreditor.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     src/editor.h \
     src/effecteditor.h \
     src/helper.h \
+    src/mediastorehelper.h \
     src/pixelateeditor.h \
     src/previewgenerator.h \
     src/recoloreditor.h \

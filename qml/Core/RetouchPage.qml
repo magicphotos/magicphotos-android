@@ -97,7 +97,7 @@ Page {
                 onClicked: {
                     retouchPage.shareActionActive = false;
 
-                    retouchEditor.saveImage(UIHelper.filePathToSaveImage);
+                    retouchEditor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -116,7 +116,7 @@ Page {
                 onClicked: {
                     retouchPage.shareActionActive = true;
 
-                    retouchEditor.saveImage(UIHelper.filePathToSaveImage);
+                    retouchEditor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -304,7 +304,7 @@ Page {
                             if (retouchPage.shareActionActive) {
                                 UIHelper.shareImage(imagePath);
                             } else if (UIHelper.requestWriteStoragePermission() &&
-                                       UIHelper.addImageToMediaLibrary(imagePath)) {
+                                       MediaStoreHelper.addImageToMediaStore(imagePath)) {
                                 imageSavedMessageDialog.open();
                             } else {
                                 imageSaveFailedMessageDialog.open();
