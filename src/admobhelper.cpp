@@ -35,14 +35,14 @@ void AdMobHelper::initAds()
     }
 }
 
-void AdMobHelper::setPersonalization(bool personalized)
+void AdMobHelper::setPersonalization(bool personalized) const
 {
     jboolean j_personalized = personalized ? JNI_TRUE : JNI_FALSE;
 
     QtAndroid::androidActivity().callMethod<void>("setAdsPersonalization", "(Z)V", j_personalized);
 }
 
-void AdMobHelper::showBannerView()
+void AdMobHelper::showBannerView() const
 {
     if (Initialized) {
         QAndroidJniObject j_unit_id = QAndroidJniObject::fromString(ADMOB_BANNERVIEW_UNIT_ID);
@@ -51,14 +51,14 @@ void AdMobHelper::showBannerView()
     }
 }
 
-void AdMobHelper::hideBannerView()
+void AdMobHelper::hideBannerView() const
 {
     if (Initialized) {
         QtAndroid::androidActivity().callMethod<void>("hideBannerView");
     }
 }
 
-void AdMobHelper::showInterstitial()
+void AdMobHelper::showInterstitial() const
 {
     if (Initialized) {
         QtAndroid::androidActivity().callMethod<void>("showInterstitial");

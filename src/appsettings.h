@@ -1,8 +1,6 @@
 #ifndef APPSETTINGS_H
 #define APPSETTINGS_H
 
-#include <memory>
-
 #include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -43,8 +41,8 @@ public:
     void setAdMobConsent(const QString &consent);
 
 private:
-    int                        DefaultBrushSize;
-    std::unique_ptr<QSettings> Settings;
+    int       DefaultBrushSize;
+    QSettings Settings {QStringLiteral("Oleg Derevenetz"), QStringLiteral("MagicPhotos")};
 };
 
 #endif // APPSETTINGS_H

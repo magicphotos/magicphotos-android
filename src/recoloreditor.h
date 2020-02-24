@@ -52,13 +52,13 @@ protected:
 private:
     void ChangeImageAt(bool save_undo, int center_x, int center_y);
 
-    quint16 PackRGB16(quint8 r, quint8 g, quint8 b);
-    std::tuple<quint8, quint8, quint8> UnpackRGB16(quint16 rgb);
+    quint16 PackRGB16(quint8 r, quint8 g, quint8 b) const;
+    std::tuple<quint8, quint8, quint8> UnpackRGB16(quint16 rgb) const;
 
-    quint32 PackHSV(qint16 h, quint8 s, quint8 v);
-    std::tuple<qint16, quint8, quint8> UnpackHSV(quint32 hsv);
+    quint32 PackHSV(qint16 h, quint8 s, quint8 v) const;
+    std::tuple<qint16, quint8, quint8> UnpackHSV(quint32 hsv) const;
 
-    QRgb AdjustHue(QRgb rgb);
+    QRgb AdjustHue(QRgb rgb) const;
 
     int                     Hue;
     QImage                  OriginalImage;

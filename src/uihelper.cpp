@@ -26,7 +26,7 @@ int UIHelper::screenDpi() const
     return ScreenDpi;
 }
 
-bool UIHelper::requestReadStoragePermission()
+bool UIHelper::requestReadStoragePermission() const
 {
     if (QtAndroid::checkPermission(QStringLiteral("android.permission.READ_EXTERNAL_STORAGE")) == QtAndroid::PermissionResult::Granted) {
         return true;
@@ -38,7 +38,7 @@ bool UIHelper::requestReadStoragePermission()
     }
 }
 
-bool UIHelper::requestWriteStoragePermission()
+bool UIHelper::requestWriteStoragePermission() const
 {
     if (QtAndroid::checkPermission(QStringLiteral("android.permission.WRITE_EXTERNAL_STORAGE")) == QtAndroid::PermissionResult::Granted) {
         return true;
@@ -50,12 +50,12 @@ bool UIHelper::requestWriteStoragePermission()
     }
 }
 
-void UIHelper::showGallery()
+void UIHelper::showGallery() const
 {
     QtAndroid::androidActivity().callMethod<void>("showGallery");
 }
 
-void UIHelper::shareImage(const QString &image_path)
+void UIHelper::shareImage(const QString &image_path) const
 {
     QAndroidJniObject j_image_path = QAndroidJniObject::fromString(image_path);
 

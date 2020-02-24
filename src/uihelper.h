@@ -27,11 +27,11 @@ public:
     bool darkTheme() const;
     int screenDpi() const;
 
-    Q_INVOKABLE bool requestReadStoragePermission();
-    Q_INVOKABLE bool requestWriteStoragePermission();
+    Q_INVOKABLE bool requestReadStoragePermission() const;
+    Q_INVOKABLE bool requestWriteStoragePermission() const;
 
-    Q_INVOKABLE void showGallery();
-    Q_INVOKABLE void shareImage(const QString &image_path);
+    Q_INVOKABLE void showGallery() const;
+    Q_INVOKABLE void shareImage(const QString &image_path) const;
 
 public slots:
     void handleDeviceConfigurationUpdate();
