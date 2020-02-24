@@ -84,7 +84,7 @@ Page {
                 onClicked: {
                     sketchPage.shareActionActive = false;
 
-                    sketchEditor.saveImage(UIHelper.filePathToSaveImage);
+                    sketchEditor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -103,7 +103,7 @@ Page {
                 onClicked: {
                     sketchPage.shareActionActive = true;
 
-                    sketchEditor.saveImage(UIHelper.filePathToSaveImage);
+                    sketchEditor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -296,7 +296,7 @@ Page {
                         if (sketchPage.shareActionActive) {
                             UIHelper.shareImage(imagePath);
                         } else if (UIHelper.requestWriteStoragePermission() &&
-                                   UIHelper.addImageToMediaLibrary(imagePath)) {
+                                   MediaStoreHelper.addImageToMediaStore(imagePath)) {
                             imageSavedMessageDialog.open();
                         } else {
                             imageSaveFailedMessageDialog.open();

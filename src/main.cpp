@@ -15,6 +15,7 @@
 #include "cartooneditor.h"
 #include "decolorizeeditor.h"
 #include "helper.h"
+#include "mediastorehelper.h"
 #include "pixelateeditor.h"
 #include "recoloreditor.h"
 #include "retoucheditor.h"
@@ -62,6 +63,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), &AdMobHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("AppSettings"), &AppSettings::GetInstance());
+    engine.rootContext()->setContextProperty(QStringLiteral("MediaStoreHelper"), &MediaStoreHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("UIHelper"), &UIHelper::GetInstance());
 
     QQuickStyle::setStyle(QStringLiteral("Material"));

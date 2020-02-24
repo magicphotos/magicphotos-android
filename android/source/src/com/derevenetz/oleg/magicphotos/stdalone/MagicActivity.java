@@ -177,7 +177,21 @@ public class MagicActivity extends QtActivity
         }
     }
 
-    public boolean addImageToMediaLibrary(String image_path)
+    public void shareImage(String image_path)
+    {
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_path)));
+
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
+        } catch (Exception ex) {
+            Log.e("MagicActivity", "shareImage() : " + ex.toString());
+        }
+    }
+
+    public boolean addImageToMediaStore(String image_path)
     {
         String image_extension = FilenameUtils.getExtension(image_path);
 
@@ -200,7 +214,7 @@ public class MagicActivity extends QtActivity
 
                     return true;
                 } catch (Exception ex) {
-                    Log.e("MagicActivity", "addImageToMediaLibrary() : " + ex.toString());
+                    Log.e("MagicActivity", "addImageToMediaStore() : " + ex.toString());
 
                     return false;
                 }
@@ -209,20 +223,6 @@ public class MagicActivity extends QtActivity
             }
         } else {
             return false;
-        }
-    }
-
-    public void shareImage(String image_path)
-    {
-        try {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-
-            intent.setType("image/*");
-            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_path)));
-
-            startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
-        } catch (Exception ex) {
-            Log.e("MagicActivity", "shareImage() : " + ex.toString());
         }
     }
 

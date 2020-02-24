@@ -1,5 +1,3 @@
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
 #include <QtAndroidExtras/QtAndroid>
 #include <QtAndroidExtras/QAndroidJniObject>
 
@@ -16,17 +14,6 @@ UIHelper &UIHelper::GetInstance()
     static UIHelper instance;
 
     return instance;
-}
-
-QString UIHelper::filePathToSaveImage() const
-{
-    QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
-
-    if (tmp_dir != QStringLiteral("")) {
-        QDir().mkpath(tmp_dir);
-    }
-
-    return QDir(tmp_dir).filePath(QStringLiteral("output.jpg"));
 }
 
 bool UIHelper::darkTheme() const
@@ -66,13 +53,6 @@ bool UIHelper::requestWriteStoragePermission()
 void UIHelper::showGallery()
 {
     QtAndroid::androidActivity().callMethod<void>("showGallery");
-}
-
-bool UIHelper::addImageToMediaLibrary(const QString &image_path)
-{
-    QAndroidJniObject j_image_path = QAndroidJniObject::fromString(image_path);
-
-    return QtAndroid::androidActivity().callMethod<jboolean>("addImageToMediaLibrary", "(Ljava/lang/String;)Z", j_image_path.object<jstring>());
 }
 
 void UIHelper::shareImage(const QString &image_path)
