@@ -3,7 +3,6 @@
 AppSettings::AppSettings(QObject *parent) : QObject(parent)
 {
     DefaultBrushSize = 0;
-    Settings         = std::make_unique<QSettings>(QStringLiteral("Oleg Derevenetz"), QStringLiteral("MagicPhotos"));
 }
 
 AppSettings &AppSettings::GetInstance()
@@ -15,10 +14,10 @@ AppSettings &AppSettings::GetInstance()
 
 bool AppSettings::disableAds() const
 {
-    if (Settings->contains(QStringLiteral("DisableAds"))) {
-        return Settings->value(QStringLiteral("DisableAds")).toBool();
-    } else if (Settings->contains(QStringLiteral("IsFullVersion"))) {
-        return Settings->value(QStringLiteral("IsFullVersion")).toBool();
+    if (Settings.contains(QStringLiteral("DisableAds"))) {
+        return Settings.value(QStringLiteral("DisableAds")).toBool();
+    } else if (Settings.contains(QStringLiteral("IsFullVersion"))) {
+        return Settings.value(QStringLiteral("IsFullVersion")).toBool();
     } else {
         return false;
     }
@@ -26,7 +25,7 @@ bool AppSettings::disableAds() const
 
 void AppSettings::setDisableAds(bool disable)
 {
-    Settings->setValue(QStringLiteral("DisableAds"), disable);
+    Settings.setValue(QStringLiteral("DisableAds"), disable);
 }
 
 int AppSettings::defaultBrushSize() const
@@ -41,8 +40,8 @@ void AppSettings::setDefaultBrushSize(int size)
 
 int AppSettings::brushSize() const
 {
-    if (Settings->contains(QStringLiteral("BrushSize"))) {
-        return Settings->value(QStringLiteral("BrushSize")).toInt();
+    if (Settings.contains(QStringLiteral("BrushSize"))) {
+        return Settings.value(QStringLiteral("BrushSize")).toInt();
     } else {
         return DefaultBrushSize;
     }
@@ -50,13 +49,13 @@ int AppSettings::brushSize() const
 
 void AppSettings::setBrushSize(int size)
 {
-    Settings->setValue(QStringLiteral("BrushSize"), size);
+    Settings.setValue(QStringLiteral("BrushSize"), size);
 }
 
 qreal AppSettings::brushHardness() const
 {
-    if (Settings->contains(QStringLiteral("BrushHardness"))) {
-        return Settings->value(QStringLiteral("BrushHardness")).toDouble();
+    if (Settings.contains(QStringLiteral("BrushHardness"))) {
+        return Settings.value(QStringLiteral("BrushHardness")).toDouble();
     } else {
         return 0.75;
     }
@@ -64,13 +63,13 @@ qreal AppSettings::brushHardness() const
 
 void AppSettings::setBrushHardness(qreal hardness)
 {
-    Settings->setValue(QStringLiteral("BrushHardness"), hardness);
+    Settings.setValue(QStringLiteral("BrushHardness"), hardness);
 }
 
 QString AppSettings::adMobConsent() const
 {
-    if (Settings->contains(QStringLiteral("AdMobConsent"))) {
-        return Settings->value(QStringLiteral("AdMobConsent")).toString();
+    if (Settings.contains(QStringLiteral("AdMobConsent"))) {
+        return Settings.value(QStringLiteral("AdMobConsent")).toString();
     } else {
         return QStringLiteral("");
     }
@@ -78,5 +77,5 @@ QString AppSettings::adMobConsent() const
 
 void AppSettings::setAdMobConsent(const QString &consent)
 {
-    Settings->setValue(QStringLiteral("AdMobConsent"), consent);
+    Settings.setValue(QStringLiteral("AdMobConsent"), consent);
 }

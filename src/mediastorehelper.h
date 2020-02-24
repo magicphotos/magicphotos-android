@@ -25,7 +25,7 @@ public:
 
     QString imageFilePath() const;
 
-    Q_INVOKABLE bool addImageToMediaStore(const QString &image_path);
+    Q_INVOKABLE bool addImageToMediaStore(const QString &image_path) const;
 };
 
 #endif // MEDIASTOREHELPER_H

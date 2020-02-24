@@ -27,7 +27,7 @@ QString MediaStoreHelper::imageFilePath() const
     return QDir(tmp_dir).filePath(QStringLiteral("output.jpg"));
 }
 
-bool MediaStoreHelper::addImageToMediaStore(const QString &image_path)
+bool MediaStoreHelper::addImageToMediaStore(const QString &image_path) const
 {
     QAndroidJniObject j_image_path = QAndroidJniObject::fromString(image_path);
 
