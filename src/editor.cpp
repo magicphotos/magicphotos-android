@@ -56,12 +56,12 @@ void Editor::setBrushSize(int size)
 
                 if (r <= BrushSize) {
                     if (r <= BrushSize * BrushHardness) {
-                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                        BrushTemplateImage.setPixel(x, y, qRgba(255, 255, 255, 255));
                     } else {
-                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
+                        BrushTemplateImage.setPixel(x, y, qRgba(255, 255, 255, qFloor(255 * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+                    BrushTemplateImage.setPixel(x, y, qRgba(255, 255, 255, 0));
                 }
             }
         }
@@ -107,12 +107,12 @@ void Editor::setBrushHardness(qreal hardness)
 
                 if (r <= BrushSize) {
                     if (r <= BrushSize * BrushHardness) {
-                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                        BrushTemplateImage.setPixel(x, y, qRgba(255, 255, 255, 255));
                     } else {
-                        BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
+                        BrushTemplateImage.setPixel(x, y, qRgba(255, 255, 255, qFloor(255 * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
-                    BrushTemplateImage.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+                    BrushTemplateImage.setPixel(x, y, qRgba(255, 255, 255, 0));
                 }
             }
         }
