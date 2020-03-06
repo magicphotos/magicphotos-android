@@ -39,8 +39,8 @@ void BlurEditor::processOpenedImage()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 }
 
 BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -84,8 +84,8 @@ void BlurPreviewGenerator::StartImageGenerator()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 
     ImageGeneratorRunning = true;
 

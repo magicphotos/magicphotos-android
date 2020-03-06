@@ -40,8 +40,8 @@ void PixelateEditor::processOpenedImage()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 }
 
 PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -85,8 +85,8 @@ void PixelatePreviewGenerator::StartImageGenerator()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 
     ImageGeneratorRunning = true;
 
