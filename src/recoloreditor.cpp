@@ -138,16 +138,16 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
 quint16 RecolorEditor::PackRGB16(quint8 r, quint8 g, quint8 b) const
 {
-    return static_cast<quint16>(((static_cast<quint16>(r) & 0xf8) << 8) |
-                                ((static_cast<quint16>(g) & 0xfc) << 3) |
-                                ((static_cast<quint16>(b) & 0xf8) >> 3));
+    return static_cast<quint16>(((static_cast<quint16>(r) & 0xF8) << 8) |
+                                ((static_cast<quint16>(g) & 0xFC) << 3) |
+                                ((static_cast<quint16>(b) & 0xF8) >> 3));
 }
 
 std::tuple<quint8, quint8, quint8> RecolorEditor::UnpackRGB16(quint16 rgb) const
 {
-    auto r = static_cast<quint8>(((rgb >> 11) & 0x1f) << 3);
-    auto g = static_cast<quint8>(((rgb >> 5)  & 0x3f) << 2);
-    auto b = static_cast<quint8>(((rgb)       & 0x1f) << 3);
+    auto r = static_cast<quint8>(((rgb >> 11) & 0x1F) << 3);
+    auto g = static_cast<quint8>(((rgb >> 5)  & 0x3F) << 2);
+    auto b = static_cast<quint8>(((rgb)       & 0x1F) << 3);
 
     return std::make_tuple(r, g, b);
 }
@@ -163,9 +163,9 @@ quint32 RecolorEditor::PackHSV(qint16 h, quint8 s, quint8 v) const
 
 std::tuple<qint16, quint8, quint8> RecolorEditor::UnpackHSV(quint32 hsv) const
 {
-    auto h = static_cast<qint16>((hsv >> 16) & 0xffff);
-    auto s = static_cast<quint8>((hsv >> 8)  & 0xff);
-    auto v = static_cast<quint8>((hsv)       & 0xff);
+    auto h = static_cast<qint16>((hsv >> 16) & 0xFFFF);
+    auto s = static_cast<quint8>((hsv >> 8)  & 0xFF);
+    auto v = static_cast<quint8>((hsv)       & 0xFF);
 
     return std::make_tuple(h, s, v);
 }

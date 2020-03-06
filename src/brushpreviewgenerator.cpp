@@ -68,12 +68,12 @@ void BrushPreviewGenerator::paint(QPainter *painter)
 
                 if (r <= BrushSize) {
                     if (r <= BrushSize * BrushHardness) {
-                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0xFF));
+                        brush_template.setPixel(x, y, qRgba(255, 255, 255, 255));
                     } else {
-                        brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, qFloor(0xFF * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
+                        brush_template.setPixel(x, y, qRgba(255, 255, 255, qFloor(255 * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
-                    brush_template.setPixel(x, y, qRgba(0xFF, 0xFF, 0xFF, 0x00));
+                    brush_template.setPixel(x, y, qRgba(255, 255, 255, 0));
                 }
             }
         }
@@ -89,7 +89,7 @@ void BrushPreviewGenerator::paint(QPainter *painter)
         QImage   result(MaxBrushSize * 2, MaxBrushSize * 2, QImage::Format_ARGB32);
         QPainter result_painter(&result);
 
-        result.fill(QColor::fromRgba(qRgba(0x00, 0x00, 0x00, 0x00)));
+        result.fill(QColor::fromRgba(qRgba(0, 0, 0, 0)));
 
         result_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         result_painter.drawImage(QPoint((result.width()  - brush_preview.width())  / 2,
