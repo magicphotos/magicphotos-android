@@ -39,8 +39,8 @@ void SketchEditor::processOpenedImage()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 }
 
 SketchPreviewGenerator::SketchPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -84,8 +84,8 @@ void SketchPreviewGenerator::StartImageGenerator()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 
     ImageGeneratorRunning = true;
 

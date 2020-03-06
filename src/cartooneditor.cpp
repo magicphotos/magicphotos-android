@@ -52,8 +52,8 @@ void CartoonEditor::processOpenedImage()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 }
 
 CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
@@ -117,8 +117,8 @@ void CartoonPreviewGenerator::StartImageGenerator()
 
     thread->start(QThread::LowPriority);
 
-    (void)thread.release();
-    (void)generator.release();
+    static_cast<void>(thread.release());
+    static_cast<void>(generator.release());
 
     ImageGeneratorRunning = true;
 
