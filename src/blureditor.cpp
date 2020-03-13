@@ -22,7 +22,7 @@ void BlurEditor::setRadius(int radius)
     Radius = radius;
 }
 
-void BlurEditor::processOpenedImage()
+void BlurEditor::ProcessOpenedImage()
 {
     auto thread    = std::make_unique<QThread>();
     auto generator = std::make_unique<BlurImageGenerator>();
@@ -35,8 +35,8 @@ void BlurEditor::processOpenedImage()
     connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
 
-    generator->setRadius(Radius);
-    generator->setInput(LoadedImage);
+    generator->SetRadius(Radius);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -81,8 +81,8 @@ void BlurPreviewGenerator::StartImageGenerator()
     connect(generator.get(), &BlurImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &BlurImageGenerator::finished,   generator.get(), &BlurImageGenerator::deleteLater);
 
-    generator->setRadius(Radius);
-    generator->setInput(LoadedImage);
+    generator->SetRadius(Radius);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -100,12 +100,12 @@ BlurImageGenerator::BlurImageGenerator(QObject *parent) :
 {
 }
 
-void BlurImageGenerator::setRadius(int radius)
+void BlurImageGenerator::SetRadius(int radius)
 {
     Radius = radius;
 }
 
-void BlurImageGenerator::setInput(const QImage &input_image)
+void BlurImageGenerator::SetInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

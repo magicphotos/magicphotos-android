@@ -22,7 +22,7 @@ void SketchEditor::setRadius(int radius)
     Radius = radius;
 }
 
-void SketchEditor::processOpenedImage()
+void SketchEditor::ProcessOpenedImage()
 {
     auto thread    = std::make_unique<QThread>();
     auto generator = std::make_unique<SketchImageGenerator>();
@@ -35,8 +35,8 @@ void SketchEditor::processOpenedImage()
     connect(generator.get(), &SketchImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &SketchImageGenerator::finished,   generator.get(), &SketchImageGenerator::deleteLater);
 
-    generator->setRadius(Radius);
-    generator->setInput(LoadedImage);
+    generator->SetRadius(Radius);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -81,8 +81,8 @@ void SketchPreviewGenerator::StartImageGenerator()
     connect(generator.get(), &SketchImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &SketchImageGenerator::finished,   generator.get(), &SketchImageGenerator::deleteLater);
 
-    generator->setRadius(Radius);
-    generator->setInput(LoadedImage);
+    generator->SetRadius(Radius);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -100,12 +100,12 @@ SketchImageGenerator::SketchImageGenerator(QObject *parent) :
 {
 }
 
-void SketchImageGenerator::setRadius(int radius)
+void SketchImageGenerator::SetRadius(int radius)
 {
     Radius = radius;
 }
 
-void SketchImageGenerator::setInput(const QImage &input_image)
+void SketchImageGenerator::SetInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

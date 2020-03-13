@@ -29,7 +29,7 @@ public:
     void setRadius(int radius);
 
 protected:
-    void processOpenedImage() override;
+    void ProcessOpenedImage() override;
 
 private:
     int Radius;
@@ -77,8 +77,8 @@ public:
 
     ~SketchImageGenerator() noexcept override = default;
 
-    void setRadius(int radius);
-    void setInput(const QImage &input_image);
+    void SetRadius(int radius);
+    void SetInput(const QImage &input_image);
 
 public slots:
     void start();

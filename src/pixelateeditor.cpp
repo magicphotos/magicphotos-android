@@ -23,7 +23,7 @@ void PixelateEditor::setPixDenom(int pix_denom)
     PixDenom = pix_denom;
 }
 
-void PixelateEditor::processOpenedImage()
+void PixelateEditor::ProcessOpenedImage()
 {
     auto thread    = std::make_unique<QThread>();
     auto generator = std::make_unique<PixelateImageGenerator>();
@@ -36,8 +36,8 @@ void PixelateEditor::processOpenedImage()
     connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
 
-    generator->setPixDenom(PixDenom);
-    generator->setInput(LoadedImage);
+    generator->SetPixDenom(PixDenom);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -82,8 +82,8 @@ void PixelatePreviewGenerator::StartImageGenerator()
     connect(generator.get(), &PixelateImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &PixelateImageGenerator::finished,   generator.get(), &PixelateImageGenerator::deleteLater);
 
-    generator->setPixDenom(PixDenom);
-    generator->setInput(LoadedImage);
+    generator->SetPixDenom(PixDenom);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -101,12 +101,12 @@ PixelateImageGenerator::PixelateImageGenerator(QObject *parent) :
 {
 }
 
-void PixelateImageGenerator::setPixDenom(int pix_denom)
+void PixelateImageGenerator::SetPixDenom(int pix_denom)
 {
     PixDenom = pix_denom;
 }
 
-void PixelateImageGenerator::setInput(const QImage &input_image)
+void PixelateImageGenerator::SetInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

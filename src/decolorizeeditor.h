@@ -23,7 +23,7 @@ public:
     ~DecolorizeEditor() noexcept override = default;
 
 protected:
-    void processOpenedImage() override;
+    void ProcessOpenedImage() override;
 };
 
 class GrayscaleImageGenerator : public QObject
@@ -41,7 +41,7 @@ public:
 
     ~GrayscaleImageGenerator() noexcept override = default;
 
-    void setInput(const QImage &input_image);
+    void SetInput(const QImage &input_image);
 
 public slots:
     void start();

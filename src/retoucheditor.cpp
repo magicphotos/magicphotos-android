@@ -161,7 +161,7 @@ void RetouchEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void RetouchEditor::processOpenedImage()
+void RetouchEditor::ProcessOpenedImage()
 {
     CurrentImage = LoadedImage;
 
