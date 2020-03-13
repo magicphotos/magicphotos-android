@@ -1,8 +1,9 @@
 #include "appsettings.h"
 
-AppSettings::AppSettings(QObject *parent) : QObject(parent)
+AppSettings::AppSettings(QObject *parent) :
+    QObject         (parent),
+    DefaultBrushSize(0)
 {
-    DefaultBrushSize = 0;
 }
 
 AppSettings &AppSettings::GetInstance()

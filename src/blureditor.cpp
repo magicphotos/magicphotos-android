@@ -6,9 +6,10 @@
 
 #include "blureditor.h"
 
-BlurEditor::BlurEditor(QQuickItem *parent) : EffectEditor(parent)
+BlurEditor::BlurEditor(QQuickItem *parent) :
+    EffectEditor(parent),
+    Radius      (0)
 {
-    Radius = 0;
 }
 
 int BlurEditor::radius() const
@@ -43,9 +44,10 @@ void BlurEditor::processOpenedImage()
     static_cast<void>(generator.release());
 }
 
-BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
+BlurPreviewGenerator::BlurPreviewGenerator(QQuickItem *parent) :
+    PreviewGenerator(parent),
+    Radius          (0)
 {
-    Radius = 0;
 }
 
 int BlurPreviewGenerator::radius() const
@@ -92,9 +94,10 @@ void BlurPreviewGenerator::StartImageGenerator()
     emit generationStarted();
 }
 
-BlurImageGenerator::BlurImageGenerator(QObject *parent) : QObject(parent)
+BlurImageGenerator::BlurImageGenerator(QObject *parent) :
+    QObject(parent),
+    Radius (0)
 {
-    Radius = 0;
 }
 
 void BlurImageGenerator::setRadius(int radius)

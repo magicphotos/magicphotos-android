@@ -3,7 +3,8 @@
 
 #include "helper.h"
 
-Helper::Helper(QQuickPaintedItem *parent) : QQuickPaintedItem(parent)
+Helper::Helper(QQuickPaintedItem *parent) :
+    QQuickPaintedItem(parent)
 {
     setFlag(QQuickItem::ItemHasContents, true);
 }

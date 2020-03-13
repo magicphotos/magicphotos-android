@@ -7,10 +7,11 @@
 
 #include "cartooneditor.h"
 
-CartoonEditor::CartoonEditor(QQuickItem *parent) : EffectEditor(parent)
+CartoonEditor::CartoonEditor(QQuickItem *parent) :
+    EffectEditor(parent),
+    Radius      (0),
+    Threshold   (0)
 {
-    Radius    = 0;
-    Threshold = 0;
 }
 
 int CartoonEditor::radius() const
@@ -56,10 +57,11 @@ void CartoonEditor::processOpenedImage()
     static_cast<void>(generator.release());
 }
 
-CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
+CartoonPreviewGenerator::CartoonPreviewGenerator(QQuickItem *parent) :
+    PreviewGenerator(parent),
+    Radius          (0),
+    Threshold       (0)
 {
-    Radius    = 0;
-    Threshold = 0;
 }
 
 int CartoonPreviewGenerator::radius() const
@@ -125,10 +127,11 @@ void CartoonPreviewGenerator::StartImageGenerator()
     emit generationStarted();
 }
 
-CartoonImageGenerator::CartoonImageGenerator(QObject *parent) : QObject(parent)
+CartoonImageGenerator::CartoonImageGenerator(QObject *parent) :
+    QObject  (parent),
+    Radius   (0),
+    Threshold(0)
 {
-    Radius    = 0;
-    Threshold = 0;
 }
 
 void CartoonImageGenerator::setRadius(int radius)

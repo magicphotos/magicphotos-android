@@ -6,9 +6,10 @@
 
 #include "sketcheditor.h"
 
-SketchEditor::SketchEditor(QQuickItem *parent) : EffectEditor(parent)
+SketchEditor::SketchEditor(QQuickItem *parent) :
+    EffectEditor(parent),
+    Radius      (0)
 {
-    Radius = 0;
 }
 
 int SketchEditor::radius() const
@@ -43,9 +44,10 @@ void SketchEditor::processOpenedImage()
     static_cast<void>(generator.release());
 }
 
-SketchPreviewGenerator::SketchPreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
+SketchPreviewGenerator::SketchPreviewGenerator(QQuickItem *parent) :
+    PreviewGenerator(parent),
+    Radius          (0)
 {
-    Radius = 0;
 }
 
 int SketchPreviewGenerator::radius() const
@@ -92,9 +94,10 @@ void SketchPreviewGenerator::StartImageGenerator()
     emit generationStarted();
 }
 
-SketchImageGenerator::SketchImageGenerator(QObject *parent) : QObject(parent)
+SketchImageGenerator::SketchImageGenerator(QObject *parent) :
+    QObject(parent),
+    Radius (0)
 {
-    Radius = 0;
 }
 
 void SketchImageGenerator::setRadius(int radius)

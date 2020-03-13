@@ -7,7 +7,8 @@
 
 #include "decolorizeeditor.h"
 
-DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) : EffectEditor(parent)
+DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) :
+    EffectEditor(parent)
 {
 }
 
@@ -32,7 +33,8 @@ void DecolorizeEditor::processOpenedImage()
     static_cast<void>(generator.release());
 }
 
-GrayscaleImageGenerator::GrayscaleImageGenerator(QObject *parent) : QObject(parent)
+GrayscaleImageGenerator::GrayscaleImageGenerator(QObject *parent) :
+    QObject(parent)
 {
 }
 
