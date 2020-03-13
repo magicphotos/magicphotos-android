@@ -8,14 +8,14 @@
 
 #include "editor.h"
 
-Editor::Editor(QQuickItem *parent) : QQuickPaintedItem(parent)
+Editor::Editor(QQuickItem *parent) :
+    QQuickPaintedItem(parent),
+    Changed          (false),
+    Mode             (ModeScroll),
+    HelperSize       (0),
+    BrushSize        (0),
+    BrushHardness    (0.0)
 {
-    Changed       = false;
-    Mode          = ModeScroll;
-    BrushSize     = 0;
-    HelperSize    = 0;
-    BrushHardness = 0.0;
-
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
     setFlag(QQuickItem::ItemHasContents, true);

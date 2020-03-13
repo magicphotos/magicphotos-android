@@ -7,9 +7,10 @@
 
 #include "pixelateeditor.h"
 
-PixelateEditor::PixelateEditor(QQuickItem *parent) : EffectEditor(parent)
+PixelateEditor::PixelateEditor(QQuickItem *parent) :
+    EffectEditor(parent),
+    PixDenom    (0)
 {
-    PixDenom = 0;
 }
 
 int PixelateEditor::pixDenom() const
@@ -44,9 +45,10 @@ void PixelateEditor::processOpenedImage()
     static_cast<void>(generator.release());
 }
 
-PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) : PreviewGenerator(parent)
+PixelatePreviewGenerator::PixelatePreviewGenerator(QQuickItem *parent) :
+    PreviewGenerator(parent),
+    PixDenom        (0)
 {
-    PixDenom = 0;
 }
 
 int PixelatePreviewGenerator::pixDenom() const
@@ -93,9 +95,10 @@ void PixelatePreviewGenerator::StartImageGenerator()
     emit generationStarted();
 }
 
-PixelateImageGenerator::PixelateImageGenerator(QObject *parent) : QObject(parent)
+PixelateImageGenerator::PixelateImageGenerator(QObject *parent) :
+    QObject (parent),
+    PixDenom(0)
 {
-    PixDenom = 0;
 }
 
 void PixelateImageGenerator::setPixDenom(int pix_denom)

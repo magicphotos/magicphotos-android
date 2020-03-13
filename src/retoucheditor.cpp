@@ -5,10 +5,11 @@
 
 #include "retoucheditor.h"
 
-RetouchEditor::RetouchEditor(QQuickItem *parent) : Editor(parent)
+RetouchEditor::RetouchEditor(QQuickItem *parent) :
+    Editor            (parent),
+    SamplingPointValid(false),
+    LastBlurPointValid(false)
 {
-    SamplingPointValid = false;
-    LastBlurPointValid = false;
 }
 
 bool RetouchEditor::samplingPointValid() const

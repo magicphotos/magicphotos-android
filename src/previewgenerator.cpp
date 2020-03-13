@@ -6,11 +6,11 @@
 
 #include "previewgenerator.h"
 
-PreviewGenerator::PreviewGenerator(QQuickItem *parent) : QQuickPaintedItem(parent)
+PreviewGenerator::PreviewGenerator(QQuickItem *parent) :
+    QQuickPaintedItem    (parent),
+    ImageGeneratorRunning(false),
+    RestartImageGenerator(false)
 {
-    ImageGeneratorRunning = false;
-    RestartImageGenerator = false;
-
     setFlag(QQuickItem::ItemHasContents, true);
 }
 

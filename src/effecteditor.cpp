@@ -6,7 +6,8 @@
 
 #include "effecteditor.h"
 
-EffectEditor::EffectEditor(QQuickItem *parent) : Editor(parent)
+EffectEditor::EffectEditor(QQuickItem *parent) :
+    Editor(parent)
 {
 }
 

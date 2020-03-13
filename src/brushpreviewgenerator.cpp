@@ -9,12 +9,12 @@
 
 #include "brushpreviewgenerator.h"
 
-BrushPreviewGenerator::BrushPreviewGenerator(QQuickItem *parent) : QQuickPaintedItem(parent)
+BrushPreviewGenerator::BrushPreviewGenerator(QQuickItem *parent) :
+    QQuickPaintedItem(parent),
+    BrushSize        (0),
+    MaxBrushSize     (0),
+    BrushHardness    (0.0)
 {
-    BrushSize     = 0;
-    MaxBrushSize  = 0;
-    BrushHardness = 0.0;
-
     setFlag(QQuickItem::ItemHasContents, true);
 }
 

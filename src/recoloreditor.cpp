@@ -7,10 +7,10 @@
 
 #include "recoloreditor.h"
 
-RecolorEditor::RecolorEditor(QQuickItem *parent) : Editor(parent)
+RecolorEditor::RecolorEditor(QQuickItem *parent) :
+    Editor(parent),
+    Hue   (0)
 {
-    Hue = 0;
-
     quint16 index = 0;
     QColor  color;
 

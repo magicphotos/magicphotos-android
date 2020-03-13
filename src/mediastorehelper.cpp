@@ -5,7 +5,8 @@
 
 #include "mediastorehelper.h"
 
-MediaStoreHelper::MediaStoreHelper(QObject *parent) : QObject(parent)
+MediaStoreHelper::MediaStoreHelper(QObject *parent) :
+    QObject(parent)
 {
 }
 
