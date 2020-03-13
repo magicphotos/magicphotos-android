@@ -33,7 +33,7 @@ public:
     void setThreshold(int threshold);
 
 protected:
-    void processOpenedImage() override;
+    void ProcessOpenedImage() override;
 
 private:
     int Radius, Threshold;
@@ -85,9 +85,9 @@ public:
 
     ~CartoonImageGenerator() noexcept override = default;
 
-    void setRadius(int radius);
-    void setThreshold(int threshold);
-    void setInput(const QImage &input_image);
+    void SetRadius(int radius);
+    void SetThreshold(int threshold);
+    void SetInput(const QImage &input_image);
 
 public slots:
     void start();

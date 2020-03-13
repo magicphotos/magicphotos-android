@@ -45,7 +45,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
 
-    void processOpenedImage() override;
+    void ProcessOpenedImage() override;
 
 private:
     void ChangeImageAt(bool save_undo, int center_x, int center_y);

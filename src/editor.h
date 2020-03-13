@@ -78,7 +78,7 @@ signals:
     void helperImageReady(const QImage &helperImage);
 
 protected:
-    virtual void processOpenedImage() = 0;
+    virtual void ProcessOpenedImage() = 0;
 
     void SaveUndoImage();
 

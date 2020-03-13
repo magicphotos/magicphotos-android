@@ -66,7 +66,7 @@ void RecolorEditor::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void RecolorEditor::processOpenedImage()
+void RecolorEditor::ProcessOpenedImage()
 {
     OriginalImage = LoadedImage;
     CurrentImage  = LoadedImage;

@@ -34,7 +34,7 @@ void CartoonEditor::setThreshold(int threshold)
     Threshold = threshold;
 }
 
-void CartoonEditor::processOpenedImage()
+void CartoonEditor::ProcessOpenedImage()
 {
     auto thread    = std::make_unique<QThread>();
     auto generator = std::make_unique<CartoonImageGenerator>();
@@ -47,9 +47,9 @@ void CartoonEditor::processOpenedImage()
     connect(generator.get(), &CartoonImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &CartoonImageGenerator::finished,   generator.get(), &CartoonImageGenerator::deleteLater);
 
-    generator->setRadius(Radius);
-    generator->setThreshold(Threshold);
-    generator->setInput(LoadedImage);
+    generator->SetRadius(Radius);
+    generator->SetThreshold(Threshold);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -113,9 +113,9 @@ void CartoonPreviewGenerator::StartImageGenerator()
     connect(generator.get(), &CartoonImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &CartoonImageGenerator::finished,   generator.get(), &CartoonImageGenerator::deleteLater);
 
-    generator->setRadius(Radius);
-    generator->setThreshold(Threshold);
-    generator->setInput(LoadedImage);
+    generator->SetRadius(Radius);
+    generator->SetThreshold(Threshold);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -134,17 +134,17 @@ CartoonImageGenerator::CartoonImageGenerator(QObject *parent) :
 {
 }
 
-void CartoonImageGenerator::setRadius(int radius)
+void CartoonImageGenerator::SetRadius(int radius)
 {
     Radius = radius;
 }
 
-void CartoonImageGenerator::setThreshold(int threshold)
+void CartoonImageGenerator::SetThreshold(int threshold)
 {
     Threshold = threshold;
 }
 
-void CartoonImageGenerator::setInput(const QImage &input_image)
+void CartoonImageGenerator::SetInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

@@ -12,7 +12,7 @@ DecolorizeEditor::DecolorizeEditor(QQuickItem *parent) :
 {
 }
 
-void DecolorizeEditor::processOpenedImage()
+void DecolorizeEditor::ProcessOpenedImage()
 {
     auto thread    = std::make_unique<QThread>();
     auto generator = std::make_unique<GrayscaleImageGenerator>();
@@ -25,7 +25,7 @@ void DecolorizeEditor::processOpenedImage()
     connect(generator.get(), &GrayscaleImageGenerator::finished,   thread.get(),    &QThread::quit);
     connect(generator.get(), &GrayscaleImageGenerator::finished,   generator.get(), &GrayscaleImageGenerator::deleteLater);
 
-    generator->setInput(LoadedImage);
+    generator->SetInput(LoadedImage);
 
     thread->start(QThread::LowPriority);
 
@@ -38,7 +38,7 @@ GrayscaleImageGenerator::GrayscaleImageGenerator(QObject *parent) :
 {
 }
 
-void GrayscaleImageGenerator::setInput(const QImage &input_image)
+void GrayscaleImageGenerator::SetInput(const QImage &input_image)
 {
     InputImage = input_image;
 }

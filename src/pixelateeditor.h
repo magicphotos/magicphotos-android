@@ -29,7 +29,7 @@ public:
     void setPixDenom(int pix_denom);
 
 protected:
-    void processOpenedImage() override;
+    void ProcessOpenedImage() override;
 
 private:
     int PixDenom;
@@ -77,8 +77,8 @@ public:
 
     ~PixelateImageGenerator() noexcept override = default;
 
-    void setPixDenom(int pix_denom);
-    void setInput(const QImage &input_image);
+    void SetPixDenom(int pix_denom);
+    void SetInput(const QImage &input_image);
 
 public slots:
     void start();

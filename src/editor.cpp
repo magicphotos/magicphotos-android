@@ -179,7 +179,7 @@ void Editor::openImage(const QString &image_path, int image_orientation)
 
                             emit undoAvailabilityUpdated(false);
 
-                            processOpenedImage();
+                            ProcessOpenedImage();
                         } else {
                             emit imageOpenFailed();
                         }
