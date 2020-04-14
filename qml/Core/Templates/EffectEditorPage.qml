@@ -6,13 +6,13 @@ import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import ImageEditor 1.0
 
-import "../Util.js" as UtilScript
+import "../../Util.js" as UtilScript
 
 Page {
-    id: recolorPage
+    id: effectEditorPage
 
     header: Pane {
-        topPadding:          recolorPage.bannerViewHeight
+        topPadding:          effectEditorPage.bannerViewHeight
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -60,18 +60,6 @@ Page {
                     fillMode: Image.PreserveAspectFit
                 }
             }
-
-            Button {
-                id:             hueSelectionModeButton
-                implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
-                implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
-                checkable:      true
-
-                contentItem: Image {
-                    source:   "qrc:/resources/images/mode_hue_selection.png"
-                    fillMode: Image.PreserveAspectFit
-                }
-            }
         }
     }
 
@@ -92,9 +80,9 @@ Page {
                 }
 
                 onClicked: {
-                    recolorPage.shareActionActive = false;
+                    effectEditorPage.shareActionActive = false;
 
-                    recolorPage.editor.saveImage(MediaStoreHelper.imageFilePath);
+                    effectEditorPage.editor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -111,9 +99,9 @@ Page {
                 }
 
                 onClicked: {
-                    recolorPage.shareActionActive = true;
+                    effectEditorPage.shareActionActive = true;
 
-                    recolorPage.editor.saveImage(MediaStoreHelper.imageFilePath);
+                    effectEditorPage.editor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -130,7 +118,7 @@ Page {
                 }
 
                 onClicked: {
-                    recolorPage.editor.undo();
+                    effectEditorPage.editor.undo();
                 }
             }
 
@@ -172,35 +160,9 @@ Page {
 
     readonly property var editor:             editorLoader.item
 
-    property bool componentCompleted:         false
     property bool shareActionActive:          false
 
-    property int imageOrientation:            -1
-
-    property string imagePath:                ""
-
-    property var editorComponent: Component {
-        RecolorEditor {
-        }
-    }
-
-    onComponentCompletedChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImagePathChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
+    property var editorComponent:             undefined
 
     Keys.onReleased: {
         if (event.key === Qt.Key_Back) {
@@ -267,26 +229,23 @@ Page {
 
                 Loader {
                     id:              editorLoader
-                    sourceComponent: recolorPage.editorComponent
+                    sourceComponent: effectEditorPage.editorComponent
 
                     onLoaded: {
                         item.scale           = Qt.binding(function() { return editorFlickable.contentWidth > 0.0 && editorFlickable.initialContentWidth > 0.0 ? editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0; });
                         item.transformOrigin = Item.TopLeft;
-                        item.mode            = Qt.binding(function() { return editorMode(scrollModeButton.checked, originalModeButton.checked, effectedModeButton.checked, hueSelectionModeButton.checked); });
+                        item.mode            = Qt.binding(function() { return editorMode(scrollModeButton.checked, originalModeButton.checked, effectedModeButton.checked); });
                         item.helperSize      = Qt.binding(function() { return helper.width; });
-                        item.hue             = 180;
 
-                        recolorPage.updateEditorParameters();
+                        effectEditorPage.updateEditorParameters();
                     }
 
-                    function editorMode(scroll_mode, original_mode, effected_mode, hue_selection_mode) {
+                    function editorMode(scroll_mode, original_mode, effected_mode) {
                         if (scroll_mode) {
                             return EffectEditor.ModeScroll;
                         } else if (original_mode) {
                             return EffectEditor.ModeOriginal;
                         } else if (effected_mode) {
-                            return EffectEditor.ModeEffected;
-                        } else if (hue_selection_mode) {
                             return EffectEditor.ModeEffected;
                         } else {
                             return EffectEditor.ModeScroll;
@@ -345,58 +304,12 @@ Page {
         }
     }
 
-    Rectangle {
-        id:                     hueZoneRectangle
-        anchors.right:          parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        z:                      1
-        width:                  UtilScript.dp(UIHelper.screenDpi, 48)
-        height:                 parent.height * 3 / 4
-        color:                  "transparent"
-        border.color:           "black"
-        border.width:           UtilScript.dp(UIHelper.screenDpi, 1)
-        visible:                hueSelectionModeButton.checked
-
-        gradient: Gradient {
-            GradientStop { position: 1.0;  color: "#FF0000" }
-            GradientStop { position: 0.85; color: "#FFFF00" }
-            GradientStop { position: 0.76; color: "#00FF00" }
-            GradientStop { position: 0.5;  color: "#00FFFF" }
-            GradientStop { position: 0.33; color: "#0000FF" }
-            GradientStop { position: 0.16; color: "#FF00FF" }
-            GradientStop { position: 0.0;  color: "#FF0000" }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-
-            Rectangle {
-                id:            hueSliderRectangle
-                anchors.left:  parent.left
-                anchors.right: parent.right
-                y:             Math.max(0, Math.min(hueZoneRectangle.height - height, hueZoneRectangle.height - recolorPage.editor.hue / (359 / hueZoneRectangle.height)));
-                height:        UtilScript.dp(UIHelper.screenDpi, 6)
-                color:         "transparent"
-                border.color:  "black"
-                border.width:  UtilScript.dp(UIHelper.screenDpi, 2)
-            }
-
-            onPressed: {
-                recolorPage.editor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
-            }
-
-            onPositionChanged: {
-                recolorPage.editor.hue = (height - Math.max(0, Math.min(height, mouse.y))) * (359 / height);
-            }
-        }
-    }
-
     Pane {
         id:                 brushSettingsPane
         anchors.bottom:     parent.bottom
         anchors.left:       parent.left
         anchors.right:      parent.right
-        z:                  2
+        z:                  1
         visible:            false
         Material.elevation: 5
 
@@ -435,7 +348,7 @@ Page {
                     if (!pressed) {
                         AppSettings.brushSize = value;
 
-                        recolorPage.updateEditorParameters();
+                        effectEditorPage.updateEditorParameters();
                     }
                 }
             }
@@ -459,7 +372,7 @@ Page {
                     if (!pressed) {
                         AppSettings.brushHardness = value;
 
-                        recolorPage.updateEditorParameters();
+                        effectEditorPage.updateEditorParameters();
                     }
                 }
             }
@@ -506,7 +419,7 @@ Page {
     }
 
     Connections {
-        target: recolorPage.editor
+        target: effectEditorPage.editor
 
         onImageOpened: {
             waitRectangle.visible = false;
@@ -515,10 +428,10 @@ Page {
             saveToolButton.enabled  = true;
             shareToolButton.enabled = true;
 
-            editorFlickable.contentWidth         = recolorPage.editor.width;
-            editorFlickable.contentHeight        = recolorPage.editor.height;
-            editorFlickable.initialContentWidth  = recolorPage.editor.width;
-            editorFlickable.initialContentHeight = recolorPage.editor.height;
+            editorFlickable.contentWidth         = effectEditorPage.editor.width;
+            editorFlickable.contentHeight        = effectEditorPage.editor.height;
+            editorFlickable.initialContentWidth  = effectEditorPage.editor.width;
+            editorFlickable.initialContentHeight = effectEditorPage.editor.height;
         }
 
         onImageOpenFailed: {
@@ -532,7 +445,7 @@ Page {
         }
 
         onImageSaved: {
-            if (recolorPage.shareActionActive) {
+            if (effectEditorPage.shareActionActive) {
                 UIHelper.shareImage(imagePath);
             } else if (UIHelper.requestWriteStoragePermission() &&
                        MediaStoreHelper.addImageToMediaStore(imagePath)) {
@@ -555,7 +468,7 @@ Page {
         }
 
         onMouseEvent: {
-            var rect = recolorPage.editor.mapToItem(editorRectangle, x, y);
+            var rect = effectEditorPage.editor.mapToItem(editorRectangle, x, y);
 
             if (eventType === Editor.MousePressed ||
                 eventType === Editor.MouseMoved) {
@@ -578,9 +491,5 @@ Page {
         onHelperImageReady: {
             helper.setHelperImage(helperImage);
         }
-    }
-
-    Component.onCompleted: {
-        componentCompleted = true;
     }
 }

@@ -22,12 +22,12 @@ Page {
         Row {
             id:               headerRow
             anchors.centerIn: parent
+            enabled:          false
 
             Button {
                 id:             scrollModeButton
                 implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
                 implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
-                enabled:        false
                 checkable:      true
                 checked:        true
 
@@ -41,7 +41,6 @@ Page {
                 id:             samplingPointModeButton
                 implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
                 implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
-                enabled:        false
                 checkable:      true
 
                 contentItem: Image {
@@ -54,7 +53,6 @@ Page {
                 id:             cloneModeButton
                 implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
                 implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
-                enabled:        false
                 checkable:      true
 
                 contentItem: Image {
@@ -67,7 +65,6 @@ Page {
                 id:             blurModeButton
                 implicitWidth:  UtilScript.dp(UIHelper.screenDpi, 48)
                 implicitHeight: UtilScript.dp(UIHelper.screenDpi, 48)
-                enabled:        false
                 checkable:      true
 
                 contentItem: Image {
@@ -97,7 +94,7 @@ Page {
                 onClicked: {
                     retouchPage.shareActionActive = false;
 
-                    retouchEditor.saveImage(MediaStoreHelper.imageFilePath);
+                    retouchPage.editor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -116,7 +113,7 @@ Page {
                 onClicked: {
                     retouchPage.shareActionActive = true;
 
-                    retouchEditor.saveImage(MediaStoreHelper.imageFilePath);
+                    retouchPage.editor.saveImage(MediaStoreHelper.imageFilePath);
                 }
             }
 
@@ -133,7 +130,7 @@ Page {
                 }
 
                 onClicked: {
-                    retouchEditor.undo();
+                    retouchPage.editor.undo();
                 }
             }
 
@@ -173,21 +170,35 @@ Page {
 
     readonly property int bannerViewHeight:   AdMobHelper.bannerViewHeight
 
+    readonly property var editor:             editorLoader.item
+
+    property bool componentCompleted:         false
     property bool shareActionActive:          false
 
     property int imageOrientation:            -1
 
     property string imagePath:                ""
 
+    property var editorComponent: Component {
+        RetouchEditor {
+        }
+    }
+
+    onComponentCompletedChanged: {
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            editor.openImage(imagePath, imageOrientation);
+        }
+    }
+
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imagePath !== "") {
-            retouchEditor.openImage(imagePath, imageOrientation);
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            editor.openImage(imagePath, imageOrientation);
         }
     }
 
     onImagePathChanged: {
-        if (imageOrientation !== -1 && imagePath !== "") {
-            retouchEditor.openImage(imagePath, imageOrientation);
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            editor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -195,7 +206,7 @@ Page {
         if (event.key === Qt.Key_Back) {
             if (brushSettingsPane.visible) {
                 brushSettingsPane.visible = false;
-            } else if (retouchEditor.changed) {
+            } else if (editor.changed) {
                 backMessageDialog.open();
             } else {
                 mainStackView.pop();
@@ -206,8 +217,8 @@ Page {
     }
 
     function updateEditorParameters() {
-        retouchEditor.brushSize     = AppSettings.brushSize;
-        retouchEditor.brushHardness = AppSettings.brushHardness;
+        editor.brushSize     = AppSettings.brushSize;
+        editor.brushHardness = AppSettings.brushHardness;
     }
 
     Rectangle {
@@ -255,108 +266,22 @@ Page {
                 property real initialContentHeight: 0.0
 
                 Rectangle {
-                    width:  retouchEditor.width  * retouchEditor.scale
-                    height: retouchEditor.height * retouchEditor.scale
+                    width:  retouchPage.editor.width  * retouchPage.editor.scale
+                    height: retouchPage.editor.height * retouchPage.editor.scale
                     color:  "transparent"
                     clip:   true
 
-                    RetouchEditor {
-                        id:              retouchEditor
-                        scale:           editorFlickable.contentWidth        > 0.0 &&
-                                         editorFlickable.initialContentWidth > 0.0 ?
-                                         editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0
-                        transformOrigin: Item.TopLeft
-                        mode:            editorMode(scrollModeButton.checked, samplingPointModeButton.checked, cloneModeButton.checked, blurModeButton.checked)
-                        helperSize:      helper.width
+                    Loader {
+                        id:              editorLoader
+                        sourceComponent: retouchPage.editorComponent
 
-                        onImageOpened: {
-                            waitRectangle.visible = false;
+                        onLoaded: {
+                            item.scale           = Qt.binding(function() { return editorFlickable.contentWidth > 0.0 && editorFlickable.initialContentWidth > 0.0 ? editorFlickable.contentWidth / editorFlickable.initialContentWidth : 1.0; });
+                            item.transformOrigin = Item.TopLeft;
+                            item.mode            = Qt.binding(function() { return editorMode(scrollModeButton.checked, samplingPointModeButton.checked, cloneModeButton.checked, blurModeButton.checked); });
+                            item.helperSize      = Qt.binding(function() { return helper.width; });
 
-                            saveToolButton.enabled  = true;
-                            shareToolButton.enabled = true;
-
-                            scrollModeButton.enabled        = true;
-                            samplingPointModeButton.enabled = true;
-                            cloneModeButton.enabled         = true;
-                            blurModeButton.enabled          = true;
-
-                            editorFlickable.contentWidth         = width;
-                            editorFlickable.contentHeight        = height;
-                            editorFlickable.initialContentWidth  = width;
-                            editorFlickable.initialContentHeight = height;
-                        }
-
-                        onImageOpenFailed: {
-                            waitRectangle.visible = false;
-
-                            saveToolButton.enabled  = false;
-                            shareToolButton.enabled = false;
-
-                            scrollModeButton.enabled        = false;
-                            samplingPointModeButton.enabled = false;
-                            cloneModeButton.enabled         = false;
-                            blurModeButton.enabled          = false;
-
-                            imageOpenFailedMessageDialog.open();
-                        }
-
-                        onImageSaved: {
-                            if (retouchPage.shareActionActive) {
-                                UIHelper.shareImage(imagePath);
-                            } else if (UIHelper.requestWriteStoragePermission() &&
-                                       MediaStoreHelper.addImageToMediaStore(imagePath)) {
-                                imageSavedMessageDialog.open();
-                            } else {
-                                imageSaveFailedMessageDialog.open();
-                            }
-                        }
-
-                        onImageSaveFailed: {
-                            imageSaveFailedMessageDialog.open();
-                        }
-
-                        onUndoAvailabilityUpdated: {
-                            if (available) {
-                                undoToolButton.enabled = true;
-                            } else {
-                                undoToolButton.enabled = false;
-                            }
-                        }
-
-                        onMouseEvent: {
-                            var rect = mapToItem(editorRectangle, x, y);
-
-                            if (eventType === RetouchEditor.MousePressed) {
-                                helperRectangle.visible = true;
-
-                                if (rect.y < editorRectangle.height / 2) {
-                                    if (rect.x < editorRectangle.width / 2) {
-                                        helperRectangle.anchors.left  = undefined;
-                                        helperRectangle.anchors.right = editorRectangle.right;
-                                    } else {
-                                        helperRectangle.anchors.right = undefined;
-                                        helperRectangle.anchors.left  = editorRectangle.left;
-                                    }
-                                }
-                            } else if (eventType === RetouchEditor.MouseMoved) {
-                                helperRectangle.visible = true;
-
-                                if (rect.y < editorRectangle.height / 2) {
-                                    if (rect.x < editorRectangle.width / 2) {
-                                        helperRectangle.anchors.left  = undefined;
-                                        helperRectangle.anchors.right = editorRectangle.right;
-                                    } else {
-                                        helperRectangle.anchors.right = undefined;
-                                        helperRectangle.anchors.left  = editorRectangle.left;
-                                    }
-                                }
-                            } else if (eventType === RetouchEditor.MouseReleased) {
-                                helperRectangle.visible = false;
-                            }
-                        }
-
-                        onHelperImageReady: {
-                            helper.setHelperImage(helperImage);
+                            retouchPage.updateEditorParameters();
                         }
 
                         function editorMode(scroll_mode, sampling_point_mode, clone_mode, blur_mode) {
@@ -376,12 +301,12 @@ Page {
 
                     Image {
                         id:      samplingPointImage
-                        x:       imageX(width,  retouchEditor.samplingPoint.x, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
-                        y:       imageY(height, retouchEditor.samplingPoint.y, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
+                        x:       imageX(width,  retouchPage.editor.samplingPoint.x, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
+                        y:       imageY(height, retouchPage.editor.samplingPoint.y, editorFlickable.contentWidth, editorFlickable.initialContentWidth)
                         width:   UtilScript.dp(UIHelper.screenDpi, 48)
                         height:  UtilScript.dp(UIHelper.screenDpi, 48)
                         source:  "qrc:/resources/images/sampling_point.png"
-                        visible: retouchEditor.samplingPointValid
+                        visible: retouchPage.editor.samplingPointValid
 
                         function imageX(width, sampling_point_x, content_width, initial_content_width) {
                             if (content_width > 0.0 && initial_content_width > 0.0) {
@@ -566,7 +491,82 @@ Page {
         }
     }
 
+    Connections {
+        target: retouchPage.editor
+
+        onImageOpened: {
+            waitRectangle.visible = false;
+
+            headerRow.enabled       = true;
+            saveToolButton.enabled  = true;
+            shareToolButton.enabled = true;
+
+            editorFlickable.contentWidth         = retouchPage.editor.width;
+            editorFlickable.contentHeight        = retouchPage.editor.height;
+            editorFlickable.initialContentWidth  = retouchPage.editor.width;
+            editorFlickable.initialContentHeight = retouchPage.editor.height;
+        }
+
+        onImageOpenFailed: {
+            waitRectangle.visible = false;
+
+            headerRow.enabled       = false;
+            saveToolButton.enabled  = false;
+            shareToolButton.enabled = false;
+
+            imageOpenFailedMessageDialog.open();
+        }
+
+        onImageSaved: {
+            if (retouchPage.shareActionActive) {
+                UIHelper.shareImage(imagePath);
+            } else if (UIHelper.requestWriteStoragePermission() &&
+                       MediaStoreHelper.addImageToMediaStore(imagePath)) {
+                imageSavedMessageDialog.open();
+            } else {
+                imageSaveFailedMessageDialog.open();
+            }
+        }
+
+        onImageSaveFailed: {
+            imageSaveFailedMessageDialog.open();
+        }
+
+        onUndoAvailabilityUpdated: {
+            if (available) {
+                undoToolButton.enabled = true;
+            } else {
+                undoToolButton.enabled = false;
+            }
+        }
+
+        onMouseEvent: {
+            var rect = retouchPage.editor.mapToItem(editorRectangle, x, y);
+
+            if (eventType === Editor.MousePressed ||
+                eventType === Editor.MouseMoved) {
+                helperRectangle.visible = true;
+
+                if (rect.y < editorRectangle.height / 2) {
+                    if (rect.x < editorRectangle.width / 2) {
+                        helperRectangle.anchors.left  = undefined;
+                        helperRectangle.anchors.right = editorRectangle.right;
+                    } else {
+                        helperRectangle.anchors.right = undefined;
+                        helperRectangle.anchors.left  = editorRectangle.left;
+                    }
+                }
+            } else if (eventType === Editor.MouseReleased) {
+                helperRectangle.visible = false;
+            }
+        }
+
+        onHelperImageReady: {
+            helper.setHelperImage(helperImage);
+        }
+    }
+
     Component.onCompleted: {
-        updateEditorParameters();
+        componentCompleted = true;
     }
 }

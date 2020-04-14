@@ -16,5 +16,7 @@
         <file>qml/Core/SketchPage.qml</file>
         <file>qml/Core/Dialog/AdMobConsentDialog.qml</file>
         <file>qml/Core/Misc/MFButton.qml</file>
+        <file>qml/Core/Templates/EffectEditorPage.qml</file>
+        <file>qml/Core/Templates/PreviewPage.qml</file>
     </qresource>
 </RCC>

@@ -2,189 +2,113 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.2
 import ImageEditor 1.0
+
+import "Templates"
 
 import "../Util.js" as UtilScript
 
-Page {
-    id: cartoonPreviewPage
+PreviewPage {
+    id:              cartoonPreviewPage
+    headerLabelText: qsTr("Cartoon")
 
-    header: Pane {
-        Material.background: Material.Green
-
-        Label {
-            anchors.centerIn: parent
-            text:             qsTr("Cartoon")
-            font.pixelSize:   UtilScript.dp(UIHelper.screenDpi, 24)
-            font.family:      "Helvetica"
+    previewGeneratorComponent: Component {
+        CartoonPreviewGenerator {
+            property int waitRectangleUsageCounter: 0
         }
     }
 
-    footer: ToolBar {
-        RowLayout {
-            anchors.fill: parent
+    controlColumnLayoutComponent: Component {
+        ColumnLayout {
+            spacing: UtilScript.dp(UIHelper.screenDpi, 16)
 
-            ToolButton {
-                id:               applyToolButton
-                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
-                enabled:          false
-                Layout.alignment: Qt.AlignHCenter
+            Slider {
+                from:             cartoonPreviewPage.gaussianRadiusSliderFrom
+                to:               cartoonPreviewPage.gaussianRadiusSliderTo
+                value:            cartoonPreviewPage.gaussianRadiusSliderValue
+                stepSize:         cartoonPreviewPage.gaussianRadiusSliderStepSize
+                Layout.fillWidth: true
 
-                contentItem: Image {
-                    source:   "qrc:/resources/images/tool_apply.png"
-                    fillMode: Image.PreserveAspectFit
+                onPressedChanged: {
+                    if (!pressed) {
+                        cartoonPreviewPage.previewGenerator.radius = value;
+                    }
                 }
+            }
 
-                onClicked: {
-                    var component = Qt.createComponent("CartoonPage.qml");
+            Slider {
+                from:             cartoonPreviewPage.thresholdSliderFrom
+                to:               cartoonPreviewPage.thresholdSliderTo
+                value:            cartoonPreviewPage.thresholdSliderValue
+                stepSize:         cartoonPreviewPage.thresholdSliderStepSize
+                Layout.fillWidth: true
 
-                    if (component.status === Component.Ready) {
-                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "cartoonThreshold": thresholdSlider.value, "imagePath": cartoonPreviewPage.imagePath});
-                    } else {
-                        console.error(component.errorString());
+                onPressedChanged: {
+                    if (!pressed) {
+                        cartoonPreviewPage.previewGenerator.threshold = value;
                     }
                 }
             }
         }
     }
 
-    property int imageOrientation: -1
+    readonly property real gaussianRadiusSliderFrom:     0.0
+    readonly property real gaussianRadiusSliderTo:       10.0
+    readonly property real gaussianRadiusSliderValue:    5.0
+    readonly property real gaussianRadiusSliderStepSize: 1.0
+    readonly property real thresholdSliderFrom:          32.0
+    readonly property real thresholdSliderTo:            128.0
+    readonly property real thresholdSliderValue:         80.0
+    readonly property real thresholdSliderStepSize:      8.0
 
-    property string imagePath:     ""
+    property bool componentCompleted:                    false
+
+    property int imageOrientation:                       -1
+
+    property string imagePath:                           ""
+
+    onComponentCompletedChanged: {
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius    = gaussianRadiusSliderValue;
+            previewGenerator.threshold = thresholdSliderValue;
+
+            previewGenerator.openImage(imagePath, imageOrientation);
+        }
+    }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imagePath !== "") {
-            cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
-            cartoonPreviewGenerator.threshold = thresholdSlider.value;
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius    = gaussianRadiusSliderValue;
+            previewGenerator.threshold = thresholdSliderValue;
 
-            cartoonPreviewGenerator.openImage(imagePath, imageOrientation);
+            previewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
     onImagePathChanged: {
-        if (imageOrientation !== -1 && imagePath !== "") {
-            cartoonPreviewGenerator.radius    = gaussianRadiusSlider.value;
-            cartoonPreviewGenerator.threshold = thresholdSlider.value;
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius    = gaussianRadiusSliderValue;
+            previewGenerator.threshold = thresholdSliderValue;
 
-            cartoonPreviewGenerator.openImage(imagePath, imageOrientation);
+            previewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            mainStackView.pop();
+    onApplyClicked: {
+        var control_values = getControlValues();
 
-            event.accepted = true;
-        }
-    }
+        if (control_values.length === 2) {
+            var component = Qt.createComponent("CartoonPage.qml");
 
-    ColumnLayout {
-        anchors.fill:    parent
-        anchors.margins: UtilScript.dp(UIHelper.screenDpi, 16)
-        spacing:         UtilScript.dp(UIHelper.screenDpi, 16)
-
-        Rectangle {
-            color:             "transparent"
-            Layout.fillWidth:  true
-            Layout.fillHeight: true
-
-            CartoonPreviewGenerator {
-                id:           cartoonPreviewGenerator
-                anchors.fill: parent
-
-                property int waitRectangleUsageCounter: 0
-
-                onImageOpened: {
-                    gaussianRadiusSlider.enabled = true;
-                    thresholdSlider.enabled      = true;
-                    applyToolButton.enabled      = true;
-                }
-
-                onImageOpenFailed: {
-                    gaussianRadiusSlider.enabled = false;
-                    thresholdSlider.enabled      = false;
-                    applyToolButton.enabled      = false;
-
-                    imageOpenFailedMessageDialog.open();
-                }
-
-                onGenerationStarted: {
-                    waitRectangleUsageCounter = waitRectangleUsageCounter + 1;
-
-                    if (waitRectangleUsageCounter === 1) {
-                        waitRectangle.visible = true;
-                    }
-                }
-
-                onGenerationFinished: {
-                    if (waitRectangleUsageCounter === 1) {
-                        waitRectangle.visible = false;
-                    }
-
-                    if (waitRectangleUsageCounter > 0) {
-                        waitRectangleUsageCounter = waitRectangleUsageCounter - 1;
-                    }
-                }
-            }
-
-            Rectangle {
-                id:           waitRectangle
-                anchors.fill: parent
-                z:            1
-                color:        "black"
-                opacity:      0.75
-                visible:      false
-
-                BusyIndicator {
-                    anchors.centerIn: parent
-                    running:          parent.visible
-                }
-
-                MultiPointTouchArea {
-                    anchors.fill: parent
-                }
-            }
-        }
-
-        Slider {
-            id:               gaussianRadiusSlider
-            from:             0
-            to:               10
-            value:            5
-            stepSize:         1.0
-            enabled:          false
-            Layout.fillWidth: true
-
-            onPressedChanged: {
-                if (!pressed) {
-                    cartoonPreviewGenerator.radius = value;
-                }
-            }
-        }
-
-        Slider {
-            id:               thresholdSlider
-            from:             32
-            to:               128
-            value:            80
-            stepSize:         8.0
-            enabled:          false
-            Layout.fillWidth: true
-
-            onPressedChanged: {
-                if (!pressed) {
-                    cartoonPreviewGenerator.threshold = value;
-                }
+            if (component.status === Component.Ready) {
+                mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": control_values[0], "cartoonThreshold": control_values[1], "imagePath": imagePath});
+            } else {
+                console.error(component.errorString());
             }
         }
     }
 
-    MessageDialog {
-        id:              imageOpenFailedMessageDialog
-        title:           qsTr("Error")
-        text:            qsTr("Could not open image")
-        standardButtons: StandardButton.Ok
+    Component.onCompleted: {
+        componentCompleted = true;
     }
 }
