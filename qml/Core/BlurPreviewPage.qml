@@ -2,169 +2,92 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.2
 import ImageEditor 1.0
+
+import "Templates"
 
 import "../Util.js" as UtilScript
 
-Page {
-    id: blurPreviewPage
+PreviewPage {
+    id:              blurPreviewPage
+    headerLabelText: qsTr("Blur")
 
-    header: Pane {
-        Material.background: Material.Green
-
-        Label {
-            anchors.centerIn: parent
-            text:             qsTr("Blur")
-            font.pixelSize:   UtilScript.dp(UIHelper.screenDpi, 24)
-            font.family:      "Helvetica"
+    previewGeneratorComponent: Component {
+        BlurPreviewGenerator {
+            property int waitRectangleUsageCounter: 0
         }
     }
 
-    footer: ToolBar {
-        RowLayout {
-            anchors.fill: parent
+    controlColumnLayoutComponent: Component {
+        ColumnLayout {
+            spacing: UtilScript.dp(UIHelper.screenDpi, 16)
 
-            ToolButton {
-                id:               applyToolButton
-                implicitWidth:    UtilScript.dp(UIHelper.screenDpi, 48)
-                implicitHeight:   UtilScript.dp(UIHelper.screenDpi, 48)
-                enabled:          false
-                Layout.alignment: Qt.AlignHCenter
+            Slider {
+                from:             blurPreviewPage.gaussianRadiusSliderFrom
+                to:               blurPreviewPage.gaussianRadiusSliderTo
+                value:            blurPreviewPage.gaussianRadiusSliderValue
+                stepSize:         blurPreviewPage.gaussianRadiusSliderStepSize
+                Layout.fillWidth: true
 
-                contentItem: Image {
-                    source:   "qrc:/resources/images/tool_apply.png"
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                onClicked: {
-                    var component = Qt.createComponent("BlurPage.qml");
-
-                    if (component.status === Component.Ready) {
-                        mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": gaussianRadiusSlider.value, "imagePath": blurPreviewPage.imagePath});
-                    } else {
-                        console.error(component.errorString());
+                onPressedChanged: {
+                    if (!pressed) {
+                        blurPreviewPage.previewGenerator.radius = value;
                     }
                 }
             }
         }
     }
 
-    property int imageOrientation: -1
+    readonly property real gaussianRadiusSliderFrom:     4.0
+    readonly property real gaussianRadiusSliderTo:       18.0
+    readonly property real gaussianRadiusSliderValue:    11.0
+    readonly property real gaussianRadiusSliderStepSize: 1.0
 
-    property string imagePath:     ""
+    property bool componentCompleted:                    false
+
+    property int imageOrientation:                       -1
+
+    property string imagePath:                           ""
+
+    onComponentCompletedChanged: {
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius = gaussianRadiusSliderValue;
+
+            previewGenerator.openImage(imagePath, imageOrientation);
+        }
+    }
 
     onImageOrientationChanged: {
-        if (imageOrientation !== -1 && imagePath !== "") {
-            blurPreviewGenerator.radius = gaussianRadiusSlider.value;
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius = gaussianRadiusSliderValue;
 
-            blurPreviewGenerator.openImage(imagePath, imageOrientation);
+            previewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
     onImagePathChanged: {
-        if (imageOrientation !== -1 && imagePath !== "") {
-            blurPreviewGenerator.radius = gaussianRadiusSlider.value;
+        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius = gaussianRadiusSliderValue;
 
-            blurPreviewGenerator.openImage(imagePath, imageOrientation);
+            previewGenerator.openImage(imagePath, imageOrientation);
         }
     }
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            mainStackView.pop();
+    onApplyClicked: {
+        var control_values = getControlValues();
 
-            event.accepted = true;
-        }
-    }
+        if (control_values.length === 1) {
+            var component = Qt.createComponent("BlurPage.qml");
 
-    ColumnLayout {
-        anchors.fill:    parent
-        anchors.margins: UtilScript.dp(UIHelper.screenDpi, 16)
-        spacing:         UtilScript.dp(UIHelper.screenDpi, 16)
-
-        Rectangle {
-            color:             "transparent"
-            Layout.fillWidth:  true
-            Layout.fillHeight: true
-
-            BlurPreviewGenerator {
-                id:           blurPreviewGenerator
-                anchors.fill: parent
-
-                property int waitRectangleUsageCounter: 0
-
-                onImageOpened: {
-                    gaussianRadiusSlider.enabled = true;
-                    applyToolButton.enabled      = true;
-                }
-
-                onImageOpenFailed: {
-                    gaussianRadiusSlider.enabled = false;
-                    applyToolButton.enabled      = false;
-
-                    imageOpenFailedMessageDialog.open();
-                }
-
-                onGenerationStarted: {
-                    waitRectangleUsageCounter = waitRectangleUsageCounter + 1;
-
-                    if (waitRectangleUsageCounter === 1) {
-                        waitRectangle.visible = true;
-                    }
-                }
-
-                onGenerationFinished: {
-                    if (waitRectangleUsageCounter === 1) {
-                        waitRectangle.visible = false;
-                    }
-
-                    if (waitRectangleUsageCounter > 0) {
-                        waitRectangleUsageCounter = waitRectangleUsageCounter - 1;
-                    }
-                }
-            }
-
-            Rectangle {
-                id:           waitRectangle
-                anchors.fill: parent
-                z:            1
-                color:        "black"
-                opacity:      0.75
-                visible:      false
-
-                BusyIndicator {
-                    anchors.centerIn: parent
-                    running:          parent.visible
-                }
-
-                MultiPointTouchArea {
-                    anchors.fill: parent
-                }
-            }
-        }
-
-        Slider {
-            id:               gaussianRadiusSlider
-            from:             4
-            to:               18
-            value:            11
-            stepSize:         1.0
-            enabled:          false
-            Layout.fillWidth: true
-
-            onPressedChanged: {
-                if (!pressed) {
-                    blurPreviewGenerator.radius = value;
-                }
+            if (component.status === Component.Ready) {
+                mainStackView.push(component, {"imageOrientation": imageOrientation, "gaussianRadius": control_values[0], "imagePath": imagePath});
+            } else {
+                console.error(component.errorString());
             }
         }
     }
 
-    MessageDialog {
-        id:              imageOpenFailedMessageDialog
-        title:           qsTr("Error")
-        text:            qsTr("Could not open image")
-        standardButtons: StandardButton.Ok
+    Component.onCompleted: {
+        componentCompleted = true;
     }
 }

@@ -37,6 +37,9 @@ int main(int argc, char *argv[])
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionCancelled,    &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionCancel);
     QObject::connect(&AndroidGW::GetInstance(), &AndroidGW::imageSelectionFailed,       &UIHelper::GetInstance(),    &UIHelper::handleImageSelectionFailure);
 
+    qmlRegisterUncreatableType<Editor>      ("ImageEditor", 1, 0, "Editor",       QStringLiteral("Could not create object of type Editor"));
+    qmlRegisterUncreatableType<EffectEditor>("ImageEditor", 1, 0, "EffectEditor", QStringLiteral("Could not create object of type EffectEditor"));
+
     qmlRegisterType<BlurEditor>          ("ImageEditor", 1, 0, "BlurEditor");
     qmlRegisterType<BlurPreviewGenerator>("ImageEditor", 1, 0, "BlurPreviewGenerator");
 
