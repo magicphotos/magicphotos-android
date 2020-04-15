@@ -11,46 +11,16 @@ EffectEditorPage {
         }
     }
 
-    property bool componentCompleted: false
-
     property int imageOrientation:    -1
     property int gaussianRadius:      -1
 
     property string imagePath:        ""
 
-    onComponentCompletedChanged: {
-        if (componentCompleted && imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
-            editor.radius = gaussianRadius;
-
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (componentCompleted && imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
-            editor.radius = gaussianRadius;
-
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onGaussianRadiusChanged: {
-        if (componentCompleted && imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
-            editor.radius = gaussianRadius;
-
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImagePathChanged: {
-        if (componentCompleted && imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
-            editor.radius = gaussianRadius;
-
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
     Component.onCompleted: {
-        componentCompleted = true;
+        if (imageOrientation !== -1 && gaussianRadius !== -1 && imagePath !== "") {
+            editor.radius = gaussianRadius;
+
+            editor.openImage(imagePath, imageOrientation);
+        }
     }
 }

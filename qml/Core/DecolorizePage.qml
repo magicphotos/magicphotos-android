@@ -11,31 +11,13 @@ EffectEditorPage {
         }
     }
 
-    property bool componentCompleted: false
-
     property int imageOrientation:    -1
 
     property string imagePath:        ""
 
-    onComponentCompletedChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImagePathChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
     Component.onCompleted: {
-        componentCompleted = true;
+        if (imageOrientation !== -1 && imagePath !== "") {
+            editor.openImage(imagePath, imageOrientation);
+        }
     }
 }
