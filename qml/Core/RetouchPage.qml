@@ -172,7 +172,6 @@ Page {
 
     readonly property var editor:             editorLoader.item
 
-    property bool componentCompleted:         false
     property bool shareActionActive:          false
 
     property int imageOrientation:            -1
@@ -181,24 +180,6 @@ Page {
 
     property var editorComponent: Component {
         RetouchEditor {
-        }
-    }
-
-    onComponentCompletedChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImagePathChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            editor.openImage(imagePath, imageOrientation);
         }
     }
 
@@ -567,6 +548,8 @@ Page {
     }
 
     Component.onCompleted: {
-        componentCompleted = true;
+        if (imageOrientation !== -1 && imagePath !== "") {
+            editor.openImage(imagePath, imageOrientation);
+        }
     }
 }

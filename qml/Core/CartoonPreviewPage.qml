@@ -61,38 +61,9 @@ PreviewPage {
     readonly property real thresholdSliderValue:         80.0
     readonly property real thresholdSliderStepSize:      8.0
 
-    property bool componentCompleted:                    false
-
     property int imageOrientation:                       -1
 
     property string imagePath:                           ""
-
-    onComponentCompletedChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            previewGenerator.radius    = gaussianRadiusSliderValue;
-            previewGenerator.threshold = thresholdSliderValue;
-
-            previewGenerator.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            previewGenerator.radius    = gaussianRadiusSliderValue;
-            previewGenerator.threshold = thresholdSliderValue;
-
-            previewGenerator.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImagePathChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            previewGenerator.radius    = gaussianRadiusSliderValue;
-            previewGenerator.threshold = thresholdSliderValue;
-
-            previewGenerator.openImage(imagePath, imageOrientation);
-        }
-    }
 
     onApplyClicked: {
         var control_values = getControlValues();
@@ -109,6 +80,11 @@ PreviewPage {
     }
 
     Component.onCompleted: {
-        componentCompleted = true;
+        if (imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius    = gaussianRadiusSliderValue;
+            previewGenerator.threshold = thresholdSliderValue;
+
+            previewGenerator.openImage(imagePath, imageOrientation);
+        }
     }
 }

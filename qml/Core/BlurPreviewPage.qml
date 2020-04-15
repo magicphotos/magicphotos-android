@@ -43,35 +43,9 @@ PreviewPage {
     readonly property real gaussianRadiusSliderValue:    11.0
     readonly property real gaussianRadiusSliderStepSize: 1.0
 
-    property bool componentCompleted:                    false
-
     property int imageOrientation:                       -1
 
     property string imagePath:                           ""
-
-    onComponentCompletedChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            previewGenerator.radius = gaussianRadiusSliderValue;
-
-            previewGenerator.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImageOrientationChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            previewGenerator.radius = gaussianRadiusSliderValue;
-
-            previewGenerator.openImage(imagePath, imageOrientation);
-        }
-    }
-
-    onImagePathChanged: {
-        if (componentCompleted && imageOrientation !== -1 && imagePath !== "") {
-            previewGenerator.radius = gaussianRadiusSliderValue;
-
-            previewGenerator.openImage(imagePath, imageOrientation);
-        }
-    }
 
     onApplyClicked: {
         var control_values = getControlValues();
@@ -88,6 +62,10 @@ PreviewPage {
     }
 
     Component.onCompleted: {
-        componentCompleted = true;
+        if (imageOrientation !== -1 && imagePath !== "") {
+            previewGenerator.radius = gaussianRadiusSliderValue;
+
+            previewGenerator.openImage(imagePath, imageOrientation);
+        }
     }
 }
