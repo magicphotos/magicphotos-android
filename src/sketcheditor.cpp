@@ -1,3 +1,4 @@
+#include <array>
 #include <memory>
 
 #include <QtCore/QThread>
@@ -121,8 +122,8 @@ void SketchImageGenerator::start()
 
     sketch_image = sketch_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
-    int tab[] = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
-    int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
+    std::array<int, 17> tab   = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
+    int                 alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
     int r1 = sketch_image.rect().top();
     int r2 = sketch_image.rect().bottom();
@@ -131,8 +132,8 @@ void SketchImageGenerator::start()
 
     int bpl = sketch_image.bytesPerLine();
 
-    int           rgba[4];
-    unsigned char *p;
+    std::array<int, 4> rgba = {};
+    unsigned char     *p;
 
     for (int col = c1; col <= c2; col++) {
         p = sketch_image.scanLine(r1) + col * 4;

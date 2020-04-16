@@ -1,3 +1,5 @@
+#include <array>
+
 #include <QtCore/QtMath>
 #include <QtCore/QRect>
 #include <QtGui/QImage>
@@ -265,8 +267,8 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
             QImage blur_image = CurrentImage.copy(blur_rect).convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
-            int tab[] = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
-            int alpha = BLUR_RADIUS < 1 ? 16 : (BLUR_RADIUS > 17 ? 1 : tab[BLUR_RADIUS - 1]);
+            std::array<int, 17> tab   = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
+            int                 alpha = BLUR_RADIUS < 1 ? 16 : (BLUR_RADIUS > 17 ? 1 : tab[BLUR_RADIUS - 1]);
 
             int r1 = blur_image.rect().top();
             int r2 = blur_image.rect().bottom();
@@ -275,8 +277,8 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
 
             int bpl = blur_image.bytesPerLine();
 
-            int           rgba[4];
-            unsigned char *p;
+            std::array<int, 4> rgba = {};
+            unsigned char     *p;
 
             for (int col = c1; col <= c2; col++) {
                 p = blur_image.scanLine(r1) + col * 4;
