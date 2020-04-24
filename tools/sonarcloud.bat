@@ -21,7 +21,7 @@ IF NOT "%~1"=="" (
      && make.exe install INSTALL_ROOT=android-build ^
      && androiddeployqt.exe --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform %ANDROID_PLATFORM% --deployment bundled --gradle --no-gdbserver ^
      && CD .. ^
-     && sonar-scanner.bat -D"sonar.projectKey=magicphotos:magicphotos-android" ^
+     && sonar-scanner.bat -D"sonar.projectKey=magicphotos_magicphotos-android" ^
                           -D"sonar.projectName=MagicPhotos Android" ^
                           -D"sonar.organization=magicphotos-github" ^
                           -D"sonar.sources=." ^
