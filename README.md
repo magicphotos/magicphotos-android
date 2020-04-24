@@ -19,12 +19,12 @@ additional information.
 
 ---
 
-[![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=alert_status)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
+[![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=alert_status)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
 
-[![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
-[![SonarCloud Security Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=security_rating)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
-[![SonarCloud Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
+[![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
+[![SonarCloud Security Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=security_rating)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
+[![SonarCloud Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
 
-[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=bugs)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
-[![SonarCloud Code Smells](https://sonarcloud.io/api/project_badges/measure?project=magicphotos%3Amagicphotos-android&metric=code_smells)](https://sonarcloud.io/dashboard?id=magicphotos%3Amagicphotos-android)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=bugs)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
+[![SonarCloud Code Smells](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=code_smells)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
