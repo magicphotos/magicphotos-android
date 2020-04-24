@@ -141,48 +141,48 @@
         <translation>https://magicphotos.sourceforge.io/help/android/help_ru.html</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="445"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="426"/>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="469"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="450"/>
         <source>Brush Hardness</source>
         <translation>Жесткость кисти</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="478"/>
-        <location filename="../qml/Core/RecolorPage.qml" line="492"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="459"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="473"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="479"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="460"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="485"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="466"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="486"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="467"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="493"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="474"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="499"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="480"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="500"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="481"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
@@ -195,48 +195,48 @@
         <translation>https://magicphotos.sourceforge.io/help/android/help_ru.html</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="431"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="412"/>
         <source>Brush Size</source>
         <translation>Размер кисти</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="455"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="436"/>
         <source>Brush Hardness</source>
         <translation>Жесткость кисти</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="464"/>
-        <location filename="../qml/Core/RetouchPage.qml" line="478"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="445"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="459"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="465"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="446"/>
         <source>Could not open image</source>
         <translation>Невозможно открыть изображение</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="471"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="452"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="472"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="453"/>
         <source>Image saved successfully</source>
         <translation>Изображение успешно сохранено</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="479"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="460"/>
         <source>Could not save image</source>
         <translation>Невозможно сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="485"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="466"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="486"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="467"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Вы уверены? Все несохраненные изменения будут потеряны.</translation>
     </message>
