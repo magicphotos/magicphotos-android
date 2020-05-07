@@ -1,6 +1,7 @@
 #include <array>
 #include <memory>
 
+#include <QtCore/QtGlobal>
 #include <QtCore/QThread>
 #include <QtGui/QColor>
 #include <QtGui/QPainter>

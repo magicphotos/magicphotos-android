@@ -66,7 +66,7 @@ void Editor::setBrushSize(int size)
             }
         }
 
-        int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+        int brush_width = qFloor(BrushSize / scale()) * 2;
 
         if (brush_width > 0) {
             BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
@@ -117,7 +117,7 @@ void Editor::setBrushHardness(qreal hardness)
             }
         }
 
-        int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+        int brush_width = qFloor(BrushSize / scale()) * 2;
 
         if (brush_width > 0) {
             BrushImage = BrushTemplateImage.scaledToWidth(brush_width);
@@ -246,7 +246,7 @@ void Editor::paint(QPainter *painter)
 void Editor::scaleBrushImage()
 {
     if (!BrushTemplateImage.isNull()) {
-        int brush_width = qMax(1, qMin(qMin(qFloor(BrushSize / scale()) * 2, CurrentImage.width()), CurrentImage.height()));
+        int brush_width = qFloor(BrushSize / scale()) * 2;
 
         if (brush_width > 0) {
             BrushImage = BrushTemplateImage.scaledToWidth(brush_width);

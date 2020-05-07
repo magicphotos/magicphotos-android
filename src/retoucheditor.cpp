@@ -2,6 +2,7 @@
 
 #include <QtCore/QtMath>
 #include <QtCore/QRect>
+#include <QtGui/QColor>
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 
@@ -29,19 +30,6 @@ void RetouchEditor::mousePressEvent(QMouseEvent *event)
     if (Mode == ModeSamplingPoint) {
         int sampling_point_x = event->pos().x();
         int sampling_point_y = event->pos().y();
-
-        if (sampling_point_x >= CurrentImage.width()) {
-            sampling_point_x = CurrentImage.width() - 1;
-        }
-        if (sampling_point_y >= CurrentImage.height()) {
-            sampling_point_y = CurrentImage.height() - 1;
-        }
-        if (sampling_point_x < 0) {
-            sampling_point_x = 0;
-        }
-        if (sampling_point_y < 0) {
-            sampling_point_y = 0;
-        }
 
         if (!SamplingPointValid) {
             SamplingPointValid = true;
@@ -86,19 +74,6 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
         int sampling_point_x = event->pos().x();
         int sampling_point_y = event->pos().y();
 
-        if (sampling_point_x >= CurrentImage.width()) {
-            sampling_point_x = CurrentImage.width() - 1;
-        }
-        if (sampling_point_y >= CurrentImage.height()) {
-            sampling_point_y = CurrentImage.height() - 1;
-        }
-        if (sampling_point_x < 0) {
-            sampling_point_x = 0;
-        }
-        if (sampling_point_y < 0) {
-            sampling_point_y = 0;
-        }
-
         if (!SamplingPointValid) {
             SamplingPointValid = true;
 
@@ -116,19 +91,6 @@ void RetouchEditor::mouseMoveEvent(QMouseEvent *event)
         if (SamplingPointValid) {
             int sampling_point_x = InitialSamplingPoint.x() + (event->pos().x() - InitialTouchPoint.x());
             int sampling_point_y = InitialSamplingPoint.y() + (event->pos().y() - InitialTouchPoint.y());
-
-            if (sampling_point_x >= CurrentImage.width()) {
-                sampling_point_x = CurrentImage.width() - 1;
-            }
-            if (sampling_point_y >= CurrentImage.height()) {
-                sampling_point_y = CurrentImage.height() - 1;
-            }
-            if (sampling_point_x < 0) {
-                sampling_point_x = 0;
-            }
-            if (sampling_point_y < 0) {
-                sampling_point_y = 0;
-            }
 
             if (SamplingPoint.x() != sampling_point_x ||
                 SamplingPoint.y() != sampling_point_y) {
@@ -193,27 +155,29 @@ void RetouchEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int width  = qMin(BrushImage.width(),  CurrentImage.width());
-        int height = qMin(BrushImage.height(), CurrentImage.height());
+        int width  = BrushImage.width();
+        int height = BrushImage.height();
 
-        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
-        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
+        int img_x = center_x - width  / 2;
+        int img_y = center_y - height / 2;
 
         if (Mode == ModeClone) {
-            int src_x = qMin(qMax(0, SamplingPoint.x() - width  / 2), CurrentImage.width()  - width);
-            int src_y = qMin(qMax(0, SamplingPoint.y() - height / 2), CurrentImage.height() - height);
+            int src_x = SamplingPoint.x() - width  / 2;
+            int src_y = SamplingPoint.y() - height / 2;
 
-            QImage   brush_image(width, height, QImage::Format_ARGB32);
+            QImage brush_image(width, height, QImage::Format_ARGB32);
+
+            brush_image.fill(qRgba(0, 0, 0, 0));
+
             QPainter brush_painter(&brush_image);
 
             brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
-
             brush_painter.drawImage(QPoint(0, 0), CurrentImage, QRect(src_x, src_y, width, height));
-
-            QPainter image_painter(&CurrentImage);
 
             brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
             brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+            QPainter image_painter(&CurrentImage);
 
             image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
             image_painter.drawImage(QPoint(img_x, img_y), brush_image);
