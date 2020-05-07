@@ -68,12 +68,12 @@ void BrushPreviewGenerator::paint(QPainter *painter)
 
                 if (r <= BrushSize) {
                     if (r <= BrushSize * BrushHardness) {
-                        brush_template.setPixel(x, y, qRgba(255, 255, 255, 255));
+                        brush_template.setPixel(x, y, qRgba(0, 0, 0, 255));
                     } else {
-                        brush_template.setPixel(x, y, qRgba(255, 255, 255, qFloor(255 * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
+                        brush_template.setPixel(x, y, qRgba(0, 0, 0, qFloor(255 * (BrushSize - r) / (BrushSize * (1.0 - BrushHardness)))));
                     }
                 } else {
-                    brush_template.setPixel(x, y, qRgba(255, 255, 255, 0));
+                    brush_template.setPixel(x, y, qRgba(0, 0, 0, 0));
                 }
             }
         }
