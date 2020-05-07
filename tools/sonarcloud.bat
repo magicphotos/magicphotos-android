@@ -5,7 +5,7 @@ SET ANDROID_SDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk
 SET ANDROID_NDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk\ndk-bundle
 SET ANDROID_NDK_HOST=windows
 SET SONARCLOUD_ROOT=D:\Users\%USERNAME%\Documents\SonarCloud
-SET ANDROID_PLATFORM=android-28
+SET ANDROID_PLATFORM=android-29
 
 PATH=%PATH%;C:\Qt\5.12.8\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows\bin;%SONARCLOUD_ROOT%\build-wrapper-win-x86;%SONARCLOUD_ROOT%\sonar-scanner-3.3.0.1492-windows\bin
 

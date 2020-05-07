@@ -4,7 +4,7 @@ SET JAVA_HOME=C:\Program Files (x86)\Java\jdk1.8.0_202
 SET ANDROID_SDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk
 SET ANDROID_NDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk\ndk-bundle
 SET ANDROID_NDK_HOST=windows
-SET ANDROID_PLATFORM=android-28
+SET ANDROID_PLATFORM=android-29
 
 PATH=%PATH%;C:\Qt\5.12.8\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows\bin
 

@@ -4,7 +4,7 @@
           android:versionName="2.2.2"
           android:versionCode="65"
           android:installLocation="auto">
-    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28"/>
+    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="29"/>
     <supports-screens android:anyDensity="true"
                       android:largeScreens="true"
                       android:normalScreens="true"
