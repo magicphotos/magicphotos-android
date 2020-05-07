@@ -2,6 +2,7 @@
 #include <QtCore/QPoint>
 #include <QtCore/QRect>
 #include <QtCore/QThread>
+#include <QtGui/QColor>
 #include <QtGui/QPainter>
 
 #include "effecteditor.h"
@@ -62,13 +63,16 @@ void EffectEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int width  = qMin(BrushImage.width(),  CurrentImage.width());
-        int height = qMin(BrushImage.height(), CurrentImage.height());
+        int width  = BrushImage.width();
+        int height = BrushImage.height();
 
-        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
-        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
+        int img_x = center_x - width  / 2;
+        int img_y = center_y - height / 2;
 
-        QImage   brush_image(width, height, QImage::Format_ARGB32);
+        QImage brush_image(width, height, QImage::Format_ARGB32);
+
+        brush_image.fill(qRgba(0, 0, 0, 0));
+
         QPainter brush_painter(&brush_image);
 
         brush_painter.setCompositionMode(QPainter::CompositionMode_Source);
@@ -79,10 +83,10 @@ void EffectEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             brush_painter.drawImage(QPoint(0, 0), EffectedImage, QRect(img_x, img_y, width, height));
         }
 
-        QPainter image_painter(&CurrentImage);
-
         brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
         brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+        QPainter image_painter(&CurrentImage);
 
         image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         image_painter.drawImage(QPoint(img_x, img_y), brush_image);

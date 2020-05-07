@@ -91,13 +91,16 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
             SaveUndoImage();
         }
 
-        int width  = qMin(BrushImage.width(),  CurrentImage.width());
-        int height = qMin(BrushImage.height(), CurrentImage.height());
+        int width  = BrushImage.width();
+        int height = BrushImage.height();
 
-        int img_x = qMin(qMax(0, center_x - width  / 2), CurrentImage.width()  - width);
-        int img_y = qMin(qMax(0, center_y - height / 2), CurrentImage.height() - height);
+        int img_x = center_x - width  / 2;
+        int img_y = center_y - height / 2;
 
-        QImage   brush_image(width, height, QImage::Format_ARGB32);
+        QImage brush_image(width, height, QImage::Format_ARGB32);
+
+        brush_image.fill(qRgba(0, 0, 0, 0));
+
         QPainter brush_painter(&brush_image);
 
         if (Mode == ModeOriginal) {
@@ -106,15 +109,20 @@ void RecolorEditor::ChangeImageAt(bool save_undo, int center_x, int center_y)
         } else if (Mode == ModeEffected) {
             for (int y = img_y; y < img_y + height; y++) {
                 for (int x = img_x; x < img_x + width; x++) {
-                    brush_image.setPixel(x - img_x, y - img_y, AdjustHue(OriginalImage.pixel(x, y)));
+                    if (x >= 0 && x < OriginalImage.width() &&
+                        y >= 0 && y < OriginalImage.height()) {
+                        brush_image.setPixel(x - img_x, y - img_y, AdjustHue(OriginalImage.pixel(x, y)));
+                    } else {
+                        brush_image.setPixel(x - img_x, y - img_y, qRgba(0, 0, 0, 0));
+                    }
                 }
             }
         }
 
-        QPainter image_painter(&CurrentImage);
-
         brush_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
         brush_painter.drawImage(QPoint(0, 0), BrushImage);
+
+        QPainter image_painter(&CurrentImage);
 
         image_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         image_painter.drawImage(QPoint(img_x, img_y), brush_image);

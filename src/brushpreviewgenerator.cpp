@@ -78,18 +78,20 @@ void BrushPreviewGenerator::paint(QPainter *painter)
             }
         }
 
-        QImage   brush_preview(brush_template.width(), brush_template.height(), QImage::Format_ARGB32);
-        QPainter preview_painter(&brush_preview);
+        QImage brush_preview(brush_template.width(), brush_template.height(), QImage::Format_ARGB32);
 
         brush_preview.fill(Qt::red);
+
+        QPainter preview_painter(&brush_preview);
 
         preview_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
         preview_painter.drawImage(QPoint(0, 0), brush_template);
 
-        QImage   result(MaxBrushSize * 2, MaxBrushSize * 2, QImage::Format_ARGB32);
-        QPainter result_painter(&result);
+        QImage result(MaxBrushSize * 2, MaxBrushSize * 2, QImage::Format_ARGB32);
 
-        result.fill(QColor::fromRgba(qRgba(0, 0, 0, 0)));
+        result.fill(qRgba(0, 0, 0, 0));
+
+        QPainter result_painter(&result);
 
         result_painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         result_painter.drawImage(QPoint((result.width()  - brush_preview.width())  / 2,
