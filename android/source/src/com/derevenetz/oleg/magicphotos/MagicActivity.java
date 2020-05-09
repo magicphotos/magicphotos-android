@@ -48,9 +48,7 @@ public class MagicActivity extends QtActivity
 
     private static final long AD_RELOAD_ON_FAILURE_DELAY = 60000;
 
-    private boolean           statusBarVisible           = false,
-                              showPersonalizedAds        = false;
-    private int               statusBarHeight            = 0;
+    private boolean           showPersonalizedAds        = false;
     private AdView            bannerView                 = null;
     private InterstitialAd    interstitial               = null;
 
@@ -61,52 +59,6 @@ public class MagicActivity extends QtActivity
     private static native void imageSelected(String image_path, int image_orientation);
     private static native void imageSelectionCancelled();
     private static native void imageSelectionFailed();
-
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-
-        int resource_id = getResources().getIdentifier("status_bar_height", "dimen", "android");
-
-        if (resource_id > 0) {
-            statusBarHeight = getResources().getDimensionPixelSize(resource_id);
-        }
-
-        if ((getWindow().getDecorView().getSystemUiVisibility() & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-            statusBarVisible = true;
-        } else {
-            statusBarVisible = false;
-        }
-
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int visibility)
-            {
-                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                    statusBarVisible = true;
-
-                    if (bannerView != null) {
-                        int ad_visibility = bannerView.getVisibility();
-
-                        bannerView.setVisibility(View.GONE);
-                        bannerView.setY(statusBarHeight);
-                        bannerView.setVisibility(ad_visibility);
-                    }
-                } else {
-                    statusBarVisible = false;
-
-                    if (bannerView != null) {
-                        int ad_visibility = bannerView.getVisibility();
-
-                        bannerView.setVisibility(View.GONE);
-                        bannerView.setY(0);
-                        bannerView.setVisibility(ad_visibility);
-                    }
-                }
-            }
-        });
-    }
 
     @Override
     public void onResume()
@@ -331,7 +283,7 @@ public class MagicActivity extends QtActivity
             @Override
             public void run()
             {
-                View view = getWindow().getDecorView().getRootView();
+                View view = getWindow().getDecorView().findViewById(android.R.id.content);
 
                 if (view instanceof ViewGroup) {
                     ViewGroup view_group = (ViewGroup)view;
@@ -356,12 +308,6 @@ public class MagicActivity extends QtActivity
                     bannerView.setAdUnitId(f_unit_id);
                     bannerView.setLayoutParams(params);
                     bannerView.setVisibility(View.GONE);
-
-                    if (statusBarVisible) {
-                        bannerView.setY(statusBarHeight);
-                    } else {
-                        bannerView.setY(0);
-                    }
 
                     bannerView.setAdListener(new AdListener() {
                         @Override
@@ -422,7 +368,7 @@ public class MagicActivity extends QtActivity
             @Override
             public void run()
             {
-                View view = getWindow().getDecorView().getRootView();
+                View view = getWindow().getDecorView().findViewById(android.R.id.content);
 
                 if (view instanceof ViewGroup) {
                     ViewGroup view_group = (ViewGroup)view;
