@@ -123,8 +123,9 @@ void SketchImageGenerator::start()
 
     sketch_image = sketch_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
-    std::array<int, 17> tab   = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
-    int                 alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
+    constexpr std::array<int, 17> tab = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
+
+    int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
     int r1 = sketch_image.rect().top();
     int r2 = sketch_image.rect().bottom();
