@@ -87,7 +87,7 @@ protected:
     QImage LoadedImage, CurrentImage, BrushImage;
 
 private:
-    static const int UNDO_DEPTH = 8;
+    static constexpr int UNDO_DEPTH = 8;
 
     static constexpr qreal IMAGE_MPIX_LIMIT = 1.0;
 
