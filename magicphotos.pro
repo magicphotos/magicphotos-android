@@ -71,6 +71,7 @@ android {
     OTHER_FILES += \
         android/source/AndroidManifest.xml \
         android/source/build.gradle \
+        android/source/gradle.properties \
         android/source/gradlew \
         android/source/gradlew.bat \
         android/source/gradle/wrapper/gradle-wrapper.jar \
