@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.3'
     }
 }
 
@@ -42,9 +42,26 @@ android {
     compileSdkVersion androidCompileSdkVersion.toInteger()
     buildToolsVersion androidBuildToolsVersion
 
+    defaultConfig {
+        minSdkVersion ({
+            def matcher = (new File('AndroidManifest.xml')).getText('UTF-8') =~ /android:minSdkVersion="([0-9]+)"/
+
+            return matcher[0][1].toInteger()
+        }.call())
+
+        targetSdkVersion androidCompileSdkVersion.toInteger()
+    }
+
     sourceSets {
         main {
-            manifest.srcFile 'AndroidManifest.xml'
+            manifest.srcFile ({
+                def android_manifest_tmp = new File('AndroidManifest.tmp.xml')
+
+                android_manifest_tmp.write((new File('AndroidManifest.xml')).getText('UTF-8').replaceAll('<uses-sdk[^/]*/>', ''))
+
+                return android_manifest_tmp
+            }.call())
+
             java.srcDirs = [qt5AndroidDir + '/src', 'src', 'java']
             aidl.srcDirs = [qt5AndroidDir + '/src', 'src', 'aidl']
             res.srcDirs = [qt5AndroidDir + '/res', 'res']
