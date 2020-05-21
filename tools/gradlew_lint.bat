@@ -2,7 +2,7 @@
 
 SET JAVA_HOME=C:\Program Files (x86)\Java\jdk1.8.0_202
 SET ANDROID_SDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk
-SET ANDROID_NDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk\ndk-bundle
+SET ANDROID_NDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk\ndk\20.0.5594570
 SET ANDROID_NDK_HOST=windows
 SET ANDROID_PLATFORM=android-29
 
