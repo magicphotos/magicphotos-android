@@ -49,7 +49,11 @@ android {
             return matcher[0][1].toInteger()
         }.call())
 
-        targetSdkVersion androidCompileSdkVersion.toInteger()
+        targetSdkVersion ({
+            def matcher = (new File('AndroidManifest.xml')).getText('UTF-8') =~ /android:targetSdkVersion="([0-9]+)"/
+
+            return matcher[0][1].toInteger()
+        }.call())
     }
 
     sourceSets {
