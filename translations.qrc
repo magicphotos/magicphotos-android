@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/tr">
-        <file alias="magicphotos_ru.qm">translations/magicphotos_ru.qm</file>
         <file alias="magicphotos_de.qm">translations/magicphotos_de.qm</file>
         <file alias="magicphotos_fr.qm">translations/magicphotos_fr.qm</file>
+        <file alias="magicphotos_ru.qm">translations/magicphotos_ru.qm</file>
+        <file alias="magicphotos_zh.qm">translations/magicphotos_zh.qm</file>
     </qresource>
 </RCC>
