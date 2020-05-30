@@ -6,6 +6,9 @@ lupdate -locations absolute ..\magicphotos.pro -ts ..\translations\magicphotos_f
 
 lupdate -locations absolute ..\magicphotos.pro -ts ..\translations\magicphotos_ru.src.ts
 
+lupdate -locations absolute ..\magicphotos.pro -ts ..\translations\magicphotos_zh.src.ts
+
 lconvert ..\translations\magicphotos_de.src.ts ..\translations\magicphotos_de.qt.ts -o ..\translations\magicphotos_de.ts
 lconvert ..\translations\magicphotos_fr.src.ts ..\translations\magicphotos_fr.qt.ts -o ..\translations\magicphotos_fr.ts
 lconvert ..\translations\magicphotos_ru.src.ts ..\translations\magicphotos_ru.qt.ts -o ..\translations\magicphotos_ru.ts
+lconvert ..\translations\magicphotos_zh.src.ts ..\translations\magicphotos_zh.qt.ts -o ..\translations\magicphotos_zh.ts
