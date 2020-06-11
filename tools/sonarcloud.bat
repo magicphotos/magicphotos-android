@@ -1,13 +1,13 @@
 @ECHO OFF
 
-SET JAVA_HOME=C:\Program Files (x86)\Java\jdk1.8.0_202
+SET JAVA_HOME=C:\Program Files\Java\jdk1.8.0_251
 SET ANDROID_SDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk
 SET ANDROID_NDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk\ndk\20.0.5594570
 SET ANDROID_NDK_HOST=windows
 SET SONARCLOUD_ROOT=D:\Users\%USERNAME%\Documents\SonarCloud
 SET ANDROID_PLATFORM=android-29
 
-PATH=%PATH%;C:\Qt\5.12.8\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows\bin;%SONARCLOUD_ROOT%\build-wrapper-win-x86;%SONARCLOUD_ROOT%\sonar-scanner-3.3.0.1492-windows\bin
+SET PATH=%PATH%;C:\Qt\5.12.8\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows\bin;%SONARCLOUD_ROOT%\build-wrapper-win-x86;%SONARCLOUD_ROOT%\sonar-scanner-4.3.0.2102-windows\bin
 
 IF NOT "%~1"=="" (
         CD .. ^
