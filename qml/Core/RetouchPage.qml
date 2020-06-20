@@ -12,7 +12,6 @@ Page {
     id: retouchPage
 
     header: Pane {
-        topPadding:          retouchPage.bannerViewHeight
         Material.background: Material.LightBlue
 
         ButtonGroup {
@@ -167,8 +166,6 @@ Page {
     }
 
     readonly property bool allowInterstitial: true
-
-    readonly property int bannerViewHeight:   AdMobHelper.bannerViewHeight
 
     readonly property var editor:             editorLoader.item
 

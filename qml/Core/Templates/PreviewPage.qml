@@ -10,6 +10,7 @@ Page {
     id: previewPage
 
     header: Pane {
+        topPadding:          previewPage.bannerViewHeight
         Material.background: Material.Green
 
         Label {
@@ -42,6 +43,8 @@ Page {
             }
         }
     }
+
+    readonly property int bannerViewHeight:    AdMobHelper.bannerViewHeight
 
     readonly property var previewGenerator:    previewGeneratorLoader.item
     readonly property var controlColumnLayout: controlColumnLayoutLoader.item
