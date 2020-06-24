@@ -1,3 +1,5 @@
+#include <QtCore/QLatin1String>
+
 #include "appsettings.h"
 
 AppSettings::AppSettings(QObject *parent) :
@@ -72,7 +74,7 @@ QString AppSettings::adMobConsent() const
     if (Settings.contains(QStringLiteral("AdMobConsent"))) {
         return Settings.value(QStringLiteral("AdMobConsent")).toString();
     } else {
-        return QStringLiteral("");
+        return QLatin1String("");
     }
 }
 

@@ -1,3 +1,4 @@
+#include <QtCore/QLatin1String>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
 #include <QtAndroidExtras/QtAndroid>
@@ -21,7 +22,7 @@ QString MediaStoreHelper::imageFilePath() const
 {
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
-    if (tmp_dir != QStringLiteral("")) {
+    if (tmp_dir != QLatin1String("")) {
         QDir().mkpath(tmp_dir);
     }
 
