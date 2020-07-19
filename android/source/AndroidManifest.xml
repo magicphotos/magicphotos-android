@@ -2,7 +2,7 @@
 <manifest package="com.derevenetz.oleg.magicphotos.stdalone"
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionName="2.3.0"
-          android:versionCode="71"
+          android:versionCode="73"
           android:installLocation="auto">
     <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="29"/>
     <supports-screens android:anyDensity="true"
