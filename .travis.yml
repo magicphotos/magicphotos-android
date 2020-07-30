@@ -60,7 +60,7 @@ script:
     echo && \
     echo "------------------ MAKE -------------------" && \
     echo && \
-    make "CFLAGS=-Werror" all && \
+    make all && \
     echo && \
     echo "-------------- MAKE INSTALL ---------------" && \
     echo && \
