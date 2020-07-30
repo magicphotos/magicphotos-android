@@ -6,7 +6,7 @@ SET ANDROID_NDK_ROOT=%USERPROFILE%\AppData\Local\Android\Sdk\ndk\21.0.6113669
 SET ANDROID_NDK_HOST=windows-x86_64
 SET ANDROID_PLATFORM=android-29
 
-SET PATH=%PATH%;C:\Qt\5.12.9\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\windows-x86_64\bin
+SET PATH=%PATH%;C:\Qt\5.12.9\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\%ANDROID_NDK_HOST%\bin
 
     CD .. ^
  && (IF NOT EXIST .gradlewbuild (MKDIR .gradlewbuild && ATTRIB +H .gradlewbuild)) ^
