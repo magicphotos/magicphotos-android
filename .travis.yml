@@ -43,7 +43,7 @@ script:
     export ANDROID_NDK_ROOT=/usr/local/android-sdk/ndk/21.0.6113669 && \
     export ANDROID_NDK_HOST=linux-x86_64 && \
     export ANDROID_PLATFORM=android-29 && \
-    export PATH=$HOME/Qt/5.12.9/android_armv7/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH && \
+    export PATH="$HOME/Qt/5.12.9/android_armv7/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH" && \
     echo && \
     echo "--------- UNSHALLOW GIT FOR SONAR ---------" && \
     echo && \
@@ -68,7 +68,7 @@ script:
     echo && \
     echo "------------- ANDROIDDEPLOYQT -------------" && \
     echo && \
-    androiddeployqt --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform $ANDROID_PLATFORM --deployment bundled --gradle --no-gdbserver && \
+    androiddeployqt --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform "$ANDROID_PLATFORM" --deployment bundled --gradle --no-gdbserver && \
     if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then \
         echo && \
         echo "-------------- SONAR WRAPPER --------------" && \

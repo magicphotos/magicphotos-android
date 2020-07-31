@@ -19,7 +19,7 @@ IF NOT "%~1"=="" (
      && make.exe clean ^
      && build-wrapper-win-x86-64.exe --out-dir bw-output make.exe -j%NUMBER_OF_PROCESSORS% all ^
      && make.exe install INSTALL_ROOT=android-build ^
-     && androiddeployqt.exe --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform %ANDROID_PLATFORM% --deployment bundled --gradle --no-gdbserver ^
+     && androiddeployqt.exe --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform "%ANDROID_PLATFORM%" --deployment bundled --gradle --no-gdbserver ^
      && CD .. ^
      && sonar-scanner.bat -D"sonar.projectKey=magicphotos_magicphotos-android" ^
                           -D"sonar.projectName=MagicPhotos Android" ^
