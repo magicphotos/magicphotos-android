@@ -44,6 +44,8 @@ script:
     export ANDROID_NDK_HOST=linux-x86_64 && \
     export ANDROID_PLATFORM=android-29 && \
     export PATH="$HOME/Qt/5.12.9/android_armv7/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH" && \
+    export QMAKE_CFLAGS_ENV="-Werror" && \
+    export QMAKE_CXXFLAGS_ENV="-Werror" && \
     echo && \
     echo "--------- UNSHALLOW GIT FOR SONAR ---------" && \
     echo && \
