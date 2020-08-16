@@ -1,4 +1,3 @@
-#include <array>
 #include <memory>
 
 #include <QtCore/QtMath>
@@ -119,7 +118,7 @@ void BlurImageGenerator::start()
 
     blur_image = blur_image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
-    constexpr std::array<int, 17> tab = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
+    constexpr int tab[] = {14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2};
 
     int alpha = Radius < 1 ? 16 : (Radius > 17 ? 1 : tab[Radius - 1]);
 
@@ -130,8 +129,8 @@ void BlurImageGenerator::start()
 
     int bpl = blur_image.bytesPerLine();
 
-    std::array<int, 4> rgba = {};
-    unsigned char     *p;
+    int            rgba[4];
+    unsigned char *p;
 
     for (int col = c1; col <= c2; col++) {
         p = blur_image.scanLine(r1) + col * 4;
