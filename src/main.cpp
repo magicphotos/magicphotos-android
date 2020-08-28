@@ -14,6 +14,7 @@
 #include "brushpreviewgenerator.h"
 #include "cartooneditor.h"
 #include "decolorizeeditor.h"
+#include "gplayhelper.h"
 #include "helper.h"
 #include "mediastorehelper.h"
 #include "pixelateeditor.h"
@@ -66,6 +67,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), &AdMobHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("AppSettings"), &AppSettings::GetInstance());
+    engine.rootContext()->setContextProperty(QStringLiteral("GPlayHelper"), &GPlayHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("MediaStoreHelper"), &MediaStoreHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("UIHelper"), &UIHelper::GetInstance());
 

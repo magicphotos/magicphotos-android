@@ -395,6 +395,12 @@ Page {
         title:           qsTr("Info")
         text:            qsTr("Image saved successfully")
         standardButtons: StandardButton.Ok
+
+        onAccepted: {
+            if (Math.random() < 0.10) {
+                GPlayHelper.requestReview();
+            }
+        }
     }
 
     MessageDialog {

@@ -16,6 +16,7 @@ SOURCES += \
     src/decolorizeeditor.cpp \
     src/editor.cpp \
     src/effecteditor.cpp \
+    src/gplayhelper.cpp \
     src/helper.cpp \
     src/main.cpp \
     src/mediastorehelper.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     src/decolorizeeditor.h \
     src/editor.h \
     src/effecteditor.h \
+    src/gplayhelper.h \
     src/helper.h \
     src/mediastorehelper.h \
     src/pixelateeditor.h \

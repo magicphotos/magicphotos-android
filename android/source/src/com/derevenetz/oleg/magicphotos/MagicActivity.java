@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,12 @@ import org.qtproject.qt5.android.bindings.QtActivity;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.OnCompleteListener;
+import com.google.android.play.core.tasks.Task;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
 
@@ -175,6 +182,35 @@ public class MagicActivity extends QtActivity
             }
         } else {
             return false;
+        }
+    }
+
+    public void requestReview()
+    {
+        final Activity f_activity = this;
+
+        try {
+            final ReviewManager f_manager = ReviewManagerFactory.create(this);
+
+            f_manager.requestReviewFlow().addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+                @Override
+                public void onComplete(Task<ReviewInfo> task) {
+                    if (task.isSuccessful()) {
+                        f_manager.launchReviewFlow(f_activity, task.getResult()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(Task<Void> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e("MagicActivity", "requestReview() : launchReviewFlow() failed");
+                                }
+                            }
+                        });
+                    } else {
+                        Log.e("MagicActivity", "requestReview() : requestReviewFlow() failed");
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            Log.e("MagicActivity", "requestReview() : " + ex.toString());
         }
     }
 
