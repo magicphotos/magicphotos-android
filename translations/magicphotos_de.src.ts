@@ -54,7 +54,7 @@
     </message>
     <message>
         <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="388"/>
-        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="402"/>
+        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="408"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -74,17 +74,17 @@
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="403"/>
+        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="409"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="409"/>
+        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="415"/>
         <source>Warning</source>
         <translation>Achtung</translation>
     </message>
     <message>
-        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="410"/>
+        <location filename="../qml/Core/Templates/EffectEditorPage.qml" line="416"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <location filename="../qml/Core/RecolorPage.qml" line="456"/>
-        <location filename="../qml/Core/RecolorPage.qml" line="470"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="476"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -172,17 +172,17 @@
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="471"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="477"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="477"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="483"/>
         <source>Warning</source>
         <translation>Achtung</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RecolorPage.qml" line="478"/>
+        <location filename="../qml/Core/RecolorPage.qml" line="484"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
@@ -206,7 +206,7 @@
     </message>
     <message>
         <location filename="../qml/Core/RetouchPage.qml" line="442"/>
-        <location filename="../qml/Core/RetouchPage.qml" line="456"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="462"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -226,17 +226,17 @@
         <translation>Abbildung wurde erfolgreich gespeichert</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="457"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="463"/>
         <source>Could not save image</source>
         <translation>Abbildung kann nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="463"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="469"/>
         <source>Warning</source>
         <translation>Achtung</translation>
     </message>
     <message>
-        <location filename="../qml/Core/RetouchPage.qml" line="464"/>
+        <location filename="../qml/Core/RetouchPage.qml" line="470"/>
         <source>Are you sure? Current image is not saved and will be lost.</source>
         <translation>Sind Sie sicher? Alle nicht gespeicherten Anderungen gehen verloren.</translation>
     </message>
