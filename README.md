@@ -19,7 +19,7 @@ additional information.
 
 ---
 
-[![Travis Build Status](https://travis-ci.org/magicphotos/magicphotos-android.svg?branch=master)](https://travis-ci.org/magicphotos/magicphotos-android)
+[![Travis Build Status](https://travis-ci.com/magicphotos/magicphotos-android.svg?branch=master)](https://travis-ci.com/magicphotos/magicphotos-android)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=alert_status)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
 
 [![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
