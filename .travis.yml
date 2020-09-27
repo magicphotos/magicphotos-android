@@ -47,10 +47,6 @@ script:
     export QMAKE_CFLAGS_ENV="-Werror" && \
     export QMAKE_CXXFLAGS_ENV="-Werror" && \
     echo && \
-    echo "--------- UNSHALLOW GIT FOR SONAR ---------" && \
-    echo && \
-    git fetch --unshallow && \
-    echo && \
     echo "---------- CREATE BUILD DIRECTORY ---------" && \
     echo && \
     mkdir .build && \
@@ -72,6 +68,10 @@ script:
     echo && \
     androiddeployqt --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform "$ANDROID_PLATFORM" --deployment bundled --gradle --no-gdbserver && \
     if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then \
+        echo && \
+        echo "--------- UNSHALLOW GIT FOR SONAR ---------" && \
+        echo && \
+        git fetch --unshallow && \
         echo && \
         echo "-------------- SONAR WRAPPER --------------" && \
         echo && \
