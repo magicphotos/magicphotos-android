@@ -225,10 +225,10 @@ void Editor::saveImage(const QString &image_path)
 
 void Editor::undo()
 {
-    if (UndoStack.count() > 0) {
+    if (!UndoStack.isEmpty()) {
         CurrentImage = UndoStack.pop();
 
-        if (UndoStack.count() == 0) {
+        if (UndoStack.isEmpty()) {
             emit undoAvailabilityUpdated(false);
         }
 
