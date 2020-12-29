@@ -1,0 +1,74 @@
+name: "SonarCloud Analysis"
+
+on:
+  push:
+    branches:
+    - master
+
+  schedule:
+    - cron: "0 11 * * 6"
+
+jobs:
+  analyze:
+    name: "Analyze"
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      QT_VERSION: 5.12.10
+      SONAR_SCANNER_VERSION: 4.5.0.2216
+
+    steps:
+    - name: "Checkout repository"
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: "Install additional packages"
+      run: |
+        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null && \
+        bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtpurchasing qtandroidextras
+
+    - name: "Initialize SonarCloud"
+      run: |
+        mkdir -p "$HOME/SonarCloud" && \
+        wget -P "$HOME/SonarCloud" "https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip" && \
+        wget -P "$HOME/SonarCloud" "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip" && \
+        unzip "$HOME/SonarCloud/build-wrapper-linux-x86.zip" -d "$HOME/SonarCloud" && \
+        unzip "$HOME/SonarCloud/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip" -d "$HOME/SonarCloud"
+
+    - name: "Run build via SonarCloud wrapper"
+      env:
+        ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+        ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/21.0.6113669
+        ANDROID_NDK_HOST: linux-x86_64
+        ANDROID_PLATFORM: android-29
+        QMAKE_CFLAGS_ENV: "-Werror"
+        QMAKE_CXXFLAGS_ENV: "-Werror"
+      run: |
+        export PATH="$HOME/Qt/$QT_VERSION/android_arm64_v8a/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH" && \
+        mkdir .build && \
+        cd .build && \
+        qmake ../magicphotos.pro && \
+        "$HOME/SonarCloud/build-wrapper-linux-x86/build-wrapper-linux-x86-64" --out-dir bw-output make all
+
+    - name: "Perform SonarCloud analysis"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        "$HOME/SonarCloud/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner" -Dsonar.projectKey=magicphotos_magicphotos-android \
+                                                                                        -Dsonar.projectName="MagicPhotos Android" \
+                                                                                        -Dsonar.organization=magicphotos-github \
+                                                                                        -Dsonar.sources=. \
+                                                                                        -Dsonar.sourceEncoding=UTF-8 \
+                                                                                        -Dsonar.exclusions="3rdparty/**/*,android/source/3rdparty/**/*,qml/**/*,translations/*" \
+                                                                                        -Dsonar.cfamily.build-wrapper-output=.build/bw-output \
+                                                                                        -Dsonar.cfamily.cache.enabled=false \
+                                                                                        -Dsonar.cfamily.threads=1 \
+                                                                                        -Dsonar.java.source=1.7 \
+                                                                                        -Dsonar.java.binaries=.build \
+                                                                                        -Dsonar.host.url=https://sonarcloud.io
