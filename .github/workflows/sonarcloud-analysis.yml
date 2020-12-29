@@ -65,7 +65,7 @@ jobs:
                                                                                         -Dsonar.organization=magicphotos-github \
                                                                                         -Dsonar.sources=. \
                                                                                         -Dsonar.sourceEncoding=UTF-8 \
-                                                                                        -Dsonar.exclusions="3rdparty/**/*,android/source/3rdparty/**/*,qml/**/*,translations/*" \
+                                                                                        -Dsonar.exclusions="qml/**/*,translations/*" \
                                                                                         -Dsonar.cfamily.build-wrapper-output=.build/bw-output \
                                                                                         -Dsonar.cfamily.cache.enabled=false \
                                                                                         -Dsonar.cfamily.threads=1 \
