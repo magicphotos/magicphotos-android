@@ -19,6 +19,7 @@ additional information.
 
 ---
 
+[![Build Status](https://github.com/magicphotos/magicphotos-android/workflows/Build/badge.svg)](https://github.com/magicphotos/magicphotos-android/actions?query=workflow%3A%22Build%22)
 [![Travis Build Status](https://travis-ci.com/magicphotos/magicphotos-android.svg?branch=master)](https://travis-ci.com/magicphotos/magicphotos-android)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=alert_status)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
 
