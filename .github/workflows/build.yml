@@ -1,0 +1,58 @@
+name: "Build"
+
+on:
+  push:
+    branches:
+    - master
+
+  pull_request:
+    branches:
+    - master
+
+  schedule:
+    - cron: "0 10 * * 6"
+
+jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      QT_VERSION: 5.12.10
+
+    steps:
+    - name: "Checkout repository"
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+
+    - name: "Checkout HEAD^2 for pull request"
+      if: ${{ github.event_name == 'pull_request' }}
+      run: |
+        git checkout HEAD^2
+
+    - name: "Install additional packages"
+      run: |
+        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null && \
+        bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtpurchasing qtandroidextras
+
+    - name: "Run build"
+      env:
+        ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+        ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/21.0.6113669
+        ANDROID_NDK_HOST: linux-x86_64
+        ANDROID_PLATFORM: android-29
+        QMAKE_CFLAGS_ENV: "-Werror"
+        QMAKE_CXXFLAGS_ENV: "-Werror"
+      run: |
+        export PATH="$HOME/Qt/$QT_VERSION/android_arm64_v8a/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH" && \
+        mkdir .build && \
+        cd .build && \
+        qmake ../magicphotos.pro && \
+        make all && \
+        make install INSTALL_ROOT=android-build && \
+        androiddeployqt --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform "$ANDROID_PLATFORM" --deployment bundled --gradle --no-gdbserver
