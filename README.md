@@ -3,16 +3,18 @@
 MagicPhotos  lets  you  quickly  and  easily give photos a dramatic look by
 applying  different  effects  while  keeping your chosen details untouched.
 This draws the viewer's attention to the individual image details, creating
-striking   images.  With  its  intuitive  and  responsive  user  interface,
-MagicPhotos  is  super easy and fun to use. You simply use your finger as a
-brush  to  apply  effects  to  certain  regions of your image or bring back
-original  image.  Photo editor supports multiple effects (Decolorize (Color
-Splash),  Recolor,  Sketch,  Cartoon and so on) and Photo Retouch mode that
-lets you remove small flaws and unwanted content (watermarks, people, text,
-power lines as well as other unwanted objects) from your photos, as well as
-apply  controlled  blur to selected details of photo you would like to hide
-(license  plates,  human  faces  and so on). Application is easy to use and
-provides full control of editing process.
+striking images.
+
+With   its   intuitive   and   responsive  user  interface, MagicPhotos  is
+super easy and fun to use. You simply use your finger as a brush  to  apply
+effects  to  certain  regions of your image or bring back original  image.
+
+Photo   editor   supports  multiple  effects  (Decolorize  (Color  Splash),
+Recolor,   Sketch,  Cartoon and so on) and Photo Retouch mode that lets you
+remove  small  flaws  and unwanted content (watermarks, people, text, power
+lines as well as other unwanted objects) from your photos, as well as apply
+controlled   blur  to  selected  details  of  photo  you would like to hide
+(license  plates,  human  faces  and so on).
 
 Please  visit [project website](https://magicphotos.sourceforge.io/) to get
 additional information.
