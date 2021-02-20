@@ -244,8 +244,8 @@ void CartoonImageGenerator::start()
 
     // Apply Cartoon filter
 
-    QVector<int> src_buf(blur_image.width() * blur_image.height() * 4, 0);
-    QVector<int> dst_buf(blur_image.width() * blur_image.height() * 4, 0);
+    QVector src_buf(blur_image.width() * blur_image.height() * 4, 0);
+    QVector dst_buf(blur_image.width() * blur_image.height() * 4, 0);
 
     for (int y = 0; y < blur_image.height(); y++) {
         for (int x = 0; x < blur_image.width(); x++) {
