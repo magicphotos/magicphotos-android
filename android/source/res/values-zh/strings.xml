@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">魔术照片</string>
+    <string name="share_image_clip_data_label">图像</string>
     <string name="share_image_chooser_title">通过分享</string>
 </resources>

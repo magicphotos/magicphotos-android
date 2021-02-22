@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -132,10 +133,16 @@ public class MagicActivity extends QtActivity
     public void shareImage(String image_path)
     {
         try {
+            Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_path));
+
             Intent intent = new Intent(Intent.ACTION_SEND);
 
             intent.setType("image/*");
-            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(image_path)));
+            intent.setClipData(new ClipData(getResources().getString(R.string.share_image_clip_data_label),
+                                            new String[] {intent.getType()},
+                                            new ClipData.Item(uri)));
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
 
             startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_image_chooser_title)));
         } catch (Exception ex) {
