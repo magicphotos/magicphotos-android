@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MagicPhotos</string>
+    <string name="share_image_clip_data_label">Image</string>
     <string name="share_image_chooser_title">Partager via</string>
 </resources>
