@@ -37,7 +37,7 @@ jobs:
 
     - name: "Install additional packages"
       run: |
-        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null && \
+        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null
         bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtpurchasing qtandroidextras
 
     - name: "Run build"
@@ -49,10 +49,10 @@ jobs:
         QMAKE_CFLAGS_ENV: "-Werror"
         QMAKE_CXXFLAGS_ENV: "-Werror"
       run: |
-        export PATH="$HOME/Qt/$QT_VERSION/android_arm64_v8a/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH" && \
-        mkdir .build && \
-        cd .build && \
-        qmake ../magicphotos.pro && \
-        make all && \
-        make install INSTALL_ROOT=android-build && \
+        export PATH="$HOME/Qt/$QT_VERSION/android_arm64_v8a/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH"
+        mkdir .build
+        cd .build
+        qmake ../magicphotos.pro
+        make all
+        make install INSTALL_ROOT=android-build
         androiddeployqt --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform "$ANDROID_PLATFORM" --deployment bundled --gradle --no-gdbserver

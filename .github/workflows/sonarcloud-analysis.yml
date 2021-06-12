@@ -9,8 +9,8 @@ on:
     - cron: "0 11 * * 6"
 
 jobs:
-  analyze:
-    name: "Analyze"
+  sonarcloud:
+    name: "SonarCloud Analysis"
     runs-on: ubuntu-latest
 
     defaults:
@@ -29,15 +29,15 @@ jobs:
 
     - name: "Install additional packages"
       run: |
-        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null && \
+        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null
         bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtpurchasing qtandroidextras
 
     - name: "Initialize SonarCloud"
       run: |
-        mkdir -p "$HOME/SonarCloud" && \
-        wget -P "$HOME/SonarCloud" "https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip" && \
-        wget -P "$HOME/SonarCloud" "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip" && \
-        unzip "$HOME/SonarCloud/build-wrapper-linux-x86.zip" -d "$HOME/SonarCloud" && \
+        mkdir -p "$HOME/SonarCloud"
+        wget -P "$HOME/SonarCloud" "https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip"
+        wget -P "$HOME/SonarCloud" "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip"
+        unzip "$HOME/SonarCloud/build-wrapper-linux-x86.zip" -d "$HOME/SonarCloud"
         unzip "$HOME/SonarCloud/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip" -d "$HOME/SonarCloud"
 
     - name: "Run build via SonarCloud wrapper"
@@ -49,10 +49,10 @@ jobs:
         QMAKE_CFLAGS_ENV: "-Werror"
         QMAKE_CXXFLAGS_ENV: "-Werror"
       run: |
-        export PATH="$HOME/Qt/$QT_VERSION/android_arm64_v8a/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH" && \
-        mkdir .build && \
-        cd .build && \
-        qmake ../magicphotos.pro && \
+        export PATH="$HOME/Qt/$QT_VERSION/android_arm64_v8a/bin:$ANDROID_NDK_ROOT/prebuilt/$ANDROID_NDK_HOST/bin:$PATH"
+        mkdir .build
+        cd .build
+        qmake ../magicphotos.pro
         "$HOME/SonarCloud/build-wrapper-linux-x86/build-wrapper-linux-x86-64" --out-dir bw-output make all
 
     - name: "Perform SonarCloud analysis"
