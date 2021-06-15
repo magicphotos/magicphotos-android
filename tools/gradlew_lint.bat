@@ -18,4 +18,4 @@ SET PATH=%PATH%;C:\Qt\5.12.11\android_armv7\bin;%ANDROID_NDK_ROOT%\prebuilt\%AND
  && make.exe install INSTALL_ROOT=android-build ^
  && androiddeployqt.exe --input android-libmagicphotos.so-deployment-settings.json --output android-build --android-platform "%ANDROID_PLATFORM%" --deployment bundled --gradle --no-gdbserver ^
  && CD android-build ^
- && gradlew.bat lint
+ && gradlew.bat --no-daemon lint
