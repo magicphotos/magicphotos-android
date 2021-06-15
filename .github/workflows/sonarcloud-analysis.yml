@@ -18,7 +18,7 @@ jobs:
         shell: bash
 
     env:
-      QT_VERSION: 5.12.10
+      QT_VERSION: 5.12.11
       SONAR_SCANNER_VERSION: 4.5.0.2216
 
     steps:
