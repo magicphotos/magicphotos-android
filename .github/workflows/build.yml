@@ -22,7 +22,7 @@ jobs:
         shell: bash
 
     env:
-      QT_VERSION: 5.12.10
+      QT_VERSION: 5.12.11
 
     steps:
     - name: "Checkout repository"
