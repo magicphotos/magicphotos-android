@@ -53,7 +53,7 @@ jobs:
         mkdir .build
         cd .build
         qmake ../magicphotos.pro
-        "$HOME/SonarCloud/build-wrapper-linux-x86/build-wrapper-linux-x86-64" --out-dir bw-output make all
+        "$HOME/SonarCloud/build-wrapper-linux-x86/build-wrapper-linux-x86-64" --out-dir .bw-output make all
 
     - name: "Perform SonarCloud analysis"
       env:
@@ -66,7 +66,7 @@ jobs:
                                                                                         -Dsonar.sources=. \
                                                                                         -Dsonar.sourceEncoding=UTF-8 \
                                                                                         -Dsonar.exclusions="qml/**/*,translations/*" \
-                                                                                        -Dsonar.cfamily.build-wrapper-output=.build/bw-output \
+                                                                                        -Dsonar.cfamily.build-wrapper-output=.build/.bw-output \
                                                                                         -Dsonar.cfamily.cache.enabled=false \
                                                                                         -Dsonar.cfamily.threads=1 \
                                                                                         -Dsonar.java.source=1.7 \
