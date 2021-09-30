@@ -1,6 +1,7 @@
 #include <memory>
 
 #include <QtCore/QtMath>
+#include <QtCore/QVector>
 #include <QtCore/QThread>
 #include <QtGui/QColor>
 #include <QtGui/QPainter>
