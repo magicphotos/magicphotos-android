@@ -33,6 +33,8 @@ jobs:
         sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null
         # Workaround for "Build-tool 31.0.0 is missing DX" error
         sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --uninstall "build-tools;31.0.0" > /dev/null
+        # Workaround for "Build-tool 32.0.0 is missing DX" error
+        sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --uninstall "build-tools;32.0.0" > /dev/null
         bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtpurchasing qtandroidextras
 
     - name: "Run build"
