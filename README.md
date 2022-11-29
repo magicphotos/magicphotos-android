@@ -21,7 +21,7 @@ additional information.
 
 ---
 
-[![Build Status](https://github.com/magicphotos/magicphotos-android/workflows/Build/badge.svg)](https://github.com/magicphotos/magicphotos-android/actions?query=workflow%3A%22Build%22)
+[![Build Status](https://github.com/magicphotos/magicphotos-android/actions/workflows/build.yml/badge.svg?branch=stdalone)](https://github.com/magicphotos/magicphotos-android/actions/workflows/build.yml?query=branch%3Astdalone)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=alert_status)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
 
 [![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=magicphotos_magicphotos-android&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=magicphotos_magicphotos-android)
