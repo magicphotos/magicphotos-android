@@ -62,7 +62,7 @@ public class MagicActivity extends QtActivity
     private static native void imageSelectionFailed();
 
     @Override
-    public void onResume()
+    protected void onResume()
     {
         super.onResume();
 
@@ -72,7 +72,7 @@ public class MagicActivity extends QtActivity
     }
 
     @Override
-    public void onPause()
+    protected void onPause()
     {
         if (bannerView != null) {
             bannerView.pause();
@@ -82,7 +82,7 @@ public class MagicActivity extends QtActivity
     }
 
     @Override
-    public void onDestroy()
+    protected void onDestroy()
     {
         if (bannerView != null) {
             bannerView.destroy();
