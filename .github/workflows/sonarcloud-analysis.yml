@@ -31,7 +31,7 @@ jobs:
     - name: "Install additional packages"
       run: |
         sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;21.0.6113669" > /dev/null
-        bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtpurchasing qtandroidextras
+        bash tools/install-qt.sh --version "$QT_VERSION" --target android --toolchain android_arm64_v8a --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtandroidextras
 
     - name: "Initialize SonarCloud"
       run: |
